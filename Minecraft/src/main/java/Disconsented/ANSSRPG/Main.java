@@ -66,7 +66,7 @@ public class Main {
     				ArrayList itemList = new ArrayList();
 
     				switch ((int)type.get(i)){
-    				case 1:
+    				case 1: // Block breaking skills
     					for (int o = 0; o < Integer.parseInt(skillEntryCount.get(i).toString()); o++){
     						itemList.add( config.get((String) skillNames.get(i), "Block Name "+(o+1), "tile.").getString());//Name of blocks
     						req.add(config.get((String) skillNames.get(i), "Block Level Requirment"+(o+1), 1).getInt());//Level requirement
@@ -74,7 +74,7 @@ public class Main {
     						}
     					skillInfo.add(i,new SkillInfo(exp, req, skillNames.get(i).toString(), itemList, type.get(i)));
     						break;
-    				case 2:
+    				case 2: // Entity killing skills
     					for (int o = 0; o < Integer.parseInt(skillEntryCount.get(i).toString()); o++){
     						exp.add(config.get((String) skillNames.get(i), "Entity Experience"+(o+1), 1).getInt());
     						req.add(config.get((String) skillNames.get(i), "Entity Level Requirment"+(o+1), 1).getInt());
@@ -82,7 +82,7 @@ public class Main {
     					}
     					skillInfo.add(i,new SkillInfo(exp, req, skillNames.get(i).toString(), itemList, type.get(i)));
     					break;
-    				case 3:
+    				case 3: // Crafting skills
     					for (int o = 0; o < Integer.parseInt(skillEntryCount.get(i).toString()); o++){
     						exp.add(config.get((String) skillNames.get(i), "Item Experience"+(o+1), 1).getInt());
     						req.add(config.get((String) skillNames.get(i), "Item Level Requirment"+(o+1), 1).getInt());
