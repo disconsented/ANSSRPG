@@ -1,9 +1,9 @@
-package Disconsented.ANSSRPG.client;
+package disconsented.anssrpg.client;
 
 import net.minecraftforge.client.MinecraftForgeClient;
-import Disconsented.ANSSRPG.CommonProxy;
+import disconsented.anssrpg.CommonProxy;
 
-public class ClientProxy extends Disconsented.ANSSRPG.CommonProxy {       
+public class ClientProxy extends disconsented.anssrpg.CommonProxy {       
         @Override
         public void registerRenderers() {
                 // This is for rendering entities and so forth later on

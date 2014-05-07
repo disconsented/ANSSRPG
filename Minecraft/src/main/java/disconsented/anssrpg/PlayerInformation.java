@@ -1,5 +1,10 @@
- package Disconsented.ANSSRPG;
+ package disconsented.anssrpg;
+ /**
+  * @author James
+  * Handles the data that is stored on players (experience for skills and perks)
+  */
      
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -18,7 +23,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;
     public final class PlayerInformation implements IExtendedEntityProperties {
            // private int currentXP;
             private Map experience = new HashMap();
-            private double levelCurve = Main.experienceCurve;
+            private ArrayList perks = new ArrayList();
+            private double levelCurve = ConfigurationHandler.experienceCurve;
             public final static String EXT_PROP_NAME = "PlayerInformation";
             private final EntityPlayer player;
            
@@ -46,7 +52,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;
             	Set mapSet = (Set) experience.entrySet();
                 //Create iterator on Set 
                 Iterator mapIterator = mapSet.iterator();
-                if(Main.debugInfo == true){ 
+                if(ConfigurationHandler.debugInfo == true){ 
                 	System.out.println("Display the key/value of HashMap.");
                 }
                 while (mapIterator.hasNext()) {
@@ -54,15 +60,11 @@ import net.minecraftforge.common.IExtendedEntityProperties;
                         String keyValue = (String) mapEntry.getKey();
                         int value = (Integer) mapEntry.getValue();
                         compound.setInteger(keyValue, value);
-                }
-                	
-            	
-           
+                } 
             }
      
           	 @Override
           	 public final void loadNBTData(NBTTagCompound compound) {            	
-          		 System.out.println(compound);
           	 }    
      
           	 public void addXP(int ammount, String skillName){
