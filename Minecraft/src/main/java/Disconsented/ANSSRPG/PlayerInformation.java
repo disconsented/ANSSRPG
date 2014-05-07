@@ -9,10 +9,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
-     
+     //xp required = experienceCurve ^ level
+     //
     public final class PlayerInformation implements IExtendedEntityProperties {
            // private int currentXP;
             private Map experience = new HashMap();
@@ -53,7 +55,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;
                         int value = (Integer) mapEntry.getValue();
                         compound.setInteger(keyValue, value);
                 }
-
+                	
             	
            
             }
@@ -65,10 +67,23 @@ import net.minecraftforge.common.IExtendedEntityProperties;
      
           	 public void addXP(int ammount, String skillName){
           		int currentXP;
-          		if (experience.get(skillName) == null ){currentXP = 1;}
+          		if (experience.get(skillName) == null ){
+          			currentXP = 1;
+          			}
           		else {
-          			currentXP = (Integer) experience.get(skillName);}
-          		 this.experience.put(skillName, currentXP + ammount);
+          			currentXP = (Integer) experience.get(skillName);
+          			}
+          		 this.experience.put(skillName, currentXP + ammount);          		
+          	 }
+          	 public boolean canLevelUp(int newExp, String skillName)
+          	 {
+          		 if ((newExp + (Integer)this.experience.get(skillName)) >= Math.pow(levelCurve, getLevel((Integer) this.experience.get(skillName))+1)){
+          			return true;
+           		 }
+           		 else{
+           			return false;
+           		 }
+				
           	 }
           	 
           	 public void setXP(int ammount, String skillName){

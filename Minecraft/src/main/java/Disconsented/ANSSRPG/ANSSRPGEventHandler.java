@@ -37,6 +37,9 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
                				}else{
                				ent.addChatComponentMessage(new ChatComponentText(Main.skillInfo.get(skillLoop).exp.get(blockLoop)+" experience added to: "+ Main.skillInfo.get(skillLoop).name));
                				playerInfo.addXP((Integer) Main.skillInfo.get(skillLoop).exp.get(blockLoop), Main.skillInfo.get(skillLoop).name);
+        					if (playerInfo.canLevelUp((Integer) Main.skillInfo.get(skillLoop).exp.get(blockLoop), Main.skillInfo.get(skillLoop).name)){
+        						ent.addChatComponentMessage(new ChatComponentText("Your skill "+Main.skillInfo.get(skillLoop).name+" has reached level: "+ playerInfo.getLevel(playerInfo.getXP(Main.skillInfo.get(skillLoop).name))));
+        					}
                				}
                				break blockCheck;
              			}
@@ -86,6 +89,9 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
     							playerInfo.addXP((Integer) Main.skillInfo.get(skillLoop).exp.get(entityLoop), Main.skillInfo.get(skillLoop).name);
     							player.addChatComponentMessage(new ChatComponentText(Main.skillInfo.get(skillLoop).exp.get(entityLoop)+" experience added to: "+ Main.skillInfo.get(skillLoop).name));
     							player.addChatComponentMessage(new ChatComponentText("Skill experience: "+playerInfo.getXP(Main.skillInfo.get(skillLoop).name)));
+            					if (playerInfo.canLevelUp((Integer) Main.skillInfo.get(skillLoop).exp.get(entityLoop), Main.skillInfo.get(skillLoop).name)){
+            						player.addChatComponentMessage(new ChatComponentText("Your skill "+Main.skillInfo.get(skillLoop).name+" has reached level: "+ playerInfo.getLevel(playerInfo.getXP(Main.skillInfo.get(skillLoop).name))));
+            					}
     							break entityCheck;
     						}
     						else{
@@ -119,6 +125,9 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
     				System.out.println(event.entity.getCommandSenderName()+"=/="+Main.skillInfo.get(skillLoop).itemName.get(entityLoop));
     				if ( event.entity.getCommandSenderName().equals(Main.skillInfo.get(skillLoop).itemName.get(entityLoop)) ){    					
     					playerInfo.addXP((Integer) Main.skillInfo.get(skillLoop).exp.get(entityLoop), Main.skillInfo.get(skillLoop).name);
+    					if (playerInfo.canLevelUp((Integer) Main.skillInfo.get(skillLoop).exp.get(entityLoop), Main.skillInfo.get(skillLoop).name)){
+    						player.addChatComponentMessage(new ChatComponentText("Your skill "+Main.skillInfo.get(skillLoop).name+" has reached level: "+ playerInfo.getLevel(playerInfo.getXP(Main.skillInfo.get(skillLoop).name))));
+    					}
     					player.addChatComponentMessage(new ChatComponentText(Main.skillInfo.get(skillLoop).exp.get(entityLoop)+" experience added to: "+ Main.skillInfo.get(skillLoop).name));
     					player.addChatComponentMessage(new ChatComponentText("Skill experience: "+playerInfo.getXP(Main.skillInfo.get(skillLoop).name)));
     					break entityCheck;
