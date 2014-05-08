@@ -17,6 +17,7 @@ public class ConfigurationHandler {
 	public static double experienceCurve;
 	public static boolean debugInfo = true;
 	static ArrayList names = new ArrayList();
+	static ArrayList mainStore = new ArrayList();
 	LinkedHashMap entityList = new LinkedHashMap();
 	static File fileNameMain = new File("config/ANSSRPG","Main.cfg");
 	static String line = null;
@@ -67,13 +68,13 @@ public class ConfigurationHandler {
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write("//the ; represents a new section");
             bufferedWriter.newLine();
-            bufferedWriter.write("// List of skillnames goes here (Make sure there is only one per line and that they are prefixed by:)");
+            bufferedWriter.write("// List of skillnames goes here (Make sure there is only one per line)");
             bufferedWriter.newLine();
             bufferedWriter.write("//And suffixed by -# where # is the skill type number");
             bufferedWriter.newLine();
-            bufferedWriter.write(":example skill name-1");
+            bufferedWriter.write("example skill name=1");
             bufferedWriter.newLine();
-            bufferedWriter.write(";");
+            bufferedWriter.write(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
             bufferedWriter.newLine();
             bufferedWriter.write("Debug info:false");
             bufferedWriter.newLine();
@@ -97,10 +98,10 @@ public class ConfigurationHandler {
 		ArrayList entryName = new ArrayList();
 		ArrayList entryExperience = new ArrayList();
 		ArrayList entryRequirement = new ArrayList();
-		ArrayList<Byte> type = new ArrayList<Byte>();
-		
+		ArrayList<Integer> type = new ArrayList<Integer>();
+		int stage = 0;
 
-		 try {
+		 try { // Main reader
 	            // FileReader reads text files in the default encoding.
 	            FileReader fileReader = 
 	                new FileReader(fileNameMain);
@@ -108,32 +109,20 @@ public class ConfigurationHandler {
 	            // Always wrap FileReader in BufferedReader.
 	            BufferedReader bufferedReader = 
 	                new BufferedReader(fileReader);
-
+/*ignore comment lines 
+ * get the skill names
+ * substring them to seperate the names(between":" and "-" and the type (after "-"/ last char)
+ * Get debug info
+ * 
+ */
 	            while((line = bufferedReader.readLine()) != null) {
 	            	if (!line.startsWith("/")){ //All ANSSRPG config files should start with a comment
-	            		writeDefaultMain();
-	            	}
-	            	if (line.startsWith("/")){
-	            	}
-	            	else {
-	            		while (!line.startsWith(";")){//SkillNames
-	            			names.add(line);
-	            		}
-	            		while (!line.startsWith(";")){ //DebugInfo
-	            			skillNames.add(line.substring(1));
-	            		}
-	            		if (line.substring(line.indexOf(":")+1).toLowerCase() == "true"){
-	            			debugInfo = true;
-	            		}
-	            		else
-	            		{
-	            			debugInfo = false;
-	            		}
-	            		
+	            		mainStore.add(line);
 	            	}
 	            }	
 
 	            // Always close files.
+	            System.out.println(mainStore);
 	            bufferedReader.close();			
 	        }
 	        catch(FileNotFoundException ex) {
@@ -145,13 +134,26 @@ public class ConfigurationHandler {
 	            System.out.println(
 	                "Error reading file '" + fileNameMain + "'");					
 	        }
-		for(int i = 0; i < names.size(); i++){ // For the skills
+		 for (int i = 0; i < mainStore.size(); i++){
+			 if (!mainStore.get(i).toString().startsWith("/")){
+				 if (mainStore.get(i).toString().contains("=")){ //If it contains - aka a skill name
+					 names.add(mainStore.get(i).toString().substring(0, mainStore.get(i).toString().indexOf("=")));//Adding the skill name
+					 type.add(Integer.parseInt(mainStore.get(i).toString().substring(mainStore.get(i).toString().indexOf("=")+1)) );
+				 }
+				 if (true){//If it contans : aka a setting
+					 
+				 }
+			 }
+		 }
+		 System.out.println(names);
+		 System.out.println(names.size());
+		for(int i = 0; i < names.size()-1; i++){ // For the skills
 			File fileName = new File ("config/ANSSRPG", names.get(i).toString().toLowerCase()+".cfg");
 			int x = 0;
 			 try {
 		            // FileReader reads text files in the default encoding.
 		            FileReader fileReader = 
-		                new FileReader(fileNameMain);
+		                new FileReader(fileName);
 
 		            // Always wrap FileReader in BufferedReader.
 		            BufferedReader bufferedReader = 
@@ -159,7 +161,7 @@ public class ConfigurationHandler {
 
 		            while((line = bufferedReader.readLine()) != null) {
 		            	if (!line.startsWith("/")){ //All ANSSRPG config files should start with a comment
-		            		writeDefaultSkill(line, (byte) 0);
+		            		writeDefaultSkill((String) names.get(x), type.get(x).byteValue());
 		            	}
 		            	if (line.startsWith("/")){
 		            	}
@@ -187,14 +189,14 @@ public class ConfigurationHandler {
 		        }
 		        catch(FileNotFoundException ex) {
 		            System.out.println(
-		                "Unable to open file '" + fileNameMain + "'");
-		            	writeDefaultMain();
+		                "Unable to open file '" + fileName + "'");
+		            writeDefaultSkill((String) names.get(i), type.get(i).byteValue());
 		        }
 		        catch(IOException ex) {
 		            System.out.println(
-		                "Error reading file '" + fileNameMain + "'");					
+		                "Error reading file '" + fileName + "'");					
 		        }
-			 skillInfo.add(new SkillInfo(entryExperience, entryRequirement, names.get(i).toString(), skillNames, (Byte)type.get(i)));
+			 skillInfo.add(new SkillInfo(entryExperience, entryRequirement, names.get(i).toString(), skillNames,  type.get(i).byteValue()));
 		}
 //This is just old code incase I want it
 		/*try {
