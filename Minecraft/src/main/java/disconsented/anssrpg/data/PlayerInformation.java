@@ -25,7 +25,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;
            // private int currentXP;
             private Map experience = new HashMap();
             private ArrayList perks = new ArrayList();
-            private double levelCurve = ConfigurationHandler.experienceCurve;
+            public static double levelCurve = ConfigurationHandler.experienceCurve;
             public final static String EXT_PROP_NAME = "PlayerInformation";
             private final EntityPlayer player;
            

@@ -14,13 +14,17 @@ import disconsented.anssrpg.data.SkillInfo;
 
 public class ConfigurationHandler {
     public static ArrayList<SkillInfo> skillInfo = new ArrayList<SkillInfo>(); //Has to be static
-	public static double experienceCurve;
+	public static double experienceCurve = 1.3;
 	public static boolean debugInfo = true;
 	static ArrayList names = new ArrayList();
 	static ArrayList mainStore = new ArrayList();
 	LinkedHashMap entityList = new LinkedHashMap();
 	static File fileNameMain = new File("config/ANSSRPG","Main.cfg");
 	static String line = null;
+	
+	final static String LEVEL_CURVE = "Level Curve";
+	final static String DEBUG_INFO = "Debug info";
+	
 	private static void writeDefaultSkill(String name, byte type){
 		File fileName = new File ("config/ANSSRPG", name.toLowerCase()+".cfg");
 		try {
@@ -30,7 +34,7 @@ public class ConfigurationHandler {
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write("//Skill Name: "+name);
             bufferedWriter.newLine();
-            bufferedWriter.write("//Skill Name: "+type);
+            bufferedWriter.write("//Skill Type: "+type);
             bufferedWriter.newLine();
             bufferedWriter.write("//the ; represents a new section");
             bufferedWriter.newLine();
@@ -47,7 +51,6 @@ public class ConfigurationHandler {
             bufferedWriter.write("Entry experience:");
             bufferedWriter.newLine();
             bufferedWriter.write("Entry level requirement:");
-            bufferedWriter.newLine();
             // Note that write() does not automatically
             // append a newline character.
 
@@ -72,12 +75,19 @@ public class ConfigurationHandler {
             bufferedWriter.newLine();
             bufferedWriter.write("//And suffixed by -# where # is the skill type number");
             bufferedWriter.newLine();
+            bufferedWriter.write("// 1 = Block Breaking");
+            bufferedWriter.newLine();
+            bufferedWriter.write("// 2 = Crafting");
+            bufferedWriter.newLine();
+            bufferedWriter.write("// 3 = Killing Entities");
+            bufferedWriter.newLine();
             bufferedWriter.write("example skill name=1");
             bufferedWriter.newLine();
             bufferedWriter.write(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
             bufferedWriter.newLine();
-            bufferedWriter.write("Debug info:false");
+            bufferedWriter.write(DEBUG_INFO+":false");
             bufferedWriter.newLine();
+            bufferedWriter.write(LEVEL_CURVE+"1.3");
             // Note that write() does not automatically
             // append a newline character.
 
@@ -95,9 +105,6 @@ public class ConfigurationHandler {
 	 */
 	public static void loadAndSave(){
 		ArrayList skillNames = new ArrayList();
-		ArrayList entryName = new ArrayList();
-		ArrayList entryExperience = new ArrayList();
-		ArrayList entryRequirement = new ArrayList();
 		ArrayList<Integer> type = new ArrayList<Integer>();
 		int stage = 0;
 
@@ -140,12 +147,20 @@ public class ConfigurationHandler {
 					 names.add(mainStore.get(i).toString().substring(0, mainStore.get(i).toString().indexOf("=")));//Adding the skill name
 					 type.add(Integer.parseInt(mainStore.get(i).toString().substring(mainStore.get(i).toString().indexOf("=")+1)) );
 				 }
-				 if (true){//If it contans : aka a setting
-					 
+				 if (mainStore.get(i).toString().contains(":")){//If it contans : aka a setting
+					 if (mainStore.get(i).toString().contains(DEBUG_INFO)){
+						 debugInfo = Boolean.parseBoolean(mainStore.get(i).toString());
+					 }
+					 else if (mainStore.get(i).toString().contains(LEVEL_CURVE)){
+						 experienceCurve = Double.parseDouble(mainStore.get(i).toString());
+					 }
 				 }
 			 }
 		 }
 		for(int i = 0; i < names.size(); i++){ // For the skills
+			ArrayList entryName = new ArrayList();
+			ArrayList entryExperience = new ArrayList();
+			ArrayList entryRequirement = new ArrayList();
 			File fileName = new File ("config/ANSSRPG", names.get(i).toString().toLowerCase()+".cfg");
 			int x = 0;
 			 try {
@@ -167,11 +182,11 @@ public class ConfigurationHandler {
 		            			x++;
 		            			break;
 		            		case 1:
-		            			entryExperience.add(line.substring(line.indexOf(":")+1));
+		            			entryExperience.add(Integer.parseInt(line.substring(line.indexOf(":")+1)));
 		            			x++;
 		            			break;
 		            		case 2:
-		            			entryRequirement.add(line.substring(line.indexOf(":")+1));
+		            			entryRequirement.add(Integer.parseInt(line.substring(line.indexOf(":")+1)));
 		            			x = 0;
 		            			break;
 		            		}
@@ -191,6 +206,9 @@ public class ConfigurationHandler {
 		                "Error reading file '" + fileName + "'");					
 		        }
 			 skillInfo.add(new SkillInfo(entryExperience, entryRequirement, names.get(i).toString(), entryName,  type.get(i).byteValue()));
+			/* entryExperience.clear();
+			 entryRequirement.clear();
+			 entryName.clear(); */
 			 for (int a = 0; a <+ skillInfo.size(); a++){
 				 System.out.println(skillInfo.get(a).name);
 			 }

@@ -1,4 +1,4 @@
-package disconsented.anssrpg;
+package disconsented.anssrpg.commands;
 
 import java.util.List;
 
