@@ -1,4 +1,4 @@
-package disconsented.anssrpg;
+package disconsented.anssrpg.config;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-import net.minecraftforge.common.config.Configuration;
+import disconsented.anssrpg.data.SkillInfo;
 
 public class ConfigurationHandler {
     public static ArrayList<SkillInfo> skillInfo = new ArrayList<SkillInfo>(); //Has to be static
@@ -145,9 +145,7 @@ public class ConfigurationHandler {
 				 }
 			 }
 		 }
-		 System.out.println(names);
-		 System.out.println(names.size());
-		for(int i = 0; i < names.size()-1; i++){ // For the skills
+		for(int i = 0; i < names.size(); i++){ // For the skills
 			File fileName = new File ("config/ANSSRPG", names.get(i).toString().toLowerCase()+".cfg");
 			int x = 0;
 			 try {
@@ -160,23 +158,20 @@ public class ConfigurationHandler {
 		                new BufferedReader(fileReader);
 
 		            while((line = bufferedReader.readLine()) != null) {
-		            	if (!line.startsWith("/")){ //All ANSSRPG config files should start with a comment
-		            		writeDefaultSkill((String) names.get(x), type.get(x).byteValue());
-		            	}
-		            	if (line.startsWith("/")){
-		            	}
+		            		if (line.startsWith("/")){
+		            		}
 		            	else {
 		            		switch (x){
 		            		case 0:
-		            			entryName.add(line);
+		            			entryName.add(line.substring(line.indexOf(":")+1));
 		            			x++;
 		            			break;
 		            		case 1:
-		            			entryExperience.add(line);
+		            			entryExperience.add(line.substring(line.indexOf(":")+1));
 		            			x++;
 		            			break;
 		            		case 2:
-		            			entryRequirement.add(line);
+		            			entryRequirement.add(line.substring(line.indexOf(":")+1));
 		            			x = 0;
 		            			break;
 		            		}
@@ -188,15 +183,19 @@ public class ConfigurationHandler {
 		            bufferedReader.close();			
 		        }
 		        catch(FileNotFoundException ex) {
-		            System.out.println(
-		                "Unable to open file '" + fileName + "'");
+		            System.out.println("Unable to open file '" + fileName + "'");
 		            writeDefaultSkill((String) names.get(i), type.get(i).byteValue());
 		        }
 		        catch(IOException ex) {
 		            System.out.println(
 		                "Error reading file '" + fileName + "'");					
 		        }
-			 skillInfo.add(new SkillInfo(entryExperience, entryRequirement, names.get(i).toString(), skillNames,  type.get(i).byteValue()));
+			 skillInfo.add(new SkillInfo(entryExperience, entryRequirement, names.get(i).toString(), entryName,  type.get(i).byteValue()));
+			 for (int a = 0; a <+ skillInfo.size(); a++){
+				 System.out.println(skillInfo.get(a).name);
+			 }
+			 
+			 
 		}
 //This is just old code incase I want it
 		/*try {

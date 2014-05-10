@@ -1,4 +1,4 @@
- package disconsented.anssrpg;
+ package disconsented.anssrpg.data;
  /**
   * @author James
   * Handles the data that is stored on players (experience for skills and perks)
@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import disconsented.anssrpg.config.ConfigurationHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

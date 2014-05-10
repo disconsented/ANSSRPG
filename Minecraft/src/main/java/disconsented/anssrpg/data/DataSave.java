@@ -1,4 +1,4 @@
-package disconsented.anssrpg;
+package disconsented.anssrpg.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import disconsented.anssrpg.config.ConfigurationHandler;
 
 public class DataSave {
 	Map expMap = new HashMap();

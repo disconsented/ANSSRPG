@@ -1,7 +1,7 @@
 /**
  * 
  */
-package disconsented.anssrpg;
+package disconsented.anssrpg.data;
 
 import java.util.ArrayList;
 

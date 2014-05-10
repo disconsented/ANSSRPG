@@ -1,4 +1,4 @@
-package disconsented.anssrpg;
+package disconsented.anssrpg.data;
 /**
  * @author James
  * Handles storing the information for each skill
@@ -21,7 +21,7 @@ public class SkillInfo {
 	 * 
 	 * @param exp
 	 * @param req
-	 * @param name Name
+	 * @param name 
 	 * @param itemName
 	 * @param type
 	 */

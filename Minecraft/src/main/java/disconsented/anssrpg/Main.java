@@ -22,7 +22,9 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import disconsented.anssrpg.config.ConfigurationHandler;
 //import cpw.mods.fml.common.network.NetworkMod; // not used in 1.7
+import disconsented.anssrpg.events.ANSSRPGEventHandler;
 
 @Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="0.0.1")
 //@NetworkMod(clientSideRequired=true) // not used in 1.7
