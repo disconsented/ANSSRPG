@@ -1,3 +1,6 @@
+I am always looking for help and feedback, I normally hangout on the #cauldron IRC on esper.net
+
+
 Don't Be a Jerk: The Open Source Software License. (https://github.com/evantahler/Dont-be-a-Jerk)
 Last Update: April 12, 2012
 
