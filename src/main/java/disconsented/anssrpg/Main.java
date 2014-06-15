@@ -9,6 +9,8 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -22,9 +24,11 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import disconsented.anssrpg.config.ConfigurationHandler;
+import disconsented.anssrpg.config.JsonHandler;
+import disconsented.anssrpg.data.PerkObject;
+import disconsented.anssrpg.data.RegisterWriter;
 //import cpw.mods.fml.common.network.NetworkMod; // not used in 1.7
-import disconsented.anssrpg.events.ANSSRPGEventHandler;
+import disconsented.anssrpg.events.constructingEntity;
 
 @Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="0.0.1")
 //@NetworkMod(clientSideRequired=true) // not used in 1.7
@@ -41,15 +45,18 @@ public class Main {
 		@EventHandler // used in 1.6.2
         //@PreInit    // used in 1.5.2
         public void preInit(FMLPreInitializationEvent event) {
-			ConfigurationHandler.loadAndSave();
+			//ConfigurationHandler.loadAndSave();
+			JsonHandler.loadConfig();
         }
        
         @EventHandler // used in 1.6.2
         //@Init       // used in 1.5.2
         public void load(FMLInitializationEvent event) {
                 proxy.registerRenderers();
-                MinecraftForge.EVENT_BUS.register(new ANSSRPGEventHandler());
-                FMLCommonHandler.instance().bus().register(new ANSSRPGEventHandler());
+                MinecraftForge.EVENT_BUS.register(new constructingEntity());
+                FMLCommonHandler.instance().bus().register(new constructingEntity());
+                
+                
                 //MiningSorting.loadRequirements();
 
         }
@@ -57,6 +64,18 @@ public class Main {
         @EventHandler // used in 1.6.2
         //@PostInit   // used in 1.5.2
         public void postInit(FMLPostInitializationEvent event) {
-                // Stub Method
+        	System.exit(0);
+        	if (JsonHandler.getPrintItem()){
+        		System.out.println("item");
+        		RegisterWriter.Write("item");
+        	}
+        	if (JsonHandler.getPrintBlock()){
+        		System.out.println("block");
+        		RegisterWriter.Write("block");
+        	}
+        	if (JsonHandler.getPrintEntity()){
+        		System.out.println("entity");
+        		RegisterWriter.Write("entity");
+        	}
         }
 }

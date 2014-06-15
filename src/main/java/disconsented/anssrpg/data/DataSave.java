@@ -12,17 +12,21 @@ import disconsented.anssrpg.config.ConfigurationHandler;
 
 public class DataSave {
 	Map expMap = new HashMap();
+	Map perkMap = new HashMap();
 	ArrayList perks = new ArrayList();
 	 @SubscribeEvent
 		public void onEntityJoinWorldEvent(EntityJoinWorldEvent event){    		
 	    		if (event.entity instanceof EntityPlayer){
 	    			System.out.println("Player Respawn detected");
 	    			PlayerInformation playerInfo = PlayerInformation.get((EntityPlayer) event.entity);
+	    			
 	    			for(int i = 0; i < ConfigurationHandler.skillInfo.size();i++ ){
 	    				if(expMap.get(event.entity.getUniqueID()+ConfigurationHandler.skillInfo.get(i).name) != null ){
 	    					playerInfo.setXP((Integer) expMap.get(event.entity.getUniqueID()+ConfigurationHandler.skillInfo.get(i).name), ConfigurationHandler.skillInfo.get(i).name);
 	    				}
 	    			}
+	    			
+	    			
 	    		}
 			}
 	    @SubscribeEvent

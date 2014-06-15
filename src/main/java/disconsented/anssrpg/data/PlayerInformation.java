@@ -4,6 +4,7 @@
   * Handles the data that is stored on players (experience for skills and perks)
   */
      
+import java.awt.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -11,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 
 import disconsented.anssrpg.config.ConfigurationHandler;
+import disconsented.anssrpg.data.PerkObject;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -24,7 +26,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;
     public final class PlayerInformation implements IExtendedEntityProperties {
            // private int currentXP;
             private Map experience = new HashMap();
-            private ArrayList perks = new ArrayList();
+            private ArrayList<PerkObject> perks = new ArrayList<PerkObject>();
             public static double levelCurve = ConfigurationHandler.experienceCurve;
             public final static String EXT_PROP_NAME = "PlayerInformation";
             private final EntityPlayer player;
@@ -62,6 +64,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;
                         int value = (Integer) mapEntry.getValue();
                         compound.setInteger(keyValue, value);
                 } 
+                //compound.setTag("perks", perks);
             }
      
           	 @Override
@@ -105,5 +108,12 @@ import net.minecraftforge.common.IExtendedEntityProperties;
           	 public int getLevel(int xp){        	
           		 return (int) (Math.log10((double)xp)/Math.log10(levelCurve));
         }
+          	 public boolean hasPerk(PerkObject perk){          		 
+				return perks.contains(perk);
+          		 
+          	 }
+          	 public void addPerk(PerkObject perk){
+          		 perks.add(perk);
+          	 }
     }
      

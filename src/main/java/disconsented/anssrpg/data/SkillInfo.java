@@ -11,12 +11,15 @@ package disconsented.anssrpg.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.item.Item;
+
 public class SkillInfo {
 	
 	public int skill;
 	public String name;
 	public byte type; //Handles the skill type block breaking[1](onBreakEvent), Entity Damaging[2](), Crafting[3](ItemCraftedEvent),  
-	public ArrayList exp, req, itemName = new ArrayList();
+	public ArrayList exp, req = new ArrayList();
+	public ArrayList<Item> itemName = new ArrayList<Item>();
 	/**
 	 * 
 	 * @param exp
