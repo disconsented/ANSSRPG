@@ -9,17 +9,10 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 
-/**
- * @author James
- * Handles giving perks, requirements's etc
- * Types:
- * 1 - Unlock perk
- * 2 - potion effect perk
- * 
- */ 
 public class PerkObject {
+	
 	public String name;
-	public ArrayList requirement = new ArrayList();
+	public ArrayList requirementName, requirementLevel = new ArrayList();
 	public String perkSlug;
 	public Block unlockBlock;
 	public Item unlockItem;
@@ -27,8 +20,7 @@ public class PerkObject {
 	public String description;
 	public int pointCost;
 	
-	private String getSlug(String name){
-		
+	private String getSlug(String name){		
 		return name.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
 	}
 	
@@ -40,27 +32,30 @@ public class PerkObject {
  * @param pointCost - Cost in points to unlock
  * @param requirement - 
  */
-	public PerkObject (String name, Block unlockBlock, String description, int pointCost, ArrayList requirement){
+	public PerkObject (String name, Block unlockBlock, String description, int pointCost, ArrayList requirementName, ArrayList requirementLevel){
 		this.perkSlug = getSlug(name);
 		this.name = name;
 		this.unlockBlock = unlockBlock;
-		this.requirement = requirement;
+		this.requirementName = requirementName;
+		this.requirementLevel = requirementLevel;
 		this.pointCost = pointCost;
 		this.description = description;
 	}
-	public PerkObject (String name, Item unlockItem, String description, int pointCost, ArrayList requirement){
+	public PerkObject (String name, Item unlockItem, String description, int pointCost, ArrayList requirementName, ArrayList requirementLevel){
 		this.perkSlug = getSlug(name);
 		this.name = name;
 		this.unlockItem = unlockItem;
-		this.requirement = requirement;
+		this.requirementName = requirementName;
+		this.requirementLevel = requirementLevel;
 		this.pointCost = pointCost;
 		this.description = description;
 	}
-	public PerkObject (String name, Entity unlockEntity, String description, int pointCost, ArrayList requirement){
+	public PerkObject (String name, Entity unlockEntity, String description, int pointCost, ArrayList requirementName, ArrayList requirementLevel){
 		this.perkSlug = getSlug(name);
 		this.name = name;
 		this.unlockEntity = unlockEntity;
-		this.requirement = requirement;
+		this.requirementName = requirementName;
+		this.requirementLevel = requirementLevel;
 		this.pointCost = pointCost;
 		this.description = description;
 	}
