@@ -4,30 +4,25 @@
   * Handles the data that is stored on players (experience for skills and perks)
   */
      
-import java.awt.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import disconsented.anssrpg.config.ConfigurationHandler;
-import disconsented.anssrpg.data.PerkObject;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
+import disconsented.anssrpg.config.JsonConfigHandler;
      //xp required = experienceCurve ^ level
      //
     public final class PlayerInformation implements IExtendedEntityProperties {
            // private int currentXP;
             private Map experience = new HashMap();
             private ArrayList<PerkObject> perks = new ArrayList<PerkObject>();
-            public static double levelCurve = ConfigurationHandler.experienceCurve;
+            public static double levelCurve = JsonConfigHandler.getLevelCurve();
             public final static String EXT_PROP_NAME = "PlayerInformation";
             private final EntityPlayer player;
            
@@ -55,7 +50,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;
             	Set mapSet = (Set) experience.entrySet();
                 //Create iterator on Set 
                 Iterator mapIterator = mapSet.iterator();
-                if(ConfigurationHandler.debugInfo == true){ 
+                if(JsonConfigHandler.getDebug()){ 
                 	System.out.println("Display the key/value of HashMap.");
                 }
                 while (mapIterator.hasNext()) {

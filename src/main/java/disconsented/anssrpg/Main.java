@@ -1,18 +1,10 @@
 package disconsented.anssrpg;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.UUID;
 
-import javax.swing.JOptionPane;
-
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler; // used in 1.6.2
@@ -24,13 +16,14 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import disconsented.anssrpg.config.JsonHandler;
-import disconsented.anssrpg.data.PerkObject;
+import disconsented.anssrpg.config.JsonConfigHandler;
+import disconsented.anssrpg.data.PlayerData;
+import disconsented.anssrpg.data.PlayerFile;
 import disconsented.anssrpg.data.RegisterWriter;
 //import cpw.mods.fml.common.network.NetworkMod; // not used in 1.7
 import disconsented.anssrpg.events.constructingEntity;
 
-@Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="0.0.1")
+@Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="TC2")
 //@NetworkMod(clientSideRequired=true) // not used in 1.7
 public class Main {
         // The instance of your mod that Forge uses.
@@ -46,7 +39,8 @@ public class Main {
         //@PreInit    // used in 1.5.2
         public void preInit(FMLPreInitializationEvent event) {
 			//ConfigurationHandler.loadAndSave();
-			JsonHandler.loadConfig();
+			JsonConfigHandler.loadConfig();
+			JsonConfigHandler.loadSkillConfig();
         }
        
         @EventHandler // used in 1.6.2
@@ -64,16 +58,15 @@ public class Main {
         @EventHandler // used in 1.6.2
         //@PostInit   // used in 1.5.2
         public void postInit(FMLPostInitializationEvent event) {
-        	System.exit(0);
-        	if (JsonHandler.getPrintItem()){
+        	if (JsonConfigHandler.getPrintItem()){
         		System.out.println("item");
         		RegisterWriter.Write("item");
         	}
-        	if (JsonHandler.getPrintBlock()){
+        	if (JsonConfigHandler.getPrintBlock()){
         		System.out.println("block");
         		RegisterWriter.Write("block");
         	}
-        	if (JsonHandler.getPrintEntity()){
+        	if (JsonConfigHandler.getPrintEntity()){
         		System.out.println("entity");
         		RegisterWriter.Write("entity");
         	}
