@@ -3,40 +3,40 @@ package disconsented.anssrpg.events;
  * @author James
  * Handles when to add experience and blocking of events
  */
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import disconsented.anssrpg.config.JsonHandler;
-import disconsented.anssrpg.data.PlayerInformation;
+import disconsented.anssrpg.config.JsonConfigHandler;
+import disconsented.anssrpg.data.PlayerHandler;
+import disconsented.anssrpg.data.SkillHandler;
+import disconsented.anssrpg.data.SkillObject;
 	
     public class blockBreaking{   
+    	/**
+    	 * If the break is a MP Player
+    	 * Iterate through all skills of type 1
+    	 * 		Check that what was broken is in the skill via iteration
+    	 * 			if player can mine it
+    	 * 				give xp
+    	 * 			else
+    	 * 				don't give xp and block event
+    	 * @param eventBreak
+    	 */
     @SubscribeEvent
-    public void onBreakevent(BreakEvent eventBreak){  
-             if (eventBreak.getPlayer() instanceof EntityPlayer) {
-             EntityPlayer ent = eventBreak.getPlayer();
-             PlayerInformation playerInfo = PlayerInformation.get(eventBreak.getPlayer());
-     		  for (Integer skillLoop = 0; skillLoop < JsonHandler.getSkillList().size(); skillLoop++){ // Skill loop
-     			  System.out.println(JsonHandler.getSkillList().get(skillLoop).itemName);
-               	if ((byte)JsonHandler.getSkillList().get(skillLoop).type == (byte)1){
-               		
-               		blockCheck:	for (Integer blockLoop = 0; blockLoop < JsonHandler.getSkillList().get(skillLoop).itemName.size(); blockLoop++){ // Block loop     
-               			if (eventBreak.block.getUnlocalizedName().equals(JsonHandler.getSkillList().get(skillLoop).itemName.get(blockLoop))){             				
-               				if (playerInfo.getLevel(playerInfo.getXP(JsonHandler.getSkillList().get(skillLoop).name)) < (Integer)JsonHandler.getSkillList().get(skillLoop).req.get(blockLoop)){
-               					ent.addChatComponentMessage(new ChatComponentText("Your skill ("+playerInfo.getLevel(playerInfo.getXP(JsonHandler.getSkillList().get(skillLoop).name))+") is not high enough to break "+eventBreak.block.getLocalizedName()+"("+JsonHandler.getSkillList().get(skillLoop).req.get(blockLoop)+")"));
-               					eventBreak.setCanceled(true);
-               				}else{
-               					ent.addChatComponentMessage(new ChatComponentText(JsonHandler.getSkillList().get(skillLoop).exp.get(blockLoop)+" experience added to: "+ JsonHandler.getSkillList().get(skillLoop).name));
-               					playerInfo.addXP((Integer) JsonHandler.getSkillList().get(skillLoop).exp.get(blockLoop), JsonHandler.getSkillList().get(skillLoop).name);
-               					if (playerInfo.canLevelUp((Integer) JsonHandler.getSkillList().get(skillLoop).exp.get(blockLoop), JsonHandler.getSkillList().get(skillLoop).name)){
-               						ent.addChatComponentMessage(new ChatComponentText("Your skill "+JsonHandler.getSkillList().get(skillLoop).name+" has reached level: "+ playerInfo.getLevel(playerInfo.getXP(JsonHandler.getSkillList().get(skillLoop).name))));
-               					}
-               				}
-               				break blockCheck;
-             			}
-             		}
-             	}
-             }
-         } 
+    public void onBreakevent(BreakEvent event){  
+    	if (event.getPlayer() instanceof EntityPlayerMP){
+    		for(int i = 0; i < SkillHandler.skillCount(); i++){
+    			int blockIndex = SkillHandler.indexOfBlock(1,event.block);
+    			if (blockIndex != -1){
+    				if (PlayerHandler.hasPerk(event.block, SkillHandler.getSkillName(i))){//Player can mine
+    					PlayerHandler.addXP(SkillHandler.getXP(blockIndex, i), SkillHandler.getSkillName(i), (EntityPlayerMP) event.getPlayer());
+    					}
+    				else{    					
+    					PlayerHandler.sendFail((EntityPlayerMP) event.getPlayer());
+    					event.setCanceled(true);
+    					}
+    				}
+    			}
+    		}
+    	}
     }
-}
