@@ -8,5 +8,4 @@
 *.txt
 gradlew
 gradlew.bat
-build.gradle
 .classpath
