@@ -21,7 +21,7 @@ import disconsented.anssrpg.config.JsonConfigHandler;
 
 /**
  * 
- * @author james
+ * @author James
  *
  *onEntityJoinWorld - Probably not needed
  *onLivingDeath - Saves data
@@ -29,11 +29,14 @@ import disconsented.anssrpg.config.JsonConfigHandler;
 public class DataSave {
 	static HashMap players = new HashMap();
 	
+	public static PlayerData getPlayerData(String playerID){
+		return (PlayerData) players.get(playerID);		
+	}
 	public static void addPlayer(PlayerData player, String PlayerID){
 		players.put(PlayerID,player);
 	}
 	/**
-	 * Load player daya
+	 * Load player data
 	 * @param event
 	 */
 	@SubscribeEvent
