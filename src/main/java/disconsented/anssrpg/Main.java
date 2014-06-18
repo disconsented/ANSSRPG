@@ -39,16 +39,15 @@ public class Main {
         //@PreInit    // used in 1.5.2
         public void preInit(FMLPreInitializationEvent event) {
 			//ConfigurationHandler.loadAndSave();
-			JsonConfigHandler.loadConfig();
-			JsonConfigHandler.loadSkillConfig();
+			JsonConfigHandler.loadConfigs();
         }
        
         @EventHandler // used in 1.6.2
         //@Init       // used in 1.5.2
         public void load(FMLInitializationEvent event) {
                 proxy.registerRenderers();
-                MinecraftForge.EVENT_BUS.register(new constructingEntity());
-                FMLCommonHandler.instance().bus().register(new constructingEntity());
+                //MinecraftForge.EVENT_BUS.register(new constructingEntity());
+               // FMLCommonHandler.instance().bus().register(new constructingEntity());
                 
                 
                 //MiningSorting.loadRequirements();

@@ -21,8 +21,7 @@ public class PlayerFile {
 	static String SKILL_LIST = "Skill List";
 	
 	
-	public static void loadPlayer(String playerID) {	
-		
+	public static void loadPlayer(String playerID) {		
 		File playerFile = new File("anssdat/",playerID+".dat");
 		JSONParser parser = new JSONParser();		 
 		try {	 
@@ -76,7 +75,7 @@ public class PlayerFile {
 			file.write(obj.toJSONString());
 			file.flush();
 			file.close();
-			JOptionPane.showMessageDialog(null, playerFile);
+			//JOptionPane.showMessageDialog(null, playerFile);
 	 
 		} catch (IOException e) {
 			e.printStackTrace();
