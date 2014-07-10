@@ -36,7 +36,7 @@ import disconsented.anssrpg.player.PlayerHandler;
     			Skill temp = (Skill)SkillHandler.getSkillList().get(i);
     			if(temp.type == 1){
     				int blockIndex = SkillHandler.indexOfBlock((Block)event.block, i); 
-    				if (blockIndex != -1){
+    				if (blockIndex != -1 || requiresPerk){
     					if (requiresPerk){
 	    						if (PlayerHandler.hasPerk(event.block, SkillHandler.getSkillName(i))){//Player can mine
 	        						PlayerHandler.addXP(SkillHandler.getXP(blockIndex, i), SkillHandler.getSkillName(i), (EntityPlayerMP) event.getPlayer());
@@ -51,27 +51,5 @@ import disconsented.anssrpg.player.PlayerHandler;
     			}
     		}
     	}
-    }    	
-    
-    	/*if (event.getPlayer() instanceof EntityPlayerMP){
-    		//System.out.println("Poke");
-    		System.out.println(event.block.equals(Block.blockRegistry.getObject("coal_ore")));
-    		for(int i = 0; i < SkillHandler.skillCount(); i++){
-    			Skill temp = (Skill)SkillHandler.getSkillList().get(i);
-    			System.out.println(temp.entryName);
-    			System.out.println(temp.exp);
-    			int blockIndex = SkillHandler.indexOfBlock((Block)event.block, i);    			
-    			System.out.println(blockIndex);
-    			if (blockIndex != -1){
-    				if (PlayerHandler.hasPerk(event.block, SkillHandler.getSkillName(i))){//Player can mine
-    						PlayerHandler.addXP(SkillHandler.getXP(blockIndex, i), SkillHandler.getSkillName(i), (EntityPlayerMP) event.getPlayer());
-    					}
-    				else{    					
-    						PlayerHandler.sendFail((EntityPlayerMP) event.getPlayer());
-    						event.setCanceled(true);
-    					}
-    				}
-    			}
-    		}
-    	}*/
-    }
+    }	
+}
