@@ -1,4 +1,4 @@
-package disconsented.anssrpg.data;
+package disconsented.anssrpg.skill;
 /**
  * @author James
  * Handles storing the information for each skill
@@ -14,7 +14,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 
-public class SkillObject {
+public class Skill {
 	
 	public String name;
 	
@@ -22,14 +22,14 @@ public class SkillObject {
 	public ArrayList exp = new ArrayList();
 	public ArrayList entryName = new ArrayList();
 	/**
-	 * 
-	 * @param exp
-	 * @param req
-	 * @param name 
-	 * @param itemName
-	 * @param type
+	 *  The position of the entrys of the ArrayList's matter
+	 * @param exp - ArrayList for the exp
+	 * @param req - Deprecated
+	 * @param name - Name of the skill
+	 * @param entryName - Name of the entry (
+	 * @param type - Skill Type
 	 */
-	public SkillObject (ArrayList exp, String name, ArrayList entryName, int type) {
+	public Skill (ArrayList exp, String name, ArrayList entryName, int type) {
 		this.exp = exp;
 		this.name = name;
 		this.entryName = entryName;

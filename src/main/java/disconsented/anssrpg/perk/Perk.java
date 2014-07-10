@@ -1,7 +1,7 @@
 /**
  * 
  */
-package disconsented.anssrpg.data;
+package disconsented.anssrpg.perk;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 
-public class PerkObject {
+public class Perk {
 	
 	public String name;
 	public ArrayList requirementName, requirementLevel = new ArrayList();
@@ -17,7 +17,9 @@ public class PerkObject {
 	public Block unlockBlock;
 	public Item unlockItem;
 	public Entity unlockEntity;
+	public String unlock;
 	public String description;
+	public String type;
 	public int pointCost;
 	
 	private String getSlug(String name){		
@@ -32,7 +34,7 @@ public class PerkObject {
  * @param pointCost - Cost in points to unlock
  * @param requirement - 
  */
-	public PerkObject (String name, Block unlockBlock, String description, int pointCost, ArrayList requirementName, ArrayList requirementLevel){
+	public Perk (String name, Block unlockBlock, String description, int pointCost, ArrayList requirementName, ArrayList requirementLevel){
 		this.perkSlug = getSlug(name);
 		this.name = name;
 		this.unlockBlock = unlockBlock;
@@ -41,7 +43,7 @@ public class PerkObject {
 		this.pointCost = pointCost;
 		this.description = description;
 	}
-	public PerkObject (String name, Item unlockItem, String description, int pointCost, ArrayList requirementName, ArrayList requirementLevel){
+	public Perk (String name, Item unlockItem, String description, int pointCost, ArrayList requirementName, ArrayList requirementLevel){
 		this.perkSlug = getSlug(name);
 		this.name = name;
 		this.unlockItem = unlockItem;
@@ -50,7 +52,7 @@ public class PerkObject {
 		this.pointCost = pointCost;
 		this.description = description;
 	}
-	public PerkObject (String name, Entity unlockEntity, String description, int pointCost, ArrayList requirementName, ArrayList requirementLevel){
+	public Perk (String name, Entity unlockEntity, String description, int pointCost, ArrayList requirementName, ArrayList requirementLevel){
 		this.perkSlug = getSlug(name);
 		this.name = name;
 		this.unlockEntity = unlockEntity;
@@ -59,5 +61,4 @@ public class PerkObject {
 		this.pointCost = pointCost;
 		this.description = description;
 	}
-
 }

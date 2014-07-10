@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -20,13 +21,13 @@ public static void Write(String entry){
 		 registryName = "item.registry";
 		break;
 	case "entity":
-		System.out.println("Entitty registry is broken");	
+		temp = new ArrayList(Arrays.asList(EntityList.func_151515_b().toArray()));		;
 		 registryName = "entity.registry";
 		break;
 	case "block":
 		temp = new ArrayList<String>(Block.blockRegistry.getKeys());
 		 registryName = "block.registry";
-			break;
+		break;
 	}
 	try {
         FileWriter fileWriter = new FileWriter(registryName);

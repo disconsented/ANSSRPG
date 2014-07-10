@@ -1,16 +1,24 @@
- package disconsented.anssrpg.data;
+ package disconsented.anssrpg.player;
+
+import java.util.ArrayList;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.util.ChatComponentText;
+import disconsented.anssrpg.Settings;
 import disconsented.anssrpg.config.JsonConfigHandler;
+import disconsented.anssrpg.data.DataSave;
+import disconsented.anssrpg.perk.Perk;
+import disconsented.anssrpg.perk.PerkStore;
  /**
   * @author James
   * Handles the data that is stored on players (experience for skills and perks)
   */
 
     public final class PlayerHandler{
-            static double levelCurve = JsonConfigHandler.getLevelCurve();
+            static double levelCurve = Settings.getLevelCurve();
              public static void sendFail(EntityPlayerMP player){
             	 player.addChatComponentMessage(new ChatComponentText("You are not skilled enough to preform this action"));
              }
@@ -38,26 +46,66 @@ import disconsented.anssrpg.config.JsonConfigHandler;
           	 }       
        
           	 public static int getXP(String skillName, String playerID){
-          		 return (int) DataSave.getPlayerData(playerID).skillExp.get(skillName);
+          		 int amount = 0;
+          		 if (DataSave.getPlayerData(playerID).skillExp.get(skillName) != null){
+          			 amount = (int) DataSave.getPlayerData(playerID).skillExp.get(skillName);
+          		 }
+          		 return amount;
           	 }
           	 
           	 public static int getLevel(int xp){        	
           		 return (int) (Math.log10((double)xp)/Math.log10(levelCurve));
           	 }
-          	 public boolean hasPerk(PerkObject perk, String playerID){          		 
+          	 public boolean hasPerk(Perk perk, String playerID){          		 
 				return DataSave.getPlayerData(playerID).perkList.contains(perk);          		 
           	 }
           	public static boolean hasPerk(Block block, String playerID){
+          		boolean has = false; 
+          		if (PerkStore.getBlockPerkList(block) != null){
+          			for (int x = 0; x < PerkStore.getBlockPerkList(block).size(); x++){
+          				if (DataSave.getPlayerData(playerID).perkList.contains(PerkStore.getBlockPerkList(block))){
+          					has = true;
+          				}
+          				else{
+          					if (Settings.getDebug()){
+          						System.out.println(DataSave.getPlayerData(playerID).perkList.toString());
+          						System.out.println(PerkStore.getBlockPerkList(block));
+          					}
+          				}
+          		}
+          		}
+				return has;          		 
+          	 }
+          	public static boolean hasPerk(Item item, String playerID){
           		boolean has = false;
           		for(int i = 0;i < DataSave.getPlayerData(playerID).perkList.size(); i++){
-          			if (DataSave.getPlayerData(playerID).perkList.get(i).unlockBlock == block){
+          			if (DataSave.getPlayerData(playerID).perkList.get(i).unlockItem == item){
           				has = true;
           			}
           		}
 				return has;          		 
           	 }
-          	 public void addPerk(PerkObject perk, String playerID){
+          	public static boolean hasPerk(Entity entity, String playerID){
+          		boolean has = false;
+          		for(int i = 0;i < DataSave.getPlayerData(playerID).perkList.size(); i++){
+          			if (DataSave.getPlayerData(playerID).perkList.get(i).unlockEntity == entity){
+          				has = true;
+          			}
+          		}
+				return has;          		 
+          	 }
+          	 public static void addPerk(Perk perk, String playerID){
           		DataSave.getPlayerData(playerID).perkList.add(perk);
           	 }
+          	public static void addPerk(String perkSlug, String playerID){
+          		DataSave.getPlayerData(playerID).perkList.add(PerkStore.getPerk(perkSlug));
+          	 }
+          	public static ArrayList getPerks(String UUID){
+          		try {
+          			return DataSave.getPlayerData(UUID).perkList;
+          		}catch(NullPointerException e){
+          			return null;
+          		}
+          	}
     }
      

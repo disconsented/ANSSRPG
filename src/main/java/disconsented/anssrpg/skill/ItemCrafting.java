@@ -1,13 +1,11 @@
-package disconsented.anssrpg.events;
+package disconsented.anssrpg.skill;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ContainerWorkbench;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraftforge.event.entity.player.PlayerOpenContainerEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
-import disconsented.anssrpg.config.JsonHandler;
-import disconsented.anssrpg.data.PlayerInformation;
+import disconsented.anssrpg.player.PlayerHandler;
 
 /**
  * @author James
@@ -17,9 +15,43 @@ import disconsented.anssrpg.data.PlayerInformation;
 
 
 	
-    public class itemCrafting{
-    	
+    public class ItemCrafting{
+    
+    	@SubscribeEvent
+        public void onPlayerOpenContainer(PlayerOpenContainerEvent event){ //Used for canceling the crafting of items
+    		if (event.entityPlayer instanceof EntityPlayerMP){
+        		EntityPlayerMP player = (EntityPlayerMP) event.entityPlayer;
+        		for(int i = 0; i < SkillHandler.skillCount(); i++){
+        			int itemIndex = SkillHandler.indexOfItem((Item)event.entityPlayer.openContainer.inventoryItemStacks.get(0));
+        			if (itemIndex != -1){
+        				if (PlayerHandler.hasPerk((Item)event.entityPlayer.openContainer.inventoryItemStacks.get(0), SkillHandler.getSkillName(i))){//Player can craft
+        					//PlayerHandler.addXP(SkillHandler.getXP(itemIndex, i), SkillHandler.getSkillName(i), player);
+        					}
+        				else{    					
+        					PlayerHandler.sendFail(player);
+        					event.entityPlayer.closeScreen();
+        					}
+        				}
+        			}
+        		}
+        	}
     @SubscribeEvent
+    public void onItemCraftedEvent(ItemCraftedEvent event) { // Used for giving players experience from crafting
+    	if (event.player instanceof EntityPlayerMP){
+    		EntityPlayerMP player = (EntityPlayerMP) event.player;
+    		for(int i = 0; i < SkillHandler.skillCount(); i++){
+    			int itemIndex = SkillHandler.indexOfItem((Item)player.openContainer.inventoryItemStacks.get(0));
+    			if (itemIndex != -1){
+    				if (PlayerHandler.hasPerk((Item)event.player.openContainer.inventoryItemStacks.get(0), SkillHandler.getSkillName(i))){//Player can craft
+    					PlayerHandler.addXP(SkillHandler.getXP(itemIndex, i), SkillHandler.getSkillName(i), player);
+    					}
+    				}
+    			}
+    		}
+    	}
+    
+    }
+    /*@SubscribeEvent
     public void onPlayerOpenContainer(PlayerOpenContainerEvent event){ //Used for canceling the crafting of items
 		EntityPlayer player = event.entityPlayer;
         PlayerInformation playerInfo = PlayerInformation.get(event.entityPlayer);
@@ -75,5 +107,4 @@ import disconsented.anssrpg.data.PlayerInformation;
 
     			}
     		}
-    	}
-}
+    	}*/

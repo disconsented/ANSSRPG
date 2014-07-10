@@ -1,11 +1,9 @@
 package disconsented.anssrpg;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.UUID;
-
+import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler; // used in 1.6.2
 //import cpw.mods.fml.common.Mod.PreInit;    // used in 1.5.2
@@ -16,12 +14,16 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import disconsented.anssrpg.commands.ANSSRPG;
+import disconsented.anssrpg.commands.DebugCommand;
 import disconsented.anssrpg.config.JsonConfigHandler;
-import disconsented.anssrpg.data.PlayerData;
-import disconsented.anssrpg.data.PlayerFile;
+import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.data.RegisterWriter;
-//import cpw.mods.fml.common.network.NetworkMod; // not used in 1.7
-import disconsented.anssrpg.events.constructingEntity;
+import disconsented.anssrpg.perk.Perk;
+import disconsented.anssrpg.perk.PerkStore;
+import disconsented.anssrpg.skill.BlockBreaking;
+import disconsented.anssrpg.skill.SkillHandler;
 
 @Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="TC2")
 //@NetworkMod(clientSideRequired=true) // not used in 1.7
@@ -46,28 +48,43 @@ public class Main {
         //@Init       // used in 1.5.2
         public void load(FMLInitializationEvent event) {
                 proxy.registerRenderers();
-                //MinecraftForge.EVENT_BUS.register(new constructingEntity());
-               // FMLCommonHandler.instance().bus().register(new constructingEntity());
-                
-                
-                //MiningSorting.loadRequirements();
-
+                MinecraftForge.EVENT_BUS.register(new BlockBreaking());
+                MinecraftForge.EVENT_BUS.register(new DataSave());
+                }
+        @EventHandler
+        public void serverLoad(FMLServerStartingEvent event)
+        {
+          event.registerServerCommand(new DebugCommand());
+          event.registerServerCommand(new ANSSRPG());
         }
        
         @EventHandler // used in 1.6.2
         //@PostInit   // used in 1.5.2
         public void postInit(FMLPostInitializationEvent event) {
-        	if (JsonConfigHandler.getPrintItem()){
-        		System.out.println("item");
+        	 //event.registerServerCommand(new DebugCommand());
+        	System.out.println((Block)Block.blockRegistry.getObject("coal_ore"));
+        	System.out.println((Block)Block.blockRegistry.getObject("iron_ore"));
+        	System.out.println((Block)Block.blockRegistry.getObject("redstone_ore"));
+        	if (Settings.getDebug()){
+	        	System.out.println("ANSSRPG has the following skills registered:");
+	        	for	(int i = 0; i < SkillHandler.getSkillList().size(); i++){
+	        		System.out.println(SkillHandler.getSkillName(i));
+	        	}
+	        	System.out.println("ANSSRPG has the following perks registered");
+	        	System.out.println(PerkStore.getRegisteredPerks());
+	        	System.out.println();
+        	}
+        	if (Settings.getPrintItem()){
+        		System.out.println("item registry is being written to disk");
         		RegisterWriter.Write("item");
         	}
-        	if (JsonConfigHandler.getPrintBlock()){
-        		System.out.println("block");
+        	if (Settings.getPrintBlock()){
+        		System.out.println("block registry is being written to disk");
         		RegisterWriter.Write("block");
         	}
-        	if (JsonConfigHandler.getPrintEntity()){
+        	if (Settings.getPrintEntity()){
         		System.out.println("entity");
-        		RegisterWriter.Write("entity");
+        		RegisterWriter.Write("entity registry is being written to disk");
         	}
         }
 }
