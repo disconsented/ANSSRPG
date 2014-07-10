@@ -36,7 +36,7 @@ public class JsonConfigHandler {
 	static String ENTRY_NAME = "Entry Name";
 	static String PRINTOUT_ITEM = "Printout items";
 	static String PRINTOUT_BLOCK = "Printout blocks";
-	static String PRINTOUT_ENTITY = "Printout entities";
+	static String PRINTOUT_ENTITY = "Printout entitys";
 	static String SKILL_NAME = "Skill name";
 	
 	

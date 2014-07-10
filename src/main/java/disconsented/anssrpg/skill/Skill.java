@@ -22,7 +22,7 @@ public class Skill {
 	public ArrayList exp = new ArrayList();
 	public ArrayList entryName = new ArrayList();
 	/**
-	 *  The position of the entries of the ArrayList's matter
+	 *  The position of the entrys of the ArrayList's matter
 	 * @param exp - ArrayList for the exp
 	 * @param req - Deprecated
 	 * @param name - Name of the skill
