@@ -63,3 +63,8 @@ processResources
 }
 targetCompatibility=7
 sourceCompatibility=7
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    from sourceSets.api.output
+    classifier = 'dev'
+}
