@@ -29,13 +29,13 @@ import disconsented.anssrpg.player.PlayerHandler;
     public void onBreakevent(BreakEvent event){ 
     	Boolean requiresPerk = false;
     	if (event.getPlayer() instanceof EntityPlayerMP){
-    		if(PerkStore.getBlockPerkList((Block)event.block) != null){
+    		if(PerkStore.getBlockPerkList(event.block) != null){
     			requiresPerk = true;
     		}
     		for (int i = 0; i < SkillHandler.getSkillList().size(); i++){
     			Skill temp = (Skill)SkillHandler.getSkillList().get(i);
     			if(temp.type == 1){
-    				int blockIndex = SkillHandler.indexOfBlock((Block)event.block, i); 
+    				int blockIndex = SkillHandler.indexOfBlock(event.block, i);
     				if (blockIndex != -1 || requiresPerk){
     					if (requiresPerk){
 	    						if (PlayerHandler.hasPerk(event.block, SkillHandler.getSkillName(i))){//Player can mine
