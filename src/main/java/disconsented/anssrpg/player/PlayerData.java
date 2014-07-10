@@ -13,7 +13,7 @@ import disconsented.anssrpg.perk.Perk;
 import net.minecraft.item.Item;
 
 public class PlayerData {
-	public ArrayList<Perk> perkList = new ArrayList<Perk>();
+	public ArrayList<String> perkList = new ArrayList<String>();
 	public HashMap skillExp = new HashMap();
 	public String playerID;
 
