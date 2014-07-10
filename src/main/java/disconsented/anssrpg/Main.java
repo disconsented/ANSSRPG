@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler; // used in 1.6.2
 //import cpw.mods.fml.common.Mod.PreInit;    // used in 1.5.2
@@ -48,8 +49,8 @@ public class Main {
         //@Init       // used in 1.5.2
         public void load(FMLInitializationEvent event) {
                 proxy.registerRenderers();
-                MinecraftForge.EVENT_BUS.register(new BlockBreaking());
-                MinecraftForge.EVENT_BUS.register(new DataSave());
+                MinecraftForge.EVENT_BUS.register(new BlockBreaking());               
+                FMLCommonHandler.instance().bus().register(new DataSave());
                 }
         @EventHandler
         public void serverLoad(FMLServerStartingEvent event)
@@ -62,9 +63,6 @@ public class Main {
         //@PostInit   // used in 1.5.2
         public void postInit(FMLPostInitializationEvent event) {
         	 //event.registerServerCommand(new DebugCommand());
-        	System.out.println((Block)Block.blockRegistry.getObject("coal_ore"));
-        	System.out.println((Block)Block.blockRegistry.getObject("iron_ore"));
-        	System.out.println((Block)Block.blockRegistry.getObject("redstone_ore"));
         	if (Settings.getDebug()){
 	        	System.out.println("ANSSRPG has the following skills registered:");
 	        	for	(int i = 0; i < SkillHandler.getSkillList().size(); i++){

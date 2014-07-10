@@ -42,34 +42,36 @@ public class SkillHandler {
 				}
 		return result;		
 	}
-	public static int indexOfEntity(Entity entity){
+	public static int indexOfEntity(Entity entity, int skillNum){
 		int result = -1;
-		for (int i = 0; i < skillList.size() && result == -1; i++){
-			if (skillList.get(i).type == 2){
-				for (int x = 0; x < skillList.size() && result == -1; x++){
-					if (skillList.get(i).entryName.get(x).equals(entity)){
-						result = x;
-					}
-					
+		for (int x = 0; x < skillList.get(skillNum).entryName.size() && result == -1; x++){
+			if (skillList.get(skillNum).entryName.get(x).equals((entity))){
+				result = x;
+			}
+			else{
+				if (Settings.getDebug()){
+					System.out.println("Entry name:"+skillList.get(skillNum).entryName.get(x));
+					System.out.println("Entity: "+entity);
 				}
 			}
 		}
-		return result;		
-	}
-	public static int indexOfItem(Item item){
+return result;		
+}
+	public static int indexOfItem(Item item, int skillNum){
 		int result = -1;
-		for (int i = 0; i < skillList.size() && result == -1; i++){
-			if (skillList.get(i).type == 3){
-				for (int x = 0; x < skillList.size() && result == -1; x++){
-					if (skillList.get(i).entryName.get(x).equals(item)){
-						result = x;
-					}
-					
+		for (int x = 0; x < skillList.get(skillNum).entryName.size() && result == -1; x++){
+			if (skillList.get(skillNum).entryName.get(x).equals((item))){
+				result = x;
+			}
+			else{
+				if (Settings.getDebug()){
+					System.out.println("Entry name:"+skillList.get(skillNum).entryName.get(x));
+					System.out.println("Item: "+item);
 				}
 			}
 		}
-		return result;		
-	}
+return result;		
+}
 	public static ArrayList getSkillList(){
 		return skillList;
 	}

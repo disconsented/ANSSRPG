@@ -77,15 +77,15 @@ public class ANSSRPG implements ICommand
 						  player.addChatMessage(new ChatComponentText(temp.name));
 						  player.addChatMessage(new ChatComponentText(Integer.toString(temp.type)));
 						  player.addChatMessage(new ChatComponentText(temp.exp.toString()));
-						  player.addChatMessage(new ChatComponentText(temp.entryName.toString()));
-						  
+						  player.addChatMessage(new ChatComponentText(temp.entryName.toString()));						  
 					  }
 				  }				  
 			  }
 			  else if (astring[1].toLowerCase().equals("uuid")){
 				  player.addChatMessage(new ChatComponentText(UUID));
 			  }
-			  else if(astring[1].toLowerCase().equals("perk")){
+			  else if(astring[1].toLowerCase().equals("perkXP")){
+				  PlayerHandler.getXP(astring[2], UUID);
 			  }
 		  break;
 	  }	  
