@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import net.minecraft.world.World;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
@@ -37,7 +38,7 @@ public class DataSave {
 	public static void addPlayer(PlayerData player, String PlayerID){
 		players.put(PlayerID,player);
 	}
-	static void createPlayer(String playerID){
+	public static void createPlayer(String playerID){
 		ArrayList tempAL = new ArrayList();
 		HashMap tempHM = new HashMap();
 		PlayerData temp = new PlayerData(tempAL, tempHM, playerID);
@@ -76,10 +77,9 @@ public class DataSave {
 	@SubscribeEvent
 	public void onPlayerRespawnEvent (PlayerRespawnEvent event){
 		if (Settings.getDebug()){
-			System.out.println("Player "+event.player.getCommandSenderName()+" with UUID:"+event.player.getPersistentID().toString()+"has logged out");
+			System.out.println("Player "+event.player.getCommandSenderName()+" with UUID:"+event.player.getPersistentID().toString()+"has respawned");
 			System.out.println("Saving player data");
 		}
 		PlayerFile.writePlayer((PlayerData) players.get(event.player.getPersistentID().toString()));
-	}
-
+	}	
 }
