@@ -3,25 +3,19 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-
-import net.minecraft.init.Blocks;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 
 import disconsented.anssrpg.Settings;
 import disconsented.anssrpg.perk.DummyPerk;
-import disconsented.anssrpg.perk.Perk;
 import disconsented.anssrpg.perk.PerkStore;
-import disconsented.anssrpg.skill.Skill;
 import disconsented.anssrpg.skill.SkillHandler;
 /**
  * @author james
