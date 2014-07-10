@@ -56,14 +56,14 @@ import disconsented.anssrpg.perk.PerkStore;
           	 public static int getLevel(int xp){        	
           		 return (int) (Math.log10((double)xp)/Math.log10(levelCurve));
           	 }
-          	 public boolean hasPerk(Perk perk, String playerID){          		 
-				return DataSave.getPlayerData(playerID).perkList.contains(perk);          		 
+          	 public static boolean hasPerk(Perk perk, String playerID){          		 
+				return DataSave.getPlayerData(playerID).perkList.contains(perk.perkSlug);          		 
           	 }
           	public static boolean hasPerk(Block block, String playerID){
           		boolean has = false; 
           		if (PerkStore.getBlockPerkList(block) != null){
-          			for (int x = 0; x < PerkStore.getBlockPerkList(block).size(); x++){
-          				if (DataSave.getPlayerData(playerID).perkList.contains(PerkStore.getBlockPerkList(block))){
+          			for (int x = 0; x < PerkStore.getBlockPerkList(block).size(); x++){          				
+          				if (hasPerk((Perk)PerkStore.getBlockPerkList(block).get(x),playerID)){
           					has = true;
           				}
           				else{
@@ -77,28 +77,44 @@ import disconsented.anssrpg.perk.PerkStore;
 				return has;          		 
           	 }
           	public static boolean hasPerk(Item item, String playerID){
-          		boolean has = false;
-          		for(int i = 0;i < DataSave.getPlayerData(playerID).perkList.size(); i++){
-          			if (DataSave.getPlayerData(playerID).perkList.get(i).unlockItem == item){
-          				has = true;
-          			}
+          		boolean has = false; 
+          		if (PerkStore.getItemPerkList(item) != null){
+          			for (int x = 0; x < PerkStore.getItemPerkList(item).size(); x++){          				
+          				if (hasPerk((Perk)PerkStore.getItemPerkList(item).get(x),playerID)){
+          					has = true;
+          				}
+          				else{
+          					if (Settings.getDebug()){
+          						System.out.println(DataSave.getPlayerData(playerID).perkList.toString());
+          						System.out.println(PerkStore.getItemPerkList(item));
+          					}
+          				}
+          		}
           		}
 				return has;          		 
           	 }
           	public static boolean hasPerk(Entity entity, String playerID){
-          		boolean has = false;
-          		for(int i = 0;i < DataSave.getPlayerData(playerID).perkList.size(); i++){
-          			if (DataSave.getPlayerData(playerID).perkList.get(i).unlockEntity == entity){
-          				has = true;
-          			}
+          		boolean has = false; 
+          		if (PerkStore.getEntityPerkList(entity) != null){
+          			for (int x = 0; x < PerkStore.getEntityPerkList(entity).size(); x++){          				
+          				if (hasPerk((Perk)PerkStore.getEntityPerkList(entity).get(x),playerID)){
+          					has = true;
+          				}
+          				else{
+          					if (Settings.getDebug()){
+          						System.out.println(DataSave.getPlayerData(playerID).perkList.toString());
+          						System.out.println(PerkStore.getEntityPerkList(entity));
+          					}
+          				}
+          		}
           		}
 				return has;          		 
           	 }
           	 public static void addPerk(Perk perk, String playerID){
-          		DataSave.getPlayerData(playerID).perkList.add(perk);
+          		DataSave.getPlayerData(playerID).perkList.add(perk.perkSlug);
           	 }
           	public static void addPerk(String perkSlug, String playerID){
-          		DataSave.getPlayerData(playerID).perkList.add(PerkStore.getPerk(perkSlug));
+          		DataSave.getPlayerData(playerID).perkList.add(perkSlug);
           	 }
           	public static ArrayList getPerks(String UUID){
           		try {
