@@ -26,26 +26,23 @@ import disconsented.anssrpg.skill.BlockBreaking;
 import disconsented.anssrpg.skill.SkillHandler;
 
 @Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="TC2")
-//@NetworkMod(clientSideRequired=true) // not used in 1.7
 public class Main {
         // The instance of your mod that Forge uses.
         @Instance(value = "ANSSRPG")
-        public static Main instance; //DONT DELETE THIs
+        public static Main instance;
        
         // Says where the client and server 'proxy' code is loaded.
         @SidedProxy(clientSide="disconsented.anssrpg.client.ClientProxy", serverSide="disconsented.anssrpg.CommonProxy")
         public static CommonProxy proxy;//DONT TOUCH THIS
         
        
-		@EventHandler // used in 1.6.2
-        //@PreInit    // used in 1.5.2
+		@EventHandler
         public void preInit(FMLPreInitializationEvent event) {
 			//ConfigurationHandler.loadAndSave();
 			JsonConfigHandler.loadConfigs();
         }
        
-        @EventHandler // used in 1.6.2
-        //@Init       // used in 1.5.2
+        @EventHandler
         public void load(FMLInitializationEvent event) {
                 proxy.registerRenderers();
                 MinecraftForge.EVENT_BUS.register(new BlockBreaking());
@@ -58,13 +55,12 @@ public class Main {
           event.registerServerCommand(new ANSSRPG());
         }
        
-        @EventHandler // used in 1.6.2
-        //@PostInit   // used in 1.5.2
+        @EventHandler
         public void postInit(FMLPostInitializationEvent event) {
         	 //event.registerServerCommand(new DebugCommand());
-        	System.out.println((Block)Block.blockRegistry.getObject("coal_ore"));
-        	System.out.println((Block)Block.blockRegistry.getObject("iron_ore"));
-        	System.out.println((Block)Block.blockRegistry.getObject("redstone_ore"));
+        	System.out.println(Block.blockRegistry.getObject("coal_ore"));
+        	System.out.println(Block.blockRegistry.getObject("iron_ore"));
+        	System.out.println(Block.blockRegistry.getObject("redstone_ore"));
         	if (Settings.getDebug()){
 	        	System.out.println("ANSSRPG has the following skills registered:");
 	        	for	(int i = 0; i < SkillHandler.getSkillList().size(); i++){
