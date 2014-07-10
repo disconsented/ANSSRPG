@@ -96,13 +96,13 @@ public class PerkStore {
 	public static HashMap getRegisteredPerks(){
 		return perkRegistry;
 	}
-	public ArrayList getItemPerkList(Item item){
+	public static ArrayList getItemPerkList(Item item){
 		return itemRegistry.get(item);		
 	}
 	public static ArrayList getBlockPerkList(Block block){
 		return blockRegistry.get(block);		
 	}
-	public ArrayList getEntityPerkList(Entity entity){
+	public static ArrayList getEntityPerkList(Entity entity){
 		return entityRegistry.get(entity);		
 	}
 }
