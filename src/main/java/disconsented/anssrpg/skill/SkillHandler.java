@@ -25,7 +25,7 @@ public class SkillHandler {
 		return skillList.size();
 	}
 	public static int getXP(int blockIndex, int skillNumber){
-		return (int) skillList.get(skillNumber).exp.get(skillNumber);
+		return (int) skillList.get(skillNumber).exp.get(blockIndex);
 	}
 	public static int indexOfBlock(Block block, int skillNum){
 		int result = -1;
