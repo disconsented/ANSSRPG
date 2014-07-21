@@ -29,49 +29,43 @@ public class SkillHandler {
 	}
 	public static int indexOfBlock(Block block, int skillNum){
 		int result = -1;
-				for (int x = 0; x < skillList.get(skillNum).entryName.size() && result == -1; x++){
-					if (skillList.get(skillNum).entryName.get(x).equals((block))){
-						result = x;
-					}
-					else{
-						if (Settings.getDebug()){
-							System.out.println("Entry name:"+skillList.get(skillNum).entryName.get(x));
-							System.out.println("Block:"+block);
-						}
+		for (int x = 0; x < skillList.get(skillNum).entryName.size() && result == -1; x++){
+			if (skillList.get(skillNum).type == 1){
+					result = skillList.get(skillNum).entryName.indexOf(block);
+					if (Settings.getDebug()){
+						System.out.println("Entry name:"+skillList.get(skillNum).entryName.get(x));
+						System.out.println("block: "+block);
 					}
 				}
+			}		
 		return result;		
 	}
 	public static int indexOfEntity(Entity entity, int skillNum){
 		int result = -1;
 		for (int x = 0; x < skillList.get(skillNum).entryName.size() && result == -1; x++){
-			if (skillList.get(skillNum).entryName.get(x).equals((entity))){
-				result = x;
-			}
-			else{
-				if (Settings.getDebug()){
-					System.out.println("Entry name:"+skillList.get(skillNum).entryName.get(x));
-					System.out.println("Entity: "+entity);
+			if (skillList.get(skillNum).type == 2){
+					result = skillList.get(skillNum).entryName.indexOf(entity);
+					if (Settings.getDebug()){
+						System.out.println("Entry name:"+skillList.get(skillNum).entryName.get(x));
+						System.out.println("Entity: "+entity);
+					}
 				}
-			}
+			}		
+		return result;	
 		}
-return result;		
-}
 	public static int indexOfItem(Item item, int skillNum){
 		int result = -1;
 		for (int x = 0; x < skillList.get(skillNum).entryName.size() && result == -1; x++){
-			if (skillList.get(skillNum).entryName.get(x).equals((item))){
-				result = x;
-			}
-			else{
-				if (Settings.getDebug()){
-					System.out.println("Entry name:"+skillList.get(skillNum).entryName.get(x));
-					System.out.println("Item: "+item);
+			if (skillList.get(skillNum).type == 3){
+					result = skillList.get(skillNum).entryName.indexOf(item);
+					if (Settings.getDebug()){
+						System.out.println("Entry name:"+skillList.get(skillNum).entryName.get(x));
+						System.out.println("Item: "+item);
+					}
 				}
-			}
-		}
-return result;		
-}
+			}		
+		return result;		
+	}
 	public static ArrayList getSkillList(){
 		return skillList;
 	}

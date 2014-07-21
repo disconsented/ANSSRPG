@@ -1,5 +1,6 @@
 package disconsented.anssrpg.config;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -53,10 +54,11 @@ public class JsonConfigHandler {
 	
 	public static void loadConfigs(){
 		loadConfig();
+	}
+	public static void loadPerkAndSkill(){
 		for(int i = 0; i < skillNames.size();i++){
 			loadSkillConfig(skillNames.get(i).toString(),(int) skillType.get(i));
 		}
-		//createPerkConfig();
 		loadPerkConfig();
 	}
 	private static void loadConfig() {	
@@ -286,8 +288,10 @@ public class JsonConfigHandler {
 			}
 			reader.close();			
 		}
-		catch(Exception E){
+		catch(FileNotFoundException e){
 			createPerkConfig();
+		}
+		catch(Exception E){			
 			E.printStackTrace();
 		}
 	}

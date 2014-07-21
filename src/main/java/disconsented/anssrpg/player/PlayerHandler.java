@@ -27,7 +27,7 @@ import disconsented.anssrpg.perk.PerkStore;
           		 setXP(amount + getXP(skillName,playerID),skillName, playerID);
           		 player.addChatComponentMessage(new ChatComponentText("Congratulations you have gained "+amount+" XP for "+skillName)); 
           		 if (canLevelUp(amount, skillName, playerID)){
-          			player.addChatComponentMessage(new ChatComponentText("Congratulations your skill "+skillName+"has leveled up!"));
+          			player.addChatComponentMessage(new ChatComponentText("Congratulations your skill "+skillName+" has leveled up!"));
           		 }
           	 }
           	 public static boolean canLevelUp(int newExp, String skillName, String playerID)
@@ -93,7 +93,7 @@ import disconsented.anssrpg.perk.PerkStore;
           		}
 				return has;          		 
           	 }
-          	public static boolean hasPerk(Entity entity, String playerID){
+          	public static boolean hasPerk(Object entity, String playerID){
           		boolean has = false; 
           		if (PerkStore.getEntityPerkList(entity) != null){
           			for (int x = 0; x < PerkStore.getEntityPerkList(entity).size(); x++){          				

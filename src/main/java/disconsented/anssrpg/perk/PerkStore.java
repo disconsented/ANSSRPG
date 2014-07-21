@@ -12,7 +12,7 @@ import net.minecraft.item.Item;
 public class PerkStore {
 	static HashMap <String, Perk> perkRegistry = new HashMap();
 	static HashMap <Item, ArrayList> itemRegistry = new HashMap();
-	static HashMap <Entity, ArrayList> entityRegistry = new HashMap();
+	static HashMap <Object, ArrayList> entityRegistry = new HashMap();
 	static HashMap <Block, ArrayList> blockRegistry = new HashMap();
 	
 	public static void addPerk(Perk perk){
@@ -66,7 +66,7 @@ public class PerkStore {
 		}
 	}
 	public static void constructPerk(DummyPerk temp) throws NoSuchFieldException{
-		Entity tempEntity;
+		Object tempEntity;
 		Block tempBlock;
 		Item tempItem;
 		Perk tempPerk = null;
@@ -77,7 +77,7 @@ public class PerkStore {
 			tempPerk = new Perk(temp.name, tempBlock, temp.description, temp.pointCost, temp.requirementName, temp.requirementLevel);
 			break;		
 		case "entity":
-		    tempEntity = (Entity) EntityList.stringToClassMapping.get(temp.unlock);
+		    tempEntity = EntityList.stringToClassMapping.get(temp.unlock);
 		    tempPerk = new Perk(temp.name, tempEntity, temp.description, temp.pointCost, temp.requirementName, temp.requirementLevel);
 			break;
 		case "item":
@@ -102,7 +102,7 @@ public class PerkStore {
 	public static ArrayList getBlockPerkList(Block block){
 		return blockRegistry.get(block);		
 	}
-	public static ArrayList getEntityPerkList(Entity entity){
+	public static ArrayList getEntityPerkList(Object entity){
 		return entityRegistry.get(entity);		
 	}
 }

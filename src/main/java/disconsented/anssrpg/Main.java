@@ -1,15 +1,9 @@
 package disconsented.anssrpg;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler; // used in 1.6.2
-//import cpw.mods.fml.common.Mod.PreInit;    // used in 1.5.2
-//import cpw.mods.fml.common.Mod.Init;       // used in 1.5.2
-//import cpw.mods.fml.common.Mod.PostInit;   // used in 1.5.2
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -21,9 +15,10 @@ import disconsented.anssrpg.commands.DebugCommand;
 import disconsented.anssrpg.config.JsonConfigHandler;
 import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.data.RegisterWriter;
-import disconsented.anssrpg.perk.Perk;
 import disconsented.anssrpg.perk.PerkStore;
 import disconsented.anssrpg.skill.BlockBreaking;
+import disconsented.anssrpg.skill.EntityDamage;
+import disconsented.anssrpg.skill.ItemCrafting;
 import disconsented.anssrpg.skill.SkillHandler;
 
 @Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="TC2")
@@ -49,7 +44,10 @@ public class Main {
         //@Init       // used in 1.5.2
         public void load(FMLInitializationEvent event) {
                 proxy.registerRenderers();
-                MinecraftForge.EVENT_BUS.register(new BlockBreaking());               
+                MinecraftForge.EVENT_BUS.register(new BlockBreaking());     
+                MinecraftForge.EVENT_BUS.register(new EntityDamage());
+                MinecraftForge.EVENT_BUS.register(new ItemCrafting());
+                FMLCommonHandler.instance().bus().register(new ItemCrafting());
                 FMLCommonHandler.instance().bus().register(new DataSave());
                 }
         @EventHandler
@@ -63,6 +61,7 @@ public class Main {
         //@PostInit   // used in 1.5.2
         public void postInit(FMLPostInitializationEvent event) {
         	 //event.registerServerCommand(new DebugCommand());
+        	JsonConfigHandler.loadPerkAndSkill();
         	if (Settings.getDebug()){
 	        	System.out.println("ANSSRPG has the following skills registered:");
 	        	for	(int i = 0; i < SkillHandler.getSkillList().size(); i++){
@@ -81,8 +80,8 @@ public class Main {
         		RegisterWriter.Write("block");
         	}
         	if (Settings.getPrintEntity()){
-        		System.out.println("entity");
-        		RegisterWriter.Write("entity registry is being written to disk");
+        		System.out.println("entity registry is being written to disk");
+        		RegisterWriter.Write("entity");
         	}
         }
 }

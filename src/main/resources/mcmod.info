@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "anssrpg",
+  "name": "A Not So Simple RPG",
+  "description": "ANSSRPG is an open source player progression framework built for Minecraft Forge and Cauldron servers.",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "",
+  "url": "https://github.com/disconsented/ANSSRPG",
   "updateUrl": "",
-  "authors": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authors": ["Disconsented"],
+  "credits": "The countless names who have helped me",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

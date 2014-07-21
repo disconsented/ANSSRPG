@@ -16,7 +16,7 @@ public class Perk {
 	public String perkSlug;
 	public Block unlockBlock;
 	public Item unlockItem;
-	public Entity unlockEntity;
+	public Object unlockEntity;
 	public String unlock;
 	public String description;
 	public String type;
@@ -52,7 +52,7 @@ public class Perk {
 		this.pointCost = pointCost;
 		this.description = description;
 	}
-	public Perk (String name, Entity unlockEntity, String description, int pointCost, ArrayList requirementName, ArrayList requirementLevel){
+	public Perk (String name, Object unlockEntity, String description, int pointCost, ArrayList requirementName, ArrayList requirementLevel){
 		this.perkSlug = getSlug(name);
 		this.name = name;
 		this.unlockEntity = unlockEntity;
@@ -61,4 +61,5 @@ public class Perk {
 		this.pointCost = pointCost;
 		this.description = description;
 	}
+
 }
