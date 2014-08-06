@@ -6,14 +6,12 @@
 /bin
 /build
 /eclipse
-/gradle
 /logs
 /mods
 /out
 .project
 .settings
 *.txt
-gradlew
 gradlew.bat
 .classpath
 
