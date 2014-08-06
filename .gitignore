@@ -13,7 +13,6 @@
 .project
 .settings
 *.txt
-gradlew
 gradlew.bat
 .classpath
 
