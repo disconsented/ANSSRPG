@@ -21,5 +21,3 @@ This software is free and open source.
 
 Don't be a jerk.
 Enjoy your free software!
-
-Unless you are Dark-Arcana, then you can't use anything... Because I am a jerk
