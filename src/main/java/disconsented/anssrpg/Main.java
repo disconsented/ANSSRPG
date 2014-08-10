@@ -10,11 +10,13 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import disconsented.anssrpg.commands.ANSSRPG;
 import disconsented.anssrpg.commands.DebugCommand;
 import disconsented.anssrpg.config.JsonConfigHandler;
 import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.data.RegisterWriter;
+import disconsented.anssrpg.gui.TestEvent;
 import disconsented.anssrpg.perk.PerkStore;
 import disconsented.anssrpg.skill.BlockBreaking;
 import disconsented.anssrpg.skill.EntityDamage;
@@ -27,7 +29,7 @@ public class Main {
         // The instance of your mod that Forge uses.
         @Instance(value = "ANSSRPG")
         public static Main instance; //DONT DELETE THIs
-       
+
         // Says where the client and server 'proxy' code is loaded.
         @SidedProxy(clientSide="disconsented.anssrpg.client.ClientProxy", serverSide="disconsented.anssrpg.CommonProxy")
         public static CommonProxy proxy;//DONT TOUCH THIS
@@ -39,6 +41,11 @@ public class Main {
 			//ConfigurationHandler.loadAndSave();
 			JsonConfigHandler.loadConfigs();
         }
+		
+		@EventHandler
+	    public void init(FMLInitializationEvent event) {
+	        NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
+	    }
        
         @EventHandler // used in 1.6.2
         //@Init       // used in 1.5.2
@@ -47,6 +54,8 @@ public class Main {
                 MinecraftForge.EVENT_BUS.register(new BlockBreaking());     
                 MinecraftForge.EVENT_BUS.register(new EntityDamage());
                 MinecraftForge.EVENT_BUS.register(new ItemCrafting());
+                MinecraftForge.EVENT_BUS.register(new TestEvent());
+                FMLCommonHandler.instance().bus().register(new TestEvent());
                 FMLCommonHandler.instance().bus().register(new ItemCrafting());
                 FMLCommonHandler.instance().bus().register(new DataSave());
                 }

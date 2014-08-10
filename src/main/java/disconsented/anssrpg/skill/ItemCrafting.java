@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerOpenContainerEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
+import disconsented.anssrpg.Main;
 import disconsented.anssrpg.perk.PerkStore;
 import disconsented.anssrpg.player.PlayerHandler;
 
@@ -19,7 +20,7 @@ import disconsented.anssrpg.player.PlayerHandler;
  */
     public class ItemCrafting{
     	@SubscribeEvent
-    	public void onPlayerOpenContainer(PlayerOpenContainerEvent event){
+    	public void onPlayerOpenContainer(PlayerOpenContainerEvent event){    		
         	Boolean requiresPerk = false;
 	        	if (event.entityPlayer instanceof EntityPlayerMP){
 	        		EntityPlayerMP player = (EntityPlayerMP) event.entityPlayer;
