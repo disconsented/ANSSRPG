@@ -28,9 +28,9 @@ import disconsented.anssrpg.player.PlayerHandler;
     	 * @param eventBreak
     	 */
     @SubscribeEvent
-    public void onBreakevent(BreakEvent event){
-    	event.getPlayer().openGui(Main.instance, 0, null, 0, 0, 0);
+    public void onBreakevent(BreakEvent event){    	
     	Boolean requiresPerk = false;
+    	event.getPlayer().openGui(Main.instance, 0, null, 0, 0, 0);
     	if (event.getPlayer() instanceof EntityPlayerMP){
     		if(PerkStore.getBlockPerkList(event.block) != null){
     			requiresPerk = true;
