@@ -113,10 +113,24 @@ import disconsented.anssrpg.perk.PerkStore;
           	 public static void addPerk(Perk perk, String playerID){
           		DataSave.getPlayerData(playerID).perkList.add(perk.perkSlug);
           	 }
-          	public static void addPerk(String perkSlug, String playerID){
-          		DataSave.getPlayerData(playerID).perkList.add(perkSlug);
+          	public static String addPerk(String perkSlug, String playerID){
+          		String toReturn = null;
+          		PlayerData player = DataSave.getPlayerData(playerID);
+          		Perk temp = PerkStore.getPerk(perkSlug);
+          		if (player.points <= temp.pointCost){
+          			PlayerHandler.removePoints(temp.pointCost, player);
+          			DataSave.getPlayerData(playerID).perkList.add(perkSlug);
+          			toReturn = "Success";
+          		}
+          		else{
+          			toReturn = "Insuffient Points";
+          		}
+          		return toReturn;
           	 }
-          	public static ArrayList getPerks(String UUID){
+          	private static void removePoints(int pointCost, PlayerData temp) {
+				temp.points -= pointCost;
+			}
+			public static ArrayList getPerks(String UUID){
           		try {
           			return DataSave.getPlayerData(UUID).perkList;
           		}catch(NullPointerException e){

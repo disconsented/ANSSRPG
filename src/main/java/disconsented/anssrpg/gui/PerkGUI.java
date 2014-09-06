@@ -12,7 +12,9 @@ import net.minecraft.client.renderer.Tessellator;
 
 import org.lwjgl.opengl.GL11;
 
+import disconsented.anssrpg.Main;
 import disconsented.anssrpg.helper.Color;
+import disconsented.anssrpg.network.Request;
 import disconsented.anssrpg.perk.LocalPerk;
 
 public class PerkGUI extends GuiScreen {
@@ -20,11 +22,19 @@ public class PerkGUI extends GuiScreen {
 	private ArrayList <GuiButton> buttons = new ArrayList<GuiButton>(); //378 = status text field thingy
 	private int selected = 0;
 	private GuiTextField  status = new GuiTextField(fontRendererObj, 504, 392, 244, 18);
-	private String stuff = "Blank";
-	private ArrayList <LocalPerk> localPerks = new ArrayList<LocalPerk>();
+	private static String statusMessage = "Blank";
+	private String stuff = "dfghdfgjdbfgj";
+	private static ArrayList <LocalPerk> localPerks = new ArrayList<LocalPerk>();
 	//private FontRenderer thing = new FontRenderer();	
 	//private Button next;
 
+	public static void addPerk(LocalPerk e){
+		localPerks.add(e);
+		System.out.println(localPerks.size());
+	}
+	public static void updateStatus(String e){
+		statusMessage = e;
+	}
     @Override
     public void updateScreen() {
     	this.drawDefaultBackground();
@@ -130,6 +140,7 @@ public class PerkGUI extends GuiScreen {
     			case 1:
     				break;
     			case 2:
+    				Main.snw.sendToServer(new Request("item", ));
     				break;
     			}
     		}

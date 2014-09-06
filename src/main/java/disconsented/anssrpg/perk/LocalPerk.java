@@ -12,7 +12,7 @@ import net.minecraft.item.Item;
 public class LocalPerk {
 	
 	public String name;
-	public ArrayList requirementName, requirementLevel = new ArrayList();
+	public ArrayList <String> requirements = new ArrayList();
 	public String perkSlug;
 	public String description;
 	public int pointCost;
@@ -29,12 +29,10 @@ public class LocalPerk {
  * @param pointCost - Cost in points to unlock
  * @param requirement - 
  */
-	public LocalPerk (String name, Block unlockBlock, String description, int pointCost, ArrayList requirementName, ArrayList requirementLevel){
+	public LocalPerk (String name, String description, int pointCost, ArrayList requirements){
 		this.perkSlug = getSlug(name);
 		this.name = name;
-		this.unlockBlock = unlockBlock;
-		this.requirementName = requirementName;
-		this.requirementLevel = requirementLevel;
+		this.requirements = requirements;
 		this.pointCost = pointCost;
 		this.description = description;
 	}

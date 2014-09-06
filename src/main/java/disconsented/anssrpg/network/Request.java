@@ -1,24 +1,26 @@
 package disconsented.anssrpg.network;
 
 import io.netty.buffer.ByteBuf;
+import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 public class Request implements IMessage{
-    public int extremelyImportantInteger;
+    public String slug;
+    public String uuid;
 
     public Request() {}
 
-    public Request(int a) {
-        this.extremelyImportantInteger = a;
+    public Request(String slug, String uuid) {
+        this.slug = slug;
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
-        buf.writeInt(extremelyImportantInteger);
+    	ByteBufUtils.writeUTF8String(buf, slug);
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        this.extremelyImportantInteger = buf.readInt();
+        this.slug = ByteBufUtils.readUTF8String(buf);
     }
 }

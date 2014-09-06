@@ -1,24 +1,25 @@
 package disconsented.anssrpg.network;
 
 import io.netty.buffer.ByteBuf;
+import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 public class Responce implements IMessage{
-    public int extremelyImportantInteger;
+    public String responce;
 
     public Responce() {}
 
-    public Responce(int a) {
-        this.extremelyImportantInteger = a;
+    public Responce(String responce) {
+        this.responce = responce;
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
-        buf.writeInt(extremelyImportantInteger);
+    	ByteBufUtils.writeUTF8String(buf, responce);
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        this.extremelyImportantInteger = buf.readInt();
+        this.responce = ByteBufUtils.readUTF8String(buf);
     }
 }

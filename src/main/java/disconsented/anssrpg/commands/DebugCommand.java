@@ -5,6 +5,7 @@ import java.util.List;
 
 import disconsented.anssrpg.Main;
 import disconsented.anssrpg.network.PerkInfo;
+import disconsented.anssrpg.network.Request;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -42,18 +43,11 @@ public class DebugCommand implements ICommand
   @Override
   public void processCommand(ICommandSender icommandsender, String[] astring)
   {
+	  EntityPlayerMP player = (EntityPlayerMP) icommandsender;
 	  for (int i = 0; i < astring.length; i++){
 	  icommandsender.addChatMessage(new ChatComponentText(astring[i]));
 	  }	 
-	  ArrayList<String> temp1 = new ArrayList<String>();
-	  ArrayList<Integer> temp2 = new ArrayList<Integer>();
-	  temp1.add("A");
-	  temp1.add("B");
-	  temp1.add("C");
-	  temp2.add(1);
-	  temp2.add(2);
-	  temp2.add(3);
-	  Main.snw.sendTo(new PerkInfo("Name","Description", 5, temp1, temp2), (EntityPlayerMP)icommandsender);
+	  
   }
 
   @Override
