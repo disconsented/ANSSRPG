@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.Tessellator;
 
 import org.lwjgl.opengl.GL11;
 
+import scala.Console;
 import disconsented.anssrpg.Main;
 import disconsented.anssrpg.helper.Color;
 import disconsented.anssrpg.network.Request;
@@ -23,14 +24,21 @@ public class PerkGUI extends GuiScreen {
 	private int selected = 0;
 	private GuiTextField  status = new GuiTextField(fontRendererObj, 504, 392, 244, 18);
 	private static String statusMessage = "Blank";
-	private String stuff = "dfghdfgjdbfgj";
+	private String descriptionCurrent = "dfghdfgjdbfgj";
+	// Keeps track of the current page number to display
+	private int pageNumber = 0; //15 items per page
+	private int itemsPerPage = 15;
 	private static ArrayList <LocalPerk> localPerks = new ArrayList<LocalPerk>();
 	//private FontRenderer thing = new FontRenderer();	
 	//private Button next;
 
+
+	private double roundUp(double x) {
+		return (itemsPerPage * Math.ceil(x / itemsPerPage));
+	}
 	public static void addPerk(LocalPerk e){
 		localPerks.add(e);
-		System.out.println(localPerks.size());
+		System.out.println("The perk " + e.name + " has been recieved by the client");
 	}
 	public static void updateStatus(String e){
 		statusMessage = e;
@@ -94,6 +102,15 @@ public class PerkGUI extends GuiScreen {
     	drawTriangle(2*xMod, 2*yMod, 7*xMod, 7*yMod, 0x8B8B8B, 3);
     	//Overlay square
     	drawRectangle(2*xMod+border, 2*yMod+border, 9*xMod-border, 9*yMod-border, 0xFFC6C6C6);
+    	
+    	for (int i = 0; i < buttons.size()-3; i++){
+    		if(i < localPerks.size()){
+    			buttons.get(i+3).displayString = localPerks.get(i+(pageNumber*itemsPerPage)).name;
+    		}
+    		else{
+    			buttons.get(i+3).displayString = "Null";
+    		}
+    	}
     	for (int i = 0; i < buttons.size(); i++){
     		buttons.get(i).drawButton(Minecraft.getMinecraft(), i, i);
     	}
@@ -107,13 +124,14 @@ public class PerkGUI extends GuiScreen {
     	drawTriangle(6*xMod,390,(int)(3*xMod-border*2),20,Color.black,3);
     	drawTriangle(6*xMod+border,390+border,(int)(3*xMod-border*4),18-border,Color.greyDark,1);
     	drawTriangle(6*xMod+border,390+border,(int)(3*xMod-border*4),18-border,Color.greyDark,3);
-    	
+    	if(selected > 3){
+    		descriptionCurrent = localPerks.get(selected-3).description;
+    	}
     	status.drawCenteredString(fontRendererObj, "Status message", 626, 396, Color.white);
-    	fontRendererObj.drawSplitString(stuff, 6*xMod+border, 2*yMod+(border*3), (int)(3*xMod-(border*4)), (int)(6*yMod-(border*4)));   	
+    	fontRendererObj.drawSplitString(descriptionCurrent, 6*xMod+border, 2*yMod+(border*3), (int)(3*xMod-(border*4)), (int)(6*yMod-(border*4)));   	
     }
-    
-    @Override //Opened and resized
-    public void initGui() {
+	@Override //Opened and resized
+    public void initGui() {		
     	super.initGui(); //I see this done a ton and I don't understand why
     	//buttonNext = new GuiButton(1,);
     	buttons.add(new GuiButton(0, 172, 410, 124, 20, "Previous"));
@@ -139,8 +157,8 @@ public class PerkGUI extends GuiScreen {
     				break;
     			case 1:
     				break;
-    			case 2:
-    				Main.snw.sendToServer(new Request("item", ));
+    			case 2:    				
+    				//Main.snw.sendToServer(new Request("item", ));
     				break;
     			}
     		}
