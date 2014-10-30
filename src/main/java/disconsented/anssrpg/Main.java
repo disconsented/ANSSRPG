@@ -51,7 +51,7 @@ public class Main {
 			snw = NetworkRegistry.INSTANCE.newSimpleChannel("ANSSRPG");
 			snw.registerMessage(ResponceHandler.class, Responce.class, 0, Side.SERVER); 
 			snw.registerMessage(PerkInfoHandler.class, PerkInfo.class, 1, Side.CLIENT); 
-			snw.registerMessage(RequestHandler.class, Request.class, 2, Side.CLIENT); 
+			snw.registerMessage(RequestHandler.class, Request.class, 2, Side.SERVER); 
         }
 		
 		@EventHandler
