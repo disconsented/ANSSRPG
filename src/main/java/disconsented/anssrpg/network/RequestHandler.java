@@ -10,9 +10,9 @@ public class RequestHandler implements IMessageHandler<Request, IMessage>{
 
 	@Override
 	public IMessage onMessage(Request message, MessageContext ctx) {
-		PlayerHandler.addPerk(message.slug, message.uuid);
-		
-		return new Responce();
+		System.out.println("Request recieved");
+		Main.snw.sendTo(new Responce(PlayerHandler.addPerk(message.slug, ctx.getServerHandler().playerEntity.getPersistentID().toString())), ctx.getServerHandler().playerEntity);
+		return null;
 	}
 
 }

@@ -33,6 +33,13 @@ public class PerkGUI extends GuiScreen {
 	//private Button next;
 
 
+	private LocalPerk getCurrentPerk(){
+		if (selected > 2 && selected-3 < localPerks.size()){
+			return localPerks.get(selected-3+(pageNumber*itemsPerPage));
+		}else{
+			return new LocalPerk("null", "null", 0, null);
+		}
+	}
 	private double roundUp(double x) {
 		return (itemsPerPage * Math.ceil(x / itemsPerPage));
 	}
@@ -124,9 +131,9 @@ public class PerkGUI extends GuiScreen {
     	drawTriangle(6*xMod,390,(int)(3*xMod-border*2),20,Color.black,3);
     	drawTriangle(6*xMod+border,390+border,(int)(3*xMod-border*4),18-border,Color.greyDark,1);
     	drawTriangle(6*xMod+border,390+border,(int)(3*xMod-border*4),18-border,Color.greyDark,3);
-    	if(selected > 3){
-    		descriptionCurrent = localPerks.get(selected-3).description;
-    	}
+//    	if(selected > 3){
+    		descriptionCurrent = getCurrentPerk().description + getCurrentPerk().name;
+//    	}
     	status.drawCenteredString(fontRendererObj, "Status message", 626, 396, Color.white);
     	fontRendererObj.drawSplitString(descriptionCurrent, 6*xMod+border, 2*yMod+(border*3), (int)(3*xMod-(border*4)), (int)(6*yMod-(border*4)));   	
     }
@@ -153,12 +160,20 @@ public class PerkGUI extends GuiScreen {
     		if(buttons.get(i).id >= 0 && buttons.get(i).id <= 2 && buttons.get(i).enabled == false){
     			buttons.get(i).enabled = true;
     			switch(i){
-    			case 0:
+    			case 0://Prev
+    				if (pageNumber > 1)
+    				{
+    					pageNumber--;
+    				}
     				break;
-    			case 1:
+    			case 1://Next
+    				if (pageNumber < 1 && pageNumber < roundUp(localPerks.size()))
+    				{
+    					pageNumber++;
+    				}
     				break;
-    			case 2:    				
-    				//Main.snw.sendToServer(new Request("item", ));
+    			case 2: //Go		
+    				Main.snw.sendToServer(new Request(getCurrentPerk().perkSlug));
     				break;
     			}
     		}

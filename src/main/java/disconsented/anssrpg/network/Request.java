@@ -6,11 +6,10 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 public class Request implements IMessage{
     public String slug;
-    public String uuid;
 
     public Request() {}
 
-    public Request(String slug, String uuid) {
+    public Request(String slug) {
         this.slug = slug;
     }
 
