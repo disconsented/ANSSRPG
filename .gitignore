@@ -12,7 +12,6 @@
 .project
 .settings
 *.txt
-gradlew.bat
 .classpath
 
 #IntelliJ
