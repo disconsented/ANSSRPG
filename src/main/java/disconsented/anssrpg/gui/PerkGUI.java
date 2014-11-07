@@ -32,7 +32,12 @@ public class PerkGUI extends GuiScreen {
 	//private FontRenderer thing = new FontRenderer();	
 	//private Button next;
 
-
+	@Override 
+	public boolean doesGuiPauseGame()
+	{
+		return false;
+	}
+	
 	private LocalPerk getCurrentPerk(){
 		if (selected > 2 && selected-3 < localPerks.size()){
 			return localPerks.get(selected-3+(pageNumber*itemsPerPage));
@@ -134,7 +139,7 @@ public class PerkGUI extends GuiScreen {
 //    	if(selected > 3){
     		descriptionCurrent = getCurrentPerk().description + getCurrentPerk().name;
 //    	}
-    	status.drawCenteredString(fontRendererObj, "Status message", 626, 396, Color.white);
+    	status.drawCenteredString(fontRendererObj, statusMessage, 626, 396, Color.white);
     	fontRendererObj.drawSplitString(descriptionCurrent, 6*xMod+border, 2*yMod+(border*3), (int)(3*xMod-(border*4)), (int)(6*yMod-(border*4)));   	
     }
 	@Override //Opened and resized

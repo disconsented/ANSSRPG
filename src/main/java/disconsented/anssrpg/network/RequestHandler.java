@@ -7,12 +7,12 @@ import disconsented.anssrpg.Main;
 import disconsented.anssrpg.player.PlayerHandler;
 
 public class RequestHandler implements IMessageHandler<Request, IMessage>{
-
+	private String responceText;
 	@Override
 	public IMessage onMessage(Request message, MessageContext ctx) {
-		System.out.println("Request recieved");
-		Main.snw.sendTo(new Responce(PlayerHandler.addPerk(message.slug, ctx.getServerHandler().playerEntity.getPersistentID().toString())), ctx.getServerHandler().playerEntity);
-		return null;
+		System.out.println("Request recieved");		
+		responceText = PlayerHandler.addPerk(message.slug, ctx.getServerHandler().playerEntity.getPersistentID().toString());
+		return new Responce(responceText);
 	}
 
 }
