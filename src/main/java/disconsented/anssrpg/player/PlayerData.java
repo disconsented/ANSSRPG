@@ -16,10 +16,12 @@ public class PlayerData {
 	public ArrayList<String> perkList = new ArrayList<String>();
 	public HashMap skillExp = new HashMap();
 	public String playerID;
+	public int points;
 
-	public PlayerData(ArrayList perkList, HashMap skillExp, String playerID){
+	public PlayerData(ArrayList perkList, HashMap skillExp, String playerID, int points){
 		this.perkList = perkList;
 		this.skillExp = skillExp;
 		this.playerID = playerID; 
+		this.points = points;
 	}
 }

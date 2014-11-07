@@ -49,7 +49,7 @@ public class ANSSRPG implements ICommand
 	  switch(astring[0]){
 	  case "-list":
 		  if (astring[1].equals("perk")){
-			  player.addChatMessage(new ChatComponentText(PerkStore.getRegisteredPerks().toString()));
+			  player.addChatMessage(new ChatComponentText(PerkStore.getRegisteredPerks().keySet().toString()));
 		  }else if(astring[1].equals("skill")){
 			  for(int i = 0; i < SkillHandler.getSkillList().size(); i++){
 				  player.addChatMessage(new ChatComponentText(SkillHandler.getSkillName(i)));

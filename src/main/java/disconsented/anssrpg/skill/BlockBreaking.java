@@ -4,9 +4,11 @@ package disconsented.anssrpg.skill;
  * Handles when to add experience and blocking of events
  */
 import net.minecraft.block.Block;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import disconsented.anssrpg.Main;
 import disconsented.anssrpg.config.JsonConfigHandler;
 import disconsented.anssrpg.perk.PerkStore;
 import disconsented.anssrpg.player.PlayerHandler;
@@ -26,8 +28,9 @@ import disconsented.anssrpg.player.PlayerHandler;
     	 * @param eventBreak
     	 */
     @SubscribeEvent
-    public void onBreakevent(BreakEvent event){ 
+    public void onBreakevent(BreakEvent event){    	
     	Boolean requiresPerk = false;
+    	event.getPlayer().openGui(Main.instance, 0, null, 0, 0, 0);
     	if (event.getPlayer() instanceof EntityPlayerMP){
     		if(PerkStore.getBlockPerkList(event.block) != null){
     			requiresPerk = true;

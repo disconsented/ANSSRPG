@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -109,7 +110,7 @@ public class JsonConfigHandler {
 		}
 	}
 	private static void createConfig(){		
-		 Gson gson = new Gson();  
+		 Gson gson = new GsonBuilder().setPrettyPrinting().create();  
 		 JsonObject settings = new JsonObject();   
 		 JsonObject example = new JsonObject();
 		 settings.addProperty(DEBUG_INFO, false);
@@ -170,7 +171,7 @@ public class JsonConfigHandler {
 	}
 	private static void createSkillConfig(String name){		
 		File skillConfig = new File("config/ANSSRPG",name.replaceAll("[^A-Za-z0-9]", "")+".cfg");	
-		 Gson gson = new Gson(); 
+		 Gson gson = new GsonBuilder().setPrettyPrinting().create(); 
 		 JsonPrimitive value1 = new JsonPrimitive("entry_ID_example");
 		 JsonPrimitive value2 = new JsonPrimitive(1);
 		 JsonArray example1 = new JsonArray();
@@ -198,7 +199,7 @@ public class JsonConfigHandler {
 		}
 
 	private static void createPerkConfig(){
-		 Gson gson = new Gson();  
+		 Gson gson = new GsonBuilder().setPrettyPrinting().create();  
 		 ArrayList name = new ArrayList();
 		 name.add("Mining");
 		 name.add("Smithing");

@@ -3,8 +3,12 @@ package disconsented.anssrpg.commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import disconsented.anssrpg.Main;
+import disconsented.anssrpg.network.PerkInfo;
+import disconsented.anssrpg.network.Request;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 
 public class DebugCommand implements ICommand
@@ -39,10 +43,11 @@ public class DebugCommand implements ICommand
   @Override
   public void processCommand(ICommandSender icommandsender, String[] astring)
   {
+	  EntityPlayerMP player = (EntityPlayerMP) icommandsender;
 	  for (int i = 0; i < astring.length; i++){
 	  icommandsender.addChatMessage(new ChatComponentText(astring[i]));
-	  }
-   
+	  }	 
+	  
   }
 
   @Override

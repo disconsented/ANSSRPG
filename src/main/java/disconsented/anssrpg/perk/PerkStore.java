@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.item.Item;
 
 public class PerkStore {
+	static ArrayList<Perk> perkList = new ArrayList();
 	static HashMap <String, Perk> perkRegistry = new HashMap();
 	static HashMap <Item, ArrayList> itemRegistry = new HashMap();
 	static HashMap <Object, ArrayList> entityRegistry = new HashMap();
@@ -17,6 +18,7 @@ public class PerkStore {
 	
 	public static void addPerk(Perk perk){
 		perkRegistry.put(perk.perkSlug, perk);
+		perkList.add(perk);
 		if (perk.unlockBlock != null){
 			try{
 				blockRegistry.get(perk.unlockBlock).add(perk);
@@ -95,6 +97,9 @@ public class PerkStore {
 	}
 	public static HashMap getRegisteredPerks(){
 		return perkRegistry;
+	}
+	public static ArrayList getAllPerks(){
+		return perkList;
 	}
 	public static ArrayList getItemPerkList(Item item){
 		return itemRegistry.get(item);		
