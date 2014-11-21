@@ -5,7 +5,7 @@ package disconsented.anssrpg.skill;
 
 import java.util.ArrayList;
 
-import disconsented.anssrpg.Settings;
+import disconsented.anssrpg.common.Settings;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;

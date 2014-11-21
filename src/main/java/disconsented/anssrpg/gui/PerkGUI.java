@@ -14,6 +14,7 @@ import org.lwjgl.opengl.GL11;
 
 import scala.Console;
 import disconsented.anssrpg.Main;
+import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.helper.Color;
 import disconsented.anssrpg.network.Request;
 import disconsented.anssrpg.perk.LocalPerk;
@@ -29,6 +30,7 @@ public class PerkGUI extends GuiScreen {
 	private int pageNumber = 0; //15 items per page
 	private int itemsPerPage = 15;
 	private static ArrayList <LocalPerk> localPerks = new ArrayList<LocalPerk>();
+	private static Settings instance = Settings.getInstance();
 	//private FontRenderer thing = new FontRenderer();	
 	//private Button next;
 

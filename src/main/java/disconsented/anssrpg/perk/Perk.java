@@ -1,25 +1,23 @@
 /**
- * 
+ * Author: Disconsented
+ * Supertpye for perks
  */
 package disconsented.anssrpg.perk;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import scala.reflect.internal.Trees.This;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 
-public class Perk {
+public abstract class Perk {
 	
 	public String name;
-	public ArrayList requirementName, requirementLevel = new ArrayList();
+	public ArrayList<Requirement> requirements = new ArrayList<Requirement>();
 	public String perkSlug;
-	public Block unlockBlock;
-	public Item unlockItem;
-	public Object unlockEntity;
-	public String unlock;
 	public String description;
-	public String type;
 	public int pointCost;
 	
 	private String getSlug(String name){		
@@ -29,37 +27,27 @@ public class Perk {
 /**
  * 
  * @param name - Name of the perk
- * @param unlockBlock - What it is unlocking
  * @param description - Description
  * @param pointCost - Cost in points to unlock
- * @param requirement - 
+ * @param requirement - Requirment object
  */
-	public Perk (String name, Block unlockBlock, String description, int pointCost, ArrayList requirementName, ArrayList requirementLevel){
-		this.perkSlug = getSlug(name);
-		this.name = name;
-		this.unlockBlock = unlockBlock;
-		this.requirementName = requirementName;
-		this.requirementLevel = requirementLevel;
-		this.pointCost = pointCost;
-		this.description = description;
+	public Perk (){}
+	public abstract void construct(HashMap map);
+	protected void setCore(HashMap map)
+	{
+		this.setName(map.get("name").toString());
+		this.setRequirements((ArrayList<Requirement>) map.get("requirements"));
+		this.setDescription(map.get("description").toString());
+		this.setPointCost((int) map.get("pointcost"));
 	}
-	public Perk (String name, Item unlockItem, String description, int pointCost, ArrayList requirementName, ArrayList requirementLevel){
-		this.perkSlug = getSlug(name);
-		this.name = name;
-		this.unlockItem = unlockItem;
-		this.requirementName = requirementName;
-		this.requirementLevel = requirementLevel;
-		this.pointCost = pointCost;
-		this.description = description;
-	}
-	public Perk (String name, Object unlockEntity, String description, int pointCost, ArrayList requirementName, ArrayList requirementLevel){
-		this.perkSlug = getSlug(name);
-		this.name = name;
-		this.unlockEntity = unlockEntity;
-		this.requirementName = requirementName;
-		this.requirementLevel = requirementLevel;
-		this.pointCost = pointCost;
-		this.description = description;
-	}
+	protected void setName(String name){this.name = name; this.perkSlug = getSlug(name);} 
+	protected void setRequirements(ArrayList<Requirement> requirments){this.requirements = requirments;}
+	protected void setDescription(String description){this.description = description;}
+	protected void setPointCost(int pointCost){this.pointCost = pointCost;}
+	public String getName(){return name;}
+	public ArrayList getRequirements(){return requirements;}
+	public String getDescription(){return description;}
+	public int getPointCost(){return pointCost;}
+	public String getSlug(){return perkSlug;}
 
 }

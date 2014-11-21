@@ -3,12 +3,14 @@ package disconsented.anssrpg.commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import disconsented.anssrpg.Main;
 import disconsented.anssrpg.perk.PerkStore;
 import disconsented.anssrpg.player.PlayerHandler;
 import disconsented.anssrpg.skill.Skill;
 import disconsented.anssrpg.skill.SkillHandler;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 
@@ -49,7 +51,7 @@ public class ANSSRPG implements ICommand
 	  switch(astring[0]){
 	  case "-list":
 		  if (astring[1].equals("perk")){
-			  player.addChatMessage(new ChatComponentText(PerkStore.getRegisteredPerks().keySet().toString()));
+			  player.addChatMessage(new ChatComponentText(PerkStore.getInstance().getPerks().toString()));
 		  }else if(astring[1].equals("skill")){
 			  for(int i = 0; i < SkillHandler.getSkillList().size(); i++){
 				  player.addChatMessage(new ChatComponentText(SkillHandler.getSkillName(i)));
@@ -87,8 +89,11 @@ public class ANSSRPG implements ICommand
 			  else if(astring[1].toLowerCase().equals("perkXP")){
 				  PlayerHandler.getXP(astring[2], UUID);
 			  }
+		  break;	  
+	  case "-perks":
+		  ((EntityPlayer) player).openGui(Main.instance, 0, null, 0, 0, 0);  
 		  break;
-	  }	  
+	  }
   }
 
   @Override

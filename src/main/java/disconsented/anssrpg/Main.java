@@ -1,6 +1,7 @@
 package disconsented.anssrpg;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -15,9 +16,9 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import disconsented.anssrpg.commands.ANSSRPG;
 import disconsented.anssrpg.commands.DebugCommand;
+import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.config.JsonConfigHandler;
 import disconsented.anssrpg.data.DataSave;
-import disconsented.anssrpg.data.RegisterWriter;
 import disconsented.anssrpg.network.PerkInfo;
 import disconsented.anssrpg.network.PerkInfoHandler;
 import disconsented.anssrpg.network.Request;
@@ -30,7 +31,7 @@ import disconsented.anssrpg.skill.EntityDamage;
 import disconsented.anssrpg.skill.ItemCrafting;
 import disconsented.anssrpg.skill.SkillHandler;
 
-@Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="TC2")
+@Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="TC3")
 //@NetworkMod(clientSideRequired=true) // not used in 1.7
 public class Main {
         // The instance of your mod that Forge uses.
@@ -43,11 +44,18 @@ public class Main {
         
         public static SimpleNetworkWrapper snw;
         
+        private Settings settings = Settings.getInstance();
+        
        
 		@EventHandler // used in 1.6.2
         //@PreInit    // used in 1.5.2
         public void preInit(FMLPreInitializationEvent event) {
-			JsonConfigHandler.loadConfigs();
+			Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+			config.load();
+			settings.setLevelCurve(config.get(config.CATEGORY_GENERAL, "Level Curve", 1.3).getDouble());
+			settings.setDebug(config.get(config.CATEGORY_GENERAL, "debug", false).getBoolean(false));
+			config.save();
+			
 			snw = NetworkRegistry.INSTANCE.newSimpleChannel("ANSSRPG");
 			snw.registerMessage(ResponceHandler.class, Responce.class, 0, Side.SERVER); 
 			snw.registerMessage(PerkInfoHandler.class, PerkInfo.class, 1, Side.CLIENT); 
@@ -79,27 +87,15 @@ public class Main {
         @EventHandler // used in 1.6.2
         //@PostInit   // used in 1.5.2
         public void postInit(FMLPostInitializationEvent event) {
-        	JsonConfigHandler.loadPerkAndSkill();
+        	JsonConfigHandler.loadPerkAndSkill(); //loaded in here so that other mods have their stuff loaded
         	if (Settings.getDebug()){
 	        	System.out.println("ANSSRPG has the following skills registered:");
 	        	for	(int i = 0; i < SkillHandler.getSkillList().size(); i++){
 	        		System.out.println(SkillHandler.getSkillName(i));
 	        	}
 	        	System.out.println("ANSSRPG has the following perks registered");
-	        	System.out.println(PerkStore.getRegisteredPerks());
+	        	System.out.println(PerkStore.getInstance().getPerks());
 	        	System.out.println();
-        	}
-        	if (Settings.getPrintItem()){
-        		System.out.println("item registry is being written to disk");
-        		RegisterWriter.Write("item");
-        	}
-        	if (Settings.getPrintBlock()){
-        		System.out.println("block registry is being written to disk");
-        		RegisterWriter.Write("block");
-        	}
-        	if (Settings.getPrintEntity()){
-        		System.out.println("entity registry is being written to disk");
-        		RegisterWriter.Write("entity");
         	}
         }
 }

@@ -15,7 +15,7 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import disconsented.anssrpg.Main;
-import disconsented.anssrpg.Settings;
+import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.network.PerkInfo;
 import disconsented.anssrpg.perk.LocalPerk;
 import disconsented.anssrpg.perk.Perk;
@@ -63,10 +63,10 @@ public class DataSave {
 			System.out.println("Loading player data");
 		}		
 		PlayerFile.loadPlayer(event.player.getPersistentID().toString());
-		ArrayList<Perk> temp = PerkStore.getAllPerks();
-		for(int i = 0; i < temp.size(); i++){
-			Main.snw.sendTo(new PerkInfo(temp.get(i).name, temp.get(i).description,temp.get(i).perkSlug, temp.get(i).pointCost, temp.get(i).requirementName, temp.get(i).requirementLevel), (EntityPlayerMP) event.player);
-		}
+		ArrayList<Perk> temp = PerkStore.getInstance().getPerks();
+//		for(int i = 0; i < temp.size(); i++){
+//			Main.snw.sendTo(new PerkInfo(temp.get(i).name, temp.get(i).description,temp.get(i).perkSlug, temp.get(i).pointCost, temp.get(i).requirementName, temp.get(i).requirementLevel), (EntityPlayerMP) event.player);
+//		}
 	}
 	/**
 	 * Saves player data
