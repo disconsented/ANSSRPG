@@ -3,7 +3,10 @@
  */
 package disconsented.anssrpg.perk;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.google.gson.annotations.Expose;
 
 import net.minecraft.block.Block;
 
@@ -12,14 +15,15 @@ import net.minecraft.block.Block;
  *
  */
 public class BlockPerk extends Perk {
-	Block block;
-	
-	@Override
-	public void construct(HashMap map) {
-		this.setCore(map);
-		this.setBlock((Block) map.get("block"));
-	}
 
+	public BlockPerk(String name, ArrayList<Requirement> requirements,
+			String description, int pointCost) {
+		super(name, requirements, description, pointCost);
+		// TODO Auto-generated constructor stub
+	}
+	Block block;
+	@Expose
+	String blockName;
 	/**
 	 * @return 
 	 */
@@ -32,6 +36,12 @@ public class BlockPerk extends Perk {
 	 */
 	protected void setBlock(Block block) {
 		this.block = block;
+	}
+
+	@Override
+	public void touchUp() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

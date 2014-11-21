@@ -1,4 +1,5 @@
 package disconsented.anssrpg.config;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -6,6 +7,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Scanner;
+import java.util.Set;
+
+import scala.collection.mutable.HashTable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -13,12 +19,17 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 
 import disconsented.anssrpg.common.Settings;
+import disconsented.anssrpg.data.DataSave;
+import disconsented.anssrpg.perk.ItemPerk;
+import disconsented.anssrpg.perk.Perk;
 import disconsented.anssrpg.perk.PerkStore;
 import disconsented.anssrpg.perk.Requirement;
+import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.SkillHandler;
 /**
  * @author james
@@ -52,8 +63,9 @@ public class JsonConfigHandler {
 	public static void loadPerkAndSkill(){
 		//loadSkillConfig();
 		//loadPerkConfig();
-		createSkillConfig();
+//		createSkillConfig();
 		createPerkConfig();
+		loadPerkConfig();
 	}
 //	private static void loadSkillConfig(){		
 //		ArrayList tempEntry = new ArrayList();
@@ -114,7 +126,7 @@ public class JsonConfigHandler {
 //		  }  
 //		}
 	private static void createSkillConfig(){
-		 Gson gson = new GsonBuilder().setPrettyPrinting().create(); 
+		 Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create(); 
 		 JsonObject obj = new JsonObject();
 		 HashMap<String, DummySkill> temp = new HashMap<String, DummySkill>();
 		 DummySkill instance = DummySkill.getInstance();
@@ -135,14 +147,13 @@ public class JsonConfigHandler {
 	}
 
 	private static void createPerkConfig(){
-		 Gson gson = new GsonBuilder().setPrettyPrinting().create(); 
+		 Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create(); 
 		 JsonObject obj = new JsonObject();
-		 HashMap<String, DummyPerk> temp = new HashMap<String, DummyPerk>();
-		 DummyPerk instance = DummyPerk.getInstance();
-			temp.put("item",instance);
-			temp.put("block",instance);
-			temp.put("entity",instance);
-		 String stringObject = gson.toJson(temp);	    
+		 ArrayList<Pair> list = new ArrayList<Pair>();
+		 list.add(new Pair("item",new ItemPerk()));
+		 list.add(new Pair("item",new ItemPerk()));
+		 list.add(new Pair("item",new ItemPerk()));
+		 String stringObject = gson.toJson(list);	    
 		 try { 
 		  configFileLocation.mkdirs();
 		  FileWriter writer = new FileWriter(perkFile);  
@@ -154,74 +165,21 @@ public class JsonConfigHandler {
 			 System.err.println(e.getLocalizedMessage());
 		 }  
 	}
-//	private static void loadPerkConfig(){
-//		Boolean go = true;
-//		String name = null;
-//		String type = null;
-//		ArrayList tempName = new ArrayList();
-//		ArrayList tempLevel = new ArrayList();
-//		String unlock = null;
-//		String description = null;
-//		String nextName = null;
-//		String nextPeek = null;
-//		int pointCost = 0;
-//		try{
-//			JsonReader reader = new JsonReader (new FileReader(perkFile));	
-//			reader.setLenient(true);
-//			JsonToken BEGIN_OBJECT = reader.peek();
-//			while(reader.peek() == BEGIN_OBJECT){
-//				reader.beginObject();			
-//
-//				while (reader.hasNext()){
-//					nextName = reader.nextName().toLowerCase();
-//					if (nextName.equals("type")){
-//						type = reader.nextString();
-//					}else if (nextName.equals("name")){
-//						name = reader.nextString();
-//					}else if (nextName.equals("unlock")){
-//						unlock = reader.nextString();
-//					}else if (nextName.equals("requirementname")){
-//						reader.beginArray();
-//						while (reader.peek().toString().equals("STRING")){
-//							tempName.add(reader.nextString());
-//						}
-//						reader.endArray();
-//					}else if (nextName.equals("requirementlevel")){
-//						reader.beginArray();
-//						while (reader.peek().toString().equals("NUMBER")){
-//							tempLevel.add(reader.nextInt());
-//						}
-//						reader.endArray();
-//					}else if (nextName.equals("pointcost")){			
-//						pointCost = reader.nextInt();
-//					}else if (nextName.equals("description")){
-//						description = reader.nextString();
-//					}
-//				}
-//				reader.endObject();
-//				if (Settings.getDebug()){
-//					System.out.println("Attempting to construct the following perk");
-//					System.out.println(type);
-//					System.out.println(name);
-//					System.out.println(unlock);
-//					System.out.println(tempName);
-//					System.out.println(tempLevel);
-//					System.out.println(pointCost);
-//					System.out.println(description);
-//					System.out.println("");
-//				}
-//				DummyPerk temp = new DummyPerk(type, name, unlock, description,pointCost, tempName,tempLevel);
-//				PerkStore.constructPerk(temp);
-//				tempName.clear();
-//				tempLevel.clear();
-//			}
-//			reader.close();			
-//		}
+	private static void loadPerkConfig(){
+		try{
+			Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create(); 
+			JsonReader reader = new JsonReader(new FileReader(perkFile)); 
+            LinkedList object = gson.fromJson(reader, Object.class);            
+            
+            
+            System.out.println(object.toString());
+            reader.close();
+            }
 //		catch(FileNotFoundException e){
-//			createPerkConfig();
-//		}
-//		catch(Exception E){			
-//			E.printStackTrace();
-//		}
-//	}
+//			DataSave.createPlayer(playerID);
+//		}			
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 }

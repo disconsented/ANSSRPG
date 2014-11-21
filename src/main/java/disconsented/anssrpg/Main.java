@@ -61,15 +61,11 @@ public class Main {
 			snw.registerMessage(PerkInfoHandler.class, PerkInfo.class, 1, Side.CLIENT); 
 			snw.registerMessage(RequestHandler.class, Request.class, 2, Side.SERVER); 
         }
-		
-		@EventHandler
-	    public void init(FMLInitializationEvent event) {
-	        NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
-	    }
        
         @EventHandler // used in 1.6.2
         //@Init       // used in 1.5.2
         public void load(FMLInitializationEvent event) {
+        		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
                 proxy.registerRenderers();
                 MinecraftForge.EVENT_BUS.register(new BlockBreaking());     
                 MinecraftForge.EVENT_BUS.register(new EntityDamage());

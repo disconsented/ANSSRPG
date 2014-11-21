@@ -3,6 +3,8 @@
  */
 package disconsented.anssrpg.perk;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * @author Disconsented
  * Object for requirements
@@ -17,8 +19,11 @@ public class Requirement {
 	 */
 	
 	public enum Action {HAVE,DONT,LEVEL_EQUALS,LEVEL_GREATER,LEVEL_LESS}
+	@Expose
 	public Action action;
+	@Expose
 	public String name;
+	@Expose
 	public String extraData;
 	public Requirement(Action action, String name, String extraData)
 	{

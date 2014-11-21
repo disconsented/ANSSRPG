@@ -7,6 +7,8 @@ package disconsented.anssrpg.perk;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.google.gson.annotations.Expose;
+
 import scala.reflect.internal.Trees.This;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -14,16 +16,19 @@ import net.minecraft.item.Item;
 
 public abstract class Perk {
 	
-	public String name;
-	public ArrayList<Requirement> requirements = new ArrayList<Requirement>();
-	public String perkSlug;
-	public String description;
-	public int pointCost;
+	@Expose
+	public String name = "default_name";
+	@Expose
+	public ArrayList<Requirement> requirements = new ArrayList<Requirement>();	
+	public String perkSlug;//Not exposed as its made based on the name
+	@Expose
+	public String description = "default_description";
+	@Expose
+	public int pointCost = 0;
 	
 	private String getSlug(String name){		
 		return name.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
-	}
-	
+	}	
 /**
  * 
  * @param name - Name of the perk
@@ -31,15 +36,27 @@ public abstract class Perk {
  * @param pointCost - Cost in points to unlock
  * @param requirement - Requirment object
  */
-	public Perk (){}
-	public abstract void construct(HashMap map);
-	protected void setCore(HashMap map)
-	{
-		this.setName(map.get("name").toString());
-		this.setRequirements((ArrayList<Requirement>) map.get("requirements"));
-		this.setDescription(map.get("description").toString());
-		this.setPointCost((int) map.get("pointcost"));
+//	public Perk (HashMap map){
+//		this.setName(map.get("name").toString());
+//		this.setRequirements((ArrayList<Requirement>) map.get("requirements"));
+//		this.setDescription(map.get("description").toString());
+//		this.setPointCost((int) map.get("pointcost"));
+//		construct(map);
+//	}
+	public Perk (String name, ArrayList<Requirement> requirements, String description, int pointCost){
+		this.name = name;
+		this.requirements = requirements;
+		this.description = description;
+		this.pointCost = pointCost;
 	}
+	public Perk(){
+		this.requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
+		this.requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
+		this.requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
+	}
+	
+	//public abstract void construct(HashMap map); //For sub type specific construction
+	public abstract void touchUp(); //For converting strings into object references after deserialisation
 	protected void setName(String name){this.name = name; this.perkSlug = getSlug(name);} 
 	protected void setRequirements(ArrayList<Requirement> requirments){this.requirements = requirments;}
 	protected void setDescription(String description){this.description = description;}

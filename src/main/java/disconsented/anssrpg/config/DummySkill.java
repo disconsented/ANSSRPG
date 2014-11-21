@@ -4,7 +4,7 @@
 package disconsented.anssrpg.config;
 
 /**
- * @author j
+ * @author Disconsented
  *
  */
 public class DummySkill {
@@ -12,7 +12,8 @@ public class DummySkill {
 	/**
 	 * 
 	 */
-	public DummySkill() {
+	private DummySkill instance;
+	private DummySkill() {
 		// TODO Auto-generated constructor stub
 	}
 
