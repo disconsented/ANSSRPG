@@ -9,5 +9,4 @@ deploy:
   file: "/build/*.jar"
   skip_cleanup: true
   on:
-    tags: true
     all_branches: true
