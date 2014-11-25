@@ -1,5 +1,6 @@
 package disconsented.anssrpg;
 
+import handler.SkillHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -15,21 +16,19 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import disconsented.anssrpg.commands.ANSSRPG;
-import disconsented.anssrpg.commands.DebugCommand;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.config.JsonConfigHandler;
 import disconsented.anssrpg.data.DataSave;
+import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.network.PerkInfo;
 import disconsented.anssrpg.network.PerkInfoHandler;
 import disconsented.anssrpg.network.Request;
 import disconsented.anssrpg.network.RequestHandler;
 import disconsented.anssrpg.network.Responce;
 import disconsented.anssrpg.network.ResponceHandler;
-import disconsented.anssrpg.perk.PerkStore;
 import disconsented.anssrpg.skill.BlockBreaking;
 import disconsented.anssrpg.skill.EntityDamage;
 import disconsented.anssrpg.skill.ItemCrafting;
-import disconsented.anssrpg.skill.SkillHandler;
 
 @Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="TC3")
 //@NetworkMod(clientSideRequired=true) // not used in 1.7
@@ -76,7 +75,6 @@ public class Main {
         @EventHandler
         public void serverLoad(FMLServerStartingEvent event)
         {
-          event.registerServerCommand(new DebugCommand());
           event.registerServerCommand(new ANSSRPG());
         }
        
@@ -85,10 +83,10 @@ public class Main {
         public void postInit(FMLPostInitializationEvent event) {
         	JsonConfigHandler.loadPerkAndSkill(); //loaded in here so that other mods have their stuff loaded
         	if (Settings.getDebug()){
-	        	System.out.println("ANSSRPG has the following skills registered:");
-	        	for	(int i = 0; i < SkillHandler.getSkillList().size(); i++){
-	        		System.out.println(SkillHandler.getSkillName(i));
-	        	}
+//	        	System.out.println("ANSSRPG has the following skills registered:");
+//	        	for	(int i = 0; i < SkillHandler.getSkillList().size(); i++){
+//	        		System.out.println(SkillHandler.getSkillName(i));
+//	        	}
 	        	System.out.println("ANSSRPG has the following perks registered");
 	        	System.out.println(PerkStore.getInstance().getPerks());
 	        	System.out.println();

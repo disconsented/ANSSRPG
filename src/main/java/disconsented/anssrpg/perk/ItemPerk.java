@@ -45,9 +45,8 @@ public class ItemPerk extends Perk {
 	}
 
 	@Override
-	public void touchUp() {
-		// TODO Auto-generated method stub
-		
+	public void touchUp() {		
+		this.item = (Item) Item.itemRegistry.getObject(itemName);
 	}
 
 }

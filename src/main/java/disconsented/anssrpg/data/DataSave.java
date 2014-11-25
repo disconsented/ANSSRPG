@@ -19,7 +19,6 @@ import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.network.PerkInfo;
 import disconsented.anssrpg.perk.LocalPerk;
 import disconsented.anssrpg.perk.Perk;
-import disconsented.anssrpg.perk.PerkStore;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.player.PlayerFile;
 

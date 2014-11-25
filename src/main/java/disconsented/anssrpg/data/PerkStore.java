@@ -1,7 +1,9 @@
-package disconsented.anssrpg.perk;
+package disconsented.anssrpg.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import disconsented.anssrpg.perk.Perk;
 
 /**
  * Author: Disconsented

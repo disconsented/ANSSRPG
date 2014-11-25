@@ -1,7 +1,7 @@
 /**
  * 
  */
-package disconsented.anssrpg.skill;
+package disconsented.anssrpg.data;
 
 
 /**

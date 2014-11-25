@@ -21,9 +21,12 @@ public class BlockPerk extends Perk {
 		super(name, requirements, description, pointCost);
 		// TODO Auto-generated constructor stub
 	}
+	public BlockPerk() {
+		super();
+	}
 	Block block;
 	@Expose
-	String blockName;
+	String blockName = "default_blockName";
 	/**
 	 * @return 
 	 */
@@ -40,8 +43,7 @@ public class BlockPerk extends Perk {
 
 	@Override
 	public void touchUp() {
-		// TODO Auto-generated method stub
-		
+		this.block = (Block) Block.blockRegistry.getObject(blockName);		
 	}
 
 }

@@ -17,7 +17,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
+import disconsented.anssrpg.perk.BlockPerk;
+import disconsented.anssrpg.perk.EntityPerk;
 import disconsented.anssrpg.perk.ItemPerk;
+import disconsented.anssrpg.skill.objects.BlockSkill;
 /**
  * @author Disconsented, Abelistah
  * Json Config's
@@ -27,23 +30,35 @@ public class JsonConfigHandler {
 	static File perkFile = new File("config/ANSSRPG","perk.cfg");
 	static File configFileLocation = new File("config/ANSSRPG");
 
-	private static ObjectStore objectStore;	
+	private static PerkStore perkStore;	
+	public static SkillStore skillStore;
 	
 	public static void loadPerkAndSkill(){
 		createPerkConfig();
 		loadPerkConfig();
+		createSkillConfig();
+		loadSkillConfig();
 	}
 	public static void createPerkConfig(){
-		objectStore = new ObjectStore();
+		perkStore = new PerkStore();
         ArrayList<ItemPerk> items = new ArrayList<>();
-       items.add(new ItemPerk());
-       items.add(new ItemPerk());
-       objectStore.setItemPerks(items);
+        items.add(new ItemPerk());
+        items.add(new ItemPerk());
+        ArrayList<BlockPerk> blocks = new ArrayList<>();
+        blocks.add(new BlockPerk());
+        blocks.add(new BlockPerk());
+        ArrayList<EntityPerk> entitys = new ArrayList<>();
+        entitys.add(new EntityPerk());
+        entitys.add(new EntityPerk());       
+       
+       perkStore.setItemPerks(items);
+       perkStore.setEntityPerks(entitys);
+       perkStore.setBlockPerks(blocks);
         try {
          configFileLocation.mkdirs();
                 Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
                 Writer osWriter = new OutputStreamWriter(new FileOutputStream(perkFile));
-                gson.toJson(objectStore, osWriter);
+                gson.toJson(perkStore, osWriter);
                 osWriter.close();
           
         } catch (Exception e) {  
@@ -52,14 +67,42 @@ public class JsonConfigHandler {
         }  
 	}
 	private static void loadPerkConfig(){
-	       try {
-	
+	       try {	
 	               Gson gson = new Gson();
-	               Type objectStoreType = new TypeToken<ObjectStore>(){}.getType();
+	               Type objectStoreType = new TypeToken<PerkStore>(){}.getType();
 	               Reader isReader = new InputStreamReader(new FileInputStream(perkFile));
-	               objectStore = gson.fromJson(isReader, objectStoreType);
-	               isReader.close();
-	
+	               perkStore = gson.fromJson(isReader, objectStoreType);
+	               isReader.close();	
+	       }
+	       catch (IOException iox) {
+	               iox.printStackTrace();
+	       }
+	}
+	public static void createSkillConfig(){
+		skillStore = new SkillStore();
+        ArrayList<BlockSkill> blocks = new ArrayList<BlockSkill>();
+        blocks.add(new BlockSkill());
+        blocks.add(new BlockSkill());
+       skillStore.setBlock(blocks);
+        try {
+         configFileLocation.mkdirs();
+                Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+                Writer osWriter = new OutputStreamWriter(new FileOutputStream(skillFile));
+                gson.toJson(skillStore, osWriter);
+                osWriter.close();
+          
+        } catch (Exception e) {  
+                System.err.println("Exception when creating skill config");
+                System.err.println(e.getLocalizedMessage());
+        }  
+	}
+	private static void loadSkillConfig(){
+	       try {	
+	               Gson gson = new Gson();
+	               Type objectStoreType = new TypeToken<PerkStore>(){}.getType();
+	               Reader isReader = new InputStreamReader(new FileInputStream(skillFile));
+	               skillStore = gson.fromJson(isReader, objectStoreType);
+	               isReader.close();	
 	       }
 	       catch (IOException iox) {
 	               iox.printStackTrace();

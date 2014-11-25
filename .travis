@@ -1,0 +1,14 @@
+language: java
+jdk:
+  - oraclejdk8
+  - oraclejdk7
+  - openjdk7
+  - openjdk6
+script: gradlew build
+deploy:
+  provider: releases
+  file: "/build/*.jar"
+  skip_cleanup: true
+  on:
+    tags: true
+    all_branches: true

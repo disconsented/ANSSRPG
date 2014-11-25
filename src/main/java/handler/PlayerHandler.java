@@ -1,4 +1,4 @@
- package disconsented.anssrpg.player;
+ package handler;
 
 import java.util.ArrayList;
 
@@ -10,8 +10,9 @@ import net.minecraft.util.ChatComponentText;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.config.JsonConfigHandler;
 import disconsented.anssrpg.data.DataSave;
+import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.perk.Perk;
-import disconsented.anssrpg.perk.PerkStore;
+import disconsented.anssrpg.player.PlayerData;
  /**
   * @author James
   * Handles the data that is stored on players (experience for skills and perks)

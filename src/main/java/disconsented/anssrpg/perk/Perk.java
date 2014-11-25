@@ -36,13 +36,6 @@ public abstract class Perk {
  * @param pointCost - Cost in points to unlock
  * @param requirement - Requirment object
  */
-//	public Perk (HashMap map){
-//		this.setName(map.get("name").toString());
-//		this.setRequirements((ArrayList<Requirement>) map.get("requirements"));
-//		this.setDescription(map.get("description").toString());
-//		this.setPointCost((int) map.get("pointcost"));
-//		construct(map);
-//	}
 	public Perk (String name, ArrayList<Requirement> requirements, String description, int pointCost){
 		this.name = name;
 		this.requirements = requirements;
@@ -55,7 +48,6 @@ public abstract class Perk {
 		this.requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
 	}
 	
-	//public abstract void construct(HashMap map); //For sub type specific construction
 	public abstract void touchUp(); //For converting strings into object references after deserialisation
 	protected void setName(String name){this.name = name; this.perkSlug = getSlug(name);} 
 	protected void setRequirements(ArrayList<Requirement> requirments){this.requirements = requirments;}
