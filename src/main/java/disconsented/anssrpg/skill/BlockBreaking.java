@@ -27,31 +27,8 @@ import disconsented.anssrpg.data.PerkStore;
     	 * 			Add xp
     	 * @param eventBreak
     	 */
-//    @SubscribeEvent
-//    public void onBreakevent(BreakEvent event){    	
-//    	Boolean requiresPerk = false;    	
-//    	if (event.getPlayer() instanceof EntityPlayerMP){
-//    		if(PerkStore.getBlockPerkList(event.block) != null){
-//    			requiresPerk = true;
-//    		}
-//    		for (int i = 0; i < SkillHandler.getSkillList().size(); i++){
-//    			Skill temp = (Skill)SkillHandler.getSkillList().get(i);
-//    			if(temp.type == 1){
-//    				int blockIndex = SkillHandler.indexOfBlock(event.block, i);
-//    				if (blockIndex != -1 || requiresPerk){
-//    					if (requiresPerk){
-//	    						if (PlayerHandler.hasPerk(event.block, SkillHandler.getSkillName(i))){//Player can mine
-//	        						PlayerHandler.addXP(SkillHandler.getXP(blockIndex, i), SkillHandler.getSkillName(i), (EntityPlayerMP) event.getPlayer());
-//	        					}else{    					
-//	        						PlayerHandler.sendFail((EntityPlayerMP) event.getPlayer());
-//	        						event.setCanceled(true);
-//	        					}
-//    					}else{
-//    						PlayerHandler.addXP(SkillHandler.getXP(blockIndex, i), SkillHandler.getSkillName(i), (EntityPlayerMP) event.getPlayer());
-//    					}
-//    				}    				
-//    			}
-//    		}
-//    	}
-//    }	
+    @SubscribeEvent
+    public void onBreakevent(BreakEvent event){    	
+    	
+    }	
 }
