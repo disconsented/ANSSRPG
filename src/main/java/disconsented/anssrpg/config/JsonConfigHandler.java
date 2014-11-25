@@ -2,7 +2,6 @@ package disconsented.anssrpg.config;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -10,11 +9,9 @@ import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import disconsented.anssrpg.perk.BlockPerk;
@@ -41,30 +38,24 @@ public class JsonConfigHandler {
 	}
 	public static void createPerkConfig(){
 		perkStore = new PerkStore();
-        ArrayList<ItemPerk> items = new ArrayList<>();
-        items.add(new ItemPerk());
-        items.add(new ItemPerk());
-        ArrayList<BlockPerk> blocks = new ArrayList<>();
-        blocks.add(new BlockPerk());
-        blocks.add(new BlockPerk());
-        ArrayList<EntityPerk> entitys = new ArrayList<>();
-        entitys.add(new EntityPerk());
-        entitys.add(new EntityPerk());       
-       
-       perkStore.setItemPerks(items);
-       perkStore.setEntityPerks(entitys);
-       perkStore.setBlockPerks(blocks);
+		perkStore.addItemPerk(new ItemPerk());
+		perkStore.addItemPerk(new ItemPerk());
+		perkStore.addBlockPerk(new BlockPerk());
+		perkStore.addBlockPerk(new BlockPerk());
+		perkStore.addEntityPerk(new EntityPerk());
+		perkStore.addEntityPerk(new EntityPerk());
+
         try {
          configFileLocation.mkdirs();
                 Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
                 Writer osWriter = new OutputStreamWriter(new FileOutputStream(perkFile));
                 gson.toJson(perkStore, osWriter);
                 osWriter.close();
-          
-        } catch (Exception e) {  
+
+        } catch (Exception e) {
                 System.err.println("Exception when creating perk config");
                 System.err.println(e.getLocalizedMessage());
-        }  
+        }
 	}
 	private static void loadPerkConfig(){
 	       try {	
