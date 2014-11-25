@@ -15,6 +15,7 @@
 .classpath
 
 #IntelliJ
+/.idea
 1.7.10.iml
 1.7.10.ipr
 1.7.10.iws

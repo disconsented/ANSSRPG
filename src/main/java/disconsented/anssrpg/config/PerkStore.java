@@ -9,40 +9,40 @@ import com.google.gson.annotations.Expose;
 import disconsented.anssrpg.perk.BlockPerk;
 import disconsented.anssrpg.perk.EntityPerk;
 import disconsented.anssrpg.perk.ItemPerk;
- 
+
 public class PerkStore {
-    // The ArrayLists to be Serialized/Deserialized
     @Expose
-    private List<ItemPerk> items = new LinkedList<>();
-    
+    private ArrayList<ItemPerk> items = new ArrayList<>();
     @Expose
-    private List<BlockPerk> blocks = new LinkedList<>();
-    // And so forth
-    
+    private ArrayList<BlockPerk> blocks = new ArrayList<>();
     @Expose
-    private List<EntityPerk> entities = new LinkedList<>();
+    private ArrayList<EntityPerk> entities = new ArrayList<>();
  
-    public List<ItemPerk> getItemPerks() {
-        return items;
+    public ArrayList<ItemPerk> getItems() {
+        return this.items;
     }
  
-    public void setItemPerks(List<ItemPerk> itemPerks) {
-        items = itemPerks;
+    public void setItems(ArrayList<ItemPerk> items) {
+        this.items = items;
     }
  
-    public List<BlockPerk> getBlockPerks() {
-        return blocks;
+    public ArrayList<BlockPerk> getBlocks() {
+        return this.blocks;
     }
  
-    public void setBlockPerks(List<BlockPerk> blockPerks) {
-        blocks = blockPerks;
+    public void setBlocks(ArrayList<BlockPerk> blocks) {
+        this.blocks = blocks;
     }
     
-    public List<EntityPerk> getEntityPerks(){
-    	return entities;
+    public ArrayList<EntityPerk> getEntities(){
+    	return this.entities;
     }
     
-    public void setEntityPerks(List<EntityPerk> entities){
+    public void setEntities(ArrayList<EntityPerk> entities){
     	this.entities = entities;
     }
+
+    public void addItemPerk(ItemPerk itemPerk) { this.items.add(itemPerk); }
+    public void addBlockPerk(BlockPerk blockPerk) { this.blocks.add(blockPerk); }
+    public void addEntityPerk(EntityPerk entityPerk) { this.entities.add(entityPerk); }
 }
