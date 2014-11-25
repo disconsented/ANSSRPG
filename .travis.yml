@@ -8,6 +8,7 @@ script: ./gradlew build
 deploy:
   provider: releases
   file: "/build/*.jar"
+  api-key: AUTHKEY
   skip_cleanup: true
   on:
     all_branches: true
