@@ -17,7 +17,7 @@ public abstract class Skill {
 	 * @param exp - ArrayList for the exp using XPGain objects
 	 * @param name - Name of the skill
 	 */
-	public Skill (ArrayList<XPGain> exp, String name) {
+	public Skill (ArrayList<? extends XPGain> exp, String name) {
 		this.exp = exp;
 		this.name = name;
 	}

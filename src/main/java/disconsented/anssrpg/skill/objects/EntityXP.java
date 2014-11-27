@@ -15,7 +15,7 @@ public class EntityXP extends XPGain {
 	 * 
 	 */
 	private int exp = 0;
-	private Object entity;
+	private Class entity;
 	private String name = "default_name";
 	
 	public EntityXP() {
@@ -23,8 +23,10 @@ public class EntityXP extends XPGain {
 
 	@Override
 	public void touchUp() {
-		entity = EntityList.stringToClassMapping.get(name);
+		entity = EntityList.stringToClassMapping.get(name).getClass();
 
 	}
-
+	public Class getEntity(){
+		return entity;
+	}
 }
