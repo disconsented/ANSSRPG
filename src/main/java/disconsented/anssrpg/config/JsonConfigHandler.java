@@ -9,7 +9,6 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,10 +18,12 @@ import disconsented.anssrpg.perk.BlockPerk;
 import disconsented.anssrpg.perk.EntityPerk;
 import disconsented.anssrpg.perk.ItemPerk;
 import disconsented.anssrpg.skill.objects.BlockSkill;
+
 /**
  * @author Disconsented, Abelistah
  * Json Config's
  */
+
 public class JsonConfigHandler {
 	static File skillFile = new File("config/ANSSRPG", "skill.cfg");
 	static File perkFile = new File("config/ANSSRPG","perk.cfg");
@@ -46,39 +47,40 @@ public class JsonConfigHandler {
 
         try {
          configFileLocation.mkdirs();
-                Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
-                Writer osWriter = new OutputStreamWriter(new FileOutputStream(perkFile));
-                gson.toJson(perkStore, osWriter);
-                osWriter.close();
+		Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+		Writer osWriter = new OutputStreamWriter(new FileOutputStream(perkFile));
+		gson.toJson(perkStore, osWriter);
+		osWriter.close();
 
         } catch (Exception e) {
-                System.err.println("Exception when creating perk config");
-                System.err.println(e.getLocalizedMessage());
+			System.err.println("Exception when creating perk config");
+			System.err.println(e.getLocalizedMessage());
         }
 	}
 	private static void loadPerkConfig(){
-	       try {	
-	               Gson gson = new Gson();
-	               Type objectStoreType = new TypeToken<PerkStore>(){}.getType();
-	               Reader isReader = new InputStreamReader(new FileInputStream(perkFile));
-	               perkStore = gson.fromJson(isReader, objectStoreType);
-	               perkStore.touchUp();
-	               isReader.close();	
-	     
-		} 
-	       catch (FileNotFoundException e){
-	    	   createPerkConfig();
-	       }
-	       catch (IOException iox) {
-	               iox.printStackTrace();
-	       }
+	   try {
+		   Gson gson = new Gson();
+		   Type objectStoreType = new TypeToken<PerkStore>(){}.getType();
+		   Reader isReader = new InputStreamReader(new FileInputStream(perkFile));
+		   perkStore = gson.fromJson(isReader, objectStoreType);
+		   isReader.close();
+
+		   if(perkStore != null) {
+			   perkStore.touchUp();
+		   }
+	   }
+	   catch (FileNotFoundException e){
+		   createPerkConfig();
+	   }
+	   catch (IOException iox) {
+			   iox.printStackTrace();
+	   }
 	}
 	public static void createSkillConfig(){
 		skillStore = new SkillStore();
-        ArrayList<BlockSkill> blocks = new ArrayList<BlockSkill>();
-        blocks.add(new BlockSkill());
-        blocks.add(new BlockSkill());
-       skillStore.setBlock(blocks);
+		skillStore.addBlockSkill(new BlockSkill());
+		skillStore.addBlockSkill(new BlockSkill());
+
         try {
          configFileLocation.mkdirs();
                 Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
@@ -92,19 +94,22 @@ public class JsonConfigHandler {
         }  
 	}
 	private static void loadSkillConfig(){
-	       try {	
-	               Gson gson = new Gson();
-	               Type objectStoreType = new TypeToken<SkillStore>(){}.getType();
-	               Reader isReader = new InputStreamReader(new FileInputStream(skillFile));
-	               skillStore = gson.fromJson(isReader, objectStoreType);
-	               skillStore.touchUp();
-	               isReader.close();	
-	       }
-	       catch(FileNotFoundException e){
-	    	   createSkillConfig();
-	       }
-	       catch (IOException iox) {
-	               iox.printStackTrace();
-	       }
+	   try {
+		   Gson gson = new Gson();
+		   Type objectStoreType = new TypeToken<SkillStore>(){}.getType();
+		   Reader isReader = new InputStreamReader(new FileInputStream(skillFile));
+		   skillStore = gson.fromJson(isReader, objectStoreType);
+		   isReader.close();
+
+		   if(skillStore != null) {
+			   skillStore.touchUp();
+		   }
+	   }
+	   catch(FileNotFoundException e){
+		   createSkillConfig();
+	   }
+	   catch (IOException iox) {
+			   iox.printStackTrace();
+	   }
 	}
 }

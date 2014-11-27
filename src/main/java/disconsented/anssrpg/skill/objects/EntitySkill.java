@@ -21,8 +21,9 @@ public class EntitySkill extends Skill {
 	}
 	public EntitySkill(){
 		super();
-		this.exp = new ArrayList<EntityXP>();
-		exp.add(new EntityXP());
-		exp.add(new EntityXP());
+		ArrayList<EntityXP> entityXPs = new ArrayList<>();
+		entityXPs.add(new EntityXP());
+		entityXPs.add(new EntityXP());
+		this.exp = entityXPs;
 	}
 }

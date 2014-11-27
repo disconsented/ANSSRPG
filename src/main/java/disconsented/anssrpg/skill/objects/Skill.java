@@ -12,7 +12,7 @@ public abstract class Skill {
 	@Expose
 	public String name = "default_skillname";
 	@Expose
-	public ArrayList exp;
+	public ArrayList<? extends XPGain> exp;
 	/**  
 	 * @param exp - ArrayList for the exp using XPGain objects
 	 * @param name - Name of the skill
@@ -37,7 +37,7 @@ public abstract class Skill {
 	/**
 	 * @return the exp
 	 */
-	public ArrayList<XPGain> getExp() {
+	public ArrayList<? extends XPGain> getExp() {
 		return exp;
 	}
 	/**

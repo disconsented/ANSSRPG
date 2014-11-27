@@ -3,15 +3,11 @@
  */
 package disconsented.anssrpg.perk;
 
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.google.gson.annotations.Expose;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.world.World;
 
 /**
  * @author Disconsented
@@ -19,13 +15,14 @@ import net.minecraft.world.World;
  */
 public class EntityPerk extends Perk {
 
+	public EntityPerk() {
+		super();
+	}
+
 	public EntityPerk(String name, ArrayList<Requirement> requirements,
 			String description, int pointCost) {
 		super(name, requirements, description, pointCost);
 		// TODO Auto-generated constructor stub
-	}
-	public EntityPerk() {
-		super();
 	}
 	Class entity;
 	@Expose
