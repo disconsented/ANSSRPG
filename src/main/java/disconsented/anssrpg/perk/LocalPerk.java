@@ -5,10 +5,6 @@ package disconsented.anssrpg.perk;
 
 import java.util.ArrayList;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
-
 public class LocalPerk {
 	
 	public String name;

@@ -21,9 +21,10 @@ public class BlockSkill extends Skill {
 	}
 	public BlockSkill(){
 		super();
-		this.exp = new ArrayList<BlockXP>();
-		exp.add(new BlockXP());
-		exp.add(new BlockXP());
+		ArrayList<BlockXP> blockXPs = new ArrayList<>();
+		blockXPs.add(new BlockXP());
+		blockXPs.add(new BlockXP());
+		this.exp = blockXPs;
 	}
 	public void touchUp() {
 		for (int i = 0; i < exp.size(); i++){

@@ -19,13 +19,13 @@ public class SkillStore {
 	 * 
 	 */
 	@Expose
-	private ArrayList<BlockSkill> blocks = new ArrayList<BlockSkill>();
+	private ArrayList<BlockSkill> blocks = new ArrayList<>();
 
 	/**
 	 * @return the block
 	 */
 	public ArrayList<BlockSkill> getBlock() {
-		return blocks;
+		return this.blocks;
 	}
 
 	/**
@@ -35,8 +35,10 @@ public class SkillStore {
 		this.blocks = block;
 	}
 
+	public void addBlockSkill(BlockSkill blockSkill) { this.blocks.add(blockSkill); }
+
 	public void touchUp() {
-		for (BlockSkill block : blocks){
+		for (BlockSkill block : this.blocks){
 			block.touchUp();
 			disconsented.anssrpg.data.SkillStore.addSkill(block);
 		}

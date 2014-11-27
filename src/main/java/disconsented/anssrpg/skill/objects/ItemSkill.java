@@ -21,8 +21,9 @@ public class ItemSkill extends Skill {
 	}
 	public ItemSkill(){
 		super();
-		this.exp = new ArrayList<ItemXP>();
-		exp.add(new ItemXP());
-		exp.add(new ItemXP());
+		ArrayList<ItemXP> itemXPs = new ArrayList<>();
+		itemXPs.add(new ItemXP());
+		itemXPs.add(new ItemXP());
+		this.exp = itemXPs;
 	}
 }

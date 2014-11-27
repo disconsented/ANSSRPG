@@ -25,19 +25,20 @@ import disconsented.anssrpg.skill.objects.BlockXP;
     @SubscribeEvent
     public void onBreakevent(BreakEvent event){    	
     	if(event.getPlayer() instanceof EntityPlayerMP){
+			EntityPlayerMP playerMP = (EntityPlayerMP) event.getPlayer();
     		PlayerData player = PlayerStore.getInstance().getPlayer(event.getPlayer().getUniqueID().toString());
-    		ArrayList<BlockPerk> blocklist = PerkStore.getPerksForBlock(event.block.getUnlocalizedName());
+    		ArrayList<BlockPerk> blockList = PerkStore.getPerksForBlock(event.block.getUnlocalizedName());
     		boolean requiresPerk = false;
-    		if (blocklist != null){
+    		if (blockList != null){
     			requiresPerk = true;
     		}    		
     		for (BlockSkill skill : SkillStore.getInstance().getBlockSkill()){
-    			ArrayList<BlockXP> temp = skill.exp;
+    			ArrayList<BlockXP> temp = (ArrayList<BlockXP>) skill.exp;
     			for (int i = 0; i < temp.size(); i++){
     				if(temp.get(i).getBlock().equals(event.block)){	  
 	    				if (requiresPerk){
-	    					if (PlayerHandler.hasPerk(player, blocklist)){
-	    						PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), event.getPlayer());
+	    					if (PlayerHandler.hasPerk(player, blockList)){
+	    						PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
 	    					}
 	    					else
 	    					{
@@ -47,12 +48,11 @@ import disconsented.anssrpg.skill.objects.BlockXP;
 	    				}
 	    				else
 	    				{
-	    					PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), event.getPlayer());
+	    					PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
 	    				}
     				}
     			}
     		}
     	}
-    	
-    }	
+    }
 }

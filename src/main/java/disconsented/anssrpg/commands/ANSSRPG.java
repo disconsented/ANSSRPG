@@ -1,19 +1,14 @@
 package disconsented.anssrpg.commands;
 
-import handler.PlayerHandler;
-import handler.SkillHandler;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import disconsented.anssrpg.Main;
-import disconsented.anssrpg.data.PerkStore;
-import disconsented.anssrpg.skill.objects.Skill;
+
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.ChatComponentText;
 
 public class ANSSRPG implements ICommand
 {

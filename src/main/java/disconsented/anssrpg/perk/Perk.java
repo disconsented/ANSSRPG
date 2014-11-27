@@ -5,14 +5,8 @@
 package disconsented.anssrpg.perk;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.google.gson.annotations.Expose;
-
-import scala.reflect.internal.Trees.This;
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
 
 public abstract class Perk {
 	
@@ -28,26 +22,27 @@ public abstract class Perk {
 	
 	private String getSlug(String name){		
 		return name.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
-	}	
-/**
- * 
- * @param name - Name of the perk
- * @param description - Description
- * @param pointCost - Cost in points to unlock
- * @param requirement - Requirment object
- */
+	}
+
+	public Perk(){
+		this.requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
+		this.requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
+		this.requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
+	}
+	/**
+	 *
+	 * @param name - Name of the perk
+	 * @param description - Description
+	 * @param pointCost - Cost in points to unlock
+	 * @param requirement - Requirment object
+	 */
 	public Perk (String name, ArrayList<Requirement> requirements, String description, int pointCost){
 		this.name = name;
 		this.requirements = requirements;
 		this.description = description;
 		this.pointCost = pointCost;
 	}
-	public Perk(){
-		this.requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
-		this.requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
-		this.requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
-	}
-	
+
 	public abstract void touchUp(); //For converting strings into object references after deserialisation
 	protected void setName(String name){this.name = name; this.perkSlug = getSlug(name);} 
 	protected void setRequirements(ArrayList<Requirement> requirments){this.requirements = requirments;}
