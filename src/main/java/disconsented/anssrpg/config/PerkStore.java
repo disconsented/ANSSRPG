@@ -6,6 +6,7 @@ import java.util.*;
 
 import com.google.gson.annotations.Expose;
 
+import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.perk.BlockPerk;
 import disconsented.anssrpg.perk.EntityPerk;
 import disconsented.anssrpg.perk.ItemPerk;
@@ -45,4 +46,17 @@ public class PerkStore {
     public void addItemPerk(ItemPerk itemPerk) { this.items.add(itemPerk); }
     public void addBlockPerk(BlockPerk blockPerk) { this.blocks.add(blockPerk); }
     public void addEntityPerk(EntityPerk entityPerk) { this.entities.add(entityPerk); }
+
+	public void touchUp() {
+		for (ItemPerk item : items){
+			item.touchUp();
+		}
+		for (BlockPerk block : blocks){
+			block.touchUp();
+			disconsented.anssrpg.data.PerkStore.putBlockPerk(block);
+		}
+		for(EntityPerk entity : entities){
+			entity.touchUp();
+		}
+	}
 }

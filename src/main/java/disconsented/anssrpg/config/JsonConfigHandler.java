@@ -1,6 +1,7 @@
 package disconsented.anssrpg.config;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -31,9 +32,7 @@ public class JsonConfigHandler {
 	public static SkillStore skillStore;
 	
 	public static void loadPerkAndSkill(){
-		createPerkConfig();
-		loadPerkConfig();
-		createSkillConfig();
+		loadPerkConfig();		
 		loadSkillConfig();
 	}
 	public static void createPerkConfig(){
@@ -63,7 +62,12 @@ public class JsonConfigHandler {
 	               Type objectStoreType = new TypeToken<PerkStore>(){}.getType();
 	               Reader isReader = new InputStreamReader(new FileInputStream(perkFile));
 	               perkStore = gson.fromJson(isReader, objectStoreType);
+	               perkStore.touchUp();
 	               isReader.close();	
+	     
+		} 
+	       catch (FileNotFoundException e){
+	    	   createPerkConfig();
 	       }
 	       catch (IOException iox) {
 	               iox.printStackTrace();
@@ -80,8 +84,8 @@ public class JsonConfigHandler {
                 Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
                 Writer osWriter = new OutputStreamWriter(new FileOutputStream(skillFile));
                 gson.toJson(skillStore, osWriter);
-                osWriter.close();
-          
+                osWriter.close();   
+                
         } catch (Exception e) {  
                 System.err.println("Exception when creating skill config");
                 System.err.println(e.getLocalizedMessage());
@@ -90,10 +94,14 @@ public class JsonConfigHandler {
 	private static void loadSkillConfig(){
 	       try {	
 	               Gson gson = new Gson();
-	               Type objectStoreType = new TypeToken<PerkStore>(){}.getType();
+	               Type objectStoreType = new TypeToken<SkillStore>(){}.getType();
 	               Reader isReader = new InputStreamReader(new FileInputStream(skillFile));
 	               skillStore = gson.fromJson(isReader, objectStoreType);
+	               skillStore.touchUp();
 	               isReader.close();	
+	       }
+	       catch(FileNotFoundException e){
+	    	   createSkillConfig();
 	       }
 	       catch (IOException iox) {
 	               iox.printStackTrace();

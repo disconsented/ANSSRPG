@@ -19,20 +19,28 @@ public class SkillStore {
 	 * 
 	 */
 	@Expose
-	private ArrayList<BlockSkill> block = new ArrayList<BlockSkill>();
+	private ArrayList<BlockSkill> blocks = new ArrayList<BlockSkill>();
 
 	/**
 	 * @return the block
 	 */
 	public ArrayList<BlockSkill> getBlock() {
-		return block;
+		return blocks;
 	}
 
 	/**
 	 * @param block the block to set
 	 */
 	public void setBlock(ArrayList<BlockSkill> block) {
-		this.block = block;
+		this.blocks = block;
+	}
+
+	public void touchUp() {
+		for (BlockSkill block : blocks){
+			block.touchUp();
+			disconsented.anssrpg.data.SkillStore.addSkill(block);
+		}
+		
 	}
 	
 

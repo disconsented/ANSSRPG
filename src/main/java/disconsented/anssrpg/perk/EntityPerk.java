@@ -3,6 +3,7 @@
  */
 package disconsented.anssrpg.perk;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,6 +11,7 @@ import com.google.gson.annotations.Expose;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.world.World;
 
 /**
  * @author Disconsented
@@ -25,7 +27,7 @@ public class EntityPerk extends Perk {
 	public EntityPerk() {
 		super();
 	}
-	Object entity;
+	Class entity;
 	@Expose
 	String entityName = "default_entityName";
 	/**
@@ -38,13 +40,13 @@ public class EntityPerk extends Perk {
 	/**
 	 * @param entity the entity to set
 	 */
-	protected void setEntity(Object entity) {
+	protected void setEntity(Class entity) {
 		this.entity = entity;
 	}
 
 	@Override
 	public void touchUp() {
-		this.entity = EntityList.stringToClassMapping.get(entityName);	
+			this.entity = EntityList.stringToClassMapping.get(entityName).getClass();
 	}
 
 }
