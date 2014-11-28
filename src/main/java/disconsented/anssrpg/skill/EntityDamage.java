@@ -34,7 +34,7 @@ import disconsented.anssrpg.skill.objects.EntityXP;
 				requiresPerk = true;
 			}
 			for (EntitySkill skill : SkillStore.getInstance().getEntitySkill()) {
-				ArrayList<EntityXP> temp = (ArrayList<EntityXP>) skill.exp;
+				ArrayList<EntityXP> temp = skill.getExp();
 				for (int i = 0; i < temp.size(); i++){
 					Class entityClass = temp.get(i).getEntity();
 					if(event.entity.getClass().equals(entityClass)) {

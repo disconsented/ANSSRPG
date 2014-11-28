@@ -5,25 +5,32 @@ package disconsented.anssrpg.skill.objects;
 
 import java.util.ArrayList;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * @author Disconsented
  *
  */
 public class ItemSkill extends Skill {
-
-	/**
-	 * @param exp
-	 * @param name
-	 */	
-	public ItemSkill(ArrayList<XPGain> exp, String name) {
-		super(exp, name);
-		// TODO Auto-generated constructor stub
-	}
+	@Expose
+	private ArrayList<ItemXP> exp = new ArrayList<ItemXP>();
+	
 	public ItemSkill(){
-		super();
-		ArrayList<ItemXP> itemXPs = new ArrayList<>();
-		itemXPs.add(new ItemXP());
-		itemXPs.add(new ItemXP());
-		this.exp = itemXPs;
+		super();		
+		exp.add(new ItemXP());
+		exp.add(new ItemXP());
+	}
+
+	@Override
+	public void touchUp() {
+		for (int i = 0; i < exp.size(); i++){
+			ItemXP thing = (ItemXP) exp.get(i);
+			thing.touchUp();
+		}
+		
+	}
+
+	public ArrayList<ItemXP> getExp() {
+		return exp;
 	}
 }

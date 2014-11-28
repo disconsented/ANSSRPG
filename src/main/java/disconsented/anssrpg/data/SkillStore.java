@@ -38,5 +38,12 @@ public class SkillStore {
 	public static void addSkill(BlockSkill skill) {		
 		blockSkill.add(skill);
 	}
+	public static void addSkill(EntitySkill entity) {
+		entitySkill.add(entity);		
+	}
+	public static void addSkill(ItemSkill item) {
+		itemSkill.add(item);
+		
+	}
 
 }

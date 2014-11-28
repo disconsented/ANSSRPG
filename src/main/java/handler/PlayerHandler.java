@@ -47,9 +47,15 @@ import disconsented.anssrpg.skill.objects.BlockXP;
 			}
 			return false;
 		}
-		public static void awardXP(PlayerData player, String name, int value, EntityPlayer playerEntity) {			
+		public static void awardXP(PlayerData player, String name, int value, EntityPlayer playerEntity) {
+			if (player.getSkillExp().get(name) != null){
 			player.getSkillExp().put(name, 
 					new Integer(player.getSkillExp().get(name).intValue() + value));
+			}
+			else
+			{
+				player.getSkillExp().put(name, value);
+			}
 			playerEntity.addChatComponentMessage(new ChatComponentText("You have been awared with "+value+" xp"));
 		}
 		public static void taskFail(EntityPlayer player) {			

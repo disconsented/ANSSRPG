@@ -10,6 +10,9 @@ import com.google.gson.annotations.Expose;
  *	
  */
 public abstract class XPGain {
+	
+	public XPGain(){		
+	}
 
 	/**
 	 * Super type abstract class
@@ -18,7 +21,7 @@ public abstract class XPGain {
 	private int xp = 0;
 	
 	@Expose
-	private String name = "default_name";
+	protected String name = "default_name";
 
 	public int getXp() {
 		return xp;

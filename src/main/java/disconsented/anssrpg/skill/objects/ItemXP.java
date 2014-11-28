@@ -3,6 +3,8 @@
  */
 package disconsented.anssrpg.skill.objects;
 
+import com.google.gson.annotations.Expose;
+
 import net.minecraft.item.Item;
 
 /**
@@ -14,9 +16,7 @@ public class ItemXP extends XPGain {
 	/**
 	 * 
 	 */
-	private int exp = 0;
 	private Item item;
-	private String name = "default_name";
 	
 	public ItemXP() {
 	}

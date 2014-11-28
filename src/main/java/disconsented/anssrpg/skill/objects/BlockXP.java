@@ -16,11 +16,7 @@ public class BlockXP extends XPGain {
 	/**
 	 * 
 	 */
-	@Expose
-	private int exp = 0;
 	private Block block;
-	@Expose
-	private String name = "default_name";
 	
 	public BlockXP() {
 	}

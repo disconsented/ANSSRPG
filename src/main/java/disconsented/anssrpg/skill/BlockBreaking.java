@@ -33,7 +33,7 @@ import disconsented.anssrpg.skill.objects.BlockXP;
     			requiresPerk = true;
     		}    		
     		for (BlockSkill skill : SkillStore.getInstance().getBlockSkill()){
-    			ArrayList<BlockXP> temp = (ArrayList<BlockXP>) skill.exp;
+    			ArrayList<BlockXP> temp = skill.getExp();
     			for (int i = 0; i < temp.size(); i++){
     				if(temp.get(i).getBlock().equals(event.block)){	  
 	    				if (requiresPerk){

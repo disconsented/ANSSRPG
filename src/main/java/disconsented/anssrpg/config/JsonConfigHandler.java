@@ -18,6 +18,8 @@ import disconsented.anssrpg.perk.BlockPerk;
 import disconsented.anssrpg.perk.EntityPerk;
 import disconsented.anssrpg.perk.ItemPerk;
 import disconsented.anssrpg.skill.objects.BlockSkill;
+import disconsented.anssrpg.skill.objects.EntitySkill;
+import disconsented.anssrpg.skill.objects.ItemSkill;
 
 /**
  * @author Disconsented, Abelistah
@@ -80,6 +82,10 @@ public class JsonConfigHandler {
 		skillStore = new SkillStore();
 		skillStore.addBlockSkill(new BlockSkill());
 		skillStore.addBlockSkill(new BlockSkill());
+		skillStore.addEntitySkill(new EntitySkill());
+		skillStore.addEntitySkill(new EntitySkill());
+		skillStore.addItemSkill(new ItemSkill());
+		skillStore.addItemSkill(new ItemSkill());
 
         try {
          configFileLocation.mkdirs();
