@@ -13,11 +13,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import disconsented.anssrpg.data.DataSave;
+import disconsented.anssrpg.data.PlayerStore;
 import net.minecraft.world.WorldSavedData;
 
 public class PlayerFile {
-	static String PERK_LIST = "Perk List";
-	static String SKILL_LIST = "Skill List";
 	static File dataFolder = new File("data");
 	
 	
@@ -26,8 +25,8 @@ public class PlayerFile {
 		try{
 			FileReader reader = new FileReader(dataLocation);
             Gson gson = new GsonBuilder().create();
-            PlayerData p = gson.fromJson(reader, PlayerData.class);
-            System.out.println(p);
+            PlayerData player = gson.fromJson(reader, PlayerData.class);
+            PlayerStore.addPlayer(player);
             }
 		catch(FileNotFoundException e){
 			DataSave.createPlayer(playerID);
@@ -42,7 +41,7 @@ public class PlayerFile {
 	 */
 
 	public static void writePlayer(PlayerData player){
-		File dataLocation = new File(dataFolder, player.playerID);
+		File dataLocation = new File(dataFolder, player.getPlayerID());
 		dataFolder.mkdirs();
 		Gson gson = new Gson();  
 		String json = gson.toJson(player);

@@ -3,56 +3,56 @@ package disconsented.anssrpg.skill;
  * @author James
  * Handles when to add experience and blocking of events
  */
-import net.minecraft.block.Block;
-import net.minecraft.client.entity.EntityPlayerSP;
+import handler.PlayerHandler;
+
+import java.util.ArrayList;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import disconsented.anssrpg.Main;
-import disconsented.anssrpg.config.JsonConfigHandler;
-import disconsented.anssrpg.perk.PerkStore;
-import disconsented.anssrpg.player.PlayerHandler;
+import disconsented.anssrpg.data.PerkStore;
+import disconsented.anssrpg.data.PlayerStore;
+import disconsented.anssrpg.data.SkillStore;
+import disconsented.anssrpg.perk.BlockPerk;
+import disconsented.anssrpg.player.PlayerData;
+import disconsented.anssrpg.skill.objects.BlockSkill;
+import disconsented.anssrpg.skill.objects.BlockXP;
 	
     public class BlockBreaking{   
     	/**
-    	 * Instance of EntityPlayerMP
-    	 * Get required perks for entry
-    	 * 		NullCheck
-    	 * 		
-    	 * Iterate through all skills of type (1)
-    	 * If it requires perk
-    	 * 		Check if player has it
-    	 * 			Do add xp/fail depending on what happens
-    	 * If it doesn't
-    	 * 			Add xp
-    	 * @param eventBreak
+    	 * Author Disconsented
     	 */
     @SubscribeEvent
     public void onBreakevent(BreakEvent event){    	
-    	Boolean requiresPerk = false;
-    	event.getPlayer().openGui(Main.instance, 0, null, 0, 0, 0);
-    	if (event.getPlayer() instanceof EntityPlayerMP){
-    		if(PerkStore.getBlockPerkList(event.block) != null){
+    	if(event.getPlayer() instanceof EntityPlayerMP){
+			EntityPlayerMP playerMP = (EntityPlayerMP) event.getPlayer();
+    		PlayerData player = PlayerStore.getInstance().getPlayer(event.getPlayer().getUniqueID().toString());
+    		ArrayList<BlockPerk> blockList = PerkStore.getPerksForBlock(event.block.getUnlocalizedName());
+    		boolean requiresPerk = false;
+    		if (blockList != null){
     			requiresPerk = true;
-    		}
-    		for (int i = 0; i < SkillHandler.getSkillList().size(); i++){
-    			Skill temp = (Skill)SkillHandler.getSkillList().get(i);
-    			if(temp.type == 1){
-    				int blockIndex = SkillHandler.indexOfBlock(event.block, i);
-    				if (blockIndex != -1 || requiresPerk){
-    					if (requiresPerk){
-	    						if (PlayerHandler.hasPerk(event.block, SkillHandler.getSkillName(i))){//Player can mine
-	        						PlayerHandler.addXP(SkillHandler.getXP(blockIndex, i), SkillHandler.getSkillName(i), (EntityPlayerMP) event.getPlayer());
-	        					}else{    					
-	        						PlayerHandler.sendFail((EntityPlayerMP) event.getPlayer());
-	        						event.setCanceled(true);
-	        					}
-    					}else{
-    						PlayerHandler.addXP(SkillHandler.getXP(blockIndex, i), SkillHandler.getSkillName(i), (EntityPlayerMP) event.getPlayer());
-    					}
-    				}    				
+    		}    		
+    		for (BlockSkill skill : SkillStore.getInstance().getBlockSkill()){
+    			ArrayList<BlockXP> temp = skill.getExp();
+    			for (int i = 0; i < temp.size(); i++){
+    				if(temp.get(i).getBlock().equals(event.block)){	  
+	    				if (requiresPerk){
+	    					if (PlayerHandler.hasPerk(player, blockList)){
+	    						PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
+	    					}
+	    					else
+	    					{
+	    						PlayerHandler.taskFail(event.getPlayer());
+	    						event.setCanceled(true);
+	    					}
+	    				}
+	    				else
+	    				{
+	    					PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
+	    				}
+    				}
     			}
     		}
     	}
-    }	
+    }
 }

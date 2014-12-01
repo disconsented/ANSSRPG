@@ -15,7 +15,24 @@
 .classpath
 
 #IntelliJ
+/.idea
 1.7.10.iml
 1.7.10.ipr
 1.7.10.iws
 ANSSRPG.iml
+
+#ANSSRPG
+/data
+/saves
+/world
+/crash-reports
+/config
+/resourcepacks
+banned-ips.json
+banned-players.json
+ops.json
+server.properties
+servers.dat
+usercache.json
+usernamecache.json
+whitelist.json

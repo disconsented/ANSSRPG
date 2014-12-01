@@ -14,6 +14,7 @@ import org.lwjgl.opengl.GL11;
 
 import scala.Console;
 import disconsented.anssrpg.Main;
+import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.helper.Color;
 import disconsented.anssrpg.network.Request;
 import disconsented.anssrpg.perk.LocalPerk;
@@ -23,12 +24,12 @@ public class PerkGUI extends GuiScreen {
 	private ArrayList <GuiButton> buttons = new ArrayList<GuiButton>(); //378 = status text field thingy
 	private int selected = 0;
 	private GuiTextField  status = new GuiTextField(fontRendererObj, 504, 392, 244, 18);
-	private static String statusMessage = "Blank";
 	private String descriptionCurrent = "dfghdfgjdbfgj";
 	// Keeps track of the current page number to display
 	private int pageNumber = 0; //15 items per page
 	private int itemsPerPage = 15;
 	private static ArrayList <LocalPerk> localPerks = new ArrayList<LocalPerk>();
+	private static Settings instance = Settings.getInstance();
 	//private FontRenderer thing = new FontRenderer();	
 	//private Button next;
 
@@ -51,9 +52,6 @@ public class PerkGUI extends GuiScreen {
 	public static void addPerk(LocalPerk e){
 		localPerks.add(e);
 		System.out.println("The perk " + e.name + " has been recieved by the client");
-	}
-	public static void updateStatus(String e){
-		statusMessage = e;
 	}
     @Override
     public void updateScreen() {
@@ -139,7 +137,7 @@ public class PerkGUI extends GuiScreen {
 //    	if(selected > 3){
     		descriptionCurrent = getCurrentPerk().description + getCurrentPerk().name;
 //    	}
-    	status.drawCenteredString(fontRendererObj, statusMessage, 626, 396, Color.white);
+    	status.drawCenteredString(fontRendererObj, Settings.getInstance().getStatusMessage(), 626, 396, Color.white);
     	fontRendererObj.drawSplitString(descriptionCurrent, 6*xMod+border, 2*yMod+(border*3), (int)(3*xMod-(border*4)), (int)(6*yMod-(border*4)));   	
     }
 	@Override //Opened and resized
