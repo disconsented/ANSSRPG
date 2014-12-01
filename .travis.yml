@@ -3,7 +3,7 @@ jdk:
   - oraclejdk7
 install:
   - sudo apt-get update -y
-  - chmod +X ./gradlew
+  - chmod +x ./gradlew
 script:
   - ./gradlew build
 before_deploy:
