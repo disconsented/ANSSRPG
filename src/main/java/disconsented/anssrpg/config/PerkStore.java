@@ -50,6 +50,7 @@ public class PerkStore {
 	public void touchUp() {
 		for (ItemPerk item : items){
 			item.touchUp();
+			disconsented.anssrpg.data.PerkStore.putItemPerk(item);
 		}
 		for (BlockPerk block : blocks){
 			block.touchUp();
@@ -57,6 +58,7 @@ public class PerkStore {
 		}
 		for(EntityPerk entity : entities){
 			entity.touchUp();
+			disconsented.anssrpg.data.PerkStore.putEntityPerk(entity);
 		}
 	}
 }

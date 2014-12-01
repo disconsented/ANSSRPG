@@ -36,9 +36,6 @@ public class PerkStore {
 	public static Perk getPerk(String perkSlug) {		
 		return perksMap.get(perkSlug);
 	}
-	public static ArrayList<BlockPerk> getPerksForBlock(String unlocalisedName){
-		return blockMap.get(unlocalisedName);	
-	}
 	public static void putBlockPerk(BlockPerk perk){
 		perks.add(perk);
 		if (blockMap.containsKey(perk.getBlock().getUnlocalizedName())){
@@ -51,8 +48,39 @@ public class PerkStore {
 			blockMap.put(perk.getBlock().getUnlocalizedName(), temp);
 		}
 	}
+	public static void putItemPerk(ItemPerk item) {
+		perks.add(item);
+		if (itemMap.containsKey(item.getItem().getUnlocalizedName())){
+			itemMap.get(item.getItem().getUnlocalizedName()).add(item);
+		}
+		else
+		{
+			ArrayList<ItemPerk> temp = new ArrayList<ItemPerk>();
+			temp.add(item);
+			itemMap.put(item.getItem().getUnlocalizedName(), temp);
+		}
+	}
+	public static void putEntityPerk(EntityPerk entity) {
+		perks.add(entity);
+		if (entityMap.containsKey(entity.getEntity().getSimpleName())){
+			entityMap.get(entity.getEntity().getSimpleName()).add(entity);
+		}
+		else
+		{
+			ArrayList<EntityPerk> temp = new ArrayList<EntityPerk>();
+			temp.add(entity);
+			entityMap.put(entity.getEntity().getSimpleName(), temp);
+		}		
+		
+	}
+	public static ArrayList<BlockPerk> getPerksForBlock(String unlocalisedName){
+		return blockMap.get(unlocalisedName);	
+	}
 	public static ArrayList<EntityPerk> getPerksForEntity(
 			String commandSenderName) {
 		return entityMap.get(commandSenderName);
+	}
+	public static ArrayList<ItemPerk> getPerksForItem(String unlocalizedName) {		
+		return itemMap.get(unlocalizedName);
 	}
 }

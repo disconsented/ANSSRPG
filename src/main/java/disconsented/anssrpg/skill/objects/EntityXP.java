@@ -23,7 +23,7 @@ public class EntityXP extends XPGain {
 
 	@Override
 	public void touchUp() {
-		entity = EntityList.stringToClassMapping.get(name).getClass();
+		entity = (Class) EntityList.stringToClassMapping.get(name);
 
 	}
 	public Class getEntity(){

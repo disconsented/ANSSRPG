@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import disconsented.anssrpg.data.PerkStore;
@@ -28,7 +29,7 @@ import disconsented.anssrpg.skill.objects.EntityXP;
 		if(event.source.getEntity() instanceof EntityPlayerMP) {
 			EntityPlayerMP playerMP = (EntityPlayerMP)event.source.getEntity();
 			PlayerData player = PlayerStore.getInstance().getPlayer(playerMP.getUniqueID().toString());
-			ArrayList<EntityPerk> entitylist = PerkStore.getPerksForEntity(event.entity.getCommandSenderName());
+			ArrayList<EntityPerk> entitylist = PerkStore.getPerksForEntity(event.entity.getClass().getSimpleName());
 			boolean requiresPerk = false;
 			if (entitylist != null){
 				requiresPerk = true;
@@ -40,21 +41,55 @@ import disconsented.anssrpg.skill.objects.EntityXP;
 					if(event.entity.getClass().equals(entityClass)) {
 						if (requiresPerk){
 							if (PlayerHandler.hasPerk(player, entitylist)){
-								PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
+//								if (event.entity.isDead){
+//									PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
+//								}
 							}
 							else
 							{
 								PlayerHandler.taskFail((EntityPlayer) playerMP);
-								event.ammount = 0;
+								event.ammount = 1;
 							}
 						}
 						else
 						{
-							PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
+//							if (event.entity.isDead){
+//								PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
+//							}
 						}
 					}
 				}
 			}
 		}
 	}
+    
+    @SubscribeEvent
+    public void onLivingDeathEvent(LivingDeathEvent event){
+    	if(event.source.getEntity() instanceof EntityPlayerMP) {
+			EntityPlayerMP playerMP = (EntityPlayerMP)event.source.getEntity();
+			PlayerData player = PlayerStore.getInstance().getPlayer(playerMP.getUniqueID().toString());
+			ArrayList<EntityPerk> entitylist = PerkStore.getPerksForEntity(event.entity.getClass().getSimpleName());
+			boolean requiresPerk = false;
+			if (entitylist != null){
+				requiresPerk = true;
+			}
+			for (EntitySkill skill : SkillStore.getInstance().getEntitySkill()) {
+				ArrayList<EntityXP> temp = skill.getExp();
+				for (int i = 0; i < temp.size(); i++){
+					Class entityClass = temp.get(i).getEntity();
+					if(event.entity.getClass().equals(entityClass)) {
+						if (requiresPerk){
+							if (PlayerHandler.hasPerk(player, entitylist)){
+									PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
+							}							
+						}
+						else
+						{
+								PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
+						}
+					}
+				}
+			}
+		}
+    }
 }

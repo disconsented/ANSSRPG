@@ -30,7 +30,7 @@ public class EntityPerk extends Perk {
 	/**
 	 * @return the entity
 	 */
-	public Object getEntity() {
+	public Class getEntity() {
 		return entity;
 	}
 
@@ -42,8 +42,11 @@ public class EntityPerk extends Perk {
 	}
 
 	@Override
-	public void touchUp() {
-			this.entity = EntityList.stringToClassMapping.get(entityName).getClass();
+	public void touchUp () {
+			this.entity = (Class) EntityList.stringToClassMapping.get(entityName);
+			if (entity == null){
+				throw new NullPointerException();
+			}
 	}
 
 }

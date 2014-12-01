@@ -1,0 +1,17 @@
+language: java
+jdk:
+  - oraclejdk7
+install:
+  - sudo apt-get update -y
+  - chmod +X ./gradlew
+script:
+  - gradlew build
+before_deploy:
+  - cd build
+  - zip -r build.zip .
+deploy:
+  provider: releases
+  api-key:
+    secure:
+  file: /build/build.zip
+  skip_cleanup: true

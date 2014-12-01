@@ -26,5 +26,8 @@ public class ItemXP extends XPGain {
 		item = (Item) Item.itemRegistry.getObject(name);
 
 	}
+	public Item getItem(){
+		return item;
+	}
 
 }
