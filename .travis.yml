@@ -15,3 +15,5 @@ deploy:
     secure:
   file: /build/build.zip
   skip_cleanup: true
+  on:
+    all_branches: true
