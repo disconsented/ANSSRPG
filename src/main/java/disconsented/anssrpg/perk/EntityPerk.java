@@ -38,7 +38,7 @@ public class EntityPerk extends Perk {
 	 * @param entity the entity to set
 	 */
 	protected void setEntity(Class entity) {
-		this.entity = entity;
+		this.entity = entity;		
 	}
 
 	@Override
@@ -47,6 +47,7 @@ public class EntityPerk extends Perk {
 			if (entity == null){
 				throw new NullPointerException();
 			}
+			this.setSlug();
 	}
 
 }

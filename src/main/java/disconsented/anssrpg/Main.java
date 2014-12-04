@@ -1,6 +1,5 @@
 package disconsented.anssrpg;
 
-import handler.SkillHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -16,10 +15,12 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import disconsented.anssrpg.commands.ANSSRPG;
+import disconsented.anssrpg.commands.Perks;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.config.JsonConfigHandler;
 import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.data.PerkStore;
+import disconsented.anssrpg.handler.SkillHandler;
 import disconsented.anssrpg.network.PerkInfo;
 import disconsented.anssrpg.network.PerkInfoHandler;
 import disconsented.anssrpg.network.Request;
@@ -49,10 +50,17 @@ public class Main {
 		@EventHandler // used in 1.6.2
         //@PreInit    // used in 1.5.2
         public void preInit(FMLPreInitializationEvent event) {
+			if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER){
+				settings.isServer = true;
+			}else{
+				settings.isServer = false;
+			}
+			
 			Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 			config.load();
 			settings.setLevelCurve(config.get(config.CATEGORY_GENERAL, "Level Curve", 1.3).getDouble());
 			settings.setDebug(config.get(config.CATEGORY_GENERAL, "debug", false).getBoolean(false));
+			settings.setPointsMode(config.get(config.CATEGORY_GENERAL, "Points Mode", 1,"0 = disabled, 1 = based on assrpg xp, 2 = convert vanilla levels to points").getInt());
 			config.save();
 			
 			snw = NetworkRegistry.INSTANCE.newSimpleChannel("ANSSRPG");
@@ -75,7 +83,8 @@ public class Main {
         @EventHandler
         public void serverLoad(FMLServerStartingEvent event)
         {
-          event.registerServerCommand(new ANSSRPG());
+          //event.registerServerCommand(new ANSSRPG());
+        	event.registerServerCommand(new Perks());
         }
        
         @EventHandler // used in 1.6.2

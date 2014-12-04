@@ -4,23 +4,22 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
 
-import scala.util.parsing.input.StreamReader;
+import net.minecraft.server.MinecraftServer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.data.PlayerStore;
-import net.minecraft.world.WorldSavedData;
 
-public class PlayerFile {
-	static File dataFolder = new File("data");
+public class PlayerFile {	
+	
 	
 	
 	public static void loadPlayer(String playerID) {
+		File dataFolder = Settings.getInstance().getFolder();
 		File dataLocation = new File(dataFolder, playerID);
 		try{
 			FileReader reader = new FileReader(dataLocation);
@@ -41,6 +40,7 @@ public class PlayerFile {
 	 */
 
 	public static void writePlayer(PlayerData player){
+		File dataFolder = Settings.getInstance().getFolder();
 		File dataLocation = new File(dataFolder, player.getPlayerID());
 		dataFolder.mkdirs();
 		Gson gson = new Gson();  

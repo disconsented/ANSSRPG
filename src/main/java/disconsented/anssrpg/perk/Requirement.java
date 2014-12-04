@@ -31,4 +31,7 @@ public class Requirement {
 		this.name = name;
 		this.extraData = extraData;
 	}
+	public String getNameAsSlug(){
+		return name.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
+	}
 }

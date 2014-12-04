@@ -2,7 +2,6 @@ package disconsented.anssrpg.skill;
 
 import java.util.ArrayList;
 
-import handler.PlayerHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -15,6 +14,7 @@ import disconsented.anssrpg.Main;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
 import disconsented.anssrpg.data.SkillStore;
+import disconsented.anssrpg.handler.PlayerHandler;
 import disconsented.anssrpg.perk.EntityPerk;
 import disconsented.anssrpg.perk.ItemPerk;
 import disconsented.anssrpg.player.PlayerData;

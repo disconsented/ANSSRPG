@@ -48,10 +48,15 @@ public abstract class Perk {
 	protected void setRequirements(ArrayList<Requirement> requirments){this.requirements = requirments;}
 	protected void setDescription(String description){this.description = description;}
 	protected void setPointCost(int pointCost){this.pointCost = pointCost;}
+	protected void setSlug(){perkSlug = name.toLowerCase().replaceAll("[^A-Za-z0-9]", "");}
 	public String getName(){return name;}
 	public ArrayList getRequirements(){return requirements;}
 	public String getDescription(){return description;}
 	public int getPointCost(){return pointCost;}
 	public String getSlug(){return perkSlug;}
+	@Override
+	public String toString() {		
+		return this.name+"|"+this.description+"|"+this.pointCost+"|"+this.requirements.toString();
+	}
 
 }
