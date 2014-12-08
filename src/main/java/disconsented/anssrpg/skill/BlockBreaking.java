@@ -3,8 +3,6 @@ package disconsented.anssrpg.skill;
  * @author James
  * Handles when to add experience and blocking of events
  */
-import handler.PlayerHandler;
-
 import java.util.ArrayList;
 
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -13,6 +11,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
 import disconsented.anssrpg.data.SkillStore;
+import disconsented.anssrpg.handler.PlayerHandler;
 import disconsented.anssrpg.perk.BlockPerk;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.BlockSkill;

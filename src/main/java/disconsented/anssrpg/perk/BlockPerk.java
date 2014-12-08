@@ -37,5 +37,8 @@ public class BlockPerk extends Perk {
 	protected void setBlock(Block block) { this.block = block; }
 
 	@Override
-	public void touchUp() {	this.block = (Block) Block.blockRegistry.getObject(blockName); }
+	public void touchUp() {	
+		this.block = (Block) Block.blockRegistry.getObject(blockName); 
+		this.setSlug();
+	}
 }

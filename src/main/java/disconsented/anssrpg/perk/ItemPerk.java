@@ -46,6 +46,7 @@ public class ItemPerk extends Perk {
 	@Override
 	public void touchUp() {		
 		this.item = (Item) Item.itemRegistry.getObject(itemName);
+		this.setSlug();
 	}
 
 }

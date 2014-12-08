@@ -1,7 +1,7 @@
 /**
  * 
  */
-package handler;
+package disconsented.anssrpg.handler;
 
 import java.util.ArrayList;
 
@@ -38,5 +38,5 @@ public class SkillHandler {
 	 */
 	public static boolean doesRequirePerk(Block block){
 		return false;
-	}
+	}	
 }

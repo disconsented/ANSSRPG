@@ -51,14 +51,17 @@ public class PerkStore {
 		for (ItemPerk item : items){
 			item.touchUp();
 			disconsented.anssrpg.data.PerkStore.putItemPerk(item);
+			disconsented.anssrpg.data.PerkStore.addPerk(item);			
 		}
 		for (BlockPerk block : blocks){
 			block.touchUp();
 			disconsented.anssrpg.data.PerkStore.putBlockPerk(block);
+			disconsented.anssrpg.data.PerkStore.addPerk(block);	
 		}
 		for(EntityPerk entity : entities){
 			entity.touchUp();
 			disconsented.anssrpg.data.PerkStore.putEntityPerk(entity);
+			disconsented.anssrpg.data.PerkStore.addPerk(entity);	
 		}
 	}
 }

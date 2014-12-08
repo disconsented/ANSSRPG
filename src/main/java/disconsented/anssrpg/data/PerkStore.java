@@ -29,8 +29,8 @@ public class PerkStore {
 	public ArrayList<Perk> getPerks(){
 		return perks;
 	}
-	public void addPerk(Perk perk){
-		perks.add(perk);
+	public static void addPerk(Perk perk){
+		
 		perksMap.put(perk.perkSlug,perk);
 	}
 	public static Perk getPerk(String perkSlug) {		
