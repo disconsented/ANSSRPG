@@ -6,10 +6,13 @@ package disconsented.anssrpg.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
@@ -76,8 +79,10 @@ public class DataSave {
 			System.out.println("Player "+event.player.getCommandSenderName()+" with UUID:"+event.player.getPersistentID().toString()+"has logged out");
 			System.out.println("Saving player data");
 		}
-		PlayerFile.writePlayer(PlayerStore.getInstance().getPlayer(event.player.getPersistentID().toString()));		
+		PlayerFile.writePlayer(PlayerStore.getInstance().getPlayer(event.player.getPersistentID().toString()));
+		PlayerStore.getInstance().getAllData().remove(event.player.getPersistentID().toString());
 	}
+	
 	/**
 	 * Saves player data (crash damage mitigation)
 	 * @param event

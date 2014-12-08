@@ -1,5 +1,8 @@
 package disconsented.anssrpg;
 
+import java.util.Iterator;
+import java.util.Map.Entry;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -11,6 +14,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
@@ -20,6 +24,7 @@ import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.config.JsonConfigHandler;
 import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.data.PerkStore;
+import disconsented.anssrpg.data.PlayerStore;
 import disconsented.anssrpg.handler.SkillHandler;
 import disconsented.anssrpg.network.PerkInfo;
 import disconsented.anssrpg.network.PerkInfoHandler;
@@ -27,6 +32,8 @@ import disconsented.anssrpg.network.Request;
 import disconsented.anssrpg.network.RequestHandler;
 import disconsented.anssrpg.network.Responce;
 import disconsented.anssrpg.network.ResponceHandler;
+import disconsented.anssrpg.player.PlayerData;
+import disconsented.anssrpg.player.PlayerFile;
 import disconsented.anssrpg.skill.BlockBreaking;
 import disconsented.anssrpg.skill.EntityDamage;
 import disconsented.anssrpg.skill.ItemCrafting;
@@ -85,17 +92,25 @@ public class Main {
         {
           //event.registerServerCommand(new ANSSRPG());
         	event.registerServerCommand(new Perks());
+        	event.registerServerCommand(new disconsented.anssrpg.commands.Skill());
         }
-       
+        
+        /**
+    	 * Should allow single player saving as well as server shutdown saving
+    	 * @param event
+    	 */
+    	@EventHandler
+    	public void onServerStoppingEvent (FMLServerStoppingEvent event){
+    		for(Entry<String, PlayerData> entry : PlayerStore.getInstance().getAllData().entrySet()){
+    			PlayerData player = entry.getValue();
+    			PlayerFile.writePlayer(player);
+    		}
+    	}
         @EventHandler // used in 1.6.2
         //@PostInit   // used in 1.5.2
         public void postInit(FMLPostInitializationEvent event) {
         	JsonConfigHandler.loadPerkAndSkill(); //loaded in here so that other mods have their stuff loaded
         	if (Settings.getDebug()){
-//	        	System.out.println("ANSSRPG has the following skills registered:");
-//	        	for	(int i = 0; i < SkillHandler.getSkillList().size(); i++){
-//	        		System.out.println(SkillHandler.getSkillName(i));
-//	        	}
 	        	System.out.println("ANSSRPG has the following perks registered");
 	        	System.out.println(PerkStore.getInstance().getPerks());
 	        	System.out.println();

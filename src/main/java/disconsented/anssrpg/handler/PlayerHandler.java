@@ -62,19 +62,19 @@ import disconsented.anssrpg.perk.Requirement;
 				case LEVEL_EQUALS:
 					if (!(player.getSkillExp().get(req.name) == Integer.parseInt(req.extraData))){
 						cont = false;
-						toReturn = "Unable to grant perk,"+perkSlug+"'s level did not equal "+req.extraData;
+						toReturn = "Unable to grant perk,"+req.name+"'s level did not equal "+req.extraData;
 					}
 					break;
 				case LEVEL_GREATER:
 					if (player.getSkillExp().get(req.name) < Integer.parseInt(req.extraData)){
 						cont = false;
-						toReturn = "Unable to grant perk,"+perkSlug+"'s level was less than "+req.extraData;
+						toReturn = "Unable to grant perk,"+req.name+"'s level was less than "+req.extraData;
 					}
 					break;
 				case LEVEL_LESS:
 					if (player.getSkillExp().get(req.name) > Integer.parseInt(req.extraData)){
 						cont = false;
-						toReturn = "Unable to grant perk,"+perkSlug+"'s level did not equal "+req.extraData;
+						toReturn = "Unable to grant perk,"+req.name+"'s level did not equal "+req.extraData;
 					}
 					break;
 				default:
@@ -83,9 +83,9 @@ import disconsented.anssrpg.perk.Requirement;
     			}
     			if (!cont){
     				break;
-    			}
+    			}    			
     		}
-    		if(cont){
+    		if(cont && !player.getPerkList().contains(perkSlug)){
     			player.getPerkList().add(perkSlug);
     			toReturn = "All conditions meet, granting perk";
     		}

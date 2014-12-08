@@ -24,6 +24,10 @@ public class PlayerData {
 		this.playerID = playerID; 
 		this.points = points;
 	}
+	@Override
+	public String toString(){
+		return this.playerID;		
+	}
 
 	public ArrayList<String> getPerkList() {
 		return perkList;

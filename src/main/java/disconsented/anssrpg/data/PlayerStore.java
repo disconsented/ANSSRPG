@@ -31,5 +31,8 @@ public class PlayerStore {
 	{
 		return data.get(playerID);
 	}
+	public static HashMap<String,PlayerData> getAllData(){
+		return data;
+	}
 
 }

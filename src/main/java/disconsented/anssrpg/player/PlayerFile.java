@@ -20,6 +20,8 @@ public class PlayerFile {
 	
 	public static void loadPlayer(String playerID) {
 		File dataFolder = Settings.getInstance().getFolder();
+		dataFolder.mkdirs();
+		String temp = dataFolder.getParentFile().getPath();
 		File dataLocation = new File(dataFolder, playerID);
 		try{
 			FileReader reader = new FileReader(dataLocation);
@@ -29,6 +31,9 @@ public class PlayerFile {
             }
 		catch(FileNotFoundException e){
 			DataSave.createPlayer(playerID);
+			if (Settings.getInstance().getDebug()){
+				e.printStackTrace();
+			}
 		}
 		catch(Exception e){
 			e.printStackTrace();
