@@ -57,6 +57,7 @@ import disconsented.anssrpg.skill.objects.ItemXP;
 	    							{
 	    								PlayerHandler.taskFail((EntityPlayer) playerMP);
 	    								event.entityPlayer.closeScreen();
+	    								break;
 	    							}
 	    						}
 	    					}
