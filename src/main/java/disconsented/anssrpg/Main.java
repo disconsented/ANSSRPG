@@ -3,6 +3,7 @@ package disconsented.anssrpg;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -19,6 +20,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import disconsented.anssrpg.commands.ANSSRPG;
+import disconsented.anssrpg.commands.ConfigGUI;
 import disconsented.anssrpg.commands.Perks;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.config.JsonConfigHandler;
@@ -67,6 +69,7 @@ public class Main {
 			config.load();
 			settings.setLevelCurve(config.get(config.CATEGORY_GENERAL, "Level Curve", 1.3).getDouble());
 			settings.setDebug(config.get(config.CATEGORY_GENERAL, "debug", false).getBoolean(false));
+			settings.setShowGui(config.get(config.CATEGORY_GENERAL, "Show configuration GUI", false).getBoolean(false));
 			settings.setPointsMode(config.get(config.CATEGORY_GENERAL, "Points Mode", 1,"0 = disabled, 1 = based on assrpg xp, 2 = convert vanilla levels to points").getInt());
 			config.save();
 			
@@ -93,6 +96,7 @@ public class Main {
           //event.registerServerCommand(new ANSSRPG());
         	event.registerServerCommand(new Perks());
         	event.registerServerCommand(new disconsented.anssrpg.commands.Skill());
+        	ClientCommandHandler.instance.registerCommand(new ConfigGUI());
         }
         
         /**
@@ -108,12 +112,13 @@ public class Main {
     	}
         @EventHandler // used in 1.6.2
         //@PostInit   // used in 1.5.2
-        public void postInit(FMLPostInitializationEvent event) {
+        public void postInit(FMLPostInitializationEvent event) throws Exception {
         	JsonConfigHandler.loadPerkAndSkill(); //loaded in here so that other mods have their stuff loaded
         	if (Settings.getDebug()){
 	        	System.out.println("ANSSRPG has the following perks registered");
 	        	System.out.println(PerkStore.getInstance().getPerks());
 	        	System.out.println();
-        	}
+        	}  
+//        	disconsented.anssrpg.gui.Config.main();
         }
 }

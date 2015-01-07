@@ -105,7 +105,7 @@ import disconsented.anssrpg.perk.Requirement;
 		public static boolean hasPerk(PlayerData player, ArrayList<? extends Perk> blocklist) {
 			for (int i = 0; i < blocklist.size(); i++)
 			{
-				if(player.getPerkList().contains(blocklist.get(i))){
+				if(player.getPerkList().contains(blocklist.get(i).perkSlug)){
 					return true;
 				}
 			}

@@ -25,9 +25,9 @@ public class ItemPerk extends Perk {
 		// TODO Auto-generated constructor stub
 	}
 
-	Item item;
+	private Item item;
 	@Expose
-	String itemName = "default_itemName";
+	public String itemName = "default_itemName";
 	
 	/**
 	 * @return the item

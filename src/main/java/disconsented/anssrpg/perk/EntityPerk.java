@@ -24,9 +24,9 @@ public class EntityPerk extends Perk {
 		super(name, requirements, description, pointCost);
 		// TODO Auto-generated constructor stub
 	}
-	Class entity;
+	private Class entity;
 	@Expose
-	String entityName = "default_entityName";
+	public String entityName = "default_entityName";
 	/**
 	 * @return the entity
 	 */

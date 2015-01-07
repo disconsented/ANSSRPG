@@ -26,7 +26,7 @@ public class PerkStore {
 		}
 		return instance;
 	}
-	public ArrayList<Perk> getPerks(){
+	public static ArrayList<Perk> getPerks(){
 		return perks;
 	}
 	public static void addPerk(Perk perk){
@@ -82,5 +82,12 @@ public class PerkStore {
 	}
 	public static ArrayList<ItemPerk> getPerksForItem(String unlocalizedName) {		
 		return itemMap.get(unlocalizedName);
+	}
+	public static void Clear(){
+		perks = new ArrayList<Perk>();
+		blockMap = new HashMap<String, ArrayList<BlockPerk>>();
+		entityMap = new HashMap<String, ArrayList<EntityPerk>>();
+		itemMap = new HashMap<String, ArrayList<ItemPerk>>();
+		perksMap = new HashMap<String,Perk>();
 	}
 }

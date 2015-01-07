@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import disconsented.anssrpg.skill.objects.BlockSkill;
 import disconsented.anssrpg.skill.objects.EntitySkill;
 import disconsented.anssrpg.skill.objects.ItemSkill;
+import disconsented.anssrpg.skill.objects.Skill;
 
 
 /**
@@ -19,6 +20,7 @@ public class SkillStore {
 	private static ArrayList <BlockSkill> blockSkill = new ArrayList<BlockSkill>();
 	private static ArrayList <EntitySkill> entitySkill = new ArrayList<EntitySkill>();
 	private static ArrayList <ItemSkill> itemSkill = new ArrayList <ItemSkill>();
+	private static ArrayList <Skill> skills = new ArrayList <Skill>();
 	protected SkillStore() {/* Exists only to defeat instantiation.*/}
 	public static SkillStore getInstance() {
 		if(instance == null) {
@@ -26,24 +28,36 @@ public class SkillStore {
 		}
 		return instance;
 	}
-	public ArrayList<BlockSkill> getBlockSkill() {
+	public static ArrayList<BlockSkill> getBlockSkill() {
 		return blockSkill;
 	}
-	public ArrayList<EntitySkill> getEntitySkill() {
+	public static ArrayList<EntitySkill> getEntitySkill() {
 		return entitySkill;
 	}
-	public ArrayList<ItemSkill> getItemSkill() {
+	public static ArrayList<ItemSkill> getItemSkill() {
 		return itemSkill;
 	}
 	public static void addSkill(BlockSkill skill) {		
 		blockSkill.add(skill);
+		skills.add(skill);
 	}
 	public static void addSkill(EntitySkill entity) {
-		entitySkill.add(entity);		
+		entitySkill.add(entity);
+		skills.add(entity);
 	}
 	public static void addSkill(ItemSkill item) {
 		itemSkill.add(item);
+		skills.add(item);
 		
+	}
+	public static void Clear() {
+		blockSkill = new ArrayList<BlockSkill>();
+		entitySkill = new ArrayList<EntitySkill>();
+		itemSkill = new ArrayList <ItemSkill>();
+		skills = new ArrayList <Skill>();
+	}
+	public static ArrayList<Skill> getSkills() {
+		return skills;
 	}
 
 }

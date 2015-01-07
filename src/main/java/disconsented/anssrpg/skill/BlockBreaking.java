@@ -16,6 +16,7 @@ import disconsented.anssrpg.perk.BlockPerk;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.BlockSkill;
 import disconsented.anssrpg.skill.objects.BlockXP;
+import disconsented.anssrpg.skill.objects.XPGain;
 	
     public class BlockBreaking{   
     	/**
@@ -34,7 +35,7 @@ import disconsented.anssrpg.skill.objects.BlockXP;
     		for (BlockSkill skill : SkillStore.getInstance().getBlockSkill()){
     			ArrayList<BlockXP> temp = skill.getExp();
     			for (int i = 0; i < temp.size(); i++){
-    				if(temp.get(i).getBlock().equals(event.block)){	  
+    				if(((BlockXP) temp.get(i)).getBlock().equals(event.block)){	  
 	    				if (requiresPerk){
 	    					if (PlayerHandler.hasPerk(player, blockList)){
 	    						PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);

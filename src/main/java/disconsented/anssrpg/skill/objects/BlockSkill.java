@@ -13,20 +13,25 @@ import com.google.gson.annotations.Expose;
  */
 public class BlockSkill extends Skill {
 	@Expose
-	private ArrayList<BlockXP> exp = new ArrayList<BlockXP>();
-
+	ArrayList<BlockXP> exp = new ArrayList<BlockXP>();
 	public BlockSkill(){
-		super();		
 		exp.add(new BlockXP());
 		exp.add(new BlockXP());
 	}
 	public void touchUp() {
-		for (int i = 0; i < exp.size(); i++){
-			BlockXP thing = (BlockXP) exp.get(i);
+		for (XPGain xp : exp){
+			BlockXP thing = new BlockXP();
+			thing.name = xp.name;
+			thing.xp = xp.xp;
 			thing.touchUp();
 		}
 	}
+	@Override
 	public ArrayList<BlockXP> getExp() {
 		return exp;
+	}
+	@Override
+	public void setExp(ArrayList exp) {
+		this.exp = exp;		
 	}
 }
