@@ -1,4 +1,3 @@
-/**
 /*The MIT License (MIT)
 
 Copyright (c) 2015 Disconsented, James Kerr
@@ -21,8 +20,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
- * Author: Disconsented
- * Supertpye for perks
+/** Author: Disconsented
+ * Supertype for perks
  */
 package disconsented.anssrpg.perk;
 
