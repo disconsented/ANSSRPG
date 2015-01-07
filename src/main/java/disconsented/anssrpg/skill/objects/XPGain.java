@@ -18,7 +18,7 @@ public abstract class XPGain {
 	 * Super type abstract class
 	 */
 	@Expose
-	private int xp = 0;
+	protected int xp = 0;
 	
 	@Expose
 	protected String name = "default_name";
@@ -37,5 +37,13 @@ public abstract class XPGain {
 	 * 
 	 */
 	public abstract void touchUp();
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 }

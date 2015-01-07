@@ -12,25 +12,35 @@ import com.google.gson.annotations.Expose;
  *
  */
 public class ItemSkill extends Skill {
+	
 	@Expose
 	private ArrayList<ItemXP> exp = new ArrayList<ItemXP>();
 	
-	public ItemSkill(){
-		super();		
+	public ItemSkill(){	
 		exp.add(new ItemXP());
 		exp.add(new ItemXP());
 	}
 
 	@Override
 	public void touchUp() {
-		for (int i = 0; i < exp.size(); i++){
-			ItemXP thing = (ItemXP) exp.get(i);
+		for (XPGain xp : exp){
+			ItemXP thing = new ItemXP();
+			thing.name = xp.name;
+			thing.xp = xp.xp;
 			thing.touchUp();
 		}
 		
 	}
 
+	@Override
 	public ArrayList<ItemXP> getExp() {
 		return exp;
 	}
+
+	@Override
+	public void setExp(ArrayList exp) {
+		this.exp = exp;
+		
+	}
+
 }

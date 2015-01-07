@@ -11,12 +11,9 @@ before_deploy:
   - zip -r build.zip .
 deploy:
   provider: releases
-  user:
-    secure: "fqNt8PQgJN+zbfVt6hhhTGz/ADbZyt6/rnJJ9CWgJ8Pb05vE7qEVKKUVPQOqz2exNcLsvQ643d9JBhOF/xkCa3oE987jbMcgHqPS/OrSf0BhLgPxxFkyQyzrMOrqgCJ4mPf8sVdXo9ym6Z08IAbp1NW79b6W8ruZErm2zebZUSk="
-  password:
-    secure: "WwrCwGw9pPnEdIwy9YYrMbiH+RuOe9KUvKB8IjvV7QCGpjDxlmSB7t/p5KrImE7vlpmFgAw+zwE7GkqRem9xbFVFTgpA+Q2e6H0yPDeNIFun+kFWtV4qnaAak9xgtvZR8T6KTa7X5fN4DvtaohZZc1jTE+fqSl6AxVF0PL//vUo="
+  user: ACCOUNT
+  password: PASS
   file: /build/build.zip
   skip_cleanup: true
   on:
-    tags: true
-    all_branches: true
+    branch: master

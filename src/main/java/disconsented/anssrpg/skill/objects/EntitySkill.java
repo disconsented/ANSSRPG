@@ -13,24 +13,31 @@ import com.google.gson.annotations.Expose;
  */
 public class EntitySkill extends Skill {
 	@Expose
-	private ArrayList<EntityXP> exp = new ArrayList<>();
+	private ArrayList<EntityXP> exp = new ArrayList<EntityXP>();
 	
 	public EntitySkill(){
-		super();
-		
 		exp.add(new EntityXP());
 		exp.add(new EntityXP());
 	}
 
 	@Override
 	public void touchUp() {
-		for (int i = 0; i < exp.size(); i++){
-			EntityXP thing = (EntityXP) exp.get(i);
+		for (XPGain xp : exp){
+			EntityXP thing = new EntityXP();
+			thing.name = xp.name;
+			thing.xp = xp.xp;
 			thing.touchUp();
 		}
 	}
 
+	@Override
 	public ArrayList<EntityXP> getExp() {
 		return exp;
+	}
+
+	@Override
+	public void setExp(ArrayList exp) {
+		this.exp = exp;
+		
 	}
 }
