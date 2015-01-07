@@ -73,18 +73,30 @@ public class PerkStore {
 	public void touchUp() {
 		for (ItemPerk item : items){
 			item.touchUp();
-			disconsented.anssrpg.data.PerkStore.putItemPerk(item);
-			disconsented.anssrpg.data.PerkStore.addPerk(item);			
+			if (item.getItem() != null){
+			    disconsented.anssrpg.data.PerkStore.putItemPerk(item);
+			    disconsented.anssrpg.data.PerkStore.addPerk(item);
+			}else{
+			    System.err.println(item.name+"'s object is null. Skipping");
+			}
 		}
 		for (BlockPerk block : blocks){
 			block.touchUp();
-			disconsented.anssrpg.data.PerkStore.putBlockPerk(block);
-			disconsented.anssrpg.data.PerkStore.addPerk(block);	
+			if (block.getBlock() != null){
+			    disconsented.anssrpg.data.PerkStore.putBlockPerk(block);
+			    disconsented.anssrpg.data.PerkStore.addPerk(block);
+			}else{
+                System.err.println(block.name+"'s object is null. Skipping");
+            }
 		}
 		for(EntityPerk entity : entities){
 			entity.touchUp();
-			disconsented.anssrpg.data.PerkStore.putEntityPerk(entity);
-			disconsented.anssrpg.data.PerkStore.addPerk(entity);	
+			if (entity.getEntity() != null){
+    			disconsented.anssrpg.data.PerkStore.putEntityPerk(entity);
+    			disconsented.anssrpg.data.PerkStore.addPerk(entity);
+			}else{
+                System.err.println(entity.name+"'s object is null. Skipping");
+            }
 		}
 	}
 }
