@@ -18,6 +18,7 @@ import disconsented.anssrpg.perk.EntityPerk;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.EntitySkill;
 import disconsented.anssrpg.skill.objects.EntityXP;
+import disconsented.anssrpg.skill.objects.XPGain;
 	
     public class EntityDamage {
     	/**
@@ -36,7 +37,7 @@ import disconsented.anssrpg.skill.objects.EntityXP;
 			for (EntitySkill skill : SkillStore.getInstance().getEntitySkill()) {
 				ArrayList<EntityXP> temp = skill.getExp();
 				for (int i = 0; i < temp.size(); i++){
-					Class entityClass = temp.get(i).getEntity();
+					Class entityClass = ((EntityXP) temp.get(i)).getEntity();
 					if(event.entity.getClass().equals(entityClass)) {
 						if (requiresPerk){
 							if (PlayerHandler.hasPerk(player, entitylist)){
@@ -75,7 +76,7 @@ import disconsented.anssrpg.skill.objects.EntityXP;
 			for (EntitySkill skill : SkillStore.getInstance().getEntitySkill()) {
 				ArrayList<EntityXP> temp = skill.getExp();
 				for (int i = 0; i < temp.size(); i++){
-					Class entityClass = temp.get(i).getEntity();
+					Class entityClass = ((EntityXP) temp.get(i)).getEntity();
 					if(event.entity.getClass().equals(entityClass)) {
 						if (requiresPerk){
 							if (PlayerHandler.hasPerk(player, entitylist)){

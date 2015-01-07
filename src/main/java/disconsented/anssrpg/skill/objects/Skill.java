@@ -15,7 +15,9 @@ public abstract class Skill {
 	 * @param exp - ArrayList for the exp using XPGain objects
 	 * @param name - Name of the skill
 	 */
-	public Skill(){}
+	
+	public Skill(){
+	}
 	/**
 	 * @return the name
 	 */
@@ -29,4 +31,6 @@ public abstract class Skill {
 		this.name = name;
 	}	
 	public abstract void touchUp();
+	public abstract ArrayList getExp();
+	public abstract void setExp(ArrayList exp);
 }

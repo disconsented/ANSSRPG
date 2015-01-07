@@ -22,6 +22,7 @@ import disconsented.anssrpg.skill.objects.EntitySkill;
 import disconsented.anssrpg.skill.objects.EntityXP;
 import disconsented.anssrpg.skill.objects.ItemSkill;
 import disconsented.anssrpg.skill.objects.ItemXP;
+import disconsented.anssrpg.skill.objects.XPGain;
 
 /**
  * @author James
@@ -47,7 +48,7 @@ import disconsented.anssrpg.skill.objects.ItemXP;
 	    			for (ItemSkill skill : SkillStore.getInstance().getItemSkill()) {
 	    				ArrayList<ItemXP> temp = skill.getExp();
 	    				for (int i = 0; i < temp.size(); i++){
-	    					Item compareItem = temp.get(i).getItem();
+	    					Item compareItem = ((ItemXP) temp.get(i)).getItem();
 	    					if(item.equals(compareItem)) {
 	    						if (requiresPerk){
 	    							if (PlayerHandler.hasPerk(player, entitylist)){
@@ -57,6 +58,7 @@ import disconsented.anssrpg.skill.objects.ItemXP;
 	    							{
 	    								PlayerHandler.taskFail((EntityPlayer) playerMP);
 	    								event.entityPlayer.closeScreen();
+	    								break;
 	    							}
 	    						}
 	    					}
@@ -80,7 +82,7 @@ import disconsented.anssrpg.skill.objects.ItemXP;
     			for (ItemSkill skill : SkillStore.getInstance().getItemSkill()) {
     				ArrayList<ItemXP> temp = skill.getExp();
     				for (int i = 0; i < temp.size(); i++){
-    					Item compareItem = temp.get(i).getItem();
+    					Item compareItem = ((ItemXP) temp.get(i)).getItem();
     					if(item.equals(compareItem)) {
     						if (requiresPerk){
     							if (PlayerHandler.hasPerk(player, entitylist)){

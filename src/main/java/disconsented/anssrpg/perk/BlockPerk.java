@@ -22,10 +22,10 @@ public class BlockPerk extends Perk {
 		super(name, requirements, description, pointCost);
 		// TODO Auto-generated constructor stub
 	}
-	Block block;
+	private Block block;
 
 	@Expose
-	String blockName = "default_blockName";
+	public String blockName = "default_blockName";
 	/**
 	 * @return
 	 */
