@@ -16,4 +16,4 @@ deploy:
   file: /build/build.zip
   skip_cleanup: true
   on:
-    branch: master
+    branch: release
