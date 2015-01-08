@@ -20,4 +20,3 @@ deploy:
   on:
     tags: true
     repo: disconsented/ANSSRPG
-    branch: master
