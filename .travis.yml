@@ -10,17 +10,20 @@ install:
 - chmod +x ./gradlew
 script:
 - "./gradlew build"
-notifications:
- irc:
-  channels:
-   - "irc.esper.net#Disconsented "
-  template:
-   - "%{build_number} (%{branch} - %{commit}: %{commit_message} : %{author}): %{message} (%{build_url}) "
+#notifications:
+# irc:
+#  channels:
+#   - "irc.esper.net#Disconsented "
+#  template:
+#   - "%{build_number} (%{branch} - %{commit}: %{commit_message} : %{author}): %{message} (%{build_url}) "
+before_deploy:
+  -ls ./build/libs/
 deploy:
   provider: releases
   api_key:
     secure: VhPE7D1RUg5NVYN5NijQElRCBXcwG4GLFIv3Tl4OdShL2/V8VkCn8FgNnvIsYPR2J95QfYkmop2H2Fjxztni/tF8hun5qS+VAzgVjE8mep53NQ4VsfkVGcHQAMsjqELe3njGeecZs8RI2cxhPSBexvlBflakhi1cq2GlYEaeBeY=
-  file: "./build/libs/*.jar"
+  file_glob: true
+  file: ./build/libs/*.jar
   on:
     tags: true
     repo: disconsented/ANSSRPG
