@@ -5,7 +5,6 @@ cache:
   directories:
     - $HOME/.gradle
     - .gradle
-sudo: false
 install:
 - sudo apt-get update -y
 - chmod +x ./gradlew
