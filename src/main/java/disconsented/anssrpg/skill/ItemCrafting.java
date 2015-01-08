@@ -1,3 +1,25 @@
+/*The MIT License (MIT)
+
+Copyright (c) 2015 Disconsented, James Kerr
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
 package disconsented.anssrpg.skill;
 
 import java.util.ArrayList;
@@ -22,6 +44,7 @@ import disconsented.anssrpg.skill.objects.EntitySkill;
 import disconsented.anssrpg.skill.objects.EntityXP;
 import disconsented.anssrpg.skill.objects.ItemSkill;
 import disconsented.anssrpg.skill.objects.ItemXP;
+import disconsented.anssrpg.skill.objects.XPGain;
 
 /**
  * @author James
@@ -47,7 +70,7 @@ import disconsented.anssrpg.skill.objects.ItemXP;
 	    			for (ItemSkill skill : SkillStore.getInstance().getItemSkill()) {
 	    				ArrayList<ItemXP> temp = skill.getExp();
 	    				for (int i = 0; i < temp.size(); i++){
-	    					Item compareItem = temp.get(i).getItem();
+	    					Item compareItem = ((ItemXP) temp.get(i)).getItem();
 	    					if(item.equals(compareItem)) {
 	    						if (requiresPerk){
 	    							if (PlayerHandler.hasPerk(player, entitylist)){
@@ -57,6 +80,7 @@ import disconsented.anssrpg.skill.objects.ItemXP;
 	    							{
 	    								PlayerHandler.taskFail((EntityPlayer) playerMP);
 	    								event.entityPlayer.closeScreen();
+	    								break;
 	    							}
 	    						}
 	    					}
@@ -80,7 +104,7 @@ import disconsented.anssrpg.skill.objects.ItemXP;
     			for (ItemSkill skill : SkillStore.getInstance().getItemSkill()) {
     				ArrayList<ItemXP> temp = skill.getExp();
     				for (int i = 0; i < temp.size(); i++){
-    					Item compareItem = temp.get(i).getItem();
+    					Item compareItem = ((ItemXP) temp.get(i)).getItem();
     					if(item.equals(compareItem)) {
     						if (requiresPerk){
     							if (PlayerHandler.hasPerk(player, entitylist)){

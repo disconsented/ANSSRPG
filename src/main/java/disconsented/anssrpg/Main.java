@@ -1,8 +1,31 @@
+/*The MIT License (MIT)
+
+Copyright (c) 2015 Disconsented, James Kerr
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
 package disconsented.anssrpg;
 
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -19,6 +42,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import disconsented.anssrpg.commands.ANSSRPG;
+import disconsented.anssrpg.commands.ConfigGUI;
 import disconsented.anssrpg.commands.Perks;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.config.JsonConfigHandler;
@@ -67,6 +91,7 @@ public class Main {
 			config.load();
 			settings.setLevelCurve(config.get(config.CATEGORY_GENERAL, "Level Curve", 1.3).getDouble());
 			settings.setDebug(config.get(config.CATEGORY_GENERAL, "debug", false).getBoolean(false));
+			settings.setShowGui(config.get(config.CATEGORY_GENERAL, "Show configuration GUI", false).getBoolean(false));
 			settings.setPointsMode(config.get(config.CATEGORY_GENERAL, "Points Mode", 1,"0 = disabled, 1 = based on assrpg xp, 2 = convert vanilla levels to points").getInt());
 			config.save();
 			
@@ -93,6 +118,7 @@ public class Main {
           //event.registerServerCommand(new ANSSRPG());
         	event.registerServerCommand(new Perks());
         	event.registerServerCommand(new disconsented.anssrpg.commands.Skill());
+        	ClientCommandHandler.instance.registerCommand(new ConfigGUI());
         }
         
         /**
@@ -108,12 +134,13 @@ public class Main {
     	}
         @EventHandler // used in 1.6.2
         //@PostInit   // used in 1.5.2
-        public void postInit(FMLPostInitializationEvent event) {
+        public void postInit(FMLPostInitializationEvent event) throws Exception {
         	JsonConfigHandler.loadPerkAndSkill(); //loaded in here so that other mods have their stuff loaded
         	if (Settings.getDebug()){
 	        	System.out.println("ANSSRPG has the following perks registered");
 	        	System.out.println(PerkStore.getInstance().getPerks());
 	        	System.out.println();
-        	}
+        	}  
+//        	disconsented.anssrpg.gui.Config.main();
         }
 }

@@ -29,28 +29,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import disconsented.anssrpg.common.Settings;
-import disconsented.anssrpg.data.PerkStore;
-import disconsented.anssrpg.handler.PlayerHandler;
-import disconsented.anssrpg.perk.Perk;
-import disconsented.anssrpg.player.PlayerData;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.ChatComponentText;
 
 /**
  * @author Disconsented
  *
- */	
-public class Perks implements ICommand {
+ */
+public class ConfigGUI implements ICommand {
 	private List aliases;
-	/**
-	 * 
-	 */
-	public Perks() {
+	public ConfigGUI(){
 		this.aliases = new ArrayList();
-		this.aliases.add("perk");
-		this.aliases.add("perks");
+		this.aliases.add("ConfigGUI");
+		this.aliases.add("CONFIGGUI");
+		this.aliases.add("configgui");
 	}
 
 	@Override
@@ -62,13 +54,13 @@ public class Perks implements ICommand {
 	@Override
 	public String getCommandName() {
 		// TODO Auto-generated method stub
-		return "perk";
+		return "ConfigGUI";
 	}
 
 	@Override
 	public String getCommandUsage(ICommandSender p_71518_1_) {
 		// TODO Auto-generated method stub
-		return null;
+		return "ConfigGUI";
 	}
 
 	@Override
@@ -78,63 +70,13 @@ public class Perks implements ICommand {
 	}
 
 	@Override
-	public void processCommand(ICommandSender player, String[] arguments) {
-		String UUID = ((EntityPlayerMP) player).getPersistentID().toString();
-		String toReturn = "";
-		EntityPlayerMP p2 = (EntityPlayerMP) player;
-		PlayerData playerdata = PlayerHandler.getPlayer(UUID);
-		switch(arguments[0].toLowerCase()){
-		case "list":			
-			switch(arguments[1].toLowerCase()){
-			case "current":
-				for(String perk :PlayerHandler.getPlayer(p2.getUniqueID().toString()).getPerkList()){
-					toReturn += PerkStore.getInstance().getPerk(perk)+",";
-				}
-			break;
-			case "all":
-				for (Perk perk : PerkStore.getInstance().getPerks()){
-					toReturn += perk.perkSlug+",";
-				}
-				break;
-				default:
-					toReturn = arguments[1]+" is an invalid argument";
-				break;
-			}			
-			break;
-		case "obtain":
-			if (arguments.length >= 2){
-				toReturn = PlayerHandler.addPerk(arguments[1].toString(), playerdata);
-			}
-			break;
-		case "getinfo":
-			if ((arguments.length >= 2)){				
-				toReturn = PerkStore.getInstance().getPerk(arguments[1]).toString();
-			}
-			break;
-		case "convertpoints":
-			if(Settings.getInstance().getPointsMode() == 2){
-				if (arguments.length > 2){
-					if(p2.experienceLevel >= Integer.parseInt(arguments[2])){
-						p2.experienceLevel -= Integer.parseInt(arguments[2]);
-						playerdata.setPoints(playerdata.getPoints() + Integer.parseInt(arguments[2]));
-					}
-					else
-					{
-						toReturn = "Invalid Argument";
-					}
-				}
-				else
-				{
-					toReturn = "Invalid Argument";
-				}
-			}
-			else
-			{
-				toReturn = "option unavaliable";
-			}
-			break;
-		}
-		player.addChatMessage(new ChatComponentText(toReturn));
+	public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_) {
+		if (Settings.getInstance().isServer){ 
+//    		throw new Exception("Trying to launch GUI on server");
+    	}else{
+    		disconsented.anssrpg.gui.Config.main();
+    	}
+		
 	}
 
 	@Override
