@@ -20,14 +20,47 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-package disconsented.anssrpg.client;
+/**
+ *
+ */
+package disconsented.anssrpg.perk;
 
-import net.minecraftforge.client.MinecraftForgeClient;
-import disconsented.anssrpg.CommonProxy;
+import java.util.ArrayList;
 
-public class ClientProxy extends disconsented.anssrpg.CommonProxy {       
-        @Override
-        public void registerRenderers() {
-                // This is for rendering entities and so forth later on
-        }
+import com.google.gson.annotations.Expose;
+
+import net.minecraft.block.Block;
+
+/**
+ * @author Disconsented
+ *
+ */
+public class BlockPerk extends Perk {
+
+	public BlockPerk() { super(); }
+
+	public BlockPerk(String name, ArrayList<Requirement> requirements,
+			String description, int pointCost) {
+		super(name, requirements, description, pointCost);
+		// TODO Auto-generated constructor stub
+	}
+	private Block block;
+
+	@Expose
+	public String blockName = "default_blockName";
+	/**
+	 * @return
+	 */
+	public Block getBlock() { return block; }
+
+	/**
+	 * @param
+	 */
+	protected void setBlock(Block block) { this.block = block; }
+
+	@Override
+	public void touchUp() {	
+		this.block = (Block) Block.blockRegistry.getObject(blockName); 
+		this.setSlug();
+	}
 }

@@ -20,14 +20,45 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-package disconsented.anssrpg.client;
+/**
+ * 
+ */
+package disconsented.anssrpg.handler;
 
-import net.minecraftforge.client.MinecraftForgeClient;
-import disconsented.anssrpg.CommonProxy;
+import java.util.ArrayList;
 
-public class ClientProxy extends disconsented.anssrpg.CommonProxy {       
-        @Override
-        public void registerRenderers() {
-                // This is for rendering entities and so forth later on
-        }
+import disconsented.anssrpg.common.Settings;
+import disconsented.anssrpg.data.PerkStore;
+import disconsented.anssrpg.data.SkillStore;
+import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+import net.minecraft.item.Item;
+
+/**
+ * @author Disconsented
+ *
+ */
+public class SkillHandler {
+	private static PerkStore perkInstance = PerkStore.getInstance();
+	private static SkillStore skillInstance = SkillStore.getInstance();
+	/**
+	 * Check that a block requires a perk
+	 */
+	public boolean getRequiresPerk(Block block){
+		return false;
+	}
+	
+	/**
+	 * Check that a item requires a perk
+	 */
+	public boolean getRequiresPerk(Item item){
+		return false;
+	}
+	/**
+	 * Check that a entity requires a perk
+	 */
+	public static boolean doesRequirePerk(Block block){
+		return false;
+	}	
 }

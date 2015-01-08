@@ -20,14 +20,40 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-package disconsented.anssrpg.client;
+/**
+ * 
+ */
+package disconsented.anssrpg.perk;
 
-import net.minecraftforge.client.MinecraftForgeClient;
-import disconsented.anssrpg.CommonProxy;
+import com.google.gson.annotations.Expose;
 
-public class ClientProxy extends disconsented.anssrpg.CommonProxy {       
-        @Override
-        public void registerRenderers() {
-                // This is for rendering entities and so forth later on
-        }
+/**
+ * @author Disconsented
+ * Object for requirements
+ */
+public class Requirement {
+	/*
+	 * HAVE - Has a perk
+	 * DONT - Doesn't have a perk
+	 * LEVEL_EQUALS - Level == x
+	 * LEVEL_GREATER - Level > x 
+	 * LEVEL_LESS - Level < x
+	 */
+	
+	public enum Action {HAVE,DONT,LEVEL_EQUALS,LEVEL_GREATER,LEVEL_LESS}
+	@Expose
+	public Action action;
+	@Expose
+	public String name;
+	@Expose
+	public String extraData;
+	public Requirement(Action action, String name, String extraData)
+	{
+		this.action = action;
+		this.name = name;
+		this.extraData = extraData;
+	}
+	public String getNameAsSlug(){
+		return name.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
+	}
 }

@@ -1,3 +1,4 @@
+package disconsented.anssrpg.skill.objects;
 /*The MIT License (MIT)
 
 Copyright (c) 2015 Disconsented, James Kerr
@@ -20,14 +21,38 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-package disconsented.anssrpg.client;
+/**
+ * @author James
+ * Handles storing the information for each skill
+ */
 
-import net.minecraftforge.client.MinecraftForgeClient;
-import disconsented.anssrpg.CommonProxy;
+import java.util.ArrayList;
 
-public class ClientProxy extends disconsented.anssrpg.CommonProxy {       
-        @Override
-        public void registerRenderers() {
-                // This is for rendering entities and so forth later on
-        }
+import com.google.gson.annotations.Expose;
+
+public abstract class Skill {
+	@Expose
+	public String name = "default_skillname";
+	/**  
+	 * @param exp - ArrayList for the exp using XPGain objects
+	 * @param name - Name of the skill
+	 */
+	
+	public Skill(){
+	}
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}	
+	public abstract void touchUp();
+	public abstract ArrayList getExp();
+	public abstract void setExp(ArrayList exp);
 }

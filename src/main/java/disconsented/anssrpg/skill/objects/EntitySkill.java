@@ -20,14 +20,46 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-package disconsented.anssrpg.client;
+/**
+ * 
+ */
+package disconsented.anssrpg.skill.objects;
 
-import net.minecraftforge.client.MinecraftForgeClient;
-import disconsented.anssrpg.CommonProxy;
+import java.util.ArrayList;
 
-public class ClientProxy extends disconsented.anssrpg.CommonProxy {       
-        @Override
-        public void registerRenderers() {
-                // This is for rendering entities and so forth later on
-        }
+import com.google.gson.annotations.Expose;
+
+/**
+ * @author Disconsented
+ *
+ */
+public class EntitySkill extends Skill {
+	@Expose
+	private ArrayList<EntityXP> exp = new ArrayList<EntityXP>();
+	
+	public EntitySkill(){
+		exp.add(new EntityXP());
+		exp.add(new EntityXP());
+	}
+
+	@Override
+	public void touchUp() {
+		for (XPGain xp : exp){
+			EntityXP thing = new EntityXP();
+			thing.name = xp.name;
+			thing.xp = xp.xp;
+			thing.touchUp();
+		}
+	}
+
+	@Override
+	public ArrayList<EntityXP> getExp() {
+		return exp;
+	}
+
+	@Override
+	public void setExp(ArrayList exp) {
+		this.exp = exp;
+		
+	}
 }

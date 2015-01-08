@@ -20,14 +20,56 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-package disconsented.anssrpg.client;
+/**
+ * 
+ */
+package disconsented.anssrpg.perk;
 
-import net.minecraftforge.client.MinecraftForgeClient;
-import disconsented.anssrpg.CommonProxy;
+import java.util.ArrayList;
 
-public class ClientProxy extends disconsented.anssrpg.CommonProxy {       
-        @Override
-        public void registerRenderers() {
-                // This is for rendering entities and so forth later on
-        }
+import com.google.gson.annotations.Expose;
+
+import net.minecraft.entity.EntityList;
+
+/**
+ * @author Disconsented
+ *
+ */
+public class EntityPerk extends Perk {
+
+	public EntityPerk() {
+		super();
+	}
+
+	public EntityPerk(String name, ArrayList<Requirement> requirements,
+			String description, int pointCost) {
+		super(name, requirements, description, pointCost);
+		// TODO Auto-generated constructor stub
+	}
+	private Class entity;
+	@Expose
+	public String entityName = "default_entityName";
+	/**
+	 * @return the entity
+	 */
+	public Class getEntity() {
+		return entity;
+	}
+
+	/**
+	 * @param entity the entity to set
+	 */
+	protected void setEntity(Class entity) {
+		this.entity = entity;		
+	}
+
+	@Override
+	public void touchUp () {
+			this.entity = (Class) EntityList.stringToClassMapping.get(entityName);
+			if (entity == null){
+				throw new NullPointerException();
+			}
+			this.setSlug();
+	}
+
 }

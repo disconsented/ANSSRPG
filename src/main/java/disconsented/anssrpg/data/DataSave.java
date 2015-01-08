@@ -1,3 +1,25 @@
+/*The MIT License (MIT)
+
+Copyright (c) 2015 Disconsented, James Kerr
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
 package disconsented.anssrpg.data;
 /**
  * Handles non-shut down saving and loading of player data
@@ -6,20 +28,22 @@ package disconsented.anssrpg.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import disconsented.anssrpg.Main;
-import disconsented.anssrpg.Settings;
+import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.network.PerkInfo;
 import disconsented.anssrpg.perk.LocalPerk;
 import disconsented.anssrpg.perk.Perk;
-import disconsented.anssrpg.perk.PerkStore;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.player.PlayerFile;
 
@@ -30,19 +54,18 @@ import disconsented.anssrpg.player.PlayerFile;
  *onEntityJoinWorld - Probably not needed
  *onLivingDeath - Saves data
  */
-public class DataSave {
-	static HashMap players = new HashMap();
-	
+public class DataSave {	
 	public static PlayerData getPlayerData(String playerID){
-		if (players.get(playerID) != null){
-			return (PlayerData) players.get(playerID);
+		PlayerData player = PlayerStore.getInstance().getPlayer(playerID);
+		if (player != null){
+			return player;
 		}else{
 			createPlayer(playerID);
-			return (PlayerData) players.get(playerID);
+			return PlayerStore.getInstance().getPlayer(playerID);
 		}
 	}
 	public static void addPlayer(PlayerData player, String PlayerID){
-		players.put(PlayerID,player);
+		PlayerStore.getInstance().addPlayer(player);
 	}
 	public static void createPlayer(String playerID){
 		ArrayList tempAL = new ArrayList();
@@ -63,10 +86,10 @@ public class DataSave {
 			System.out.println("Loading player data");
 		}		
 		PlayerFile.loadPlayer(event.player.getPersistentID().toString());
-		ArrayList<Perk> temp = PerkStore.getAllPerks();
-		for(int i = 0; i < temp.size(); i++){
-			Main.snw.sendTo(new PerkInfo(temp.get(i).name, temp.get(i).description,temp.get(i).perkSlug, temp.get(i).pointCost, temp.get(i).requirementName, temp.get(i).requirementLevel), (EntityPlayerMP) event.player);
-		}
+		ArrayList<Perk> temp = PerkStore.getInstance().getPerks();
+//		for(int i = 0; i < temp.size(); i++){
+//			Main.snw.sendTo(new PerkInfo(temp.get(i).name, temp.get(i).description,temp.get(i).perkSlug, temp.get(i).pointCost, temp.get(i).requirementName, temp.get(i).requirementLevel), (EntityPlayerMP) event.player);
+//		}
 	}
 	/**
 	 * Saves player data
@@ -78,8 +101,10 @@ public class DataSave {
 			System.out.println("Player "+event.player.getCommandSenderName()+" with UUID:"+event.player.getPersistentID().toString()+"has logged out");
 			System.out.println("Saving player data");
 		}
-		PlayerFile.writePlayer((PlayerData) players.get(event.player.getPersistentID().toString()));		
+		PlayerFile.writePlayer(PlayerStore.getInstance().getPlayer(event.player.getPersistentID().toString()));
+		PlayerStore.getInstance().getAllData().remove(event.player.getPersistentID().toString());
 	}
+	
 	/**
 	 * Saves player data (crash damage mitigation)
 	 * @param event
@@ -90,6 +115,6 @@ public class DataSave {
 			System.out.println("Player "+event.player.getCommandSenderName()+" with UUID:"+event.player.getPersistentID().toString()+"has respawned");
 			System.out.println("Saving player data");
 		}
-		PlayerFile.writePlayer((PlayerData) players.get(event.player.getPersistentID().toString()));
+		PlayerFile.writePlayer(PlayerStore.getInstance().getPlayer(event.player.getPersistentID().toString()));
 	}	
 }
