@@ -31,7 +31,6 @@ public class Settings {
 	private static double levelCurve = 1.6;
 	private static String statusMessage = "null";
 	private static double pointsRatio = .2;
-	private static boolean showGui = false;
 	/**
 	 * 0 - Disabled
 	 * 1 - Points awarded based on XP from skills
@@ -80,12 +79,5 @@ public class Settings {
 			return new File("saves\\"+MinecraftServer.getServer().getFolderName()+"\\data\\");
 		}
 				
-	}
-
-	public static boolean isShowGui() {
-		return showGui;
-	}
-	public static void setShowGui(boolean showGui) {
-		Settings.showGui = showGui;
 	}
 }

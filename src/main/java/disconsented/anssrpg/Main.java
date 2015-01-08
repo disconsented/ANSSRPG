@@ -62,7 +62,7 @@ import disconsented.anssrpg.skill.BlockBreaking;
 import disconsented.anssrpg.skill.EntityDamage;
 import disconsented.anssrpg.skill.ItemCrafting;
 
-@Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="TC3")
+@Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="DEV6")
 //@NetworkMod(clientSideRequired=true) // not used in 1.7
 public class Main {
         // The instance of your mod that Forge uses.
@@ -91,7 +91,6 @@ public class Main {
 			config.load();
 			settings.setLevelCurve(config.get(config.CATEGORY_GENERAL, "Level Curve", 1.3).getDouble());
 			settings.setDebug(config.get(config.CATEGORY_GENERAL, "debug", false).getBoolean(false));
-			settings.setShowGui(config.get(config.CATEGORY_GENERAL, "Show configuration GUI", false).getBoolean(false));
 			settings.setPointsMode(config.get(config.CATEGORY_GENERAL, "Points Mode", 1,"0 = disabled, 1 = based on assrpg xp, 2 = convert vanilla levels to points").getInt());
 			config.save();
 			
