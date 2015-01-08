@@ -341,8 +341,16 @@ public class Config {
 
 	protected static void newExperience() {
 		if (currentSkill != null){
-			BlockXP xp = new BlockXP();
-			currentSkill.getExp().add(xp);
+		    if (currentSkill instanceof BlockSkill){
+		        currentSkill.getExp().add(new BlockXP());
+		    }
+		    else if (currentSkill instanceof EntitySkill){
+		        currentSkill.getExp().add(new EntityXP());
+		    }
+		    else if (currentSkill instanceof ItemSkill) {
+		        currentSkill.getExp().add(new EntityXP());
+		    }
+		    updateSkillExpList();
 		}
 		
 	}
