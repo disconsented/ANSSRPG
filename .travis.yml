@@ -17,7 +17,7 @@ script:
 #  template:
 #   - "%{build_number} (%{branch} - %{commit}: %{commit_message} : %{author}): %{message} (%{build_url}) "
 before_deploy:
-  -ls ./build/libs/
+  - ls ./build/libs/
 deploy:
   provider: releases
   api_key:
