@@ -1,6 +1,11 @@
 language: java
 jdk:
 - oraclejdk7
+cache:
+  directories:
+    - $HOME/.gradle
+    - .gradle
+sudo: false
 install:
 - sudo apt-get update -y
 - chmod +x ./gradlew
@@ -20,3 +25,4 @@ deploy:
   on:
     tags: true
     repo: disconsented/ANSSRPG
+    all_branches: true
