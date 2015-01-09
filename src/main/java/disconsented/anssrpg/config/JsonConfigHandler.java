@@ -71,12 +71,12 @@ public class JsonConfigHandler {
 	public static void createPerkConfig(PerkStore perkStore){
 		if (perkStore == null){
 			perkStore = new PerkStore();
-			perkStore.addItemPerk(new ItemPerk());
-			perkStore.addItemPerk(new ItemPerk());
-			perkStore.addBlockPerk(new BlockPerk());
-			perkStore.addBlockPerk(new BlockPerk());
-			perkStore.addEntityPerk(new EntityPerk());
-			perkStore.addEntityPerk(new EntityPerk());
+//			perkStore.addItemPerk(new ItemPerk());
+//			perkStore.addItemPerk(new ItemPerk());
+//			perkStore.addBlockPerk(new BlockPerk());
+//			perkStore.addBlockPerk(new BlockPerk());
+//			perkStore.addEntityPerk(new EntityPerk());
+//			perkStore.addEntityPerk(new EntityPerk());
 		}
 			
 
@@ -121,12 +121,12 @@ public class JsonConfigHandler {
 	public static void createSkillConfig(SkillStore skillStore){
 		if (skillStore == null){
 			skillStore = new SkillStore();
-			skillStore.addBlockSkill(new BlockSkill());
-			skillStore.addBlockSkill(new BlockSkill());
-			skillStore.addEntitySkill(new EntitySkill());
-			skillStore.addEntitySkill(new EntitySkill());
-			skillStore.addItemSkill(new ItemSkill());
-			skillStore.addItemSkill(new ItemSkill());
+//			skillStore.addBlockSkill(new BlockSkill());
+//			skillStore.addBlockSkill(new BlockSkill());
+//			skillStore.addEntitySkill(new EntitySkill());
+//			skillStore.addEntitySkill(new EntitySkill());
+//			skillStore.addItemSkill(new ItemSkill());
+//			skillStore.addItemSkill(new ItemSkill());
 		}
         try {
          configFileLocation.mkdirs();
