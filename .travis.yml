@@ -5,11 +5,10 @@ cache:
   directories:
     - $HOME/.gradle
     - .gradle
-install:
-- sudo apt-get update -y
-- chmod +x ./gradlew
+sudo: false
+install: true
 script:
-- "./gradlew build"
+  - gradle build
 notifications:
  irc:
   channels:
