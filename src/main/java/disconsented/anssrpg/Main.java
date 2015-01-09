@@ -22,7 +22,6 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg;
 
-import java.util.Iterator;
 import java.util.Map.Entry;
 
 import net.minecraftforge.client.ClientCommandHandler;
@@ -41,7 +40,6 @@ import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
-import disconsented.anssrpg.commands.ANSSRPG;
 import disconsented.anssrpg.commands.ConfigGUI;
 import disconsented.anssrpg.commands.Perks;
 import disconsented.anssrpg.common.Settings;
@@ -49,7 +47,6 @@ import disconsented.anssrpg.config.JsonConfigHandler;
 import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
-import disconsented.anssrpg.handler.SkillHandler;
 import disconsented.anssrpg.network.PerkInfo;
 import disconsented.anssrpg.network.PerkInfoHandler;
 import disconsented.anssrpg.network.Request;
@@ -62,7 +59,7 @@ import disconsented.anssrpg.skill.BlockBreaking;
 import disconsented.anssrpg.skill.EntityDamage;
 import disconsented.anssrpg.skill.ItemCrafting;
 
-@Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="DEV6")
+@Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="DEV7")
 //@NetworkMod(clientSideRequired=true) // not used in 1.7
 public class Main {
         // The instance of your mod that Forge uses.
@@ -110,14 +107,14 @@ public class Main {
                 MinecraftForge.EVENT_BUS.register(new ItemCrafting());
                 FMLCommonHandler.instance().bus().register(new ItemCrafting());
                 FMLCommonHandler.instance().bus().register(new DataSave());
+                ClientCommandHandler.instance.registerCommand(new ConfigGUI());
                 }
         @EventHandler
         public void serverLoad(FMLServerStartingEvent event)
         {
           //event.registerServerCommand(new ANSSRPG());
         	event.registerServerCommand(new Perks());
-        	event.registerServerCommand(new disconsented.anssrpg.commands.Skill());
-        	ClientCommandHandler.instance.registerCommand(new ConfigGUI());
+        	event.registerServerCommand(new disconsented.anssrpg.commands.Skill());        	
         }
         
         /**
