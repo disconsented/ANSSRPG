@@ -188,9 +188,11 @@ public class Config {
 
 	private static void updateReqList() {
 		DefaultListModel model = new DefaultListModel();
-		ArrayList<Requirement> temp = currentPerk.getRequirements();
-		for (Requirement req: temp){
-			model.addElement(req.name);
+		if ( currentPerk != null && currentPerk.getRequirements() != null){
+    		ArrayList<Requirement> temp = currentPerk.getRequirements();
+    		for (Requirement req: temp){
+    			model.addElement(req.name);
+    		}
 		}
 		listRequirement.setModel(model);
 		listRequirement.updateUI();
@@ -219,15 +221,19 @@ public class Config {
 
 	protected static void updateCurrentPerk() {
 		if (listPerk.getSelectedIndex() > -1){
-		currentPerk = perks.get(listPerk.getSelectedIndex());
+		    currentPerk = perks.get(listPerk.getSelectedIndex());
+		    textPerkName.setText(currentPerk.name);
+	        editorPerkDescription.setText(currentPerk.description);
+	        spinnerPointCost.setValue(currentPerk.pointCost);
 		}
 		else
 		{
 			currentPerk = null;
-		}		
-		textPerkName.setText(currentPerk.name);
-		editorPerkDescription.setText(currentPerk.description);
-		spinnerPointCost.setValue(currentPerk.pointCost);
+			textPerkName.setText("");
+	        editorPerkDescription.setText("");
+	        spinnerPointCost.setValue(0);
+		}
+		
 		
 		if (currentPerk instanceof BlockPerk){
 			BlockPerk temp = (BlockPerk) currentPerk;
@@ -268,24 +274,17 @@ public class Config {
 	}
 
 	protected static void updateCurrentSkillExp() {
-		ArrayList<? extends XPGain> temp = currentSkill.getExp();
-		int x = listRequirement.getSelectedIndex();
-		if (x > -1){
-			currentExp = temp.get(x);
-			txtSkillObjectName.setText(currentExp.getName());
-			spinnerExpXP.setValue(currentExp.getXp());
-		}
-		else{
-			if (temp.size()> 0){
-				currentExp = temp.get(0);
-				txtSkillObjectName.setText(currentExp.getName());
-				spinnerExpXP.setValue(currentExp.getXp());
-			}else{
-				txtSkillObjectName.setText(null);
-				spinnerExpXP.setValue(0);	
-			}
-			
-		}
+	    if (currentSkill != null && listSkillExp.getSelectedIndex() > -1){
+	        currentExp = (XPGain) currentSkill.getExp().get(listSkillExp.getSelectedIndex());
+	        if (currentExp != null){
+	            txtSkillObjectName.setText(currentExp.getName());
+	            spinnerExpXP.setValue(currentExp.getXp());
+	        }
+	        else{
+	            txtSkillObjectName.setText("");
+                spinnerExpXP.setValue(0);
+	        }
+	    }
 	}
 
 	protected static void deleteCurrentExperience() {
@@ -300,14 +299,16 @@ public class Config {
 		skills.remove(currentSkill);
 		currentSkill = null;
 		listSkill.setSelectedIndex(-1);
-		updateSkillList();		
+		updateSkillList();
+		updateCurrentSkill();
 	}
 
 	protected static void deleteCurrentRequirement() {
 		if (listRequirement.getSelectedIndex() > -1){
 			currentPerk.requirements.remove(listRequirement.getSelectedIndex());
 			listRequirement.setSelectedIndex(-1);
-			updateCurrentRequirment();		}
+			updateReqList();	
+		}
 		
 		
 	}
@@ -315,18 +316,18 @@ public class Config {
 		perks.remove(currentPerk);
 		currentPerk = null;
 		updatePerkList();		
-		
+		updateCurrentPerk();
 	}
 
 	protected static void newPerk() {
 		BlockPerk perk = new BlockPerk();
-		PerkStore.addPerk(perk);
+		perks.add(perk);
 		updatePerkList();		
 	}
 
 	protected static void newRequirement() {
 		if (currentPerk != null){
-			Requirement req = new Requirement(Action.HAVE, "", "");
+			Requirement req = new Requirement(Action.HAVE, "default_name", "");
 			currentPerk.requirements.add(req);
 			updateReqList();
 		}		
@@ -334,7 +335,7 @@ public class Config {
 
 	protected static void newSkill() {
 		BlockSkill skill = new BlockSkill();
-		SkillStore.addSkill(skill);
+		skills.add(skill);
 		updateSkillList();
 		
 	}
@@ -362,9 +363,10 @@ public class Config {
 
 	protected static void updateCurrentRequirmentInfo() {
 		if (currentReq != null){
-			currentReq.action = Action.valueOf(spinnerPerkAction.toString());
+			currentReq.action = Action.valueOf(spinnerPerkAction.getValue().toString());
 			currentReq.extraData = textPerkExtraData.getText();
 			currentReq.name = textPerkReqName.getText();
+			updateReqList();
 		}
 		
 	}
@@ -447,7 +449,8 @@ public class Config {
 		if (currentExp != null){
 			currentExp.setXp((int) spinnerExpXP.getValue());
 			currentExp.setName(txtSkillObjectName.getText());
-		}
+			updateSkillExpList();
+			}		
 	}
 
 	/**
@@ -475,6 +478,8 @@ public class Config {
 			public void actionPerformed(ActionEvent arg0) {
 				PerkStore.Clear();
 				SkillStore.Clear();
+				perks.clear();
+                skills.clear();
 				updatePerkList();
 				updateSkillList();
 				JOptionPane.showMessageDialog(null,"All data has been cleared from memory");
