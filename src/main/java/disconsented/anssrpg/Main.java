@@ -59,7 +59,7 @@ import disconsented.anssrpg.skill.BlockBreaking;
 import disconsented.anssrpg.skill.EntityDamage;
 import disconsented.anssrpg.skill.ItemCrafting;
 
-@Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="DEV7")
+@Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="DEV8")
 //@NetworkMod(clientSideRequired=true) // not used in 1.7
 public class Main {
         // The instance of your mod that Forge uses.
@@ -82,6 +82,7 @@ public class Main {
 				settings.isServer = true;
 			}else{
 				settings.isServer = false;
+				ClientCommandHandler.instance.registerCommand(new ConfigGUI());
 			}
 			
 			Configuration config = new Configuration(event.getSuggestedConfigurationFile());
@@ -106,9 +107,8 @@ public class Main {
                 MinecraftForge.EVENT_BUS.register(new EntityDamage());
                 MinecraftForge.EVENT_BUS.register(new ItemCrafting());
                 FMLCommonHandler.instance().bus().register(new ItemCrafting());
-                FMLCommonHandler.instance().bus().register(new DataSave());
-                ClientCommandHandler.instance.registerCommand(new ConfigGUI());
-                }
+                FMLCommonHandler.instance().bus().register(new DataSave());                
+         }
         @EventHandler
         public void serverLoad(FMLServerStartingEvent event)
         {
