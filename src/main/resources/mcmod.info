@@ -2,7 +2,7 @@
 {
   "modid": "anssrpg",
   "name": "A Not So Simple RPG",
-  "description": "ANSSRPG is an open source player progression framework built for Minecraft Forge and Cauldron servers.",
+  "description": "ANSSRPG is an open source player progression framework built for Minecraft Forge servers.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "www.disconsented.com",
