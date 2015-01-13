@@ -36,3 +36,4 @@ servers.dat
 usercache.json
 usernamecache.json
 whitelist.json
+output/

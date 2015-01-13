@@ -25,7 +25,8 @@ buildProps.withReader {
     ext.config = new ConfigSlurper().parse prop
 }
 
-version = "${config.minecraft.version}-${config.version.mod.minor}.${config.version.mod.revis}"
+version = "${config.version.minecraft}-${config.version.mod.minor}-${config.version.mod.revis}"
+println version
 group= "com.disconsented.anssrpg" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "anssrpg"
 
@@ -61,7 +62,7 @@ processResources
         include 'mcmod.info'
                 
         // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version':project.version, 'mcversion':config.minecraft.version
     }
         
     // copy everything else, thats not the mcmod.info
@@ -69,6 +70,8 @@ processResources
         exclude 'mcmod.info'
     }
 }
+
+
 targetCompatibility=7
 sourceCompatibility=7
 task deobfJar(type: Jar) {
