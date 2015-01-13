@@ -17,13 +17,21 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "DEV8"
+ext.buildProps = file "build.properties"
+
+buildProps.withReader {
+    def prop = new Properties()
+    prop.load(it)
+    ext.config = new ConfigSlurper().parse prop
+}
+
+version = "${config.minecraft.version}-${config.version.mod.minor}.${config.version.mod.revis}"
 group= "com.disconsented.anssrpg" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "anssrpg"
 
 minecraft {
-    version = "1.7.10-10.13.2.1230"
-    assetDir = "eclipse/assets"
+    version = "${config.version.minecraft}-${config.version.forge}"
+    runDir = "eclipse/assets"
 }
 
 dependencies {
