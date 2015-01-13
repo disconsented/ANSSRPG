@@ -48,7 +48,6 @@ public class Settings {
 	/**
 	 * Checks if the references in the config gui are valid when saving
 	 */
-	private static boolean checkValidReference = false;
 	/**
 	 * 0 - Disabled
 	 * 1 - Points awarded based on XP from skills
@@ -67,7 +66,6 @@ public class Settings {
         config.load();
         setLevelCurve(config.get(config.CATEGORY_GENERAL, "Level Curve", 1.3).getDouble());
         setDebug(config.get(config.CATEGORY_GENERAL, "debug", false).getBoolean(false));
-        setCheckValidReference(config.get(config.CATEGORY_GENERAL, "Check valid references", false).getBoolean(false));
         setPointsMode(config.get(config.CATEGORY_GENERAL, "Points Mode", 1,"0 = disabled, 1 = based on assrpg xp, 2 = convert vanilla levels to points").getInt());
         config.save();
 	}
@@ -109,10 +107,4 @@ public class Settings {
 		}
 				
 	}
-    public static boolean isCheckValidReference() {
-        return checkValidReference;
-    }
-    public static void setCheckValidReference(boolean checkValidReference) {
-        Settings.checkValidReference = checkValidReference;
-    }
 }

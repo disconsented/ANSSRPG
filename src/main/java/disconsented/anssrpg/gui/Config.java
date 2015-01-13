@@ -472,12 +472,14 @@ public class Config {
 	protected static void updateCurrentSkillExpInfo() {
 		if (currentExp != null){
 			currentExp.setXp((int) spinnerExpXP.getValue());
-	         if(itemModel.contains(txtSkillObjectName.getText()) || blockModel.contains(txtSkillObjectName.getText()) || entityModel.contains(txtSkillObjectName.getText()) ){
+	         if(itemModel.contains(txtSkillObjectName.getText()) || 
+	            blockModel.contains(txtSkillObjectName.getText()) ||
+	            entityModel.contains(txtSkillObjectName.getText()) ){
 	                 currentExp.setName(txtSkillObjectName.getText());
 	         }
 	         else
 	         {
-	               JOptionPane.showMessageDialog(null, "Invalid object");
+	             JOptionPane.showMessageDialog(null, textPerkObject.getText() + " is a invalid object");
 	         }			
 			updateSkillExpList();
 			}		
