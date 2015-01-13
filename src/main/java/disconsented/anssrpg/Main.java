@@ -83,15 +83,7 @@ public class Main {
 			}else{
 				settings.isServer = false;
 				ClientCommandHandler.instance.registerCommand(new ConfigGUI());
-			}
-			
-			Configuration config = new Configuration(event.getSuggestedConfigurationFile());
-			config.load();
-			settings.setLevelCurve(config.get(config.CATEGORY_GENERAL, "Level Curve", 1.3).getDouble());
-			settings.setDebug(config.get(config.CATEGORY_GENERAL, "debug", false).getBoolean(false));
-			settings.setPointsMode(config.get(config.CATEGORY_GENERAL, "Points Mode", 1,"0 = disabled, 1 = based on assrpg xp, 2 = convert vanilla levels to points").getInt());
-			config.save();
-			
+			}			
 			snw = NetworkRegistry.INSTANCE.newSimpleChannel("ANSSRPG");
 			snw.registerMessage(ResponceHandler.class, Responce.class, 0, Side.SERVER); 
 			snw.registerMessage(PerkInfoHandler.class, PerkInfo.class, 1, Side.CLIENT); 
