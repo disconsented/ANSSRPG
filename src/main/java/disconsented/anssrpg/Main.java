@@ -59,7 +59,7 @@ import disconsented.anssrpg.skill.BlockBreaking;
 import disconsented.anssrpg.skill.EntityDamage;
 import disconsented.anssrpg.skill.ItemCrafting;
 
-@Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="DEV8")
+@Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="DEV9")
 //@NetworkMod(clientSideRequired=true) // not used in 1.7
 public class Main {
         // The instance of your mod that Forge uses.
