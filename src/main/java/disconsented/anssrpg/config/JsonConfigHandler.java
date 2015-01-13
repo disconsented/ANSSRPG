@@ -37,6 +37,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import disconsented.anssrpg.gui.Config;
 import disconsented.anssrpg.perk.BlockPerk;
 import disconsented.anssrpg.perk.EntityPerk;
 import disconsented.anssrpg.perk.ItemPerk;
@@ -167,7 +168,7 @@ public class JsonConfigHandler {
 	 */
 	public static void savePerkAndSkill() {	
 		PerkStore perkStore = new PerkStore();
-		for (Perk perk : disconsented.anssrpg.data.PerkStore.getPerks()){
+		for (Perk perk : Config.getPerks()){
 			if (perk instanceof BlockPerk){
 				perkStore.addBlockPerk((BlockPerk) perk);
 			}
@@ -175,21 +176,23 @@ public class JsonConfigHandler {
 				perkStore.addEntityPerk((EntityPerk) perk);
 			}
 			else if (perk instanceof ItemPerk){
-				perkStore.addEntityPerk((EntityPerk) perk);
+				perkStore.addItemPerk((ItemPerk) perk);
 			}
 		}
 		createPerkConfig(perkStore);
 		
 		SkillStore skillStore = new SkillStore();
-		for (BlockSkill skill : disconsented.anssrpg.data.SkillStore.getBlockSkill()){
-			skillStore.addBlockSkill(skill);
-		}
-		for (ItemSkill skill : disconsented.anssrpg.data.SkillStore.getItemSkill()){
-			skillStore.addItemSkill(skill);
-		}
-		for (EntitySkill skill : disconsented.anssrpg.data.SkillStore.getEntitySkill()){
-			skillStore.addEntitySkill(skill);
-		}
+		for (Skill skill : Config.getSkills()){
+            if (skill instanceof BlockSkill){
+                skillStore.addBlockSkill((BlockSkill) skill);
+            }
+            else if (skill instanceof EntitySkill){
+                skillStore.addEntitySkill((EntitySkill) skill);
+            }
+            else if (skill instanceof ItemSkill){
+                skillStore.addItemSkill((ItemSkill) skill);
+            }
+        }
 		
 		createSkillConfig(skillStore);
 	}

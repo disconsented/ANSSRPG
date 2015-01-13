@@ -113,38 +113,38 @@ public class Config {
 	 * Launch the application.
 	 */
 	public static void main() {
-		//EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-					Config window = new Config();
-					updatePerkList();
-					updateSkillList();
-					updateRegLists();
-					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-			}
-//		}
-//	);
-//	}
+		Config window = new Config();
+		updatePerkList();
+		updateSkillList();
+		updateRegLists();
+		window.frame.setVisible(true);
+	}
 
+	
 	/**
 	 * Create the application.
 	 */
 	public Config() {
 		initialize();
 	}
+	public static ArrayList<Perk> getPerks(){
+	    return perks;
+	}
+	public static ArrayList<Skill> getSkills(){
+	    return skills;
+	}
 	private static void updateRegLists(){
 		DefaultListModel itemModel = new DefaultListModel();
 		Iterator it = Item.itemRegistry.getKeys().iterator();
 		while (it.hasNext()){
-			itemModel.addElement(it.next().toString());
+		    String current = it.next().toString();
+			itemModel.addElement(current.substring(current.indexOf(':')+1, current.length()));
 		}
 		DefaultListModel blockModel = new DefaultListModel();
 		it = Block.blockRegistry.getKeys().iterator();
 		while (it.hasNext()){
-			blockModel.addElement(it.next().toString());
+		    String current = it.next().toString();
+			blockModel.addElement(current.substring(current.indexOf(':')+1, current.length()));
 		}
 		DefaultListModel entityModel = new DefaultListModel();
 		it = EntityList.func_151515_b().iterator();
@@ -489,13 +489,20 @@ public class Config {
 		});
 		JMenuItem mntmSave = new JMenuItem("Save");
 		menuBar.add(mntmSave);
+		
+		JMenuItem mntmLoad = new JMenuItem("Load");
+		mntmLoad.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent arg0) {
+		        disconsented.anssrpg.data.PerkStore.Clear();
+                disconsented.anssrpg.data.SkillStore.Clear();
+                JsonConfigHandler.loadPerkAndSkill();
+		    }
+		});
+		menuBar.add(mntmLoad);
 		mntmSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Comit everything to memory then save to disk
-				JsonConfigHandler.savePerkAndSkill();
-				disconsented.anssrpg.data.PerkStore.Clear();
-				disconsented.anssrpg.data.SkillStore.Clear();
-				JsonConfigHandler.loadPerkAndSkill();
+				JsonConfigHandler.savePerkAndSkill();				
 			}
 		});
 		mntmSave.addMouseListener(new MouseAdapter() {
