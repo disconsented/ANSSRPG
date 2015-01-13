@@ -61,6 +61,7 @@ import com.ibm.icu.text.SpoofChecker;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityList;
 import net.minecraft.item.Item;
+import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.config.JsonConfigHandler;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.SkillStore;
@@ -108,6 +109,9 @@ public class Config {
 	private static JList listRegItem = new JList();
 	private static JSpinner spinnerSkillType = new JSpinner();
 	private static JSpinner spinnerExpXP = new JSpinner();
+	private static DefaultListModel entityModel = new DefaultListModel();
+	private static DefaultListModel itemModel = new DefaultListModel();
+	private static DefaultListModel blockModel = new DefaultListModel();
 
 	/**
 	 * Launch the application.
@@ -134,19 +138,19 @@ public class Config {
 	    return skills;
 	}
 	private static void updateRegLists(){
-		DefaultListModel itemModel = new DefaultListModel();
+	    itemModel = new DefaultListModel();
 		Iterator it = Item.itemRegistry.getKeys().iterator();
 		while (it.hasNext()){
 		    String current = it.next().toString();
 			itemModel.addElement(current.substring(current.indexOf(':')+1, current.length()));
 		}
-		DefaultListModel blockModel = new DefaultListModel();
+		blockModel = new DefaultListModel();
 		it = Block.blockRegistry.getKeys().iterator();
 		while (it.hasNext()){
 		    String current = it.next().toString();
 			blockModel.addElement(current.substring(current.indexOf(':')+1, current.length()));
 		}
-		DefaultListModel entityModel = new DefaultListModel();
+		entityModel = new DefaultListModel();
 		it = EntityList.func_151515_b().iterator();
 		while (it.hasNext()){
 			entityModel.addElement(it.next().toString());
@@ -419,16 +423,29 @@ public class Config {
 			tempBlockPerk.name = textPerkName.getText();
 			tempBlockPerk.description = editorPerkDescription.getText();
 			tempBlockPerk.pointCost = (int) spinnerPointCost.getValue();
-			tempBlockPerk.blockName = textPerkObject.getText();
 			tempBlockPerk.requirements = currentPerk.requirements;
 			perks.set(perks.indexOf(currentPerk),tempBlockPerk);
-			currentPerk = tempBlockPerk;
+			if(blockModel.contains(textPerkObject.getText())){
+			    tempBlockPerk.blockName = textPerkObject.getText();
+			    currentPerk = tempBlockPerk;
+			}
+			else
+			{
+			    JOptionPane.showMessageDialog(null, textPerkObject.getText() + " is a invalid object");
+			}
 			break;
 		case "Entity":
 			EntityPerk tempEntityPerk = new EntityPerk();
 			tempEntityPerk.name = textPerkName.getText();
 			tempEntityPerk.description = editorPerkDescription.getText();
 			tempEntityPerk.pointCost = (int) spinnerPointCost.getValue();
+	        if(entityModel.contains(textPerkObject.getText())){
+	            tempEntityPerk.entityName = textPerkObject.getText();
+	        }
+	        else
+	        {
+	            JOptionPane.showMessageDialog(null, textPerkObject.getText() + " is a invalid object");
+	        }
 			tempEntityPerk.requirements = currentPerk.requirements;
 			perks.set(perks.indexOf(currentPerk),tempEntityPerk);
 			currentPerk = tempEntityPerk;
@@ -438,6 +455,13 @@ public class Config {
 			tempItemPerk.name = textPerkName.getText();
 			tempItemPerk.description = editorPerkDescription.getText();
 			tempItemPerk.pointCost = (int) spinnerPointCost.getValue();
+	        if(itemModel.contains(textPerkObject.getText())){
+	            tempItemPerk.itemName = textPerkObject.getText();
+	        }
+	        else
+	        {
+	            JOptionPane.showMessageDialog(null, textPerkObject.getText() + " is a invalid object");
+	        }
 			tempItemPerk.requirements = currentPerk.requirements;
 			perks.set(perks.indexOf(currentPerk),tempItemPerk);
 			currentPerk = tempItemPerk;
@@ -448,7 +472,13 @@ public class Config {
 	protected static void updateCurrentSkillExpInfo() {
 		if (currentExp != null){
 			currentExp.setXp((int) spinnerExpXP.getValue());
-			currentExp.setName(txtSkillObjectName.getText());
+	         if(itemModel.contains(txtSkillObjectName.getText()) || blockModel.contains(txtSkillObjectName.getText()) || entityModel.contains(txtSkillObjectName.getText()) ){
+	                 currentExp.setName(txtSkillObjectName.getText());
+	         }
+	         else
+	         {
+	               JOptionPane.showMessageDialog(null, "Invalid object");
+	         }			
 			updateSkillExpList();
 			}		
 	}
@@ -931,4 +961,19 @@ public class Config {
 		JLabel label = new JLabel("");
 		panelRegistry.add(label);
 	}
+
+
+    public static DefaultListModel getEntityModel() {
+        return entityModel;
+    }
+
+
+    public static DefaultListModel getItemModel() {
+        return itemModel;
+    }
+
+
+    public static DefaultListModel getBlockModel() {
+        return blockModel;
+    }
 }
