@@ -51,6 +51,11 @@ dependencies {
 
 }
 
+minecraft {
+	replace "@MAJOR@", config.version.mod.major
+	replace "@MINOR@", config.version.mod.minor
+	replace "@REVIS@", config.version.mod.revis
+}
 processResources
 {
     // this will ensure that this task is redone when the versions change.
