@@ -17,13 +17,22 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "DEV8"
+ext.buildProps = file "build.properties"
+
+buildProps.withReader {
+    def prop = new Properties()
+    prop.load(it)
+    ext.config = new ConfigSlurper().parse prop
+}
+
+version = "${config.version.minecraft}-${config.version.mod.minor}-${config.version.mod.revis}"
+println version
 group= "com.disconsented.anssrpg" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "anssrpg"
 
 minecraft {
-    version = "1.7.10-10.13.2.1230"
-    assetDir = "eclipse/assets"
+    version = "${config.version.minecraft}-${config.version.forge}"
+    runDir = "eclipse/assets"
 }
 
 dependencies {
@@ -42,6 +51,11 @@ dependencies {
 
 }
 
+minecraft {
+	replace "@MAJOR@", config.version.mod.major
+	replace "@MINOR@", config.version.mod.minor
+	replace "@REVIS@", config.version.mod.revis
+}
 processResources
 {
     // this will ensure that this task is redone when the versions change.
@@ -53,7 +67,7 @@ processResources
         include 'mcmod.info'
                 
         // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version':project.version, 'mcversion':config.minecraft.version
     }
         
     // copy everything else, thats not the mcmod.info
@@ -61,6 +75,8 @@ processResources
         exclude 'mcmod.info'
     }
 }
+
+
 targetCompatibility=7
 sourceCompatibility=7
 task deobfJar(type: Jar) {
