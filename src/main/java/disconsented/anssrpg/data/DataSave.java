@@ -85,6 +85,12 @@ public class DataSave {
 	@SubscribeEvent
 	public void onPlayerLoggedInEvent(PlayerLoggedInEvent event){
 	    System.out.println(event.player.getDisplayName());
+	    
+	    if (event.player instanceof EntityPlayerMP){
+	         EntityPlayerMP player = (EntityPlayerMP) event.player;
+	         System.out.println("Maybe this works/?"+ player.playerData);      
+	        
+	    }
 		if (Settings.getDebug()){
 			System.out.println("Player "+event.player.getCommandSenderName()+" with UUID:"+event.player.getPersistentID().toString()+"has logged in");
 			System.out.println("Loading player data");
@@ -98,7 +104,6 @@ public class DataSave {
 	 */
 	@SubscribeEvent
 	public void onPlayerLoggedOutEvent(PlayerLoggedOutEvent event){
-	    System.out.println("Maybe this works/?"+ event.player.playerData);
 		if (Settings.getDebug()){
 			System.out.println("Player "+event.player.getCommandSenderName()+" with UUID:"+event.player.getPersistentID().toString()+"has logged out");
 			System.out.println("Saving player data");
