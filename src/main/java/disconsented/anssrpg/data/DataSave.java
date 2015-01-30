@@ -41,6 +41,7 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import disconsented.anssrpg.Main;
 import disconsented.anssrpg.common.Settings;
+import disconsented.anssrpg.core.asm.ASMplayer;
 import disconsented.anssrpg.network.PerkInfo;
 import disconsented.anssrpg.perk.LocalPerk;
 import disconsented.anssrpg.perk.Perk;
@@ -81,6 +82,8 @@ public class DataSave {
 	 */
 	@SubscribeEvent
 	public void onPlayerLoggedInEvent(PlayerLoggedInEvent event){
+//	    ASMplayer.adjust();
+	    System.out.println(event.player.playerData);
 		if (Settings.getDebug()){
 			System.out.println("Player "+event.player.getCommandSenderName()+" with UUID:"+event.player.getPersistentID().toString()+"has logged in");
 			System.out.println("Loading player data");

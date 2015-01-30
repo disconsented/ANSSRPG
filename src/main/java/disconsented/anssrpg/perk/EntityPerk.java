@@ -47,29 +47,31 @@ public class EntityPerk extends Perk {
 		// TODO Auto-generated constructor stub
 	}
 	private Class entity;
+	
 	@Expose
 	public String entityName = "default_entityName";
-	/**
-	 * @return the entity
-	 */
+
 	public Class getEntity() {
 		return entity;
 	}
 
-	/**
-	 * @param entity the entity to set
-	 */
 	protected void setEntity(Class entity) {
 		this.entity = entity;		
 	}
 
-	@Override
-	public void touchUp () {
-			this.entity = (Class) EntityList.stringToClassMapping.get(entityName);
-			if (entity == null){
-				throw new NullPointerException();
-			}
-			this.setSlug();
-	}
+    @Override
+    protected void searchObject() {
+        this.entity = (Class) EntityList.stringToClassMapping.get(entityName);
+        if (entity == null){
+            throw new NullPointerException();
+        }
+        
+    }
+
+    @Override
+    protected void regexObjects() {
+        // TODO Auto-generated method stub
+        
+    }
 
 }

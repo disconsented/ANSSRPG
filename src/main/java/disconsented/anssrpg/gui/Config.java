@@ -22,13 +22,13 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg.gui;
 
-import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 import javax.swing.AbstractListModel;
@@ -56,12 +56,9 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import com.ibm.icu.text.SpoofChecker;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityList;
 import net.minecraft.item.Item;
-import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.config.JsonConfigHandler;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.SkillStore;
@@ -79,6 +76,7 @@ import disconsented.anssrpg.skill.objects.ItemSkill;
 import disconsented.anssrpg.skill.objects.ItemXP;
 import disconsented.anssrpg.skill.objects.Skill;
 import disconsented.anssrpg.skill.objects.XPGain;
+import javax.swing.JCheckBox;
 
 public class Config {
 
@@ -112,6 +110,7 @@ public class Config {
 	private static DefaultListModel entityModel = new DefaultListModel();
 	private static DefaultListModel itemModel = new DefaultListModel();
 	private static DefaultListModel blockModel = new DefaultListModel();
+	private static JCheckBox chckbxRegularExpression = new JCheckBox("Regular Expression");
 
 	/**
 	 * Launch the application.
@@ -138,23 +137,52 @@ public class Config {
 	    return skills;
 	}
 	private static void updateRegLists(){
+	    ArrayList<String> unsortedItemEntries = new ArrayList<String>();	    
 	    itemModel = new DefaultListModel();
 		Iterator it = Item.itemRegistry.getKeys().iterator();
 		while (it.hasNext()){
 		    String current = it.next().toString();
-			itemModel.addElement(current.substring(current.indexOf(':')+1, current.length()));
+		    unsortedItemEntries.add(current);			
 		}
-		blockModel = new DefaultListModel();
-		it = Block.blockRegistry.getKeys().iterator();
-		while (it.hasNext()){
-		    String current = it.next().toString();
-			blockModel.addElement(current.substring(current.indexOf(':')+1, current.length()));
+		Collections.sort(unsortedItemEntries);
+		for (String string : unsortedItemEntries){
+		    itemModel.addElement(string);
 		}
-		entityModel = new DefaultListModel();
-		it = EntityList.func_151515_b().iterator();
-		while (it.hasNext()){
-			entityModel.addElement(it.next().toString());
-		}
+		
+        ArrayList<String> unsortedBlockEntries = new ArrayList<String>();       
+        blockModel = new DefaultListModel();
+        it = Block.blockRegistry.getKeys().iterator();
+        while (it.hasNext()){
+            String current = it.next().toString();
+            unsortedBlockEntries.add(current);          
+        }
+        Collections.sort(unsortedBlockEntries);
+        for (String string : unsortedBlockEntries){
+            blockModel.addElement(string);
+        }
+        
+        ArrayList<String> unsortedEntityEntries = new ArrayList<String>();      
+        entityModel = new DefaultListModel();
+        it = EntityList.func_151515_b().iterator();
+        while (it.hasNext()){
+            String current = it.next().toString();
+            unsortedEntityEntries.add(current);         
+        }
+        Collections.sort(unsortedEntityEntries);
+        for (String string : unsortedEntityEntries){
+            entityModel.addElement(string);
+        }
+//		blockModel = new DefaultListModel();
+//		it = Block.blockRegistry.getKeys().iterator();
+//		while (it.hasNext()){
+//		    String current = it.next().toString();
+//			blockModel.addElement(current.substring(current.indexOf(':')+1, current.length()));
+//		}
+//		entityModel = new DefaultListModel();
+//		it = EntityList.func_151515_b().iterator();
+//		while (it.hasNext()){
+//			entityModel.addElement(it.next().toString());
+//		}
 		listRegBlock.setModel(blockModel);
 		listRegBlock.updateUI();
 		listRegEntity.setModel(entityModel);
@@ -424,6 +452,7 @@ public class Config {
 			tempBlockPerk.description = editorPerkDescription.getText();
 			tempBlockPerk.pointCost = (int) spinnerPointCost.getValue();
 			tempBlockPerk.requirements = currentPerk.requirements;
+			tempBlockPerk.regex = chckbxRegularExpression.isSelected();
 			perks.set(perks.indexOf(currentPerk),tempBlockPerk);
 			if(blockModel.contains(textPerkObject.getText())){
 			    tempBlockPerk.blockName = textPerkObject.getText();
@@ -754,6 +783,9 @@ public class Config {
 		
 		spinnerPointCost.setBounds(246, 137, 29, 20);
 		panelPerk.add(spinnerPointCost);
+		
+		chckbxRegularExpression.setBounds(401, 167, 124, 23);
+		panelPerk.add(chckbxRegularExpression);
 		
 		JPanel panelSkill = new JPanel();
 		panelSkill.addMouseListener(new MouseAdapter() {

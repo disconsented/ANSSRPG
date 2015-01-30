@@ -20,9 +20,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-/**
- *
- */
 package disconsented.anssrpg.perk;
 
 import java.util.ArrayList;
@@ -48,19 +45,22 @@ public class BlockPerk extends Perk {
 
 	@Expose
 	public String blockName = "default_blockName";
-	/**
-	 * @return
-	 */
+
 	public Block getBlock() { return block; }
 
-	/**
-	 * @param
-	 */
 	protected void setBlock(Block block) { this.block = block; }
+	
+    @Override
+    protected void searchObject() {
+        this.block = (Block) Block.blockRegistry.getObject(blockName); 
+        if (block == null){
+            throw new NullPointerException();
+        }
+    }
 
-	@Override
-	public void touchUp() {	
-		this.block = (Block) Block.blockRegistry.getObject(blockName); 
-		this.setSlug();
-	}
+    @Override
+    protected void regexObjects() {
+        // TODO Auto-generated method stub
+        
+    }
 }

@@ -29,12 +29,13 @@ import java.util.ArrayList;
 
 import com.google.gson.annotations.Expose;
 
-public abstract class Perk {
-	
+public abstract class Perk {	
 	@Expose
 	public String name = "default_name";
 	@Expose
 	public ArrayList<Requirement> requirements = new ArrayList<Requirement>();	
+	@Expose
+	public boolean regex = false;
 	public String perkSlug;//Not exposed as its made based on the name
 	@Expose
 	public String description = "default_description";
@@ -50,13 +51,6 @@ public abstract class Perk {
 		this.requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
 		this.requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
 	}
-	/**
-	 *
-	 * @param name - Name of the perk
-	 * @param description - Description
-	 * @param pointCost - Cost in points to unlock
-	 * @param requirement - Requirment object
-	 */
 	public Perk (String name, ArrayList<Requirement> requirements, String description, int pointCost){
 		this.name = name;
 		this.requirements = requirements;
@@ -64,7 +58,18 @@ public abstract class Perk {
 		this.pointCost = pointCost;
 	}
 
-	public abstract void touchUp(); //For converting strings into object references after deserialisation
+	public void touchUp(){
+	    this.setSlug();
+	    if (regex){
+	        regexObjects();
+	    }
+	    else
+	    {
+	        searchObject();
+	    }
+	}
+	protected abstract void searchObject();
+	protected abstract void regexObjects();
 	protected void setName(String name){this.name = name; this.perkSlug = getSlug(name);} 
 	protected void setRequirements(ArrayList<Requirement> requirments){this.requirements = requirments;}
 	protected void setDescription(String description){this.description = description;}

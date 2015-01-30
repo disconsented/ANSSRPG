@@ -15,9 +15,16 @@ buildscript {
     }
 }
 
+jar {
+        manifest {
+        attributes 'FMLCorePlugin': 'disconsented.anssrpg.core.Coremod',
+                        'FMLCorePluginContainsFMLMod': 'true'
+    }
+}
+
 apply plugin: 'forge'
 
-version = "DEV9"
+version = "DEV10"
 group= "com.disconsented.anssrpg" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "anssrpg"
 
@@ -63,6 +70,7 @@ processResources
 }
 targetCompatibility=7
 sourceCompatibility=7
+FMLCorePluginContainsFMLMod: true
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     from sourceSets.api.output

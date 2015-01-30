@@ -26,7 +26,6 @@ import java.util.Map.Entry;
 
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -44,6 +43,7 @@ import disconsented.anssrpg.commands.ConfigGUI;
 import disconsented.anssrpg.commands.Perks;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.config.JsonConfigHandler;
+import disconsented.anssrpg.core.asm.ASMplayer;
 import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
@@ -58,15 +58,13 @@ import disconsented.anssrpg.player.PlayerFile;
 import disconsented.anssrpg.skill.BlockBreaking;
 import disconsented.anssrpg.skill.EntityDamage;
 import disconsented.anssrpg.skill.ItemCrafting;
+import disconsented.anssrpg.skill.Smelting;
 
-@Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="DEV9")
-//@NetworkMod(clientSideRequired=true) // not used in 1.7
+@Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="DEV10",acceptableRemoteVersions="*")
 public class Main {
-        // The instance of your mod that Forge uses.
         @Instance(value = "ANSSRPG")
-        public static Main instance; //DONT DELETE THIs
+        public static Main instance; 
 
-        // Says where the client and server 'proxy' code is loaded.
         @SidedProxy(clientSide="disconsented.anssrpg.client.ClientProxy", serverSide="disconsented.anssrpg.CommonProxy")
         public static CommonProxy proxy;//DONT TOUCH THIS
         
@@ -75,9 +73,8 @@ public class Main {
         private Settings settings = Settings.getInstance();
         
        
-		@EventHandler // used in 1.6.2
-        //@PreInit    // used in 1.5.2
-        public void preInit(FMLPreInitializationEvent event) {
+		@EventHandler
+        public void preInit(FMLPreInitializationEvent event) throws Exception {		    
 			if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER){
 				settings.isServer = true;
 			}else{
@@ -98,8 +95,10 @@ public class Main {
                 MinecraftForge.EVENT_BUS.register(new BlockBreaking());     
                 MinecraftForge.EVENT_BUS.register(new EntityDamage());
                 MinecraftForge.EVENT_BUS.register(new ItemCrafting());
+                MinecraftForge.EVENT_BUS.register(new Smelting());
                 FMLCommonHandler.instance().bus().register(new ItemCrafting());
-                FMLCommonHandler.instance().bus().register(new DataSave());                
+                FMLCommonHandler.instance().bus().register(new DataSave());
+                FMLCommonHandler.instance().bus().register(new Smelting());
          }
         @EventHandler
         public void serverLoad(FMLServerStartingEvent event)
@@ -120,14 +119,12 @@ public class Main {
     			PlayerFile.writePlayer(player);
     		}
     	}
-        @EventHandler // used in 1.6.2
-        //@PostInit   // used in 1.5.2
+        @EventHandler
         public void postInit(FMLPostInitializationEvent event) throws Exception {
-        	JsonConfigHandler.loadPerkAndSkill(); //loaded in here so that other mods have their stuff loaded
+        	JsonConfigHandler.loadPerkAndSkill();
         	if (Settings.getDebug()){
 	        	System.out.println("ANSSRPG has the following perks registered");
 	        	System.out.println(PerkStore.getInstance().getPerks());
-	        	System.out.println();
         	}  
 //        	disconsented.anssrpg.gui.Config.main();
         }

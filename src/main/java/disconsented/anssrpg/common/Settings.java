@@ -46,9 +46,6 @@ public class Settings {
 	private static String statusMessage = "null";
 	private static double pointsRatio = .2;
 	/**
-	 * Checks if the references in the config gui are valid when saving
-	 */
-	/**
 	 * 0 - Disabled
 	 * 1 - Points awarded based on XP from skills
 	 * 2 - Points can be converted from vanilla levels

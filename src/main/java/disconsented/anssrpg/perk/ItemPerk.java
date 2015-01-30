@@ -44,31 +44,34 @@ public class ItemPerk extends Perk {
 	public ItemPerk(String name, ArrayList<Requirement> requirements,
 			String description, int pointCost) {
 		super(name, requirements, description, pointCost);
-		// TODO Auto-generated constructor stub
+
 	}
 
 	private Item item;
 	@Expose
 	public String itemName = "default_itemName";
 	
-	/**
-	 * @return the item
-	 */
+
 	public Item getItem() {
 		return item;
 	}
 
-	/**
-	 * @param item the item to set
-	 */
 	protected void setItem(Item item) {
 		this.item = item;
 	}
-
+	
 	@Override
-	public void touchUp() {		
+	public void searchObject() {		
 		this.item = (Item) Item.itemRegistry.getObject(itemName);
-		this.setSlug();
+		if (item == null){
+            throw new NullPointerException();
+        }
 	}
+
+    @Override
+    protected void regexObjects() {
+        // TODO Auto-generated method stub
+        
+    }
 
 }
