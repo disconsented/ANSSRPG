@@ -12,7 +12,7 @@ public class ASMplayer implements IClassTransformer{
     @Override
     public byte[] transform(String name, String transformedName,
             byte[] basicClass) {
-        if (name.equals("net.minecraft.entity.player.EntityPlayer")){
+        if (name.equals("net.minecraft.entity.player.EntityPlayerMP")){
             byte[] b = null;
             try{
                 ClassReader cr = new ClassReader(basicClass);
