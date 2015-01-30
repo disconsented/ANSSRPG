@@ -28,24 +28,13 @@ package disconsented.anssrpg.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.world.World;
-import net.minecraftforge.event.world.BlockEvent.BreakEvent;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
-import cpw.mods.fml.relauncher.Side;
-import disconsented.anssrpg.Main;
 import disconsented.anssrpg.common.Settings;
-import disconsented.anssrpg.core.asm.ASMplayer;
-import disconsented.anssrpg.network.PerkInfo;
-import disconsented.anssrpg.perk.LocalPerk;
 import disconsented.anssrpg.perk.Perk;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.player.PlayerFile;
@@ -88,8 +77,8 @@ public class DataSave {
 	    
 	    if (event.player instanceof EntityPlayerMP){
 	         EntityPlayerMP player = (EntityPlayerMP) event.player;
-	         System.out.println("Maybe this works/?"+ player.playerData);      
-	        
+	         String playerData = player.playerData;
+	         System.out.println("Maybe this works/? "+ playerData);
 	    }
 		if (Settings.getDebug()){
 			System.out.println("Player "+event.player.getCommandSenderName()+" with UUID:"+event.player.getPersistentID().toString()+"has logged in");
