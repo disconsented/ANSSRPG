@@ -15,13 +15,6 @@ buildscript {
     }
 }
 
-jar {
-        manifest {
-        attributes 'FMLCorePlugin': 'disconsented.anssrpg.core.Coremod',
-                        'FMLCorePluginContainsFMLMod': 'true'
-    }
-}
-
 apply plugin: 'forge'
 
 version = "DEV10"
@@ -70,8 +63,16 @@ processResources
 }
 targetCompatibility=7
 sourceCompatibility=7
-task deobfJar(type: Jar) {
+task deobfJar(type: Jar){
     from sourceSets.main.output
     from sourceSets.api.output
     classifier = 'dev'
+}
+
+jar 
+{
+        manifest {
+        attributes 'FMLCorePlugin': 'disconsented.anssrpg.core.Coremod',
+                        'FMLCorePluginContainsFMLMod': 'true'
+   }
 }
