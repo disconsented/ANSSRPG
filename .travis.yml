@@ -8,7 +8,7 @@ cache:
 sudo: false
 install: true
 script:
-  - gradle build
+  - gradle build --stacktrace
 notifications:
  irc:
   channels:
