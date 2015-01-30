@@ -98,6 +98,7 @@ public class DataSave {
 	 */
 	@SubscribeEvent
 	public void onPlayerLoggedOutEvent(PlayerLoggedOutEvent event){
+	    System.out.println(event.player.playerData);
 		if (Settings.getDebug()){
 			System.out.println("Player "+event.player.getCommandSenderName()+" with UUID:"+event.player.getPersistentID().toString()+"has logged out");
 			System.out.println("Saving player data");
