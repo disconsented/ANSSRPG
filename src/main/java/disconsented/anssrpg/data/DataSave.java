@@ -34,11 +34,13 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
+import cpw.mods.fml.relauncher.Side;
 import disconsented.anssrpg.Main;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.core.asm.ASMplayer;
@@ -79,20 +81,16 @@ public class DataSave {
 	/**
 	 * Load player data
 	 * @param event
-	 */
+	 */	
 	@SubscribeEvent
 	public void onPlayerLoggedInEvent(PlayerLoggedInEvent event){
-//	    ASMplayer.adjust();
-	    System.out.println(event.player.playerData);
+	    System.out.println(event.player.getDisplayName());
 		if (Settings.getDebug()){
 			System.out.println("Player "+event.player.getCommandSenderName()+" with UUID:"+event.player.getPersistentID().toString()+"has logged in");
 			System.out.println("Loading player data");
 		}		
 		PlayerFile.loadPlayer(event.player.getPersistentID().toString());
 		ArrayList<Perk> temp = PerkStore.getInstance().getPerks();
-//		for(int i = 0; i < temp.size(); i++){
-//			Main.snw.sendTo(new PerkInfo(temp.get(i).name, temp.get(i).description,temp.get(i).perkSlug, temp.get(i).pointCost, temp.get(i).requirementName, temp.get(i).requirementLevel), (EntityPlayerMP) event.player);
-//		}
 	}
 	/**
 	 * Saves player data

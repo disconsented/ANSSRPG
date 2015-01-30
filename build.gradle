@@ -70,7 +70,6 @@ processResources
 }
 targetCompatibility=7
 sourceCompatibility=7
-FMLCorePluginContainsFMLMod: true
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     from sourceSets.api.output
