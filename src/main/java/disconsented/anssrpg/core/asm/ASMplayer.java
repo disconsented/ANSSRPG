@@ -22,6 +22,8 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg.core.asm;
 
+import java.io.FileOutputStream;
+
 import net.minecraft.launchwrapper.IClassTransformer;
 
 import org.objectweb.asm.ClassReader;
@@ -31,6 +33,7 @@ import org.objectweb.asm.Opcodes;
 
 public class ASMplayer implements IClassTransformer{
 
+    @SuppressWarnings("unused")
     @Override
     public byte[] transform(String name, String transformedName,
             byte[] basicClass) {
@@ -42,6 +45,11 @@ public class ASMplayer implements IClassTransformer{
                 ClassVisitor ca = new PlayerFieldAdapter(Opcodes.ASM4, cw); //Actual transformation done here                  
                 cr.accept(ca, 0);
                 b = cw.toByteArray();
+                if (false){
+                    FileOutputStream fos = new FileOutputStream("EntityPlayerMP.class");
+                    fos.write(b);
+                    fos.close();
+                }
             }catch(Exception e){
                 System.err.println(e.getStackTrace());
             }
