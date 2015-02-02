@@ -73,13 +73,6 @@ public class DataSave {
 	 */	
 	@SubscribeEvent
 	public void onPlayerLoggedInEvent(PlayerLoggedInEvent event){
-	    System.out.println(event.player.getDisplayName());
-	    
-	    if (event.player instanceof EntityPlayerMP){
-	         EntityPlayerMP player = (EntityPlayerMP) event.player;
-	         String playerData = player.playerData;
-	         System.out.println("Maybe this works/? "+ playerData);
-	    }
 		if (Settings.getDebug()){
 			System.out.println("Player "+event.player.getCommandSenderName()+" with UUID:"+event.player.getPersistentID().toString()+"has logged in");
 			System.out.println("Loading player data");

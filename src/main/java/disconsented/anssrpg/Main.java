@@ -43,7 +43,6 @@ import disconsented.anssrpg.commands.ConfigGUI;
 import disconsented.anssrpg.commands.Perks;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.config.JsonConfigHandler;
-import disconsented.anssrpg.core.asm.ASMplayer;
 import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
