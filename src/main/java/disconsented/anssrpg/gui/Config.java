@@ -66,8 +66,12 @@ import disconsented.anssrpg.perk.BlockPerk;
 import disconsented.anssrpg.perk.EntityPerk;
 import disconsented.anssrpg.perk.ItemPerk;
 import disconsented.anssrpg.perk.Perk;
+import disconsented.anssrpg.perk.RegexBlockPerk;
+import disconsented.anssrpg.perk.RegexEntityPerk;
+import disconsented.anssrpg.perk.RegexItemPerk;
 import disconsented.anssrpg.perk.Requirement;
 import disconsented.anssrpg.perk.Requirement.Action;
+import disconsented.anssrpg.perk.TitlePerk;
 import disconsented.anssrpg.skill.objects.BlockSkill;
 import disconsented.anssrpg.skill.objects.BlockXP;
 import disconsented.anssrpg.skill.objects.EntitySkill;
@@ -76,6 +80,7 @@ import disconsented.anssrpg.skill.objects.ItemSkill;
 import disconsented.anssrpg.skill.objects.ItemXP;
 import disconsented.anssrpg.skill.objects.Skill;
 import disconsented.anssrpg.skill.objects.XPGain;
+
 import javax.swing.JCheckBox;
 import javax.swing.JTextPane;
 
@@ -111,6 +116,9 @@ public class Config {
 	private static DefaultListModel entityModel = new DefaultListModel();
 	private static DefaultListModel itemModel = new DefaultListModel();
 	private static DefaultListModel blockModel = new DefaultListModel();
+	private static ArrayList<String> entityList = new ArrayList<String>();
+	private static ArrayList<String> itemList = new ArrayList<String>();
+	private static ArrayList<String> blockList = new ArrayList<String>();
 
 	/**
 	 * Launch the application.
@@ -142,7 +150,8 @@ public class Config {
 		Iterator it = Item.itemRegistry.getKeys().iterator();
 		while (it.hasNext()){
 		    String current = it.next().toString();
-		    unsortedItemEntries.add(current);			
+		    unsortedItemEntries.add(current);
+		    itemList.add(current.substring(current.lastIndexOf(":")));
 		}
 		Collections.sort(unsortedItemEntries);
 		for (String string : unsortedItemEntries){
@@ -154,7 +163,8 @@ public class Config {
         it = Block.blockRegistry.getKeys().iterator();
         while (it.hasNext()){
             String current = it.next().toString();
-            unsortedBlockEntries.add(current);          
+            unsortedBlockEntries.add(current);
+            blockList.add(current.substring(current.lastIndexOf(":")));
         }
         Collections.sort(unsortedBlockEntries);
         for (String string : unsortedBlockEntries){
@@ -166,23 +176,13 @@ public class Config {
         it = EntityList.func_151515_b().iterator();
         while (it.hasNext()){
             String current = it.next().toString();
-            unsortedEntityEntries.add(current);         
+            unsortedEntityEntries.add(current);
+            entityList.add(current);
         }
         Collections.sort(unsortedEntityEntries);
         for (String string : unsortedEntityEntries){
             entityModel.addElement(string);
         }
-//		blockModel = new DefaultListModel();
-//		it = Block.blockRegistry.getKeys().iterator();
-//		while (it.hasNext()){
-//		    String current = it.next().toString();
-//			blockModel.addElement(current.substring(current.indexOf(':')+1, current.length()));
-//		}
-//		entityModel = new DefaultListModel();
-//		it = EntityList.func_151515_b().iterator();
-//		while (it.hasNext()){
-//			entityModel.addElement(it.next().toString());
-//		}
 		listRegBlock.setModel(blockModel);
 		listRegBlock.updateUI();
 		listRegEntity.setModel(entityModel);
@@ -453,7 +453,7 @@ public class Config {
 			tempBlockPerk.pointCost = (int) spinnerPointCost.getValue();
 			tempBlockPerk.requirements = currentPerk.requirements;
 			perks.set(perks.indexOf(currentPerk),tempBlockPerk);
-			if(blockModel.contains(textPerkObject.getText())){
+			if(blockList.contains(textPerkObject.getText())){
 			    tempBlockPerk.blockName = textPerkObject.getText();
 			    currentPerk = tempBlockPerk;
 			}
@@ -467,7 +467,7 @@ public class Config {
 			tempEntityPerk.name = textPerkName.getText();
 			tempEntityPerk.description = editorPerkDescription.getText();
 			tempEntityPerk.pointCost = (int) spinnerPointCost.getValue();
-	        if(entityModel.contains(textPerkObject.getText())){
+	        if(entityList.contains(textPerkObject.getText())){
 	            tempEntityPerk.entityName = textPerkObject.getText();
 	        }
 	        else
@@ -483,7 +483,7 @@ public class Config {
 			tempItemPerk.name = textPerkName.getText();
 			tempItemPerk.description = editorPerkDescription.getText();
 			tempItemPerk.pointCost = (int) spinnerPointCost.getValue();
-	        if(itemModel.contains(textPerkObject.getText())){
+	        if(itemList.contains(textPerkObject.getText())){
 	            tempItemPerk.itemName = textPerkObject.getText();
 	        }
 	        else
@@ -494,7 +494,35 @@ public class Config {
 			perks.set(perks.indexOf(currentPerk),tempItemPerk);
 			currentPerk = tempItemPerk;
 			break;
-		}
+		case "RegexBlock":
+		    RegexBlockPerk regexBlockPerk = new RegexBlockPerk();
+		    regexBlockPerk.name = textPerkName.getText();
+		    regexBlockPerk.description  = editorPerkDescription.getText();
+		    regexBlockPerk.pointCost = (int) spinnerPointCost.getValue();
+		    regexBlockPerk.searchQuery = textPerkObject.getText();
+          break;
+		case "RegexEntity":
+		    RegexEntityPerk regexEntityPerk = new RegexEntityPerk();
+		    regexEntityPerk.name = textPerkName.getText();
+            regexEntityPerk.description  = editorPerkDescription.getText();
+            regexEntityPerk.pointCost = (int) spinnerPointCost.getValue();
+            regexEntityPerk.searchQuery = textPerkObject.getText();
+	      break;
+		case "RegexItem":
+		    RegexItemPerk regexItemPerk = new RegexItemPerk();
+		    regexItemPerk.name = textPerkName.getText();
+            regexItemPerk.description  = editorPerkDescription.getText();
+            regexItemPerk.pointCost = (int) spinnerPointCost.getValue();
+            regexItemPerk.searchQuery = textPerkObject.getText();
+	      break;
+		case "Title":
+		    TitlePerk title = new TitlePerk();
+		    title.name = textPerkName.getText();
+		    title.description  = editorPerkDescription.getText();
+		    title.pointCost = (int) spinnerPointCost.getValue();
+		    title.setTitle(textPerkObject.getText());
+	      break;
+		}		
 	}
 
 	protected static void updateCurrentSkillExpInfo() {
@@ -690,7 +718,7 @@ public class Config {
 		textPerkExtraData.setColumns(10);
 		
 		
-		spinnerPerkType.setModel(new SpinnerListModel(new String[] {"Block", "Item", "Entity"}));
+		spinnerPerkType.setModel(new SpinnerListModel(new String[] {"Block", "Item", "Entity", "RegexBlock", "RegexItem", "RegexEntity", "Title"}));
 		spinnerPerkType.setBounds(246, 11, 149, 20);
 		panelPerk.add(spinnerPerkType);
 		
