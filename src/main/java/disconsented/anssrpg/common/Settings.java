@@ -25,21 +25,9 @@ package disconsented.anssrpg.common;
 
 import java.io.File;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.relauncher.Side;
-import disconsented.anssrpg.commands.ConfigGUI;
-import disconsented.anssrpg.network.PerkInfo;
-import disconsented.anssrpg.network.PerkInfoHandler;
-import disconsented.anssrpg.network.Request;
-import disconsented.anssrpg.network.RequestHandler;
-import disconsented.anssrpg.network.Responce;
-import disconsented.anssrpg.network.ResponceHandler;
 import net.minecraft.server.MinecraftServer;
-import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.config.Configuration;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class Settings {
 	private static boolean debug = false;
@@ -63,6 +51,44 @@ public class Settings {
 	
 	private Settings(){}
 	
+	public static boolean getDebug(){
+		return  debug;
+	}
+	public static File getFolder(){
+		if (isServer){
+			return new File(MinecraftServer.getServer().getFolderName()+"\\data\\");
+		}
+		else{
+			return new File("saves\\"+MinecraftServer.getServer().getFolderName()+"\\data\\");
+		}
+				
+	}
+	public static Settings getInstance()
+	{
+		return instance;
+	}
+	public static double getLevelCurve() {
+		return levelCurve;
+	}
+	public static int getPointsMode(){
+		return pointsMode;
+	}
+	public static String getStatusMessage()
+	{
+		return statusMessage;
+	}
+	public static void setDebug(Boolean yes){
+		debug = yes;
+	}
+	public static void setLevelCurve(Double amount){
+		levelCurve = amount;
+	}
+	public static void setPointsMode(int int1) {
+		pointsMode = int1;
+	}
+	public static void setStatusMessage(String message){
+		statusMessage = message;
+	}
 	public void load(FMLPreInitializationEvent event) {        
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
         config.load();
@@ -78,43 +104,5 @@ public class Settings {
         logging = config.get(misc, "enableLogging", true, "Enables logging to console.").getBoolean();
 
         config.save();
-	}
-	public static Settings getInstance()
-	{
-		return instance;
-	}
-	public static boolean getDebug(){
-		return  debug;
-	}
-	public static void setDebug(Boolean yes){
-		debug = yes;
-	}
-	public static double getLevelCurve() {
-		return levelCurve;
-	}
-	public static void setLevelCurve(Double amount){
-		levelCurve = amount;
-	}
-	public static void setStatusMessage(String message){
-		statusMessage = message;
-	}
-	public static String getStatusMessage()
-	{
-		return statusMessage;
-	}
-	public static void setPointsMode(int int1) {
-		pointsMode = int1;
-	}
-	public static int getPointsMode(){
-		return pointsMode;
-	}
-	public static File getFolder(){
-		if (isServer){
-			return new File(MinecraftServer.getServer().getFolderName()+"\\data\\");
-		}
-		else{
-			return new File("saves\\"+MinecraftServer.getServer().getFolderName()+"\\data\\");
-		}
-				
 	}
 }

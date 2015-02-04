@@ -36,12 +36,12 @@ public class Request implements IMessage{
     }
 
     @Override
-    public void toBytes(ByteBuf buf) {
-    	ByteBufUtils.writeUTF8String(buf, slug);
+    public void fromBytes(ByteBuf buf) {
+        this.slug = ByteBufUtils.readUTF8String(buf);
     }
 
     @Override
-    public void fromBytes(ByteBuf buf) {
-        this.slug = ByteBufUtils.readUTF8String(buf);
+    public void toBytes(ByteBuf buf) {
+    	ByteBufUtils.writeUTF8String(buf, slug);
     }
 }

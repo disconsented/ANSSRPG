@@ -24,7 +24,6 @@ package disconsented.anssrpg.skill;
 
 import java.util.ArrayList;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
@@ -32,20 +31,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerOpenContainerEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
-import disconsented.anssrpg.Main;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
 import disconsented.anssrpg.data.SkillStore;
 import disconsented.anssrpg.handler.PlayerHandler;
-import disconsented.anssrpg.perk.EntityPerk;
-import disconsented.anssrpg.perk.ItemPerk;
 import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
-import disconsented.anssrpg.skill.objects.EntitySkill;
-import disconsented.anssrpg.skill.objects.EntityXP;
 import disconsented.anssrpg.skill.objects.ItemSkill;
 import disconsented.anssrpg.skill.objects.ItemXP;
-import disconsented.anssrpg.skill.objects.XPGain;
 
 /**
  * @author James
@@ -55,6 +48,37 @@ import disconsented.anssrpg.skill.objects.XPGain;
  * ItemCrafted handles just giving XP
  */
     public class ItemCrafting{
+    	@SubscribeEvent //Assumed that crafting wasn't blocked
+	    public void onItemCraftedEvent(ItemCraftedEvent event) { 
+    		if(event.player instanceof EntityPlayerMP) {
+    			EntityPlayerMP playerMP = (EntityPlayerMP)event.player;
+    			PlayerData player = PlayerStore.getInstance().getPlayer(playerMP.getUniqueID().toString());
+    			Item item = (Item) ((ItemStack) event.player.openContainer.inventoryItemStacks.get(0)).getItem();
+    			ArrayList<Slug> entitylist = PerkStore.getInstance().getSlugs(item);
+    			boolean requiresPerk = false;
+    			if (entitylist != null){
+    				requiresPerk = true;
+    			}
+    			for (ItemSkill skill : SkillStore.getInstance().getItemSkill()) {
+    				ArrayList<ItemXP> temp = skill.getExp();
+    				for (int i = 0; i < temp.size(); i++){
+    					Item compareItem = ((ItemXP) temp.get(i)).getItem();
+    					if(item.equals(compareItem)) {
+    						if (requiresPerk){
+    							if (PlayerHandler.hasPerk(player, entitylist)){
+    									PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
+    							}
+    						}
+    						else
+    						{
+    								PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
+    						}
+    					}
+    				}
+    			}
+    		}
+        	
+    	}
     	@SubscribeEvent
     	public void onPlayerOpenContainer(PlayerOpenContainerEvent event){    		
     		if(event.entityPlayer instanceof EntityPlayerMP) {
@@ -90,37 +114,6 @@ import disconsented.anssrpg.skill.objects.XPGain;
     		}
     		}
 	        	
-    	}
-    	@SubscribeEvent //Assumed that crafting wasn't blocked
-	    public void onItemCraftedEvent(ItemCraftedEvent event) { 
-    		if(event.player instanceof EntityPlayerMP) {
-    			EntityPlayerMP playerMP = (EntityPlayerMP)event.player;
-    			PlayerData player = PlayerStore.getInstance().getPlayer(playerMP.getUniqueID().toString());
-    			Item item = (Item) ((ItemStack) event.player.openContainer.inventoryItemStacks.get(0)).getItem();
-    			ArrayList<Slug> entitylist = PerkStore.getInstance().getSlugs(item);
-    			boolean requiresPerk = false;
-    			if (entitylist != null){
-    				requiresPerk = true;
-    			}
-    			for (ItemSkill skill : SkillStore.getInstance().getItemSkill()) {
-    				ArrayList<ItemXP> temp = skill.getExp();
-    				for (int i = 0; i < temp.size(); i++){
-    					Item compareItem = ((ItemXP) temp.get(i)).getItem();
-    					if(item.equals(compareItem)) {
-    						if (requiresPerk){
-    							if (PlayerHandler.hasPerk(player, entitylist)){
-    									PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
-    							}
-    						}
-    						else
-    						{
-    								PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
-    						}
-    					}
-    				}
-    			}
-    		}
-        	
     	} 
     }	    
     

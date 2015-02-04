@@ -57,10 +57,6 @@ public class JsonConfigHandler {
 	private static File perkFile = new File("config/ANSSRPG","perk.cfg");
 	private static File configFileLocation = new File("config/ANSSRPG");
 	
-	public static void loadPerkAndSkill(){
-		loadPerkConfig();		
-		loadSkillConfig();
-	}
 	public static void createPerkAndSkill(){		
 		createSkillConfig(null);		
 		createPerkConfig(null);
@@ -94,28 +90,6 @@ public class JsonConfigHandler {
         }
 	}
 	/**
-	 * Loads perk data from disk into memory
-	 */
-	private static void loadPerkConfig(){
-	   try {
-		   Gson gson = new Gson();
-		   Type objectStoreType = new TypeToken<PerkStore>(){}.getType();
-		   Reader isReader = new InputStreamReader(new FileInputStream(perkFile));
-		   PerkStore perkStore = gson.fromJson(isReader, objectStoreType);
-		   isReader.close();
-
-		   if(perkStore != null) {
-			   perkStore.touchUp();
-		   }
-	   }
-	   catch (FileNotFoundException e){
-		   createPerkConfig(null);
-	   }
-	   catch (IOException iox) {
-			   iox.printStackTrace();
-	   }
-	}
-	/**
 	 * Writes the skillStore to disk, if skillStore is null it will create the default one
 	 * @param skillStore
 	 */
@@ -140,6 +114,32 @@ public class JsonConfigHandler {
                 System.err.println("Exception when creating skill config");
                 System.err.println(e.getLocalizedMessage());
         }  
+	}
+	public static void loadPerkAndSkill(){
+		loadPerkConfig();		
+		loadSkillConfig();
+	}
+	/**
+	 * Loads perk data from disk into memory
+	 */
+	private static void loadPerkConfig(){
+	   try {
+		   Gson gson = new Gson();
+		   Type objectStoreType = new TypeToken<PerkStore>(){}.getType();
+		   Reader isReader = new InputStreamReader(new FileInputStream(perkFile));
+		   PerkStore perkStore = gson.fromJson(isReader, objectStoreType);
+		   isReader.close();
+
+		   if(perkStore != null) {
+			   perkStore.touchUp();
+		   }
+	   }
+	   catch (FileNotFoundException e){
+		   createPerkConfig(null);
+	   }
+	   catch (IOException iox) {
+			   iox.printStackTrace();
+	   }
 	}
 	/**
 	 * Loads skill file into memory

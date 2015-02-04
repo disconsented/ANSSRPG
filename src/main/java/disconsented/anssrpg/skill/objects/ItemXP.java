@@ -25,8 +25,6 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.skill.objects;
 
-import com.google.gson.annotations.Expose;
-
 import net.minecraft.item.Item;
 
 /**
@@ -43,13 +41,13 @@ public class ItemXP extends XPGain {
 	public ItemXP() {
 	}
 
+	public Item getItem(){
+		return item;
+	}
 	@Override
 	public void touchUp() {
 		item = (Item) Item.itemRegistry.getObject(name);
 
-	}
-	public Item getItem(){
-		return item;
 	}
 
 }

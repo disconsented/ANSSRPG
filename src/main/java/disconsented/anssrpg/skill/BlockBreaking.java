@@ -34,12 +34,10 @@ import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
 import disconsented.anssrpg.data.SkillStore;
 import disconsented.anssrpg.handler.PlayerHandler;
-import disconsented.anssrpg.perk.BlockPerk;
 import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.BlockSkill;
 import disconsented.anssrpg.skill.objects.BlockXP;
-import disconsented.anssrpg.skill.objects.XPGain;
 	
     public class BlockBreaking{   
     	/**

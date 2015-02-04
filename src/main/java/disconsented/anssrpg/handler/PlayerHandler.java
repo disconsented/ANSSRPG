@@ -30,13 +30,10 @@ import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
-import disconsented.anssrpg.perk.BlockPerk;
-import disconsented.anssrpg.perk.EntityPerk;
 import disconsented.anssrpg.perk.Perk;
+import disconsented.anssrpg.perk.Requirement;
 import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
-import disconsented.anssrpg.skill.objects.BlockXP;
-import disconsented.anssrpg.perk.Requirement;
  /**
   * @author Disconsented
   * Handles the data that is stored on players (experience for skills and perks)
@@ -44,18 +41,9 @@ import disconsented.anssrpg.perk.Requirement;
 
     public final class PlayerHandler{
     	
-    	public static PlayerData getPlayer(String playerID){
-    		PlayerData player = PlayerStore.getPlayer(playerID);
-    		if (player == null){
-    			DataSave.createPlayer(playerID);
-    			player = PlayerStore.getPlayer(playerID);
-    		}
-    		return player;
-    	}
     	public static void addPerk(Perk perk, PlayerData player){
     		player.getPerkList().add(perk.slug);
     	}
-    	
     	public static String addPerk(String perkSlug, PlayerData player){
     		/*Get Perk
     		 * Check requirements
@@ -113,28 +101,12 @@ import disconsented.anssrpg.perk.Requirement;
     			toReturn = "All conditions meet, granting perk";
     		}
 			return toReturn;
-    	}    	
+    	}
+    	
     	public static void addXp(Integer num, String skillName, PlayerData player){
     		player.getSkillExp().put(skillName, player.getSkillExp().get(skillName) + num);
-    	}
-    	
-    	public static boolean hasPerk(Perk perk, PlayerData player){
-			return player.getPerkList().contains(perk.getSlug());
-		}
-    	
-    	public static int getPoints(PlayerData player){
-    		return player.getPoints();
-    	}
-		public static boolean hasPerk(PlayerData player, ArrayList<Slug> slugList) {
-		    for (Slug slug : slugList){
-		        if (player.getPerkList().contains(slug)){
-		            return true;
-		        }
-		        return false;
-		    }
-		    return false;
-		}
-		public static void awardXP(PlayerData player, String name, int value, EntityPlayer playerEntity) {
+    	}    	
+    	public static void awardXP(PlayerData player, String name, int value, EntityPlayer playerEntity) {
 			if (player.getSkillExp().get(name) != null){
 			player.getSkillExp().put(name, 
 					new Integer(player.getSkillExp().get(name).intValue() + value));
@@ -159,10 +131,35 @@ import disconsented.anssrpg.perk.Requirement;
 			
 						
 		}
+    	
+    	public static int getLevel(int xp){
+			return (int) (Math.log10((double)xp)/Math.log10(Settings.getInstance().getLevelCurve()));
+		}
+    	
+    	public static PlayerData getPlayer(String playerID){
+    		PlayerData player = PlayerStore.getPlayer(playerID);
+    		if (player == null){
+    			DataSave.createPlayer(playerID);
+    			player = PlayerStore.getPlayer(playerID);
+    		}
+    		return player;
+    	}
+		public static int getPoints(PlayerData player){
+    		return player.getPoints();
+    	}
+		public static boolean hasPerk(Perk perk, PlayerData player){
+			return player.getPerkList().contains(perk.getSlug());
+		}
+		public static boolean hasPerk(PlayerData player, ArrayList<Slug> slugList) {
+		    for (Slug slug : slugList){
+		        if (player.getPerkList().contains(slug)){
+		            return true;
+		        }
+		        return false;
+		    }
+		    return false;
+		}
 		public static void taskFail(EntityPlayer player) {			
 			player.addChatComponentMessage(new ChatComponentText("You are unable to preform this task"));
-		}
-		public static int getLevel(int xp){
-			return (int) (Math.log10((double)xp)/Math.log10(Settings.getInstance().getLevelCurve()));
 		}
    }

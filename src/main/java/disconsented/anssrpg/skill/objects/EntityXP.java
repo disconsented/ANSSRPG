@@ -25,8 +25,6 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.skill.objects;
 
-import com.google.gson.annotations.Expose;
-
 import net.minecraft.entity.EntityList;
 
 /**
@@ -43,12 +41,12 @@ public class EntityXP extends XPGain {
 	public EntityXP() {
 	}
 
+	public Class getEntity(){
+		return entity;
+	}
 	@Override
 	public void touchUp() {
 		entity = (Class) EntityList.stringToClassMapping.get(name);
 
-	}
-	public Class getEntity(){
-		return entity;
 	}
 }

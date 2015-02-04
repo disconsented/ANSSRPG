@@ -44,17 +44,6 @@ public class ItemSkill extends Skill {
 	}
 
 	@Override
-	public void touchUp() {
-		for (XPGain xp : exp){
-			ItemXP thing = new ItemXP();
-			thing.name = xp.name;
-			thing.xp = xp.xp;
-			thing.touchUp();
-		}
-		
-	}
-
-	@Override
 	public ArrayList<ItemXP> getExp() {
 		return exp;
 	}
@@ -62,6 +51,17 @@ public class ItemSkill extends Skill {
 	@Override
 	public void setExp(ArrayList exp) {
 		this.exp = exp;
+		
+	}
+
+	@Override
+	public void touchUp() {
+		for (XPGain xp : exp){
+			ItemXP thing = new ItemXP();
+			thing.name = xp.name;
+			thing.xp = xp.xp;
+			thing.touchUp();
+		}
 		
 	}
 

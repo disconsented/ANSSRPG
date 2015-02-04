@@ -40,14 +40,6 @@ public class BlockSkill extends Skill {
 		exp.add(new BlockXP());
 		exp.add(new BlockXP());
 	}
-	public void touchUp() {
-		for (XPGain xp : exp){
-			BlockXP thing = new BlockXP();
-			thing.name = xp.name;
-			thing.xp = xp.xp;
-			thing.touchUp();
-		}
-	}
 	@Override
 	public ArrayList<BlockXP> getExp() {
 		return exp;
@@ -55,5 +47,13 @@ public class BlockSkill extends Skill {
 	@Override
 	public void setExp(ArrayList exp) {
 		this.exp = exp;		
+	}
+	public void touchUp() {
+		for (XPGain xp : exp){
+			BlockXP thing = new BlockXP();
+			thing.name = xp.name;
+			thing.xp = xp.xp;
+			thing.touchUp();
+		}
 	}
 }

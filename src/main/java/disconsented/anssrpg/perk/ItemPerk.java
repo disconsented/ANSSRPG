@@ -27,9 +27,9 @@ package disconsented.anssrpg.perk;
 
 import java.util.ArrayList;
 
-import com.google.gson.annotations.Expose;
-
 import net.minecraft.item.Item;
+
+import com.google.gson.annotations.Expose;
 
 /**
  * @author Disconsented
@@ -37,35 +37,35 @@ import net.minecraft.item.Item;
  */
 public class ItemPerk extends Perk {
 
+	private Item item;
+
+	@Expose
+	public String itemName = "default_itemName";
+
 	public ItemPerk() {
 		super();
 	}
-
 	public ItemPerk(String name, ArrayList<Requirement> requirements,
 			String description, int pointCost) {
 		super(name, requirements, description, pointCost);
 
 	}
-
-	private Item item;
-	@Expose
-	public String itemName = "default_itemName";
 	
 
 	public Item getItem() {
 		return item;
 	}
 
-	protected void setItem(Item item) {
-		this.item = item;
-	}
-	
 	@Override
 	public void searchObject() {		
 		this.item = (Item) Item.itemRegistry.getObject(itemName);
 		if (item == null){
             throw new NullPointerException();
         }
+	}
+	
+	protected void setItem(Item item) {
+		this.item = item;
 	}
 
 }

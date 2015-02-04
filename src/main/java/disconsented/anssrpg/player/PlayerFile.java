@@ -27,8 +27,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import net.minecraft.server.MinecraftServer;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

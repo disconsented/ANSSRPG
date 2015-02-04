@@ -40,21 +40,21 @@ public class PlayerStore {
 	
 	protected PlayerStore() {/* Exists only to defeat instantiation.*/}
 	
+	public static void addPlayer(PlayerData player) {
+		data.put(player.getPlayerID(), player);
+	}
+	public static HashMap<String,PlayerData> getAllData(){
+		return data;
+	}
 	public static PlayerStore getInstance() {
 		if(instance == null) {
 			instance = new PlayerStore();
 		}
 		return instance;
 	}
-	public static void addPlayer(PlayerData player) {
-		data.put(player.getPlayerID(), player);
-	}
 	public static PlayerData getPlayer(String playerID)
 	{
 		return data.get(playerID);
-	}
-	public static HashMap<String,PlayerData> getAllData(){
-		return data;
 	}
 
 }

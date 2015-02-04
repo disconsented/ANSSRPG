@@ -28,12 +28,8 @@ package disconsented.anssrpg.player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
 
-import disconsented.anssrpg.perk.Perk;
 import disconsented.anssrpg.perk.Slug;
-import net.minecraft.item.Item;
 
 public class PlayerData {
 	private ArrayList<Slug> perkList = new ArrayList<Slug>();
@@ -47,40 +43,40 @@ public class PlayerData {
 		this.playerID = playerID; 
 		this.points = points;
 	}
-	@Override
-	public String toString(){
-		return this.playerID;		
-	}
-
 	public ArrayList<Slug> getPerkList() {
 		return perkList;
-	}
-
-	public void setPerkList(ArrayList<Slug> perkList) {
-		this.perkList = perkList;
-	}
-
-	public HashMap<String, Integer> getSkillExp() {
-		return skillExp;
-	}
-
-	public void setSkillExp(HashMap<String, Integer> skillExp) {
-		this.skillExp = skillExp;
 	}
 
 	public String getPlayerID() {
 		return playerID;
 	}
 
-	public void setPlayerID(String playerID) {
-		this.playerID = playerID;
-	}
-
 	public int getPoints() {
 		return points;
 	}
 
+	public HashMap<String, Integer> getSkillExp() {
+		return skillExp;
+	}
+
+	public void setPerkList(ArrayList<Slug> perkList) {
+		this.perkList = perkList;
+	}
+
+	public void setPlayerID(String playerID) {
+		this.playerID = playerID;
+	}
+
 	public void setPoints(int points) {
 		this.points = points;
+	}
+
+	public void setSkillExp(HashMap<String, Integer> skillExp) {
+		this.skillExp = skillExp;
+	}
+
+	@Override
+	public String toString(){
+		return this.playerID;		
 	}
 }

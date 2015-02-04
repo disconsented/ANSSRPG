@@ -29,7 +29,6 @@ package disconsented.anssrpg.data;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import net.minecraft.entity.player.EntityPlayerMP;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
@@ -47,15 +46,6 @@ import disconsented.anssrpg.player.PlayerFile;
  *onLivingDeath - Saves data
  */
 public class DataSave {	
-	public static PlayerData getPlayerData(String playerID){
-		PlayerData player = PlayerStore.getInstance().getPlayer(playerID);
-		if (player != null){
-			return player;
-		}else{
-			createPlayer(playerID);
-			return PlayerStore.getInstance().getPlayer(playerID);
-		}
-	}
 	public static void addPlayer(PlayerData player, String PlayerID){
 		PlayerStore.getInstance().addPlayer(player);
 	}
@@ -66,6 +56,15 @@ public class DataSave {
 		addPlayer(temp, playerID);
 		tempAL.clear();
 		tempHM.clear();
+	}
+	public static PlayerData getPlayerData(String playerID){
+		PlayerData player = PlayerStore.getInstance().getPlayer(playerID);
+		if (player != null){
+			return player;
+		}else{
+			createPlayer(playerID);
+			return PlayerStore.getInstance().getPlayer(playerID);
+		}
 	}
 	/**
 	 * Load player data

@@ -48,6 +48,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SpinnerListModel;
@@ -80,9 +81,6 @@ import disconsented.anssrpg.skill.objects.ItemSkill;
 import disconsented.anssrpg.skill.objects.ItemXP;
 import disconsented.anssrpg.skill.objects.Skill;
 import disconsented.anssrpg.skill.objects.XPGain;
-
-import javax.swing.JCheckBox;
-import javax.swing.JTextPane;
 
 public class Config {
 
@@ -121,204 +119,13 @@ public class Config {
 	private static ArrayList<String> blockList = new ArrayList<String>();
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main() {
-		Config window = new Config();
-		updatePerkList();
-		updateSkillList();
-		updateRegLists();
-		window.frame.setVisible(true);
-	}
-
-	
-	/**
 	 * Create the application.
 	 */
 	public Config() {
 		initialize();
 	}
-	public static ArrayList<Perk> getPerks(){
-	    return perks;
-	}
-	public static ArrayList<Skill> getSkills(){
-	    return skills;
-	}
-	private static void updateRegLists(){
-	    ArrayList<String> unsortedItemEntries = new ArrayList<String>();	    
-	    itemModel = new DefaultListModel();
-		Iterator it = Item.itemRegistry.getKeys().iterator();
-		while (it.hasNext()){
-		    String current = it.next().toString();
-		    unsortedItemEntries.add(current);
-		    itemList.add(current.substring(current.lastIndexOf(":")));
-		}
-		Collections.sort(unsortedItemEntries);
-		for (String string : unsortedItemEntries){
-		    itemModel.addElement(string);
-		}
-		
-        ArrayList<String> unsortedBlockEntries = new ArrayList<String>();       
-        blockModel = new DefaultListModel();
-        it = Block.blockRegistry.getKeys().iterator();
-        while (it.hasNext()){
-            String current = it.next().toString();
-            unsortedBlockEntries.add(current);
-            blockList.add(current.substring(current.lastIndexOf(":")));
-        }
-        Collections.sort(unsortedBlockEntries);
-        for (String string : unsortedBlockEntries){
-            blockModel.addElement(string);
-        }
-        
-        ArrayList<String> unsortedEntityEntries = new ArrayList<String>();      
-        entityModel = new DefaultListModel();
-        it = EntityList.func_151515_b().iterator();
-        while (it.hasNext()){
-            String current = it.next().toString();
-            unsortedEntityEntries.add(current);
-            entityList.add(current);
-        }
-        Collections.sort(unsortedEntityEntries);
-        for (String string : unsortedEntityEntries){
-            entityModel.addElement(string);
-        }
-		listRegBlock.setModel(blockModel);
-		listRegBlock.updateUI();
-		listRegEntity.setModel(entityModel);
-		listRegEntity.updateUI();
-		listRegItem.setModel(itemModel);
-		listRegItem.updateUI();
-	}
-	private static void updatePerkList(){
-		DefaultListModel model = new DefaultListModel();
-		for (Perk perk: perks){
-			model.addElement(perk.name);
-		}
-		listPerk.setModel(model);
-		listPerk.updateUI();
-	}
-	private static void updateSkillList(){
-		DefaultListModel model = new DefaultListModel();
-		for (Skill skill: skills){
-			model.addElement(skill.name);
-		}
-		listSkill.setModel(model);
-		listSkill.updateUI();
-	}
-	private static void updateSkillExpList() {
-		DefaultListModel model = new DefaultListModel();
-		if (currentSkill != null){
-			ArrayList<XPGain> local = currentSkill.getExp();		
-			for (int i = 0; i < local.size(); i++){
-				model.addElement(local.get(i).getName());
-			}
-		}
-		listSkillExp.setModel(model);
-		listSkillExp.updateUI();		
-	}
 
-	private static void updateReqList() {
-		DefaultListModel model = new DefaultListModel();
-		if ( currentPerk != null && currentPerk.getRequirements() != null){
-    		ArrayList<Requirement> temp = currentPerk.getRequirements();
-    		for (Requirement req: temp){
-    			model.addElement(req.name);
-    		}
-		}
-		listRequirement.setModel(model);
-		listRequirement.updateUI();
-		
-		
-	}
-
-	protected static void updateCurrentSkill() {
-		if (listSkill.getSelectedIndex() > -1){
-			currentSkill = skills.get(listSkill.getSelectedIndex());			
-			if (currentSkill instanceof BlockSkill || currentSkill == null){
-				spinnerSkillType.setValue("Block");
-			}else if(currentSkill instanceof ItemSkill){
-				spinnerSkillType.setValue("Item");
-			}else if(currentSkill instanceof EntitySkill){
-				spinnerSkillType.setValue("Entity");
-			}
-			txtSkillName.setText(currentSkill.name);
-		}else{
-			currentSkill = null;
-			txtSkillName.setText("");
-		}
-		
-		updateSkillExpList();
-	}
-
-	protected static void updateCurrentPerk() {
-		if (listPerk.getSelectedIndex() > -1){
-		    currentPerk = perks.get(listPerk.getSelectedIndex());
-		    textPerkName.setText(currentPerk.name);
-	        editorPerkDescription.setText(currentPerk.description);
-	        spinnerPointCost.setValue(currentPerk.pointCost);
-		}
-		else
-		{
-			currentPerk = null;
-			textPerkName.setText("");
-	        editorPerkDescription.setText("");
-	        spinnerPointCost.setValue(0);
-		}
-		
-		
-		if (currentPerk instanceof BlockPerk){
-			BlockPerk temp = (BlockPerk) currentPerk;
-			spinnerPerkType.setValue("Block");
-		    textPerkObject.setText(temp.blockName);
-		    temp = null;
-		} else if (currentPerk instanceof ItemPerk){
-			spinnerPerkType.setValue("Item");
-			ItemPerk temp = (ItemPerk) currentPerk;
-			textPerkObject.setText(temp.itemName);
-			temp = null;
-		}
-		else if (currentPerk instanceof EntityPerk){
-			spinnerPerkType.setValue("Entity");
-			EntityPerk temp = (EntityPerk) currentPerk;
-			textPerkObject.setText(temp.entityName);
-			temp = null;
-		} else if (currentPerk == null){
-			spinnerPerkType.setValue("Block");
-		    textPerkObject.setText("");
-		}		
-		updateReqList();
-		updateCurrentRequirment();
-	}
-
-	protected static void updateCurrentRequirment() {
-		if(listRequirement.getSelectedIndex() > -1){
-			currentReq = currentPerk.requirements.get(listRequirement.getSelectedIndex());
-			spinnerPerkAction.setValue(currentReq.action.toString());
-			textPerkReqName.setText(currentReq.name);
-			textPerkExtraData.setText(currentReq.extraData);
-		}else{
-			spinnerPerkAction.setValue("HAVE");
-			textPerkReqName.setText("");
-			textPerkExtraData.setText("");
-		}		
-
-	}
-
-	protected static void updateCurrentSkillExp() {
-	    if (currentSkill != null && listSkillExp.getSelectedIndex() > -1){
-	        currentExp = (XPGain) currentSkill.getExp().get(listSkillExp.getSelectedIndex());
-	        if (currentExp != null){
-	            txtSkillObjectName.setText(currentExp.getName());
-	            spinnerExpXP.setValue(currentExp.getXp());
-	        }
-	        else{
-	            txtSkillObjectName.setText("");
-                spinnerExpXP.setValue(0);
-	        }
-	    }
-	}
-
+	
 	protected static void deleteCurrentExperience() {
 		currentSkill.getExp().remove(currentExp);
 		currentExp = null;
@@ -326,15 +133,12 @@ public class Config {
 		updateSkillExpList();
 		
 	}
-
-	protected static void deleteCurrentSkill() {
-		skills.remove(currentSkill);
-		currentSkill = null;
-		listSkill.setSelectedIndex(-1);
-		updateSkillList();
-		updateCurrentSkill();
+	protected static void deleteCurrentPerk() {
+		perks.remove(currentPerk);
+		currentPerk = null;
+		updatePerkList();		
+		updateCurrentPerk();
 	}
-
 	protected static void deleteCurrentRequirement() {
 		if (listRequirement.getSelectedIndex() > -1){
 			currentPerk.requirements.remove(listRequirement.getSelectedIndex());
@@ -344,201 +148,29 @@ public class Config {
 		
 		
 	}
-	protected static void deleteCurrentPerk() {
-		perks.remove(currentPerk);
-		currentPerk = null;
-		updatePerkList();		
-		updateCurrentPerk();
-	}
-
-	protected static void newPerk() {
-		BlockPerk perk = new BlockPerk();
-		perks.add(perk);
-		updatePerkList();		
-	}
-
-	protected static void newRequirement() {
-		if (currentPerk != null){
-			Requirement req = new Requirement(Action.HAVE, "default_name", "");
-			currentPerk.requirements.add(req);
-			updateReqList();
-		}		
-	}
-
-	protected static void newSkill() {
-		BlockSkill skill = new BlockSkill();
-		skills.add(skill);
+	protected static void deleteCurrentSkill() {
+		skills.remove(currentSkill);
+		currentSkill = null;
+		listSkill.setSelectedIndex(-1);
 		updateSkillList();
-		
+		updateCurrentSkill();
+	}
+	public static DefaultListModel getBlockModel() {
+        return blockModel;
+    }
+	public static DefaultListModel getEntityModel() {
+        return entityModel;
+    }
+	public static DefaultListModel getItemModel() {
+        return itemModel;
+    }
+
+	public static ArrayList<Perk> getPerks(){
+	    return perks;
 	}
 
-	protected static void newExperience() {
-		if (currentSkill != null){
-		    if (currentSkill instanceof BlockSkill){
-		        currentSkill.getExp().add(new BlockXP());
-		    }
-		    else if (currentSkill instanceof EntitySkill){
-		        currentSkill.getExp().add(new EntityXP());
-		    }
-		    else if (currentSkill instanceof ItemSkill) {
-		        currentSkill.getExp().add(new EntityXP());
-		    }
-		    updateSkillExpList();
-		}
-		
-	}
-
-	protected static void updateCurrentPerkInfo() {
-		recreatePerk();
-		updatePerkList();
-	}
-
-	protected static void updateCurrentRequirmentInfo() {
-		if (currentReq != null){
-			currentReq.action = Action.valueOf(spinnerPerkAction.getValue().toString());
-			currentReq.extraData = textPerkExtraData.getText();
-			currentReq.name = textPerkReqName.getText();
-			updateReqList();
-		}
-		
-	}
-	protected static void updateCurrentSkillInfo() {
-		if(currentSkill != null){			
-			if (currentSkill instanceof BlockSkill && spinnerSkillType.getValue() != "Block"){
-				recreateSkill();					
-			} else if (currentSkill instanceof EntitySkill && spinnerSkillType.getValue() != "Entity"){
-				recreateSkill();
-			} else if (currentSkill instanceof ItemSkill && spinnerSkillType.getValue() != "Item"){
-				recreateSkill();
-			}else{
-				currentSkill.name = txtSkillName.getText();
-			}
-			updateSkillList();
-		}
-		
-	}
-
-	private static void recreateSkill() {
-		switch (spinnerSkillType.getValue().toString()){
-		case "Block":
-			BlockSkill tempSkill = new BlockSkill();
-			tempSkill.name = txtSkillName.getText();
-			tempSkill.setExp(new ArrayList<BlockXP>());
-			skills.set(skills.indexOf(currentSkill),tempSkill);
-			currentSkill = tempSkill;
-			break;
-		case "Entity":
-			EntitySkill tempEntitySkill = new EntitySkill();
-			tempEntitySkill.setExp(new ArrayList<EntityXP>());
-			tempEntitySkill.name = txtSkillName.getText();
-			skills.set(skills.indexOf(currentSkill),tempEntitySkill);
-			currentSkill = tempEntitySkill;
-			break;
-		case "Item":
-			ItemSkill tempItemSkill = new ItemSkill();
-			tempItemSkill.setExp(new ArrayList<ItemXP>());
-			tempItemSkill.name = txtSkillName.getText();
-			skills.set(skills.indexOf(currentSkill),tempItemSkill);
-			currentSkill = tempItemSkill;
-			break;
-		}
-		
-	}
-	private static void recreatePerk(){
-		switch (spinnerPerkType.getValue().toString()){
-		case "Block":
-			BlockPerk tempBlockPerk = new BlockPerk();
-			tempBlockPerk.name = textPerkName.getText();
-			tempBlockPerk.description = editorPerkDescription.getText();
-			tempBlockPerk.pointCost = (int) spinnerPointCost.getValue();
-			tempBlockPerk.requirements = currentPerk.requirements;
-			perks.set(perks.indexOf(currentPerk),tempBlockPerk);
-			if(blockList.contains(textPerkObject.getText())){
-			    tempBlockPerk.blockName = textPerkObject.getText();
-			    currentPerk = tempBlockPerk;
-			}
-			else
-			{
-			    JOptionPane.showMessageDialog(null, textPerkObject.getText() + " is a invalid object");
-			}
-			break;
-		case "Entity":
-			EntityPerk tempEntityPerk = new EntityPerk();
-			tempEntityPerk.name = textPerkName.getText();
-			tempEntityPerk.description = editorPerkDescription.getText();
-			tempEntityPerk.pointCost = (int) spinnerPointCost.getValue();
-	        if(entityList.contains(textPerkObject.getText())){
-	            tempEntityPerk.entityName = textPerkObject.getText();
-	        }
-	        else
-	        {
-	            JOptionPane.showMessageDialog(null, textPerkObject.getText() + " is a invalid object");
-	        }
-			tempEntityPerk.requirements = currentPerk.requirements;
-			perks.set(perks.indexOf(currentPerk),tempEntityPerk);
-			currentPerk = tempEntityPerk;
-			break;
-		case "Item":
-			ItemPerk tempItemPerk = new ItemPerk();
-			tempItemPerk.name = textPerkName.getText();
-			tempItemPerk.description = editorPerkDescription.getText();
-			tempItemPerk.pointCost = (int) spinnerPointCost.getValue();
-	        if(itemList.contains(textPerkObject.getText())){
-	            tempItemPerk.itemName = textPerkObject.getText();
-	        }
-	        else
-	        {
-	            JOptionPane.showMessageDialog(null, textPerkObject.getText() + " is a invalid object");
-	        }
-			tempItemPerk.requirements = currentPerk.requirements;
-			perks.set(perks.indexOf(currentPerk),tempItemPerk);
-			currentPerk = tempItemPerk;
-			break;
-		case "RegexBlock":
-		    RegexBlockPerk regexBlockPerk = new RegexBlockPerk();
-		    regexBlockPerk.name = textPerkName.getText();
-		    regexBlockPerk.description  = editorPerkDescription.getText();
-		    regexBlockPerk.pointCost = (int) spinnerPointCost.getValue();
-		    regexBlockPerk.searchQuery = textPerkObject.getText();
-          break;
-		case "RegexEntity":
-		    RegexEntityPerk regexEntityPerk = new RegexEntityPerk();
-		    regexEntityPerk.name = textPerkName.getText();
-            regexEntityPerk.description  = editorPerkDescription.getText();
-            regexEntityPerk.pointCost = (int) spinnerPointCost.getValue();
-            regexEntityPerk.searchQuery = textPerkObject.getText();
-	      break;
-		case "RegexItem":
-		    RegexItemPerk regexItemPerk = new RegexItemPerk();
-		    regexItemPerk.name = textPerkName.getText();
-            regexItemPerk.description  = editorPerkDescription.getText();
-            regexItemPerk.pointCost = (int) spinnerPointCost.getValue();
-            regexItemPerk.searchQuery = textPerkObject.getText();
-	      break;
-		case "Title":
-		    TitlePerk title = new TitlePerk();
-		    title.name = textPerkName.getText();
-		    title.description  = editorPerkDescription.getText();
-		    title.pointCost = (int) spinnerPointCost.getValue();
-		    title.setTitle(textPerkObject.getText());
-	      break;
-		}		
-	}
-
-	protected static void updateCurrentSkillExpInfo() {
-		if (currentExp != null){
-			currentExp.setXp((int) spinnerExpXP.getValue());
-	         if(itemModel.contains(txtSkillObjectName.getText()) || 
-	            blockModel.contains(txtSkillObjectName.getText()) ||
-	            entityModel.contains(txtSkillObjectName.getText()) ){
-	                 currentExp.setName(txtSkillObjectName.getText());
-	         }
-	         else
-	         {
-	             JOptionPane.showMessageDialog(null, textPerkObject.getText() + " is a invalid object");
-	         }			
-			updateSkillExpList();
-			}		
+	public static ArrayList<Skill> getSkills(){
+	    return skills;
 	}
 
 	/**
@@ -870,11 +502,11 @@ public class Config {
 		panelSkill.setLayout(null);
 		listSkill.setModel(new AbstractListModel() {
 			String[] values = new String[] {};
-			public int getSize() {
-				return values.length;
-			}
 			public Object getElementAt(int index) {
 				return values[index];
+			}
+			public int getSize() {
+				return values.length;
 			}
 		});
 		listSkill.setSelectedIndex(0);
@@ -897,11 +529,11 @@ public class Config {
 		scrollPane_2.setViewportView(listSkillExp);
 		listSkillExp.setModel(new AbstractListModel() {
 			String[] values = new String[] {};
-			public int getSize() {
-				return values.length;
-			}
 			public Object getElementAt(int index) {
 				return values[index];
+			}
+			public int getSize() {
+				return values.length;
 			}
 		});
 		listSkillExp.setSelectedIndex(0);
@@ -1028,18 +660,384 @@ public class Config {
 		panelAbout.add(txtpnGeneralRulesrecommendationsFill);
 	}
 
+	/**
+	 * Launch the application.
+	 */
+	public static void main() {
+		Config window = new Config();
+		updatePerkList();
+		updateSkillList();
+		updateRegLists();
+		window.frame.setVisible(true);
+	}
 
-    public static DefaultListModel getEntityModel() {
-        return entityModel;
-    }
+	protected static void newExperience() {
+		if (currentSkill != null){
+		    if (currentSkill instanceof BlockSkill){
+		        currentSkill.getExp().add(new BlockXP());
+		    }
+		    else if (currentSkill instanceof EntitySkill){
+		        currentSkill.getExp().add(new EntityXP());
+		    }
+		    else if (currentSkill instanceof ItemSkill) {
+		        currentSkill.getExp().add(new EntityXP());
+		    }
+		    updateSkillExpList();
+		}
+		
+	}
+
+	protected static void newPerk() {
+		BlockPerk perk = new BlockPerk();
+		perks.add(perk);
+		updatePerkList();		
+	}
+
+	protected static void newRequirement() {
+		if (currentPerk != null){
+			Requirement req = new Requirement(Action.HAVE, "default_name", "");
+			currentPerk.requirements.add(req);
+			updateReqList();
+		}		
+	}
+
+	protected static void newSkill() {
+		BlockSkill skill = new BlockSkill();
+		skills.add(skill);
+		updateSkillList();
+		
+	}
+	private static void recreatePerk(){
+		switch (spinnerPerkType.getValue().toString()){
+		case "Block":
+			BlockPerk tempBlockPerk = new BlockPerk();
+			tempBlockPerk.name = textPerkName.getText();
+			tempBlockPerk.description = editorPerkDescription.getText();
+			tempBlockPerk.pointCost = (int) spinnerPointCost.getValue();
+			tempBlockPerk.requirements = currentPerk.requirements;
+			perks.set(perks.indexOf(currentPerk),tempBlockPerk);
+			if(blockList.contains(textPerkObject.getText())){
+			    tempBlockPerk.blockName = textPerkObject.getText();
+			    currentPerk = tempBlockPerk;
+			}
+			else
+			{
+			    JOptionPane.showMessageDialog(null, textPerkObject.getText() + " is a invalid object");
+			}
+			break;
+		case "Entity":
+			EntityPerk tempEntityPerk = new EntityPerk();
+			tempEntityPerk.name = textPerkName.getText();
+			tempEntityPerk.description = editorPerkDescription.getText();
+			tempEntityPerk.pointCost = (int) spinnerPointCost.getValue();
+	        if(entityList.contains(textPerkObject.getText())){
+	            tempEntityPerk.entityName = textPerkObject.getText();
+	        }
+	        else
+	        {
+	            JOptionPane.showMessageDialog(null, textPerkObject.getText() + " is a invalid object");
+	        }
+			tempEntityPerk.requirements = currentPerk.requirements;
+			perks.set(perks.indexOf(currentPerk),tempEntityPerk);
+			currentPerk = tempEntityPerk;
+			break;
+		case "Item":
+			ItemPerk tempItemPerk = new ItemPerk();
+			tempItemPerk.name = textPerkName.getText();
+			tempItemPerk.description = editorPerkDescription.getText();
+			tempItemPerk.pointCost = (int) spinnerPointCost.getValue();
+	        if(itemList.contains(textPerkObject.getText())){
+	            tempItemPerk.itemName = textPerkObject.getText();
+	        }
+	        else
+	        {
+	            JOptionPane.showMessageDialog(null, textPerkObject.getText() + " is a invalid object");
+	        }
+			tempItemPerk.requirements = currentPerk.requirements;
+			perks.set(perks.indexOf(currentPerk),tempItemPerk);
+			currentPerk = tempItemPerk;
+			break;
+		case "RegexBlock":
+		    RegexBlockPerk regexBlockPerk = new RegexBlockPerk();
+		    regexBlockPerk.name = textPerkName.getText();
+		    regexBlockPerk.description  = editorPerkDescription.getText();
+		    regexBlockPerk.pointCost = (int) spinnerPointCost.getValue();
+		    regexBlockPerk.searchQuery = textPerkObject.getText();
+          break;
+		case "RegexEntity":
+		    RegexEntityPerk regexEntityPerk = new RegexEntityPerk();
+		    regexEntityPerk.name = textPerkName.getText();
+            regexEntityPerk.description  = editorPerkDescription.getText();
+            regexEntityPerk.pointCost = (int) spinnerPointCost.getValue();
+            regexEntityPerk.searchQuery = textPerkObject.getText();
+	      break;
+		case "RegexItem":
+		    RegexItemPerk regexItemPerk = new RegexItemPerk();
+		    regexItemPerk.name = textPerkName.getText();
+            regexItemPerk.description  = editorPerkDescription.getText();
+            regexItemPerk.pointCost = (int) spinnerPointCost.getValue();
+            regexItemPerk.searchQuery = textPerkObject.getText();
+	      break;
+		case "Title":
+		    TitlePerk title = new TitlePerk();
+		    title.name = textPerkName.getText();
+		    title.description  = editorPerkDescription.getText();
+		    title.pointCost = (int) spinnerPointCost.getValue();
+		    title.setTitle(textPerkObject.getText());
+	      break;
+		}		
+	}
+
+	private static void recreateSkill() {
+		switch (spinnerSkillType.getValue().toString()){
+		case "Block":
+			BlockSkill tempSkill = new BlockSkill();
+			tempSkill.name = txtSkillName.getText();
+			tempSkill.setExp(new ArrayList<BlockXP>());
+			skills.set(skills.indexOf(currentSkill),tempSkill);
+			currentSkill = tempSkill;
+			break;
+		case "Entity":
+			EntitySkill tempEntitySkill = new EntitySkill();
+			tempEntitySkill.setExp(new ArrayList<EntityXP>());
+			tempEntitySkill.name = txtSkillName.getText();
+			skills.set(skills.indexOf(currentSkill),tempEntitySkill);
+			currentSkill = tempEntitySkill;
+			break;
+		case "Item":
+			ItemSkill tempItemSkill = new ItemSkill();
+			tempItemSkill.setExp(new ArrayList<ItemXP>());
+			tempItemSkill.name = txtSkillName.getText();
+			skills.set(skills.indexOf(currentSkill),tempItemSkill);
+			currentSkill = tempItemSkill;
+			break;
+		}
+		
+	}
+
+	protected static void updateCurrentPerk() {
+		if (listPerk.getSelectedIndex() > -1){
+		    currentPerk = perks.get(listPerk.getSelectedIndex());
+		    textPerkName.setText(currentPerk.name);
+	        editorPerkDescription.setText(currentPerk.description);
+	        spinnerPointCost.setValue(currentPerk.pointCost);
+		}
+		else
+		{
+			currentPerk = null;
+			textPerkName.setText("");
+	        editorPerkDescription.setText("");
+	        spinnerPointCost.setValue(0);
+		}
+		
+		
+		if (currentPerk instanceof BlockPerk){
+			BlockPerk temp = (BlockPerk) currentPerk;
+			spinnerPerkType.setValue("Block");
+		    textPerkObject.setText(temp.blockName);
+		    temp = null;
+		} else if (currentPerk instanceof ItemPerk){
+			spinnerPerkType.setValue("Item");
+			ItemPerk temp = (ItemPerk) currentPerk;
+			textPerkObject.setText(temp.itemName);
+			temp = null;
+		}
+		else if (currentPerk instanceof EntityPerk){
+			spinnerPerkType.setValue("Entity");
+			EntityPerk temp = (EntityPerk) currentPerk;
+			textPerkObject.setText(temp.entityName);
+			temp = null;
+		} else if (currentPerk == null){
+			spinnerPerkType.setValue("Block");
+		    textPerkObject.setText("");
+		}		
+		updateReqList();
+		updateCurrentRequirment();
+	}
+
+	protected static void updateCurrentPerkInfo() {
+		recreatePerk();
+		updatePerkList();
+	}
+
+	protected static void updateCurrentRequirment() {
+		if(listRequirement.getSelectedIndex() > -1){
+			currentReq = currentPerk.requirements.get(listRequirement.getSelectedIndex());
+			spinnerPerkAction.setValue(currentReq.action.toString());
+			textPerkReqName.setText(currentReq.name);
+			textPerkExtraData.setText(currentReq.extraData);
+		}else{
+			spinnerPerkAction.setValue("HAVE");
+			textPerkReqName.setText("");
+			textPerkExtraData.setText("");
+		}		
+
+	}
+
+	protected static void updateCurrentRequirmentInfo() {
+		if (currentReq != null){
+			currentReq.action = Action.valueOf(spinnerPerkAction.getValue().toString());
+			currentReq.extraData = textPerkExtraData.getText();
+			currentReq.name = textPerkReqName.getText();
+			updateReqList();
+		}
+		
+	}
+
+	protected static void updateCurrentSkill() {
+		if (listSkill.getSelectedIndex() > -1){
+			currentSkill = skills.get(listSkill.getSelectedIndex());			
+			if (currentSkill instanceof BlockSkill || currentSkill == null){
+				spinnerSkillType.setValue("Block");
+			}else if(currentSkill instanceof ItemSkill){
+				spinnerSkillType.setValue("Item");
+			}else if(currentSkill instanceof EntitySkill){
+				spinnerSkillType.setValue("Entity");
+			}
+			txtSkillName.setText(currentSkill.name);
+		}else{
+			currentSkill = null;
+			txtSkillName.setText("");
+		}
+		
+		updateSkillExpList();
+	}
+	protected static void updateCurrentSkillExp() {
+	    if (currentSkill != null && listSkillExp.getSelectedIndex() > -1){
+	        currentExp = (XPGain) currentSkill.getExp().get(listSkillExp.getSelectedIndex());
+	        if (currentExp != null){
+	            txtSkillObjectName.setText(currentExp.getName());
+	            spinnerExpXP.setValue(currentExp.getXp());
+	        }
+	        else{
+	            txtSkillObjectName.setText("");
+                spinnerExpXP.setValue(0);
+	        }
+	    }
+	}
+
+	protected static void updateCurrentSkillExpInfo() {
+		if (currentExp != null){
+			currentExp.setXp((int) spinnerExpXP.getValue());
+	         if(itemModel.contains(txtSkillObjectName.getText()) || 
+	            blockModel.contains(txtSkillObjectName.getText()) ||
+	            entityModel.contains(txtSkillObjectName.getText()) ){
+	                 currentExp.setName(txtSkillObjectName.getText());
+	         }
+	         else
+	         {
+	             JOptionPane.showMessageDialog(null, textPerkObject.getText() + " is a invalid object");
+	         }			
+			updateSkillExpList();
+			}		
+	}
+	protected static void updateCurrentSkillInfo() {
+		if(currentSkill != null){			
+			if (currentSkill instanceof BlockSkill && spinnerSkillType.getValue() != "Block"){
+				recreateSkill();					
+			} else if (currentSkill instanceof EntitySkill && spinnerSkillType.getValue() != "Entity"){
+				recreateSkill();
+			} else if (currentSkill instanceof ItemSkill && spinnerSkillType.getValue() != "Item"){
+				recreateSkill();
+			}else{
+				currentSkill.name = txtSkillName.getText();
+			}
+			updateSkillList();
+		}
+		
+	}
+
+	private static void updatePerkList(){
+		DefaultListModel model = new DefaultListModel();
+		for (Perk perk: perks){
+			model.addElement(perk.name);
+		}
+		listPerk.setModel(model);
+		listPerk.updateUI();
+	}
+
+	private static void updateRegLists(){
+	    ArrayList<String> unsortedItemEntries = new ArrayList<String>();	    
+	    itemModel = new DefaultListModel();
+		Iterator it = Item.itemRegistry.getKeys().iterator();
+		while (it.hasNext()){
+		    String current = it.next().toString();
+		    unsortedItemEntries.add(current);
+		    itemList.add(current.substring(current.lastIndexOf(":")));
+		}
+		Collections.sort(unsortedItemEntries);
+		for (String string : unsortedItemEntries){
+		    itemModel.addElement(string);
+		}
+		
+        ArrayList<String> unsortedBlockEntries = new ArrayList<String>();       
+        blockModel = new DefaultListModel();
+        it = Block.blockRegistry.getKeys().iterator();
+        while (it.hasNext()){
+            String current = it.next().toString();
+            unsortedBlockEntries.add(current);
+            blockList.add(current.substring(current.lastIndexOf(":")));
+        }
+        Collections.sort(unsortedBlockEntries);
+        for (String string : unsortedBlockEntries){
+            blockModel.addElement(string);
+        }
+        
+        ArrayList<String> unsortedEntityEntries = new ArrayList<String>();      
+        entityModel = new DefaultListModel();
+        it = EntityList.func_151515_b().iterator();
+        while (it.hasNext()){
+            String current = it.next().toString();
+            unsortedEntityEntries.add(current);
+            entityList.add(current);
+        }
+        Collections.sort(unsortedEntityEntries);
+        for (String string : unsortedEntityEntries){
+            entityModel.addElement(string);
+        }
+		listRegBlock.setModel(blockModel);
+		listRegBlock.updateUI();
+		listRegEntity.setModel(entityModel);
+		listRegEntity.updateUI();
+		listRegItem.setModel(itemModel);
+		listRegItem.updateUI();
+	}
 
 
-    public static DefaultListModel getItemModel() {
-        return itemModel;
-    }
+    private static void updateReqList() {
+		DefaultListModel model = new DefaultListModel();
+		if ( currentPerk != null && currentPerk.getRequirements() != null){
+    		ArrayList<Requirement> temp = currentPerk.getRequirements();
+    		for (Requirement req: temp){
+    			model.addElement(req.name);
+    		}
+		}
+		listRequirement.setModel(model);
+		listRequirement.updateUI();
+		
+		
+	}
 
 
-    public static DefaultListModel getBlockModel() {
-        return blockModel;
-    }
+    private static void updateSkillExpList() {
+		DefaultListModel model = new DefaultListModel();
+		if (currentSkill != null){
+			ArrayList<XPGain> local = currentSkill.getExp();		
+			for (int i = 0; i < local.size(); i++){
+				model.addElement(local.get(i).getName());
+			}
+		}
+		listSkillExp.setModel(model);
+		listSkillExp.updateUI();		
+	}
+
+
+    private static void updateSkillList(){
+		DefaultListModel model = new DefaultListModel();
+		for (Skill skill: skills){
+			model.addElement(skill.name);
+		}
+		listSkill.setModel(model);
+		listSkill.updateUI();
+	}
 }

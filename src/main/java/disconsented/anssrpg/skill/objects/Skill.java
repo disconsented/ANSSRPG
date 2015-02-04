@@ -40,19 +40,19 @@ public abstract class Skill {
 	
 	public Skill(){
 	}
+	public abstract ArrayList getExp();
 	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
-	}
+	}	
+	public abstract void setExp(ArrayList exp);
 	/**
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
-	}	
+	}
 	public abstract void touchUp();
-	public abstract ArrayList getExp();
-	public abstract void setExp(ArrayList exp);
 }

@@ -25,11 +25,11 @@ package disconsented.anssrpg.perk;
 import com.google.gson.annotations.Expose;
 
 public class Slug {
+    @Expose
+    private String slug;
     Slug(String name){
         this.slug = name.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
     }
-    @Expose
-    private String slug;
     
     public String getSlug() {
         return slug;

@@ -43,16 +43,6 @@ public class EntitySkill extends Skill {
 	}
 
 	@Override
-	public void touchUp() {
-		for (XPGain xp : exp){
-			EntityXP thing = new EntityXP();
-			thing.name = xp.name;
-			thing.xp = xp.xp;
-			thing.touchUp();
-		}
-	}
-
-	@Override
 	public ArrayList<EntityXP> getExp() {
 		return exp;
 	}
@@ -61,5 +51,15 @@ public class EntitySkill extends Skill {
 	public void setExp(ArrayList exp) {
 		this.exp = exp;
 		
+	}
+
+	@Override
+	public void touchUp() {
+		for (XPGain xp : exp){
+			EntityXP thing = new EntityXP();
+			thing.name = xp.name;
+			thing.xp = xp.xp;
+			thing.touchUp();
+		}
 	}
 }

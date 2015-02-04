@@ -53,23 +53,42 @@ public class PerkStore {
 	private static HashMap<Slug,Perk> perksMap = new HashMap<Slug,Perk>();
 	private static PerkStore instance = null;
 	private PerkStore() {/* Exists only to defeat instantiation.*/}
-	public static PerkStore getInstance() {
+	//Adds a perk to the complete list
+    public static void addPerk(Perk perk){		
+    	perksMap.put(perk.slug, perk);
+    }
+	public static void Clear(){
+		perks.clear();
+		blockMap.clear();
+		entityMap.clear();
+		itemMap.clear();
+		perksMap.clear();
+	}
+    public static PerkStore getInstance() {
 		if(instance == null) {
 			instance = new PerkStore();
 		}
 		return instance;
 	}
-	//Adds a perk to the complete list
-    public static void addPerk(Perk perk){		
-    	perksMap.put(perk.slug, perk);
-    }
-    public static ArrayList<Perk> getPerks(){
-		return perks;
-	}
 	public static Perk getPerk(String perkSlug) {		
 		return perksMap.get(perkSlug);
 	}
-	public static void putPerk(BlockPerk block){
+	public static ArrayList<Perk> getPerks(){
+		return perks;
+	}
+	public static ArrayList<Slug> getSlugs(Block block){
+	    return blockMap.get(block.getUnlocalizedName());   
+	    
+	}
+	public static ArrayList<Slug> getSlugs(Entity entity){
+	    return entityMap.get(entity.getCommandSenderName());
+        
+    }
+	public static ArrayList<Slug> getSlugs(Item item){
+	    return itemMap.get(item.getUnlocalizedName());
+        
+    }
+    public static void putPerk(BlockPerk block){
 		perks.add(block);
 		if (blockMap.containsKey(block.getBlock().getUnlocalizedName())){
 			blockMap.get(block.getBlock().getUnlocalizedName()).add(block.slug);
@@ -81,19 +100,7 @@ public class PerkStore {
 			blockMap.put(block.getBlock().getUnlocalizedName(), temp);
 		}
 	}
-	public static void putPerk(ItemPerk item) {
-		perks.add(item);
-		if (itemMap.containsKey(item.getItem().getUnlocalizedName())){
-			itemMap.get(item.getItem().getUnlocalizedName()).add(item.slug);
-		}
-		else
-		{
-			ArrayList<Slug> temp = new ArrayList<Slug>();
-			temp.add(item.slug);
-			itemMap.put(item.getItem().getUnlocalizedName(), temp);
-		}
-	}
-	public static void putPerk(EntityPerk entity) {
+    public static void putPerk(EntityPerk entity) {
 		perks.add(entity);
 		if (entityMap.containsKey(entity.getEntity().getSimpleName())){
 			entityMap.get(entity.getEntity().getSimpleName()).add(entity.slug);
@@ -105,6 +112,19 @@ public class PerkStore {
 			entityMap.put(entity.getEntity().getSimpleName(), temp);
 		}		
 		
+	}
+	
+	public static void putPerk(ItemPerk item) {
+		perks.add(item);
+		if (itemMap.containsKey(item.getItem().getUnlocalizedName())){
+			itemMap.get(item.getItem().getUnlocalizedName()).add(item.slug);
+		}
+		else
+		{
+			ArrayList<Slug> temp = new ArrayList<Slug>();
+			temp.add(item.slug);
+			itemMap.put(item.getItem().getUnlocalizedName(), temp);
+		}
 	}
 	public static void putPerk(RegexBlockPerk perk){
 	    perks.add(perk);
@@ -121,7 +141,21 @@ public class PerkStore {
 	    }
 	    
 	}
-    public static void putPerk(RegexItemPerk perk){
+	public static void putPerk(RegexEntityPerk perk){
+        perks.add(perk);
+        for (Entity entity : perk.entities){
+            if (entityMap.containsKey(entity.getCommandSenderName())){
+                entityMap.get(entity.getCommandSenderName()).add(perk.slug);
+            }
+            else
+            {
+                ArrayList<Slug> temp = new ArrayList<Slug>();
+                temp.add(perk.slug);
+                entityMap.put(entity.getCommandSenderName(), temp);
+            }
+        }
+    }
+	public static void putPerk(RegexItemPerk perk){
         perks.add(perk);
         for (Item item : perk.items){
             if (itemMap.containsKey(item.getUnlocalizedName())){
@@ -136,43 +170,9 @@ public class PerkStore {
         }
         
     }
-    public static void putPerk(RegexEntityPerk perk){
-        perks.add(perk);
-        for (Entity entity : perk.entities){
-            if (entityMap.containsKey(entity.getCommandSenderName())){
-                entityMap.get(entity.getCommandSenderName()).add(perk.slug);
-            }
-            else
-            {
-                ArrayList<Slug> temp = new ArrayList<Slug>();
-                temp.add(perk.slug);
-                entityMap.put(entity.getCommandSenderName(), temp);
-            }
-        }
-    }
 	
 	public static void putPerk(TitlePerk title) {
 	    titlePerks.add(title);
         
     }
-	public static ArrayList<Slug> getSlugs(Block block){
-	    return blockMap.get(block.getUnlocalizedName());   
-	    
-	}
-	public static ArrayList<Slug> getSlugs(Entity entity){
-	    return entityMap.get(entity.getCommandSenderName());
-        
-    }
-	public static ArrayList<Slug> getSlugs(Item item){
-	    return itemMap.get(item.getUnlocalizedName());
-        
-    }
-	
-	public static void Clear(){
-		perks.clear();
-		blockMap.clear();
-		entityMap.clear();
-		itemMap.clear();
-		perksMap.clear();
-	}
 }

@@ -52,22 +52,22 @@ public abstract class Perk {
 		this.pointCost = pointCost;
 	}
 
-	public void touchUp(){
-	        searchObject();
-	}
-	public abstract void searchObject();
-	protected void setName(String name){this.name = name; this.slug = new Slug(name);} 
-	protected void setRequirements(ArrayList<Requirement> requirments){this.requirements = requirments;}
-	protected void setDescription(String description){this.description = description;}
-	protected void setPointCost(int pointCost){this.pointCost = pointCost;}
-	public String getName(){return name;}
-	public ArrayList getRequirements(){return requirements;}
 	public String getDescription(){return description;}
-	public int getPointCost(){return pointCost;}
+	public String getName(){return name;}
+	public int getPointCost(){return pointCost;} 
+	public ArrayList getRequirements(){return requirements;}
 	public Slug getSlug(){return slug;}
+	public abstract void searchObject();
+	protected void setDescription(String description){this.description = description;}
+	protected void setName(String name){this.name = name; this.slug = new Slug(name);}
+	protected void setPointCost(int pointCost){this.pointCost = pointCost;}
+	protected void setRequirements(ArrayList<Requirement> requirments){this.requirements = requirments;}
 	@Override
 	public String toString() {		
 		return this.name+"|"+this.description+"|"+this.pointCost+"|"+this.requirements.toString();
+	}
+	public void touchUp(){
+	        searchObject();
 	}
 
 }

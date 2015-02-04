@@ -25,8 +25,6 @@ package disconsented.anssrpg.perk;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import com.google.gson.annotations.Expose;
-
 import net.minecraft.block.Block;
 
 public class RegexBlockPerk extends RegexPerk{

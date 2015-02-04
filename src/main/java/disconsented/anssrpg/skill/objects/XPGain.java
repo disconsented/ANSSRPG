@@ -33,20 +33,27 @@ import com.google.gson.annotations.Expose;
  */
 public abstract class XPGain {
 	
-	public XPGain(){		
-	}
-
 	/**
 	 * Super type abstract class
 	 */
 	@Expose
 	protected int xp = 0;
-	
+
 	@Expose
 	protected String name = "default_name";
+	
+	public XPGain(){		
+	}
+
+	public String getName() {
+		return name;
+	}
 
 	public int getXp() {
 		return xp;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
@@ -55,17 +62,10 @@ public abstract class XPGain {
 	public void setXp(int xp) {
 		this.xp = xp;
 	}
+
 	/**
 	 * 
 	 */
 	public abstract void touchUp();
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 }

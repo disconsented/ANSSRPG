@@ -22,9 +22,10 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg.network;
 
+import io.netty.buffer.ByteBuf;
+
 import java.util.ArrayList;
 
-import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
@@ -51,18 +52,6 @@ public class PerkInfo implements IMessage{
     }
 
     @Override
-    public void toBytes(ByteBuf buf) {
-    	buf.writeInt(size);
-    	ByteBufUtils.writeUTF8String(buf, name);
-    	ByteBufUtils.writeUTF8String(buf, description);
-    	ByteBufUtils.writeUTF8String(buf, slug);
-        buf.writeInt(pointCost);
-        for (int i = 0; i < requirements.size(); i++){
-        	ByteBufUtils.writeUTF8String(buf, requirements.get(i));
-        }        
-    }
-
-    @Override
     public void fromBytes(ByteBuf buf) {
     	this.size = buf.readInt();
     	this.name = ByteBufUtils.readUTF8String(buf);
@@ -73,5 +62,17 @@ public class PerkInfo implements IMessage{
         for (int i = 0; i < size; i++){
         	this.requirements.add(ByteBufUtils.readUTF8String(buf));
         }
+    }
+
+    @Override
+    public void toBytes(ByteBuf buf) {
+    	buf.writeInt(size);
+    	ByteBufUtils.writeUTF8String(buf, name);
+    	ByteBufUtils.writeUTF8String(buf, description);
+    	ByteBufUtils.writeUTF8String(buf, slug);
+        buf.writeInt(pointCost);
+        for (int i = 0; i < requirements.size(); i++){
+        	ByteBufUtils.writeUTF8String(buf, requirements.get(i));
+        }        
     }
 }

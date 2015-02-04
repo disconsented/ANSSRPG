@@ -27,9 +27,9 @@ package disconsented.anssrpg.perk;
 
 import java.util.ArrayList;
 
-import com.google.gson.annotations.Expose;
-
 import net.minecraft.entity.EntityList;
+
+import com.google.gson.annotations.Expose;
 
 /**
  * @author Disconsented
@@ -37,29 +37,25 @@ import net.minecraft.entity.EntityList;
  */
 public class EntityPerk extends Perk {
 
+	private Class entity;
+
+	@Expose
+	public String entityName = "default_entityName";
 	public EntityPerk() {
 		super();
 	}
-
+	
 	public EntityPerk(String name, ArrayList<Requirement> requirements,
 			String description, int pointCost) {
 		super(name, requirements, description, pointCost);
 		// TODO Auto-generated constructor stub
 	}
-	private Class entity;
-	
-	@Expose
-	public String entityName = "default_entityName";
 
 	public Class getEntity() {
 		return entity;
 	}
 
-	protected void setEntity(Class entity) {
-		this.entity = entity;		
-	}
-
-    @Override
+	@Override
     public void searchObject() {
         this.entity = (Class) EntityList.stringToClassMapping.get(entityName);
         if (entity == null){
@@ -67,5 +63,9 @@ public class EntityPerk extends Perk {
         }
         
     }
+
+    protected void setEntity(Class entity) {
+		this.entity = entity;		
+	}
 
 }

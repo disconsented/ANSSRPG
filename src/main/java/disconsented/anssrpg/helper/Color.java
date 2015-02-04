@@ -22,7 +22,6 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg.helper;
 
-import java.util.HashMap;
 
 public class Color{
 	public static int black = 0xFF000000;

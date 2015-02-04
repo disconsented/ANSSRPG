@@ -23,10 +23,8 @@ THE SOFTWARE.
 package disconsented.anssrpg.gui;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
@@ -34,7 +32,6 @@ import net.minecraft.client.renderer.Tessellator;
 
 import org.lwjgl.opengl.GL11;
 
-import scala.Console;
 import disconsented.anssrpg.Main;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.helper.Color;
@@ -55,72 +52,20 @@ public class PerkGUI extends GuiScreen {
 	//private FontRenderer thing = new FontRenderer();	
 	//private Button next;
 
+	public static void addPerk(LocalPerk e){
+		localPerks.add(e);
+		System.out.println("The perk " + e.name + " has been recieved by the client");
+	}
+	
 	@Override 
 	public boolean doesGuiPauseGame()
 	{
 		return false;
 	}
-	
-	private LocalPerk getCurrentPerk(){
-		if (selected > 2 && selected-3 < localPerks.size()){
-			return localPerks.get(selected-3+(pageNumber*itemsPerPage));
-		}else{
-			return new LocalPerk("null", "null", 0, null);
-		}
-	}
-	private double roundUp(double x) {
-		return (itemsPerPage * Math.ceil(x / itemsPerPage));
-	}
-	public static void addPerk(LocalPerk e){
-		localPerks.add(e);
-		System.out.println("The perk " + e.name + " has been recieved by the client");
-	}
-    @Override
-    public void updateScreen() {
-    	this.drawDefaultBackground();
-    }
-    void drawRectangle(int x, int y, int width, int height, int color){
+	void drawRectangle(int x, int y, int width, int height, int color){
     	GuiScreen.drawRect(x, y, width, height, color);
     }
-    /**
-     * 
-     * @param x
-     * @param y
-     * @param width
-     * @param height
-     * @param color
-     * @param mode
-     */
-    void drawTriangle(int x, int y, int width, int height, int color, int mode){
-     GL11.glEnable(GL11.GL_BLEND);
-   	 GL11.glDisable(GL11.GL_TEXTURE_2D);
-   	 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-   	 Tessellator tes = Tessellator.instance;
-   	 tes.startDrawing(GL11.GL_TRIANGLES);
-   	 tes.setColorOpaque_I(color);
-   	 switch (mode){
-   	 case 1:
-   		 tes.addVertex(x, y, 0); //top left
-      	 tes.addVertex(x, y+height, 0); //Bottom left
-      	 tes.addVertex(x+width, y, 0); //top right  
-   		 break;
-   	 case 2:
-   		 break;
-   	 case 3:
-   		tes.addVertex(x+width, y, 0); //top right
-   		tes.addVertex(x, y+height, 0); //Bottom left
-   		tes.addVertex(x+width, y+height, 0); //bottom right
-   		 break;
-   	 case 4:
-   		 break;
-   	 }  	 
-   	 tes.draw();
-   	GL11.glEnable(GL11.GL_TEXTURE_2D);
-	 GL11.glDisable(GL11.GL_BLEND);
-    	
-    }
-
-    @Override //Each frame
+	@Override //Each frame
     public void drawScreen(int par1, int par2, float par3) {
     	int xMod = 84;
     	int yMod = 48;
@@ -162,7 +107,51 @@ public class PerkGUI extends GuiScreen {
     	status.drawCenteredString(fontRendererObj, Settings.getInstance().getStatusMessage(), 626, 396, Color.white);
     	fontRendererObj.drawSplitString(descriptionCurrent, 6*xMod+border, 2*yMod+(border*3), (int)(3*xMod-(border*4)), (int)(6*yMod-(border*4)));   	
     }
-	@Override //Opened and resized
+    /**
+     * 
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @param color
+     * @param mode
+     */
+    void drawTriangle(int x, int y, int width, int height, int color, int mode){
+     GL11.glEnable(GL11.GL_BLEND);
+   	 GL11.glDisable(GL11.GL_TEXTURE_2D);
+   	 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+   	 Tessellator tes = Tessellator.instance;
+   	 tes.startDrawing(GL11.GL_TRIANGLES);
+   	 tes.setColorOpaque_I(color);
+   	 switch (mode){
+   	 case 1:
+   		 tes.addVertex(x, y, 0); //top left
+      	 tes.addVertex(x, y+height, 0); //Bottom left
+      	 tes.addVertex(x+width, y, 0); //top right  
+   		 break;
+   	 case 2:
+   		 break;
+   	 case 3:
+   		tes.addVertex(x+width, y, 0); //top right
+   		tes.addVertex(x, y+height, 0); //Bottom left
+   		tes.addVertex(x+width, y+height, 0); //bottom right
+   		 break;
+   	 case 4:
+   		 break;
+   	 }  	 
+   	 tes.draw();
+   	GL11.glEnable(GL11.GL_TEXTURE_2D);
+	 GL11.glDisable(GL11.GL_BLEND);
+    	
+    }
+    private LocalPerk getCurrentPerk(){
+		if (selected > 2 && selected-3 < localPerks.size()){
+			return localPerks.get(selected-3+(pageNumber*itemsPerPage));
+		}else{
+			return new LocalPerk("null", "null", 0, null);
+		}
+	}
+    @Override //Opened and resized
     public void initGui() {		
     	super.initGui(); //I see this done a ton and I don't understand why
     	//buttonNext = new GuiButton(1,);
@@ -179,7 +168,30 @@ public class PerkGUI extends GuiScreen {
     	status.setText("Status Message");
     	status.setFocused(false);
     }
+
     @Override
+    protected void mouseClicked(int par1, int par2, int par3) {
+    	for (int i = 0; i < buttons.size(); i++){    		
+    		if (buttons.get(i).mousePressed(Minecraft.getMinecraft(), par1, par2)){    			
+    			if(buttons.get(i).id >= 3 && buttons.get(i).id <= 17){
+    				if (buttons.get(i).enabled == true){
+    					buttons.get(i).enabled = false;
+    					buttons.get(selected).enabled = true;
+    					selected = i;
+    				}
+    				else if(buttons.get(i).enabled == false && selected == i){    					
+    					buttons.get(i).enabled = true;
+    				}
+    			}
+    			else{
+    				if(buttons.get(i).id >= 0 && buttons.get(i).id <= 2){
+    					buttons.get(i).enabled = false;
+    				}
+    			}
+    		} 			
+    	}
+    }
+	@Override
     protected void mouseMovedOrUp(int a, int b, int c){
     	for (int i = 0; i < buttons.size(); i++){  
     		if(buttons.get(i).id >= 0 && buttons.get(i).id <= 2 && buttons.get(i).enabled == false){
@@ -204,26 +216,11 @@ public class PerkGUI extends GuiScreen {
     		}
     	}
     }
+    private double roundUp(double x) {
+		return (itemsPerPage * Math.ceil(x / itemsPerPage));
+	}
     @Override
-    protected void mouseClicked(int par1, int par2, int par3) {
-    	for (int i = 0; i < buttons.size(); i++){    		
-    		if (buttons.get(i).mousePressed(Minecraft.getMinecraft(), par1, par2)){    			
-    			if(buttons.get(i).id >= 3 && buttons.get(i).id <= 17){
-    				if (buttons.get(i).enabled == true){
-    					buttons.get(i).enabled = false;
-    					buttons.get(selected).enabled = true;
-    					selected = i;
-    				}
-    				else if(buttons.get(i).enabled == false && selected == i){    					
-    					buttons.get(i).enabled = true;
-    				}
-    			}
-    			else{
-    				if(buttons.get(i).id >= 0 && buttons.get(i).id <= 2){
-    					buttons.get(i).enabled = false;
-    				}
-    			}
-    		} 			
-    	}
+    public void updateScreen() {
+    	this.drawDefaultBackground();
     }
 }

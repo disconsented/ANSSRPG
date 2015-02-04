@@ -23,13 +23,10 @@ THE SOFTWARE.
 package disconsented.anssrpg.perk;
 
 import java.util.ArrayList;
-import java.util.Set;
-
-import scala.actors.threadpool.Arrays;
-
-import com.google.gson.annotations.Expose;
 
 import net.minecraft.block.Block;
+
+import com.google.gson.annotations.Expose;
 
 /**
  * @author Disconsented
@@ -37,6 +34,10 @@ import net.minecraft.block.Block;
  */
 public class BlockPerk extends Perk {
 
+	private Block block;
+
+	@Expose
+	public String blockName = "default_blockName";
 	public BlockPerk() { super(); }
 
 	public BlockPerk(String name, ArrayList<Requirement> requirements,
@@ -44,20 +45,16 @@ public class BlockPerk extends Perk {
 		super(name, requirements, description, pointCost);
 		// TODO Auto-generated constructor stub
 	}
-	private Block block;
-
-	@Expose
-	public String blockName = "default_blockName";
 
 	public Block getBlock() { return block; }
 
-	protected void setBlock(Block block) { this.block = block; }
-	
-    @Override
+	@Override
     public void searchObject() {
         this.block = (Block) Block.blockRegistry.getObject(blockName); 
         if (block == null){
             throw new NullPointerException();
         }
     }
+	
+    protected void setBlock(Block block) { this.block = block; }
 }

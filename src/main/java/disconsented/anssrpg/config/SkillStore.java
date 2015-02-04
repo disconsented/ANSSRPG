@@ -40,15 +40,21 @@ public class SkillStore {
 	private ArrayList<ItemSkill> items = new ArrayList<ItemSkill>();
 
 
+	public void addBlockSkill(BlockSkill blockSkill) { this.blocks.add(blockSkill); }
+
+
+	public void addEntitySkill(EntitySkill entitySkill) { this.entites.add(entitySkill); }
+	
+
+	public void addItemSkill(ItemSkill itemSkill) { this.items.add(itemSkill); }
+
 	public ArrayList<BlockSkill> getBlock() {
 		return this.blocks;
 	}
-
-
+	
 	public void setBlock(ArrayList<BlockSkill> block) {
 		this.blocks = block;
 	}
-	
 
 	public void touchUp() {
 		for (BlockSkill block : this.blocks){
@@ -65,10 +71,4 @@ public class SkillStore {
 		}
 	
 	}
-
-	public void addBlockSkill(BlockSkill blockSkill) { this.blocks.add(blockSkill); }
-	
-	public void addEntitySkill(EntitySkill entitySkill) { this.entites.add(entitySkill); }
-
-	public void addItemSkill(ItemSkill itemSkill) { this.items.add(itemSkill); }
 }

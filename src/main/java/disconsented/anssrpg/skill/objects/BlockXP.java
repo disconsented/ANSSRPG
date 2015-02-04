@@ -25,8 +25,6 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.skill.objects;
 
-import com.google.gson.annotations.Expose;
-
 import net.minecraft.block.Block;
 
 /**
@@ -43,14 +41,14 @@ public class BlockXP extends XPGain {
 	public BlockXP() {
 	}
 
+	public Block getBlock() {
+		return block;
+	}
+
 	@Override
 	public void touchUp() {
 		block = (Block) Block.blockRegistry.getObject(name);
 
-	}
-
-	public Block getBlock() {
-		return block;
 	}
 
 }

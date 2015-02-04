@@ -44,21 +44,6 @@ public class SkillStore {
 	private static ArrayList <ItemSkill> itemSkill = new ArrayList <ItemSkill>();
 	private static ArrayList <Skill> skills = new ArrayList <Skill>();
 	protected SkillStore() {/* Exists only to defeat instantiation.*/}
-	public static SkillStore getInstance() {
-		if(instance == null) {
-			instance = new SkillStore();
-		}
-		return instance;
-	}
-	public static ArrayList<BlockSkill> getBlockSkill() {
-		return blockSkill;
-	}
-	public static ArrayList<EntitySkill> getEntitySkill() {
-		return entitySkill;
-	}
-	public static ArrayList<ItemSkill> getItemSkill() {
-		return itemSkill;
-	}
 	public static void addSkill(BlockSkill skill) {		
 		blockSkill.add(skill);
 		skills.add(skill);
@@ -77,6 +62,21 @@ public class SkillStore {
 		entitySkill = new ArrayList<EntitySkill>();
 		itemSkill = new ArrayList <ItemSkill>();
 		skills = new ArrayList <Skill>();
+	}
+	public static ArrayList<BlockSkill> getBlockSkill() {
+		return blockSkill;
+	}
+	public static ArrayList<EntitySkill> getEntitySkill() {
+		return entitySkill;
+	}
+	public static SkillStore getInstance() {
+		if(instance == null) {
+			instance = new SkillStore();
+		}
+		return instance;
+	}
+	public static ArrayList<ItemSkill> getItemSkill() {
+		return itemSkill;
 	}
 	public static ArrayList<Skill> getSkills() {
 		return skills;

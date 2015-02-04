@@ -25,12 +25,12 @@ package disconsented.anssrpg.perk;
 public class TitlePerk extends Perk {
     private String title = "default title";
 
-    @Override
-    public void searchObject() {
-    }
-    
     public String getTitle() {
         return title;
+    }
+    
+    @Override
+    public void searchObject() {
     }
 
     public void setTitle(String title) {

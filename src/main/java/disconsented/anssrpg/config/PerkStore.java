@@ -25,11 +25,10 @@ package disconsented.anssrpg.config;
 /**
  * Author: Abelistah
  */
-import java.util.*;
+import java.util.ArrayList;
 
 import com.google.gson.annotations.Expose;
 
-import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.perk.BlockPerk;
 import disconsented.anssrpg.perk.EntityPerk;
 import disconsented.anssrpg.perk.ItemPerk;
@@ -39,15 +38,6 @@ import disconsented.anssrpg.perk.RegexItemPerk;
 import disconsented.anssrpg.perk.TitlePerk;
 
 public class PerkStore {
-    public PerkStore(){
-        items.add(new ItemPerk());
-        blocks.add(new BlockPerk());
-        entities.add(new EntityPerk());
-        titles.add(new TitlePerk());
-        regexBlocks.add(new RegexBlockPerk());
-        regexItems.add(new RegexItemPerk());
-        regexEntitys.add(new RegexEntityPerk());
-    }
     @Expose
     private ArrayList<ItemPerk> items = new ArrayList<>();
     @Expose
@@ -62,14 +52,23 @@ public class PerkStore {
     private ArrayList<RegexItemPerk> regexItems = new ArrayList<>();
     @Expose 
     private ArrayList<RegexEntityPerk> regexEntitys = new ArrayList<>();
+    public PerkStore(){
+        items.add(new ItemPerk());
+        blocks.add(new BlockPerk());
+        entities.add(new EntityPerk());
+        titles.add(new TitlePerk());
+        regexBlocks.add(new RegexBlockPerk());
+        regexItems.add(new RegexItemPerk());
+        regexEntitys.add(new RegexEntityPerk());
+    }
 
-    public void addItemPerk(ItemPerk itemPerk) { this.items.add(itemPerk); }
     public void addBlockPerk(BlockPerk blockPerk) { this.blocks.add(blockPerk); }
     public void addEntityPerk(EntityPerk entityPerk) { this.entities.add(entityPerk); }
-    public void addRegexTitlePerk(TitlePerk titlePerk){ this.titles.add(titlePerk); }
-    public void addRegexItemPerk(RegexItemPerk itemPerk) { this.regexItems.add(itemPerk); }
+    public void addItemPerk(ItemPerk itemPerk) { this.items.add(itemPerk); }
     public void addRegexBlockPerk(RegexBlockPerk blockPerk) { this.regexBlocks.add(blockPerk); }
     public void addRegexEntityPerk(RegexEntityPerk entityPerk) { this.regexEntitys.add(entityPerk); }
+    public void addRegexItemPerk(RegexItemPerk itemPerk) { this.regexItems.add(itemPerk); }
+    public void addRegexTitlePerk(TitlePerk titlePerk){ this.titles.add(titlePerk); }
 
 	public void touchUp() {
 		for (ItemPerk item : items){
