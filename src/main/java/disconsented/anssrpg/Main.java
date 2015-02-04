@@ -73,7 +73,8 @@ public class Main {
         
        
 		@EventHandler
-        public void preInit(FMLPreInitializationEvent event) throws Exception {		    
+        public void preInit(FMLPreInitializationEvent event) throws Exception {
+		    settings.load(event);
 			if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER){
 				settings.isServer = true;
 			}else{

@@ -1,6 +1,7 @@
 /*The MIT License (MIT)
 
 Copyright (c) 2015 Disconsented, James Kerr
+Copyright (c) 2015 TehNut
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -42,9 +43,14 @@ import net.minecraftforge.common.config.Configuration;
 
 public class Settings {
 	private static boolean debug = false;
+	private static boolean logging = true;
 	private static double levelCurve = 1.6;
 	private static String statusMessage = "null";
 	private static double pointsRatio = .2;
+	
+	// Categories
+    public static String balancing = "Balancing";
+    public static String misc = "Misc Options";
 	/**
 	 * 0 - Disabled
 	 * 1 - Points awarded based on XP from skills
@@ -57,13 +63,20 @@ public class Settings {
 	
 	private Settings(){}
 	
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {        
+	public void load(FMLPreInitializationEvent event) {        
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
         config.load();
-        setLevelCurve(config.get(config.CATEGORY_GENERAL, "Level Curve", 1.3).getDouble());
-        setDebug(config.get(config.CATEGORY_GENERAL, "debug", false).getBoolean(false));
-        setPointsMode(config.get(config.CATEGORY_GENERAL, "Points Mode", 1,"0 = disabled, 1 = based on assrpg xp, 2 = convert vanilla levels to points").getInt());
+        
+        config.addCustomCategoryComment(balancing, "Balancing tweaks.");
+        config.addCustomCategoryComment(misc, "Settings that don't fit in other categories");
+        
+        levelCurve = config.get(balancing, "levelCurve", 1.6, "Level curve settings.").getDouble();
+        pointsRatio = config.get(balancing, "pointsRatio", .2, "Points ratio settings.").getDouble();
+        pointsMode = config.get(balancing, "pointsMode", 1, "Points Mode. \n0 - Disabled \n1 - Points awarded based on XP from skills \n2 - Points can be converted from vanilla levels").getInt();
+        
+        debug = config.get(misc, "enableDebugMode", false, "Enables debugging features. Meant for development use.").getBoolean();
+        logging = config.get(misc, "enableLogging", true, "Enables logging to console.").getBoolean();
+
         config.save();
 	}
 	public static Settings getInstance()
