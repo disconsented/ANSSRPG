@@ -39,6 +39,7 @@ import disconsented.anssrpg.data.SkillStore;
 import disconsented.anssrpg.handler.PlayerHandler;
 import disconsented.anssrpg.perk.EntityPerk;
 import disconsented.anssrpg.perk.ItemPerk;
+import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.EntitySkill;
 import disconsented.anssrpg.skill.objects.EntityXP;
@@ -62,7 +63,7 @@ import disconsented.anssrpg.skill.objects.XPGain;
 	    			EntityPlayerMP playerMP = (EntityPlayerMP)event.entityPlayer;
 	    			PlayerData player = PlayerStore.getInstance().getPlayer(playerMP.getUniqueID().toString());
 	    			Item item = (Item) ((ItemStack) event.entityPlayer.openContainer.inventoryItemStacks.get(0)).getItem();
-	    			ArrayList<ItemPerk> entitylist = PerkStore.getPerksForItem(item.getUnlocalizedName());
+	    			ArrayList<Slug> entitylist = PerkStore.getInstance().getSlugs(item);
 	    			boolean requiresPerk = false;
 	    			if (entitylist != null){
 	    				requiresPerk = true;
@@ -96,7 +97,7 @@ import disconsented.anssrpg.skill.objects.XPGain;
     			EntityPlayerMP playerMP = (EntityPlayerMP)event.player;
     			PlayerData player = PlayerStore.getInstance().getPlayer(playerMP.getUniqueID().toString());
     			Item item = (Item) ((ItemStack) event.player.openContainer.inventoryItemStacks.get(0)).getItem();
-    			ArrayList<ItemPerk> entitylist = PerkStore.getPerksForItem(item.getUnlocalizedName());
+    			ArrayList<Slug> entitylist = PerkStore.getInstance().getSlugs(item);
     			boolean requiresPerk = false;
     			if (entitylist != null){
     				requiresPerk = true;
@@ -108,21 +109,12 @@ import disconsented.anssrpg.skill.objects.XPGain;
     					if(item.equals(compareItem)) {
     						if (requiresPerk){
     							if (PlayerHandler.hasPerk(player, entitylist)){
-//    								if (event.entity.isDead){
     									PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
-//    								}
     							}
-//    							else
-//    							{
-//    								PlayerHandler.taskFail((EntityPlayer) playerMP);
-//    								event.player.closeScreen();
-//    							}
     						}
     						else
     						{
-//    							if (event.entity.isDead){
     								PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
-//    							}
     						}
     					}
     				}

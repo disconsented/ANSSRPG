@@ -35,6 +35,7 @@ import disconsented.anssrpg.data.PlayerStore;
 import disconsented.anssrpg.data.SkillStore;
 import disconsented.anssrpg.handler.PlayerHandler;
 import disconsented.anssrpg.perk.BlockPerk;
+import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.BlockSkill;
 import disconsented.anssrpg.skill.objects.BlockXP;
@@ -49,9 +50,9 @@ import disconsented.anssrpg.skill.objects.XPGain;
     	if(event.getPlayer() instanceof EntityPlayerMP){
 			EntityPlayerMP playerMP = (EntityPlayerMP) event.getPlayer();
     		PlayerData player = PlayerStore.getInstance().getPlayer(event.getPlayer().getUniqueID().toString());
-    		ArrayList<BlockPerk> blockList = PerkStore.getPerksForBlock(event.block.getUnlocalizedName());
+    		ArrayList<Slug> slugList = PerkStore.getInstance().getSlugs(event.block);
     		boolean requiresPerk = false;
-    		if (blockList != null){
+    		if (slugList != null){
     			requiresPerk = true;
     		}    		
     		for (BlockSkill skill : SkillStore.getInstance().getBlockSkill()){
@@ -59,7 +60,7 @@ import disconsented.anssrpg.skill.objects.XPGain;
     			for (int i = 0; i < temp.size(); i++){
     				if(((BlockXP) temp.get(i)).getBlock().equals(event.block)){	  
 	    				if (requiresPerk){
-	    					if (PlayerHandler.hasPerk(player, blockList)){
+	    					if (PlayerHandler.hasPerk(player, slugList)){
 	    						PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
 	    					}
 	    					else

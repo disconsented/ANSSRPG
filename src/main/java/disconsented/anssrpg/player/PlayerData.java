@@ -32,15 +32,16 @@ import java.util.List;
 import java.util.UUID;
 
 import disconsented.anssrpg.perk.Perk;
+import disconsented.anssrpg.perk.Slug;
 import net.minecraft.item.Item;
 
 public class PlayerData {
-	private ArrayList<String> perkList = new ArrayList<String>();
+	private ArrayList<Slug> perkList = new ArrayList<Slug>();
 	private HashMap<String, Integer> skillExp = new HashMap<String, Integer>();
 	private String playerID;
 	private int points;
 
-	public PlayerData(ArrayList perkList, HashMap skillExp, String playerID, int points){
+	public PlayerData(ArrayList<Slug> perkList, HashMap skillExp, String playerID, int points){
 		this.perkList = perkList;
 		this.skillExp = skillExp;
 		this.playerID = playerID; 
@@ -51,11 +52,11 @@ public class PlayerData {
 		return this.playerID;		
 	}
 
-	public ArrayList<String> getPerkList() {
+	public ArrayList<Slug> getPerkList() {
 		return perkList;
 	}
 
-	public void setPerkList(ArrayList<String> perkList) {
+	public void setPerkList(ArrayList<Slug> perkList) {
 		this.perkList = perkList;
 	}
 

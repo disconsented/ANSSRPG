@@ -33,6 +33,7 @@ import disconsented.anssrpg.data.PlayerStore;
 import disconsented.anssrpg.perk.BlockPerk;
 import disconsented.anssrpg.perk.EntityPerk;
 import disconsented.anssrpg.perk.Perk;
+import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.BlockXP;
 import disconsented.anssrpg.perk.Requirement;
@@ -52,7 +53,7 @@ import disconsented.anssrpg.perk.Requirement;
     		return player;
     	}
     	public static void addPerk(Perk perk, PlayerData player){
-    		player.getPerkList().add(perk.getSlug());
+    		player.getPerkList().add(perk.slug);
     	}
     	
     	public static String addPerk(String perkSlug, PlayerData player){
@@ -108,7 +109,7 @@ import disconsented.anssrpg.perk.Requirement;
     			}    			
     		}
     		if(cont && !player.getPerkList().contains(perkSlug)){
-    			player.getPerkList().add(perkSlug);
+    			addPerk(perk, player);
     			toReturn = "All conditions meet, granting perk";
     		}
 			return toReturn;
@@ -124,14 +125,14 @@ import disconsented.anssrpg.perk.Requirement;
     	public static int getPoints(PlayerData player){
     		return player.getPoints();
     	}
-		public static boolean hasPerk(PlayerData player, ArrayList<? extends Perk> blocklist) {
-			for (int i = 0; i < blocklist.size(); i++)
-			{
-				if(player.getPerkList().contains(blocklist.get(i).perkSlug)){
-					return true;
-				}
-			}
-			return false;
+		public static boolean hasPerk(PlayerData player, ArrayList<Slug> slugList) {
+		    for (Slug slug : slugList){
+		        if (player.getPerkList().contains(slug)){
+		            return true;
+		        }
+		        return false;
+		    }
+		    return false;
 		}
 		public static void awardXP(PlayerData player, String name, int value, EntityPlayer playerEntity) {
 			if (player.getSkillExp().get(name) != null){

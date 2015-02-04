@@ -60,17 +60,11 @@ public class EntityPerk extends Perk {
 	}
 
     @Override
-    protected void searchObject() {
+    public void searchObject() {
         this.entity = (Class) EntityList.stringToClassMapping.get(entityName);
         if (entity == null){
             throw new NullPointerException();
         }
-        
-    }
-
-    @Override
-    protected void regexObjects() {
-        // TODO Auto-generated method stub
         
     }
 

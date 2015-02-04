@@ -20,9 +20,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-/**
- * 
- */
 package disconsented.anssrpg.config;
 
 import java.util.ArrayList;
@@ -33,15 +30,8 @@ import disconsented.anssrpg.skill.objects.BlockSkill;
 import disconsented.anssrpg.skill.objects.EntitySkill;
 import disconsented.anssrpg.skill.objects.ItemSkill;
 
-/**
- * @author Disconsented
- *
- */
 public class SkillStore {
 
-	/**
-	 * 
-	 */
 	@Expose
 	private ArrayList<BlockSkill> blocks = new ArrayList<BlockSkill>();
 	@Expose
@@ -49,16 +39,12 @@ public class SkillStore {
 	@Expose
 	private ArrayList<ItemSkill> items = new ArrayList<ItemSkill>();
 
-	/**
-	 * @return the block
-	 */
+
 	public ArrayList<BlockSkill> getBlock() {
 		return this.blocks;
 	}
 
-	/**
-	 * @param block the block to set
-	 */
+
 	public void setBlock(ArrayList<BlockSkill> block) {
 		this.blocks = block;
 	}

@@ -23,6 +23,9 @@ THE SOFTWARE.
 package disconsented.anssrpg.perk;
 
 import java.util.ArrayList;
+import java.util.Set;
+
+import scala.actors.threadpool.Arrays;
 
 import com.google.gson.annotations.Expose;
 
@@ -51,16 +54,10 @@ public class BlockPerk extends Perk {
 	protected void setBlock(Block block) { this.block = block; }
 	
     @Override
-    protected void searchObject() {
+    public void searchObject() {
         this.block = (Block) Block.blockRegistry.getObject(blockName); 
         if (block == null){
             throw new NullPointerException();
         }
-    }
-
-    @Override
-    protected void regexObjects() {
-        // TODO Auto-generated method stub
-        
     }
 }

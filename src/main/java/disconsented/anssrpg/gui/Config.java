@@ -110,7 +110,6 @@ public class Config {
 	private static DefaultListModel entityModel = new DefaultListModel();
 	private static DefaultListModel itemModel = new DefaultListModel();
 	private static DefaultListModel blockModel = new DefaultListModel();
-	private static JCheckBox chckbxRegularExpression = new JCheckBox("Regular Expression");
 
 	/**
 	 * Launch the application.
@@ -452,7 +451,6 @@ public class Config {
 			tempBlockPerk.description = editorPerkDescription.getText();
 			tempBlockPerk.pointCost = (int) spinnerPointCost.getValue();
 			tempBlockPerk.requirements = currentPerk.requirements;
-			tempBlockPerk.regex = chckbxRegularExpression.isSelected();
 			perks.set(perks.indexOf(currentPerk),tempBlockPerk);
 			if(blockModel.contains(textPerkObject.getText())){
 			    tempBlockPerk.blockName = textPerkObject.getText();
@@ -783,9 +781,6 @@ public class Config {
 		
 		spinnerPointCost.setBounds(246, 137, 29, 20);
 		panelPerk.add(spinnerPointCost);
-		
-		chckbxRegularExpression.setBounds(401, 167, 124, 23);
-		panelPerk.add(chckbxRegularExpression);
 		
 		JPanel panelSkill = new JPanel();
 		panelSkill.addMouseListener(new MouseAdapter() {

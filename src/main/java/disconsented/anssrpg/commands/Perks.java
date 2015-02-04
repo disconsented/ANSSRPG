@@ -32,6 +32,7 @@ import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.handler.PlayerHandler;
 import disconsented.anssrpg.perk.Perk;
+import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
@@ -87,13 +88,13 @@ public class Perks implements ICommand {
 		case "list":			
 			switch(arguments[1].toLowerCase()){
 			case "current":
-				for(String perk :PlayerHandler.getPlayer(p2.getUniqueID().toString()).getPerkList()){
-					toReturn += PerkStore.getInstance().getPerk(perk)+",";
+				for(Slug perk : PlayerHandler.getPlayer(p2.getUniqueID().toString()).getPerkList()){
+					toReturn += PerkStore.getInstance().getPerk(perk.getSlug().toString())+",";
 				}
 			break;
 			case "all":
 				for (Perk perk : PerkStore.getInstance().getPerks()){
-					toReturn += perk.perkSlug+",";
+					toReturn += perk.slug.getSlug()+",";
 				}
 				break;
 				default:

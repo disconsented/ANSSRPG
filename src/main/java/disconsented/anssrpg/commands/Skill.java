@@ -34,6 +34,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 import disconsented.anssrpg.data.PlayerStore;
+import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 
 /**
@@ -79,8 +80,8 @@ public class Skill implements ICommand {
 		EntityPlayerMP user = (EntityPlayerMP) player;
 		PlayerData playerData = PlayerStore.getInstance().getPlayer(user.getPersistentID().toString());
 		String toReturn = "You have the current perks: ";
-		for (String perk : playerData.getPerkList()){
-			toReturn += ","+perk;
+		for (Slug slug : playerData.getPerkList()){
+			toReturn += ","+slug;
 		}
 		toReturn += "| Your skill XP: ";
 		for (Entry<String, Integer> skill : playerData.getSkillExp().entrySet()){

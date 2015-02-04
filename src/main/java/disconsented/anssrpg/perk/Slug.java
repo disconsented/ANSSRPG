@@ -20,52 +20,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-/**
- * 
- */
 package disconsented.anssrpg.perk;
-
-import java.util.ArrayList;
 
 import com.google.gson.annotations.Expose;
 
-import net.minecraft.item.Item;
-
-/**
- * @author Disconsented
- *
- */
-public class ItemPerk extends Perk {
-
-	public ItemPerk() {
-		super();
-	}
-
-	public ItemPerk(String name, ArrayList<Requirement> requirements,
-			String description, int pointCost) {
-		super(name, requirements, description, pointCost);
-
-	}
-
-	private Item item;
-	@Expose
-	public String itemName = "default_itemName";
-	
-
-	public Item getItem() {
-		return item;
-	}
-
-	protected void setItem(Item item) {
-		this.item = item;
-	}
-	
-	@Override
-	public void searchObject() {		
-		this.item = (Item) Item.itemRegistry.getObject(itemName);
-		if (item == null){
-            throw new NullPointerException();
-        }
-	}
+public class Slug {
+    Slug(String name){
+        this.slug = name.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
+    }
+    @Expose
+    private String slug;
+    
+    public String getSlug() {
+        return slug;
+    }
+    
 
 }
