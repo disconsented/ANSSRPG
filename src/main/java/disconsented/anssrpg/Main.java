@@ -59,7 +59,7 @@ import disconsented.anssrpg.skill.EntityDamage;
 import disconsented.anssrpg.skill.ItemCrafting;
 import disconsented.anssrpg.skill.Smelting;
 
-@Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="DEV10",acceptableRemoteVersions="*")
+@Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="DEV11",acceptableRemoteVersions="*")
 public class Main {
         @Instance(value = "ANSSRPG")
         public static Main instance; 
