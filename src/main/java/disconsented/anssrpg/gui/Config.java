@@ -77,6 +77,7 @@ import disconsented.anssrpg.skill.objects.ItemXP;
 import disconsented.anssrpg.skill.objects.Skill;
 import disconsented.anssrpg.skill.objects.XPGain;
 import javax.swing.JCheckBox;
+import javax.swing.JTextPane;
 
 public class Config {
 
@@ -989,6 +990,14 @@ public class Config {
 		
 		JLabel label = new JLabel("");
 		panelRegistry.add(label);
+		
+		JPanel panelAbout = new JPanel();
+		tabbedPane.addTab("About", null, panelAbout, null);
+		
+		JTextPane txtpnGeneralRulesrecommendationsFill = new JTextPane();
+		txtpnGeneralRulesrecommendationsFill.setText("General rules/recommendations:\r\nFill out ALL fields\r\nPlan out your skills and perks before hand\r\n\r\nPerk rules:\r\nAll perks must have unique names\r\n\r\nRegistry:\r\nYou need to remove anything before the \":\" when using the name (it just tells you the source)\r\n\r\nSkill rules:\r\nUnique names are NOT required (this allows for more complex skills)");
+		txtpnGeneralRulesrecommendationsFill.setEditable(false);
+		panelAbout.add(txtpnGeneralRulesrecommendationsFill);
 	}
 
 
