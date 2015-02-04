@@ -32,6 +32,9 @@ import disconsented.anssrpg.perk.BlockPerk;
 import disconsented.anssrpg.perk.EntityPerk;
 import disconsented.anssrpg.perk.ItemPerk;
 import disconsented.anssrpg.perk.Perk;
+import disconsented.anssrpg.perk.RegexBlockPerk;
+import disconsented.anssrpg.perk.RegexEntityPerk;
+import disconsented.anssrpg.perk.RegexItemPerk;
 import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.perk.TitlePerk;
 
@@ -103,6 +106,51 @@ public class PerkStore {
 		}		
 		
 	}
+	public static void putPerk(RegexBlockPerk perk){
+	    perks.add(perk);
+	    for (Block block : perk.blocks){
+	        if (blockMap.containsKey(block.getUnlocalizedName())){
+	            blockMap.get(block.getUnlocalizedName()).add(perk.slug);
+	        }
+	        else
+	        {
+	            ArrayList<Slug> temp = new ArrayList<Slug>();
+	            temp.add(perk.slug);
+	            blockMap.put(block.getUnlocalizedName(), temp);
+	        }
+	    }
+	    
+	}
+    public static void putPerk(RegexItemPerk perk){
+        perks.add(perk);
+        for (Item item : perk.items){
+            if (itemMap.containsKey(item.getUnlocalizedName())){
+                itemMap.get(item.getUnlocalizedName()).add(perk.slug);
+            }
+            else
+            {
+                ArrayList<Slug> temp = new ArrayList<Slug>();
+                temp.add(perk.slug);
+                itemMap.put(item.getUnlocalizedName(), temp);
+            }
+        }
+        
+    }
+    public static void putPerk(RegexEntityPerk perk){
+        perks.add(perk);
+        for (Entity entity : perk.entities){
+            if (entityMap.containsKey(entity.getCommandSenderName())){
+                entityMap.get(entity.getCommandSenderName()).add(perk.slug);
+            }
+            else
+            {
+                ArrayList<Slug> temp = new ArrayList<Slug>();
+                temp.add(perk.slug);
+                entityMap.put(entity.getCommandSenderName(), temp);
+            }
+        }
+    }
+	
 	public static void putPerk(TitlePerk title) {
 	    titlePerks.add(title);
         
