@@ -22,7 +22,14 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg.perk;
 
-public class RegexItemPerk extends ItemPerk implements RegexPerk {    
+import java.util.ArrayList;
+
+import net.minecraft.item.Item;
+
+public class RegexItemPerk extends RegexPerk{   
+    
+    public ArrayList<Item> items = new ArrayList<Item>();
+    
     public RegexItemPerk(){}
     
     @Override

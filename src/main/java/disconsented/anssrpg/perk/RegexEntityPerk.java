@@ -22,7 +22,13 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg.perk;
 
-public class RegexEntityPerk extends EntityPerk implements RegexPerk {
+import java.util.ArrayList;
+
+import net.minecraft.entity.Entity;
+
+public class RegexEntityPerk extends RegexPerk{
+    
+    public ArrayList<Entity> entities = new ArrayList<Entity>();
     
     public RegexEntityPerk(){}
     

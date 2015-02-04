@@ -29,8 +29,10 @@ import com.google.gson.annotations.Expose;
 
 import net.minecraft.block.Block;
 
-public class RegexBlockPerk extends BlockPerk implements RegexPerk {
-    private ArrayList<Block> blocks = new ArrayList<Block>();
+public class RegexBlockPerk extends RegexPerk{
+    
+    public ArrayList<Block> blocks = new ArrayList<Block>();
+    
     public RegexBlockPerk(){}    
 
     @Override

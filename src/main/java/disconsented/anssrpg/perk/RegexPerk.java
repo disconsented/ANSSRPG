@@ -2,8 +2,8 @@ package disconsented.anssrpg.perk;
 
 import com.google.gson.annotations.Expose;
 
-public abstract interface RegexPerk{
+public abstract class RegexPerk extends Perk{
     
     @Expose 
-    String searchQuery = "default_searchQuery";
+    public String searchQuery = "default_searchQuery";
 }
