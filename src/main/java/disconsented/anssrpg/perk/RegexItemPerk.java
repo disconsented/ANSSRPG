@@ -26,8 +26,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import disconsented.anssrpg.common.Logging;
 
 public class RegexItemPerk extends RegexPerk{
 
@@ -40,10 +40,15 @@ public class RegexItemPerk extends RegexPerk{
         List<Object> keyList = Arrays.asList(Item.itemRegistry.getKeys().toArray());
         for (Object key : keyList){
             String current = key.toString();
+            int colonPos = current.indexOf(':');
+            if (colonPos > -1){
+                current = current.substring(colonPos+1);
+            }
             if(current.matches(searchQuery)){
                 items.add((Item) Item.itemRegistry.getObject(current));
             }
         }
+        Logging.debug(this.name + " has " + items.size()+" item's listed");
     }
 
 }
