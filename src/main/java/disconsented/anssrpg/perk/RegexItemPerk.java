@@ -19,23 +19,31 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.perk;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
-public class RegexItemPerk extends RegexPerk{   
-    
+public class RegexItemPerk extends RegexPerk{
+
     public ArrayList<Item> items = new ArrayList<Item>();
-    
+
     public RegexItemPerk(){}
-    
+
     @Override
     public void searchObject() {
-        // TODO Auto-generated method stub
-
+        List<Object> keyList = Arrays.asList(Item.itemRegistry.getKeys().toArray());
+        for (Object key : keyList){
+            String current = key.toString();
+            if(current.matches(searchQuery)){
+                items.add((Item) Item.itemRegistry.getObject(current));
+            }
+        }
     }
 
 }

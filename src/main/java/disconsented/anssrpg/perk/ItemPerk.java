@@ -19,9 +19,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 /**
- * 
+ *
  */
 package disconsented.anssrpg.perk;
 
@@ -37,35 +37,29 @@ import com.google.gson.annotations.Expose;
  */
 public class ItemPerk extends Perk {
 
-	private Item item;
+    private Item item;
 
-	@Expose
-	public String itemName = "default_itemName";
+    @Expose
+    public String itemName = "default_itemName";
 
-	public ItemPerk() {
-		super();
-	}
-	public ItemPerk(String name, ArrayList<Requirement> requirements,
-			String description, int pointCost) {
-		super(name, requirements, description, pointCost);
+    public ItemPerk() {
+        super();
+    }
+    public ItemPerk(String name, ArrayList<Requirement> requirements,
+            String description, int pointCost) {
+        super(name, requirements, description, pointCost);
+    }
+    public Item getItem() {
+        return item;
+    }
 
-	}
-	
+    @Override
+    public void searchObject() {
+        item = (Item) Item.itemRegistry.getObject(itemName);
+    }
 
-	public Item getItem() {
-		return item;
-	}
-
-	@Override
-	public void searchObject() {		
-		this.item = (Item) Item.itemRegistry.getObject(itemName);
-		if (item == null){
-            throw new NullPointerException();
-        }
-	}
-	
-	protected void setItem(Item item) {
-		this.item = item;
-	}
+    protected void setItem(Item item) {
+        this.item = item;
+    }
 
 }

@@ -19,7 +19,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.skill;
 /**
  * @author James
@@ -38,42 +38,45 @@ import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.BlockSkill;
 import disconsented.anssrpg.skill.objects.BlockXP;
-	
-    public class BlockBreaking{   
-    	/**
-    	 * Author Disconsented
-    	 */
+
+public class BlockBreaking{
+    /**
+     * Author Disconsented
+     */
     @SubscribeEvent
-    public void onBreakevent(BreakEvent event){    	
-    	if(event.getPlayer() instanceof EntityPlayerMP){
-			EntityPlayerMP playerMP = (EntityPlayerMP) event.getPlayer();
-    		PlayerData player = PlayerStore.getInstance().getPlayer(event.getPlayer().getUniqueID().toString());
-    		ArrayList<Slug> slugList = PerkStore.getInstance().getSlugs(event.block);
-    		boolean requiresPerk = false;
-    		if (slugList != null){
-    			requiresPerk = true;
-    		}    		
-    		for (BlockSkill skill : SkillStore.getInstance().getBlockSkill()){
-    			ArrayList<BlockXP> temp = skill.getExp();
-    			for (int i = 0; i < temp.size(); i++){
-    				if(((BlockXP) temp.get(i)).getBlock().equals(event.block)){	  
-	    				if (requiresPerk){
-	    					if (PlayerHandler.hasPerk(player, slugList)){
-	    						PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
-	    					}
-	    					else
-	    					{
-	    						PlayerHandler.taskFail(event.getPlayer());
-	    						event.setCanceled(true);
-	    					}
-	    				}
-	    				else
-	    				{
-	    					PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
-	    				}
-    				}
-    			}
-    		}
-    	}
+    public void onBreakevent(BreakEvent event){
+        if(event.getPlayer() instanceof EntityPlayerMP){
+            EntityPlayerMP playerMP = (EntityPlayerMP) event.getPlayer();
+            PlayerStore.getInstance();
+            PlayerData player = PlayerStore.getPlayer(event.getPlayer().getUniqueID().toString());
+            PerkStore.getInstance();
+            ArrayList<Slug> slugList = PerkStore.getSlugs(event.block);
+            boolean requiresPerk = false;
+            if (slugList != null){
+                requiresPerk = true;
+            }
+            SkillStore.getInstance();
+            for (BlockSkill skill : SkillStore.getBlockSkill()){
+                ArrayList<BlockXP> temp = skill.getExp();
+                for (int i = 0; i < temp.size(); i++){
+                    if(temp.get(i).getBlock().equals(event.block)){
+                        if (requiresPerk){
+                            if (PlayerHandler.hasPerk(player, slugList)){
+                                PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
+                            }
+                            else
+                            {
+                                PlayerHandler.taskFail(event.getPlayer());
+                                event.setCanceled(true);
+                            }
+                        }
+                        else
+                        {
+                            PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

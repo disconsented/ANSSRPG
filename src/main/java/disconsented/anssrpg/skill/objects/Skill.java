@@ -20,7 +20,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 /**
  * @author James
  * Handles storing the information for each skill
@@ -31,28 +31,28 @@ import java.util.ArrayList;
 import com.google.gson.annotations.Expose;
 
 public abstract class Skill {
-	@Expose
-	public String name = "default_skillname";
-	/**  
-	 * @param exp - ArrayList for the exp using XPGain objects
-	 * @param name - Name of the skill
-	 */
-	
-	public Skill(){
-	}
-	public abstract ArrayList getExp();
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}	
-	public abstract void setExp(ArrayList exp);
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-	public abstract void touchUp();
+    @Expose
+    public String name = "default_skillname";
+    /**
+     * @param exp - ArrayList for the exp using XPGain objects
+     * @param name - Name of the skill
+     */
+
+    public Skill(){
+    }
+    public abstract ArrayList getExp();
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+    public abstract void setExp(ArrayList exp);
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+    public abstract void touchUp();
 }

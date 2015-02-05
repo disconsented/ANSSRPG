@@ -19,7 +19,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.perk;
 
 import com.google.gson.annotations.Expose;
@@ -28,12 +28,12 @@ public class Slug {
     @Expose
     private String slug;
     Slug(String name){
-        this.slug = name.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
+        slug = name.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
     }
-    
+
     public String getSlug() {
         return slug;
     }
-    
+
 
 }

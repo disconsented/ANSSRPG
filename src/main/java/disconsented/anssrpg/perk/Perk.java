@@ -19,7 +19,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 /** Author: Disconsented
  * Supertype for perks
  */
@@ -29,45 +29,45 @@ import java.util.ArrayList;
 
 import com.google.gson.annotations.Expose;
 
-public abstract class Perk {	
-	@Expose
-	public String name = "default_name";
-	@Expose
-	public ArrayList<Requirement> requirements = new ArrayList<Requirement>();	
-	public Slug slug;//Not exposed as its made based on the name
-	@Expose
-	public String description = "default_description";
-	@Expose
-	public int pointCost = 0;
+public abstract class Perk {
+    @Expose
+    public String name = "default_name";
+    @Expose
+    public ArrayList<Requirement> requirements = new ArrayList<Requirement>();
+    public Slug slug;//Not exposed as its made based on the name
+    @Expose
+    public String description = "default_description";
+    @Expose
+    public int pointCost = 0;
 
-	public Perk(){
-		this.requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
-		this.requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
-		this.requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
-	}
-	public Perk (String name, ArrayList<Requirement> requirements, String description, int pointCost){
-		this.name = name;
-		this.requirements = requirements;
-		this.description = description;
-		this.pointCost = pointCost;
-	}
+    public Perk(){
+        requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
+        requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
+        requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
+    }
+    public Perk (String name, ArrayList<Requirement> requirements, String description, int pointCost){
+        this.name = name;
+        this.requirements = requirements;
+        this.description = description;
+        this.pointCost = pointCost;
+    }
 
-	public String getDescription(){return description;}
-	public String getName(){return name;}
-	public int getPointCost(){return pointCost;} 
-	public ArrayList getRequirements(){return requirements;}
-	public Slug getSlug(){return slug;}
-	public abstract void searchObject();
-	protected void setDescription(String description){this.description = description;}
-	protected void setName(String name){this.name = name; this.slug = new Slug(name);}
-	protected void setPointCost(int pointCost){this.pointCost = pointCost;}
-	protected void setRequirements(ArrayList<Requirement> requirments){this.requirements = requirments;}
-	@Override
-	public String toString() {		
-		return this.name+"|"+this.description+"|"+this.pointCost+"|"+this.requirements.toString();
-	}
-	public void touchUp(){
-	        searchObject();
-	}
+    public String getDescription(){return description;}
+    public String getName(){return name;}
+    public int getPointCost(){return pointCost;}
+    public ArrayList getRequirements(){return requirements;}
+    public Slug getSlug(){return slug;}
+    public abstract void searchObject();
+    protected void setDescription(String description){this.description = description;}
+    protected void setName(String name){this.name = name; slug = new Slug(name);}
+    protected void setPointCost(int pointCost){this.pointCost = pointCost;}
+    protected void setRequirements(ArrayList<Requirement> requirments){requirements = requirments;}
+    @Override
+    public String toString() {
+        return name+"|"+description+"|"+pointCost+"|"+requirements.toString();
+    }
+    public void touchUp(){
+        searchObject();
+    }
 
 }

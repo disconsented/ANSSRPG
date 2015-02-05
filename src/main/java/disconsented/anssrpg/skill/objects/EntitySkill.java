@@ -19,9 +19,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 /**
- * 
+ *
  */
 package disconsented.anssrpg.skill.objects;
 
@@ -34,32 +34,32 @@ import com.google.gson.annotations.Expose;
  *
  */
 public class EntitySkill extends Skill {
-	@Expose
-	private ArrayList<EntityXP> exp = new ArrayList<EntityXP>();
-	
-	public EntitySkill(){
-		exp.add(new EntityXP());
-		exp.add(new EntityXP());
-	}
+    @Expose
+    private ArrayList<EntityXP> exp = new ArrayList<EntityXP>();
 
-	@Override
-	public ArrayList<EntityXP> getExp() {
-		return exp;
-	}
+    public EntitySkill(){
+        exp.add(new EntityXP());
+        exp.add(new EntityXP());
+    }
 
-	@Override
-	public void setExp(ArrayList exp) {
-		this.exp = exp;
-		
-	}
+    @Override
+    public ArrayList<EntityXP> getExp() {
+        return exp;
+    }
 
-	@Override
-	public void touchUp() {
-		for (XPGain xp : exp){
-			EntityXP thing = new EntityXP();
-			thing.name = xp.name;
-			thing.xp = xp.xp;
-			thing.touchUp();
-		}
-	}
+    @Override
+    public void setExp(ArrayList exp) {
+        this.exp = exp;
+
+    }
+
+    @Override
+    public void touchUp() {
+        for (XPGain xp : exp){
+            EntityXP thing = new EntityXP();
+            thing.name = xp.name;
+            thing.xp = xp.xp;
+            thing.touchUp();
+        }
+    }
 }

@@ -19,7 +19,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.player;
 /**
  * @author James
@@ -32,51 +32,51 @@ import java.util.HashMap;
 import disconsented.anssrpg.perk.Slug;
 
 public class PlayerData {
-	private ArrayList<Slug> perkList = new ArrayList<Slug>();
-	private HashMap<String, Integer> skillExp = new HashMap<String, Integer>();
-	private String playerID;
-	private int points;
+    private ArrayList<Slug> perkList = new ArrayList<Slug>();
+    private HashMap<String, Integer> skillExp = new HashMap<String, Integer>();
+    private String playerID;
+    private int points;
 
-	public PlayerData(ArrayList<Slug> perkList, HashMap skillExp, String playerID, int points){
-		this.perkList = perkList;
-		this.skillExp = skillExp;
-		this.playerID = playerID; 
-		this.points = points;
-	}
-	public ArrayList<Slug> getPerkList() {
-		return perkList;
-	}
+    public PlayerData(ArrayList<Slug> perkList, HashMap skillExp, String playerID, int points){
+        this.perkList = perkList;
+        this.skillExp = skillExp;
+        this.playerID = playerID;
+        this.points = points;
+    }
+    public ArrayList<Slug> getPerkList() {
+        return perkList;
+    }
 
-	public String getPlayerID() {
-		return playerID;
-	}
+    public String getPlayerID() {
+        return playerID;
+    }
 
-	public int getPoints() {
-		return points;
-	}
+    public int getPoints() {
+        return points;
+    }
 
-	public HashMap<String, Integer> getSkillExp() {
-		return skillExp;
-	}
+    public HashMap<String, Integer> getSkillExp() {
+        return skillExp;
+    }
 
-	public void setPerkList(ArrayList<Slug> perkList) {
-		this.perkList = perkList;
-	}
+    public void setPerkList(ArrayList<Slug> perkList) {
+        this.perkList = perkList;
+    }
 
-	public void setPlayerID(String playerID) {
-		this.playerID = playerID;
-	}
+    public void setPlayerID(String playerID) {
+        this.playerID = playerID;
+    }
 
-	public void setPoints(int points) {
-		this.points = points;
-	}
+    public void setPoints(int points) {
+        this.points = points;
+    }
 
-	public void setSkillExp(HashMap<String, Integer> skillExp) {
-		this.skillExp = skillExp;
-	}
+    public void setSkillExp(HashMap<String, Integer> skillExp) {
+        this.skillExp = skillExp;
+    }
 
-	@Override
-	public String toString(){
-		return this.playerID;		
-	}
+    @Override
+    public String toString(){
+        return playerID;
+    }
 }

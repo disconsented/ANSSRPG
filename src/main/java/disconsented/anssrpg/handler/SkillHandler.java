@@ -19,9 +19,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 /**
- * 
+ *
  */
 package disconsented.anssrpg.handler;
 
@@ -35,25 +35,25 @@ import disconsented.anssrpg.data.SkillStore;
  *
  */
 public class SkillHandler {
-	private static PerkStore perkInstance = PerkStore.getInstance();
-	private static SkillStore skillInstance = SkillStore.getInstance();
-	/**
-	 * Check that a entity requires a perk
-	 */
-	public static boolean doesRequirePerk(Block block){
-		return false;
-	}
-	
-	/**
-	 * Check that a block requires a perk
-	 */
-	public boolean getRequiresPerk(Block block){
-		return false;
-	}
-	/**
-	 * Check that a item requires a perk
-	 */
-	public boolean getRequiresPerk(Item item){
-		return false;
-	}	
+    private static PerkStore perkInstance = PerkStore.getInstance();
+    private static SkillStore skillInstance = SkillStore.getInstance();
+    /**
+     * Check that a entity requires a perk
+     */
+    public static boolean doesRequirePerk(Block block){
+        return false;
+    }
+
+    /**
+     * Check that a block requires a perk
+     */
+    public boolean getRequiresPerk(Block block){
+        return false;
+    }
+    /**
+     * Check that a item requires a perk
+     */
+    public boolean getRequiresPerk(Item item){
+        return false;
+    }
 }

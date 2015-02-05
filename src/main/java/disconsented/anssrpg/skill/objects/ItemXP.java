@@ -19,9 +19,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 /**
- * 
+ *
  */
 package disconsented.anssrpg.skill.objects;
 
@@ -33,21 +33,21 @@ import net.minecraft.item.Item;
  */
 public class ItemXP extends XPGain {
 
-	/**
-	 * 
-	 */
-	private Item item;
-	
-	public ItemXP() {
-	}
+    /**
+     *
+     */
+    private Item item;
 
-	public Item getItem(){
-		return item;
-	}
-	@Override
-	public void touchUp() {
-		item = (Item) Item.itemRegistry.getObject(name);
+    public ItemXP() {
+    }
 
-	}
+    public Item getItem(){
+        return item;
+    }
+    @Override
+    public void touchUp() {
+        item = (Item) Item.itemRegistry.getObject(name);
+
+    }
 
 }

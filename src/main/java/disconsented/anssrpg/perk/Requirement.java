@@ -19,7 +19,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.perk;
 
 import com.google.gson.annotations.Expose;
@@ -29,28 +29,28 @@ import com.google.gson.annotations.Expose;
  * Object for requirements
  */
 public class Requirement {
-	/*
-	 * HAVE - Has a perk
-	 * DONT - Doesn't have a perk
-	 * LEVEL_EQUALS - Level == x
-	 * LEVEL_GREATER - Level > x 
-	 * LEVEL_LESS - Level < x
-	 */
-	
-	public enum Action {HAVE,DONT,LEVEL_EQUALS,LEVEL_GREATER,LEVEL_LESS}
-	@Expose
-	public Action action;
-	@Expose
-	public String name;
-	@Expose
-	public String extraData;
-	public Requirement(Action action, String name, String extraData)
-	{
-		this.action = action;
-		this.name = name;
-		this.extraData = extraData;
-	}
-	public String getNameAsSlug(){
-		return name.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
-	}
+    /*
+     * HAVE - Has a perk
+     * DONT - Doesn't have a perk
+     * LEVEL_EQUALS - Level == x
+     * LEVEL_GREATER - Level > x
+     * LEVEL_LESS - Level < x
+     */
+
+    public enum Action {HAVE,DONT,LEVEL_EQUALS,LEVEL_GREATER,LEVEL_LESS}
+    @Expose
+    public Action action;
+    @Expose
+    public String name;
+    @Expose
+    public String extraData;
+    public Requirement(Action action, String name, String extraData)
+    {
+        this.action = action;
+        this.name = name;
+        this.extraData = extraData;
+    }
+    public String getNameAsSlug(){
+        return name.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
+    }
 }

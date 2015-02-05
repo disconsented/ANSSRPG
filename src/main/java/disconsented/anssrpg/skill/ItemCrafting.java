@@ -19,12 +19,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.skill;
 
 import java.util.ArrayList;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -47,73 +46,78 @@ import disconsented.anssrpg.skill.objects.ItemXP;
  * I need to add a onCraftingMatrix changed event
  * ItemCrafted handles just giving XP
  */
-    public class ItemCrafting{
-    	@SubscribeEvent //Assumed that crafting wasn't blocked
-	    public void onItemCraftedEvent(ItemCraftedEvent event) { 
-    		if(event.player instanceof EntityPlayerMP) {
-    			EntityPlayerMP playerMP = (EntityPlayerMP)event.player;
-    			PlayerData player = PlayerStore.getInstance().getPlayer(playerMP.getUniqueID().toString());
-    			Item item = (Item) ((ItemStack) event.player.openContainer.inventoryItemStacks.get(0)).getItem();
-    			ArrayList<Slug> entitylist = PerkStore.getInstance().getSlugs(item);
-    			boolean requiresPerk = false;
-    			if (entitylist != null){
-    				requiresPerk = true;
-    			}
-    			for (ItemSkill skill : SkillStore.getInstance().getItemSkill()) {
-    				ArrayList<ItemXP> temp = skill.getExp();
-    				for (int i = 0; i < temp.size(); i++){
-    					Item compareItem = ((ItemXP) temp.get(i)).getItem();
-    					if(item.equals(compareItem)) {
-    						if (requiresPerk){
-    							if (PlayerHandler.hasPerk(player, entitylist)){
-    									PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
-    							}
-    						}
-    						else
-    						{
-    								PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
-    						}
-    					}
-    				}
-    			}
-    		}
-        	
-    	}
-    	@SubscribeEvent
-    	public void onPlayerOpenContainer(PlayerOpenContainerEvent event){    		
-    		if(event.entityPlayer instanceof EntityPlayerMP) {
-    			if(event.entityPlayer.openContainer instanceof net.minecraft.inventory.ContainerWorkbench && 
-    					event.entityPlayer.openContainer.inventoryItemStacks.get(0) != null){
-	    			EntityPlayerMP playerMP = (EntityPlayerMP)event.entityPlayer;
-	    			PlayerData player = PlayerStore.getInstance().getPlayer(playerMP.getUniqueID().toString());
-	    			Item item = (Item) ((ItemStack) event.entityPlayer.openContainer.inventoryItemStacks.get(0)).getItem();
-	    			ArrayList<Slug> entitylist = PerkStore.getInstance().getSlugs(item);
-	    			boolean requiresPerk = false;
-	    			if (entitylist != null){
-	    				requiresPerk = true;
-	    			}
-	    			for (ItemSkill skill : SkillStore.getInstance().getItemSkill()) {
-	    				ArrayList<ItemXP> temp = skill.getExp();
-	    				for (int i = 0; i < temp.size(); i++){
-	    					Item compareItem = ((ItemXP) temp.get(i)).getItem();
-	    					if(item.equals(compareItem)) {
-	    						if (requiresPerk){
-	    							if (PlayerHandler.hasPerk(player, entitylist)){
+public class ItemCrafting{
+    @SubscribeEvent //Assumed that crafting wasn't blocked
+    public void onItemCraftedEvent(ItemCraftedEvent event) {
+        if(event.player instanceof EntityPlayerMP) {
+            EntityPlayerMP playerMP = (EntityPlayerMP)event.player;
+            PlayerStore.getInstance();
+            PlayerData player = PlayerStore.getPlayer(playerMP.getUniqueID().toString());
+            Item item = ((ItemStack) event.player.openContainer.inventoryItemStacks.get(0)).getItem();
+            PerkStore.getInstance();
+            ArrayList<Slug> entitylist = PerkStore.getSlugs(item);
+            boolean requiresPerk = false;
+            if (entitylist != null){
+                requiresPerk = true;
+            }
+            SkillStore.getInstance();
+            for (ItemSkill skill : SkillStore.getItemSkill()) {
+                ArrayList<ItemXP> temp = skill.getExp();
+                for (int i = 0; i < temp.size(); i++){
+                    Item compareItem = temp.get(i).getItem();
+                    if(item.equals(compareItem)) {
+                        if (requiresPerk){
+                            if (PlayerHandler.hasPerk(player, entitylist)){
+                                PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
+                            }
+                        }
+                        else
+                        {
+                            PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
+                        }
+                    }
+                }
+            }
+        }
 
-	    							}
-	    							else
-	    							{
-	    								PlayerHandler.taskFail((EntityPlayer) playerMP);
-	    								event.entityPlayer.closeScreen();
-	    								break;
-	    							}
-	    						}
-	    					}
-	    				}
-	    			}
-    		}
-    		}
-	        	
-    	} 
-    }	    
-    
+    }
+    @SubscribeEvent
+    public void onPlayerOpenContainer(PlayerOpenContainerEvent event){
+        if(event.entityPlayer instanceof EntityPlayerMP) {
+            if(event.entityPlayer.openContainer instanceof net.minecraft.inventory.ContainerWorkbench &&
+                    event.entityPlayer.openContainer.inventoryItemStacks.get(0) != null){
+                EntityPlayerMP playerMP = (EntityPlayerMP)event.entityPlayer;
+                PlayerStore.getInstance();
+                PlayerData player = PlayerStore.getPlayer(playerMP.getUniqueID().toString());
+                Item item = ((ItemStack) event.entityPlayer.openContainer.inventoryItemStacks.get(0)).getItem();
+                PerkStore.getInstance();
+                ArrayList<Slug> entitylist = PerkStore.getSlugs(item);
+                boolean requiresPerk = false;
+                if (entitylist != null){
+                    requiresPerk = true;
+                }
+                SkillStore.getInstance();
+                for (ItemSkill skill : SkillStore.getItemSkill()) {
+                    ArrayList<ItemXP> temp = skill.getExp();
+                    for (int i = 0; i < temp.size(); i++){
+                        Item compareItem = temp.get(i).getItem();
+                        if(item.equals(compareItem)) {
+                            if (requiresPerk){
+                                if (PlayerHandler.hasPerk(player, entitylist)){
+
+                                }
+                                else
+                                {
+                                    PlayerHandler.taskFail(playerMP);
+                                    event.entityPlayer.closeScreen();
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

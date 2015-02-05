@@ -19,7 +19,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,10 +27,10 @@ import net.minecraft.inventory.Container;
 
 public class PerkGUIContainer extends Container{
 
-	@Override
-	public boolean canInteractWith(EntityPlayer p_75145_1_) {
-		// TODO Auto-generated method stub
-		return true;
-	}
+    @Override
+    public boolean canInteractWith(EntityPlayer p_75145_1_) {
+        // TODO Auto-generated method stub
+        return true;
+    }
 
 }

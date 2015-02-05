@@ -19,9 +19,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 /**
- * 
+ *
  */
 package disconsented.anssrpg.skill.objects;
 
@@ -33,22 +33,22 @@ import net.minecraft.block.Block;
  */
 public class BlockXP extends XPGain {
 
-	/**
-	 * 
-	 */
-	private Block block;
-	
-	public BlockXP() {
-	}
+    /**
+     *
+     */
+    private Block block;
 
-	public Block getBlock() {
-		return block;
-	}
+    public BlockXP() {
+    }
 
-	@Override
-	public void touchUp() {
-		block = (Block) Block.blockRegistry.getObject(name);
+    public Block getBlock() {
+        return block;
+    }
 
-	}
+    @Override
+    public void touchUp() {
+        block = (Block) Block.blockRegistry.getObject(name);
+
+    }
 
 }

@@ -19,7 +19,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.perk;
 
 import java.util.ArrayList;
@@ -34,27 +34,24 @@ import com.google.gson.annotations.Expose;
  */
 public class BlockPerk extends Perk {
 
-	private Block block;
+    private Block block;
 
-	@Expose
-	public String blockName = "default_blockName";
-	public BlockPerk() { super(); }
+    @Expose
+    public String blockName = "default_blockName";
+    public BlockPerk() { super(); }
 
-	public BlockPerk(String name, ArrayList<Requirement> requirements,
-			String description, int pointCost) {
-		super(name, requirements, description, pointCost);
-		// TODO Auto-generated constructor stub
-	}
-
-	public Block getBlock() { return block; }
-
-	@Override
-    public void searchObject() {
-        this.block = (Block) Block.blockRegistry.getObject(blockName); 
-        if (block == null){
-            throw new NullPointerException();
-        }
+    public BlockPerk(String name, ArrayList<Requirement> requirements,
+            String description, int pointCost) {
+        super(name, requirements, description, pointCost);
+        // TODO Auto-generated constructor stub
     }
-	
+
+    public Block getBlock() { return block; }
+
+    @Override
+    public void searchObject() {
+        block = (Block) Block.blockRegistry.getObject(blockName);
+    }
+
     protected void setBlock(Block block) { this.block = block; }
 }

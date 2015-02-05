@@ -19,7 +19,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.config;
 
 import java.util.ArrayList;
@@ -32,43 +32,43 @@ import disconsented.anssrpg.skill.objects.ItemSkill;
 
 public class SkillStore {
 
-	@Expose
-	private ArrayList<BlockSkill> blocks = new ArrayList<BlockSkill>();
-	@Expose
-	private ArrayList<EntitySkill> entites = new ArrayList<EntitySkill>();
-	@Expose
-	private ArrayList<ItemSkill> items = new ArrayList<ItemSkill>();
+    @Expose
+    private ArrayList<BlockSkill> blocks = new ArrayList<BlockSkill>();
+    @Expose
+    private ArrayList<EntitySkill> entites = new ArrayList<EntitySkill>();
+    @Expose
+    private ArrayList<ItemSkill> items = new ArrayList<ItemSkill>();
 
 
-	public void addBlockSkill(BlockSkill blockSkill) { this.blocks.add(blockSkill); }
+    public void addBlockSkill(BlockSkill blockSkill) { blocks.add(blockSkill); }
 
 
-	public void addEntitySkill(EntitySkill entitySkill) { this.entites.add(entitySkill); }
-	
+    public void addEntitySkill(EntitySkill entitySkill) { entites.add(entitySkill); }
 
-	public void addItemSkill(ItemSkill itemSkill) { this.items.add(itemSkill); }
 
-	public ArrayList<BlockSkill> getBlock() {
-		return this.blocks;
-	}
-	
-	public void setBlock(ArrayList<BlockSkill> block) {
-		this.blocks = block;
-	}
+    public void addItemSkill(ItemSkill itemSkill) { items.add(itemSkill); }
 
-	public void touchUp() {
-		for (BlockSkill block : this.blocks){
-			block.touchUp();
-			disconsented.anssrpg.data.SkillStore.addSkill(block);
-		}
-		for (EntitySkill entity : this.entites){
-			entity.touchUp();
-			disconsented.anssrpg.data.SkillStore.addSkill(entity);
-		}
-		for (ItemSkill item : this.items){
-			item.touchUp();
-			disconsented.anssrpg.data.SkillStore.addSkill(item);
-		}
-	
-	}
+    public ArrayList<BlockSkill> getBlock() {
+        return blocks;
+    }
+
+    public void setBlock(ArrayList<BlockSkill> block) {
+        blocks = block;
+    }
+
+    public void touchUp() {
+        for (BlockSkill block : blocks){
+            block.touchUp();
+            disconsented.anssrpg.data.SkillStore.addSkill(block);
+        }
+        for (EntitySkill entity : entites){
+            entity.touchUp();
+            disconsented.anssrpg.data.SkillStore.addSkill(entity);
+        }
+        for (ItemSkill item : items){
+            item.touchUp();
+            disconsented.anssrpg.data.SkillStore.addSkill(item);
+        }
+
+    }
 }

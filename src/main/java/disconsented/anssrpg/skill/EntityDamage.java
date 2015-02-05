@@ -19,7 +19,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.skill;
 /**
  * @author James
@@ -27,7 +27,6 @@ package disconsented.anssrpg.skill;
  */
 import java.util.ArrayList;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -40,71 +39,77 @@ import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.EntitySkill;
 import disconsented.anssrpg.skill.objects.EntityXP;
-	
-    public class EntityDamage {
-    	@SubscribeEvent
-        public void onLivingDeathEvent(LivingDeathEvent event){
-        	if(event.source.getEntity() instanceof EntityPlayerMP) {
-        		EntityPlayerMP playerMP = (EntityPlayerMP)event.source.getEntity();
-        		PlayerData player = PlayerStore.getInstance().getPlayer(playerMP.getUniqueID().toString());
-        		ArrayList<Slug> entitylist = PerkStore.getInstance().getSlugs(event.entity);
-        		boolean requiresPerk = false;
-        		if (entitylist != null){
-        			requiresPerk = true;
-        		}
-        		for (EntitySkill skill : SkillStore.getInstance().getEntitySkill()) {
-        			ArrayList<EntityXP> temp = skill.getExp();
-        			for (int i = 0; i < temp.size(); i++){
-        				Class entityClass = ((EntityXP) temp.get(i)).getEntity();
-        				if(event.entity.getClass().equals(entityClass)) {
-        					if (requiresPerk){
-        						if (PlayerHandler.hasPerk(player, entitylist)){
-        								PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
-        						}							
-        					}
-        					else
-        					{
-        							PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
-        					}
-        				}
-        			}
-        		}
-        	}
+
+public class EntityDamage {
+    @SubscribeEvent
+    public void onLivingDeathEvent(LivingDeathEvent event){
+        if(event.source.getEntity() instanceof EntityPlayerMP) {
+            EntityPlayerMP playerMP = (EntityPlayerMP)event.source.getEntity();
+            PlayerStore.getInstance();
+            PlayerData player = PlayerStore.getPlayer(playerMP.getUniqueID().toString());
+            PerkStore.getInstance();
+            ArrayList<Slug> entitylist = PerkStore.getSlugs(event.entity);
+            boolean requiresPerk = false;
+            if (entitylist != null){
+                requiresPerk = true;
+            }
+            SkillStore.getInstance();
+            for (EntitySkill skill : SkillStore.getEntitySkill()) {
+                ArrayList<EntityXP> temp = skill.getExp();
+                for (int i = 0; i < temp.size(); i++){
+                    Class entityClass = temp.get(i).getEntity();
+                    if(event.entity.getClass().equals(entityClass)) {
+                        if (requiresPerk){
+                            if (PlayerHandler.hasPerk(player, entitylist)){
+                                PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
+                            }
+                        }
+                        else
+                        {
+                            PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
+                        }
+                    }
+                }
+            }
         }
-    
+    }
+
     /**
      * Author Disconsented
      */
-   @SubscribeEvent
-   public void onLivingHurtEvent(LivingHurtEvent event){
-    if(event.source.getEntity() instanceof EntityPlayerMP) {
-    	EntityPlayerMP playerMP = (EntityPlayerMP)event.source.getEntity();
-    	PlayerData player = PlayerStore.getInstance().getPlayer(playerMP.getUniqueID().toString());
-    	ArrayList<Slug> entitylist = PerkStore.getInstance().getSlugs(event.entity);
-    	boolean requiresPerk = false;
-    	if (entitylist != null){
-    		requiresPerk = true;
-    	}
-    	for (EntitySkill skill : SkillStore.getInstance().getEntitySkill()) {
-    		ArrayList<EntityXP> temp = skill.getExp();
-    		for (int i = 0; i < temp.size(); i++){
-    			Class entityClass = ((EntityXP) temp.get(i)).getEntity();
-    			if(event.entity.getClass().equals(entityClass)) {
-    				if (requiresPerk){
-    					if (PlayerHandler.hasPerk(player, entitylist)){
-    					}
-    					else
-    					{
-    						PlayerHandler.taskFail((EntityPlayer) playerMP);
-    						event.ammount = 1;
-    					}
-    				}
-    				else
-    				{
-    				}
-    			}
-    		}
-    	}
+    @SubscribeEvent
+    public void onLivingHurtEvent(LivingHurtEvent event){
+        if(event.source.getEntity() instanceof EntityPlayerMP) {
+            EntityPlayerMP playerMP = (EntityPlayerMP)event.source.getEntity();
+            PlayerStore.getInstance();
+            PlayerData player = PlayerStore.getPlayer(playerMP.getUniqueID().toString());
+            PerkStore.getInstance();
+            ArrayList<Slug> entitylist = PerkStore.getSlugs(event.entity);
+            boolean requiresPerk = false;
+            if (entitylist != null){
+                requiresPerk = true;
+            }
+            SkillStore.getInstance();
+            for (EntitySkill skill : SkillStore.getEntitySkill()) {
+                ArrayList<EntityXP> temp = skill.getExp();
+                for (int i = 0; i < temp.size(); i++){
+                    Class entityClass = temp.get(i).getEntity();
+                    if(event.entity.getClass().equals(entityClass)) {
+                        if (requiresPerk){
+                            if (PlayerHandler.hasPerk(player, entitylist)){
+                            }
+                            else
+                            {
+                                PlayerHandler.taskFail(playerMP);
+                                event.ammount = 1;
+                            }
+                        }
+                        else
+                        {
+                        }
+                    }
+                }
+            }
+        }
     }
-}
 }

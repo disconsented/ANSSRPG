@@ -1,6 +1,7 @@
 /*The MIT License (MIT)
 
 Copyright (c) 2015 Disconsented, James Kerr
+Copyright (c) 2015 TehNut
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,37 +21,27 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.skill.objects;
+package disconsented.anssrpg.common;
 
-import com.google.gson.annotations.Expose;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-/**
- * @author Disconsented
- *
- */
-public abstract class XPGain {
-    @Expose
-    protected int xp = 0;
-
-    @Expose
-    protected String name = "default_name";
-
-    public XPGain(){
+public class Logging {
+    public static Logger logger = LogManager.getLogger("ANSSRPG");
+    
+    public static void info(Object info) {
+        if (Settings.getInstance().getLogging())
+            logger.info(info);
     }
 
-    public String getName() {
-        return name;
+    public static void error(Object error) {
+        if (Settings.getInstance().getLogging())
+            logger.info(error);
     }
 
-    public int getXp() {
-        return xp;
+    public static void debug(Object debug) {
+        if (Settings.getInstance().getLogging())
+            logger.info(debug);
     }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setXp(int xp) {
-        this.xp = xp;
-    }
-    public abstract void touchUp();
 
 }
