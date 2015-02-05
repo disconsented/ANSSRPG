@@ -37,6 +37,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.gui.Config;
 import disconsented.anssrpg.perk.BlockPerk;
 import disconsented.anssrpg.perk.EntityPerk;
@@ -83,8 +84,8 @@ public class JsonConfigHandler {
             osWriter.close();
 
         } catch (Exception e) {
-            System.err.println("Exception when creating perk config");
-            System.err.println(e.getLocalizedMessage());
+            Logging.error("Exception when creating perk config");
+            Logging.error(e.getLocalizedMessage());
         }
     }
     /**
@@ -109,8 +110,8 @@ public class JsonConfigHandler {
             osWriter.close();
 
         } catch (Exception e) {
-            System.err.println("Exception when creating skill config");
-            System.err.println(e.getLocalizedMessage());
+            Logging.error("Exception when creating skill config");
+            Logging.error(e.getLocalizedMessage());
         }
     }
     public static void loadPerkAndSkill(){

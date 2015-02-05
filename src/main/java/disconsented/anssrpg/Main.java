@@ -41,6 +41,7 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import disconsented.anssrpg.commands.ConfigGUI;
 import disconsented.anssrpg.commands.Perks;
+import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.config.JsonConfigHandler;
 import disconsented.anssrpg.data.DataSave;
@@ -123,8 +124,8 @@ public class Main {
         public void postInit(FMLPostInitializationEvent event) throws Exception {
         	JsonConfigHandler.loadPerkAndSkill();
         	if (Settings.getDebug()){
-	        	System.out.println("ANSSRPG has the following perks registered");
-	        	System.out.println(PerkStore.getInstance().getPerks());
+        	    Logging.debug("ANSSRPG has the following perks registered");
+        	    Logging.debug(PerkStore.getInstance().getPerks());
         	}  
 //        	disconsented.anssrpg.gui.Config.main();
         }
