@@ -19,21 +19,21 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.network;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import disconsented.anssrpg.common.Settings;
-import disconsented.anssrpg.gui.PerkGUI;
 
 public class ResponceHandler implements IMessageHandler<Responce, IMessage>{
 
-	@Override
-	public IMessage onMessage(Responce message, MessageContext ctx) {
-		Settings.getInstance().setStatusMessage(message.responce);
-		return null;
-	}
+    @Override
+    public IMessage onMessage(Responce message, MessageContext ctx) {
+        Settings.getInstance();
+        Settings.setStatusMessage(message.responce);
+        return null;
+    }
 
 }

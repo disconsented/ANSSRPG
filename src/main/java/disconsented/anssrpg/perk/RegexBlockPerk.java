@@ -19,30 +19,35 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.perk;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import com.google.gson.annotations.Expose;
+import java.util.List;
 
 import net.minecraft.block.Block;
+import disconsented.anssrpg.common.Logging;
 
 public class RegexBlockPerk extends RegexPerk{
-    
+
     public ArrayList<Block> blocks = new ArrayList<Block>();
-    
-    public RegexBlockPerk(){}    
+
+    public RegexBlockPerk(){}
 
     @Override
     public void searchObject() {
-        ArrayList keyList = (ArrayList) Arrays.asList(Block.blockRegistry.getKeys().toArray());
+        List<Object> keyList = Arrays.asList(Block.blockRegistry.getKeys().toArray());
         for (Object key : keyList){
             String current = key.toString();
-            if(current.matches(this.searchQuery)){
+            int colonPos = current.indexOf(':');
+            if (colonPos > -1){
+                current = current.substring(colonPos+1);
+            }
+            if(current.matches(searchQuery)){
                 blocks.add((Block) Block.blockRegistry.getObject(current));
             }
         }
+        Logging.debug(this.name + " has " + blocks.size()+" item's listed");
     }
 }

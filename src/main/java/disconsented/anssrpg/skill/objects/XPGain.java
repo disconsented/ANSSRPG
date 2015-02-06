@@ -19,9 +19,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
-/**
- * 
  */
 package disconsented.anssrpg.skill.objects;
 
@@ -29,43 +26,31 @@ import com.google.gson.annotations.Expose;
 
 /**
  * @author Disconsented
- *	
+ *
  */
 public abstract class XPGain {
-	
-	public XPGain(){		
-	}
+    @Expose
+    protected int xp = 0;
 
-	/**
-	 * Super type abstract class
-	 */
-	@Expose
-	protected int xp = 0;
-	
-	@Expose
-	protected String name = "default_name";
+    @Expose
+    protected String name = "default_name";
 
-	public int getXp() {
-		return xp;
-	}
+    public XPGain(){
+    }
 
-	/**
-	 * @param xp the xp to set
-	 */
-	public void setXp(int xp) {
-		this.xp = xp;
-	}
-	/**
-	 * 
-	 */
-	public abstract void touchUp();
+    public String getName() {
+        return name;
+    }
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+    public int getXp() {
+        return xp;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setXp(int xp) {
+        this.xp = xp;
+    }
+    public abstract void touchUp();
 
 }

@@ -1,6 +1,7 @@
 /*The MIT License (MIT)
 
 Copyright (c) 2015 Disconsented, James Kerr
+Copyright (c) 2015 TehNut
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,35 +21,27 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.perk;
+package disconsented.anssrpg.common;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import net.minecraft.item.Item;
-import disconsented.anssrpg.common.Logging;
+public class Logging {
+    public static Logger logger = LogManager.getLogger("ANSSRPG");
+    
+    public static void info(Object info) {
+        if (Settings.getInstance().getLogging())
+            logger.info(info);
+    }
 
-public class RegexItemPerk extends RegexPerk{
+    public static void error(Object error) {
+        if (Settings.getInstance().getLogging())
+            logger.info(error);
+    }
 
-    public ArrayList<Item> items = new ArrayList<Item>();
-
-    public RegexItemPerk(){}
-
-    @Override
-    public void searchObject() {
-        List<Object> keyList = Arrays.asList(Item.itemRegistry.getKeys().toArray());
-        for (Object key : keyList){
-            String current = key.toString();
-            int colonPos = current.indexOf(':');
-            if (colonPos > -1){
-                current = current.substring(colonPos+1);
-            }
-            if(current.matches(searchQuery)){
-                items.add((Item) Item.itemRegistry.getObject(current));
-            }
-        }
-        Logging.debug(this.name + " has " + items.size()+" item's listed");
+    public static void debug(Object debug) {
+        if (Settings.getInstance().getLogging())
+            logger.info(debug);
     }
 
 }

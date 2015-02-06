@@ -19,17 +19,17 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 /**
- * 
+ *
  */
 package disconsented.anssrpg.perk;
 
 import java.util.ArrayList;
 
-import com.google.gson.annotations.Expose;
-
 import net.minecraft.entity.EntityList;
+
+import com.google.gson.annotations.Expose;
 
 /**
  * @author Disconsented
@@ -37,35 +37,31 @@ import net.minecraft.entity.EntityList;
  */
 public class EntityPerk extends Perk {
 
-	public EntityPerk() {
-		super();
-	}
+    private Class entity;
 
-	public EntityPerk(String name, ArrayList<Requirement> requirements,
-			String description, int pointCost) {
-		super(name, requirements, description, pointCost);
-		// TODO Auto-generated constructor stub
-	}
-	private Class entity;
-	
-	@Expose
-	public String entityName = "default_entityName";
+    @Expose
+    public String entityName = "default_entityName";
+    public EntityPerk() {
+        super();
+    }
 
-	public Class getEntity() {
-		return entity;
-	}
+    public EntityPerk(String name, ArrayList<Requirement> requirements,
+            String description, int pointCost) {
+        super(name, requirements, description, pointCost);
+        // TODO Auto-generated constructor stub
+    }
 
-	protected void setEntity(Class entity) {
-		this.entity = entity;		
-	}
+    public Class getEntity() {
+        return entity;
+    }
 
     @Override
     public void searchObject() {
-        this.entity = (Class) EntityList.stringToClassMapping.get(entityName);
-        if (entity == null){
-            throw new NullPointerException();
-        }
-        
+        entity = (Class) EntityList.stringToClassMapping.get(entityName);
+    }
+
+    protected void setEntity(Class entity) {
+        this.entity = entity;
     }
 
 }

@@ -20,6 +20,7 @@
 *.classpath
 *.project
 *.class
+*.txt
 
 # Specific files
 Thumbs.db

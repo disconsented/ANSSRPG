@@ -19,7 +19,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.player;
 /**
  * @author James
@@ -28,59 +28,55 @@ package disconsented.anssrpg.player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
 
-import disconsented.anssrpg.perk.Perk;
 import disconsented.anssrpg.perk.Slug;
-import net.minecraft.item.Item;
 
 public class PlayerData {
-	private ArrayList<Slug> perkList = new ArrayList<Slug>();
-	private HashMap<String, Integer> skillExp = new HashMap<String, Integer>();
-	private String playerID;
-	private int points;
+    private ArrayList<Slug> perkList = new ArrayList<Slug>();
+    private HashMap<String, Integer> skillExp = new HashMap<String, Integer>();
+    private String playerID;
+    private int points;
 
-	public PlayerData(ArrayList<Slug> perkList, HashMap skillExp, String playerID, int points){
-		this.perkList = perkList;
-		this.skillExp = skillExp;
-		this.playerID = playerID; 
-		this.points = points;
-	}
-	@Override
-	public String toString(){
-		return this.playerID;		
-	}
+    public PlayerData(ArrayList<Slug> perkList, HashMap skillExp, String playerID, int points){
+        this.perkList = perkList;
+        this.skillExp = skillExp;
+        this.playerID = playerID;
+        this.points = points;
+    }
+    public ArrayList<Slug> getPerkList() {
+        return perkList;
+    }
 
-	public ArrayList<Slug> getPerkList() {
-		return perkList;
-	}
+    public String getPlayerID() {
+        return playerID;
+    }
 
-	public void setPerkList(ArrayList<Slug> perkList) {
-		this.perkList = perkList;
-	}
+    public int getPoints() {
+        return points;
+    }
 
-	public HashMap<String, Integer> getSkillExp() {
-		return skillExp;
-	}
+    public HashMap<String, Integer> getSkillExp() {
+        return skillExp;
+    }
 
-	public void setSkillExp(HashMap<String, Integer> skillExp) {
-		this.skillExp = skillExp;
-	}
+    public void setPerkList(ArrayList<Slug> perkList) {
+        this.perkList = perkList;
+    }
 
-	public String getPlayerID() {
-		return playerID;
-	}
+    public void setPlayerID(String playerID) {
+        this.playerID = playerID;
+    }
 
-	public void setPlayerID(String playerID) {
-		this.playerID = playerID;
-	}
+    public void setPoints(int points) {
+        this.points = points;
+    }
 
-	public int getPoints() {
-		return points;
-	}
+    public void setSkillExp(HashMap<String, Integer> skillExp) {
+        this.skillExp = skillExp;
+    }
 
-	public void setPoints(int points) {
-		this.points = points;
-	}
+    @Override
+    public String toString(){
+        return playerID;
+    }
 }

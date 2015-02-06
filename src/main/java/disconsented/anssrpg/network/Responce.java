@@ -19,7 +19,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.network;
 
 import io.netty.buffer.ByteBuf;
@@ -36,12 +36,12 @@ public class Responce implements IMessage{
     }
 
     @Override
-    public void toBytes(ByteBuf buf) {
-    	ByteBufUtils.writeUTF8String(buf, responce);
+    public void fromBytes(ByteBuf buf) {
+        responce = ByteBufUtils.readUTF8String(buf);
     }
 
     @Override
-    public void fromBytes(ByteBuf buf) {
-        this.responce = ByteBufUtils.readUTF8String(buf);
+    public void toBytes(ByteBuf buf) {
+        ByteBufUtils.writeUTF8String(buf, responce);
     }
 }

@@ -20,16 +20,16 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.config;
 /**
  * Author: Abelistah
  */
-import java.util.*;
+import java.util.ArrayList;
 
 import com.google.gson.annotations.Expose;
 
-import disconsented.anssrpg.data.DataSave;
+import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.perk.BlockPerk;
 import disconsented.anssrpg.perk.EntityPerk;
 import disconsented.anssrpg.perk.ItemPerk;
@@ -39,84 +39,122 @@ import disconsented.anssrpg.perk.RegexItemPerk;
 import disconsented.anssrpg.perk.TitlePerk;
 
 public class PerkStore {
-    public PerkStore(){
-        items.add(new ItemPerk());
-        blocks.add(new BlockPerk());
-        entities.add(new EntityPerk());
-        titles.add(new TitlePerk());
-        regexBlocks.add(new RegexBlockPerk());
-        regexItems.add(new RegexItemPerk());
-        regexEntitys.add(new RegexEntityPerk());
-    }
     @Expose
     private ArrayList<ItemPerk> items = new ArrayList<>();
     @Expose
     private ArrayList<BlockPerk> blocks = new ArrayList<>();
     @Expose
     private ArrayList<EntityPerk> entities = new ArrayList<>();
-    @Expose 
+    @Expose
     private ArrayList<TitlePerk> titles = new ArrayList<>();
-    @Expose 
+    @Expose
     private ArrayList<RegexBlockPerk> regexBlocks = new ArrayList<>();
     @Expose
     private ArrayList<RegexItemPerk> regexItems = new ArrayList<>();
-    @Expose 
+    @Expose
     private ArrayList<RegexEntityPerk> regexEntitys = new ArrayList<>();
+    public PerkStore(){
+        
+    }
+    public PerkStore(Boolean fill){
+        if (fill){
+            items.add(new ItemPerk());
+            blocks.add(new BlockPerk());
+            entities.add(new EntityPerk());
+            titles.add(new TitlePerk());
+            regexBlocks.add(new RegexBlockPerk());
+            regexItems.add(new RegexItemPerk());
+            regexEntitys.add(new RegexEntityPerk());
+        }
+    }
+    public void addPerk(BlockPerk perk) {
+        blocks.add(perk);
+    }
 
-    public void addItemPerk(ItemPerk itemPerk) { this.items.add(itemPerk); }
-    public void addBlockPerk(BlockPerk blockPerk) { this.blocks.add(blockPerk); }
-    public void addEntityPerk(EntityPerk entityPerk) { this.entities.add(entityPerk); }
-    public void addRegexTitlePerk(TitlePerk titlePerk){ this.titles.add(titlePerk); }
-    public void addRegexItemPerk(RegexItemPerk itemPerk) { this.regexItems.add(itemPerk); }
-    public void addRegexBlockPerk(RegexBlockPerk blockPerk) { this.regexBlocks.add(blockPerk); }
-    public void addRegexEntityPerk(RegexEntityPerk entityPerk) { this.regexEntitys.add(entityPerk); }
-
-	public void touchUp() {
-		for (ItemPerk item : items){
-			item.touchUp();
-			if (item.getItem() != null){
-			    disconsented.anssrpg.data.PerkStore.putPerk(item);
-			    disconsented.anssrpg.data.PerkStore.addPerk(item);
-			}else{
-			    System.err.println(item.name+"'s object is null. Skipping");
-			}
-		}
-		for (BlockPerk block : blocks){
-			block.touchUp();
-			if (block.getBlock() != null){
-			    disconsented.anssrpg.data.PerkStore.putPerk(block);
-			    disconsented.anssrpg.data.PerkStore.addPerk(block);
-			}else{
-                System.err.println(block.name+"'s object is null. Skipping");
+    public void addPerk(EntityPerk perk) {
+        entities.add(perk);
+    }
+    public void addPerk(ItemPerk perk) {
+        items.add(perk);
+    }
+    public void addPerk(RegexBlockPerk perk) {
+        regexBlocks.add(perk);
+    }
+    public void addPerk(RegexEntityPerk perk) {
+        regexEntitys.add(perk);
+    }
+    public void addPerk(RegexItemPerk perk) {
+        regexItems.add(perk);
+    }
+    public void addPerk(TitlePerk perk) {
+        titles.add(perk);
+    }
+    public void touchUp() {
+        for (ItemPerk item : items){
+            item.touchUp();
+            if (item.getItem() != null){
+                disconsented.anssrpg.data.PerkStore.putPerk(item);
+                disconsented.anssrpg.data.PerkStore.addPerk(item);
+            }else{
+                Logging.error(item.name+"'s object is null. Skipping");
             }
-		}
-		for(EntityPerk entity : entities){
-			entity.touchUp();
-			if (entity.getEntity() != null){
-    			disconsented.anssrpg.data.PerkStore.putPerk(entity);
-    			disconsented.anssrpg.data.PerkStore.addPerk(entity);
-			}else{
-                System.err.println(entity.name+"'s object is null. Skipping");
+        }
+        for (BlockPerk block : blocks){
+            block.touchUp();
+            if (block.getBlock() != null){
+                disconsented.anssrpg.data.PerkStore.putPerk(block);
+                disconsented.anssrpg.data.PerkStore.addPerk(block);
+            }else{
+                Logging.error(block.name+"'s object is null. Skipping");
             }
-		}
-		for(TitlePerk title : titles){
-		    if (title.getTitle() != null){
-		        disconsented.anssrpg.data.PerkStore.putPerk(title);
+        }
+        for(EntityPerk entity : entities){
+            entity.touchUp();
+            if (entity.getEntity() != null){
+                disconsented.anssrpg.data.PerkStore.putPerk(entity);
+                disconsented.anssrpg.data.PerkStore.addPerk(entity);
+            }else{
+                Logging.error(entity.name+"'s object is null. Skipping");
+            }
+        }
+        for(TitlePerk title : titles){
+            if (title.getTitle() != null){
+                disconsented.anssrpg.data.PerkStore.putPerk(title);
                 disconsented.anssrpg.data.PerkStore.addPerk(title);
-		    }else{
-		        System.err.println(title.name+"s object is null. Skipping");
-		    }
-		    
-		}
-		for(RegexItemPerk item : regexItems){
-		    
-		}
-		for(RegexBlockPerk block : regexBlocks){
-            
+            }else{
+                Logging.error(title.name+"s object is null. Skipping");
+            }
+
         }
-		for(RegexEntityPerk entityPerk : regexEntitys){
-            
+        for(RegexItemPerk perk : regexItems){
+            perk.touchUp();
+            if(perk.items != null && perk.items.size() > 0){
+                disconsented.anssrpg.data.PerkStore.putPerk(perk);
+                disconsented.anssrpg.data.PerkStore.addPerk(perk);
+            } else {
+                Logging.error(perk.name+"'s list of objects is null. Skipping");
+            }
+        }
+        for(RegexBlockPerk perk : regexBlocks){
+            perk.touchUp();
+            if(perk.blocks != null && perk.blocks.size() > 0){
+                disconsented.anssrpg.data.PerkStore.putPerk(perk);
+                disconsented.anssrpg.data.PerkStore.addPerk(perk);
+            } else {
+                Logging.error(perk.name+"'s list of objects is null. Skipping");
+            }
+
+        }
+        for(RegexEntityPerk perk : regexEntitys){
+            perk.touchUp();
+            if(perk.entities != null && perk.entities.size() > 0){
+                disconsented.anssrpg.data.PerkStore.putPerk(perk);
+                disconsented.anssrpg.data.PerkStore.addPerk(perk);
+            } else {
+                Logging.error(perk.name+"'s list of objects is null. Skipping");
+            }
+
         }
 
-	}
+    }
 }

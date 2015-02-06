@@ -19,9 +19,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 /**
- * 
+ *
  */
 package disconsented.anssrpg.data;
 
@@ -34,27 +34,27 @@ import disconsented.anssrpg.player.PlayerData;
  * Stores player's into a hashmap with the Key being their UUID
  */
 public class PlayerStore {
-	private static HashMap <String, PlayerData> data = new HashMap<String, PlayerData>();
-	
-	private static PlayerStore instance = null;
-	
-	protected PlayerStore() {/* Exists only to defeat instantiation.*/}
-	
-	public static PlayerStore getInstance() {
-		if(instance == null) {
-			instance = new PlayerStore();
-		}
-		return instance;
-	}
-	public static void addPlayer(PlayerData player) {
-		data.put(player.getPlayerID(), player);
-	}
-	public static PlayerData getPlayer(String playerID)
-	{
-		return data.get(playerID);
-	}
-	public static HashMap<String,PlayerData> getAllData(){
-		return data;
-	}
+    private static HashMap <String, PlayerData> data = new HashMap<String, PlayerData>();
+
+    private static PlayerStore instance = null;
+
+    protected PlayerStore() {/* Exists only to defeat instantiation.*/}
+
+    public static void addPlayer(PlayerData player) {
+        data.put(player.getPlayerID(), player);
+    }
+    public static HashMap<String,PlayerData> getAllData(){
+        return data;
+    }
+    public static PlayerStore getInstance() {
+        if(instance == null) {
+            instance = new PlayerStore();
+        }
+        return instance;
+    }
+    public static PlayerData getPlayer(String playerID)
+    {
+        return data.get(playerID);
+    }
 
 }

@@ -19,13 +19,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 /**
- * 
+ *
  */
 package disconsented.anssrpg.skill.objects;
-
-import com.google.gson.annotations.Expose;
 
 import net.minecraft.entity.EntityList;
 
@@ -35,20 +33,20 @@ import net.minecraft.entity.EntityList;
  */
 public class EntityXP extends XPGain {
 
-	/**
-	 * 
-	 */
-	private Class entity;
-	
-	public EntityXP() {
-	}
+    /**
+     *
+     */
+    private Class entity;
 
-	@Override
-	public void touchUp() {
-		entity = (Class) EntityList.stringToClassMapping.get(name);
+    public EntityXP() {
+    }
 
-	}
-	public Class getEntity(){
-		return entity;
-	}
+    public Class getEntity(){
+        return entity;
+    }
+    @Override
+    public void touchUp() {
+        entity = (Class) EntityList.stringToClassMapping.get(name);
+
+    }
 }
