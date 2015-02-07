@@ -25,9 +25,9 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.perk;
 
-import java.util.ArrayList;
-
 import com.google.gson.annotations.Expose;
+
+import java.util.ArrayList;
 
 public abstract class Perk {
     @Expose
@@ -40,33 +40,64 @@ public abstract class Perk {
     @Expose
     public int pointCost = 0;
 
-    public Perk(){
+    public Perk() {
         requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
         requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
         requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
     }
-    public Perk (String name, ArrayList<Requirement> requirements, String description, int pointCost){
+
+    public Perk(String name, ArrayList<Requirement> requirements, String description, int pointCost) {
         this.name = name;
         this.requirements = requirements;
         this.description = description;
         this.pointCost = pointCost;
     }
 
-    public String getDescription(){return description;}
-    public String getName(){return name;}
-    public int getPointCost(){return pointCost;}
-    public ArrayList getRequirements(){return requirements;}
-    public Slug getSlug(){return slug;}
+    public String getDescription() {
+        return description;
+    }
+
+    protected void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    protected void setName(String name) {
+        this.name = name;
+        slug = new Slug(name);
+    }
+
+    public int getPointCost() {
+        return pointCost;
+    }
+
+    protected void setPointCost(int pointCost) {
+        this.pointCost = pointCost;
+    }
+
+    public ArrayList getRequirements() {
+        return requirements;
+    }
+
+    protected void setRequirements(ArrayList<Requirement> requirments) {
+        requirements = requirments;
+    }
+
+    public Slug getSlug() {
+        return slug;
+    }
+
     public abstract void searchObject();
-    protected void setDescription(String description){this.description = description;}
-    protected void setName(String name){this.name = name; slug = new Slug(name);}
-    protected void setPointCost(int pointCost){this.pointCost = pointCost;}
-    protected void setRequirements(ArrayList<Requirement> requirments){requirements = requirments;}
+
     @Override
     public String toString() {
-        return name+"|"+description+"|"+pointCost+"|"+requirements.toString();
+        return name + "|" + description + "|" + pointCost + "|" + requirements.toString();
     }
-    public void touchUp(){
+
+    public void touchUp() {
         searchObject();
     }
 

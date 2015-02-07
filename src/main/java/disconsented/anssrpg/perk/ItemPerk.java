@@ -25,41 +25,40 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.perk;
 
-import java.util.ArrayList;
-
+import com.google.gson.annotations.Expose;
 import net.minecraft.item.Item;
 
-import com.google.gson.annotations.Expose;
+import java.util.ArrayList;
 
 /**
  * @author Disconsented
- *
  */
 public class ItemPerk extends Perk {
 
-    private Item item;
-
     @Expose
     public String itemName = "default_itemName";
+    private Item item;
 
     public ItemPerk() {
         super();
     }
+
     public ItemPerk(String name, ArrayList<Requirement> requirements,
-            String description, int pointCost) {
+                    String description, int pointCost) {
         super(name, requirements, description, pointCost);
     }
+
     public Item getItem() {
         return item;
+    }
+
+    protected void setItem(Item item) {
+        this.item = item;
     }
 
     @Override
     public void searchObject() {
         item = (Item) Item.itemRegistry.getObject(itemName);
-    }
-
-    protected void setItem(Item item) {
-        this.item = item;
     }
 
 }

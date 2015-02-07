@@ -22,26 +22,25 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.perk;
 
+import net.minecraft.entity.EntityList;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.item.Item;
-
-public class RegexEntityPerk extends RegexPerk{
+public class RegexEntityPerk extends RegexPerk {
 
     public ArrayList<Class> entities = new ArrayList<Class>();
 
-    public RegexEntityPerk(){}
+    public RegexEntityPerk() {
+    }
 
     @Override
     public void searchObject() {
         List<Object> keyList = Arrays.asList(EntityList.stringToClassMapping.keySet().toArray());
-        for (Object key : keyList){
+        for (Object key : keyList) {
             String current = key.toString();
-            if(current.matches(searchQuery)){
+            if (current.matches(searchQuery)) {
                 entities.add((Class) EntityList.stringToClassMapping.get(current));
             }
         }

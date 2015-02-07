@@ -22,32 +22,33 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.perk;
 
+import disconsented.anssrpg.common.Logging;
+import net.minecraft.block.Block;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import net.minecraft.block.Block;
-import disconsented.anssrpg.common.Logging;
-
-public class RegexBlockPerk extends RegexPerk{
+public class RegexBlockPerk extends RegexPerk {
 
     public ArrayList<Block> blocks = new ArrayList<Block>();
 
-    public RegexBlockPerk(){}
+    public RegexBlockPerk() {
+    }
 
     @Override
     public void searchObject() {
         List<Object> keyList = Arrays.asList(Block.blockRegistry.getKeys().toArray());
-        for (Object key : keyList){
+        for (Object key : keyList) {
             String current = key.toString();
             int colonPos = current.indexOf(':');
-            if (colonPos > -1){
-                current = current.substring(colonPos+1);
+            if (colonPos > -1) {
+                current = current.substring(colonPos + 1);
             }
-            if(current.matches(searchQuery)){
+            if (current.matches(searchQuery)) {
                 blocks.add((Block) Block.blockRegistry.getObject(current));
             }
         }
-        Logging.debug(this.name + " has " + blocks.size()+" item's listed");
+        Logging.debug(this.name + " has " + blocks.size() + " item's listed");
     }
 }

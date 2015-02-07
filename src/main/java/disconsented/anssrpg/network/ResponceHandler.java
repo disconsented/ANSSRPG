@@ -27,7 +27,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import disconsented.anssrpg.common.Settings;
 
-public class ResponceHandler implements IMessageHandler<Responce, IMessage>{
+public class ResponceHandler implements IMessageHandler<Responce, IMessage> {
 
     @Override
     public IMessage onMessage(Responce message, MessageContext ctx) {

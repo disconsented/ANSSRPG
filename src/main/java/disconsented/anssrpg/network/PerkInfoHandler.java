@@ -28,7 +28,7 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import disconsented.anssrpg.gui.PerkGUI;
 import disconsented.anssrpg.perk.LocalPerk;
 
-public class PerkInfoHandler implements IMessageHandler<PerkInfo, IMessage>{
+public class PerkInfoHandler implements IMessageHandler<PerkInfo, IMessage> {
 
     @Override
     public IMessage onMessage(PerkInfo message, MessageContext ctx) {

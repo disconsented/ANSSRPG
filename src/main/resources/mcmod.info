@@ -1,14 +1,14 @@
 [
 {
-  "modid": "anssrpg",
+  "modid": "ANSSRPG",
   "name": "A Not So Simple RPG",
   "description": "ANSSRPG is an open source player progression framework built for Minecraft Forge servers.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "www.disconsented.com",
   "updateUrl": "",
-  "authors": ["Disconsented"],
-  "credits": "The countless names who have helped me \n Abelistah for helping me work through Gson serialisation and deserialisation",
+  "authorList": ["Disconsented"],
+  "credits": "The countless names who have helped me. Abelistah for helping me work through Gson serialisation and deserialisation",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

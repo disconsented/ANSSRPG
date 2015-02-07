@@ -25,28 +25,26 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.perk;
 
-import java.util.ArrayList;
-
+import com.google.gson.annotations.Expose;
 import net.minecraft.entity.EntityList;
 
-import com.google.gson.annotations.Expose;
+import java.util.ArrayList;
 
 /**
  * @author Disconsented
- *
  */
 public class EntityPerk extends Perk {
 
-    private Class entity;
-
     @Expose
     public String entityName = "default_entityName";
+    private Class entity;
+
     public EntityPerk() {
         super();
     }
 
     public EntityPerk(String name, ArrayList<Requirement> requirements,
-            String description, int pointCost) {
+                      String description, int pointCost) {
         super(name, requirements, description, pointCost);
         // TODO Auto-generated constructor stub
     }
@@ -55,13 +53,13 @@ public class EntityPerk extends Perk {
         return entity;
     }
 
+    protected void setEntity(Class entity) {
+        this.entity = entity;
+    }
+
     @Override
     public void searchObject() {
         entity = (Class) EntityList.stringToClassMapping.get(entityName);
-    }
-
-    protected void setEntity(Class entity) {
-        this.entity = entity;
     }
 
 }

@@ -7,7 +7,7 @@ public class Smelting {
 
     /*Two part skill basicly the same as item crafting*/
     @SubscribeEvent
-    public void smeltingEvent(ItemSmeltedEvent event){
+    public void smeltingEvent(ItemSmeltedEvent event) {
         event.smelting.stackSize = 60;
         System.out.println(event.isCancelable());
         System.out.println(event.getPhase());

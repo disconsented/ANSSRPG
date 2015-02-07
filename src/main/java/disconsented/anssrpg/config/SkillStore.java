@@ -22,13 +22,12 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.config;
 
-import java.util.ArrayList;
-
 import com.google.gson.annotations.Expose;
-
 import disconsented.anssrpg.skill.objects.BlockSkill;
 import disconsented.anssrpg.skill.objects.EntitySkill;
 import disconsented.anssrpg.skill.objects.ItemSkill;
+
+import java.util.ArrayList;
 
 public class SkillStore {
 
@@ -40,13 +39,19 @@ public class SkillStore {
     private ArrayList<ItemSkill> items = new ArrayList<ItemSkill>();
 
 
-    public void addBlockSkill(BlockSkill blockSkill) { blocks.add(blockSkill); }
+    public void addBlockSkill(BlockSkill blockSkill) {
+        blocks.add(blockSkill);
+    }
 
 
-    public void addEntitySkill(EntitySkill entitySkill) { entites.add(entitySkill); }
+    public void addEntitySkill(EntitySkill entitySkill) {
+        entites.add(entitySkill);
+    }
 
 
-    public void addItemSkill(ItemSkill itemSkill) { items.add(itemSkill); }
+    public void addItemSkill(ItemSkill itemSkill) {
+        items.add(itemSkill);
+    }
 
     public ArrayList<BlockSkill> getBlock() {
         return blocks;
@@ -57,15 +62,15 @@ public class SkillStore {
     }
 
     public void touchUp() {
-        for (BlockSkill block : blocks){
+        for (BlockSkill block : blocks) {
             block.touchUp();
             disconsented.anssrpg.data.SkillStore.addSkill(block);
         }
-        for (EntitySkill entity : entites){
+        for (EntitySkill entity : entites) {
             entity.touchUp();
             disconsented.anssrpg.data.SkillStore.addSkill(entity);
         }
-        for (ItemSkill item : items){
+        for (ItemSkill item : items) {
             item.touchUp();
             disconsented.anssrpg.data.SkillStore.addSkill(item);
         }

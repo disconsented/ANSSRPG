@@ -22,14 +22,15 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.network;
 
-import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import io.netty.buffer.ByteBuf;
 
-public class Responce implements IMessage{
+public class Responce implements IMessage {
     public String responce;
 
-    public Responce() {}
+    public Responce() {
+    }
 
     public Responce(String responce) {
         this.responce = responce;

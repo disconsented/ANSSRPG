@@ -21,21 +21,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
 package disconsented.anssrpg.player;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.data.PlayerStore;
 
-public class PlayerFile {
+import java.io.*;
 
+public class PlayerFile {
 
 
     public static void loadPlayer(String playerID) {
@@ -44,29 +39,27 @@ public class PlayerFile {
         dataFolder.mkdirs();
         dataFolder.getParentFile().getPath();
         File dataLocation = new File(dataFolder, playerID);
-        try{
+        try {
             FileReader reader = new FileReader(dataLocation);
             Gson gson = new GsonBuilder().create();
             PlayerData player = gson.fromJson(reader, PlayerData.class);
             PlayerStore.addPlayer(player);
-        }
-        catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             DataSave.createPlayer(playerID);
             Settings.getInstance();
-            if (Settings.getDebug()){
+            if (Settings.getDebug()) {
                 e.printStackTrace();
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     /**
      * Write all of the player data to a file
-     *
      */
 
-    public static void writePlayer(PlayerData player){
+    public static void writePlayer(PlayerData player) {
         Settings.getInstance();
         File dataFolder = Settings.getFolder();
         File dataLocation = new File(dataFolder, player.getPlayerID());
