@@ -23,6 +23,7 @@ THE SOFTWARE.
 package disconsented.anssrpg.gui;
 
 import disconsented.anssrpg.Main;
+import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.helper.Color;
 import disconsented.anssrpg.network.Request;
@@ -53,7 +54,7 @@ public class PerkGUI extends GuiScreen {
 
     public static void addPerk(LocalPerk e) {
         localPerks.add(e);
-        System.out.println("The perk " + e.name + " has been recieved by the client");
+        Logging.info("The perk " + e.name + " has been recieved by the client");
     }
 
     @Override
