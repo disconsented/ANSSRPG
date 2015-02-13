@@ -25,6 +25,9 @@ version = "${mc_version}-${mod_version}"
 minecraft {
     version = "${mc_version}-${forge_version}"
     runDir = "run"
+
+    replace "@VERSION@", project.version
+    replaceIn "Reference.java"
 }
 
 import org.ajoberstar.grgit.Grgit

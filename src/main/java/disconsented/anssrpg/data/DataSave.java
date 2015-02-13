@@ -26,9 +26,6 @@ package disconsented.anssrpg.data;
  * Holds the player hashmap
  */
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
@@ -38,19 +35,21 @@ import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.player.PlayerFile;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
- *
  * @author James
- *
- *onEntityJoinWorld - Probably not needed
- *onLivingDeath - Saves data
+ *         onEntityJoinWorld - Probably not needed
+ *         onLivingDeath - Saves data
  */
 public class DataSave {
-    public static void addPlayer(PlayerData player, String PlayerID){
+    public static void addPlayer(PlayerData player, String PlayerID) {
         PlayerStore.getInstance();
         PlayerStore.addPlayer(player);
     }
-    public static void createPlayer(String playerID){
+
+    public static void createPlayer(String playerID) {
         ArrayList tempAL = new ArrayList();
         HashMap tempHM = new HashMap();
         PlayerData temp = new PlayerData(tempAL, tempHM, playerID, 0);
@@ -58,39 +57,44 @@ public class DataSave {
         tempAL.clear();
         tempHM.clear();
     }
-    public static PlayerData getPlayerData(String playerID){
+
+    public static PlayerData getPlayerData(String playerID) {
         PlayerStore.getInstance();
         PlayerData player = PlayerStore.getPlayer(playerID);
-        if (player != null){
+        if (player != null) {
             return player;
-        }else{
+        } else {
             createPlayer(playerID);
             PlayerStore.getInstance();
             return PlayerStore.getPlayer(playerID);
         }
     }
+
     /**
      * Load player data
+     *
      * @param event
      */
     @SubscribeEvent
-    public void onPlayerLoggedInEvent(PlayerLoggedInEvent event){
-        if (Settings.getDebug()){
-            Logging.debug("Player "+event.player.getCommandSenderName()+" with UUID:"+event.player.getPersistentID().toString()+"has logged in");
+    public void onPlayerLoggedInEvent(PlayerLoggedInEvent event) {
+        if (Settings.getDebug()) {
+            Logging.debug("Player " + event.player.getCommandSenderName() + " with UUID:" + event.player.getPersistentID().toString() + "has logged in");
             Logging.debug("Loading player data");
         }
         PlayerFile.loadPlayer(event.player.getPersistentID().toString());
         PerkStore.getInstance();
         PerkStore.getPerks();
     }
+
     /**
      * Saves player data
+     *
      * @param event
      */
     @SubscribeEvent
-    public void onPlayerLoggedOutEvent(PlayerLoggedOutEvent event){
-        if (Settings.getDebug()){
-            Logging.debug("Player "+event.player.getCommandSenderName()+" with UUID:"+event.player.getPersistentID().toString()+"has logged out");
+    public void onPlayerLoggedOutEvent(PlayerLoggedOutEvent event) {
+        if (Settings.getDebug()) {
+            Logging.debug("Player " + event.player.getCommandSenderName() + " with UUID:" + event.player.getPersistentID().toString() + "has logged out");
             Logging.debug("Saving player data");
         }
         PlayerFile.writePlayer(PlayerStore.getInstance().getPlayer(event.player.getPersistentID().toString()));
@@ -100,12 +104,13 @@ public class DataSave {
 
     /**
      * Saves player data (crash damage mitigation)
+     *
      * @param event
      */
     @SubscribeEvent
-    public void onPlayerRespawnEvent (PlayerRespawnEvent event){
-        if (Settings.getDebug()){
-            Logging.debug("Player "+event.player.getCommandSenderName()+" with UUID:"+event.player.getPersistentID().toString()+"has respawned");
+    public void onPlayerRespawnEvent(PlayerRespawnEvent event) {
+        if (Settings.getDebug()) {
+            Logging.debug("Player " + event.player.getCommandSenderName() + " with UUID:" + event.player.getPersistentID().toString() + "has respawned");
             Logging.debug("Saving player data");
         }
         PlayerFile.writePlayer(PlayerStore.getInstance().getPlayer(event.player.getPersistentID().toString()));

@@ -22,14 +22,13 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.network;
 
+import cpw.mods.fml.common.network.ByteBufUtils;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import io.netty.buffer.ByteBuf;
 
 import java.util.ArrayList;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-
-public class PerkInfo implements IMessage{
+public class PerkInfo implements IMessage {
     public String name;
     public String description;
     public int pointCost;
@@ -37,16 +36,17 @@ public class PerkInfo implements IMessage{
     public int size;
     public String slug;
 
-    public PerkInfo() {}
+    public PerkInfo() {
+    }
 
-    public PerkInfo(String name, String description, String slug, int pointCost, ArrayList<String> requirementName, ArrayList<Integer> requirementLevel)  {
+    public PerkInfo(String name, String description, String slug, int pointCost, ArrayList<String> requirementName, ArrayList<Integer> requirementLevel) {
         this.name = name;
         this.description = description;
         this.slug = slug;
         this.pointCost = pointCost;
         requirements = new ArrayList<String>();
-        for (int i = 0; i < requirementName.size(); i++){
-            requirements.add(requirementName.get(i)+":"+requirementLevel.get(i));
+        for (int i = 0; i < requirementName.size(); i++) {
+            requirements.add(requirementName.get(i) + ":" + requirementLevel.get(i));
         }
         size = requirements.size();
     }
@@ -59,7 +59,7 @@ public class PerkInfo implements IMessage{
         slug = ByteBufUtils.readUTF8String(buf);
         pointCost = buf.readInt();
         requirements = new ArrayList<String>();
-        for (int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             requirements.add(ByteBufUtils.readUTF8String(buf));
         }
     }
@@ -71,7 +71,7 @@ public class PerkInfo implements IMessage{
         ByteBufUtils.writeUTF8String(buf, description);
         ByteBufUtils.writeUTF8String(buf, slug);
         buf.writeInt(pointCost);
-        for (int i = 0; i < requirements.size(); i++){
+        for (int i = 0; i < requirements.size(); i++) {
             ByteBufUtils.writeUTF8String(buf, requirements.get(i));
         }
     }

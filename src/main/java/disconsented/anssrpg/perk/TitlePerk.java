@@ -29,12 +29,12 @@ public class TitlePerk extends Perk {
         return title;
     }
 
-    @Override
-    public void searchObject() {
-    }
-
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Override
+    public void searchObject() {
     }
 
 }

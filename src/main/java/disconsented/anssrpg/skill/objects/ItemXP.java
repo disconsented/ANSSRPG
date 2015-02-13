@@ -29,7 +29,6 @@ import net.minecraft.item.Item;
 
 /**
  * @author Disconsented
- *
  */
 public class ItemXP extends XPGain {
 
@@ -41,9 +40,10 @@ public class ItemXP extends XPGain {
     public ItemXP() {
     }
 
-    public Item getItem(){
+    public Item getItem() {
         return item;
     }
+
     @Override
     public void touchUp() {
         item = (Item) Item.itemRegistry.getObject(name);

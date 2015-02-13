@@ -26,10 +26,10 @@ package disconsented.anssrpg.player;
  * For storing data about players
  */
 
+import disconsented.anssrpg.perk.Slug;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import disconsented.anssrpg.perk.Slug;
 
 public class PlayerData {
     private ArrayList<Slug> perkList = new ArrayList<Slug>();
@@ -37,38 +37,39 @@ public class PlayerData {
     private String playerID;
     private int points;
 
-    public PlayerData(ArrayList<Slug> perkList, HashMap skillExp, String playerID, int points){
+    public PlayerData(ArrayList<Slug> perkList, HashMap skillExp, String playerID, int points) {
         this.perkList = perkList;
         this.skillExp = skillExp;
         this.playerID = playerID;
         this.points = points;
     }
+
     public ArrayList<Slug> getPerkList() {
         return perkList;
-    }
-
-    public String getPlayerID() {
-        return playerID;
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
-    public HashMap<String, Integer> getSkillExp() {
-        return skillExp;
     }
 
     public void setPerkList(ArrayList<Slug> perkList) {
         this.perkList = perkList;
     }
 
+    public String getPlayerID() {
+        return playerID;
+    }
+
     public void setPlayerID(String playerID) {
         this.playerID = playerID;
     }
 
+    public int getPoints() {
+        return points;
+    }
+
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public HashMap<String, Integer> getSkillExp() {
+        return skillExp;
     }
 
     public void setSkillExp(HashMap<String, Integer> skillExp) {
@@ -76,7 +77,7 @@ public class PlayerData {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return playerID;
     }
 }

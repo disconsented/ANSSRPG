@@ -25,16 +25,16 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.data;
 
-import java.util.HashMap;
-
 import disconsented.anssrpg.player.PlayerData;
+
+import java.util.HashMap;
 
 /**
  * @author Disconsented
- * Stores player's into a hashmap with the Key being their UUID
+ *         Stores player's into a hashmap with the Key being their UUID
  */
 public class PlayerStore {
-    private static HashMap <String, PlayerData> data = new HashMap<String, PlayerData>();
+    private static HashMap<String, PlayerData> data = new HashMap<String, PlayerData>();
 
     private static PlayerStore instance = null;
 
@@ -43,17 +43,19 @@ public class PlayerStore {
     public static void addPlayer(PlayerData player) {
         data.put(player.getPlayerID(), player);
     }
-    public static HashMap<String,PlayerData> getAllData(){
+
+    public static HashMap<String, PlayerData> getAllData() {
         return data;
     }
+
     public static PlayerStore getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new PlayerStore();
         }
         return instance;
     }
-    public static PlayerData getPlayer(String playerID)
-    {
+
+    public static PlayerData getPlayer(String playerID) {
         return data.get(playerID);
     }
 

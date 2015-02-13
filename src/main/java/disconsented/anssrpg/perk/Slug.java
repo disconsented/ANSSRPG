@@ -27,7 +27,8 @@ import com.google.gson.annotations.Expose;
 public class Slug {
     @Expose
     private String slug;
-    Slug(String name){
+
+    Slug(String name) {
         slug = name.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
     }
 

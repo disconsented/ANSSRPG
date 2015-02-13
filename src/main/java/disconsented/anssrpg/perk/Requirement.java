@@ -26,7 +26,7 @@ import com.google.gson.annotations.Expose;
 
 /**
  * @author Disconsented
- * Object for requirements
+ *         Object for requirements
  */
 public class Requirement {
     /*
@@ -37,20 +37,21 @@ public class Requirement {
      * LEVEL_LESS - Level < x
      */
 
-    public enum Action {HAVE,DONT,LEVEL_EQUALS,LEVEL_GREATER,LEVEL_LESS}
     @Expose
     public Action action;
     @Expose
     public String name;
     @Expose
     public String extraData;
-    public Requirement(Action action, String name, String extraData)
-    {
+    public Requirement(Action action, String name, String extraData) {
         this.action = action;
         this.name = name;
         this.extraData = extraData;
     }
-    public String getNameAsSlug(){
+
+    public String getNameAsSlug() {
         return name.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
     }
+
+    public enum Action {HAVE, DONT, LEVEL_EQUALS, LEVEL_GREATER, LEVEL_LESS}
 }

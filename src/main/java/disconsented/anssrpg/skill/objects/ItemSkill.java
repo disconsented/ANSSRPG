@@ -25,20 +25,19 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.skill.objects;
 
-import java.util.ArrayList;
-
 import com.google.gson.annotations.Expose;
+
+import java.util.ArrayList;
 
 /**
  * @author Disconsented
- *
  */
 public class ItemSkill extends Skill {
 
     @Expose
     private ArrayList<ItemXP> exp = new ArrayList<ItemXP>();
 
-    public ItemSkill(){
+    public ItemSkill() {
         exp.add(new ItemXP());
         exp.add(new ItemXP());
     }
@@ -56,7 +55,7 @@ public class ItemSkill extends Skill {
 
     @Override
     public void touchUp() {
-        for (XPGain xp : exp){
+        for (XPGain xp : exp) {
             ItemXP thing = new ItemXP();
             thing.name = xp.name;
             thing.xp = xp.xp;

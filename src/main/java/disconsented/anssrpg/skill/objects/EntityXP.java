@@ -29,7 +29,6 @@ import net.minecraft.entity.EntityList;
 
 /**
  * @author Disconsented
- *
  */
 public class EntityXP extends XPGain {
 
@@ -41,9 +40,10 @@ public class EntityXP extends XPGain {
     public EntityXP() {
     }
 
-    public Class getEntity(){
+    public Class getEntity() {
         return entity;
     }
+
     @Override
     public void touchUp() {
         entity = (Class) EntityList.stringToClassMapping.get(name);

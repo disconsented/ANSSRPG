@@ -22,111 +22,105 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg;
 
-import java.util.Map.Entry;
-
-import net.minecraftforge.client.ClientCommandHandler;
-import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.event.FMLServerStoppingEvent;
+import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import disconsented.anssrpg.commands.ConfigGUI;
 import disconsented.anssrpg.commands.Perks;
 import disconsented.anssrpg.common.Logging;
+import disconsented.anssrpg.common.Reference;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.config.JsonConfigHandler;
 import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
-import disconsented.anssrpg.network.PerkInfo;
-import disconsented.anssrpg.network.PerkInfoHandler;
-import disconsented.anssrpg.network.Request;
-import disconsented.anssrpg.network.RequestHandler;
-import disconsented.anssrpg.network.Responce;
-import disconsented.anssrpg.network.ResponceHandler;
+import disconsented.anssrpg.network.*;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.player.PlayerFile;
 import disconsented.anssrpg.skill.BlockBreaking;
 import disconsented.anssrpg.skill.EntityDamage;
 import disconsented.anssrpg.skill.ItemCrafting;
 import disconsented.anssrpg.skill.Smelting;
+import net.minecraftforge.client.ClientCommandHandler;
+import net.minecraftforge.common.MinecraftForge;
 
-@Mod(modid="ANSSRPG", name="A Not So Simple RPG", version="DEV11",acceptableRemoteVersions="*")
+import java.util.Map.Entry;
+
+@Mod(modid = Reference.ID, name = Reference.NAME, version = Reference.VERSION, acceptableRemoteVersions = "*")
 public class Main {
-        @Instance(value = "ANSSRPG")
-        public static Main instance; 
+    @Instance(value = Reference.ID)
+    public static Main instance;
 
-        @SidedProxy(clientSide="disconsented.anssrpg.client.ClientProxy", serverSide="disconsented.anssrpg.CommonProxy")
-        public static CommonProxy proxy;//DONT TOUCH THIS
-        
-        public static SimpleNetworkWrapper snw;
-        
-        private Settings settings = Settings.getInstance();
-        
-       
-		@EventHandler
-        public void preInit(FMLPreInitializationEvent event) throws Exception {
-		    settings.load(event);
-			if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER){
-				settings.isServer = true;
-			}else{
-				settings.isServer = false;
-				ClientCommandHandler.instance.registerCommand(new ConfigGUI());
-			}			
-			snw = NetworkRegistry.INSTANCE.newSimpleChannel("ANSSRPG");
-			snw.registerMessage(ResponceHandler.class, Responce.class, 0, Side.SERVER); 
-			snw.registerMessage(PerkInfoHandler.class, PerkInfo.class, 1, Side.CLIENT); 
-			snw.registerMessage(RequestHandler.class, Request.class, 2, Side.SERVER); 
+    @SidedProxy(clientSide = Reference.CLIENTPROXY, serverSide = Reference.COMMONPROXY)
+    public static CommonProxy proxy;//DONT TOUCH THIS
+
+    public static SimpleNetworkWrapper snw;
+
+    private Settings settings = Settings.getInstance();
+
+
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent event) throws Exception {
+        settings.load(event);
+        if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
+            settings.isServer = true;
+        } else {
+            settings.isServer = false;
+            ClientCommandHandler.instance.registerCommand(new ConfigGUI());
         }
-       
-        @EventHandler // used in 1.6.2
-        //@Init       // used in 1.5.2
-        public void load(FMLInitializationEvent event) {
-        		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
-                proxy.registerRenderers();
-                MinecraftForge.EVENT_BUS.register(new BlockBreaking());     
-                MinecraftForge.EVENT_BUS.register(new EntityDamage());
-                MinecraftForge.EVENT_BUS.register(new ItemCrafting());
-                MinecraftForge.EVENT_BUS.register(new Smelting());
-                FMLCommonHandler.instance().bus().register(new ItemCrafting());
-                FMLCommonHandler.instance().bus().register(new DataSave());
-                FMLCommonHandler.instance().bus().register(new Smelting());
-         }
-        @EventHandler
-        public void serverLoad(FMLServerStartingEvent event)
-        {
-          //event.registerServerCommand(new ANSSRPG());
-        	event.registerServerCommand(new Perks());
-        	event.registerServerCommand(new disconsented.anssrpg.commands.Skill());        	
+        snw = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.ID);
+        snw.registerMessage(ResponceHandler.class, Responce.class, 0, Side.SERVER);
+        snw.registerMessage(PerkInfoHandler.class, PerkInfo.class, 1, Side.CLIENT);
+        snw.registerMessage(RequestHandler.class, Request.class, 2, Side.SERVER);
+    }
+
+    @EventHandler // used in 1.6.2
+    //@Init       // used in 1.5.2
+    public void load(FMLInitializationEvent event) {
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
+        proxy.registerRenderers();
+        MinecraftForge.EVENT_BUS.register(new BlockBreaking());
+        MinecraftForge.EVENT_BUS.register(new EntityDamage());
+        MinecraftForge.EVENT_BUS.register(new ItemCrafting());
+        MinecraftForge.EVENT_BUS.register(new Smelting());
+        FMLCommonHandler.instance().bus().register(new ItemCrafting());
+        FMLCommonHandler.instance().bus().register(new DataSave());
+        FMLCommonHandler.instance().bus().register(new Smelting());
+    }
+
+    @EventHandler
+    public void serverLoad(FMLServerStartingEvent event) {
+        //event.registerServerCommand(new ANSSRPG());
+        event.registerServerCommand(new Perks());
+        event.registerServerCommand(new disconsented.anssrpg.commands.Skill());
+    }
+
+    /**
+     * Should allow single player saving as well as server shutdown saving
+     *
+     * @param event
+     */
+    @EventHandler
+    public void onServerStoppingEvent(FMLServerStoppingEvent event) {
+        for (Entry<String, PlayerData> entry : PlayerStore.getInstance().getAllData().entrySet()) {
+            PlayerData player = entry.getValue();
+            PlayerFile.writePlayer(player);
         }
-        
-        /**
-    	 * Should allow single player saving as well as server shutdown saving
-    	 * @param event
-    	 */
-    	@EventHandler
-    	public void onServerStoppingEvent (FMLServerStoppingEvent event){
-    		for(Entry<String, PlayerData> entry : PlayerStore.getInstance().getAllData().entrySet()){
-    			PlayerData player = entry.getValue();
-    			PlayerFile.writePlayer(player);
-    		}
-    	}
-        @EventHandler
-        public void postInit(FMLPostInitializationEvent event) throws Exception {
-        	JsonConfigHandler.loadPerkAndSkill();
-        	if (Settings.getDebug()){
-        	    Logging.debug("ANSSRPG has the following perks registered");
-        	    Logging.debug(PerkStore.getInstance().getPerks());
-        	}  
+    }
+
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event) throws Exception {
+        JsonConfigHandler.loadPerkAndSkill();
+        if (Settings.getDebug()) {
+            Logging.debug("ANSSRPG has the following perks registered");
+            Logging.debug(PerkStore.getInstance().getPerks());
+        }
 //        	disconsented.anssrpg.gui.Config.main();
-        }
+    }
 }

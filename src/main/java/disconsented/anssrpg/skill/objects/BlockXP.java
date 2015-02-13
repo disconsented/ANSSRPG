@@ -29,7 +29,6 @@ import net.minecraft.block.Block;
 
 /**
  * @author Disconsented
- *
  */
 public class BlockXP extends XPGain {
 

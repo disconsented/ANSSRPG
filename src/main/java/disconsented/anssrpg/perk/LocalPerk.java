@@ -30,20 +30,18 @@ import java.util.ArrayList;
 public class LocalPerk {
 
     public String name;
-    public ArrayList <String> requirements = new ArrayList();
+    public ArrayList<String> requirements = new ArrayList();
     public String perkSlug;
     public String description;
     public int pointCost;
 
     /**
-     *
-     * @param name - Name of the perk
-     * @param unlockBlock - What it is unlocking
-     * @param description - Description
-     * @param pointCost - Cost in points to unlock
-     * @param requirement -
+     * @param name         - Name of the perk
+     * @param description  - Description
+     * @param pointCost    - Cost in points to unlock
+     * @param requirements - What is needed to unlock.
      */
-    public LocalPerk (String name, String description, int pointCost, ArrayList requirements){
+    public LocalPerk(String name, String description, int pointCost, ArrayList requirements) {
         perkSlug = getSlug(name);
         this.name = name;
         this.requirements = requirements;
@@ -51,7 +49,7 @@ public class LocalPerk {
         this.description = description;
     }
 
-    private String getSlug(String name){
+    private String getSlug(String name) {
         return name.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
     }
 }

@@ -28,7 +28,7 @@ import org.apache.logging.log4j.Logger;
 
 public class Logging {
     public static Logger logger = LogManager.getLogger("ANSSRPG");
-    
+
     public static void info(Object info) {
         if (Settings.getInstance().getLogging())
             logger.info(info);

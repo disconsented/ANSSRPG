@@ -23,9 +23,9 @@ THE SOFTWARE.
 package disconsented.anssrpg.helper;
 
 
-public class Color{
+public class Color {
     public static int black = 0xFF000000;
-    public static int  white = 0xFFFFFFFF;
+    public static int white = 0xFFFFFFFF;
     public static int greyLight = 0xFFC6C6C6;
     public static int greyDark = 0xFF8B8B8B;
     public static int greyDeep = 0xFF373737;
