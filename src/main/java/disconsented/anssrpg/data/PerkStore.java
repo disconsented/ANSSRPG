@@ -81,7 +81,7 @@ public class PerkStore {
     }
 
     public static ArrayList<Slug> getSlugs(Entity entity) {
-        return entityMap.get(entity.getCommandSenderName());
+        return entityMap.get(entity.getClass().getSimpleName());
 
     }
 
