@@ -56,10 +56,11 @@ public class ItemSkill extends Skill {
     @Override
     public void touchUp() {
         for (XPGain xp : exp) {
-            ItemXP thing = new ItemXP();
-            thing.name = xp.name;
-            thing.xp = xp.xp;
-            thing.touchUp();
+            ItemXP object = new ItemXP();
+            object.name = xp.name;
+            object.xp = xp.xp;
+            object.touchUp();
+            exp.set(exp.indexOf(xp), object);
         }
 
     }

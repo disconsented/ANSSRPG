@@ -55,10 +55,11 @@ public class EntitySkill extends Skill {
     @Override
     public void touchUp() {
         for (XPGain xp : exp) {
-            EntityXP thing = new EntityXP();
-            thing.name = xp.name;
-            thing.xp = xp.xp;
-            thing.touchUp();
+            EntityXP object = new EntityXP();
+            object.name = xp.name;
+            object.xp = xp.xp;
+            object.touchUp();
+            exp.set(exp.indexOf(xp), object);
         }
     }
 }

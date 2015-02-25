@@ -54,10 +54,11 @@ public class BlockSkill extends Skill {
     @Override
     public void touchUp() {
         for (XPGain xp : exp) {
-            BlockXP thing = new BlockXP();
-            thing.name = xp.name;
-            thing.xp = xp.xp;
-            thing.touchUp();
+            BlockXP object = new BlockXP();
+            object.name = xp.name;
+            object.xp = xp.xp;
+            object.touchUp();
+            exp.set(exp.indexOf(xp), object);
         }
     }
 }
