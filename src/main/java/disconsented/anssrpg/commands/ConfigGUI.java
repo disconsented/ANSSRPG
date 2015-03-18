@@ -74,7 +74,7 @@ public class ConfigGUI implements ICommand {
         if (Settings.getInstance().isServer) {
 //    		throw new Exception("Trying to launch GUI on server");
         } else {
-            disconsented.anssrpg.gui.Config.main();
+            //disconsented.anssrpg.gui.Config.main();
         }
 
     }
