@@ -32,7 +32,7 @@ import disconsented.anssrpg.perk.*;
 
 import java.util.ArrayList;
 
-public class PerkStore {
+public class PerkContainer {
     @Expose
     private ArrayList<ItemPerk> items = new ArrayList<>();
     @Expose
@@ -41,26 +41,17 @@ public class PerkStore {
     private ArrayList<EntityPerk> entities = new ArrayList<>();
     @Expose
     private ArrayList<TitlePerk> titles = new ArrayList<>();
-    @Expose
-    private ArrayList<RegexBlockPerk> regexBlocks = new ArrayList<>();
-    @Expose
-    private ArrayList<RegexItemPerk> regexItems = new ArrayList<>();
-    @Expose
-    private ArrayList<RegexEntityPerk> regexEntitys = new ArrayList<>();
 
-    public PerkStore() {
+    public PerkContainer() {
 
     }
 
-    public PerkStore(Boolean fill) {
+    public PerkContainer(Boolean fill) {
         if (fill) {
             items.add(new ItemPerk());
             blocks.add(new BlockPerk());
             entities.add(new EntityPerk());
             titles.add(new TitlePerk());
-            regexBlocks.add(new RegexBlockPerk());
-            regexItems.add(new RegexItemPerk());
-            regexEntitys.add(new RegexEntityPerk());
         }
     }
 
@@ -74,18 +65,6 @@ public class PerkStore {
 
     public void addPerk(ItemPerk perk) {
         items.add(perk);
-    }
-
-    public void addPerk(RegexBlockPerk perk) {
-        regexBlocks.add(perk);
-    }
-
-    public void addPerk(RegexEntityPerk perk) {
-        regexEntitys.add(perk);
-    }
-
-    public void addPerk(RegexItemPerk perk) {
-        regexItems.add(perk);
     }
 
     public void addPerk(TitlePerk perk) {
@@ -129,35 +108,5 @@ public class PerkStore {
             }
 
         }
-        for (RegexItemPerk perk : regexItems) {
-            perk.touchUp();
-            if (perk.items != null && perk.items.size() > 0) {
-                disconsented.anssrpg.data.PerkStore.putPerk(perk);
-                disconsented.anssrpg.data.PerkStore.addPerk(perk);
-            } else {
-                Logging.error(perk.name + "'s list of objects is null. Skipping");
-            }
-        }
-        for (RegexBlockPerk perk : regexBlocks) {
-            perk.touchUp();
-            if (perk.blocks != null && perk.blocks.size() > 0) {
-                disconsented.anssrpg.data.PerkStore.putPerk(perk);
-                disconsented.anssrpg.data.PerkStore.addPerk(perk);
-            } else {
-                Logging.error(perk.name + "'s list of objects is null. Skipping");
-            }
-
-        }
-        for (RegexEntityPerk perk : regexEntitys) {
-            perk.touchUp();
-            if (perk.entities != null && perk.entities.size() > 0) {
-                disconsented.anssrpg.data.PerkStore.putPerk(perk);
-                disconsented.anssrpg.data.PerkStore.addPerk(perk);
-            } else {
-                Logging.error(perk.name + "'s list of objects is null. Skipping");
-            }
-
-        }
-
     }
 }

@@ -29,7 +29,7 @@ import disconsented.anssrpg.skill.objects.ItemSkill;
 
 import java.util.ArrayList;
 
-public class SkillStore {
+public class SkillContainer {
 
     @Expose
     private ArrayList<BlockSkill> blocks = new ArrayList<BlockSkill>();
