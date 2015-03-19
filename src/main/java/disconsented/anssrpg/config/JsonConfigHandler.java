@@ -23,19 +23,22 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.config;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.Writer;
+import java.lang.reflect.Type;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.gui.Config;
-import disconsented.anssrpg.perk.*;
-import disconsented.anssrpg.skill.objects.BlockSkill;
-import disconsented.anssrpg.skill.objects.EntitySkill;
-import disconsented.anssrpg.skill.objects.ItemSkill;
-import disconsented.anssrpg.skill.objects.Skill;
 
-import java.io.*;
-import java.lang.reflect.Type;
+import disconsented.anssrpg.common.Logging;
 
 /**
  * @author Disconsented, Abelistah
@@ -57,9 +60,9 @@ public class JsonConfigHandler {
      *
      * @param perkStore
      */
-    public static void createPerkConfig(PerkStore perkStore) {
+    public static void createPerkConfig(PerkContainer perkStore) {
         if (perkStore == null) {
-            perkStore = new PerkStore(true);
+            perkStore = new PerkContainer(true);
         }
 
 
@@ -81,9 +84,9 @@ public class JsonConfigHandler {
      *
      * @param skillStore
      */
-    public static void createSkillConfig(SkillStore skillStore) {
+    public static void createSkillConfig(SkillContainer skillStore) {
         if (skillStore == null) {
-            skillStore = new SkillStore();
+            skillStore = new SkillContainer();
             //			skillStore.addBlockSkill(new BlockSkill());
             //			skillStore.addBlockSkill(new BlockSkill());
             //			skillStore.addEntitySkill(new EntitySkill());
@@ -115,10 +118,10 @@ public class JsonConfigHandler {
     private static void loadPerkConfig() {
         try {
             Gson gson = new Gson();
-            Type objectStoreType = new TypeToken<PerkStore>() {
+            Type objectStoreType = new TypeToken<PerkContainer>() {
             }.getType();
             Reader isReader = new InputStreamReader(new FileInputStream(perkFile));
-            PerkStore perkStore = gson.fromJson(isReader, objectStoreType);
+            PerkContainer perkStore = gson.fromJson(isReader, objectStoreType);
             isReader.close();
 
             if (perkStore != null) {
@@ -137,10 +140,10 @@ public class JsonConfigHandler {
     private static void loadSkillConfig() {
         try {
             Gson gson = new Gson();
-            Type objectStoreType = new TypeToken<SkillStore>() {
+            Type objectStoreType = new TypeToken<SkillContainer>() {
             }.getType();
             Reader isReader = new InputStreamReader(new FileInputStream(skillFile));
-            SkillStore skillStore = gson.fromJson(isReader, objectStoreType);
+            SkillContainer skillStore = gson.fromJson(isReader, objectStoreType);
             isReader.close();
 
             if (skillStore != null) {
@@ -151,43 +154,5 @@ public class JsonConfigHandler {
         } catch (IOException iox) {
             iox.printStackTrace();
         }
-    }
-
-    /**
-     * Saves current perks and skills from memory
-     */
-    public static void savePerkAndSkill() {
-        PerkStore perkStore = new PerkStore();
-        for (Perk perk : Config.getPerks()) {
-            if (perk instanceof BlockPerk) {
-                perkStore.addPerk((BlockPerk) perk);
-            } else if (perk instanceof EntityPerk) {
-                perkStore.addPerk((EntityPerk) perk);
-            } else if (perk instanceof ItemPerk) {
-                perkStore.addPerk((ItemPerk) perk);
-            } else if (perk instanceof TitlePerk) {
-                perkStore.addPerk((TitlePerk) perk);
-            } else if (perk instanceof RegexBlockPerk) {
-                perkStore.addPerk((RegexBlockPerk) perk);
-            } else if (perk instanceof RegexItemPerk) {
-                perkStore.addPerk((RegexItemPerk) perk);
-            } else if (perk instanceof RegexEntityPerk) {
-                perkStore.addPerk((RegexEntityPerk) perk);
-            }
-        }
-        createPerkConfig(perkStore);
-
-        SkillStore skillStore = new SkillStore();
-        for (Skill skill : Config.getSkills()) {
-            if (skill instanceof BlockSkill) {
-                skillStore.addBlockSkill((BlockSkill) skill);
-            } else if (skill instanceof EntitySkill) {
-                skillStore.addEntitySkill((EntitySkill) skill);
-            } else if (skill instanceof ItemSkill) {
-                skillStore.addItemSkill((ItemSkill) skill);
-            }
-        }
-
-        createSkillConfig(skillStore);
     }
 }
