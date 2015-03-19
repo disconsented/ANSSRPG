@@ -28,37 +28,13 @@ THE SOFTWARE.
 
 import com.google.gson.annotations.Expose;
 
-import java.util.ArrayList;
-
 public abstract class Skill {
     @Expose
     public String name = "default_skillname";
-
-    /*
-     * @param exp  - ArrayList for the exp using XPGain objects
-     * @param name - Name of the skill
-     */
-
+    
     public Skill() {
     }
-
-    public abstract ArrayList getExp();
-
-    public abstract void setExp(ArrayList exp);
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    
     public abstract void touchUp();
+    
 }
