@@ -25,41 +25,35 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.skill.objects;
 
+import java.util.ArrayList;
+
+import net.minecraft.entity.EntityList;
+
 import com.google.gson.annotations.Expose;
 
-import java.util.ArrayList;
+import disconsented.anssrpg.common.Logging;
+import disconsented.anssrpg.common.Quad;
 
 /**
  * @author Disconsented
  */
 public class EntitySkill extends Skill {
+    
     @Expose
-    private ArrayList<EntityXP> exp = new ArrayList<EntityXP>();
-
-    public EntitySkill() {
-        exp.add(new EntityXP());
-        exp.add(new EntityXP());
-    }
+    private ArrayList<Quad> exp = new ArrayList<Quad>();
 
     @Override
-    public ArrayList<EntityXP> getExp() {
-        return exp;
-    }
-
-    @Override
-    public void setExp(ArrayList exp) {
-        this.exp = exp;
-
-    }
-
-    @Override
-    public void touchUp() {
-        for (XPGain xp : exp) {
-            EntityXP object = new EntityXP();
-            object.name = xp.name;
-            object.xp = xp.xp;
-            object.touchUp();
-            exp.set(exp.indexOf(xp), object);
+    public void touchUp() { ArrayList<Quad> initalised = new ArrayList<Quad>();
+        for (Quad object : exp) {
+            object.object = (Class) EntityList.stringToClassMapping.get(object.name);
+            if (object.object != null){
+                Logging.debug(object.name+" has been found. Passing on!");
+                initalised.add(object);
+            } else {
+                Logging.error(object.name+" could not be found. Ignoring!");
+            }
         }
+        
     }
+    
 }

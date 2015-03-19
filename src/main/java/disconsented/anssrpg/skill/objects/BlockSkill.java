@@ -25,40 +25,37 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.skill.objects;
 
+import java.util.ArrayList;
+
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+
 import com.google.gson.annotations.Expose;
 
-import java.util.ArrayList;
+import disconsented.anssrpg.common.Logging;
+import disconsented.anssrpg.common.Quad;
 
 /**
  * @author Disconsented
  */
 public class BlockSkill extends Skill {
+    
     @Expose
-    ArrayList<BlockXP> exp = new ArrayList<BlockXP>();
-
-    public BlockSkill() {
-        exp.add(new BlockXP());
-        exp.add(new BlockXP());
-    }
-
-    @Override
-    public ArrayList<BlockXP> getExp() {
-        return exp;
-    }
-
-    @Override
-    public void setExp(ArrayList exp) {
-        this.exp = exp;
-    }
-
+    private ArrayList<Quad> exp = new ArrayList<Quad>();
+    
     @Override
     public void touchUp() {
-        for (XPGain xp : exp) {
-            BlockXP object = new BlockXP();
-            object.name = xp.name;
-            object.xp = xp.xp;
-            object.touchUp();
-            exp.set(exp.indexOf(xp), object);
+        ArrayList<Quad> initalised = new ArrayList<Quad>();
+        for (Quad object : exp) {
+            object.object = (Item) Block.blockRegistry.getObject(object.name);
+            if (object.object != null){
+                Logging.debug(object.name+" has been found. Passing on!");
+                initalised.add(object);
+            } else {
+                Logging.error(object.name+" could not be found. Ignoring!");
+            }
         }
+        
     }
+    
 }

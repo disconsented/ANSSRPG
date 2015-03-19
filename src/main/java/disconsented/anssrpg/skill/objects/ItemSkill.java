@@ -25,9 +25,14 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.skill.objects;
 
+import java.util.ArrayList;
+
+import net.minecraft.item.Item;
+
 import com.google.gson.annotations.Expose;
 
-import java.util.ArrayList;
+import disconsented.anssrpg.common.Logging;
+import disconsented.anssrpg.common.Quad;
 
 /**
  * @author Disconsented
@@ -35,34 +40,21 @@ import java.util.ArrayList;
 public class ItemSkill extends Skill {
 
     @Expose
-    private ArrayList<ItemXP> exp = new ArrayList<ItemXP>();
-
-    public ItemSkill() {
-        exp.add(new ItemXP());
-        exp.add(new ItemXP());
-    }
-
-    @Override
-    public ArrayList<ItemXP> getExp() {
-        return exp;
-    }
-
-    @Override
-    public void setExp(ArrayList exp) {
-        this.exp = exp;
-
-    }
+    private ArrayList<Quad> exp = new ArrayList<Quad>();
 
     @Override
     public void touchUp() {
-        for (XPGain xp : exp) {
-            ItemXP object = new ItemXP();
-            object.name = xp.name;
-            object.xp = xp.xp;
-            object.touchUp();
-            exp.set(exp.indexOf(xp), object);
+        ArrayList<Quad> initalised = new ArrayList<Quad>();
+        for (Quad object : exp) {
+            object.object = (Item) Item.itemRegistry.getObject(object.name);
+            if (object.object != null){
+                Logging.debug(object.name+" has been found. Passing on!");
+                initalised.add(object);
+            } else {
+                Logging.error(object.name+" could not be found. Ignoring!");
+            }
         }
-
+        
     }
 
 }
