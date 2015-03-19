@@ -15,7 +15,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import disconsented.anssrpg.common.Logging;
 
 public class Smelting {
-    /*Shelved until issues reguarding boosting with two plays can be resolved*/
+    /*Smelting event will always give XP to the person who is tagged on the stack*/
 
 //    /*Two part skill basicly the same as item crafting*/
 //    @SubscribeEvent
