@@ -22,19 +22,19 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.perk;
 
-import com.google.gson.annotations.Expose;
-import net.minecraft.block.Block;
-
 import java.util.ArrayList;
 
-/**
- * @author Disconsented
- */
+import net.minecraft.block.Block;
+
+import com.google.gson.annotations.Expose;
+
+import disconsented.anssrpg.common.Logging;
+import disconsented.anssrpg.common.Triplet;
+
 public class BlockPerk extends Perk {
 
     @Expose
-    public String blockName = "default_blockName";
-    private Block block;
+    public ArrayList<Triplet> blocks = new ArrayList<Triplet>();
 
     public BlockPerk() {
         super();
@@ -46,16 +46,19 @@ public class BlockPerk extends Perk {
         // TODO Auto-generated constructor stub
     }
 
-    public Block getBlock() {
-        return block;
-    }
-
-    protected void setBlock(Block block) {
-        this.block = block;
-    }
-
     @Override
     public void searchObject() {
-        block = (Block) Block.blockRegistry.getObject(blockName);
+        ArrayList<Triplet> initalised = new ArrayList<Triplet>();
+        for(Triplet object : blocks){
+            object.object = (Block) Block.blockRegistry.getObject(object.name);
+            if (object.object != null){
+                Logging.debug(object.name + " has been found. Passing on.");
+                initalised.add(object);
+            } else {
+                Logging.error(object.name + " has not been found. Skipping");
+            }
+        }
+        this.blocks = initalised;    
     }
+    
 }

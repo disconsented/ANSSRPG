@@ -25,19 +25,19 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.perk;
 
-import com.google.gson.annotations.Expose;
-import net.minecraft.entity.EntityList;
-
 import java.util.ArrayList;
 
-/**
- * @author Disconsented
- */
+import net.minecraft.entity.EntityList;
+
+import com.google.gson.annotations.Expose;
+
+import disconsented.anssrpg.common.Logging;
+import disconsented.anssrpg.common.Triplet;
+
 public class EntityPerk extends Perk {
 
     @Expose
-    public String entityName = "default_entityName";
-    private Class entity;
+    public ArrayList<Triplet> entities = new ArrayList<Triplet>();
 
     public EntityPerk() {
         super();
@@ -49,17 +49,19 @@ public class EntityPerk extends Perk {
         // TODO Auto-generated constructor stub
     }
 
-    public Class getEntity() {
-        return entity;
-    }
-
-    protected void setEntity(Class entity) {
-        this.entity = entity;
-    }
-
     @Override
     public void searchObject() {
-        entity = (Class) EntityList.stringToClassMapping.get(entityName);
+        ArrayList<Triplet> initalised = new ArrayList<Triplet>();
+        for(Triplet object : entities){
+            object.object = (Class) EntityList.stringToClassMapping.get(object.name);
+            if (object.object != null){
+                Logging.debug(object.name + " has been found. Passing on.");
+                initalised.add(object);
+            } else {
+                Logging.error(object.name + " has not been found. Skipping");
+            }
+        }
+        this.entities = initalised;    
     }
 
 }

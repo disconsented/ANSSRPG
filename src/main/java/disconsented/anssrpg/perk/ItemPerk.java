@@ -25,19 +25,19 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.perk;
 
-import com.google.gson.annotations.Expose;
-import net.minecraft.item.Item;
-
 import java.util.ArrayList;
 
-/**
- * @author Disconsented
- */
+import net.minecraft.item.Item;
+
+import com.google.gson.annotations.Expose;
+
+import disconsented.anssrpg.common.Logging;
+import disconsented.anssrpg.common.Triplet;
+
 public class ItemPerk extends Perk {
 
     @Expose
-    public String itemName = "default_itemName";
-    private Item item;
+    public ArrayList<Triplet> items = new ArrayList<Triplet>();
 
     public ItemPerk() {
         super();
@@ -48,17 +48,19 @@ public class ItemPerk extends Perk {
         super(name, requirements, description, pointCost);
     }
 
-    public Item getItem() {
-        return item;
-    }
-
-    protected void setItem(Item item) {
-        this.item = item;
-    }
-
     @Override
     public void searchObject() {
-        item = (Item) Item.itemRegistry.getObject(itemName);
+        ArrayList<Triplet> initalised = new ArrayList<Triplet>();
+        for(Triplet object : items){
+            object.object = (Item) Item.itemRegistry.getObject(object.name);
+            if (object.object != null){
+                Logging.debug(object.name + " has been found. Passing on.");
+                initalised.add(object);
+            } else {
+                Logging.error(object.name + " has not been found. Skipping");
+            }
+        }
+        this.items = initalised;
     }
-
+    
 }

@@ -74,7 +74,7 @@ public class PerkContainer {
     public void touchUp() {
         for (ItemPerk item : items) {
             item.touchUp();
-            if (item.getItem() != null) {
+            if (item.items != null) {
                 disconsented.anssrpg.data.PerkStore.putPerk(item);
                 disconsented.anssrpg.data.PerkStore.addPerk(item);
             } else {
@@ -83,7 +83,7 @@ public class PerkContainer {
         }
         for (BlockPerk block : blocks) {
             block.touchUp();
-            if (block.getBlock() != null) {
+            if (block.blocks != null) {
                 disconsented.anssrpg.data.PerkStore.putPerk(block);
                 disconsented.anssrpg.data.PerkStore.addPerk(block);
             } else {
@@ -92,7 +92,7 @@ public class PerkContainer {
         }
         for (EntityPerk entity : entities) {
             entity.touchUp();
-            if (entity.getEntity() != null) {
+            if (entity.entities != null) {
                 disconsented.anssrpg.data.PerkStore.putPerk(entity);
                 disconsented.anssrpg.data.PerkStore.addPerk(entity);
             } else {
