@@ -40,7 +40,7 @@ public class Logging {
     }
 
     public static void debug(Object debug) {
-        if (Settings.getInstance().getLogging())
+        if (Settings.getInstance().getLogging() && Settings.getInstance().getDebug())
             logger.info(debug);
     }
 
