@@ -22,16 +22,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
 package disconsented.anssrpg.config;
-/**
- * Author: Abelistah
- */
-
 import com.google.gson.annotations.Expose;
 import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.perk.*;
 
 import java.util.ArrayList;
-
+/**
+ * Used to safely retain data for saving and loading perks before initalising them for use
+ * @author Abelistah
+ * @author Disconsented 
+ */
 public class PerkContainer {
     @Expose
     private ArrayList<ItemPerk> items = new ArrayList<>();

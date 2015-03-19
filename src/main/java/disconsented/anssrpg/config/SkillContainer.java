@@ -28,7 +28,10 @@ import disconsented.anssrpg.skill.objects.EntitySkill;
 import disconsented.anssrpg.skill.objects.ItemSkill;
 
 import java.util.ArrayList;
-
+/**
+ * Used to safely retain data for saving and loading skills before initalising them for use
+ * @author Disconsented 
+ */
 public class SkillContainer {
 
     @Expose
