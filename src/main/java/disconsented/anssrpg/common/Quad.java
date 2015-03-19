@@ -39,6 +39,6 @@ public class Quad<O, S, I, E> extends Triplet<O, S, I> {
         // TODO Auto-generated constructor stub
     }
     @Expose
-    int xp;
+    int xp = 0;
 
 }

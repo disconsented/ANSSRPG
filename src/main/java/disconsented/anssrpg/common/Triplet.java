@@ -41,7 +41,7 @@ public class Triplet<O,S,I> {
     //Not exposed to save on space in configs
     public Object object;
     @Expose
-    public String name;
+    public String name = "";
     @Expose
-    public int metadata;
+    public int metadata = 0;
 }
