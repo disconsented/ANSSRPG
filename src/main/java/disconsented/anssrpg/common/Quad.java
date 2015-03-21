@@ -24,7 +24,7 @@ package disconsented.anssrpg.common;
 
 import com.google.gson.annotations.Expose;
 /**
- * Same as a triplet but contains an extra field for experience
+ * Same as a triplet but contains an extra field for experience (for Blocks and Items)
  * @author Disconsented
  *
  * @param <O> {@link Triplet#object}
@@ -34,11 +34,11 @@ import com.google.gson.annotations.Expose;
  */
 public class Quad<O, S, I, E> extends Triplet<O, S, I> {
 
-    public Quad(Object object, String name, int metadata, int xp) {
-        super(object, name, metadata);
-        // TODO Auto-generated constructor stub
+    public Quad(Object object, String name,int experience, int metadata) {
+        super(object, name, experience);
+        this.metadata = metadata;
     }
     @Expose
-    int xp = 0;
+    public int metadata = 0;
 
 }

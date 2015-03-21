@@ -25,7 +25,7 @@ package disconsented.anssrpg.common;
 import com.google.gson.annotations.Expose;
 
 /**
- * Three part object for keeping track of data needed for Blocks,Items and Entites
+ * Three part object for keeping track of data needed for Entites
  * @author Disconsented
  *
  * @param <O> object
@@ -33,15 +33,15 @@ import com.google.gson.annotations.Expose;
  * @param <I> metadata
  */
 public class Triplet<O,S,I> {
-    public Triplet(Object object, String name, int metadata){
+    public Triplet(Object object, String name, int experience){
         this.object = object;
         this.name = name;
-        this.metadata = metadata;        
+        this.experience = experience;        
     }
     //Not exposed to save on space in configs
     public Object object;
     @Expose
     public String name = "";
     @Expose
-    public int metadata = 0;
+    public int experience = 0;
 }
