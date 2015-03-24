@@ -29,6 +29,8 @@ import disconsented.anssrpg.player.PlayerData;
 
 import java.util.HashMap;
 
+import net.minecraft.entity.player.EntityPlayerMP;
+
 /**
  * @author Disconsented
  *         Stores player's into a hashmap with the Key being their UUID
@@ -57,6 +59,10 @@ public class PlayerStore {
 
     public static PlayerData getPlayer(String playerID) {
         return data.get(playerID);
+    }
+
+    public static PlayerData getPlayer(EntityPlayerMP player) {
+        return data.get(player.getUniqueID().toString());
     }
 
 }
