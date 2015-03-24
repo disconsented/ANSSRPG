@@ -20,9 +20,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-/**
- *
- */
 package disconsented.anssrpg.skill.objects;
 
 import java.util.ArrayList;
@@ -33,6 +30,7 @@ import com.google.gson.annotations.Expose;
 
 import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.common.Quad;
+import disconsented.anssrpg.common.Triplet;
 
 /**
  * @author Disconsented
@@ -40,11 +38,12 @@ import disconsented.anssrpg.common.Quad;
 public class EntitySkill extends Skill {
     
     @Expose
-    private ArrayList<Quad> exp = new ArrayList<Quad>();
+    public ArrayList<Triplet> exp = new ArrayList<Triplet>();
 
     @Override
-    public void touchUp() { ArrayList<Quad> initalised = new ArrayList<Quad>();
-        for (Quad object : exp) {
+    public void touchUp() { 
+        ArrayList<Triplet> initalised = new ArrayList<Triplet>();
+        for (Triplet object : exp) {
             object.object = (Class) EntityList.stringToClassMapping.get(object.name);
             if (object.object != null){
                 Logging.debug(object.name+" has been found. Passing on!");

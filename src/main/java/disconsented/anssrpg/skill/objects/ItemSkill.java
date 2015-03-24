@@ -40,7 +40,7 @@ import disconsented.anssrpg.common.Quad;
 public class ItemSkill extends Skill {
 
     @Expose
-    private ArrayList<Quad> exp = new ArrayList<Quad>();
+    public ArrayList<Quad> exp = new ArrayList<Quad>();
 
     @Override
     public void touchUp() {

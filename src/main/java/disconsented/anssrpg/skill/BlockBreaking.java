@@ -26,7 +26,13 @@ package disconsented.anssrpg.skill;
  * Handles when to add experience and blocking of events
  */
 
+import java.util.ArrayList;
+
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import disconsented.anssrpg.common.Quad;
+import disconsented.anssrpg.common.Utils;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
 import disconsented.anssrpg.data.SkillStore;
@@ -34,43 +40,35 @@ import disconsented.anssrpg.handler.PlayerHandler;
 import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.BlockSkill;
-import disconsented.anssrpg.skill.objects.BlockXP;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraftforge.event.world.BlockEvent.BreakEvent;
-
-import java.util.ArrayList;
 
 public class BlockBreaking {
-    /**
-     * Author Disconsented
-     */
+
     @SubscribeEvent
     public void onBreakevent(BreakEvent event) {
-        if (event.getPlayer() instanceof EntityPlayerMP) {
-            EntityPlayerMP playerMP = (EntityPlayerMP) event.getPlayer();
-            PlayerStore.getInstance();
-            PlayerData player = PlayerStore.getPlayer(event.getPlayer().getUniqueID().toString());
-            PerkStore.getInstance();
+        if (event.getPlayer() instanceof EntityPlayerMP){
+            EntityPlayerMP player = (EntityPlayerMP) event.getPlayer();
+            PlayerData playerData = PlayerStore.getPlayer(player);
             ArrayList<Slug> slugList = PerkStore.getSlugs(event.block);
-            boolean requiresPerk = false;
-            if (slugList != null) {
+            ArrayList<BlockSkill> skillStore = SkillStore.getInstance().getBlockSkill();
+            Boolean requiresPerk = false;
+            
+            if (slugList != null){
                 requiresPerk = true;
             }
-            SkillStore.getInstance();
-            for (BlockSkill skill : SkillStore.getBlockSkill()) {
-                ArrayList<BlockXP> temp = skill.getExp();
-                for (int i = 0; i < temp.size(); i++) {
-                    if (temp.get(i).getBlock().equals(event.block)) {
-                        if (requiresPerk) {
-                            if (PlayerHandler.hasPerk(player, slugList)) {
-                                PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
-                            } else {
-                                PlayerHandler.taskFail(event.getPlayer());
-                                event.setCanceled(true);
-                            }
-                        } else {
-                            PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
-                        }
+            
+            for(BlockSkill skill : skillStore){
+                for(Quad entry : skill.exp){
+                    if(Utils.MatchObject(entry.object, entry.metadata, event.block, event.blockMetadata)){
+                      if (requiresPerk) {
+                          if (PlayerHandler.hasPerk(playerData, slugList)) {
+                              PlayerHandler.awardXP(playerData, skill.name, entry.experience, player);
+                              } else {
+                                  PlayerHandler.taskFail(player);
+                                  event.setCanceled(true);
+                              }
+                          } else {
+                              PlayerHandler.awardXP(playerData, skill.name, entry.experience, player);
+                          }
                     }
                 }
             }

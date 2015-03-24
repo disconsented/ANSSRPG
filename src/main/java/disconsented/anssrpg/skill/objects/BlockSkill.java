@@ -41,13 +41,13 @@ import disconsented.anssrpg.common.Quad;
 public class BlockSkill extends Skill {
     
     @Expose
-    private ArrayList<Quad> exp = new ArrayList<Quad>();
+    public ArrayList<Quad> exp = new ArrayList<Quad>();
     
     @Override
     public void touchUp() {
         ArrayList<Quad> initalised = new ArrayList<Quad>();
         for (Quad object : exp) {
-            object.object = (Item) Block.blockRegistry.getObject(object.name);
+            object.object = (Block) Block.blockRegistry.getObject(object.name);
             if (object.object != null){
                 Logging.debug(object.name+" has been found. Passing on!");
                 initalised.add(object);

@@ -26,7 +26,14 @@ package disconsented.anssrpg.skill;
  * Handles when to add experience and entitying of events
  */
 
+import java.util.ArrayList;
+
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import disconsented.anssrpg.common.Triplet;
+import disconsented.anssrpg.common.Utils;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
 import disconsented.anssrpg.data.SkillStore;
@@ -34,74 +41,61 @@ import disconsented.anssrpg.handler.PlayerHandler;
 import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.EntitySkill;
-import disconsented.anssrpg.skill.objects.EntityXP;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-
-import java.util.ArrayList;
 
 public class EntityDamage {
     @SubscribeEvent
     public void onLivingDeathEvent(LivingDeathEvent event) {
-        if (event.source.getEntity() instanceof EntityPlayerMP) {
-            EntityPlayerMP playerMP = (EntityPlayerMP) event.source.getEntity();
-            PlayerStore.getInstance();
-            PlayerData player = PlayerStore.getPlayer(playerMP.getUniqueID().toString());
-            PerkStore.getInstance();
-            ArrayList<Slug> entitylist = PerkStore.getSlugs(event.entity);
-            boolean requiresPerk = false;
-            if (entitylist != null) {
+        if (event.source.getEntity() instanceof EntityPlayerMP){
+            EntityPlayerMP player = (EntityPlayerMP) event.source.getEntity();
+            PlayerData playerData = PlayerStore.getPlayer(player);
+            ArrayList<Slug> slugList = PerkStore.getSlugs(event.entity);
+            ArrayList<EntitySkill> skillStore = SkillStore.getInstance().getEntitySkill();
+            Boolean requiresPerk = false;
+            
+            if (slugList != null){
                 requiresPerk = true;
             }
-            SkillStore.getInstance();
-            for (EntitySkill skill : SkillStore.getEntitySkill()) {
-                ArrayList<EntityXP> temp = skill.getExp();
-                for (int i = 0; i < temp.size(); i++) {
-                    Class entityClass = temp.get(i).getEntity();
-                    if (event.entity.getClass().equals(entityClass)) {
-                        if (requiresPerk) {
-                            if (PlayerHandler.hasPerk(player, entitylist)) {
-                                PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
-                            }
-                        } else {
-                            PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
-                        }
+            
+            for(EntitySkill skill : skillStore){
+                for(Triplet entry : skill.exp){
+                    if(Utils.MatchObject(event.entity, -1, entry.object, -1)){
+                      if (requiresPerk) {
+                          if (PlayerHandler.hasPerk(playerData, slugList)) {
+                              PlayerHandler.awardXP(playerData, skill.name, entry.experience, player);
+                              } else {
+                                  PlayerHandler.taskFail(player);
+                                  event.setCanceled(true);
+                              }
+                          } else {
+                              PlayerHandler.awardXP(playerData, skill.name, entry.experience, player);
+                          }
                     }
                 }
             }
         }
     }
-
-    /**
-     * Author Disconsented
-     */
     @SubscribeEvent
     public void onLivingHurtEvent(LivingHurtEvent event) {
-        if (event.source.getEntity() instanceof EntityPlayerMP) {
-            EntityPlayerMP playerMP = (EntityPlayerMP) event.source.getEntity();
-            PlayerStore.getInstance();
-            PlayerData player = PlayerStore.getPlayer(playerMP.getUniqueID().toString());
-            PerkStore.getInstance();
-            ArrayList<Slug> entitylist = PerkStore.getSlugs(event.entity);
-            boolean requiresPerk = false;
-            if (entitylist != null) {
+        if (event.source.getEntity() instanceof EntityPlayerMP){
+            EntityPlayerMP player = (EntityPlayerMP) event.source.getEntity();
+            PlayerData playerData = PlayerStore.getPlayer(player);
+            ArrayList<Slug> slugList = PerkStore.getSlugs(event.entity);
+            ArrayList<EntitySkill> skillStore = SkillStore.getInstance().getEntitySkill();
+            Boolean requiresPerk = false;
+            
+            if (slugList != null){
                 requiresPerk = true;
             }
-            SkillStore.getInstance();
-            for (EntitySkill skill : SkillStore.getEntitySkill()) {
-                ArrayList<EntityXP> temp = skill.getExp();
-                for (int i = 0; i < temp.size(); i++) {
-                    Class entityClass = temp.get(i).getEntity();
-                    if (event.entity.getClass().equals(entityClass)) {
-                        if (requiresPerk) {
-                            if (PlayerHandler.hasPerk(player, entitylist)) {
-                            } else {
-                                PlayerHandler.taskFail(playerMP);
-                                event.ammount = 1;
-                            }
-                        } else {
-                        }
+            
+            for(EntitySkill skill : skillStore){
+                for(Triplet entry : skill.exp){
+                    if(Utils.MatchObject(event.entity, -1, entry.object, -1)){
+                      if (requiresPerk) {
+                          if (!PlayerHandler.hasPerk(playerData, slugList)) {
+                              PlayerHandler.taskFail(player);
+                              event.ammount = 1;
+                          }
+                      }
                     }
                 }
             }
