@@ -32,7 +32,7 @@ public class Utils {
      * @return
      */
     public static boolean MatchObject(Object object1, int metadata1, Object object2, int metadata2){
-        if (metadata1 > -1 && metadata2 > -1){
+        if (metadata1 > -1 || metadata2 > -1){
             if (object1.equals(object2) && metadata1 == metadata2){
                 return true;
             } else {
