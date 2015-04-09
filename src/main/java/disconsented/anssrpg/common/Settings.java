@@ -75,7 +75,7 @@ public class Settings {
         return levelCurve;
     }
 
-    public static void setLevelCurve(Double amount) {
+    public static void setLevelCurve(double amount) {
         levelCurve = amount;
     }
 
