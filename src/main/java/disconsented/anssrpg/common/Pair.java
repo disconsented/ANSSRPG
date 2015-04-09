@@ -24,8 +24,8 @@ package disconsented.anssrpg.common;
 
 import com.google.gson.annotations.Expose;
 
-public class Double <O, S>{
-    public Double(Object object, String name){
+public class Pair <O, S>{
+    public Pair(Object object, String name){
         this.name = name;
         this.object = object;
     }
