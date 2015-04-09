@@ -39,6 +39,7 @@ public class Settings {
     private static double levelCurve = 1.6;
     private static String statusMessage = "null";
     private static double pointsRatio = .2;
+    private static boolean externalConfig = false;
     /**
      * 0 - Disabled
      * 1 - Points awarded based on XP from skills
@@ -112,7 +113,12 @@ public class Settings {
 
         debug = config.get(misc, "enableDebugMode", false, "Enables debugging features. Meant for development use.").getBoolean();
         logging = config.get(misc, "enableLogging", true, "Enables logging to console.").getBoolean();
+        externalConfig = config.get(misc, "useExternalConfig", false, "Use config files instead of default internal configs").getBoolean();
 
         config.save();
+    }
+
+    public static boolean isExternalConfig() {
+        return externalConfig;
     }
 }

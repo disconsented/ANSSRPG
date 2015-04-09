@@ -41,7 +41,7 @@ public class Default {
     private static SkillContainer skills = null;
     private Default(){}
     
-    public PerkContainer getPerkInstance(){
+    public static PerkContainer getPerkInstance(){
         if (perks != null){
             return perks;
         } else {
@@ -128,7 +128,7 @@ public class Default {
             
     }
     
-    public SkillContainer getSkillInstance(){
+    public static SkillContainer getSkillInstance(){
         if (skills != null){
             return skills;
         } else {

@@ -116,7 +116,13 @@ public class Main {
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) throws Exception {
-        JsonConfigHandler.loadPerkAndSkill();
+        if (settings.isExternalConfig()){
+            JsonConfigHandler.loadPerkAndSkill();
+        } else {
+            disconsented.anssrpg.config.Default.getPerkInstance().touchUp();
+            disconsented.anssrpg.config.Default.getSkillInstance().touchUp();
+        }
+        
         if (Settings.getDebug()) {
             Logging.debug("ANSSRPG has the following perks registered");
             Logging.debug(PerkStore.getInstance().getPerks());
