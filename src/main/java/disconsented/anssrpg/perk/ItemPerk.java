@@ -32,26 +32,26 @@ import net.minecraft.item.Item;
 import com.google.gson.annotations.Expose;
 
 import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.common.Triplet;
+import disconsented.anssrpg.common.Double;
 
 public class ItemPerk extends Perk {
 
     @Expose
-    public ArrayList<Triplet> items = new ArrayList<Triplet>();
+    public ArrayList<Double> items = new ArrayList<Double>();
 
     public ItemPerk() {
         super();
     }
 
     public ItemPerk(String name, ArrayList<Requirement> requirements,
-                    String description, int pointCost) {
+                    String description, int pointCost, ArrayList<Double> items) {
         super(name, requirements, description, pointCost);
     }
 
     @Override
     public void searchObject() {
-        ArrayList<Triplet> initalised = new ArrayList<Triplet>();
-        for(Triplet object : items){
+        ArrayList<Double> initalised = new ArrayList<Double>();
+        for(Double object : items){
             object.object = (Item) Item.itemRegistry.getObject(object.name);
             if (object.object != null){
                 Logging.debug(object.name + " has been found. Passing on.");
