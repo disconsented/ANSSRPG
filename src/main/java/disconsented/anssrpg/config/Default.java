@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 import scala.actors.threadpool.Arrays;
 import disconsented.anssrpg.common.Quad;
-import disconsented.anssrpg.common.Double;
+import disconsented.anssrpg.common.Pair;
 import disconsented.anssrpg.common.Triplet;
 import disconsented.anssrpg.perk.*;
 import disconsented.anssrpg.perk.Requirement.Action;
@@ -51,76 +51,76 @@ public class Default {
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "mining", "4"));}},
                     "Allows you to mine Iron Ore",
                     0,
-                    new ArrayList<Double>(){{add(new Double(null, "iron_ore"));}}));
+                    new ArrayList<Pair>(){{add(new Pair(null, "iron_ore"));}}));
             
             perks.addPerk(new BlockPerk("Unlock: Lapis Ore",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "mining", "4"));}},
                     "Allows you to mine Iron Ore",
                     0,
-                    new ArrayList<Double>(){{add(new Double(null, "lapis_ore"));}}));
+                    new ArrayList<Pair>(){{add(new Pair(null, "lapis_ore"));}}));
             
             perks.addPerk(new BlockPerk("Unlock: Gold Ore",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "mining", "9"));}},
                     "Allows you to mine Iron Ore",
                     0,
-                    new ArrayList<Double>(){{add(new Double(null, "gold_ore"));}}));
+                    new ArrayList<Pair>(){{add(new Pair(null, "gold_ore"));}}));
             
             perks.addPerk(new BlockPerk("Unlock: Redstone Ore",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "mining", "14"));}},
                     "Allows you to mine Iron Ore",
                     0,
-                    new ArrayList<Double>(){{add(new Double(null, "redstone_ore"));}}));
+                    new ArrayList<Pair>(){{add(new Pair(null, "redstone_ore"));}}));
             
             perks.addPerk(new BlockPerk("Unlock: Diamond Ore",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "mining", "19"));}},
                     "Allows you to mine Iron Ore",
                     0,
-                    new ArrayList<Double>(){{add(new Double(null, "diamond_ore"));}}));
+                    new ArrayList<Pair>(){{add(new Pair(null, "diamond_ore"));}}));
             
             perks.addPerk(new BlockPerk("Unlock: Emerald Ore",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "mining", "24"));}},
                     "Allows you to mine Iron Ore",
                     0,
-                    new ArrayList<Double>(){{add(new Double(null, "emerald_ore"));}}));
+                    new ArrayList<Pair>(){{add(new Pair(null, "emerald_ore"));}}));
             
             perks.addPerk(new ItemPerk("Unlock: Gold Armour", 
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "armouring", "4"));}},
                     "Allows you to craft Gold armour",
                     0,
-                    new ArrayList<Double>(){{
-                        add(new Double(null, "golden_helmet"));
-                        add(new Double(null, "golden_chestplate"));
-                        add(new Double(null, "golden_leggings"));
-                        add(new Double(null, "golden_boots"));
+                    new ArrayList<Pair>(){{
+                        add(new Pair(null, "golden_helmet"));
+                        add(new Pair(null, "golden_chestplate"));
+                        add(new Pair(null, "golden_leggings"));
+                        add(new Pair(null, "golden_boots"));
                         }}));
             
             perks.addPerk(new ItemPerk("Unlock: Iron Armour",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "armouring", "9"));}},
                     "Allows you to craft Iron armour",
                     0,
-                    new ArrayList<Double>(){{
-                        add(new Double(null, "iron_helmet"));
-                        add(new Double(null, "iron_chestplate"));
-                        add(new Double(null, "iron_leggings"));
-                        add(new Double(null, "iron_boots"));
+                    new ArrayList<Pair>(){{
+                        add(new Pair(null, "iron_helmet"));
+                        add(new Pair(null, "iron_chestplate"));
+                        add(new Pair(null, "iron_leggings"));
+                        add(new Pair(null, "iron_boots"));
                         }}));
             
             perks.addPerk(new ItemPerk("Unlock: Diamond Armour",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "armouring", "14"));}},
                     "Allows you to craft Diamond armour",
                     0,
-                    new ArrayList<Double>(){{
-                        add(new Double(null, "diamond_helmet"));
-                        add(new Double(null, "diamond_chestplate"));
-                        add(new Double(null, "diamond_leggings"));
-                        add(new Double(null, "diamond_boots"));
+                    new ArrayList<Pair>(){{
+                        add(new Pair(null, "diamond_helmet"));
+                        add(new Pair(null, "diamond_chestplate"));
+                        add(new Pair(null, "diamond_leggings"));
+                        add(new Pair(null, "diamond_boots"));
                         }}));
             
             perks.addPerk(new EntityPerk("Creeper killer",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "slaying", "4"));}},
                     "Allows Creepers to be killed",
                     0,
-                    new ArrayList<Double>(){{add (new Double(null,"Creeper"));}}));
+                    new ArrayList<Pair>(){{add (new Pair(null,"Creeper"));}}));
             
             return perks;
             

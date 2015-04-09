@@ -22,6 +22,7 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.data;
 
+import disconsented.anssrpg.common.Pair;
 import disconsented.anssrpg.common.Triplet;
 import disconsented.anssrpg.perk.*;
 import net.minecraft.block.Block;
@@ -93,7 +94,7 @@ public class PerkStore {
 
     public static void putPerk(BlockPerk block) {
         perks.add(block);
-        for (Triplet object : block.blocks){
+        for (Pair object : block.blocks){
             Block cache = (Block) object.object;
             if (blockMap.containsKey(cache.getUnlocalizedName())) {
                 blockMap.get(cache.getUnlocalizedName()).add(block.slug);
@@ -108,7 +109,7 @@ public class PerkStore {
 
     public static void putPerk(EntityPerk entity) {
         perks.add(entity);
-        for (Triplet object : entity.entities){
+        for (Pair object : entity.entities){
             Class cache = (Class) object.object;
             if (entityMap.containsKey(cache.getSimpleName())) {
                 entityMap.get(cache.getSimpleName()).add(entity.slug);
@@ -123,7 +124,7 @@ public class PerkStore {
 
     public static void putPerk(ItemPerk item) {
         perks.add(item);
-        for (Triplet object : item.items){
+        for (Pair object : item.items){
             Item cache = (Item) object.object;
             if (itemMap.containsKey(cache.getUnlocalizedName())) {
                 itemMap.get(cache.getUnlocalizedName()).add(item.slug);

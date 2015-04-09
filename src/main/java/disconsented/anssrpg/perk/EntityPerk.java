@@ -32,27 +32,27 @@ import net.minecraft.entity.EntityList;
 import com.google.gson.annotations.Expose;
 
 import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.common.Double;
+import disconsented.anssrpg.common.Pair;
 
 public class EntityPerk extends Perk {
 
     @Expose
-    public ArrayList<Double> entities = new ArrayList<Double>();
+    public ArrayList<Pair> entities = new ArrayList<Pair>();
 
     public EntityPerk() {
         super();
     }
 
     public EntityPerk(String name, ArrayList<Requirement> requirements,
-                      String description, int pointCost, ArrayList<Double> entities) {
+                      String description, int pointCost, ArrayList<Pair> entities) {
         super(name, requirements, description, pointCost);
         // TODO Auto-generated constructor stub
     }
 
     @Override
     public void searchObject() {
-        ArrayList<Double> initalised = new ArrayList<Double>();
-        for(Double object : entities){
+        ArrayList<Pair> initalised = new ArrayList<Pair>();
+        for(Pair object : entities){
             object.object = (Class) EntityList.stringToClassMapping.get(object.name);
             if (object.object != null){
                 Logging.debug(object.name + " has been found. Passing on.");

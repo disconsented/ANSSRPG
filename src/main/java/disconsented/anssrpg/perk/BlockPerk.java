@@ -29,27 +29,27 @@ import net.minecraft.block.Block;
 import com.google.gson.annotations.Expose;
 
 import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.common.Double;
+import disconsented.anssrpg.common.Pair;
 
 public class BlockPerk extends Perk {
 
     @Expose
-    public ArrayList<Double> blocks = new ArrayList<Double>();
+    public ArrayList<Pair> blocks = new ArrayList<Pair>();
 
     public BlockPerk() {
         super();
     }
 
     public BlockPerk(String name, ArrayList<Requirement> requirements,
-                     String description, int pointCost, ArrayList<Double> blocks) {
+                     String description, int pointCost, ArrayList<Pair> blocks) {
         super(name, requirements, description, pointCost);
         this.blocks = blocks;
     }
 
     @Override
     public void searchObject() {
-        ArrayList<Double> initalised = new ArrayList<Double>();
-        for(Double object : blocks){
+        ArrayList<Pair> initalised = new ArrayList<Pair>();
+        for(Pair object : blocks){
             object.object = (Block) Block.blockRegistry.getObject(object.name);
             if (object.object != null){
                 Logging.debug(object.name + " has been found. Passing on.");
