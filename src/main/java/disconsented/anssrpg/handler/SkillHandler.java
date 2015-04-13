@@ -27,6 +27,7 @@ package disconsented.anssrpg.handler;
 
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.SkillStore;
+import disconsented.anssrpg.skill.objects.Skill;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
@@ -34,27 +35,12 @@ import net.minecraft.item.Item;
  * @author Disconsented
  */
 public class SkillHandler {
-    private static PerkStore perkInstance = PerkStore.getInstance();
-    private static SkillStore skillInstance = SkillStore.getInstance();
-
-    /**
-     * Check that a entity requires a perk
-     */
-    public static boolean doesRequirePerk(Block block) {
-        return false;
+    
+    public static double calculateExpForLevel(Skill skill, double level){
+        return skill.base*(Math.pow(level, skill.mod));
     }
-
-    /**
-     * Check that a block requires a perk
-     */
-    public boolean getRequiresPerk(Block block) {
-        return false;
-    }
-
-    /**
-     * Check that a item requires a perk
-     */
-    public boolean getRequiresPerk(Item item) {
-        return false;
+    
+    public static long calulteLevelForExp(Skill skill, double exp){
+        return (long) (Math.pow(exp,(1/skill.mod))/Math.pow(skill.base,(1/skill.mod)));
     }
 }

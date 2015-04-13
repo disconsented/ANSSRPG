@@ -32,6 +32,14 @@ public abstract class Skill {
     @Expose
     public String name = "default_skillname";
     
+    /*Equation:
+     * base*(level^modifier)*/
+    @Expose 
+    public int base = 100;
+    
+    @Expose
+    public float mod = 1;
+    
     public Skill() {
     }
     

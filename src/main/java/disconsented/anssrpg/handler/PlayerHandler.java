@@ -30,6 +30,7 @@ import disconsented.anssrpg.perk.Perk;
 import disconsented.anssrpg.perk.Requirement;
 import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
+import disconsented.anssrpg.skill.objects.Skill;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 
@@ -109,33 +110,32 @@ public final class PlayerHandler {
         player.getSkillExp().put(skillName, player.getSkillExp().get(skillName) + num);
     }
 
-    public static void awardXP(PlayerData player, String name, int value, EntityPlayer playerEntity) {
-        if (player.getSkillExp().get(name) != null) {
-            player.getSkillExp().put(name,
-                    new Integer(player.getSkillExp().get(name).intValue() + value));
+    public static void awardXP(EntityPlayer playerEntity, Skill skill, int exp) {
+        PlayerData player = getPlayer(playerEntity.getUniqueID().toString());
+        Integer cacheExp = player.getSkillExp().get(skill.name);
+        long levelOld = SkillHandler.calulteLevelForExp(skill, exp);
+        long levelNew = 0;
+        
+        if (cacheExp != null) {
+            player.getSkillExp().put(skill.name, exp + cacheExp);
+            levelNew = SkillHandler.calulteLevelForExp(skill, exp + cacheExp);
         } else {
-            player.getSkillExp().put(name, value);
+            player.getSkillExp().put(skill.name, exp);
+            levelNew = SkillHandler.calulteLevelForExp(skill, exp);
         }
-        playerEntity.addChatComponentMessage(new ChatComponentText("You have been awared with " + value + " xp"));
-        /*Check for level up
-         * 	If leveled up send info
-         *
+        playerEntity.addChatComponentMessage(new ChatComponentText("You have been awared with " + exp + " exp"));
+        /* Check for level up
+         * If leveled up send info
          */
-        int temp = player.getSkillExp().get(name);
-        if ((value + temp >= Math.pow(Settings.getInstance().getLevelCurve(), getLevel(temp) + 1))) {
-            playerEntity.addChatComponentMessage(new ChatComponentText("Your skill " + name + " has leveled up to " + getLevel(temp)));
-            Settings.getInstance();
+        
+        if (levelNew > levelOld) {
+            playerEntity.addChatComponentMessage(new ChatComponentText("Your skill " + skill.name + " has leveled up to " + levelNew));
+            
             if (Settings.getPointsMode() == 1) {
                 player.setPoints(player.getPoints() + 1);
                 playerEntity.addChatComponentMessage(new ChatComponentText("You have recieved 1 perk point for leveling up"));
             }
-        }
-
-
-    }
-
-    public static int getLevel(int xp) {
-        return (int) (Math.log10(xp) / Math.log10(Settings.getInstance().getLevelCurve()));
+        }        
     }
 
     public static PlayerData getPlayer(String playerID) {

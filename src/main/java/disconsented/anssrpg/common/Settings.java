@@ -36,7 +36,6 @@ public class Settings {
     public static boolean isServer = false;
     private static boolean debug = false;
     private static boolean logging = true;
-    private static double levelCurve = 1.6;
     private static String statusMessage = "null";
     private static double pointsRatio = .2;
     private static boolean externalConfig = false;
@@ -72,14 +71,6 @@ public class Settings {
         return instance;
     }
 
-    public static double getLevelCurve() {
-        return levelCurve;
-    }
-
-    public static void setLevelCurve(double amount) {
-        levelCurve = amount;
-    }
-
     public static int getPointsMode() {
         return pointsMode;
     }
@@ -107,7 +98,6 @@ public class Settings {
         config.addCustomCategoryComment(balancing, "Balancing tweaks.");
         config.addCustomCategoryComment(misc, "Settings that don't fit in other categories");
 
-        levelCurve = config.get(balancing, "levelCurve", 1.6, "Level curve settings.").getDouble();
         pointsRatio = config.get(balancing, "pointsRatio", .2, "Points ratio settings.").getDouble();
         pointsMode = config.get(balancing, "pointsMode", 1, "Points Mode. \n0 - Disabled \n1 - Points awarded based on XP from skills \n2 - Points can be converted from vanilla levels").getInt();
 
