@@ -94,7 +94,7 @@ public class Perks implements ICommand {
                         break;
                     case "all":
                         for (Perk perk : PerkStore.getInstance().getPerks()) {
-                            toReturn += perk.slug.getSlug() + ",";
+                            toReturn += perk.getSlug()+ ",";
                         }
                         break;
                     default:
