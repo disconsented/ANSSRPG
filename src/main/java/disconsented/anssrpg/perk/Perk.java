@@ -87,7 +87,13 @@ public abstract class Perk {
     }
 
     public Slug getSlug() {
-        return slug;
+        if (this.slug != null){
+            return slug;
+        } else {
+            this.slug = new Slug(this.name);
+            return this.slug;
+        }
+        
     }
 
     public abstract void searchObject();
