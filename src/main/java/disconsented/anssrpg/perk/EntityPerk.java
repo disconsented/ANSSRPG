@@ -46,7 +46,7 @@ public class EntityPerk extends Perk {
     public EntityPerk(String name, ArrayList<Requirement> requirements,
                       String description, int pointCost, ArrayList<Pair> entities) {
         super(name, requirements, description, pointCost);
-        // TODO Auto-generated constructor stub
+        this.entities = entities;
     }
 
     @Override

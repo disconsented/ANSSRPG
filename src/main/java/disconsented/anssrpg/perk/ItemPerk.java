@@ -46,6 +46,7 @@ public class ItemPerk extends Perk {
     public ItemPerk(String name, ArrayList<Requirement> requirements,
                     String description, int pointCost, ArrayList<Pair> items) {
         super(name, requirements, description, pointCost);
+        this.items = items;
     }
 
     @Override
