@@ -36,5 +36,10 @@ public class Slug {
         return slug;
     }
 
+    @Override
+    public String toString() {
+        return slug;
+    }
+
 
 }
