@@ -24,6 +24,7 @@ package disconsented.anssrpg;
 
 import java.util.Map.Entry;
 
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -79,7 +80,7 @@ public class Main {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) throws Exception {
         settings.load(event);
-        if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
+        if (MinecraftServer.getServer().isDedicatedServer()) {
             settings.isServer = true;
         } else {
             settings.isServer = false;
