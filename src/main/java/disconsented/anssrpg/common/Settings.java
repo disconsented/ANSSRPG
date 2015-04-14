@@ -60,9 +60,9 @@ public class Settings {
 
     public static File getFolder() {
         if (isServer) {
-            return new File(MinecraftServer.getServer().getFolderName() + "\\data\\");
+            return new File(MinecraftServer.getServer().getFolderName() + "\\anssrpgdata\\");
         } else {
-            return new File("saves\\" + MinecraftServer.getServer().getFolderName() + "\\data\\");
+            return new File("saves\\" + MinecraftServer.getServer().getFolderName() + "\\anssrpgdata\\");
         }
 
     }
