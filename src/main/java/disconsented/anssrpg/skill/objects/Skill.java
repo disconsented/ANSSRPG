@@ -28,6 +28,11 @@ THE SOFTWARE.
 
 import com.google.gson.annotations.Expose;
 
+/**
+ * 
+ * @author Disconsented
+ * Experience = base*(level^modifier)
+ */
 public abstract class Skill {
     @Expose
     public String name = "default_skillname";
