@@ -31,6 +31,7 @@ import disconsented.anssrpg.perk.Requirement;
 import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.Skill;
+import disconsented.anssrpg.skill.objects.ToolSkill;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 
@@ -137,6 +138,11 @@ public final class PlayerHandler {
             }
         }        
     }
+    public static void awardToolXP(EntityPlayer playerEntity, ToolSkill skill, int exp){
+        if(isWielding(skill, playerEntity)){
+            awardXP(playerEntity, skill, exp);
+        }
+    }
 
     public static PlayerData getPlayer(String playerID) {
         PlayerData player = PlayerStore.getPlayer(playerID);
@@ -167,5 +173,13 @@ public final class PlayerHandler {
 
     public static void taskFail(EntityPlayer player) {
         player.addChatComponentMessage(new ChatComponentText("You are unable to preform this task"));
+    }
+    
+    public static boolean isWielding(ToolSkill skill, EntityPlayer player){
+        if(skill.toolClass == net.minecraft.item.Item.class){
+            return true;
+        } else {
+            return skill.toolClass.isInstance(player.getCurrentEquippedItem().getItem());
+        }
     }
 }

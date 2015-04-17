@@ -20,42 +20,38 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-/**
- *
- */
 package disconsented.anssrpg.skill.objects;
 
 import java.util.ArrayList;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-
 import com.google.gson.annotations.Expose;
 
-import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.common.Quad;
+import disconsented.anssrpg.data.ToolRegistry;
+import disconsented.anssrpg.perk.Perk;
+import disconsented.anssrpg.perk.Requirement;
 
 /**
  * @author Disconsented
+ * Abstract class for tools
+ * See {@link ToolRegistry} for more information
  */
-public class BlockSkill extends ToolSkill {
-    
+public abstract class ToolSkill extends Skill{    
     @Expose
-    public ArrayList<Quad> exp = new ArrayList<Quad>();
+    public String tool = "";
+    public Class toolClass = null;
     
-    @Override
-    public void touchUp() {
-        ArrayList<Quad> initalised = new ArrayList<Quad>();
-        for (Quad object : exp) {
-            object.object = (Block) Block.blockRegistry.getObject(object.name);
-            if (object.object != null){
-                Logging.debug(object.name+" has been found. Passing on!");
-                initalised.add(object);
-            } else {
-                Logging.error(object.name+" could not be found. Ignoring!");
-            }
-        }
-        
+    public ToolSkill() {
+        super();
+    }
+
+    public void initTool(){
+        toolClass = ToolRegistry.getEntry(tool);
     }
     
+    @Override
+    public void touchUp(){
+        this.touchUp();
+        this.initTool();
+    }
+
 }

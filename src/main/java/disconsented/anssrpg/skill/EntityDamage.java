@@ -61,13 +61,13 @@ public class EntityDamage {
                     if(Utils.MatchObject(event.entity, -1, entry.object, -1)){
                       if (requiresPerk) {
                           if (PlayerHandler.hasPerk(playerData, slugList)) {
-                              PlayerHandler.awardXP(player, skill, entry.experience);
+                              PlayerHandler.awardToolXP(player, skill, entry.experience);
                               } else {
                                   PlayerHandler.taskFail(player);
                                   event.setCanceled(true);
                               }
                           } else {
-                              PlayerHandler.awardXP(player, skill, entry.experience);
+                              PlayerHandler.awardToolXP(player, skill, entry.experience);
                           }
                     }
                 }

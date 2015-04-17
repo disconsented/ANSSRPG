@@ -20,42 +20,39 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-/**
- *
- */
-package disconsented.anssrpg.skill.objects;
+package disconsented.anssrpg.data;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-
-import com.google.gson.annotations.Expose;
-
-import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.common.Quad;
 
 /**
  * @author Disconsented
+ * Contains tool -> class mappings
  */
-public class BlockSkill extends ToolSkill {
+public final class ToolRegistry {
     
-    @Expose
-    public ArrayList<Quad> exp = new ArrayList<Quad>();
+    private static HashMap<String, Class> registry = new HashMap<String, Class>();
     
-    @Override
-    public void touchUp() {
-        ArrayList<Quad> initalised = new ArrayList<Quad>();
-        for (Quad object : exp) {
-            object.object = (Block) Block.blockRegistry.getObject(object.name);
-            if (object.object != null){
-                Logging.debug(object.name+" has been found. Passing on!");
-                initalised.add(object);
-            } else {
-                Logging.error(object.name+" could not be found. Ignoring!");
-            }
-        }
-        
+    public static void init(){
+        registry.put("Pickaxe", net.minecraft.item.ItemPickaxe.class);
+        registry.put("Spade", net.minecraft.item.ItemSpade.class);
+        registry.put("Sword", net.minecraft.item.ItemSword.class);
+        registry.put("Axe", net.minecraft.item.ItemAxe.class);
+        registry.put("Hoe", net.minecraft.item.ItemHoe.class);
+        registry.put("Shears", net.minecraft.item.ItemShears.class);
+        registry.put("Bow", net.minecraft.item.ItemBow.class);
+        registry.put("FlintAndSteel", net.minecraft.item.ItemFlintAndSteel.class);
+        registry.put("Hand", null);
+        registry.put("", net.minecraft.item.Item.class);
     }
     
+    public static void setEntry(String key, Class value){
+        registry.put(key, value);
+    }
+    
+    public static Class getEntry(String key){
+        return registry.get(key);
+    }
+
 }

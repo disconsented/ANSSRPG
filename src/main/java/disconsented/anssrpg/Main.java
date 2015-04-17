@@ -49,6 +49,7 @@ import disconsented.anssrpg.config.JsonConfigHandler;
 import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
+import disconsented.anssrpg.data.ToolRegistry;
 import disconsented.anssrpg.handler.SkillHandler;
 import disconsented.anssrpg.network.PerkInfo;
 import disconsented.anssrpg.network.PerkInfoHandler;
@@ -104,6 +105,7 @@ public class Main {
         FMLCommonHandler.instance().bus().register(new ItemCrafting());
         FMLCommonHandler.instance().bus().register(new DataSave());
         FMLCommonHandler.instance().bus().register(new Smelting());
+        ToolRegistry.init();
     }
 
     @EventHandler

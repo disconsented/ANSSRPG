@@ -35,7 +35,7 @@ import disconsented.anssrpg.common.Triplet;
 /**
  * @author Disconsented
  */
-public class EntitySkill extends Skill {
+public class EntitySkill extends ToolSkill {
     
     @Expose
     public ArrayList<Triplet> exp = new ArrayList<Triplet>();
