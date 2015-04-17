@@ -143,6 +143,7 @@ public class Default {
             mining.exp.add(new Quad(null, "redstone_ore", 25, 0));
             mining.exp.add(new Quad(null, "diamond_ore", 30, 0));
             mining.exp.add(new Quad(null, "emerald_ore", 35, 0));
+            mining.tool = "Pickaxe";
             skills.addBlockSkill(mining);
             
             /* log == Oak,Spruce,Birch,Jungle
@@ -154,6 +155,7 @@ public class Default {
             woodcutting.exp.add(new Quad(null, "log", 4, 3));
             woodcutting.exp.add(new Quad(null, "log2", 5, 0));
             woodcutting.exp.add(new Quad(null, "log2", 6, 1));
+            woodcutting.tool = "Axe";
             skills.addBlockSkill(woodcutting);
             
             BlockSkill digging = new BlockSkill();
@@ -163,6 +165,7 @@ public class Default {
             digging.exp.add(new Quad(null, "clay", 2, 0));
             digging.exp.add(new Quad(null, "hardened_clay", 2, 0));
             digging.exp.add(new Quad(null, "stained_hardened_clay", 2, -1));
+            digging.tool = "Spade";
             skills.addBlockSkill(digging);
             
             EntitySkill slaying = new EntitySkill();
@@ -170,6 +173,7 @@ public class Default {
             slaying.exp.add(new Triplet(null, "Skeleton", 10));
             slaying.exp.add(new Triplet(null, "Spider", 10));
             slaying.exp.add(new Triplet(null, "Creeper", 20));
+            slaying.tool = "Sword";
             skills.addEntitySkill(slaying);
             
             ItemSkill armouring = new ItemSkill();
