@@ -24,6 +24,8 @@ package disconsented.anssrpg.player;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.data.PlayerStore;
@@ -37,8 +39,7 @@ public class PlayerFile {
         Settings.getInstance();
         File dataFolder = Settings.getFolder();
         dataFolder.mkdirs();
-        dataFolder.getParentFile().getPath();
-        File dataLocation = new File(dataFolder, playerID);
+        File dataLocation = new File(dataFolder, playerID+".json");
         try {
             FileReader reader = new FileReader(dataLocation);
             Gson gson = new GsonBuilder().create();
@@ -46,9 +47,11 @@ public class PlayerFile {
             PlayerStore.addPlayer(player);
         } catch (FileNotFoundException e) {
             DataSave.createPlayer(playerID);
-            Settings.getInstance();
             if (Settings.getDebug()) {
-                e.printStackTrace();
+                for(StackTraceElement entry : e.getStackTrace()){
+                    Logging.logger.debug(entry.toString());
+                }
+                
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -60,9 +63,8 @@ public class PlayerFile {
      */
 
     public static void writePlayer(PlayerData player) {
-        Settings.getInstance();
         File dataFolder = Settings.getFolder();
-        File dataLocation = new File(dataFolder, player.getPlayerID());
+        File dataLocation = new File(dataFolder, player.getPlayerID()+".json");
         dataFolder.mkdirs();
         Gson gson = new Gson();
         String json = gson.toJson(player);
