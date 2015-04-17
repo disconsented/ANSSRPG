@@ -46,6 +46,8 @@ import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.common.Reference;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.config.JsonConfigHandler;
+import disconsented.anssrpg.config.PerkContainer;
+import disconsented.anssrpg.config.SkillContainer;
 import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
@@ -133,8 +135,12 @@ public class Main {
         if (settings.isExternalConfig()){
             JsonConfigHandler.loadPerkAndSkill();
         } else {
-            disconsented.anssrpg.config.Default.getPerkInstance().touchUp();
-            disconsented.anssrpg.config.Default.getSkillInstance().touchUp();
+            PerkContainer perkContainer = disconsented.anssrpg.config.Default.getPerkInstance();
+            SkillContainer skillContainer = disconsented.anssrpg.config.Default.getSkillInstance();
+            perkContainer.touchUp();
+            skillContainer.touchUp();
+            JsonConfigHandler.createPerkConfig(perkContainer);
+            JsonConfigHandler.createSkillConfig(skillContainer);
         }
         
         if (Settings.getDebug()) {
