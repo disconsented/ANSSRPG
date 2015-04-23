@@ -29,8 +29,9 @@ import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerOpenContainerEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
+import disconsented.anssrpg.common.Quad;
+import disconsented.anssrpg.common.Utils;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
 import disconsented.anssrpg.data.SkillStore;
@@ -38,8 +39,6 @@ import disconsented.anssrpg.handler.PlayerHandler;
 import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.ItemSkill;
-import disconsented.anssrpg.common.Quad;
-import disconsented.anssrpg.common.Utils;
 /**
  * @author James
  *         Handles crafting, both gaining XP and restricting use
@@ -48,7 +47,6 @@ import disconsented.anssrpg.common.Utils;
  *         ItemCrafted handles just giving XP
  */
 public class ItemCrafting {
-  @SubscribeEvent
   public void onPlayerOpenCrafting(PlayerOpenContainerEvent event) {
       if (event.entityPlayer instanceof EntityPlayerMP){
           Container container = event.entityPlayer.openContainer;
@@ -81,7 +79,6 @@ public class ItemCrafting {
       
   }
   
-    @SubscribeEvent //Assumed that crafting wasn't blocked
     public void onItemCraftedEvent(ItemCraftedEvent event) {
         if (event.player instanceof EntityPlayerMP) {
             EntityPlayerMP player = (EntityPlayerMP) event.player;

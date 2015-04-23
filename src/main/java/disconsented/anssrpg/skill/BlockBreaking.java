@@ -30,7 +30,6 @@ import java.util.ArrayList;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import disconsented.anssrpg.common.Quad;
 import disconsented.anssrpg.common.Utils;
 import disconsented.anssrpg.data.PerkStore;
@@ -43,8 +42,7 @@ import disconsented.anssrpg.skill.objects.BlockSkill;
 
 public class BlockBreaking {
 
-    @SubscribeEvent
-    public void onBreakevent(BreakEvent event) {
+    public void onBreakEvent(BreakEvent event) {
         if (event.getPlayer() instanceof EntityPlayerMP){
             EntityPlayerMP player = (EntityPlayerMP) event.getPlayer();
             PlayerData playerData = PlayerStore.getPlayer(player);

@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import disconsented.anssrpg.common.Triplet;
 import disconsented.anssrpg.common.Utils;
 import disconsented.anssrpg.data.PerkStore;
@@ -43,7 +42,6 @@ import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.EntitySkill;
 
 public class EntityDamage {
-    @SubscribeEvent
     public void onLivingDeathEvent(LivingDeathEvent event) {
         if (event.source.getEntity() instanceof EntityPlayerMP){
             EntityPlayerMP player = (EntityPlayerMP) event.source.getEntity();
@@ -74,7 +72,6 @@ public class EntityDamage {
             }
         }
     }
-    @SubscribeEvent
     public void onLivingHurtEvent(LivingHurtEvent event) {
         if (event.source.getEntity() instanceof EntityPlayerMP){
             EntityPlayerMP player = (EntityPlayerMP) event.source.getEntity();

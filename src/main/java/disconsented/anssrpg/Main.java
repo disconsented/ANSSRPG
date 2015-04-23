@@ -48,10 +48,11 @@ import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.config.JsonConfigHandler;
 import disconsented.anssrpg.config.PerkContainer;
 import disconsented.anssrpg.config.SkillContainer;
-import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
 import disconsented.anssrpg.data.ToolRegistry;
+import disconsented.anssrpg.event.FMLBUS;
+import disconsented.anssrpg.event.ForgeBUS;
 import disconsented.anssrpg.handler.SkillHandler;
 import disconsented.anssrpg.network.PerkInfo;
 import disconsented.anssrpg.network.PerkInfoHandler;
@@ -61,10 +62,6 @@ import disconsented.anssrpg.network.Responce;
 import disconsented.anssrpg.network.ResponceHandler;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.player.PlayerFile;
-import disconsented.anssrpg.skill.BlockBreaking;
-import disconsented.anssrpg.skill.EntityDamage;
-import disconsented.anssrpg.skill.ItemCrafting;
-import disconsented.anssrpg.skill.Smelting;
 import disconsented.anssrpg.skill.objects.BlockSkill;
 
 @Mod(modid = Reference.ID, name = Reference.NAME, version = Reference.VERSION, acceptableRemoteVersions = "*")
@@ -100,13 +97,8 @@ public class Main {
     public void load(FMLInitializationEvent event) {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
         proxy.registerRenderers();
-        MinecraftForge.EVENT_BUS.register(new BlockBreaking());
-        MinecraftForge.EVENT_BUS.register(new EntityDamage());
-        MinecraftForge.EVENT_BUS.register(new ItemCrafting());
-        MinecraftForge.EVENT_BUS.register(new Smelting());
-        FMLCommonHandler.instance().bus().register(new ItemCrafting());
-        FMLCommonHandler.instance().bus().register(new DataSave());
-        FMLCommonHandler.instance().bus().register(new Smelting());
+        MinecraftForge.EVENT_BUS.register(new ForgeBUS());
+        FMLCommonHandler.instance().bus().register(new FMLBUS());
         ToolRegistry.init();
     }
 

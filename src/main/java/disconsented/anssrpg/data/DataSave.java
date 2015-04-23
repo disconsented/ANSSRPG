@@ -26,7 +26,9 @@ package disconsented.anssrpg.data;
  * Holds the player hashmap
  */
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
@@ -34,9 +36,6 @@ import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.player.PlayerFile;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * @author James
@@ -75,7 +74,6 @@ public class DataSave {
      *
      * @param event
      */
-    @SubscribeEvent
     public void onPlayerLoggedInEvent(PlayerLoggedInEvent event) {
         if (Settings.getDebug()) {
             Logging.debug("Player " + event.player.getCommandSenderName() + " with UUID:" + event.player.getPersistentID().toString() + "has logged in");
@@ -91,7 +89,6 @@ public class DataSave {
      *
      * @param event
      */
-    @SubscribeEvent
     public void onPlayerLoggedOutEvent(PlayerLoggedOutEvent event) {
         if (Settings.getDebug()) {
             Logging.debug("Player " + event.player.getCommandSenderName() + " with UUID:" + event.player.getPersistentID().toString() + "has logged out");
@@ -107,7 +104,6 @@ public class DataSave {
      *
      * @param event
      */
-    @SubscribeEvent
     public void onPlayerRespawnEvent(PlayerRespawnEvent event) {
         if (Settings.getDebug()) {
             Logging.debug("Player " + event.player.getCommandSenderName() + " with UUID:" + event.player.getPersistentID().toString() + "has respawned");
