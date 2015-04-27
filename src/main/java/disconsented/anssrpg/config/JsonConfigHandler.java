@@ -68,7 +68,7 @@ public class JsonConfigHandler {
 
         try {
             configFileLocation.mkdirs();
-            Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+            Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().serializeNulls().create();
             Writer osWriter = new OutputStreamWriter(new FileOutputStream(perkFile));
             gson.toJson(perkStore, osWriter);
             osWriter.close();
@@ -96,7 +96,7 @@ public class JsonConfigHandler {
         }
         try {
             configFileLocation.mkdirs();
-            Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+            Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().serializeNulls().create();
             Writer osWriter = new OutputStreamWriter(new FileOutputStream(skillFile));
             gson.toJson(skillStore, osWriter);
             osWriter.close();
