@@ -80,7 +80,7 @@ public class Main {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) throws Exception {
         settings.load(event);
-        if (MinecraftServer.getServer().isDedicatedServer()) {
+        if (MinecraftServer.getServer() != null && MinecraftServer.getServer().isDedicatedServer()) {
             settings.isServer = true;
         } else {
             settings.isServer = false;
@@ -139,7 +139,7 @@ public class Main {
             Logging.debug("ANSSRPG has the following perks registered");
             Logging.debug(PerkStore.getInstance().getPerks());
         }
-//        	disconsented.anssrpg.gui.Config.main();
+
         BlockSkill temp = new BlockSkill();
         for (int i = 0; i < 100; i++){
             double xp = SkillHandler.calculateExpForLevel(temp, i);
