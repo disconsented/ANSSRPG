@@ -22,6 +22,9 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.common;
 
+import disconsented.anssrpg.skill.objects.EntitySkill;
+import net.minecraft.entity.Entity;
+
 public class Utils {
     /**
      * Returns 2 if two objects are matched. If either Metadata is <= -1 then it is treated as a wildcard (Metadata is ignored)
@@ -45,6 +48,10 @@ public class Utils {
                 return false;
             }
         }
+    }
+    
+    public static boolean MatchEntity(Entity entity, Triplet triplet){
+        return entity.getClass().equals(triplet.object);        
     }
 
 }
