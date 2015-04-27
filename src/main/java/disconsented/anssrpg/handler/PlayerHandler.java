@@ -141,6 +141,8 @@ public final class PlayerHandler {
     public static void awardToolXP(EntityPlayer playerEntity, ToolSkill skill, int exp){
         if(isWielding(skill, playerEntity)){
             awardXP(playerEntity, skill, exp);
+        } else {
+            taskFail(playerEntity);
         }
     }
 
@@ -178,7 +180,9 @@ public final class PlayerHandler {
     public static boolean isWielding(ToolSkill skill, EntityPlayer player){
         if(skill.toolClass == net.minecraft.item.Item.class){
             return true;
-        } else {
+        } else if(player.getCurrentEquippedItem() == null){
+            return skill.toolClass == null;
+        } else {        
             return skill.toolClass.isInstance(player.getCurrentEquippedItem().getItem());
         }
     }
