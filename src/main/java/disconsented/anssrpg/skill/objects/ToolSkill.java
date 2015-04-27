@@ -45,13 +45,7 @@ public abstract class ToolSkill extends Skill{
     }
 
     public void initTool(){
-        toolClass = ToolRegistry.getEntry(tool);
-    }
-    
-    @Override
-    public void touchUp(){
-        this.touchUp();
-        this.initTool();
+        this.toolClass = ToolRegistry.getEntry(tool);
     }
 
 }
