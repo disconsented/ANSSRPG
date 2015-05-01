@@ -23,7 +23,9 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.config;
 import com.google.gson.annotations.Expose;
+
 import disconsented.anssrpg.common.Logging;
+import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.perk.*;
 
 import java.util.ArrayList;
@@ -41,6 +43,8 @@ public class PerkContainer {
     private ArrayList<EntityPerk> entities = new ArrayList<>();
     @Expose
     private ArrayList<TitlePerk> titles = new ArrayList<>();
+    @Expose 
+    private ArrayList<InteractionPerk> interactions = new ArrayList<>();
 
     public PerkContainer() {
 
@@ -51,7 +55,7 @@ public class PerkContainer {
             items.add(new ItemPerk());
             blocks.add(new BlockPerk());
             entities.add(new EntityPerk());
-            titles.add(new TitlePerk());
+            titles.add(new TitlePerk());                   
         }
     }
 
@@ -70,13 +74,15 @@ public class PerkContainer {
     public void addPerk(TitlePerk perk) {
         titles.add(perk);
     }
-
+    public void addPerk(InteractionPerk perk){
+        interactions.add(perk);
+    }
     public void touchUp() {
         for (ItemPerk item : items) {
             item.touchUp();
             if (item.items != null) {
-                disconsented.anssrpg.data.PerkStore.putPerk(item);
-                disconsented.anssrpg.data.PerkStore.addPerk(item);
+                PerkStore.putPerk(item);
+                PerkStore.addPerk(item);
             } else {
                 Logging.error(item.name + "'s object is null. Skipping");
             }
@@ -84,8 +90,8 @@ public class PerkContainer {
         for (BlockPerk block : blocks) {
             block.touchUp();
             if (block.blocks != null) {
-                disconsented.anssrpg.data.PerkStore.putPerk(block);
-                disconsented.anssrpg.data.PerkStore.addPerk(block);
+                PerkStore.putPerk(block);
+                PerkStore.addPerk(block);
             } else {
                 Logging.error(block.name + "'s object is null. Skipping");
             }
@@ -93,20 +99,32 @@ public class PerkContainer {
         for (EntityPerk entity : entities) {
             entity.touchUp();
             if (entity.entities != null) {
-                disconsented.anssrpg.data.PerkStore.putPerk(entity);
-                disconsented.anssrpg.data.PerkStore.addPerk(entity);
+                PerkStore.putPerk(entity);
+                PerkStore.addPerk(entity);
             } else {
                 Logging.error(entity.name + "'s object is null. Skipping");
             }
         }
         for (TitlePerk title : titles) {
             if (title.getTitle() != null) {
-                disconsented.anssrpg.data.PerkStore.putPerk(title);
-                disconsented.anssrpg.data.PerkStore.addPerk(title);
+                PerkStore.putPerk(title);
+                PerkStore.addPerk(title);
             } else {
                 Logging.error(title.name + "s object is null. Skipping");
             }
 
+        }
+        for(InteractionPerk interaction: interactions){
+            if (interaction.interaction != null){
+                if(interaction.blocks != null){
+                    PerkStore.putPerk(interaction);
+                    PerkStore.addPerk(interaction);
+                } else {
+                    Logging.error(interaction.name + "s objects are null. Skipping");
+                }
+            } else {
+                Logging.error(interaction.name + "s interaction is null. Skipping");
+            }
         }
     }
 }

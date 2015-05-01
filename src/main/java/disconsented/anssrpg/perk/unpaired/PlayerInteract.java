@@ -20,48 +20,31 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.event;
+package disconsented.anssrpg.perk.unpaired;
 
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import java.util.ArrayList;
+
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.entity.player.PlayerOpenContainerEvent;
-import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
-import disconsented.anssrpg.perk.unpaired.PlayerInteract;
-import disconsented.anssrpg.skill.BlockBreaking;
-import disconsented.anssrpg.skill.EntityDamage;
-import disconsented.anssrpg.skill.ItemCrafting;
+import disconsented.anssrpg.data.PerkStore;
+import disconsented.anssrpg.data.PlayerStore;
+import disconsented.anssrpg.perk.Slug;
+import disconsented.anssrpg.player.PlayerData;
 
 /**
  * @author Disconsented
  *
  */
-public class ForgeBUS {
-    @SubscribeEvent
-    public void onBreakEvent(BreakEvent event) {
-        new BlockBreaking().onBreakEvent(event);
-    }
+public class PlayerInteract {
     
-    @SubscribeEvent
-    public void onLivingHurtEvent(LivingHurtEvent event) {
-        new EntityDamage().onLivingHurtEvent(event);
-    }
-    
-    @SubscribeEvent
-    public void onLivingDeathEvent(LivingDeathEvent event) {
-        new EntityDamage().onLivingDeathEvent(event);
-    }
-    
-    @SubscribeEvent
-    public void onPlayerOpenCrafting(PlayerOpenContainerEvent event) {
-        new ItemCrafting().onPlayerOpenCrafting(event);
-    }
-    
-    @SubscribeEvent
     public void OnPlayerInteract(PlayerInteractEvent event){
-        new PlayerInteract().OnPlayerInteract(event);
+        if(event.action.equals(PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) && !(event.entityPlayer.openContainer instanceof net.minecraft.inventory.ContainerPlayer)){
+            System.out.println(event.entityPlayer.openContainer);
+            System.out.println(event.useBlock);
+            System.out.println("");
+            //ArrayList<Slug> slugList = PerkStore.getSlugs(event.block);
+        }
     }
-    
+
 }

@@ -28,6 +28,7 @@ import disconsented.anssrpg.perk.*;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,6 +44,7 @@ public class PerkStore {
     private static HashMap<String, ArrayList<Slug>> entityMap = new HashMap<String, ArrayList<Slug>>();
     private static HashMap<String, ArrayList<Slug>> itemMap = new HashMap<String, ArrayList<Slug>>();
     private static ArrayList<TitlePerk> titlePerks = new ArrayList<TitlePerk>();
+    private static HashMap<String, ArrayList<Slug>> interactionBlockMap = new HashMap<String, ArrayList<Slug>>();
 
     private static HashMap<Slug, Perk> perksMap = new HashMap<Slug, Perk>();
     private static PerkStore instance = null;
@@ -60,6 +62,7 @@ public class PerkStore {
         entityMap.clear();
         itemMap.clear();
         perksMap.clear();
+        interactionBlockMap.clear();
     }
 
     public static PerkStore getInstance() {
@@ -90,6 +93,10 @@ public class PerkStore {
     public static ArrayList<Slug> getSlugs(Item item) {
         return itemMap.get(item.getUnlocalizedName());
 
+    }
+    
+    public static ArrayList<Slug> getSlugs(PlayerInteractEvent event){
+        return new ArrayList<Slug>();
     }
 
     public static void putPerk(BlockPerk block) {
@@ -141,4 +148,20 @@ public class PerkStore {
         titlePerks.add(title);
 
     }
+
+    public static void putPerk(InteractionPerk interaction) {
+        perks.add(interaction);
+        for (Triplet object : interaction.blocks){
+            Block cache = (Block) object.object;
+            if (interactionBlockMap.containsKey(cache.getUnlocalizedName())) {
+                interactionBlockMap.get(cache.getUnlocalizedName()).add(interaction.slug);
+            } else {
+                ArrayList<Slug> temp = new ArrayList<Slug>();
+                temp.add(interaction.slug);
+                interactionBlockMap.put(cache.getUnlocalizedName(), temp);
+            }
+        } 
+        
+    }
+    
 }
