@@ -31,6 +31,8 @@ import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
 import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
+import disconsented.anssrpg.task.TaskInteraction;
+import disconsented.anssrpg.task.TaskMaster;
 
 /**
  * @author Disconsented
@@ -38,13 +40,14 @@ import disconsented.anssrpg.player.PlayerData;
  */
 public class PlayerInteract {
     
-    public void OnPlayerInteract(PlayerInteractEvent event){
+    public void onPlayerInteract(PlayerInteractEvent event){
         if(event.action.equals(PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) && !(event.entityPlayer.openContainer instanceof net.minecraft.inventory.ContainerPlayer)){
-            System.out.println(event.entityPlayer.openContainer);
-            System.out.println(event.useBlock);
-            System.out.println("");
-            //ArrayList<Slug> slugList = PerkStore.getSlugs(event.block);
+            TaskMaster.getInstance().addTask(new TaskInteraction(event.entityPlayer));
         }
     }
+    public void onIneractionTask(TaskInteraction task){
+    	//Do the things
+    }
+    
 
 }

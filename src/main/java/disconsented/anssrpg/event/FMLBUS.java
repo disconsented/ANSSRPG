@@ -27,8 +27,10 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.skill.ItemCrafting;
+import disconsented.anssrpg.task.TaskMaster;
 
 /**
  * @author Disconsented
@@ -56,4 +58,8 @@ public class FMLBUS {
         new ItemCrafting().onItemCraftedEvent(event);
     }
     
+    @SubscribeEvent 
+    public void onTickEvent(TickEvent event){
+    	TaskMaster.getInstance().process(event);
+    }
 }

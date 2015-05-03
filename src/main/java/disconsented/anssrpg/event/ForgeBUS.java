@@ -61,7 +61,7 @@ public class ForgeBUS {
     
     @SubscribeEvent
     public void OnPlayerInteract(PlayerInteractEvent event){
-        new PlayerInteract().OnPlayerInteract(event);
+        new PlayerInteract().onPlayerInteract(event);
     }
     
 }
