@@ -36,7 +36,7 @@ import disconsented.anssrpg.task.TaskMaster;
 
 /**
  * @author Disconsented
- *
+ * Makes use of the tasking system to check
  */
 public class PlayerInteract {
     

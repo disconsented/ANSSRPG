@@ -70,7 +70,7 @@ public class ConfigGUI implements ICommand {
     }
 
     @Override
-    public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_) {
+    public void processCommand(ICommandSender sender, String[] p_71515_2_) {
         if (Settings.getInstance().isServer) {
 //    		throw new Exception("Trying to launch GUI on server");
         } else {

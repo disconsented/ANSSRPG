@@ -1,7 +1,6 @@
 /*The MIT License (MIT)
 
 Copyright (c) 2015 Disconsented, James Kerr
-Copyright (c) 2015 TehNut
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,15 +20,18 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.common;
+package disconsented.anssrpg.data;
 
-public class Reference {
+import java.util.HashMap;
 
-    public static final String NAME = "A Not So Simple RPG";
-    public static final String ID = "anssrpg";
-    public static final String CHANNEL = "anssrpg";
-    public static final String DEPEND = "";
-    public static final String VERSION = "@VERSION@";
-    public static final String CLIENTPROXY = "disconsented.anssrpg.client.ClientProxy";
-    public static final String COMMONPROXY = "disconsented.anssrpg.CommonProxy";
+/**
+ * @author Disconsented
+ *
+ */
+public class ContainerRegistry {
+    public HashMap<String,Class> container = new HashMap<String,Class>();
+    public static void init(){
+        
+    }
+    
 }

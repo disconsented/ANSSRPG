@@ -25,6 +25,7 @@ package disconsented.anssrpg;
 import java.util.Map.Entry;
 
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -40,6 +41,7 @@ import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
+import disconsented.anssrpg.commands.ANSSRPG;
 import disconsented.anssrpg.commands.ConfigGUI;
 import disconsented.anssrpg.commands.Perks;
 import disconsented.anssrpg.common.Logging;
@@ -106,6 +108,7 @@ public class Main {
     public void serverLoad(FMLServerStartingEvent event) {
         //event.registerServerCommand(new ANSSRPG());
         event.registerServerCommand(new Perks());
+        event.registerServerCommand(new ANSSRPG());
         event.registerServerCommand(new disconsented.anssrpg.commands.Skill());
     }
 

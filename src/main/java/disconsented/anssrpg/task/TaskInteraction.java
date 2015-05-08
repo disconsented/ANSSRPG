@@ -24,6 +24,7 @@ package disconsented.anssrpg.task;
 
 import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.common.gameevent.TickEvent;
+import disconsented.anssrpg.perk.unpaired.PlayerInteract;
 
 public class TaskInteraction extends Task {
 	public EntityPlayer player;	
@@ -42,7 +43,7 @@ public class TaskInteraction extends Task {
 
 	@Override
 	public void onTick(TickEvent event) {
-		// TODO Auto-generated method stub
+	    new PlayerInteract().onIneractionTask(this);
 
 	}
 

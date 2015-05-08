@@ -23,6 +23,7 @@ THE SOFTWARE.
 package disconsented.anssrpg;
 
 import cpw.mods.fml.common.network.IGuiHandler;
+import disconsented.anssrpg.gui.GUIExperience;
 import disconsented.anssrpg.gui.PerkGUI;
 import disconsented.anssrpg.gui.PerkGUIContainer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -40,6 +41,6 @@ public class CommonProxy implements IGuiHandler {
 
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        return new PerkGUI();
+        return new GUIExperience();
     }
 }

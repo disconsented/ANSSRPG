@@ -48,7 +48,7 @@ public class TaskMaster{
 	}
 	
 	public void process(TickEvent event){
-		if(event.side == Side.SERVER && event.phase == Phase.START){
+		if(event.side == Side.SERVER && event.phase == Phase.START && queue != null){
 			while(queue.peek() != null){
 				currentQueue.offer(queue.element());
 			}

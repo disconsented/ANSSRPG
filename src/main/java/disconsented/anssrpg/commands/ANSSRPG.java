@@ -59,12 +59,13 @@ public class ANSSRPG implements ICommand {
 
     @Override
     public void processCommand(ICommandSender player, String[] astring) {
-        String UUID = ((EntityPlayerMP) player).getPersistentID().toString();
-        switch (astring[0]) {
-            case "-perks":
-                ((EntityPlayer) player).openGui(Main.instance, 0, null, 0, 0, 0);
-                break;
-        }
+//        String UUID = ((EntityPlayerMP) player).getPersistentID().toString();
+//        switch (astring[0]) {
+//            case "-perks":
+//                ((EntityPlayer) player).openGui(Main.instance, 0, null, 0, 0, 0);
+//                break;
+//        }
+        ((EntityPlayer) player).openGui(Main.instance, 0, null, 0, 0, 0);
     }
 
     @Override
