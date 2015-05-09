@@ -27,22 +27,20 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import io.netty.buffer.ByteBuf;
 
 public class Request implements IMessage {
-    public String slug;
-
-    public Request() {
-    }
-
-    public Request(String slug) {
-        this.slug = slug;
+	public enum REQUEST {PERKS, SKILLS, ACTIVE_PERKS, OBTAINED_PERKS}
+	public REQUEST request;
+    
+    public Request(REQUEST request) {
+        this.request = request;
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        slug = ByteBufUtils.readUTF8String(buf);
+        this.request = REQUEST.valueOf(ByteBufUtils.readUTF8String(buf));
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
-        ByteBufUtils.writeUTF8String(buf, slug);
+    	ByteBufUtils.writeUTF8String(buf, request.name());
     }
 }

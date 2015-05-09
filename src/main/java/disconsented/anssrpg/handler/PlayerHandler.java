@@ -36,6 +36,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * @author Disconsented
@@ -155,7 +156,11 @@ public final class PlayerHandler {
         return player;
     }
 
-    public static int getPoints(PlayerData player) {
+    public static PlayerData getPlayer(UUID uniqueID) {
+    	return getPlayer(uniqueID.toString());		
+	}
+
+	public static int getPoints(PlayerData player) {
         return player.getPoints();
     }
 

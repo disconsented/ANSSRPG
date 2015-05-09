@@ -19,21 +19,20 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+*/
+package disconsented.anssrpg.client;
+
+import java.util.HashMap;
+
+import disconsented.anssrpg.network.SkillInfo;
+
+/**
+ * Stores data that the client needs, populated as needed.
+ * @author Disconsented
+ *
  */
-package disconsented.anssrpg.network;
-
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import disconsented.anssrpg.gui.PerkGUI;
-import disconsented.anssrpg.perk.LocalPerk;
-
-public class PerkInfoHandler implements IMessageHandler<PerkInfo, IMessage> {
-
-    @Override
-    public IMessage onMessage(PerkInfo message, MessageContext ctx) {
-        //PerkGUI.addPerk(new LocalPerk(message.name, message.description, message.pointCost, message.requirements));
-        return null;
-    }
+public class Data {
+	public static HashMap<String, SkillInfo> skillInfo = new HashMap<String, SkillInfo>();
+	
 
 }

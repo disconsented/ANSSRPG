@@ -19,21 +19,22 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
- */
+*/
 package disconsented.anssrpg.network;
 
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import disconsented.anssrpg.gui.PerkGUI;
-import disconsented.anssrpg.perk.LocalPerk;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.relauncher.Side;
+import disconsented.anssrpg.Main;
+import disconsented.anssrpg.common.Reference;
 
-public class PerkInfoHandler implements IMessageHandler<PerkInfo, IMessage> {
-
-    @Override
-    public IMessage onMessage(PerkInfo message, MessageContext ctx) {
-        //PerkGUI.addPerk(new LocalPerk(message.name, message.description, message.pointCost, message.requirements));
-        return null;
-    }
+public class Manager {
+	
+	public void init(){
+		Main.snw = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.ID);
+		Main.snw.registerMessage(ResponceHandler.class, Responce.class, 0, Side.SERVER);
+		Main.snw.registerMessage(PerkInfoHandler.class, PerkInfo.class, 1, Side.CLIENT);
+		Main.snw.registerMessage(RequestHandler.class, Request.class, 2, Side.SERVER);
+		Main.snw.registerMessage(SkillInfoHandler.class, SkillInfo.class, 3, Side.CLIENT);
+	}
 
 }

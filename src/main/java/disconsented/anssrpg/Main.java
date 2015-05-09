@@ -88,10 +88,7 @@ public class Main {
             settings.isServer = false;
             ClientCommandHandler.instance.registerCommand(new ConfigGUI());
         }
-        snw = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.ID);
-        snw.registerMessage(ResponceHandler.class, Responce.class, 0, Side.SERVER);
-        snw.registerMessage(PerkInfoHandler.class, PerkInfo.class, 1, Side.CLIENT);
-        snw.registerMessage(RequestHandler.class, Request.class, 2, Side.SERVER);
+        
     }
 
     @EventHandler // used in 1.6.2

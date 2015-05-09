@@ -22,18 +22,39 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.network;
 
+import io.netty.buffer.ByteBuf;
+import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import disconsented.anssrpg.gui.PerkGUI;
-import disconsented.anssrpg.perk.LocalPerk;
 
-public class PerkInfoHandler implements IMessageHandler<PerkInfo, IMessage> {
+public class SkillInfo implements IMessage {
+	public String name;
+	public int expCurrent;
+	public int expRequired;
+	public int levelCurrent;
+	
+	public SkillInfo(String name, int expCurrent, int expRequired, int levelCurrent){
+		this.name = name;
+		this.expCurrent = expCurrent;
+		this.expRequired = expRequired;
+		this.levelCurrent = levelCurrent;
+	}
 
-    @Override
-    public IMessage onMessage(PerkInfo message, MessageContext ctx) {
-        //PerkGUI.addPerk(new LocalPerk(message.name, message.description, message.pointCost, message.requirements));
-        return null;
-    }
+	@Override
+	public void fromBytes(ByteBuf buf) {
+		this.name = ByteBufUtils.readUTF8String(buf);
+		this.expCurrent = buf.readInt();
+		this.expRequired = buf.readInt();
+		this.levelCurrent = buf.readInt();
+		
+	}
+
+	@Override
+	public void toBytes(ByteBuf buf) {
+		ByteBufUtils.writeUTF8String(buf, this.name);
+		buf.writeInt(expCurrent);
+		buf.writeInt(expRequired);
+		buf.writeInt(levelCurrent);
+		
+	}
 
 }

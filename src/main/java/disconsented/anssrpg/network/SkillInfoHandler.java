@@ -25,15 +25,14 @@ package disconsented.anssrpg.network;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import disconsented.anssrpg.gui.PerkGUI;
-import disconsented.anssrpg.perk.LocalPerk;
+import disconsented.anssrpg.client.Data;
 
-public class PerkInfoHandler implements IMessageHandler<PerkInfo, IMessage> {
+public class SkillInfoHandler implements IMessageHandler<SkillInfo, IMessage>{
 
-    @Override
-    public IMessage onMessage(PerkInfo message, MessageContext ctx) {
-        //PerkGUI.addPerk(new LocalPerk(message.name, message.description, message.pointCost, message.requirements));
-        return null;
-    }
+	@Override
+	public IMessage onMessage(SkillInfo message, MessageContext ctx) {
+		Data.skillInfo.put(message.name, message);
+		return null;
+	}
 
 }

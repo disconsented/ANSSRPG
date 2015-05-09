@@ -22,18 +22,36 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.network;
 
+import java.util.Map.Entry;
+
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import disconsented.anssrpg.data.SkillStore;
+import disconsented.anssrpg.handler.PlayerHandler;
+import disconsented.anssrpg.player.PlayerData;
 
 public class RequestHandler implements IMessageHandler<Request, IMessage> {
-    private String responceText;
-
     @Override
     public IMessage onMessage(Request message, MessageContext ctx) {
-        //PlayerData player = PlayerStore.getInstance().getPlayer(ctx.)
-        //responceText = PlayerHandler.addPerk(null, null);
-        return new Responce(responceText);
+        switch(message.request){
+		case ACTIVE_PERKS:
+			break;
+		case OBTAINED_PERKS:
+			break;
+		case PERKS:
+			break;
+		case SKILLS:
+			PlayerData playerData = PlayerHandler.getPlayer(ctx.getServerHandler().playerEntity.getUniqueID());
+			SkillStore skillStore = SkillStore.getInstance();
+			for(Entry<String, Integer> entry : playerData.getSkillExp().entrySet()){
+			}
+			break;
+		default:
+			break;
+       
+        }
+        return null;
     }
 
 }

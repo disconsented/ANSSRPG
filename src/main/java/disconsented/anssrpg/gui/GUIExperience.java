@@ -48,10 +48,7 @@ public class GUIExperience extends GuiScreen {
     public void initGui(){ //id,x,y,width,height,string
         this.buttonList.add(new GuiButton(0, 20, 40, 40, 20, "Next"));
         this.buttonList.add(new GuiButton(1, 20, 60, 40, 20, "Prev"));
-        expBoxes = new ArrayList<ExpBox>();
-        for (int i = 0; i < 6; i++){
-            expBoxes.add(new ExpBox(80, 80 * i+1 , 35, 100, 135, "Example Name"));
-        }
+        //send message to the server to request data
     }
     
     @Override
