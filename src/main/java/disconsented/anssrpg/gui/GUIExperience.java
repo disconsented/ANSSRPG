@@ -28,8 +28,12 @@ import java.util.ArrayList;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import disconsented.anssrpg.Main;
+import disconsented.anssrpg.client.Data;
 import disconsented.anssrpg.common.Reference;
 import disconsented.anssrpg.gui.components.ExpBox;
+import disconsented.anssrpg.network.Request;
+import disconsented.anssrpg.network.Request.REQUEST;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
@@ -43,9 +47,13 @@ public class GUIExperience extends GuiScreen {
     private ArrayList<ExpBox> expBoxes;
     private int page;
     private int count;
+    private int per;
     
     @Override
     public void initGui(){ //id,x,y,width,height,string
+    	Data.skillInfo.clear();
+    	page = 0;
+    	Main.snw.sendToServer(new Request(REQUEST.SKILLS));
         this.buttonList.add(new GuiButton(0, 20, 40, 40, 20, "Next"));
         this.buttonList.add(new GuiButton(1, 20, 60, 40, 20, "Prev"));
         //send message to the server to request data
@@ -54,7 +62,15 @@ public class GUIExperience extends GuiScreen {
     @Override
     public void drawScreen(int x1, int x2, float x3)
     {
+    	count = Data.skillInfo.size();
         drawDefaultBackground();
+        
+        expBoxes = new ArrayList<ExpBox>();
+        
+        
+//        for (int i = page; i > per; i+=106){
+//        	
+//        }
         //System.out.println(texture.getResourcePath());
         int k;
 
@@ -85,8 +101,10 @@ public class GUIExperience extends GuiScreen {
     protected void actionPerformed(GuiButton button) {
         switch(button.id){
         case 0:
+        	page++;
             break;
         case 1:
+        	page--;
             break;
         }
     }

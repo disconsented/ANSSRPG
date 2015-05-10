@@ -30,6 +30,7 @@ public class Request implements IMessage {
 	public enum REQUEST {PERKS, SKILLS, ACTIVE_PERKS, OBTAINED_PERKS}
 	public REQUEST request;
     
+	public Request(){};
     public Request(REQUEST request) {
         this.request = request;
     }

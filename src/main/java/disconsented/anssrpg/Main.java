@@ -56,6 +56,7 @@ import disconsented.anssrpg.data.ToolRegistry;
 import disconsented.anssrpg.event.FMLBUS;
 import disconsented.anssrpg.event.ForgeBUS;
 import disconsented.anssrpg.handler.SkillHandler;
+import disconsented.anssrpg.network.Manager;
 import disconsented.anssrpg.network.PerkInfo;
 import disconsented.anssrpg.network.PerkInfoHandler;
 import disconsented.anssrpg.network.Request;
@@ -94,6 +95,7 @@ public class Main {
     @EventHandler // used in 1.6.2
     //@Init       // used in 1.5.2
     public void load(FMLInitializationEvent event) {
+    	Manager.init();
         NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
         proxy.registerRenderers();
         MinecraftForge.EVENT_BUS.register(new ForgeBUS());

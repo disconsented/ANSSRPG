@@ -115,8 +115,13 @@ public final class PlayerHandler {
     public static void awardXP(EntityPlayer playerEntity, Skill skill, int exp) {
         PlayerData player = getPlayer(playerEntity.getUniqueID().toString());
         Integer cacheExp = player.getSkillExp().get(skill.name);
-        long levelOld = SkillHandler.calulteLevelForExp(skill, exp);
-        long levelNew = 0;
+        long levelOld;
+        long levelNew = -1;
+        if(cacheExp != null){
+        	levelOld = SkillHandler.calulteLevelForExp(skill, cacheExp);
+        } else {
+        	levelOld = 0;
+        }
         
         if (cacheExp != null) {
             player.getSkillExp().put(skill.name, exp + cacheExp);
@@ -143,7 +148,7 @@ public final class PlayerHandler {
         if(isWielding(skill, playerEntity)){
             awardXP(playerEntity, skill, exp);
         } else {
-            taskFail(playerEntity);
+            //Fail(playerEntity);
         }
     }
 

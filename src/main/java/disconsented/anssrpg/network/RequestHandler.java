@@ -27,9 +27,12 @@ import java.util.Map.Entry;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import disconsented.anssrpg.Main;
 import disconsented.anssrpg.data.SkillStore;
 import disconsented.anssrpg.handler.PlayerHandler;
+import disconsented.anssrpg.handler.SkillHandler;
 import disconsented.anssrpg.player.PlayerData;
+import disconsented.anssrpg.skill.objects.Skill;
 
 public class RequestHandler implements IMessageHandler<Request, IMessage> {
     @Override
@@ -45,6 +48,14 @@ public class RequestHandler implements IMessageHandler<Request, IMessage> {
 			PlayerData playerData = PlayerHandler.getPlayer(ctx.getServerHandler().playerEntity.getUniqueID());
 			SkillStore skillStore = SkillStore.getInstance();
 			for(Entry<String, Integer> entry : playerData.getSkillExp().entrySet()){
+				for(Skill skill : SkillStore.getSkills()){
+					if(entry.getKey().equals(skill.name)){						
+						int level = (int) SkillHandler.calulteLevelForExp(skill, entry.getValue());
+						int xp = (int) SkillHandler.calculateExpForLevel(skill, level + 1);
+						Main.snw.sendTo(new SkillInfo(skill.name, entry.getValue(), 0, level), ctx.getServerHandler().playerEntity);
+						break;
+					}
+				}
 			}
 			break;
 		default:

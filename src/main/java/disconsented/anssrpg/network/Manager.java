@@ -29,7 +29,7 @@ import disconsented.anssrpg.common.Reference;
 
 public class Manager {
 	
-	public void init(){
+	public static void init(){
 		Main.snw = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.ID);
 		Main.snw.registerMessage(ResponceHandler.class, Responce.class, 0, Side.SERVER);
 		Main.snw.registerMessage(PerkInfoHandler.class, PerkInfo.class, 1, Side.CLIENT);
