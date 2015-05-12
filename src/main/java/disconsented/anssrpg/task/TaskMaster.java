@@ -44,7 +44,10 @@ public class TaskMaster{
 	
 	public boolean addTask(Task task){
 		task.onAdd();
-		return queue.offer(task);		
+		if (queue != null){
+		    return queue.offer(task);
+		} 
+		    return false;
 	}
 	
 	public void process(TickEvent event){

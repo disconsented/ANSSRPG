@@ -22,6 +22,7 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg.client;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import disconsented.anssrpg.network.SkillInfo;
@@ -33,6 +34,7 @@ import disconsented.anssrpg.network.SkillInfo;
  */
 public class Data {
 	public static HashMap<String, SkillInfo> skillInfo = new HashMap<String, SkillInfo>();
+	public static ArrayList<SkillInfo> skillInfoList = new ArrayList<SkillInfo>();
 	
 
 }

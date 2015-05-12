@@ -32,6 +32,7 @@ public class SkillInfoHandler implements IMessageHandler<SkillInfo, IMessage>{
 	@Override
 	public IMessage onMessage(SkillInfo message, MessageContext ctx) {
 		Data.skillInfo.put(message.name, message);
+		Data.skillInfoList.add(message);
 		return null;
 	}
 

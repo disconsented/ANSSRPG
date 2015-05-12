@@ -149,6 +149,7 @@ public class Default {
             /* log == Oak,Spruce,Birch,Jungle
              * log2 ==Acaica,DarkOak*/
             BlockSkill woodcutting = new BlockSkill();
+            woodcutting.name = "Woodcutting";
             woodcutting.exp.add(new Quad(null, "log", 1, 0));
             woodcutting.exp.add(new Quad(null, "log", 2, 1));
             woodcutting.exp.add(new Quad(null, "log", 3, 2));
@@ -159,6 +160,7 @@ public class Default {
             skills.addBlockSkill(woodcutting);
             
             BlockSkill digging = new BlockSkill();
+            digging.name = "Digging";
             digging.exp.add(new Quad(null, "sand", 1, 0));
             digging.exp.add(new Quad(null, "dirt", 1, 0));
             digging.exp.add(new Quad(null, "grass", 1, 0));
@@ -169,6 +171,7 @@ public class Default {
             skills.addBlockSkill(digging);
             
             EntitySkill slaying = new EntitySkill();
+            slaying.name = "Slaying";
             slaying.exp.add(new Triplet(null, "Zombie", 5));
             slaying.exp.add(new Triplet(null, "Skeleton", 10));
             slaying.exp.add(new Triplet(null, "Spider", 10));
@@ -177,6 +180,7 @@ public class Default {
             skills.addEntitySkill(slaying);
             
             ItemSkill armouring = new ItemSkill();
+            armouring.name = "Armouring";
             //Leather
             armouring.exp.add(new Quad(null, "leather_helmet", 10, 0));
             armouring.exp.add(new Quad(null, "leather_chestplate", 10, 0));

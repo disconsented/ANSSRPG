@@ -32,6 +32,8 @@ public class SkillInfo implements IMessage {
 	public int expRequired;
 	public int levelCurrent;
 	
+	public SkillInfo (){}
+	
 	public SkillInfo(String name, int expCurrent, int expRequired, int levelCurrent){
 		this.name = name;
 		this.expCurrent = expCurrent;

@@ -24,6 +24,7 @@ package disconsented.anssrpg.gui;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Queue;
 
 import org.lwjgl.opengl.GL11;
 
@@ -34,6 +35,7 @@ import disconsented.anssrpg.common.Reference;
 import disconsented.anssrpg.gui.components.ExpBox;
 import disconsented.anssrpg.network.Request;
 import disconsented.anssrpg.network.Request.REQUEST;
+import disconsented.anssrpg.network.SkillInfo;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
@@ -44,34 +46,32 @@ import net.minecraft.util.ResourceLocation;
  *
  */
 public class GUIExperience extends GuiScreen {    
-    private ArrayList<ExpBox> expBoxes;
+    private ArrayList<ExpBox> boxes = new ArrayList<ExpBox>();
     private int page;
-    private int count;
-    private int per;
     
     @Override
     public void initGui(){ //id,x,y,width,height,string
+        int x = width/2;
     	Data.skillInfo.clear();
-    	page = 0;
+    	Data.skillInfoList.clear();
+    	page = 1;
     	Main.snw.sendToServer(new Request(REQUEST.SKILLS));
-        this.buttonList.add(new GuiButton(0, 20, 40, 40, 20, "Next"));
-        this.buttonList.add(new GuiButton(1, 20, 60, 40, 20, "Prev"));
-        //send message to the server to request data
+        this.buttonList.add(new GuiButton(0, x, 40, 40, 20, "Next"));
+        this.buttonList.add(new GuiButton(1, x - 40, 40, 40, 20, "Prev"));        
+        for (int i = 1; i < 6; i++){
+            int y = i * 76;
+            ExpBox box1 = new ExpBox(x - 176, y, 1, 1, 1, "null");
+            ExpBox box2 = new ExpBox(x, y, 1, 1, 1, "null");
+            boxes.add(box1);
+            boxes.add(box2);
+        }
     }
     
     @Override
     public void drawScreen(int x1, int x2, float x3)
     {
-    	count = Data.skillInfo.size();
-        drawDefaultBackground();
-        
-        expBoxes = new ArrayList<ExpBox>();
-        
-        
-//        for (int i = page; i > per; i+=106){
-//        	
-//        }
-        //System.out.println(texture.getResourcePath());
+        drawDefaultBackground();       
+
         int k;
 
         for (k = 0; k < this.buttonList.size(); ++k)
@@ -79,17 +79,27 @@ public class GUIExperience extends GuiScreen {
             ((GuiButton)this.buttonList.get(k)).drawButton(this.mc, x1, x2);
         }
         
-        for(ExpBox box : expBoxes){            
-            box.draw();            
+        for(int i = 0; i < boxes.size(); i++){
+            int num = page * i;
+            ExpBox box = boxes.get(i);
+            if (num < Data.skillInfoList.size()){                
+                box.name = Data.skillInfoList.get(num).name;
+                box.expCurrent = Data.skillInfoList.get(num).expCurrent;
+                box.expRequired = Data.skillInfoList.get(num).expRequired;
+                box.level = Data.skillInfoList.get(num).levelCurrent;      
+                box.calcPercentage();
+            } else {
+                box.name = "";
+                box.expCurrent = 1;
+                box.expRequired = 1;
+                box.level = 1;
+            }
+            boxes.set(i, box);
         }
-        //new ExpBox(80, 80, 0, 0, 0, "Example Name").draw();
-//        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-//        
-//        int xSize = 376;
-//        int ySize = 306;
-//        int x = (width - xSize) / 2;
-//        int y = (height - ySize) / 2;
-//        this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+        
+        for(ExpBox box : boxes){            
+            box.draw();
+        }
     }
     
     @Override
@@ -101,10 +111,14 @@ public class GUIExperience extends GuiScreen {
     protected void actionPerformed(GuiButton button) {
         switch(button.id){
         case 0:
-        	page++;
+            if (page < Math.round(Data.skillInfoList.size() / 10)){
+                page++;
+            }
             break;
         case 1:
-        	page--;
+            if (page > 1){
+                page--;
+            }
             break;
         }
     }

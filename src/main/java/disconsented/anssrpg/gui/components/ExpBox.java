@@ -38,15 +38,24 @@ public class ExpBox extends Gui{
     //176x76
     private int x;
     private int y;
-    private int expCurrent = 0;
-    private int expRequired = 0;
+    public int expCurrent = 0;
+    public int expRequired = 0;
     private float currentPercent = 0;
-    private int level = 0;
-    private String name = "Not A Name";
+    public int level = 0;
+    public String name = "Not A Name";
     private ResourceLocation texture = new ResourceLocation(Reference.ID, "expbox.png");
     private ResourceLocation greenTexture = new ResourceLocation(Reference.ID, "green.png");
     private FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
     
+    /**
+     * 
+     * @param x
+     * @param y
+     * @param expCurrent
+     * @param expRequired
+     * @param level
+     * @param name
+     */
     public ExpBox(int x, int y, int expCurrent, int expRequired, int level, String name){
         this.x = x;
         this.y = y;
@@ -76,6 +85,9 @@ public class ExpBox extends Gui{
         drawTexturedModalRectClone(x+40, y+36, 0, 0, (int) currentPercent, 16);
     }
 
+    public void calcPercentage(){
+        this.currentPercent = (expCurrent * 100) / expRequired; 
+    }
    private void drawTexturedModalRectClone(int p_73729_1_, int p_73729_2_, int p_73729_3_, int p_73729_4_, int p_73729_5_, int p_73729_6_)
     {
         float f = 0.00390625F;
