@@ -23,13 +23,20 @@ THE SOFTWARE.
 package disconsented.anssrpg.commands;
 
 import disconsented.anssrpg.Main;
+import disconsented.anssrpg.task.TaskApplyPotion;
+import disconsented.anssrpg.task.TaskMaster;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cpw.mods.fml.common.gameevent.TickEvent.Type;
 
 public class ANSSRPG implements ICommand {
     private List aliases;
@@ -59,13 +66,10 @@ public class ANSSRPG implements ICommand {
 
     @Override
     public void processCommand(ICommandSender player, String[] astring) {
-//        String UUID = ((EntityPlayerMP) player).getPersistentID().toString();
-//        switch (astring[0]) {
-//            case "-perks":
-//                ((EntityPlayer) player).openGui(Main.instance, 0, null, 0, 0, 0);
-//                break;
-//        }
-        ((EntityPlayer) player).openGui(Main.instance, 0, null, 0, 0, 0);
+        TaskMaster.getInstance().addTask(new TaskApplyPotion(
+                (EntityLivingBase) player, new PotionEffect(6, 20), null, true, 200));
+        TaskMaster.getInstance().addTask(new TaskApplyPotion(
+                (EntityLivingBase) player, new PotionEffect(7, 20), null, false, 200));
     }
 
     @Override

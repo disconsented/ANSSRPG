@@ -45,7 +45,8 @@ public class PerkStore {
     private static HashMap<String, ArrayList<Slug>> itemMap = new HashMap<String, ArrayList<Slug>>();
     private static ArrayList<TitlePerk> titlePerks = new ArrayList<TitlePerk>();
     private static HashMap<String, ArrayList<Slug>> interactionBlockMap = new HashMap<String, ArrayList<Slug>>();
-
+    private static ArrayList<EffectPerk> effectPerks = new ArrayList<EffectPerk>();
+    
     private static HashMap<Slug, Perk> perksMap = new HashMap<Slug, Perk>();
     private static PerkStore instance = null;
 
@@ -161,6 +162,12 @@ public class PerkStore {
                 interactionBlockMap.put(cache.getUnlocalizedName(), temp);
             }
         } 
+        
+    }
+
+    public static void putPerk(EffectPerk effect) {
+        perks.add(effect);
+        effectPerks.add(effect);
         
     }
     

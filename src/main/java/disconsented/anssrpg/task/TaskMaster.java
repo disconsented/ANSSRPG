@@ -22,6 +22,9 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.task;
 
+import java.util.AbstractQueue;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -32,8 +35,8 @@ public class TaskMaster{
 	protected TaskMaster(){}
 	
 	private static TaskMaster master = null;
-	private Queue<Task> queue;
-	private Queue<Task> currentQueue;
+	private Queue<Task> queue = new LinkedList<Task>();
+	private Queue<Task> currentQueue = new LinkedList<Task>();
 	
 	public static TaskMaster getInstance(){
 		if (master == null){
@@ -44,18 +47,14 @@ public class TaskMaster{
 	
 	public boolean addTask(Task task){
 		task.onAdd();
-		if (queue != null){
-		    return queue.offer(task);
-		} 
-		    return false;
+		return queue.offer(task);
 	}
 	
 	public void process(TickEvent event){
 		if(event.side == Side.SERVER && event.phase == Phase.START && queue != null){
-			while(queue.peek() != null){
-				currentQueue.offer(queue.element());
-			}
-			
+		    while(queue.isEmpty() == false){
+		        currentQueue.offer(queue.poll());
+		    }
 			while(currentQueue.peek() != null){
 				Task currentTask = currentQueue.poll();
 				

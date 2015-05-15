@@ -50,7 +50,7 @@ public class GUIExperience extends GuiScreen {
     private int page;
     
     @Override
-    public void initGui(){ //id,x,y,width,height,string
+    public void initGui(){
         int x = width/2;
     	Data.skillInfo.clear();
     	Data.skillInfoList.clear();
@@ -90,9 +90,9 @@ public class GUIExperience extends GuiScreen {
                 box.calcPercentage();
             } else {
                 box.name = "";
-                box.expCurrent = 1;
+                box.expCurrent = 0;
                 box.expRequired = 1;
-                box.level = 1;
+                box.level = 0;
             }
             boxes.set(i, box);
         }

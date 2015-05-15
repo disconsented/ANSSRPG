@@ -20,13 +20,30 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.player;
+package disconsented.anssrpg.perk;
+
+import java.util.ArrayList;
+
+import com.google.gson.annotations.Expose;
+
+import disconsented.anssrpg.common.GenericTriplet;
 
 /**
- * Handles all of the player related ticking activities
  * @author Disconsented
  *
  */
-public class PlayerTick {
+public class EffectPerk extends Perk{
+    @Expose
+    public boolean repeat = false;
+    @Expose
+    public int cycle = 20;
+    @Expose
+    public ArrayList<GenericTriplet<Integer,Integer,Integer>> potionEffects = new ArrayList<GenericTriplet<Integer,Integer,Integer>>();
+
+    @Override
+    public void searchObject() {
+        // TODO Auto-generated method stub
+        
+    }
 
 }

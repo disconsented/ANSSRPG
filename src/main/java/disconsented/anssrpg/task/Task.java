@@ -24,7 +24,7 @@ package disconsented.anssrpg.task;
 
 import cpw.mods.fml.common.gameevent.TickEvent;
 
-public abstract class Task {
+public abstract class Task/* implements Comparable<TaskApplyPotion>*/{
 	
 	private int tick = 0;
 	protected boolean repeat = false;
@@ -70,10 +70,10 @@ public abstract class Task {
 	 */
 	private boolean filter(TickEvent event){
 		if(type == null) {
-			return true;
+			return false;
 		}
 		
-		return event.type.equals(type);
+		return !event.type.equals(type);
 	}
 	
 	public boolean canRepeat(){

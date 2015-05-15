@@ -8,7 +8,7 @@
   "url": "www.disconsented.com",
   "updateUrl": "",
   "authorList": ["Disconsented"],
-  "credits": "The countless names who have helped me. Abelistah for helping me work through Gson serialisation and deserialisation",
+  "credits": "Abelistah, TehNut, Dmod, Jon11888",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
