@@ -129,7 +129,12 @@ public class Main {
         if (settings.isExternalConfig()){
             JsonConfigHandler.loadPerkAndSkill();
         } else {
-            JsonConfigHandler.loadInternalConfig();            
+            PerkContainer perkContainer = disconsented.anssrpg.config.Default.getPerkInstance();
+            SkillContainer skillContainer = disconsented.anssrpg.config.Default.getSkillInstance();
+            perkContainer.touchUp();
+            skillContainer.touchUp();
+            JsonConfigHandler.createPerkConfig(perkContainer);
+            JsonConfigHandler.createSkillConfig(skillContainer);
         }
         
         if (Settings.getDebug()) {
