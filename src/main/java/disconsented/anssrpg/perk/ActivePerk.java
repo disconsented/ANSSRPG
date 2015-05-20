@@ -24,26 +24,18 @@ package disconsented.anssrpg.perk;
 
 import java.util.ArrayList;
 
-import com.google.gson.annotations.Expose;
-
-import disconsented.anssrpg.common.GenericTriplet;
+import net.minecraft.entity.EntityLivingBase;
 
 /**
  * @author Disconsented
  *
  */
-public class EffectPerk extends Perk{
-    @Expose
-    public boolean repeat = false;
-    @Expose
-    public int cycle = 20;
-    @Expose
-    public ArrayList<GenericTriplet<Integer,Integer,Integer>> potionEffects = new ArrayList<GenericTriplet<Integer,Integer,Integer>>();
-
-    @Override
-    public void searchObject() {
-        // TODO Auto-generated method stub
-        
+public abstract class ActivePerk extends Perk {
+    public ActivePerk(String name, ArrayList<Requirement> requirements, String description, int pointCost){
+        super(name, requirements, description, pointCost);
     }
-
+    public ActivePerk(){}
+    
+    public abstract void activate(EntityLivingBase target, EntityLivingBase source);
+    
 }

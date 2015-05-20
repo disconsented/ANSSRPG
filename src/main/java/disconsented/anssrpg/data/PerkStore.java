@@ -45,16 +45,16 @@ public class PerkStore {
     private static HashMap<String, ArrayList<Slug>> itemMap = new HashMap<String, ArrayList<Slug>>();
     private static ArrayList<TitlePerk> titlePerks = new ArrayList<TitlePerk>();
     private static HashMap<String, ArrayList<Slug>> interactionBlockMap = new HashMap<String, ArrayList<Slug>>();
-    private static ArrayList<EffectPerk> effectPerks = new ArrayList<EffectPerk>();
+    private static ArrayList<PotionSelfPerk> potionSelf = new ArrayList<PotionSelfPerk>();
     
-    private static HashMap<Slug, Perk> perksMap = new HashMap<Slug, Perk>();
+    private static HashMap<String, Perk> perksMap = new HashMap<String, Perk>();
     private static PerkStore instance = null;
 
     private PerkStore() {/* Exists only to defeat instantiation.*/}
 
     //Adds a perk to the complete list
     public static void addPerk(Perk perk) {
-        perksMap.put(perk.slug, perk);
+        perksMap.put(perk.getSlug().getSlug(), perk);
     }
 
     public static void Clear() {
@@ -165,9 +165,8 @@ public class PerkStore {
         
     }
 
-    public static void putPerk(EffectPerk effect) {
+    public static void putPerk(PotionSelfPerk effect) {
         perks.add(effect);
-        effectPerks.add(effect);
         
     }
     

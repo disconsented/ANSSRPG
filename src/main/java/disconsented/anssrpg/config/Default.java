@@ -122,6 +122,8 @@ public class Default {
                     0,
                     new ArrayList<Pair>(){{add (new Pair(null,"Creeper"));}}));
             
+            perks.addPerk(new PotionSelfPerk("Health boost", null, "Provides a 10 second shield", 0, 21, 1, 200, false, 1));            
+            
             return perks;
             
         }

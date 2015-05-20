@@ -26,6 +26,7 @@ import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
+import disconsented.anssrpg.perk.ActivePerk;
 import disconsented.anssrpg.perk.Perk;
 import disconsented.anssrpg.perk.Requirement;
 import disconsented.anssrpg.perk.Slug;
@@ -33,6 +34,7 @@ import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.Skill;
 import disconsented.anssrpg.skill.objects.ToolSkill;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 
 import java.util.ArrayList;
@@ -59,7 +61,15 @@ public final class PlayerHandler {
          * */
         String toReturn = "error";
         Perk perk = PerkStore.getPerk(perkSlug);
-        ArrayList<Requirement> requirements = perk.getRequirements();
+        if (perk == null){
+            return "No perk with that slug was found"; 
+        }
+        ArrayList<Requirement> requirements;
+        if (perk.getRequirements() != null){
+            requirements = perk.getRequirements();
+        } else {
+            requirements = new ArrayList<Requirement>();
+        }
         boolean cont = true;
         for (Requirement req : requirements) {
             switch (req.action) {
@@ -144,6 +154,7 @@ public final class PlayerHandler {
             }
         }        
     }
+    
     public static void awardToolXP(EntityPlayer playerEntity, ToolSkill skill, int exp){
         if(isWielding(skill, playerEntity)){
             awardXP(playerEntity, skill, exp);
@@ -196,4 +207,16 @@ public final class PlayerHandler {
             return skill.toolClass.isInstance(player.getCurrentEquippedItem().getItem());
         }
     }
+    
+
+    public static String activatePerk(EntityPlayerMP p2, PlayerData playerData,
+            String perkSlug) {
+        ActivePerk cachePerk = (ActivePerk) PerkStore.getPerk(perkSlug);
+        if(hasPerk(cachePerk, playerData)){
+            cachePerk.activate(p2, null);
+        }
+        return "Sucess maybe?";
+        
+    }
+
 }

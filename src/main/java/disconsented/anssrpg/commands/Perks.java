@@ -128,6 +128,12 @@ public class Perks implements ICommand {
                     toReturn = "option unavaliable";
                 }
                 break;
+            case "activate":
+                if (arguments.length >= 2){
+                    PlayerHandler.activatePerk(p2, playerdata, arguments[1]);
+                }
+                
+                break;
         }
         player.addChatMessage(new ChatComponentText(toReturn));
     }

@@ -46,7 +46,7 @@ public class PerkContainer {
     @Expose 
     private ArrayList<InteractionPerk> interactions = new ArrayList<>();
     @Expose
-    private ArrayList<EffectPerk> effects = new ArrayList<>();
+    private ArrayList<PotionSelfPerk> selfPotion = new ArrayList<>();
     
 
     public PerkContainer() {
@@ -59,7 +59,7 @@ public class PerkContainer {
             blocks.add(new BlockPerk());
             entities.add(new EntityPerk());
             titles.add(new TitlePerk());
-            effects.add(new EffectPerk());
+            selfPotion.add(new PotionSelfPerk());
         }
     }
 
@@ -81,8 +81,8 @@ public class PerkContainer {
     public void addPerk(InteractionPerk perk){
         interactions.add(perk);
     }
-    public void addPerk(EffectPerk effect){
-        effects.add(effect);
+    public void addPerk(PotionSelfPerk effect){
+        selfPotion.add(effect);
     }
     public void touchUp() {
         for (ItemPerk item : items) {
@@ -133,14 +133,9 @@ public class PerkContainer {
                 Logging.error(interaction.name + "s interaction is null. Skipping");
             }
         }
-        for (EffectPerk effect : effects) {
-            if (effect.potionEffects != null) {
-                PerkStore.putPerk(effect);
-                PerkStore.addPerk(effect);
-            } else {
-                Logging.error(effect.name + "s object is null. Skipping");
-            }
-
+        for (PotionSelfPerk effect : selfPotion) {
+            PerkStore.putPerk(effect);
+            PerkStore.addPerk(effect);
         }
     }
 }

@@ -65,11 +65,7 @@ public class ANSSRPG implements ICommand {
     }
 
     @Override
-    public void processCommand(ICommandSender player, String[] astring) {
-        TaskMaster.getInstance().addTask(new TaskApplyPotion(
-                (EntityLivingBase) player, new PotionEffect(6, 20), null, true, 200));
-        TaskMaster.getInstance().addTask(new TaskApplyPotion(
-                (EntityLivingBase) player, new PotionEffect(7, 20), null, false, 200));
+    public void processCommand(ICommandSender player, String[] astring) {        
     }
 
     @Override
