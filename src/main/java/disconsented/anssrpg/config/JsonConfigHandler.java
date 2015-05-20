@@ -155,4 +155,13 @@ public class JsonConfigHandler {
             iox.printStackTrace();
         }
     }
+
+    public static void loadInternalConfig() {
+        PerkContainer perkContainer = disconsented.anssrpg.config.Default.getPerkInstance();
+        SkillContainer skillContainer = disconsented.anssrpg.config.Default.getSkillInstance();
+        perkContainer.touchUp();
+        skillContainer.touchUp();
+        JsonConfigHandler.createPerkConfig(perkContainer);
+        JsonConfigHandler.createSkillConfig(skillContainer);        
+    }
 }
