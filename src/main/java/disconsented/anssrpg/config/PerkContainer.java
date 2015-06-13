@@ -134,8 +134,12 @@ public class PerkContainer {
             }
         }
         for (PotionSelfPerk effect : selfPotion) {
-            PerkStore.putPerk(effect);
-            PerkStore.addPerk(effect);
+            if (effect.cycle > 0){
+                PerkStore.putPerk(effect);
+                PerkStore.addPerk(effect);
+            } else {
+                Logging.error(effect.name + "'s cycle is to low (must be above 0)");
+            }
         }
     }
 }
