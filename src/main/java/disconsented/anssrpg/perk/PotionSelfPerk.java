@@ -30,6 +30,7 @@ import net.minecraft.potion.PotionEffect;
 
 import com.google.gson.annotations.Expose;
 
+import disconsented.anssrpg.common.PotionDefinition;
 import disconsented.anssrpg.task.TaskApplyPotion;
 import disconsented.anssrpg.task.TaskMaster;
 
@@ -37,25 +38,19 @@ import disconsented.anssrpg.task.TaskMaster;
  * @author Disconsented
  *
  */
-public class PotionSelfPerk extends ActivePerk {
+public class PotionSelfPerk extends Perk implements ActivePerk{
     
     public PotionSelfPerk(String name, ArrayList<Requirement> requirements, String description, int pointCost, 
-            int id, int amp, int duration, boolean repeat, int cycle){
+            ArrayList<PotionDefinition> effects, boolean repeat, int cycle){
         super(name, requirements, description, pointCost);
-        this.id = id;
-        this.amp = amp;
-        this.duration = duration;
         this.repeat = repeat;
         this.cycle = cycle;
+        this.effects = effects;
     }
     public PotionSelfPerk(){}
     
     @Expose
-    public int id = 1;
-    @Expose
-    public int amp = 1;
-    @Expose
-    public int duration = 1;
+    public ArrayList<PotionDefinition> effects = new ArrayList<PotionDefinition>();    
     @Expose
     public boolean repeat = false;
     @Expose
@@ -64,8 +59,10 @@ public class PotionSelfPerk extends ActivePerk {
     public void searchObject() {}
     @Override
     public void activate(EntityLivingBase target, EntityLivingBase source) {
-        TaskMaster.getInstance().addTask(new TaskApplyPotion(
-                (EntityLivingBase) target, new PotionEffect(id, duration, amp), null, repeat, cycle));
+        for (PotionDefinition effect : effects){
+            TaskMaster.getInstance().addTask(new TaskApplyPotion(
+                    (EntityLivingBase) target, new PotionEffect(effect.id, effect.duration, effect.amplifier), null, repeat, cycle, slug));
+        }        
         
     }
 }

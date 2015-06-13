@@ -30,6 +30,7 @@ import java.util.Queue;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.relauncher.Side;
+import disconsented.anssrpg.common.Logging;
 
 public class TaskMaster{
 	protected TaskMaster(){}
@@ -57,6 +58,7 @@ public class TaskMaster{
 		    }
 			while(currentQueue.peek() != null){
 				Task currentTask = currentQueue.poll();
+				Logging.debug("Attempting to process " + currentTask.getClass().getName());
 				
 				if (currentTask.canProcess(event)){
 					currentTask.onTick(event);

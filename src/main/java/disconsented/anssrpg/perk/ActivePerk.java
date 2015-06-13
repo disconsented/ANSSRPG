@@ -30,12 +30,7 @@ import net.minecraft.entity.EntityLivingBase;
  * @author Disconsented
  *
  */
-public abstract class ActivePerk extends Perk {
-    public ActivePerk(String name, ArrayList<Requirement> requirements, String description, int pointCost){
-        super(name, requirements, description, pointCost);
-    }
-    public ActivePerk(){}
-    
+public interface ActivePerk{
     public abstract void activate(EntityLivingBase target, EntityLivingBase source);
     
 }

@@ -22,10 +22,15 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.task;
 
+import java.util.ArrayList;
+
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraft.potion.PotionEffect;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import disconsented.anssrpg.common.Logging;
+import disconsented.anssrpg.perk.Slug;
 
 /**
  * @author Disconsented
@@ -34,6 +39,8 @@ import disconsented.anssrpg.common.Logging;
 public class TaskApplyPotion extends Task{
     private EntityLivingBase entity;
     private PotionEffect effect;
+    private final String tagName = "TASKAPPLYPOTION";
+    private Slug slug;
     public TaskApplyPotion(EntityLivingBase entity, PotionEffect effect, TickEvent.Type type, boolean repeat, int cycle){
         this.entity = entity;
         this.effect = effect;
@@ -41,13 +48,24 @@ public class TaskApplyPotion extends Task{
         this.repeat = repeat;
         this.cycle = cycle;
     }
+    
+    public TaskApplyPotion(EntityLivingBase entity, PotionEffect effect, TickEvent.Type type, boolean repeat, int cycle, Slug slug){
+        this.entity = entity;
+        this.effect = effect;
+        this.type = type;
+        this.repeat = repeat;
+        this.cycle = cycle;
+        this.slug = slug;
+    }
 
     /* (non-Javadoc)
      * @see disconsented.anssrpg.task.Task#onAdd()
      */
     @Override
     public void onAdd() {
-        // TODO Auto-generated method stub
+        NBTTagList list = entity.getEntityData().getTagList(tagName, 8);
+        list.appendTag(new NBTTagString(this.slug.getSlug()));        
+        entity.getEntityData().setTag(tagName, list);
 
     }
 
@@ -70,7 +88,14 @@ public class TaskApplyPotion extends Task{
      */
     @Override
     public void onEnd() {
-        // TODO Auto-generated method stub
+        NBTTagList list = entity.getEntityData().getTagList(tagName, 8);
+        for (int i = 0; i < list.tagCount(); i++){
+            if(list.getStringTagAt(i).equals(this.slug.getSlug())){
+                list.removeTag(i);
+                System.out.println("ENDED");
+                return;
+            }
+        }
 
     }
 

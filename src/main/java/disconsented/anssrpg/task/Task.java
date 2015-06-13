@@ -77,6 +77,6 @@ public abstract class Task/* implements Comparable<TaskApplyPotion>*/{
 	}
 	
 	public boolean canRepeat(){
-		return this.repeat;
-	}
+        return this.repeat;
+    }
 }

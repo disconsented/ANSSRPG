@@ -212,10 +212,11 @@ public final class PlayerHandler {
     public static String activatePerk(EntityPlayerMP p2, PlayerData playerData,
             String perkSlug) {
         ActivePerk cachePerk = (ActivePerk) PerkStore.getPerk(perkSlug);
-        if(hasPerk(cachePerk, playerData)){
+        if(hasPerk((Perk) cachePerk, playerData)){
             cachePerk.activate(p2, null);
+            return "Sucess";
         }
-        return "Sucess maybe?";
+        return "Failure (Missing "+((Perk)cachePerk).getSlug().getSlug()+ ")";
         
     }
 

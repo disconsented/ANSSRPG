@@ -77,6 +77,31 @@ public class PlayerData {
         this.skillExp = skillExp;
     }
 
+    public ArrayList<Slug> getActivePerks() {
+        return activePerks;
+    }
+    
+    /**
+     * Used for permanent perks 
+     * @param slug
+     */
+    public void addActivePerkSlug(Slug slug){
+        this.activePerks.add(slug);
+    }
+    
+    /**
+     * Used for permanent perks 
+     * @param slug
+     */
+    public void removeActivePerkSlug(Slug slug){
+        this.activePerks.remove(slug);
+    }
+    
+
+    public void setActivePerks(ArrayList<Slug> activePerks) {
+        this.activePerks = activePerks;
+    }
+
     @Override
     public String toString() {
         return playerID;
