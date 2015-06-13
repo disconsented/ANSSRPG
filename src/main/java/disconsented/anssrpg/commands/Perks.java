@@ -130,7 +130,7 @@ public class Perks implements ICommand {
                 break;
             case "activate":
                 if (arguments.length >= 2){
-                    PlayerHandler.activatePerk(p2, playerdata, arguments[1]);
+                    toReturn = PlayerHandler.activatePerk(p2, playerdata, arguments[1]);
                 }
                 
                 break;
