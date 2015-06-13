@@ -33,12 +33,16 @@ import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.Skill;
 import disconsented.anssrpg.skill.objects.ToolSkill;
+import disconsented.anssrpg.task.TaskTrackPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ChatComponentText;
 
 import java.util.ArrayList;
 import java.util.UUID;
+
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 
 /**
  * @author Disconsented
@@ -218,6 +222,33 @@ public final class PlayerHandler {
         }
         return "Failure (Missing "+((Perk)cachePerk).getSlug().getSlug()+ ")";
         
+    }
+
+    public void reactivatePerks(PlayerLoggedInEvent event) {
+        activateDataPerks((EntityPlayerMP) event.player);
+        activateNbtPerks((EntityPlayerMP) event.player);       
+        
+    }
+    
+    public void activateDataPerks(EntityPlayerMP player){
+        activateDataPerks(player, getPlayer(player.getUniqueID()));
+    }
+    
+    public void activateDataPerks(EntityPlayerMP player, PlayerData playerData){
+        for (Slug slug : playerData.getActivePerks()){
+            activatePerk(player, playerData, slug.getSlug());
+        }
+    }
+    
+    public void activateNbtPerks(EntityPlayerMP player){
+        activateNbtPerks(player, getPlayer(player.getUniqueID()));
+    }
+    
+    public void activateNbtPerks(EntityPlayerMP player, PlayerData playerData){
+        NBTTagList list = player.getEntityData().getTagList(TaskTrackPlayer.tagName, 8);
+        for (int i = 0; i < list.tagCount(); i++){
+            activatePerk(player, playerData, list.getStringTagAt(i));
+        }
     }
 
 }

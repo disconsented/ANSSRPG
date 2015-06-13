@@ -29,6 +29,7 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import disconsented.anssrpg.data.DataSave;
+import disconsented.anssrpg.handler.PlayerHandler;
 import disconsented.anssrpg.skill.ItemCrafting;
 import disconsented.anssrpg.task.TaskMaster;
 
@@ -51,6 +52,7 @@ public class FMLBUS {
     @SubscribeEvent
     public void onPlayerLoggedInEvent(PlayerLoggedInEvent event) {
         new DataSave().onPlayerLoggedInEvent(event);
+        new PlayerHandler().reactivatePerks(event);
     }
     
     @SubscribeEvent
