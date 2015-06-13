@@ -22,18 +22,23 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.common;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * @author Disconsented
  *
  */
-public class GenericTriplet <T,S,U>{
-    public T t;
-    public S s;
-    public U u;
-    public GenericTriplet(T t, S s, U u){
-        this.t = t;
-        this.s = s;
-        this.u = u;
+public class PotionDefinition{
+    @Expose
+    public int id;
+    @Expose
+    public int amplifier;
+    @Expose
+    public int duration;
+    public PotionDefinition(int id, int amplifier, int duration){
+        this.id = id;
+        this.amplifier = amplifier;
+        this.duration = duration;
     }   
-    public GenericTriplet(){}
+    public PotionDefinition(){}
 }
