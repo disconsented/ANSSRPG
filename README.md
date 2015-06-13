@@ -18,7 +18,7 @@ Effect Perks allow for effects (potion effects at this time) to be applied to pl
 2. Read: http://www.chiark.greenend.org.uk/~sgtatham/bugs.html
 3. Using a service like pastbin (no dropbox) upload:
  1. Any crash reports
- 2. Console logs (bother server.log and fml logs)
+ 2. Console logs (both server.log and fml logs)
  3. All Config files 
 4. Create a github issue with the following information:
  * Description of the issue:
