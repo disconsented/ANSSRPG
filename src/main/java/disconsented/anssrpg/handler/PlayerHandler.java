@@ -163,7 +163,7 @@ public final class PlayerHandler {
         if(isWielding(skill, playerEntity)){
             awardXP(playerEntity, skill, exp);
         } else {
-            //Fail(playerEntity);
+            taskFail(playerEntity);
         }
     }
 
