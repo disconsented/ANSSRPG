@@ -32,8 +32,8 @@ public class TaskInteraction extends Task {
 	public TaskInteraction(EntityPlayer player){
 		this.player = player;
 		this.repeat = false;
-		this.cycle = 5;
-		this.type = TickEvent.Type.WORLD;
+		this.cycle = 1;
+		this.type = TickEvent.Type.PLAYER;
 	}
 	
 	@Override

@@ -25,6 +25,7 @@ package disconsented.anssrpg.perk.unpaired;
 import java.util.ArrayList;
 
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import disconsented.anssrpg.data.PerkStore;
@@ -41,12 +42,16 @@ import disconsented.anssrpg.task.TaskMaster;
 public class PlayerInteract {
     
     public void onPlayerInteract(PlayerInteractEvent event){
-        if(event.action.equals(PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) && !(event.entityPlayer.openContainer instanceof net.minecraft.inventory.ContainerPlayer)){
+       System.out.println("sdf");
+        if(event.action.equals(PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) && event.entityPlayer.openContainer instanceof net.minecraft.inventory.ContainerPlayer){
             TaskMaster.getInstance().addTask(new TaskInteraction(event.entityPlayer));
         }
     }
     public void onIneractionTask(TaskInteraction task){
-    	//Do the things
+    	if (!(task.player.openContainer instanceof net.minecraft.inventory.ContainerPlayer)){
+    	    task.player.addChatComponentMessage(new ChatComponentText("Looks like you interacted with an container"));
+    	    task.player.closeScreen();
+    	}
     }
     
 
