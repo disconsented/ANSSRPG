@@ -19,40 +19,31 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
-package disconsented.anssrpg;
+ */
+package disconsented.anssrpg.gui.components;
 
-import cpw.mods.fml.common.network.IGuiHandler;
-import disconsented.anssrpg.gui.GUIExperience;
-import disconsented.anssrpg.gui.GUIPerk;
-import disconsented.anssrpg.gui.PerkGUI;
-import disconsented.anssrpg.gui.DummyContainer;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
+import disconsented.anssrpg.common.Reference;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.util.ResourceLocation;
 
-public class CommonProxy implements IGuiHandler {
-    public void registerRenderers() {
+/**
+ * @author Disconsented
+ *
+ */
+public class PerkList extends ComponentBase{
+    private FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+    private ResourceLocation texture = new ResourceLocation(Reference.ID, "perklist.png");
+    private int width = 256;
+    private int height = 256;
+    public PerkList(int x, int y){
+        this.x = x;
+        this.y = y;
     }
-
     @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        //return null; //If you use inventory slots this comes into play, I haven't experimented with how
-        return new DummyContainer();
-    }
-
-    @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        switch(ID){
-        case 0:
-            return new GUIExperience();
-        case 1:
-            return new GUIPerk();
-        case 2:
-            //return new GUIStatus();            
-            return null;
-        default:
-            return null;
-        }
+    public void draw() {
+        bindAndDrawTexture(texture, x, y, this.width, this.height);
         
     }
 }

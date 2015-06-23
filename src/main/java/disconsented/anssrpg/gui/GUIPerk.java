@@ -19,40 +19,52 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
-package disconsented.anssrpg;
+ */
+package disconsented.anssrpg.gui;
 
-import cpw.mods.fml.common.network.IGuiHandler;
-import disconsented.anssrpg.gui.GUIExperience;
-import disconsented.anssrpg.gui.GUIPerk;
-import disconsented.anssrpg.gui.PerkGUI;
-import disconsented.anssrpg.gui.DummyContainer;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
+import disconsented.anssrpg.gui.components.PerkInfo;
+import disconsented.anssrpg.gui.components.PerkList;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
 
-public class CommonProxy implements IGuiHandler {
-    public void registerRenderers() {
+/**
+ * @author Disconsented
+ *
+ */
+public class GUIPerk extends GuiScreen {
+    private PerkList perkList; 
+    private PerkInfo perkInfo;
+
+    @Override
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_) {
+        drawDefaultBackground();
+        //176x295
+        perkList.draw();
+        perkInfo.draw();
     }
 
     @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        //return null; //If you use inventory slots this comes into play, I haven't experimented with how
-        return new DummyContainer();
-    }
-
-    @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        switch(ID){
-        case 0:
-            return new GUIExperience();
-        case 1:
-            return new GUIPerk();
-        case 2:
-            //return new GUIStatus();            
-            return null;
-        default:
-            return null;
+    protected void actionPerformed(GuiButton button) {
+        switch(button.id){
+        case 0: //Obtain
+            break;
+        case 1: //Next
+            break;
+        case 2: //Prev
+            break;
+            
         }
-        
     }
+
+    @Override
+    public void initGui() {//176
+        perkList = new PerkList((width/2) - 176,(height - 176)/2);
+        perkInfo = new PerkInfo(width/2,(height - 176)/2);
+    }
+
+    @Override
+    public boolean doesGuiPauseGame() {
+        return false;
+    }
+
 }
