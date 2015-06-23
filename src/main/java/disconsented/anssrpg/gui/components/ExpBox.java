@@ -34,7 +34,7 @@ import disconsented.anssrpg.common.Reference;
  * @author Disconsented
  *
  */
-public class ExpBox extends Gui{
+public class ExpBox extends ComponentBase{
     //176x76
     private int x;
     private int y;
@@ -65,6 +65,7 @@ public class ExpBox extends Gui{
         this.level = level;
         this.currentPercent = (expCurrent * 100) / expRequired;       
     }
+    @Override
     public void draw(){
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
         drawTexturedModalRectClone(x, y, 0, 0, 256, 256);
@@ -81,24 +82,23 @@ public class ExpBox extends Gui{
 //        * percentile exp box - 118,56-20x12
         this.drawString(fontRenderer, currentPercent+"%", 118 + this.x, this.y + 58, 0xBEFF00); 
 //        * bar box - 40,36-99x16
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(greenTexture);
-        drawTexturedModalRectClone(x+40, y+36, 0, 0, (int) currentPercent, 16);
+        bindAndDrawTexture(greenTexture, x+40, y+36, (int) currentPercent, 16);
     }
 
     public void calcPercentage(){
         this.currentPercent = (expCurrent * 100) / expRequired; 
     }
-   private void drawTexturedModalRectClone(int p_73729_1_, int p_73729_2_, int p_73729_3_, int p_73729_4_, int p_73729_5_, int p_73729_6_)
+   private void drawTexturedModalRectClone(int x, int y, int p_73729_3_, int p_73729_4_, int width, int height)
     {
         float f = 0.00390625F;
         float f1 = 0.00390625F;
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         Tessellator.instance.setColorRGBA_F(1F, 1F, 1F, 1F);
-        tessellator.addVertexWithUV((double)(p_73729_1_ + 0), (double)(p_73729_2_ + p_73729_6_), (double)this.zLevel, (double)((float)(p_73729_3_ + 0) * f), (double)((float)(p_73729_4_ + p_73729_6_) * f1));
-        tessellator.addVertexWithUV((double)(p_73729_1_ + p_73729_5_), (double)(p_73729_2_ + p_73729_6_), (double)this.zLevel, (double)((float)(p_73729_3_ + p_73729_5_) * f), (double)((float)(p_73729_4_ + p_73729_6_) * f1));
-        tessellator.addVertexWithUV((double)(p_73729_1_ + p_73729_5_), (double)(p_73729_2_ + 0), (double)this.zLevel, (double)((float)(p_73729_3_ + p_73729_5_) * f), (double)((float)(p_73729_4_ + 0) * f1));
-        tessellator.addVertexWithUV((double)(p_73729_1_ + 0), (double)(p_73729_2_ + 0), (double)this.zLevel, (double)((float)(p_73729_3_ + 0) * f), (double)((float)(p_73729_4_ + 0) * f1));
+        tessellator.addVertexWithUV((double)(x + 0), (double)(y + height), (double)this.zLevel, (double)((float)(p_73729_3_ + 0) * f), (double)((float)(p_73729_4_ + height) * f1));
+        tessellator.addVertexWithUV((double)(x + width), (double)(y + height), (double)this.zLevel, (double)((float)(p_73729_3_ + width) * f), (double)((float)(p_73729_4_ + height) * f1));
+        tessellator.addVertexWithUV((double)(x + width), (double)(y + 0), (double)this.zLevel, (double)((float)(p_73729_3_ + width) * f), (double)((float)(p_73729_4_ + 0) * f1));
+        tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), (double)this.zLevel, (double)((float)(p_73729_3_ + 0) * f), (double)((float)(p_73729_4_ + 0) * f1));
         tessellator.draw();
     }
 }
