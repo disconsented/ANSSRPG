@@ -44,6 +44,7 @@ import cpw.mods.fml.relauncher.Side;
 import disconsented.anssrpg.commands.ANSSRPG;
 import disconsented.anssrpg.commands.ConfigGUI;
 import disconsented.anssrpg.commands.Perks;
+import disconsented.anssrpg.commands.Skill;
 import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.common.Reference;
 import disconsented.anssrpg.common.Settings;
@@ -105,10 +106,9 @@ public class Main {
 
     @EventHandler
     public void serverLoad(FMLServerStartingEvent event) {
-        //event.registerServerCommand(new ANSSRPG());
         event.registerServerCommand(new Perks());
         event.registerServerCommand(new ANSSRPG());
-        event.registerServerCommand(new disconsented.anssrpg.commands.Skill());
+        event.registerServerCommand(new Skill());
     }
 
     /**

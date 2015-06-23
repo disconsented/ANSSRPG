@@ -23,6 +23,7 @@ THE SOFTWARE.
 package disconsented.anssrpg.commands;
 
 import disconsented.anssrpg.Main;
+import disconsented.anssrpg.common.Reference;
 import disconsented.anssrpg.task.TaskApplyPotion;
 import disconsented.anssrpg.task.TaskMaster;
 import net.minecraft.command.ICommand;
@@ -65,7 +66,9 @@ public class ANSSRPG implements ICommand {
     }
 
     @Override
-    public void processCommand(ICommandSender player, String[] astring) {        
+    public void processCommand(ICommandSender player, String[] astring) {       
+        EntityPlayerMP playerMP = (EntityPlayerMP) player;
+        playerMP.openGui(Reference.ID, 1, null, 0, 0, 0);
     }
 
     @Override
