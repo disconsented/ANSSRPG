@@ -150,20 +150,6 @@ public class PerkStore {
 
     }
 
-    public static void putPerk(InteractionPerk interaction) {
-        perks.add(interaction);
-        for (Triplet object : interaction.blocks){
-            Block cache = (Block) object.object;
-            if (interactionBlockMap.containsKey(cache.getUnlocalizedName())) {
-                interactionBlockMap.get(cache.getUnlocalizedName()).add(interaction.slug);
-            } else {
-                ArrayList<Slug> temp = new ArrayList<Slug>();
-                temp.add(interaction.slug);
-                interactionBlockMap.put(cache.getUnlocalizedName(), temp);
-            }
-        } 
-        
-    }
 
     public static void putPerk(PotionSelfPerk effect) {
         perks.add(effect);
