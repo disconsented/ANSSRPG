@@ -52,8 +52,4 @@ public abstract class Skill {
     
     public abstract void touchUp();
     
-    public void initName(){
-        name = Tools.stringToSlug(name);
-    }
-    
 }

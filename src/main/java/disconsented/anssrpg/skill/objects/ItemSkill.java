@@ -44,7 +44,6 @@ public class ItemSkill extends Skill {
 
     @Override
     public void touchUp() {
-        this.initName();
         
         ArrayList<Quad> initalised = new ArrayList<Quad>();
         for (Quad object : exp) {

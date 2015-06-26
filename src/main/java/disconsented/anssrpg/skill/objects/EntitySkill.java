@@ -43,7 +43,6 @@ public class EntitySkill extends ToolSkill {
     @Override
     public void touchUp() { 
         this.initTool();
-        this.initName();
         
         ArrayList<Triplet> initalised = new ArrayList<Triplet>();
         for (Triplet object : exp) {

@@ -105,6 +105,7 @@ public abstract class Perk {
 
     public void touchUp() {
         searchObject();
+        getSlug();
     }
 
 }
