@@ -24,12 +24,14 @@ package disconsented.anssrpg.perk;
 
 import com.google.gson.annotations.Expose;
 
+import disconsented.anssrpg.common.Tools;
+
 public class Slug {
     @Expose
     private String slug;
 
     public Slug(String name) {
-        slug = name.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
+        slug = Tools.stringToSlug(name);
     }
 
     public String getSlug() {

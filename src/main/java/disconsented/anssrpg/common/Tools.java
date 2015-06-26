@@ -20,40 +20,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.perk;
-
-import com.google.gson.annotations.Expose;
-
-import disconsented.anssrpg.common.Tools;
+package disconsented.anssrpg.common;
 
 /**
  * @author Disconsented
- *         Object for requirements
+ *
  */
-public class Requirement {
-    /*
-     * HAVE - Has a perk
-     * DONT - Doesn't have a perk
-     * LEVEL_EQUALS - Level == x
-     * LEVEL_GREATER - Level > x
-     * LEVEL_LESS - Level < x
-     */
-
-    @Expose
-    public Action action;
-    @Expose
-    public String name;
-    @Expose
-    public String extraData;
-    public Requirement(Action action, String name, String extraData) {
-        this.action = action;
-        this.name = name;
-        this.extraData = extraData;
+public class Tools {
+    public static String stringToSlug(String value){
+        return value.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
     }
-
-    public String getNameAsSlug() {
-        return Tools.stringToSlug(name);
-    }
-
-    public enum Action {HAVE, DONT, LEVEL_EQUALS, LEVEL_GREATER, LEVEL_LESS}
 }

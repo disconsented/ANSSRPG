@@ -28,6 +28,8 @@ THE SOFTWARE.
 
 import com.google.gson.annotations.Expose;
 
+import disconsented.anssrpg.common.Tools;
+
 /**
  * 
  * @author Disconsented
@@ -49,5 +51,9 @@ public abstract class Skill {
     }
     
     public abstract void touchUp();
+    
+    public void initName(){
+        name = Tools.stringToSlug(name);
+    }
     
 }

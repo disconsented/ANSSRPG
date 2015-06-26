@@ -46,6 +46,7 @@ public class BlockSkill extends ToolSkill {
     @Override
     public void touchUp() {
         this.initTool();
+        this.initName();
         
         ArrayList<Quad> initalised = new ArrayList<Quad>();
         for (Quad object : exp) {

@@ -92,19 +92,19 @@ public final class PlayerHandler {
                     }
                     break;
                 case LEVEL_EQUALS:
-                    if (!(player.getSkillLevel(SkillHandler.getSkill(req.name)) == Integer.parseInt(req.extraData))) {
+                    if (!(player.getSkillLevel(SkillHandler.getSkill(req.getNameAsSlug())) == Integer.parseInt(req.extraData))) {
                         cont = false;
                         toReturn = "Unable to grant perk," + req.name + "'s level did not equal " + req.extraData;
                     }
                     break;
                 case LEVEL_GREATER:
-                    if (player.getSkillLevel(SkillHandler.getSkill(req.name)) < Integer.parseInt(req.extraData)) {
+                    if (player.getSkillLevel(SkillHandler.getSkill(req.getNameAsSlug())) < Integer.parseInt(req.extraData)) {
                         cont = false;
                         toReturn = "Unable to grant perk," + req.name + "'s level was less than " + req.extraData;
                     }
                     break;
                 case LEVEL_LESS:
-                    if (player.getSkillLevel(SkillHandler.getSkill(req.name)) > Integer.parseInt(req.extraData)) {
+                    if (player.getSkillLevel(SkillHandler.getSkill(req.getNameAsSlug())) > Integer.parseInt(req.extraData)) {
                         cont = false;
                         toReturn = "Unable to grant perk," + req.name + "'s level did not equal " + req.extraData;
                     }
