@@ -26,7 +26,9 @@ package disconsented.anssrpg.player;
  * For storing data about players
  */
 
+import disconsented.anssrpg.handler.SkillHandler;
 import disconsented.anssrpg.perk.Slug;
+import disconsented.anssrpg.skill.objects.Skill;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,6 +77,9 @@ public class PlayerData {
 
     public void setSkillExp(HashMap<String, Integer> skillExp) {
         this.skillExp = skillExp;
+    }
+    public long getSkillLevel(Skill skill){
+        return (long) SkillHandler.calculateExpForLevel(skill, this.skillExp.get(skill.name));
     }
 
     public ArrayList<Slug> getActivePerks() {

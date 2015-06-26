@@ -43,4 +43,13 @@ public class SkillHandler {
     public static long calulteLevelForExp(Skill skill, double exp){
         return (long) (Math.pow(exp,(1/skill.mod))/Math.pow(skill.base,(1/skill.mod)));
     }
+    
+    public static Skill getSkill(String name){
+        for(Skill skill : SkillStore.getSkills()){
+            if(skill.name == name){
+            return skill;
+            }
+        }
+        return null;
+    }
 }

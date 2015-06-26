@@ -26,6 +26,7 @@ import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
+import disconsented.anssrpg.data.SkillStore;
 import disconsented.anssrpg.perk.ActivePerk;
 import disconsented.anssrpg.perk.Perk;
 import disconsented.anssrpg.perk.Requirement;
@@ -40,6 +41,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ChatComponentText;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
@@ -90,19 +92,19 @@ public final class PlayerHandler {
                     }
                     break;
                 case LEVEL_EQUALS:
-                    if (!(player.getSkillExp().get(req.name) == Integer.parseInt(req.extraData))) {
+                    if (!(player.getSkillLevel(SkillHandler.getSkill(req.name)) == Integer.parseInt(req.extraData))) {
                         cont = false;
                         toReturn = "Unable to grant perk," + req.name + "'s level did not equal " + req.extraData;
                     }
                     break;
                 case LEVEL_GREATER:
-                    if (player.getSkillExp().get(req.name) < Integer.parseInt(req.extraData)) {
+                    if (player.getSkillLevel(SkillHandler.getSkill(req.name)) < Integer.parseInt(req.extraData)) {
                         cont = false;
                         toReturn = "Unable to grant perk," + req.name + "'s level was less than " + req.extraData;
                     }
                     break;
                 case LEVEL_LESS:
-                    if (player.getSkillExp().get(req.name) > Integer.parseInt(req.extraData)) {
+                    if (player.getSkillLevel(SkillHandler.getSkill(req.name)) > Integer.parseInt(req.extraData)) {
                         cont = false;
                         toReturn = "Unable to grant perk," + req.name + "'s level did not equal " + req.extraData;
                     }
@@ -248,6 +250,16 @@ public final class PlayerHandler {
         NBTTagList list = player.getEntityData().getTagList(TaskTrackPlayer.tagName, 8);
         for (int i = 0; i < list.tagCount(); i++){
             activatePerk(player, playerData, list.getStringTagAt(i));
+        }
+    }
+    
+    public void checkPlayerSkills(PlayerLoggedInEvent event){
+        PlayerData data = getPlayer(event.player.getUniqueID());
+        HashMap<String,Integer> map = data.getSkillExp();
+        for (Skill skill :SkillStore.getSkills()){
+            if(map.get(skill.name) == null){
+                map.put(skill.name, new Integer(0));
+            }
         }
     }
 

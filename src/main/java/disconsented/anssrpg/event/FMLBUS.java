@@ -53,6 +53,7 @@ public class FMLBUS {
     public void onPlayerLoggedInEvent(PlayerLoggedInEvent event) {
         new DataSave().onPlayerLoggedInEvent(event);
         new PlayerHandler().reactivatePerks(event);
+        new PlayerHandler().checkPlayerSkills(event);
     }
     
     @SubscribeEvent

@@ -49,43 +49,43 @@ public class Default {
             perks = new PerkContainer();            
             
             perks.addPerk(new BlockPerk("Unlock: Iron Ore",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "mining", "4"));}},
+                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "4"));}},
                     "Allows you to mine Iron Ore",
                     0,
                     new ArrayList<Pair>(){{add(new Pair(null, "iron_ore"));}}));
             
             perks.addPerk(new BlockPerk("Unlock: Lapis Ore",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "mining", "4"));}},
+                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "4"));}},
                     "Allows you to mine Iron Ore",
                     0,
                     new ArrayList<Pair>(){{add(new Pair(null, "lapis_ore"));}}));
             
             perks.addPerk(new BlockPerk("Unlock: Gold Ore",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "mining", "9"));}},
+                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "9"));}},
                     "Allows you to mine Iron Ore",
                     0,
                     new ArrayList<Pair>(){{add(new Pair(null, "gold_ore"));}}));
             
             perks.addPerk(new BlockPerk("Unlock: Redstone Ore",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "mining", "14"));}},
+                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "14"));}},
                     "Allows you to mine Iron Ore",
                     0,
                     new ArrayList<Pair>(){{add(new Pair(null, "redstone_ore"));}}));
             
             perks.addPerk(new BlockPerk("Unlock: Diamond Ore",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "mining", "19"));}},
+                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "19"));}},
                     "Allows you to mine Iron Ore",
                     0,
                     new ArrayList<Pair>(){{add(new Pair(null, "diamond_ore"));}}));
             
             perks.addPerk(new BlockPerk("Unlock: Emerald Ore",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "mining", "24"));}},
+                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "24"));}},
                     "Allows you to mine Iron Ore",
                     0,
                     new ArrayList<Pair>(){{add(new Pair(null, "emerald_ore"));}}));
             
             perks.addPerk(new ItemPerk("Unlock: Gold Armour", 
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "armouring", "4"));}},
+                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Armouring", "4"));}},
                     "Allows you to craft Gold armour",
                     0,
                     new ArrayList<Pair>(){{
@@ -96,7 +96,7 @@ public class Default {
                         }}));
             
             perks.addPerk(new ItemPerk("Unlock: Iron Armour",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "armouring", "9"));}},
+                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Armouring", "9"));}},
                     "Allows you to craft Iron armour",
                     0,
                     new ArrayList<Pair>(){{
@@ -107,7 +107,7 @@ public class Default {
                         }}));
             
             perks.addPerk(new ItemPerk("Unlock: Diamond Armour",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "armouring", "14"));}},
+                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Armouring", "14"));}},
                     "Allows you to craft Diamond armour",
                     0,
                     new ArrayList<Pair>(){{
@@ -118,7 +118,7 @@ public class Default {
                         }}));
             
             perks.addPerk(new EntityPerk("Creeper killer",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "slaying", "4"));}},
+                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Slaying", "4"));}},
                     "Allows Creepers to be killed",
                     0,
                     new ArrayList<Pair>(){{add (new Pair(null,"Creeper"));}}));
