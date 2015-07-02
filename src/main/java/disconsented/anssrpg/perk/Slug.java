@@ -24,14 +24,14 @@ package disconsented.anssrpg.perk;
 
 import com.google.gson.annotations.Expose;
 
-import disconsented.anssrpg.common.Tools;
+import disconsented.anssrpg.common.Utils;
 
 public class Slug {
     @Expose
     private String slug;
 
     public Slug(String name) {
-        slug = Tools.stringToSlug(name);
+        slug = Utils.Tools.stringToSlug(name);
     }
 
     public String getSlug() {

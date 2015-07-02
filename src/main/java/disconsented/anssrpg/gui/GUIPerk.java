@@ -24,8 +24,10 @@ package disconsented.anssrpg.gui;
 
 import disconsented.anssrpg.gui.components.PerkInfo;
 import disconsented.anssrpg.gui.components.PerkList;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.ScaledResolution;
 
 /**
  * @author Disconsented
@@ -58,8 +60,9 @@ public class GUIPerk extends GuiScreen {
 
     @Override
     public void initGui() {//176
-        perkList = new PerkList((width/2) - 176,(height - 176)/2);
-        perkInfo = new PerkInfo(width/2,(height - 176)/2);
+        perkList = new PerkList((width/2) - 176, (height - 240)/2);
+        perkInfo = new PerkInfo(width/2, (height - 240)/2);
+        //buttonList.add(new Button());
     }
 
     @Override

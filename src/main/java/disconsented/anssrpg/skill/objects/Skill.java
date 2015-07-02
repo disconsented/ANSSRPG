@@ -28,8 +28,6 @@ THE SOFTWARE.
 
 import com.google.gson.annotations.Expose;
 
-import disconsented.anssrpg.common.Tools;
-
 /**
  * 
  * @author Disconsented

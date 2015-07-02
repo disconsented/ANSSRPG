@@ -22,7 +22,6 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.common;
 
-import disconsented.anssrpg.skill.objects.EntitySkill;
 import net.minecraft.entity.Entity;
 
 public class Utils {
@@ -54,4 +53,13 @@ public class Utils {
         return entity.getClass().equals(triplet.object);        
     }
 
+    /**
+     * @author Disconsented
+     *
+     */
+    public static class Tools {
+        public static String stringToSlug(String value){
+            return value.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
+        }
+    }
 }
