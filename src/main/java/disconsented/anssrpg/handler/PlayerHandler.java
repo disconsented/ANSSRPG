@@ -134,17 +134,17 @@ public final class PlayerHandler {
         long levelOld;
         long levelNew = -1;
         if(cacheExp != null){
-        	levelOld = SkillHandler.calulteLevelForExp(skill, cacheExp);
+        	levelOld = SkillHandler.calculateLevelForExp(skill, cacheExp);
         } else {
         	levelOld = 0;
         }
         
         if (cacheExp != null) {
             player.getSkillExp().put(skill.name, exp + cacheExp);
-            levelNew = SkillHandler.calulteLevelForExp(skill, exp + cacheExp);
+            levelNew = SkillHandler.calculateLevelForExp(skill, exp + cacheExp);
         } else {
             player.getSkillExp().put(skill.name, exp);
-            levelNew = SkillHandler.calulteLevelForExp(skill, exp);
+            levelNew = SkillHandler.calculateLevelForExp(skill, exp);
         }
         playerEntity.addChatComponentMessage(new ChatComponentText("You have been awared with " + exp + " exp"));
         /* Check for level up

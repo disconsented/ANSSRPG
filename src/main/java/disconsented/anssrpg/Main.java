@@ -25,7 +25,6 @@ package disconsented.anssrpg;
 import java.util.Map.Entry;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -40,7 +39,6 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.relauncher.Side;
 import disconsented.anssrpg.commands.ANSSRPG;
 import disconsented.anssrpg.commands.ConfigGUI;
 import disconsented.anssrpg.commands.Perks;
@@ -49,8 +47,6 @@ import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.common.Reference;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.config.JsonConfigHandler;
-import disconsented.anssrpg.config.PerkContainer;
-import disconsented.anssrpg.config.SkillContainer;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
 import disconsented.anssrpg.data.ToolRegistry;
@@ -58,12 +54,6 @@ import disconsented.anssrpg.event.FMLBUS;
 import disconsented.anssrpg.event.ForgeBUS;
 import disconsented.anssrpg.handler.SkillHandler;
 import disconsented.anssrpg.network.Manager;
-import disconsented.anssrpg.network.PerkInfo;
-import disconsented.anssrpg.network.PerkInfoHandler;
-import disconsented.anssrpg.network.Request;
-import disconsented.anssrpg.network.RequestHandler;
-import disconsented.anssrpg.network.Responce;
-import disconsented.anssrpg.network.ResponceHandler;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.player.PlayerFile;
 import disconsented.anssrpg.skill.objects.BlockSkill;
@@ -140,7 +130,7 @@ public class Main {
         BlockSkill temp = new BlockSkill();
         for (int i = 0; i < 100; i++){
             double xp = SkillHandler.calculateExpForLevel(temp, i);
-            long level = SkillHandler.calulteLevelForExp(temp, xp);
+            long level = SkillHandler.calculateLevelForExp(temp, xp);
             Logging.debug("Int: "+i+"\n"
                     +"xp: "+xp+"\n"
                     +"Level: "+level);
