@@ -68,7 +68,7 @@ public class ANSSRPG implements ICommand {
     @Override
     public void processCommand(ICommandSender player, String[] astring) {       
         EntityPlayerMP playerMP = (EntityPlayerMP) player;
-        playerMP.openGui(Reference.ID, 1, null, 0, 0, 0);
+        playerMP.openGui(Reference.ID, Integer.parseInt(astring[0]), null, 0, 0, 0);
     }
 
     @Override
