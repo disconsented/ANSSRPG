@@ -31,14 +31,17 @@ public class SkillInfo implements IMessage {
 	public int expCurrent;
 	public int expRequired;
 	public int levelCurrent;
+	public int expOld;
 	
 	public SkillInfo (){}
 	
-	public SkillInfo(String name, int expCurrent, int expRequired, int levelCurrent){
+	public SkillInfo(String name, int expCurrent, int expRequired, int levelCurrent, int expOld){
 		this.name = name;
 		this.expCurrent = expCurrent;
 		this.expRequired = expRequired;
 		this.levelCurrent = levelCurrent;
+		this.expOld = expOld;
+
 	}
 
 	@Override
@@ -47,6 +50,7 @@ public class SkillInfo implements IMessage {
 		this.expCurrent = buf.readInt();
 		this.expRequired = buf.readInt();
 		this.levelCurrent = buf.readInt();
+		this.expOld = buf.readInt();
 		
 	}
 
@@ -56,6 +60,7 @@ public class SkillInfo implements IMessage {
 		buf.writeInt(expCurrent);
 		buf.writeInt(expRequired);
 		buf.writeInt(levelCurrent);
+		buf.writeInt(expOld);
 		
 	}
 

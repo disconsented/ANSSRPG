@@ -41,6 +41,7 @@ public class ExpBox extends ComponentBase{
     public int expCurrent = 0;
     public int expRequired = 0;
     private float currentPercent = 0;
+    public int expOld = 0;
     public int level = 0;
     public String name = "Not A Name";
     private ResourceLocation texture = new ResourceLocation(Reference.ID, "expbox.png");
@@ -51,22 +52,14 @@ public class ExpBox extends ComponentBase{
      * 
      * @param x
      * @param y
-     * @param expCurrent
-     * @param expRequired
-     * @param level
-     * @param name
      */
-    public ExpBox(int x, int y, int expCurrent, int expRequired, int level, String name){
+    public ExpBox(int x, int y){
         this.x = x;
         this.y = y;
-        this.expCurrent = expCurrent;
-        this.expRequired = expRequired;
-        this.name = name;        
-        this.level = level;
-        this.currentPercent = (expCurrent * 100) / expRequired;       
     }
     @Override
     public void draw(){
+        this.calcPercentage();
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
         drawTexturedModalRectClone(x, y, 0, 0, 256, 256);
 //        * Name box -  9,9-106x12
@@ -86,7 +79,17 @@ public class ExpBox extends ComponentBase{
     }
 
     public void calcPercentage(){
-        this.currentPercent = (expCurrent * 100) / expRequired; 
+        if (this.expOld < 0)
+        {
+            this.expOld = 0;
+        }
+        int temp = ((expCurrent - expOld) * 100) / (expRequired - expOld);
+        if(temp >= 0 && temp <= 100) {
+            this.currentPercent = temp;
+        } else {
+            this.currentPercent = 0;
+        }
+
     }
    private void drawTexturedModalRectClone(int x, int y, int p_73729_3_, int p_73729_4_, int width, int height)
     {

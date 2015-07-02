@@ -50,9 +50,9 @@ public class RequestHandler implements IMessageHandler<Request, IMessage> {
 			for(Entry<String, Integer> entry : playerData.getSkillExp().entrySet()){
 				for(Skill skill : SkillStore.getSkills()){
 					if(entry.getKey().equals(skill.name)){						
-						int level = (int) SkillHandler.calulteLevelForExp(skill, entry.getValue());
+						int level = (int) SkillHandler.calculateLevelForExp(skill, entry.getValue());
 						int xp = (int) SkillHandler.calculateExpForLevel(skill, level + 1);
-						Main.snw.sendTo(new SkillInfo(skill.name, entry.getValue(), xp, level), ctx.getServerHandler().playerEntity);
+						Main.snw.sendTo(new SkillInfo(skill.name, entry.getValue(), xp, level, (int)SkillHandler.calculateExpForLevel(skill.base, level-1, skill.mod) ), ctx.getServerHandler().playerEntity);
 						break;
 					}
 				}

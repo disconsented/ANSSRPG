@@ -48,6 +48,7 @@ import net.minecraft.util.ResourceLocation;
 public class GUIExperience extends GuiScreen {    
     private ArrayList<ExpBox> boxes = new ArrayList<ExpBox>();
     private int page;
+    private int boxCount = 0;
     
     @Override
     public void initGui(){
@@ -56,14 +57,15 @@ public class GUIExperience extends GuiScreen {
     	Data.skillInfoList.clear();
     	page = 1;
     	Main.snw.sendToServer(new Request(REQUEST.SKILLS));
-        this.buttonList.add(new GuiButton(0, x, 40, 40, 20, "Next"));
-        this.buttonList.add(new GuiButton(1, x - 40, 40, 40, 20, "Prev"));        
-        for (int i = 1; i < 6; i++){
+        this.buttonList.add(new GuiButton(0, x, 76*3, 40 , 20, "Next"));
+        this.buttonList.add(new GuiButton(1, x - 40, 76*3, 40, 20, "Prev"));
+        for (int i = 0; i < 3; i++){
             int y = i * 76;
-            ExpBox box1 = new ExpBox(x - 176, y, 1, 1, 1, "null");
-            ExpBox box2 = new ExpBox(x, y, 1, 1, 1, "null");
+            ExpBox box1 = new ExpBox(x - 176, y);
+            ExpBox box2 = new ExpBox(x, y);
             boxes.add(box1);
             boxes.add(box2);
+            boxCount += 2;
         }
     }
     
@@ -76,18 +78,18 @@ public class GUIExperience extends GuiScreen {
 
         for (k = 0; k < this.buttonList.size(); ++k)
         {
-            ((GuiButton)this.buttonList.get(k)).drawButton(this.mc, x1, x2);
+            ((GuiButton)this.buttonList.get(k)).drawButton(this.mc, 0, 0);
         }
         
         for(int i = 0; i < boxes.size(); i++){
-            int num = page * i;
+            int num = (page * i);
             ExpBox box = boxes.get(i);
             if (num < Data.skillInfoList.size()){                
                 box.name = Data.skillInfoList.get(num).name;
                 box.expCurrent = Data.skillInfoList.get(num).expCurrent;
                 box.expRequired = Data.skillInfoList.get(num).expRequired;
-                box.level = Data.skillInfoList.get(num).levelCurrent;      
-                box.calcPercentage();
+                box.level = Data.skillInfoList.get(num).levelCurrent;
+                box.expOld =  Data.skillInfoList.get(num).expOld;
             } else {
                 box.name = "";
                 box.expCurrent = 0;
@@ -111,7 +113,7 @@ public class GUIExperience extends GuiScreen {
     protected void actionPerformed(GuiButton button) {
         switch(button.id){
         case 0:
-            if (page < Math.round(Data.skillInfoList.size() / 10)){
+            if (page < Math.round(Data.skillInfoList.size() / 6)){
                 page++;
             }
             break;
