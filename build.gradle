@@ -23,7 +23,7 @@ archivesBaseName = mod_name
 version = "${mc_version}-${mod_version}"
 
 minecraft {
-    version = "${mc_version}-${forge_version}"
+    version = "${mc_version}-${forge_version}-${mc_version}"
     runDir = "run"
 
     replace "@VERSION@", project.version
@@ -98,4 +98,9 @@ tasks.build.dependsOn sourceJar, javadocJar, deobfJar
 
 tasks.withType(JavaCompile) { task ->
     task.options.encoding = 'UTF-8'
+}
+
+//IDEA assets fix
+sourceSets {
+    main { output.resourcesDir = output.classesDir }
 }
