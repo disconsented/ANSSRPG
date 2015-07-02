@@ -22,8 +22,11 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.gui;
 
+import disconsented.anssrpg.Main;
+import disconsented.anssrpg.client.Data;
 import disconsented.anssrpg.gui.components.PerkInfo;
 import disconsented.anssrpg.gui.components.PerkList;
+import disconsented.anssrpg.network.Request;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -60,6 +63,11 @@ public class GUIPerk extends GuiScreen {
 
     @Override
     public void initGui() {//176
+        //Clear park data on the client and request new info
+        Data.obtainedPerks.clear();
+        Data.perkInfo.clear();
+        Main.snw.sendToServer(new Request(Request.REQUEST.ACTIVE_PERKS));
+        Main.snw.sendToServer(new Request(Request.REQUEST.OBTAINED_PERKS));
         perkList = new PerkList((width/2) - 176, (height - 240)/2);
         perkInfo = new PerkInfo(width/2, (height - 240)/2);
         //buttonList.add(new Button());
