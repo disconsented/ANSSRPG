@@ -26,24 +26,29 @@ import disconsented.anssrpg.common.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
 
 /**
  * @author Disconsented
- * 
  */
 public class PerkInfo extends ComponentBase{
     private FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
     private ResourceLocation texture = new ResourceLocation(Reference.ID, "perkinfo.png");
     private int width = 256;
     private int height = 256;
+    public String status = "Status";
+    public String description = "Description";
     public PerkInfo(int x, int y){
         this.x = x;
         this.y = y;
     }
     @Override
-    public void draw() {        
+    public void draw() {
         bindAndDrawTexture(texture, x, y, this.width, this.height);
+        this.drawString(fontRenderer, status, 9 + this.x, this.y + 197, 0xBEFF00); //9,197 158x12
+        this.drawString(fontRenderer, description, 9 + this.x, this.y + 9, 0xBEFF00); //9,9 157x180
     }
+
 
 }

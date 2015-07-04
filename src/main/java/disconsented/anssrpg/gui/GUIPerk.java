@@ -46,6 +46,8 @@ public class GUIPerk extends GuiScreen {
         //176x295
         perkList.draw();
         perkInfo.draw();
+
+
     }
 
     @Override
@@ -57,6 +59,14 @@ public class GUIPerk extends GuiScreen {
             break;
         case 2: //Prev
             break;
+        case 3: //List 1
+            break;
+        case 4: //List 2
+            break;
+        case 5: //List 3
+            break;
+        case 6: //List 4
+            break;
             
         }
     }
@@ -66,11 +76,18 @@ public class GUIPerk extends GuiScreen {
         //Clear park data on the client and request new info
         Data.obtainedPerks.clear();
         Data.perkInfo.clear();
-        Main.snw.sendToServer(new Request(Request.REQUEST.ACTIVE_PERKS));
+        Main.snw.sendToServer(new Request(Request.REQUEST.PERKS));
         Main.snw.sendToServer(new Request(Request.REQUEST.OBTAINED_PERKS));
         perkList = new PerkList((width/2) - 176, (height - 240)/2);
+        for (int i = 0; i < 4; i++) {
+            this.buttonList.add(new GuiButton(0+3,((width/2) - 176)+39,0,""));
+        }
+
         perkInfo = new PerkInfo(width/2, (height - 240)/2);
-        //buttonList.add(new Button());
+        this.buttonList.add(new GuiButton(0,0,0,"Obtain"));
+        this.buttonList.add(new GuiButton(1,0,0,"Next"));
+        this.buttonList.add(new GuiButton(2,0,0,"Prev"));
+
     }
 
     @Override

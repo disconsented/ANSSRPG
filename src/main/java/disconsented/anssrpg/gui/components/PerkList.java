@@ -26,17 +26,20 @@ import disconsented.anssrpg.common.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.ArrayList;
 
 /**
  * @author Disconsented
- *
  */
 public class PerkList extends ComponentBase{
     private FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
     private ResourceLocation texture = new ResourceLocation(Reference.ID, "perklist.png");
     private int width = 256;
     private int height = 256;
+    private String names[] = {"1","2","3","4"};
     public PerkList(int x, int y){
         this.x = x;
         this.y = y;
@@ -44,6 +47,12 @@ public class PerkList extends ComponentBase{
     @Override
     public void draw() {
         bindAndDrawTexture(texture, x, y, this.width, this.height);
-        
+        this.drawString(fontRenderer, names[0], 39 + this.x, this.y + 36, 0xBEFF00);
+        this.drawString(fontRenderer, names[1], 39 + this.x, this.y + 96, 0xBEFF00);
+        this.drawString(fontRenderer, names[2], 39 + this.x, this.y + 156, 0xBEFF00);
+        this.drawString(fontRenderer, names[3], 39 + this.x, this.y + 216, 0xBEFF00);
+    }
+    public String[] getNames(){
+        return this.names;
     }
 }
