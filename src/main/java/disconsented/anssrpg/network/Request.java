@@ -26,6 +26,9 @@ import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import io.netty.buffer.ByteBuf;
 
+/**
+ * Used to request INFORMATION from the server
+ */
 public class Request implements IMessage {
 	public enum REQUEST {PERKS, SKILLS, ACTIVE_PERKS, OBTAINED_PERKS}
 	public REQUEST request;

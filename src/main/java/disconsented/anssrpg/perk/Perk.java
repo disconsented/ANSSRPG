@@ -106,6 +106,9 @@ public abstract class Perk {
     public void touchUp() {
         searchObject();
         getSlug();
+        if (this.requirements == null) {
+            this.requirements = new ArrayList<Requirement>();
+        }
     }
 
 }

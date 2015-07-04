@@ -117,6 +117,7 @@ public class PerkContainer {
 
         }
         for (PotionSelfPerk effect : selfPotion) {
+            effect.touchUp();
             if (effect.cycle > 0){
                 PerkStore.putPerk(effect);
                 PerkStore.addPerk(effect);

@@ -24,31 +24,38 @@ package disconsented.anssrpg.network;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import disconsented.anssrpg.perk.Requirement;
 import io.netty.buffer.ByteBuf;
 
 import java.util.ArrayList;
 
 public class PerkInfo implements IMessage {
-    public String name;
-    public String description;
-    public int pointCost;
-    public ArrayList<String> requirements;
-    public int size;
-    public String slug;
+    private String name;
+    private String description;
+    private int pointCost;
+    private ArrayList<Requirement> requirements;
+    private ArrayList<String> names = new ArrayList<String>();
+    private ArrayList<String> extraData = new ArrayList<String>();
+    private ArrayList<Requirement.Action> actions = new ArrayList<Requirement.Action>();
+    private int size;
+    private String slug;
+    private boolean obtained;
 
     public PerkInfo() {
     }
 
-    public PerkInfo(String name, String description, String slug, int pointCost, ArrayList<String> requirementName, ArrayList<Integer> requirementLevel) {
+    public PerkInfo(String name, String description, String slug, int pointCost, ArrayList<Requirement> requirements, boolean obtained) {
         this.name = name;
         this.description = description;
         this.slug = slug;
         this.pointCost = pointCost;
-        requirements = new ArrayList<String>();
-        for (int i = 0; i < requirementName.size(); i++) {
-            requirements.add(requirementName.get(i) + ":" + requirementLevel.get(i));
+        for (Requirement requirement : requirements){
+            names.add(requirement.name);
+            extraData.add(requirement.extraData);
+            actions.add(requirement.action);
         }
-        size = requirements.size();
+        this.size = requirements.size();
+        this.obtained = obtained;
     }
 
     @Override
@@ -58,21 +65,53 @@ public class PerkInfo implements IMessage {
         description = ByteBufUtils.readUTF8String(buf);
         slug = ByteBufUtils.readUTF8String(buf);
         pointCost = buf.readInt();
-        requirements = new ArrayList<String>();
+        requirements = new ArrayList<Requirement>();
         for (int i = 0; i < size; i++) {
-            requirements.add(ByteBufUtils.readUTF8String(buf));
+            requirements.add(new Requirement(Requirement.Action.valueOf(ByteBufUtils.readUTF8String(buf)), ByteBufUtils.readUTF8String(buf),ByteBufUtils.readUTF8String(buf)));
         }
+        obtained = buf.readBoolean();
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeInt(size);
-        ByteBufUtils.writeUTF8String(buf, name);
-        ByteBufUtils.writeUTF8String(buf, description);
-        ByteBufUtils.writeUTF8String(buf, slug);
-        buf.writeInt(pointCost);
-        for (int i = 0; i < requirements.size(); i++) {
-            ByteBufUtils.writeUTF8String(buf, requirements.get(i));
+        ByteBufUtils.writeUTF8String(buf, getName());
+        ByteBufUtils.writeUTF8String(buf, getDescription());
+        ByteBufUtils.writeUTF8String(buf, getSlug());
+        buf.writeInt(getPointCost());
+        for (int i = 0; i < names.size(); i++) {
+            ByteBufUtils.writeUTF8String(buf, actions.get(i).name());
+            ByteBufUtils.writeUTF8String(buf, names.get(i));
+            ByteBufUtils.writeUTF8String(buf, extraData.get(i));
         }
+        buf.writeBoolean(isObtained());
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getPointCost() {
+        return pointCost;
+    }
+
+    public ArrayList<Requirement> getRequirements() {
+        ArrayList<Requirement> req = new ArrayList<Requirement>();
+        for (int i = 0; i < names.size(); i++) {
+            req.add(new Requirement(actions.get(i),names.get(i),extraData.get(i)));
+        }
+        return req;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public boolean isObtained() {
+        return obtained;
     }
 }
