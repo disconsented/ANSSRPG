@@ -31,7 +31,7 @@ import disconsented.anssrpg.handler.PlayerHandler;
 import disconsented.anssrpg.perk.Perk;
 import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
-import net.minecraft.command.ICommand;
+import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
@@ -42,7 +42,7 @@ import java.util.List;
 /**
  * @author Disconsented
  */
-public class Perks implements ICommand {
+public class Perks extends CommandBase {
     private List aliases;
 
     /**
@@ -155,6 +155,11 @@ public class Perks implements ICommand {
     public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_) {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    @Override
+    public int getRequiredPermissionLevel() {
+        return 0;
     }
 
 }

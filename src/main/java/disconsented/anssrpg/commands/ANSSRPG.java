@@ -22,24 +22,17 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg.commands;
 
-import disconsented.anssrpg.Main;
 import disconsented.anssrpg.common.Reference;
-import disconsented.anssrpg.task.TaskApplyPotion;
-import disconsented.anssrpg.task.TaskMaster;
-import net.minecraft.command.ICommand;
+import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cpw.mods.fml.common.gameevent.TickEvent.Type;
 
-public class ANSSRPG implements ICommand {
+public class ANSSRPG extends CommandBase {
     private List aliases;
 
     public ANSSRPG() {
@@ -89,6 +82,11 @@ public class ANSSRPG implements ICommand {
 
     @Override
     public int compareTo(Object o) {
+        return 0;
+    }
+
+    @Override
+    public int getRequiredPermissionLevel() {
         return 0;
     }
 }
