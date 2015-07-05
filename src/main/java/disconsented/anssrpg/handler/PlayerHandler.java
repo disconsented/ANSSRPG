@@ -114,12 +114,14 @@ public final class PlayerHandler {
                     break;
             }
             if (!cont) {
-                break;
+                toReturn = "Failed for unknown reason";
             }
         }
-        if (cont && !player.getPerkList().contains(perkSlug)) {
+        if (!player.getPerkList().contains(perkSlug)) {
             addPerk(perk, player);
             toReturn = "All conditions meet, granting perk";
+        } else {
+            toReturn = "Already have perk";
         }
         return toReturn;
     }
