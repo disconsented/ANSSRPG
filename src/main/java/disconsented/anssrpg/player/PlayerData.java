@@ -78,8 +78,8 @@ public class PlayerData {
     public void setSkillExp(HashMap<String, Integer> skillExp) {
         this.skillExp = skillExp;
     }
-    public long getSkillLevel(Skill skill){
-        return (long) SkillHandler.calculateExpForLevel(skill, this.skillExp.get(skill.name));
+    public int getSkillLevel(Skill skill){
+        return (int) SkillHandler.calculateLevelForExp(skill, this.skillExp.get(skill.name));
     }
 
     public ArrayList<Slug> getActivePerks() {
