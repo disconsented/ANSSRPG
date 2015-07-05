@@ -57,73 +57,59 @@ public final class PlayerHandler {
         player.getPerkList().add(perk.slug);
     }
 
+    /**
+     * Checks the requirements for a perk and adds it to the player if they meet them
+     * @param perkSlug
+     * @param player
+     * @return the result
+     */
     public static String addPerk(String perkSlug, PlayerData player) {
-        /*Get Perk
-         * Check requirements
-         * Logic requirements
-         * Check points
-         * deduct points
-         * attribute perk
-         * */
-        String toReturn = "error";
         Perk perk = PerkStore.getPerk(perkSlug);
         if (perk == null){
             return "No perk with that slug was found"; 
         }
-        ArrayList<Requirement> requirements;
-        if (perk.getRequirements() != null){
-            requirements = perk.getRequirements();
-        } else {
-            requirements = new ArrayList<Requirement>();
-        }
-        boolean cont = true;
+        //Cached here for readability
+        int level = 0;
+        int reqLevel = 0;
+        ArrayList<Requirement> requirements = perk.getRequirements();
         for (Requirement req : requirements) {
-            switch (req.action) {
+            if(req.action == Requirement.Action.LEVEL_EQUALS || req.action == Requirement.Action.LEVEL_GREATER || req.action == Requirement.Action.LEVEL_LESS){
+                level = player.getSkillLevel(SkillHandler.getSkill(req.name));
+                reqLevel = Integer.parseInt(req.extraData);
+            }
+            switch(req.action){
                 case DONT:
                     if (player.getPerkList().contains(req.getNameAsSlug())) {
-                        cont = false;
-                        toReturn = "Unable to grant perk, " + req.name + " was found on the player";
+                        return "Unable to grant perk, " + req.name + " was found on the player";
                     }
                     break;
                 case HAVE:
                     if (!player.getPerkList().contains(req.getNameAsSlug())) {
-                        cont = false;
-                        toReturn = "Unable to grant perk," + req.name + " could not be found on the player";
+                        return "Unable to grant perk, " + req.name + " could not be found on the player";
                     }
                     break;
                 case LEVEL_EQUALS:
-                    if (!(player.getSkillLevel(SkillHandler.getSkill(req.name)) == Integer.parseInt(req.extraData))) {
-                        cont = false;
-                        toReturn = "Unable to grant perk," + req.name + "'s level did not equal " + req.extraData;
+                    if (!(level == reqLevel)){
+                        return "Unable to grant perk, " + req.name + "'s level did not equal " + req.extraData;
                     }
                     break;
                 case LEVEL_GREATER:
-                    if (player.getSkillLevel(SkillHandler.getSkill(req.name)) < Integer.parseInt(req.extraData)) {
-                        cont = false;
-                        toReturn = "Unable to grant perk," + req.name + "'s level was less than " + req.extraData;
+                    if(level < reqLevel){
+                        return "Unable to grant perk, " + req.name + "'s level was less than " + req.extraData;
                     }
                     break;
                 case LEVEL_LESS:
-                    if (player.getSkillLevel(SkillHandler.getSkill(req.name)) > Integer.parseInt(req.extraData)) {
-                        cont = false;
-                        toReturn = "Unable to grant perk," + req.name + "'s level did not equal " + req.extraData;
+                    if(level > reqLevel){
+                        return "Unable to grant perk, " + req.name + "'s level did not equal " + req.extraData;
                     }
                     break;
-                default:
-                    cont = false;
-                    break;
-            }
-            if (!cont) {
-                toReturn = "Failed for unknown reason";
             }
         }
-        if (!player.getPerkList().contains(perkSlug)) {
-            addPerk(perk, player);
-            toReturn = "All conditions meet, granting perk";
+        if(player.getPerkList().contains(perkSlug)){
+            return "Already have "+ perkSlug;
         } else {
-            toReturn = "Already have perk";
+            return "All requirements meet; Granting " + perkSlug;
         }
-        return toReturn;
     }
 
     public static void addXp(Integer num, String skillName, PlayerData player) {
