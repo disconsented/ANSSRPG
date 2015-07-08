@@ -56,31 +56,31 @@ public class Default {
             
             perks.addPerk(new BlockPerk("Unlock: Lapis Ore",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "4"));}},
-                    "Allows you to mine Iron Ore",
+                    "Allows you to mine Lapis Ore",
                     0,
                     new ArrayList<Pair>(){{add(new Pair(null, "lapis_ore"));}}));
             
             perks.addPerk(new BlockPerk("Unlock: Gold Ore",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "9"));}},
-                    "Allows you to mine Iron Ore",
+                    "Allows you to mine Gold Ore",
                     0,
                     new ArrayList<Pair>(){{add(new Pair(null, "gold_ore"));}}));
             
             perks.addPerk(new BlockPerk("Unlock: Redstone Ore",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "14"));}},
-                    "Allows you to mine Iron Ore",
+                    "Allows you to mine Redstone Ore",
                     0,
                     new ArrayList<Pair>(){{add(new Pair(null, "redstone_ore"));}}));
             
             perks.addPerk(new BlockPerk("Unlock: Diamond Ore",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "19"));}},
-                    "Allows you to mine Iron Ore",
+                    "Allows you to mine Diamond Ore",
                     0,
                     new ArrayList<Pair>(){{add(new Pair(null, "diamond_ore"));}}));
             
             perks.addPerk(new BlockPerk("Unlock: Emerald Ore",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "24"));}},
-                    "Allows you to mine Iron Ore",
+                    "Allows you to mine Emerald Ore",
                     0,
                     new ArrayList<Pair>(){{add(new Pair(null, "emerald_ore"));}}));
             
