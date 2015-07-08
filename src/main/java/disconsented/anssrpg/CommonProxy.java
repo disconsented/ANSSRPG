@@ -25,7 +25,6 @@ package disconsented.anssrpg;
 import cpw.mods.fml.common.network.IGuiHandler;
 import disconsented.anssrpg.gui.GUIExperience;
 import disconsented.anssrpg.gui.GUIPerk;
-import disconsented.anssrpg.gui.PerkGUI;
 import disconsented.anssrpg.gui.DummyContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;

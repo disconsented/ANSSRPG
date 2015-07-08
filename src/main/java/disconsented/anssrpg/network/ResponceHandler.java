@@ -25,14 +25,14 @@ package disconsented.anssrpg.network;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import disconsented.anssrpg.client.Data;
 import disconsented.anssrpg.common.Settings;
 
 public class ResponceHandler implements IMessageHandler<Responce, IMessage> {
 
     @Override
     public IMessage onMessage(Responce message, MessageContext ctx) {
-        Settings.getInstance();
-        Settings.setStatusMessage(message.responce);
+        Data.statusMessage = message.responce;
         return null;
     }
 

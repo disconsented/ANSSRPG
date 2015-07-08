@@ -46,6 +46,8 @@ import java.util.UUID;
 
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 
+import javax.swing.text.html.parser.Entity;
+
 /**
  * @author Disconsented
  *         Handles the data that is stored on players (experience for skills and perks)
@@ -57,6 +59,9 @@ public final class PlayerHandler {
         player.getPerkList().add(perk.slug);
     }
 
+    public static String addPerk(String perkSlug, EntityPlayerMP player){
+        return addPerk(perkSlug, getPlayer(player.getUniqueID()));
+    }
     /**
      * Checks the requirements for a perk and adds it to the player if they meet them
      * @param perkSlug
@@ -108,6 +113,7 @@ public final class PlayerHandler {
         if(player.getPerkList().contains(perkSlug)){
             return "Already have "+ perkSlug;
         } else {
+            player.getPerkList().add(perk.getSlug());
             return "All requirements meet; Granting " + perkSlug;
         }
     }

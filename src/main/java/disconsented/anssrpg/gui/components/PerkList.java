@@ -47,10 +47,10 @@ public class PerkList extends ComponentBase{
     @Override
     public void draw() {
         bindAndDrawTexture(texture, x, y, this.width, this.height);
-        this.drawString(fontRenderer, names[0], 39 + this.x, this.y + 36, 0xBEFF00);
-        this.drawString(fontRenderer, names[1], 39 + this.x, this.y + 96, 0xBEFF00);
-        this.drawString(fontRenderer, names[2], 39 + this.x, this.y + 156, 0xBEFF00);
-        this.drawString(fontRenderer, names[3], 39 + this.x, this.y + 216, 0xBEFF00);
+        this.drawString(fontRenderer, names[0], 11 + this.x, this.y + 9 + 2, 0xBEFF00);
+        this.drawString(fontRenderer, names[1], 11 + this.x, this.y + 69 + 2, 0xBEFF00);
+        this.drawString(fontRenderer, names[2], 11 + this.x, this.y + 129 + 2, 0xBEFF00);
+        this.drawString(fontRenderer, names[3], 11 + this.x, this.y + 189 + 2, 0xBEFF00);
     }
     public String[] getNames(){
         return this.names;

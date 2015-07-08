@@ -26,14 +26,12 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import disconsented.anssrpg.client.Data;
-import disconsented.anssrpg.gui.PerkGUI;
-import disconsented.anssrpg.perk.LocalPerk;
 
 public class PerkInfoHandler implements IMessageHandler<PerkInfo, IMessage> {
 
     @Override
     public IMessage onMessage(PerkInfo message, MessageContext ctx) {
-        Data.perkInfo.add(message);
+        Data.perkInfo.put(message.getSlug(),message);
         return null;
     }
 

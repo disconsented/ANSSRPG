@@ -22,8 +22,7 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg.client;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 import disconsented.anssrpg.network.PerkInfo;
 import disconsented.anssrpg.network.SkillInfo;
@@ -36,8 +35,8 @@ import disconsented.anssrpg.network.SkillInfo;
 public class Data {
 	public static HashMap<String, SkillInfo> skillInfo = new HashMap<String, SkillInfo>();
 	public static ArrayList<SkillInfo> skillInfoList = new ArrayList<SkillInfo>();
-	public static ArrayList<PerkInfo> perkInfo = new ArrayList<>();
-    public static ArrayList<String> obtainedPerks = new ArrayList<>();
+	public static LinkedHashMap<String, PerkInfo> perkInfo = new LinkedHashMap<String, PerkInfo>(); //Ensures that perks are all unique, allows for easy overridng
+	public static String statusMessage = "";
 	
 
 }

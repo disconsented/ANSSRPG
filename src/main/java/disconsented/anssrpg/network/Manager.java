@@ -31,10 +31,11 @@ public class Manager {
 	
 	public static void init(){
 		Main.snw = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.ID);
-		Main.snw.registerMessage(ResponceHandler.class, Responce.class, 0, Side.SERVER);
+		Main.snw.registerMessage(ResponceHandler.class, Responce.class, 0, Side.CLIENT);
 		Main.snw.registerMessage(PerkInfoHandler.class, PerkInfo.class, 1, Side.CLIENT);
 		Main.snw.registerMessage(RequestHandler.class, Request.class, 2, Side.SERVER);
 		Main.snw.registerMessage(SkillInfoHandler.class, SkillInfo.class, 3, Side.CLIENT);
+		Main.snw.registerMessage(PerkRequestHandler.class, PerkRequest.class, 4, Side.SERVER);
 	}
 
 }

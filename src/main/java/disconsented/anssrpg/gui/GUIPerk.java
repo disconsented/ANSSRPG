@@ -24,13 +24,18 @@ package disconsented.anssrpg.gui;
 
 import disconsented.anssrpg.Main;
 import disconsented.anssrpg.client.Data;
-import disconsented.anssrpg.gui.components.PerkInfo;
+import disconsented.anssrpg.gui.components.PerkControls;
 import disconsented.anssrpg.gui.components.PerkList;
+import disconsented.anssrpg.network.PerkInfo;
+import disconsented.anssrpg.network.PerkRequest;
 import disconsented.anssrpg.network.Request;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.ScaledResolution;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Disconsented
@@ -38,56 +43,145 @@ import net.minecraft.client.gui.ScaledResolution;
  */
 public class GUIPerk extends GuiScreen {
     private PerkList perkList; 
-    private PerkInfo perkInfo;
+    private PerkControls perkControls;
+    private int page = 0;
+    private PerkInfo selected = null;
+    private ArrayList<PerkInfo> info = new ArrayList<PerkInfo>();
+    private List<PerkInfo> subList = new ArrayList<>();
+
 
     @Override
     public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_) {
+        //Clearing then filling the ArrayList (this is where information is pulled from)
+        info.clear();
+        for(Map.Entry<String, PerkInfo> entry : Data.perkInfo.entrySet()){
+            info.add(entry.getValue());
+        }
+
+        //Resetting GUI elements
+        for (int i = 0; i < 4; i++) {
+            GuiButton button = (GuiButton)buttonList.get(i+3);
+            button.enabled = true;
+        }
+
+        //Putting the current info into the sublist
+        int start = page * 4;
+        int end = ((page+1)*4);
+        if(info.size() < 1){
+            subList = new ArrayList<PerkInfo>();
+        } else if(start < info.size() && end < info.size()){ //Normal
+            subList = info.subList(start, end);
+        } else if (start < info.size() && end >= info.size()){//end is to high
+            subList = info.subList(start, info.size()-1);
+        }
+
         drawDefaultBackground();
-        //176x295
+
+        for (int i = 0; i < 4; i++) {
+            if(subList.size()-1 >= i){
+                if(subList.get(i).isObtained()){
+                    GuiButton button = (GuiButton)buttonList.get(i+3);
+                    button.enabled = false;
+                } else {
+                    perkList.getNames()[i] = subList.get(i).getName();
+                    GuiButton button = (GuiButton)buttonList.get(i+3);
+                    button.enabled = true;
+                }
+            } else {
+                GuiButton button = (GuiButton)buttonList.get(i+3);
+                button.enabled = false;
+                perkList.getNames()[i] = "";
+            }
+        }
+
+
+
+        if(selected != null) {
+            perkControls.description = selected.getDescription();
+        } else {
+            perkControls.description = "";
+        }
+
+        perkControls.status = Data.statusMessage;
+
         perkList.draw();
-        perkInfo.draw();
+        perkControls.draw();
 
-
+        for(Object button : this.buttonList){
+            GuiButton toDraw = (GuiButton) button;
+            toDraw.drawButton(Minecraft.getMinecraft(), 0, 0);
+        }
     }
 
     @Override
     protected void actionPerformed(GuiButton button) {
         switch(button.id){
         case 0: //Obtain
+            if (selected != null) {
+                Main.snw.sendToServer(new PerkRequest(selected.getSlug()));
+                Main.snw.sendToServer(new Request(Request.REQUEST.PERKS));
+            }
             break;
         case 1: //Next
+            int x = Math.round(this.info.size() / 4);
+            if (page < x){
+                page++;
+            }
             break;
         case 2: //Prev
+            if(page > 0)
+            {
+                page--;
+            }
             break;
         case 3: //List 1
+            if(subList.size() > 0)
+            selected = subList.get(0);
             break;
         case 4: //List 2
+            if(subList.size() > 1)
+            selected = subList.get(1);
             break;
         case 5: //List 3
+            if(subList.size() > 2)
+            selected = subList.get(2);
             break;
         case 6: //List 4
+            if(subList.size() > 3)
+            selected = subList.get(3);
             break;
-            
+
         }
     }
 
     @Override
     public void initGui() {//176
+        this.buttonList = new <GuiButton>ArrayList();
+
         //Clear park data on the client and request new info
-        Data.obtainedPerks.clear();
         Data.perkInfo.clear();
+        Data.statusMessage = "";
         Main.snw.sendToServer(new Request(Request.REQUEST.PERKS));
-        Main.snw.sendToServer(new Request(Request.REQUEST.OBTAINED_PERKS));
         perkList = new PerkList((width/2) - 176, (height - 240)/2);
+        //39,36
+        //39,96
+        //39,156
+        //39,216
+        perkControls = new PerkControls(width/2, (height - 240)/2);
+        //id,x,y,width,height,string
+
+        //Order of when these are added matters as I retrieve them by their index not id
+        int commonX = (width/2) + 7;
+        int commonY = ((height - 240)/2) + 215;
+        this.buttonList.add(new GuiButton(0, commonX+54, commonY, 54, 20, "Obtain"));
+        this.buttonList.add(new GuiButton(1, commonX, commonY, 54, 20, "Next"));
+        this.buttonList.add(new GuiButton(2, commonX+108, commonY, 54, 20, "Prev"));
+
         for (int i = 0; i < 4; i++) {
-            this.buttonList.add(new GuiButton(0+3,((width/2) - 176)+39,0,""));
+            //this.buttonList.add(new GuiButton(0+3,,0,""));
+            int y = ((height - 240)/2) - 25 + (i+1) * 60;
+            this.buttonList.add(new GuiButton(i + 3, ((width/2) - 176)+38, y, 102, 20, "Select"));
         }
-
-        perkInfo = new PerkInfo(width/2, (height - 240)/2);
-        this.buttonList.add(new GuiButton(0,0,0,"Obtain"));
-        this.buttonList.add(new GuiButton(1,0,0,"Next"));
-        this.buttonList.add(new GuiButton(2,0,0,"Prev"));
-
     }
 
     @Override
