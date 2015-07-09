@@ -86,7 +86,7 @@ public class EntityDamage {
             
             for(EntitySkill skill : skillStore){
                 for(Triplet entry : skill.exp){
-                    if(Utils.MatchObject(event.entity, -1, entry.object, -1)){
+                    if(Utils.MatchEntity(event.entity, entry)){
                       if (requiresPerk) {
                           if (!PlayerHandler.hasPerk(playerData, slugList) || !PlayerHandler.isWielding(skill, player)) {
                               PlayerHandler.taskFail(player);
