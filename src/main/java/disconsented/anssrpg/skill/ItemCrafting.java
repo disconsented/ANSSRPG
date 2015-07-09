@@ -67,7 +67,7 @@ public class ItemCrafting {
               for (ItemSkill skill : skillStore){
                   for (Quad entry : skill.exp){
                       if(Utils.MatchObject(entry.object, entry.metadata, item, stack.getItemDamage())){
-                          if (PlayerHandler.hasPerk(playerData, slugList)){
+                          if (!PlayerHandler.hasPerk(playerData, slugList) && requiresPerk){
                               player.closeScreen();
                               PlayerHandler.taskFail(player);
                           }

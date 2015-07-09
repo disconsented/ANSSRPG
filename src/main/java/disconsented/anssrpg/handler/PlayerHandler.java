@@ -185,6 +185,9 @@ public final class PlayerHandler {
     }
 
     public static boolean hasPerk(PlayerData player, ArrayList<Slug> slugList) {
+        if(player == null || slugList == null){//Null check
+            return false;
+        }
         for (Slug slug : slugList) {
             for(Slug current : player.getPerkList()) {
                 if(slug.getSlug().equals(current.getSlug()))
