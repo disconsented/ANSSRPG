@@ -184,7 +184,7 @@ public final class PlayerHandler {
         return player.getPerkList().contains(perk.getSlug());
     }
 
-    public static boolean hasPerk(PlayerData player, ArrayList<Slug> slugList) {
+    /*public static boolean hasPerk(PlayerData player, ArrayList<Slug> slugList) {
         if(player == null || slugList == null){//Null check
             return false;
         }
@@ -192,6 +192,26 @@ public final class PlayerHandler {
             for(Slug current : player.getPerkList()) {
                 if(slug.getSlug().equals(current.getSlug()))
                 return true;
+            }
+        }
+        return false;
+    }*/
+
+    /**
+     * Takes a player and perkList and will return true if they have any of the perks in the list
+     * @param player
+     * @param perkList
+     * @return result
+     */
+    public static boolean hasPerk(PlayerData player, ArrayList<? extends Perk> perkList){
+        if(player == null || perkList == null){//Null check
+            return false;
+        }
+        for (Perk perk : perkList){
+            for(Slug slug : player.getPerkList()){
+                if(slug.getSlug().equals(perk.getSlug().getSlug())){
+                    return true;
+                }
             }
         }
         return false;
