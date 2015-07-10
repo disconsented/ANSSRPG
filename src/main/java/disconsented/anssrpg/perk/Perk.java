@@ -40,11 +40,7 @@ public abstract class Perk {
     @Expose
     public int pointCost = 0;
 
-    public Perk() {
-        requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
-        requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
-        requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
-    }
+    public Perk() {  } // Blank constructor for Gson
 
     public Perk(String name, ArrayList<Requirement> requirements, String description, int pointCost) {
         this.name = name;
