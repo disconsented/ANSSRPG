@@ -24,14 +24,15 @@ package disconsented.anssrpg.config;
 
 import java.util.ArrayList;
 
-import scala.actors.threadpool.Arrays;
 import disconsented.anssrpg.common.PotionDefinition;
 import disconsented.anssrpg.common.Quad;
-import disconsented.anssrpg.common.Pair;
+import disconsented.anssrpg.common.ObjectPerkDefinition;
 import disconsented.anssrpg.common.Triplet;
 import disconsented.anssrpg.perk.*;
 import disconsented.anssrpg.perk.Requirement.Action;
 import disconsented.anssrpg.skill.objects.*;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 
 /**
  * Contains the information for the default configs so it can be referenced as needed
@@ -52,76 +53,76 @@ public class Default {
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "4"));}},
                     "Allows you to mine Iron Ore",
                     0,
-                    new ArrayList<Pair>(){{add(new Pair(null, "iron_ore"));}}));
+                    new ArrayList<ObjectPerkDefinition<Block>>(){{add(new ObjectPerkDefinition(null, "iron_ore", 0));}}));
             
             perks.addPerk(new BlockPerk("Unlock: Lapis Ore",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "4"));}},
                     "Allows you to mine Lapis Ore",
                     0,
-                    new ArrayList<Pair>(){{add(new Pair(null, "lapis_ore"));}}));
+                    new ArrayList<ObjectPerkDefinition<Block>>(){{add(new ObjectPerkDefinition(null, "lapis_ore", 0));}}));
             
             perks.addPerk(new BlockPerk("Unlock: Gold Ore",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "9"));}},
                     "Allows you to mine Gold Ore",
                     0,
-                    new ArrayList<Pair>(){{add(new Pair(null, "gold_ore"));}}));
+                    new ArrayList<ObjectPerkDefinition<Block>>(){{add(new ObjectPerkDefinition(null, "gold_ore", 0));}}));
             
             perks.addPerk(new BlockPerk("Unlock: Redstone Ore",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "14"));}},
                     "Allows you to mine Redstone Ore",
                     0,
-                    new ArrayList<Pair>(){{add(new Pair(null, "redstone_ore"));}}));
+                    new ArrayList<ObjectPerkDefinition<Block>>(){{add(new ObjectPerkDefinition(null, "redstone_ore", -1));}}));
             
             perks.addPerk(new BlockPerk("Unlock: Diamond Ore",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "19"));}},
                     "Allows you to mine Diamond Ore",
                     0,
-                    new ArrayList<Pair>(){{add(new Pair(null, "diamond_ore"));}}));
+                    new ArrayList<ObjectPerkDefinition<Block>>(){{add(new ObjectPerkDefinition(null, "diamond_ore", 0));}}));
             
             perks.addPerk(new BlockPerk("Unlock: Emerald Ore",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "24"));}},
                     "Allows you to mine Emerald Ore",
                     0,
-                    new ArrayList<Pair>(){{add(new Pair(null, "emerald_ore"));}}));
+                    new ArrayList<ObjectPerkDefinition<Block>>(){{add(new ObjectPerkDefinition(null, "emerald_ore", 0));}}));
             
             perks.addPerk(new ItemPerk("Unlock: Gold Armour", 
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Armouring", "4"));}},
                     "Allows you to craft Gold armour",
                     0,
-                    new ArrayList<Pair>(){{
-                        add(new Pair(null, "golden_helmet"));
-                        add(new Pair(null, "golden_chestplate"));
-                        add(new Pair(null, "golden_leggings"));
-                        add(new Pair(null, "golden_boots"));
+                    new ArrayList<ObjectPerkDefinition<Item>>(){{
+                        add(new ObjectPerkDefinition(null, "golden_helmet",0));
+                        add(new ObjectPerkDefinition(null, "golden_chestplate",0));
+                        add(new ObjectPerkDefinition(null, "golden_leggings",0));
+                        add(new ObjectPerkDefinition(null, "golden_boots",0));
                         }}));
             
             perks.addPerk(new ItemPerk("Unlock: Iron Armour",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Armouring", "9"));}},
                     "Allows you to craft Iron armour",
                     0,
-                    new ArrayList<Pair>(){{
-                        add(new Pair(null, "iron_helmet"));
-                        add(new Pair(null, "iron_chestplate"));
-                        add(new Pair(null, "iron_leggings"));
-                        add(new Pair(null, "iron_boots"));
+                    new ArrayList<ObjectPerkDefinition<Item>>(){{
+                        add(new ObjectPerkDefinition(null, "iron_helmet",0));
+                        add(new ObjectPerkDefinition(null, "iron_chestplate",0));
+                        add(new ObjectPerkDefinition(null, "iron_leggings",0));
+                        add(new ObjectPerkDefinition(null, "iron_boots",0));
                         }}));
             
             perks.addPerk(new ItemPerk("Unlock: Diamond Armour",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Armouring", "14"));}},
                     "Allows you to craft Diamond armour",
                     0,
-                    new ArrayList<Pair>(){{
-                        add(new Pair(null, "diamond_helmet"));
-                        add(new Pair(null, "diamond_chestplate"));
-                        add(new Pair(null, "diamond_leggings"));
-                        add(new Pair(null, "diamond_boots"));
+                    new ArrayList<ObjectPerkDefinition<Item>>(){{
+                        add(new ObjectPerkDefinition(null, "diamond_helmet",0));
+                        add(new ObjectPerkDefinition(null, "diamond_chestplate",0));
+                        add(new ObjectPerkDefinition(null, "diamond_leggings",0));
+                        add(new ObjectPerkDefinition(null, "diamond_boots",0));
                         }}));
             
             perks.addPerk(new EntityPerk("Creeper killer",
                     new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Slaying", "4"));}},
                     "Allows Creepers to be killed",
                     0,
-                    new ArrayList<Pair>(){{add (new Pair(null,"Creeper"));}}));
+                    new ArrayList<ObjectPerkDefinition<Class>>(){{add (new ObjectPerkDefinition(null,"Creeper",0));}}));
             
             perks.addPerk(new PotionSelfPerk("Health boost", null, "Provides a 10 second shield", 0, 
                     new ArrayList<PotionDefinition>(){{
