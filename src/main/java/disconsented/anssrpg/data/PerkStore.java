@@ -22,14 +22,14 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.data;
 
-import disconsented.anssrpg.common.Pair;
-import disconsented.anssrpg.common.Triplet;
+import disconsented.anssrpg.common.ObjectPerkDefinition;
 import disconsented.anssrpg.perk.*;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -40,9 +40,9 @@ import java.util.HashMap;
 public class PerkStore {
     private static ArrayList<Perk> perks = new ArrayList<Perk>();
     /*String needs to be a name unique to each object type*/
-    private static HashMap<String, ArrayList<Slug>> blockMap = new HashMap<String, ArrayList<Slug>>();
-    private static HashMap<String, ArrayList<Slug>> entityMap = new HashMap<String, ArrayList<Slug>>();
-    private static HashMap<String, ArrayList<Slug>> itemMap = new HashMap<String, ArrayList<Slug>>();
+    private static HashMap<String, ArrayList<BlockPerk>> blockMap = new HashMap<String, ArrayList<BlockPerk>>();
+    private static HashMap<String, ArrayList<EntityPerk>> entityMap = new HashMap<String, ArrayList<EntityPerk>>();
+    private static HashMap<String, ArrayList<ItemPerk>> itemMap = new HashMap<String, ArrayList<ItemPerk>>();
     private static ArrayList<TitlePerk> titlePerks = new ArrayList<TitlePerk>();
     private static HashMap<String, ArrayList<Slug>> interactionBlockMap = new HashMap<String, ArrayList<Slug>>();
     private static ArrayList<PotionSelfPerk> potionSelf = new ArrayList<PotionSelfPerk>();
@@ -81,68 +81,89 @@ public class PerkStore {
         return perks;
     }
 
-    public static ArrayList<Slug> getSlugs(Block block) {
+    /**
+     * Takes a Block and returns an ArrayList of the associated perks
+     * @param block
+     * @return
+     */
+    public static ArrayList<BlockPerk> getPerks(Block block){
         return blockMap.get(block.getUnlocalizedName());
-
     }
 
-    public static ArrayList<Slug> getSlugs(Entity entity) {
-        return entityMap.get(entity.getClass().getSimpleName());
-
-    }
-
-    public static ArrayList<Slug> getSlugs(Item item) {
+    /**
+     * Takes a Item and returns an ArrayList of the associated perks
+     * @param item
+     * @return
+     */
+    public static ArrayList<ItemPerk> getPerks(Item item){
         return itemMap.get(item.getUnlocalizedName());
-
-    }
-    
-    public static ArrayList<Slug> getSlugs(PlayerInteractEvent event){
-        return new ArrayList<Slug>();
     }
 
+    /**
+     * Takes a Entity(in the form of a class object) and returns an ArrayList of the associated perks
+     * @param entity
+     * @return
+     */
+    public static ArrayList<EntityPerk> getPerks(Class entity){
+        return entityMap.get(entity.getSimpleName());
+    }
+
+
+    /**
+     * Safely stores any perk that is used in a map
+     * @param abstractMap
+     * @param perk
+     * @param name - Name that storage is based off
+     */
+    private static <t> void putPerk(AbstractMap<String, ArrayList<t>> abstractMap, t perk, String name){
+        ArrayList<t> cachePerkList = abstractMap.get(name);
+        if (cachePerkList != null){
+            cachePerkList.add(perk);
+        } else {
+            ArrayList<t> newPerkList = new ArrayList<t>();
+            newPerkList.add(perk);
+            abstractMap.put(name, newPerkList);
+        }
+    }
+
+    /**
+     * Stores BlockPerks based on the unlocalized names of the objects in its collection
+     * @param block: BlockPerk
+     */
     public static void putPerk(BlockPerk block) {
         perks.add(block);
-        for (Pair object : block.blocks){
+        for (ObjectPerkDefinition object : block.blocks){
             Block cache = (Block) object.object;
-            if (blockMap.containsKey(cache.getUnlocalizedName())) {
-                blockMap.get(cache.getUnlocalizedName()).add(block.slug);
-            } else {
-                ArrayList<Slug> temp = new ArrayList<Slug>();
-                temp.add(block.slug);
-                blockMap.put(cache.getUnlocalizedName(), temp);
-            }
+            putPerk(blockMap, block, cache.getUnlocalizedName());
         }
-        
+
     }
 
+    /**
+     * Stores BlockPerks based on the class names of the objects in its collection
+     * Class names are used as there is no registry that provides objects unlike for items and blocks
+     * @param entity: EntityPerk
+     */
     public static void putPerk(EntityPerk entity) {
         perks.add(entity);
-        for (Pair object : entity.entities){
+        for (ObjectPerkDefinition object : entity.entities){
             Class cache = (Class) object.object;
-            if (entityMap.containsKey(cache.getSimpleName())) {
-                entityMap.get(cache.getSimpleName()).add(entity.slug);
-            } else {
-                ArrayList<Slug> temp = new ArrayList<Slug>();
-                temp.add(entity.slug);
-                entityMap.put(cache.getSimpleName(), temp);
-            }
+                putPerk(entityMap, entity, cache.getSimpleName());
         }
 
     }
 
+    /**
+     * Stores BlockPerks based on the unlocalized names of the objects in its collection
+     * @param item: ItemPerk
+     */
     public static void putPerk(ItemPerk item) {
         perks.add(item);
-        for (Pair object : item.items){
+        for (ObjectPerkDefinition object : item.items){
             Item cache = (Item) object.object;
-            if (itemMap.containsKey(cache.getUnlocalizedName())) {
-                itemMap.get(cache.getUnlocalizedName()).add(item.slug);
-            } else {
-                ArrayList<Slug> temp = new ArrayList<Slug>();
-                temp.add(item.slug);
-                itemMap.put(cache.getUnlocalizedName(), temp);
-            }
+            putPerk(itemMap, item, cache.getUnlocalizedName());
         }
-        
+
     }
     
     public static void putPerk(TitlePerk title) {
