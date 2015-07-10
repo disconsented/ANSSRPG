@@ -47,7 +47,7 @@ import disconsented.anssrpg.skill.objects.ItemSkill;
  *         ItemCrafted handles just giving XP
  */
 public class ItemCrafting {
-  public void onPlayerOpenCrafting(PlayerOpenContainerEvent event) {
+  /*public void onPlayerOpenCrafting(PlayerOpenContainerEvent event) {
       if (event.entityPlayer instanceof EntityPlayerMP){
           Container container = event.entityPlayer.openContainer;
           if ((container instanceof net.minecraft.inventory.ContainerWorkbench || container instanceof net.minecraft.inventory.ContainerPlayer) &&
@@ -96,5 +96,5 @@ public class ItemCrafting {
             }
         }        
     }
-
+*/
 }

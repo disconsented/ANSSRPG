@@ -58,7 +58,7 @@ public class FMLBUS {
     
     @SubscribeEvent
     public void onItemCraftedEvent(ItemCraftedEvent event) {
-        new ItemCrafting().onItemCraftedEvent(event);
+        //new ItemCrafting().onItemCraftedEvent(event);
     }
     
     @SubscribeEvent 

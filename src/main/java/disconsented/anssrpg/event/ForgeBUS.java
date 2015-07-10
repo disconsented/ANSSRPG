@@ -41,7 +41,7 @@ public class ForgeBUS {
         new BlockBreaking().onBreakEvent(event);
     }
     
-    @SubscribeEvent
+    /*@SubscribeEvent
     public void onLivingHurtEvent(LivingHurtEvent event) {
         new EntityDamage().onLivingHurtEvent(event);
     }
@@ -49,11 +49,11 @@ public class ForgeBUS {
     @SubscribeEvent
     public void onLivingDeathEvent(LivingDeathEvent event) {
         new EntityDamage().onLivingDeathEvent(event);
-    }
+    }*/
     
     @SubscribeEvent
     public void onPlayerOpenCrafting(PlayerOpenContainerEvent event) {
-        new ItemCrafting().onPlayerOpenCrafting(event);
+        //new ItemCrafting().onPlayerOpenCrafting(event);
     }
     
 //    @SubscribeEvent

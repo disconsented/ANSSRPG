@@ -41,7 +41,7 @@ import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.EntitySkill;
 
-public class EntityDamage {
+public class EntityDamage {/*
     public void onLivingDeathEvent(LivingDeathEvent event) {
         if (event.source.getEntity() instanceof EntityPlayerMP){
             EntityPlayerMP player = (EntityPlayerMP) event.source.getEntity();
@@ -97,5 +97,5 @@ public class EntityDamage {
                 }
             }
         }
-    }
+    }*/
 }
