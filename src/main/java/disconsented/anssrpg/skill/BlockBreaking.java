@@ -28,6 +28,10 @@ package disconsented.anssrpg.skill;
 
 import java.util.ArrayList;
 
+import disconsented.anssrpg.common.ObjectPerkDefinition;
+import disconsented.anssrpg.gui.components.PerkList;
+import disconsented.anssrpg.perk.BlockPerk;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import disconsented.anssrpg.common.Quad;
@@ -46,30 +50,43 @@ public class BlockBreaking {
         if (event.getPlayer() instanceof EntityPlayerMP){
             EntityPlayerMP player = (EntityPlayerMP) event.getPlayer();
             PlayerData playerData = PlayerStore.getPlayer(player);
-            ArrayList<Slug> slugList = PerkStore.getSlugs(event.block);
+            ArrayList<BlockPerk> perkList = PerkStore.getPerks(event.block);
             ArrayList<BlockSkill> skillStore = SkillStore.getInstance().getBlockSkill();
-            Boolean requiresPerk = false;
-            
-            if (slugList != null){
-                requiresPerk = true;
-            }
-            
+
             for(BlockSkill skill : skillStore){
                 for(Quad entry : skill.exp){
                     if(Utils.MatchObject(entry.object, entry.metadata, event.block, event.blockMetadata)){
-                      if (requiresPerk) {
-                          if (PlayerHandler.hasPerk(playerData, slugList)) {
+                      if (requiresPerk(perkList, event.block, event.blockMetadata)) {
+                          if (PlayerHandler.hasPerk(playerData, perkList)) {
                               PlayerHandler.awardToolXP(player, skill, entry.experience);
                               } else {
                                   PlayerHandler.taskFail(player);
                                   event.setCanceled(true);
+                              return;
                               }
                           } else {
-                              PlayerHandler.awardToolXP(player, skill, entry.experience);
+                                PlayerHandler.awardToolXP(player, skill, entry.experience);
+                                return;
                           }
                     }
                 }
             }
         }
     }
+
+    private boolean requiresPerk(ArrayList<BlockPerk> perkList, Block block, int metadata){
+        if(perkList != null) {
+            for (BlockPerk perk : perkList) {
+                for (ObjectPerkDefinition definition : perk.blocks)
+                {
+                    if(Utils.MatchObject(definition.object, definition.metadata, block, metadata)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return  false;
+    }
 }
+
+
