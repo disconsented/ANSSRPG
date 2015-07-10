@@ -33,15 +33,15 @@ public class Utils {
      * @param metadata2
      * @return
      */
-    public static boolean MatchObject(Object object1, int metadata1, Object object2, int metadata2){
-        if (metadata1 > -1 || metadata2 > -1){
-            if (object1.equals(object2) && metadata1 == metadata2){
+    public static<T> boolean MatchObject(T object1, int metadata1, T object2, int metadata2){
+        if (metadata1 > -1 && metadata2 > -1){
+            if (object1.getClass().equals(object2.getClass()) && metadata1 == metadata2){
                 return true;
             } else {
                 return false;
             }
         } else {
-            if (object1.equals(object2)){
+            if (object1.getClass().equals(object2.getClass())){
                 return true;
             } else {
                 return false;
