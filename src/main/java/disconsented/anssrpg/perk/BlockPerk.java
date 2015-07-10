@@ -29,36 +29,36 @@ import net.minecraft.block.Block;
 import com.google.gson.annotations.Expose;
 
 import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.common.Pair;
+import disconsented.anssrpg.common.ObjectPerkDefinition;
 
 public class BlockPerk extends Perk {
 
     @Expose
-    public ArrayList<Pair> blocks = new ArrayList<Pair>();
+    public ArrayList<ObjectPerkDefinition<Block>> blocks = new ArrayList<ObjectPerkDefinition<Block>>();
 
     public BlockPerk() {
         super();
     }
 
     public BlockPerk(String name, ArrayList<Requirement> requirements,
-                     String description, int pointCost, ArrayList<Pair> blocks) {
+                     String description, int pointCost, ArrayList<ObjectPerkDefinition<Block>> blocks) {
         super(name, requirements, description, pointCost);
         this.blocks = blocks;
     }
 
     @Override
     public void searchObject() {
-        ArrayList<Pair> initalised = new ArrayList<Pair>();
-        for(Pair object : blocks){
-            object.object = (Block) Block.blockRegistry.getObject(object.name);
+        ArrayList<ObjectPerkDefinition<Block>> initialised = new ArrayList<ObjectPerkDefinition<Block>>();
+        for(ObjectPerkDefinition object : blocks){
+            object.object = Block.blockRegistry.getObject(object.name);
             if (object.object != null){
                 Logging.debug(object.name + " has been found. Passing on.");
-                initalised.add(object);
+                initialised.add(object);
             } else {
                 Logging.error(object.name + " has not been found. Skipping");
             }
         }
-        this.blocks = initalised;    
+        this.blocks = initialised;
     }
     
 }

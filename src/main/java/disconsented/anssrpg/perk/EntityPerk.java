@@ -32,36 +32,36 @@ import net.minecraft.entity.EntityList;
 import com.google.gson.annotations.Expose;
 
 import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.common.Pair;
+import disconsented.anssrpg.common.ObjectPerkDefinition;
 
 public class EntityPerk extends Perk {
 
     @Expose
-    public ArrayList<Pair> entities = new ArrayList<Pair>();
+    public ArrayList<ObjectPerkDefinition<Class>> entities = new ArrayList<ObjectPerkDefinition<Class>>();
 
     public EntityPerk() {
         super();
     }
 
     public EntityPerk(String name, ArrayList<Requirement> requirements,
-                      String description, int pointCost, ArrayList<Pair> entities) {
+                      String description, int pointCost, ArrayList<ObjectPerkDefinition<Class>> entities) {
         super(name, requirements, description, pointCost);
         this.entities = entities;
     }
 
     @Override
     public void searchObject() {
-        ArrayList<Pair> initalised = new ArrayList<Pair>();
-        for(Pair object : entities){
+        ArrayList<ObjectPerkDefinition<Class>> initialised = new ArrayList<ObjectPerkDefinition<Class>>();
+        for(ObjectPerkDefinition object : entities){
             object.object = (Class) EntityList.stringToClassMapping.get(object.name);
             if (object.object != null){
                 Logging.debug(object.name + " has been found. Passing on.");
-                initalised.add(object);
+                initialised.add(object);
             } else {
                 Logging.error(object.name + " has not been found. Skipping");
             }
         }
-        this.entities = initalised;    
+        this.entities = initialised;
     }
 
 }
