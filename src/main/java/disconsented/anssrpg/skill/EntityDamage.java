@@ -28,6 +28,9 @@ package disconsented.anssrpg.skill;
 
 import java.util.ArrayList;
 
+import disconsented.anssrpg.common.ObjectPerkDefinition;
+import disconsented.anssrpg.perk.EntityPerk;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -41,28 +44,22 @@ import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.EntitySkill;
 
-public class EntityDamage {/*
+public class EntityDamage {
     public void onLivingDeathEvent(LivingDeathEvent event) {
         if (event.source.getEntity() instanceof EntityPlayerMP){
             EntityPlayerMP player = (EntityPlayerMP) event.source.getEntity();
             PlayerData playerData = PlayerStore.getPlayer(player);
-            ArrayList<Slug> slugList = PerkStore.getSlugs(event.entity);
+            ArrayList<EntityPerk> perkList = PerkStore.getPerks(event.entity.getClass());
             ArrayList<EntitySkill> skillStore = SkillStore.getInstance().getEntitySkill();
-            Boolean requiresPerk = false;
-            
-            if (slugList != null){
-                requiresPerk = true;
-            }
-            
+
             for(EntitySkill skill : skillStore){
                 for(Triplet entry : skill.exp){
-                    if(Utils.MatchEntity(event.entity, entry)){
-                      if (requiresPerk) {
-                          if (PlayerHandler.hasPerk(playerData, slugList)) {
-                              PlayerHandler.awardToolXP(player, skill, entry.experience);
+                    if(Utils.MatchObject(event.entity.getClass(), entry.object)){
+                      if (requiresPerk(perkList, event.entity)) {
+                          if (PlayerHandler.hasPerk(playerData, perkList)) {
+                                    PlayerHandler.awardToolXP(player, skill, entry.experience);
                               } else {
                                   PlayerHandler.taskFail(player);
-                                  event.setCanceled(true);
                               }
                           } else {
                               PlayerHandler.awardToolXP(player, skill, entry.experience);
@@ -76,19 +73,15 @@ public class EntityDamage {/*
         if (event.source.getEntity() instanceof EntityPlayerMP){
             EntityPlayerMP player = (EntityPlayerMP) event.source.getEntity();
             PlayerData playerData = PlayerStore.getPlayer(player);
-            ArrayList<Slug> slugList = PerkStore.getSlugs(event.entity);
+            ArrayList<EntityPerk> perkList = PerkStore.getPerks(event.entity.getClass());
             ArrayList<EntitySkill> skillStore = SkillStore.getInstance().getEntitySkill();
-            Boolean requiresPerk = false;
-            
-            if (slugList != null){
-                requiresPerk = true;
-            }
+
             
             for(EntitySkill skill : skillStore){
                 for(Triplet entry : skill.exp){
-                    if(Utils.MatchEntity(event.entity, entry)){
-                      if (requiresPerk) {
-                          if (!PlayerHandler.hasPerk(playerData, slugList) || !PlayerHandler.isWielding(skill, player)) {
+                    if(Utils.MatchObject(event.entity.getClass(), entry.object)){
+                      if (requiresPerk(perkList, event.entity)) {
+                          if (!PlayerHandler.hasPerk(playerData, perkList) || !PlayerHandler.isWielding(skill, player)) {
                               PlayerHandler.taskFail(player);
                               event.ammount = 1;
                           }
@@ -97,5 +90,19 @@ public class EntityDamage {/*
                 }
             }
         }
-    }*/
+    }
+
+    private static boolean requiresPerk(ArrayList<EntityPerk> perkList, Entity entity){
+        if(perkList != null) {
+            for (EntityPerk perk : perkList) {
+                for (ObjectPerkDefinition<Class> definition : perk.entities)
+                {
+                    if(Utils.MatchObject(definition.object, entity.getClass())){
+                        return true;
+                    }
+                }
+            }
+        }
+        return  false;
+    }
 }

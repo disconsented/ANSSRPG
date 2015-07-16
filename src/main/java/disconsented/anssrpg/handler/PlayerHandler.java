@@ -220,7 +220,14 @@ public final class PlayerHandler {
     public static void taskFail(EntityPlayer player) {
         player.addChatComponentMessage(new ChatComponentText("You are unable to preform this task"));
     }
-    
+
+    /**
+     * Checks that the entity is weilding the associated tool
+     * If a tool is not required always returns true
+     * @param skill
+     * @param player
+     * @return
+     */
     public static boolean isWielding(ToolSkill skill, EntityPlayer player){
         if(skill.toolClass == net.minecraft.item.Item.class){
             return true;

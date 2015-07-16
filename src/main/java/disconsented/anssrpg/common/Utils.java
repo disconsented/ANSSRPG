@@ -49,8 +49,8 @@ public class Utils {
         }
     }
     
-    public static boolean MatchEntity(Entity entity, Triplet triplet){
-        return entity.getClass().equals(triplet.object);        
+    public static boolean MatchObject(Object item1, Object item2){
+        return item1.equals(item2) || item1 == item2;
     }
 
     /**

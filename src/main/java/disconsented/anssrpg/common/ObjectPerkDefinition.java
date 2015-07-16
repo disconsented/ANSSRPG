@@ -33,6 +33,7 @@ public class ObjectPerkDefinition<O>{
     @Expose
     public String name;
     public Object object;
+    @Expose
     public int metadata;
 
 }

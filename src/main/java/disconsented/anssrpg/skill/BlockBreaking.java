@@ -29,7 +29,6 @@ package disconsented.anssrpg.skill;
 import java.util.ArrayList;
 
 import disconsented.anssrpg.common.ObjectPerkDefinition;
-import disconsented.anssrpg.gui.components.PerkList;
 import disconsented.anssrpg.perk.BlockPerk;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -40,7 +39,6 @@ import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
 import disconsented.anssrpg.data.SkillStore;
 import disconsented.anssrpg.handler.PlayerHandler;
-import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.BlockSkill;
 
@@ -74,7 +72,7 @@ public class BlockBreaking {
         }
     }
 
-    private boolean requiresPerk(ArrayList<BlockPerk> perkList, Block block, int metadata){
+    private static boolean requiresPerk(ArrayList<BlockPerk> perkList, Block block, int metadata){
         if(perkList != null) {
             for (BlockPerk perk : perkList) {
                 for (ObjectPerkDefinition definition : perk.blocks)

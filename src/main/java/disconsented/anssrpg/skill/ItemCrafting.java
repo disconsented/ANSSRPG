@@ -24,6 +24,11 @@ package disconsented.anssrpg.skill;
 
 import java.util.ArrayList;
 
+import disconsented.anssrpg.common.ObjectPerkDefinition;
+import disconsented.anssrpg.gui.components.PerkList;
+import disconsented.anssrpg.perk.BlockPerk;
+import disconsented.anssrpg.perk.ItemPerk;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
@@ -43,11 +48,10 @@ import disconsented.anssrpg.skill.objects.ItemSkill;
  * @author James
  *         Handles crafting, both gaining XP and restricting use
  *         PlayerOpenContainer needs to handle blocking, checking for the output and what is in the crafting matrix (Maybe to expensive to compute/?) - For now just checking output, remember to ask about matrix gating in feedback
- *         I need to add a onCraftingMatrix changed event
  *         ItemCrafted handles just giving XP
  */
 public class ItemCrafting {
-  /*public void onPlayerOpenCrafting(PlayerOpenContainerEvent event) {
+  public void onPlayerOpenCrafting(PlayerOpenContainerEvent event) {
       if (event.entityPlayer instanceof EntityPlayerMP){
           Container container = event.entityPlayer.openContainer;
           if ((container instanceof net.minecraft.inventory.ContainerWorkbench || container instanceof net.minecraft.inventory.ContainerPlayer) &&
@@ -56,18 +60,13 @@ public class ItemCrafting {
               ItemStack stack = (ItemStack)player.openContainer.inventoryItemStacks.get(0);
               Item item = stack.getItem();             
               PlayerData playerData = PlayerStore.getPlayer(player);
-              ArrayList<Slug> slugList = PerkStore.getSlugs(item);
+              ArrayList<ItemPerk> perkList = PerkStore.getPerks(item);
               ArrayList<ItemSkill> skillStore = SkillStore.getInstance().getItemSkill();
-              Boolean requiresPerk = false;
-              
-              if (slugList != null){
-                  requiresPerk = true;
-              }
               
               for (ItemSkill skill : skillStore){
                   for (Quad entry : skill.exp){
                       if(Utils.MatchObject(entry.object, entry.metadata, item, stack.getItemDamage())){
-                          if (!PlayerHandler.hasPerk(playerData, slugList) && requiresPerk){
+                          if (!PlayerHandler.hasPerk(playerData, perkList) && requiresPerk(perkList,item, stack.getItemDamage())){
                               player.closeScreen();
                               PlayerHandler.taskFail(player);
                           }
@@ -96,5 +95,19 @@ public class ItemCrafting {
             }
         }        
     }
-*/
+
+    private static boolean requiresPerk(ArrayList<ItemPerk> perkList, Item item, int metadata){
+        if(perkList != null) {
+            for (ItemPerk perk : perkList) {
+                for (ObjectPerkDefinition definition : perk.items)
+                {
+                    if(Utils.MatchObject(definition.object, definition.metadata, item, metadata)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return  false;
+    }
+
 }
