@@ -63,19 +63,23 @@ public class PlayerFile {
      */
 
     public static void writePlayer(PlayerData player) {
-        File dataFolder = Settings.getFolder();
-        File dataLocation = new File(dataFolder, player.getPlayerID()+".json");
-        dataFolder.mkdirs();
-        Gson gson = new Gson();
-        String json = gson.toJson(player);
         try {
+            File dataFolder = Settings.getFolder();
+            File dataLocation = new File(dataFolder, player.getPlayerID()+".json");
+            dataFolder.mkdirs();
+            Gson gson = new Gson();
+            String json = gson.toJson(player);
             //write converted json data to a file named "file.json"
             FileWriter writer = new FileWriter(dataLocation);
             writer.write(json);
             writer.close();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            Logging.error(e.getLocalizedMessage());
+        }
+        catch (Exception e){
+            Logging.error(e.getLocalizedMessage());
+            Logging.error(e.getStackTrace());
         }
     }
 }
