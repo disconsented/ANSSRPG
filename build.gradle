@@ -103,9 +103,11 @@ sourceSets {
     main { output.resourcesDir = output.classesDir }
 }
 
-task tagRelease << {
+task tagRelease {
     repo.tag.add {
         name = version
         message = "Release of ${version}"
+        force = true
+        pointsTo = gitHash
     }
 }
