@@ -15,7 +15,9 @@ notifications:
    - "irc.esper.net#Disconsented "
   template:
    - "%{build_number} (%{branch} - %{commit}: %{commit_message} : %{author}): %{message} (%{build_url}) "
+   
 before_deploy:
+  - "echo 'Attempting to deploy'"
   - ls ./build/libs/
   - gradle tagRelease
 deploy:
