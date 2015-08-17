@@ -12,7 +12,7 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-        classpath 'org.ajoberstar:gradle-git:0.10.1'
+        classpath 'org.ajoberstar:gradle-git:1.2.0'
     }
 }
 
