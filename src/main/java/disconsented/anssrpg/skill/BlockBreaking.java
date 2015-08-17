@@ -29,9 +29,11 @@ package disconsented.anssrpg.skill;
 import java.util.ArrayList;
 
 import disconsented.anssrpg.common.ObjectPerkDefinition;
+import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.perk.BlockPerk;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import disconsented.anssrpg.common.Quad;
 import disconsented.anssrpg.common.Utils;
@@ -45,8 +47,16 @@ import disconsented.anssrpg.skill.objects.BlockSkill;
 public class BlockBreaking {
 
     public void onBreakEvent(BreakEvent event) {
-        if (event.getPlayer() instanceof EntityPlayerMP){
+        if (event.getPlayer() instanceof FakePlayer){
+            if(Settings.isBlockFakePlayers()){
+                event.setCanceled(true);
+            }
+            return;
+        } else if (event.getPlayer() instanceof EntityPlayerMP){
             EntityPlayerMP player = (EntityPlayerMP) event.getPlayer();
+            System.out.println(player.getEntityId());
+            player.setEntityId(20);
+            System.out.println(player.getEntityId()+"|");
             PlayerData playerData = PlayerStore.getPlayer(player);
             ArrayList<BlockPerk> perkList = PerkStore.getPerks(event.block);
             ArrayList<BlockSkill> skillStore = SkillStore.getInstance().getBlockSkill();

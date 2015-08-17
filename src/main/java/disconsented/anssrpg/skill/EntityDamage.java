@@ -29,9 +29,11 @@ package disconsented.anssrpg.skill;
 import java.util.ArrayList;
 
 import disconsented.anssrpg.common.ObjectPerkDefinition;
+import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.perk.EntityPerk;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import disconsented.anssrpg.common.Triplet;
@@ -46,7 +48,9 @@ import disconsented.anssrpg.skill.objects.EntitySkill;
 
 public class EntityDamage {
     public void onLivingDeathEvent(LivingDeathEvent event) {
-        if (event.source.getEntity() instanceof EntityPlayerMP){
+        if (event.source.getEntity() instanceof FakePlayer){
+            return;//Skipping
+        } else if (event.source.getEntity() instanceof EntityPlayerMP){
             EntityPlayerMP player = (EntityPlayerMP) event.source.getEntity();
             PlayerData playerData = PlayerStore.getPlayer(player);
             ArrayList<EntityPerk> perkList = PerkStore.getPerks(event.entity.getClass());
@@ -70,7 +74,12 @@ public class EntityDamage {
         }
     }
     public void onLivingHurtEvent(LivingHurtEvent event) {
-        if (event.source.getEntity() instanceof EntityPlayerMP){
+        if (event.source.getEntity() instanceof FakePlayer){
+            if(Settings.isBlockFakePlayers()){
+                event.setCanceled(true);
+            }
+            return;
+        } else if (event.source.getEntity() instanceof EntityPlayerMP){
             EntityPlayerMP player = (EntityPlayerMP) event.source.getEntity();
             PlayerData playerData = PlayerStore.getPlayer(player);
             ArrayList<EntityPerk> perkList = PerkStore.getPerks(event.entity.getClass());

@@ -40,6 +40,8 @@ public class Settings {
     private static double pointsRatio = .2;
     private static boolean externalConfig = false;
     private static boolean requiredOnClient = true;
+
+    private static boolean blockFakePlayers = true;
     /**
      * 0 - Disabled
      * 1 - Points awarded based on XP from skills
@@ -76,6 +78,10 @@ public class Settings {
         return pointsMode;
     }
 
+    public static boolean isBlockFakePlayers() {
+        return blockFakePlayers;
+    }
+
     public static void setPointsMode(int int1) {
         pointsMode = int1;
     }
@@ -101,6 +107,7 @@ public class Settings {
 
         pointsRatio = config.get(balancing, "pointsRatio", .2, "Points ratio settings.").getDouble();
         pointsMode = config.get(balancing, "pointsMode", 1, "Points Mode. \n0 - Disabled \n1 - Points awarded based on XP from skills \n2 - Points can be converted from vanilla levels").getInt();
+        blockFakePlayers = config.getBoolean("blockUnknownFakePlayers",balancing,true,"Enables fake players that are not associated with a real player being blocked by default(where appropriate)");
 
         debug = config.get(misc, "enableDebugMode", false, "Enables debugging features. Meant for development use.").getBoolean();
         logging = config.get(misc, "enableLogging", true, "Enables logging to console.").getBoolean();
