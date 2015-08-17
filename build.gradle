@@ -104,7 +104,7 @@ sourceSets {
 }
 
 task tagRelease {
-    println 'Attempting to apply tag {$version} to commit {$gitHash}'
+    println 'Attempting to apply tag ' + version + ' to commit ' + gitHash
     repo.tag.add {
         name = version
         message = "Release of ${version}"
