@@ -12,7 +12,7 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-        classpath 'org.ajoberstar:gradle-git:0.10.1'
+        classpath 'org.ajoberstar:gradle-git:1.2.0'
     }
 }
 
@@ -103,9 +103,12 @@ sourceSets {
     main { output.resourcesDir = output.classesDir }
 }
 
-task tagRelease << {
+task tagRelease {
+    println 'Attempting to apply tag ' + version + ' to commit ' + gitHash
     repo.tag.add {
         name = version
         message = "Release of ${version}"
+        force = true
+        pointsTo = gitHash
     }
 }

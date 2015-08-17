@@ -7,6 +7,10 @@ cache:
     - .gradle
 sudo: false
 install: true
+branches:
+  only:
+    - master
+    - build
 script:
   - gradle build --stacktrace
 notifications:
@@ -26,6 +30,7 @@ deploy:
     secure: VhPE7D1RUg5NVYN5NijQElRCBXcwG4GLFIv3Tl4OdShL2/V8VkCn8FgNnvIsYPR2J95QfYkmop2H2Fjxztni/tF8hun5qS+VAzgVjE8mep53NQ4VsfkVGcHQAMsjqELe3njGeecZs8RI2cxhPSBexvlBflakhi1cq2GlYEaeBeY=
   file_glob: true
   file: ./build/libs/*.jar
+  skip_cleanup: true
   on:
     repo: disconsented/ANSSRPG
     all_branches: true
