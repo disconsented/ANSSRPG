@@ -104,6 +104,7 @@ sourceSets {
 }
 
 task tagRelease {
+  doLast {
     println 'Attempting to apply tag ' + version + ' to commit ' + gitHash
     repo.tag.add {
         name = version
@@ -111,4 +112,5 @@ task tagRelease {
         force = true
         pointsTo = gitHash
     }
+  }
 }
