@@ -105,8 +105,8 @@ sourceSets {
 }
 
 task tagRelease {
-    println'$TEST'
-    println'Did it work?'
+    println"$test -??????"
+    println"Did it work?"
     doLast {
     repo.tag.add {
         name = version
