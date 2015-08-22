@@ -13,17 +13,15 @@ branches:
     - build
 script:
   - gradle build --stacktrace
-notifications:
- irc:
-  channels:
-   - "irc.esper.net#Disconsented "
-  template:
-   - "%{build_number} (%{branch} - %{commit}: %{commit_message} : %{author}): %{message} (%{build_url}) "
+#notifications:
+# irc:
+#  channels:
+#   - "irc.esper.net#Disconsented "
+#  template:
+#   - "%{build_number} (%{branch} - %{commit}: %{commit_message} : %{author}): %{message} (%{build_url}) "
    
 before_deploy:
-  - "echo 'Attempting to deploy'"
-  - ls ./build/libs/
-  - gradle tagRelease
+  - gradle tagRelease -Pusr=USER -Ppsw=PASS --info --stacktrace
 deploy:
   provider: releases
   api_key:
