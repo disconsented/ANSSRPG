@@ -105,7 +105,7 @@ sourceSets {
 }
 
 task tagRelease {
-    println'System.getenv('TEST')'
+    println'$TEST'
     println'Did it work?'
     doLast {
     repo.tag.add {

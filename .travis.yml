@@ -22,6 +22,8 @@ script:
    
 before_deploy:
   - "echo 'Attempting to deploy'"
+  - "echo '$TEST'"
+  - "echo 'TEST'"
   - ls ./build/libs/
   - gradle tagRelease -Pusr=USER -Ppwd=PASS --stacktrace
 deploy:
