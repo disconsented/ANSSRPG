@@ -105,9 +105,9 @@ sourceSets {
 }
 
 task tagRelease {
-    println"$test -??????"
-    println"Did it work?"
     doLast {
+    System.setProperty("org.ajoberstar.grgit.auth.username","$usr")
+    System.setProperty("org.ajoberstar.grgit.auth.password","$psw")
     repo.tag.add {
         name = version
         message = "Release of ${version}"
