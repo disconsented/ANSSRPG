@@ -23,7 +23,7 @@ notifications:
 before_deploy:
   - "echo 'Attempting to deploy'"
   - ls ./build/libs/
-  - gradle tagRelease -Pusr=USER -Ppwd=PASS
+  - gradle tagRelease -Pusr=USER -Ppwd=PASS --stacktrace
 deploy:
   provider: releases
   api_key:
