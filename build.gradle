@@ -105,8 +105,9 @@ sourceSets {
 }
 
 task tagRelease {
+    println'System.getenv('TEST')'
+    println'Did it work?'
     doLast {
-    println 'Attempting to apply tag ' + version + ' to commit ' + gitHash
     repo.tag.add {
         name = version
         message = "Release of ${version}"
