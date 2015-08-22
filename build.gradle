@@ -106,6 +106,7 @@ sourceSets {
 
 task tagRelease {
     println'System.getenv('TEST')'
+    println'Did it work?'
     doLast {
     repo.tag.add {
         name = version
