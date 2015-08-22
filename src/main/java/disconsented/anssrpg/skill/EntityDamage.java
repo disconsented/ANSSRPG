@@ -28,16 +28,13 @@ package disconsented.anssrpg.skill;
 
 import java.util.ArrayList;
 
-import disconsented.anssrpg.common.ObjectPerkDefinition;
-import disconsented.anssrpg.common.Settings;
+import disconsented.anssrpg.common.*;
 import disconsented.anssrpg.perk.EntityPerk;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import disconsented.anssrpg.common.Triplet;
-import disconsented.anssrpg.common.Utils;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
 import disconsented.anssrpg.data.SkillStore;
@@ -48,9 +45,11 @@ import disconsented.anssrpg.skill.objects.EntitySkill;
 
 public class EntityDamage {
     public void onLivingDeathEvent(LivingDeathEvent event) {
-        if (event.source.getEntity() instanceof FakePlayer){
-            return;//Skipping
-        } else if (event.source.getEntity() instanceof EntityPlayerMP){
+        boolean isFakePlayer = event.source.getEntity() instanceof FakePlayer;
+        if (isFakePlayer && !Settings.isBlockFakePlayers()){
+            return;
+        }
+        if (event.source.getEntity() instanceof EntityPlayerMP){
             EntityPlayerMP player = (EntityPlayerMP) event.source.getEntity();
             PlayerData playerData = PlayerStore.getPlayer(player);
             ArrayList<EntityPerk> perkList = PerkStore.getPerks(event.entity.getClass());
@@ -63,7 +62,17 @@ public class EntityDamage {
                           if (PlayerHandler.hasPerk(playerData, perkList)) {
                                     PlayerHandler.awardToolXP(player, skill, entry.experience);
                               } else {
-                                  PlayerHandler.taskFail(player);
+                                  if (!isFakePlayer) {
+                                      PlayerHandler.taskFail(player);
+                                      event.entity.captureDrops = true;
+                                      return;
+                                  } else {
+                                      if (Settings.isBlockFakePlayers()) {
+                                          Logging.debug("Fake player blocked at " + player.chunkCoordX + "," + player.chunkCoordY + "," + player.chunkCoordZ);
+                                          event.entity.captureDrops = true;
+                                          return;
+                                      }
+                                  }
                               }
                           } else {
                               PlayerHandler.awardToolXP(player, skill, entry.experience);
