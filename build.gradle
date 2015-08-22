@@ -34,6 +34,7 @@ def mod_version = "v${mod_version_major}.${mod_version_minor}."+gitHash
 version = "${mc_version}-${mod_version}"
 
 
+
 minecraft {
     version = "${mc_version}-${forge_version}-${mc_version}"
     runDir = "run"
@@ -104,13 +105,21 @@ sourceSets {
 }
 
 task tagRelease {
-  doLast {
+    doFirst {
+        System.setProperty("org.ajoberstar.grgit.auth.username","$usr")
+        System.setProperty("org.ajoberstar.grgit.auth.password","$pwd")
+        System.setProperty("ajoberstar.grgit.auth.interactive.allow","false")
+    }
+    doLast {
     println 'Attempting to apply tag ' + version + ' to commit ' + gitHash
     repo.tag.add {
         name = version
         message = "Release of ${version}"
         force = true
         pointsTo = gitHash
+    }
+    repo.push{
+        tags = true
     }
   }
 }

@@ -23,7 +23,7 @@ notifications:
 before_deploy:
   - "echo 'Attempting to deploy'"
   - ls ./build/libs/
-  - gradle tagRelease
+  - gradle tagRelease -Pusr=$USER -Ppwd=$PASS
 deploy:
   provider: releases
   api_key:
