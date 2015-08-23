@@ -108,6 +108,7 @@ task tagRelease {
     doLast {
         println "Example test: $ex"
     System.setProperty("org.ajoberstar.grgit.auth.username","$usr")
+        println "Examle test post: "+ System.getProperty("org.ajoberstar.grgit.auth.username")
     System.setProperty("org.ajoberstar.grgit.auth.password","$psw")
     repo.tag.add {
         name = version
