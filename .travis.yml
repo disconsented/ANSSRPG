@@ -22,7 +22,7 @@ script:
 #   - "%{build_number} (%{branch} - %{commit}: %{commit_message} : %{author}): %{message} (%{build_url}) "
    
 before_deploy:
-  - gradle tagRelease -Pusr=USER -Ppsw=PASS -Pex=USER --debug --stacktrace --info
+  - gradle tagRelease -Pusr=$USER -Ppsw=$PASS -Pex=$USER --debug --stacktrace --info
 deploy:
   provider: releases
   api_key:
