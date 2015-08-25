@@ -104,20 +104,15 @@ sourceSets {
     main { output.resourcesDir = output.classesDir }
 }
 
-task tagRelease {
-    doLast {
-        println "Example test: $ex"
-    System.setProperty("org.ajoberstar.grgit.auth.username","$usr")
-        println "Examle test post: "+ System.getProperty("org.ajoberstar.grgit.auth.username")
-    System.setProperty("org.ajoberstar.grgit.auth.password","$psw")
-    repo.tag.add {
-        name = version
-        message = "Release of ${version}"
-        force = true
-        pointsTo = gitHash
-    }
-    repo.push{
-        tags = true
-    }
+apply plugin: 'org.ajoberstar.github-pages'
+
+githubPages {
+  System.setProperty("org.ajoberstar.grgit.auth.username","$usr")        
+  System.setProperty("org.ajoberstar.grgit.auth.password","$psw")
+  repoUri = 'https://github.com/disconsented/ANSSRPG.git'
+  deleteExistingFiles = false
+  pages {
+    from(file('build/libs/')) 
+    into 'files/'
   }
 }
