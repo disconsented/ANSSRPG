@@ -13,8 +13,8 @@ install: true
 #    - build
 
 before_install:
-  - ls .git/
-  - ls .git/config
+  - cat .git/config
+  - sed -i 's/git:/https:/g' .git/config
   - cat .git/config
 #script:
 #  - gradle build publishGhPages
