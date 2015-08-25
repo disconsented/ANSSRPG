@@ -15,8 +15,9 @@ install: true
 before_install:
   - ls .git/
   - ls .git/config
-script:
-  - gradle build publishGhPages
+  - cat .git/config
+#script:
+#  - gradle build publishGhPages
 #notifications:
 # irc:
 #  channels:
