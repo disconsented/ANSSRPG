@@ -116,3 +116,19 @@ githubPages {
     into 'files/'
   }
 }
+
+task tagRelease {
+    doLast {
+        System.setProperty("org.ajoberstar.grgit.auth.username","$usr")
+        System.setProperty("org.ajoberstar.grgit.auth.password","$psw")
+        repo.tag.add {
+            name = version
+            message = "Release of ${version}"
+            force = true
+            pointsTo = gitHash
+        }
+        repo.push{
+            tags = true
+        }
+    }
+}
