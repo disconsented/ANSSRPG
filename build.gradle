@@ -104,19 +104,6 @@ sourceSets {
     main { output.resourcesDir = output.classesDir }
 }
 
-apply plugin: 'org.ajoberstar.github-pages'
-
-githubPages {
-  System.setProperty("org.ajoberstar.grgit.auth.username","$usr")        
-  System.setProperty("org.ajoberstar.grgit.auth.password","$psw")
-  repoUri = 'https://github.com/disconsented/ANSSRPG.git'
-  deleteExistingFiles = false
-  pages {
-    from(file('build/libs/')) 
-    into 'files/'
-  }
-}
-
 task tagRelease {
     doLast {
         System.setProperty("org.ajoberstar.grgit.auth.username","$usr")
