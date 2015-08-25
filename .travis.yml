@@ -7,15 +7,19 @@ cache:
     - .gradle
 sudo: false
 install: true
-branches:
-  only:
-    - master
-    - build
+#branches:
+#  only:
+#    - master
+#    - build
+
+before_install:
+  - ls .git/
+  - ls .git/config
 script:
   - gradle build publishGhPages
-notifications:
- irc:
-  channels:
-   - "irc.esper.net#Disconsented "
-  template:
-   - "%{build_number} (%{branch} - %{commit}: %{commit_message} : %{author}): %{message} (%{build_url}) "
+#notifications:
+# irc:
+#  channels:
+#   - "irc.esper.net#Disconsented "
+#  template:
+#   - "%{build_number} (%{branch} - %{commit}: %{commit_message} : %{author}): %{message} (%{build_url}) "
