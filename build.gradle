@@ -104,6 +104,7 @@ sourceSets {
     main { output.resourcesDir = output.classesDir }
 }
 
+tasks.tagRelease.dependsOn build
 task tagRelease {
     doLast {
         System.setProperty("org.ajoberstar.grgit.auth.username","$usr")
@@ -111,7 +112,6 @@ task tagRelease {
         repo.tag.add {
             name = version
             message = "Release of ${version}"
-            force = true
             pointsTo = gitHash
         }
         repo.push{
