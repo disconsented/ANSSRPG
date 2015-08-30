@@ -24,8 +24,11 @@ package disconsented.anssrpg.perk;
 
 import java.util.ArrayList;
 
+import disconsented.anssrpg.handler.PlayerHandler;
+import disconsented.anssrpg.player.PlayerData;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.PotionEffect;
 
 import com.google.gson.annotations.Expose;
@@ -41,11 +44,12 @@ import disconsented.anssrpg.task.TaskMaster;
 public class PotionSelfPerk extends Perk implements ActivePerk{
     
     public PotionSelfPerk(String name, ArrayList<Requirement> requirements, String description, int pointCost, 
-            ArrayList<PotionDefinition> effects, boolean repeat, int cycle){
+            ArrayList<PotionDefinition> effects, boolean repeat, int cycle, int maxCycles){
         super(name, requirements, description, pointCost);
         this.repeat = repeat;
         this.cycle = cycle;
         this.effects = effects;
+        this.maxCycles = maxCycles;
     }
     public PotionSelfPerk(){}
     
@@ -55,13 +59,16 @@ public class PotionSelfPerk extends Perk implements ActivePerk{
     public boolean repeat = false;
     @Expose
     public int cycle = 1;
+    @Expose
+    public int maxCycles = 10;
     @Override
     public void searchObject() {}
     @Override
     public void activate(EntityLivingBase target, EntityLivingBase source) {
+        PlayerHandler.getPlayer(((EntityPlayerMP) target).getUniqueID());
         for (PotionDefinition effect : effects){
             TaskMaster.getInstance().addTask(new TaskApplyPotion(
-                    (EntityLivingBase) target, new PotionEffect(effect.id, effect.duration, effect.amplifier), null, repeat, cycle, slug));
+                    (EntityLivingBase) target, new PotionEffect(effect.id, effect.duration, effect.amplifier), null, repeat, cycle, maxCycles, slug));
         }        
         
     }

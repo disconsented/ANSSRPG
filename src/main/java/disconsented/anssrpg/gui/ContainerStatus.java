@@ -19,28 +19,18 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
-package disconsented.anssrpg.network;
+ */
+package disconsented.anssrpg.gui;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.relauncher.Side;
-import disconsented.anssrpg.Main;
-import disconsented.anssrpg.common.Reference;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 
-public class Manager {
-	
-	public static void init(){
-
-		Main.snw = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.ID);
-		SimpleNetworkWrapper snw = Main.snw;
-		snw.registerMessage(ResponceHandler.class, Responce.class, 0, Side.CLIENT);
-		snw.registerMessage(PerkInfoHandler.class, PerkInfo.class, 1, Side.CLIENT);
-		snw.registerMessage(RequestHandler.class, Request.class, 2, Side.SERVER);
-		snw.registerMessage(SkillInfoHandler.class, SkillInfo.class, 3, Side.CLIENT);
-		snw.registerMessage(PerkRequestHandler.class, PerkRequest.class, 4, Side.SERVER);
-		snw.registerMessage(PlayerStatusHandler.class, PlayerStatus.class, 5, Side.CLIENT);
-        snw.registerMessage(ActivePerksHandler.class, ActivePerks.class, 6, Side.CLIENT);
-	}
-
+/**
+ * Created by Disconsented on 30/08/2015.
+ */
+public class ContainerStatus extends Container {
+    @Override
+    public boolean canInteractWith(EntityPlayer p_75145_1_) {
+        return true;
+    }
 }

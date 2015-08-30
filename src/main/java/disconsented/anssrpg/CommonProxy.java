@@ -23,9 +23,7 @@ THE SOFTWARE.
 package disconsented.anssrpg;
 
 import cpw.mods.fml.common.network.IGuiHandler;
-import disconsented.anssrpg.gui.GUIExperience;
-import disconsented.anssrpg.gui.GUIPerk;
-import disconsented.anssrpg.gui.DummyContainer;
+import disconsented.anssrpg.gui.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -35,8 +33,7 @@ public class CommonProxy implements IGuiHandler {
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        //return null; //If you use inventory slots this comes into play, I haven't experimented with how
-        return new DummyContainer();
+       return new DummyContainer();
     }
 
     @Override
@@ -47,8 +44,7 @@ public class CommonProxy implements IGuiHandler {
         case 1:
             return new GUIPerk();
         case 2:
-            //return new GUIStatus();            
-            return null;
+            return new GUIStatus();
         default:
             return null;
         }

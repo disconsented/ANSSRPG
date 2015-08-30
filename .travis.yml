@@ -11,17 +11,12 @@ branches:
   only:
     - master
     - build
+
+before_install:
+  - sed -i 's/git:/https:/g' .git/config
 script:
-  - gradle build --stacktrace
-#notifications:
-# irc:
-#  channels:
-#   - "irc.esper.net#Disconsented "
-#  template:
-#   - "%{build_number} (%{branch} - %{commit}: %{commit_message} : %{author}): %{message} (%{build_url}) "
-   
-before_deploy:
-  - gradle tagRelease -Pusr=USER -Ppsw=PASS --info --stacktrace
+  - gradle build tagRelease -Pusr=$USER -Ppsw=$PASS -Pex=$USER
+
 deploy:
   provider: releases
   api_key:
@@ -32,3 +27,15 @@ deploy:
   on:
     repo: disconsented/ANSSRPG
     all_branches: true
+    tags: true
+
+notifications:
+ irc:
+  channels:
+   - "irc.esper.net#Disconsented "
+  use_notice: true
+  skip_join: true
+  template:
+   - "%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}"
+   - "Change view : %{compare_url}"
+   - "Build details : %{build_url}"

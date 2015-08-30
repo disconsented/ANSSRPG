@@ -27,8 +27,10 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 public abstract class Task/* implements Comparable<TaskApplyPotion>*/{
 	
 	private int tick = 0;
+    private int totalTicks = 0;
 	protected boolean repeat = false;
 	protected int cycle = 1;
+	protected  int maxTicks = 1;
 	protected TickEvent.Type type = null;
 	/**
 	 * Called when the task is first added to the master
@@ -77,6 +79,14 @@ public abstract class Task/* implements Comparable<TaskApplyPotion>*/{
 	}
 	
 	public boolean canRepeat(){
-        return this.repeat;
+        if(totalTicks > maxTicks && maxTicks > 0){
+			return this.repeat = false;
+		}
+			return this.repeat;
+    }
+
+    public void increaseTick(){
+        this.tick++;
+        this.totalTicks++;
     }
 }

@@ -28,9 +28,14 @@ import io.netty.buffer.ByteBuf;
 
 /**
  * Used to request INFORMATION from the server
+ * PERKS will return all perks
+ * SKILLS will return all the skills on which the player has information for
+ * ACTIVE_PERKS will return all perks current active on the player
+ * START_TRACKING will start sending updates to the player about their status
+ * STOP_TRACKING will stop the information tracking
  */
 public class Request implements IMessage {
-	public enum REQUEST {PERKS, SKILLS, ACTIVE_PERKS, OBTAINED_PERKS}
+	public enum REQUEST {PERKS, SKILLS, ACTIVE_PERKS, OBTAINED_PERKS, START_TRACKING, STOP_TRACKING}
 	public REQUEST request;
     
 	public Request(){};

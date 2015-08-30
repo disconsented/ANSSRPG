@@ -36,6 +36,8 @@ import disconsented.anssrpg.handler.SkillHandler;
 import disconsented.anssrpg.perk.Perk;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.Skill;
+import disconsented.anssrpg.task.TaskMaster;
+import disconsented.anssrpg.task.TaskPlayerStatusTrack;
 import net.minecraft.entity.player.EntityPlayerMP;
 
 /**
@@ -73,6 +75,14 @@ public class RequestHandler implements IMessageHandler<Request, IMessage> {
 				}
 			}
 			break;
+            //Loads the task which sends the player their information for the gui
+            case START_TRACKING:
+                TaskMaster.getInstance().addTask(new TaskPlayerStatusTrack(player));
+                break;
+            //Stops the task from sending updates to the client
+            case STOP_TRACKING:
+                player.getEntityData().setBoolean(TaskPlayerStatusTrack.TAG_STATUS_OPEN, false);
+                break;
 		default:
 			break;
        

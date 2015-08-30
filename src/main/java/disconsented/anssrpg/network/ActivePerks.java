@@ -19,28 +19,37 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.network;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.relauncher.Side;
-import disconsented.anssrpg.Main;
-import disconsented.anssrpg.common.Reference;
+import cpw.mods.fml.common.network.ByteBufUtils;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import disconsented.anssrpg.perk.ActivePerk;
+import io.netty.buffer.ByteBuf;
 
-public class Manager {
-	
-	public static void init(){
+import java.util.ArrayList;
 
-		Main.snw = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.ID);
-		SimpleNetworkWrapper snw = Main.snw;
-		snw.registerMessage(ResponceHandler.class, Responce.class, 0, Side.CLIENT);
-		snw.registerMessage(PerkInfoHandler.class, PerkInfo.class, 1, Side.CLIENT);
-		snw.registerMessage(RequestHandler.class, Request.class, 2, Side.SERVER);
-		snw.registerMessage(SkillInfoHandler.class, SkillInfo.class, 3, Side.CLIENT);
-		snw.registerMessage(PerkRequestHandler.class, PerkRequest.class, 4, Side.SERVER);
-		snw.registerMessage(PlayerStatusHandler.class, PlayerStatus.class, 5, Side.CLIENT);
-        snw.registerMessage(ActivePerksHandler.class, ActivePerks.class, 6, Side.CLIENT);
-	}
+/**
+ * Created by j on 30/08/2015.
+ */
+public class ActivePerks implements IMessage {
+    public ArrayList<String> activePerks;
+    public ActivePerks(){}
+    public ActivePerks(ArrayList<String> activePerks){this.activePerks = activePerks;}
+    @Override
+    public void toBytes(ByteBuf buf) {
+        buf.writeInt(activePerks.size());
+        for (String string : activePerks)
+        ByteBufUtils.writeUTF8String(buf, string);
+    }
 
+    @Override
+    public void fromBytes(ByteBuf buf) {
+        int i = buf.readInt();
+        activePerks = new ArrayList<String>();
+        for (int j = 0; j < i; j++) {
+            activePerks.add(ByteBufUtils.readUTF8String(buf));
+        }
+
+    }
 }
