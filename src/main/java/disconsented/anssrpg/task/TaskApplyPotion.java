@@ -22,8 +22,6 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.task;
 
-import java.util.ArrayList;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.PotionEffect;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -46,13 +44,14 @@ public class TaskApplyPotion extends TaskTrackPlayer{
         this.cycle = cycle;
     }
     
-    public TaskApplyPotion(EntityLivingBase entity, PotionEffect effect, TickEvent.Type type, boolean repeat, int cycle, Slug slug){
+    public TaskApplyPotion(EntityLivingBase entity, PotionEffect effect, TickEvent.Type type, boolean repeat, int cycle, int maxCycles, Slug slug){
         this.entity = entity;
         this.effect = effect;
         this.type = type;
         this.repeat = repeat;
         this.cycle = cycle;
         this.slug = slug;
+        this.maxTicks = maxCycles;
     }
 
     /* (non-Javadoc)
