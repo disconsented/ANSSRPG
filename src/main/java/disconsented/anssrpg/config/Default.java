@@ -126,8 +126,8 @@ public class Default {
             
             perks.addPerk(new PotionSelfPerk("Health boost", null, "Provides a 10 second shield", 0, 
                     new ArrayList<PotionDefinition>(){{
-                add(new PotionDefinition(21,1,200));}},
-                false, 1));
+                add(new PotionDefinition(21,1,20));}},
+                true, 20, 200));
             
             return perks;
             
