@@ -62,6 +62,7 @@ public class TaskMaster{
 				
 				if (currentTask.canProcess(event)){
 					currentTask.onTick(event);
+					currentTask.increaseTick();
 					
 					if (currentTask.canRepeat()){
 						queue.offer(currentTask);
