@@ -23,6 +23,7 @@ THE SOFTWARE.
 package disconsented.anssrpg.network;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import disconsented.anssrpg.Main;
 import disconsented.anssrpg.common.Reference;
@@ -30,12 +31,16 @@ import disconsented.anssrpg.common.Reference;
 public class Manager {
 	
 	public static void init(){
+
 		Main.snw = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.ID);
-		Main.snw.registerMessage(ResponceHandler.class, Responce.class, 0, Side.CLIENT);
-		Main.snw.registerMessage(PerkInfoHandler.class, PerkInfo.class, 1, Side.CLIENT);
-		Main.snw.registerMessage(RequestHandler.class, Request.class, 2, Side.SERVER);
-		Main.snw.registerMessage(SkillInfoHandler.class, SkillInfo.class, 3, Side.CLIENT);
-		Main.snw.registerMessage(PerkRequestHandler.class, PerkRequest.class, 4, Side.SERVER);
+		SimpleNetworkWrapper snw = Main.snw;
+		snw.registerMessage(ResponceHandler.class, Responce.class, 0, Side.CLIENT);
+		snw.registerMessage(PerkInfoHandler.class, PerkInfo.class, 1, Side.CLIENT);
+		snw.registerMessage(RequestHandler.class, Request.class, 2, Side.SERVER);
+		snw.registerMessage(SkillInfoHandler.class, SkillInfo.class, 3, Side.CLIENT);
+		snw.registerMessage(PerkRequestHandler.class, PerkRequest.class, 4, Side.SERVER);
+		snw.registerMessage(PlayerStatusHandler.class, PlayerStatus.class, 5, Side.CLIENT);
+        snw.registerMessage(ActivePerksHandler.class, ActivePerks.class, 6, Side.CLIENT);
 	}
 
 }
