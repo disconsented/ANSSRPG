@@ -39,7 +39,7 @@ minecraft {
     version = "${mc_version}-${forge_version}-${mc_version}"
     runDir = "run"
 
-    replace "@VERSION@", project.version
+    replace "@VERSION@", mod_version
 }
 
 
