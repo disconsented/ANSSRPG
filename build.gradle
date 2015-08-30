@@ -104,7 +104,6 @@ sourceSets {
     main { output.resourcesDir = output.classesDir }
 }
 
-tasks.tagRelease.dependsOn build
 task tagRelease {
     doLast {
         System.setProperty("org.ajoberstar.grgit.auth.username","$usr")
