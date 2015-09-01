@@ -36,25 +36,18 @@ public class PlayerFile {
 
 
     public static void loadPlayer(String playerID) {
-        Settings.getInstance();
-        File dataFolder = Settings.getFolder();
-        dataFolder.mkdirs();
-        File dataLocation = new File(dataFolder, playerID+".json");
-        try {
-            FileReader reader = new FileReader(dataLocation);
-            Gson gson = new GsonBuilder().create();
-            PlayerData player = gson.fromJson(reader, PlayerData.class);
-            PlayerStore.addPlayer(player);
-        } catch (FileNotFoundException e) {
-            DataSave.createPlayer(playerID);
-            if (Settings.getDebug()) {
-                for(StackTraceElement entry : e.getStackTrace()){
-                    Logging.logger.debug(entry.toString());
-                }
-                
+        File dataLocation = new File(Settings.getFolder(), playerID+".json");
+        if (dataLocation.exists()){
+            try {
+                FileReader reader = new FileReader(dataLocation);
+                Gson gson = new GsonBuilder().create();
+                PlayerData player = gson.fromJson(reader, PlayerData.class);
+                PlayerStore.addPlayer(player);
+            } catch (Exception e) {
+                Logging.error(e.getStackTrace());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else {
+            Logging.debug(playerID+"'s file does not exist");
         }
     }
 
@@ -63,23 +56,21 @@ public class PlayerFile {
      */
 
     public static void writePlayer(PlayerData player) {
-        try {
-            File dataFolder = Settings.getFolder();
-            File dataLocation = new File(dataFolder, player.getPlayerID()+".json");
-            dataFolder.mkdirs();
-            Gson gson = new Gson();
-            String json = gson.toJson(player);
-            //write converted json data to a file named "file.json"
-            FileWriter writer = new FileWriter(dataLocation);
-            writer.write(json);
-            writer.close();
-
-        } catch (IOException e) {
-            Logging.error(e.getLocalizedMessage());
-        }
-        catch (Exception e){
-            Logging.error(e.getLocalizedMessage());
-            Logging.error(e.getStackTrace());
+        if(player != null) {
+            try {
+                File dataFolder = Settings.getFolder();
+                File dataLocation = new File(dataFolder, player.getPlayerID() + ".json");
+                dataFolder.mkdirs();
+                Gson gson = new Gson();
+                String json = gson.toJson(player);
+                FileWriter writer = new FileWriter(dataLocation);
+                writer.write(json);
+                writer.close();
+            } catch (Exception e) {
+                Logging.error(e.getStackTrace());
+            }
+        } else{
+            Logging.debug("Null player object detected, please report this");
         }
     }
 }
