@@ -25,7 +25,9 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.commands;
 
+import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.common.Settings;
+import disconsented.anssrpg.gui.RegistryReader;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 
@@ -35,14 +37,14 @@ import java.util.List;
 /**
  * @author Disconsented
  */
-public class ConfigGUI implements ICommand {
+public class GUIRegistry implements ICommand {
     private List aliases;
 
-    public ConfigGUI() {
+    public GUIRegistry() {
         this.aliases = new ArrayList();
-        this.aliases.add("ConfigGUI");
-        this.aliases.add("CONFIGGUI");
-        this.aliases.add("configgui");
+        this.aliases.add("GUIRegistry");
+        this.aliases.add("REGISTRY");
+        this.aliases.add("registry");
     }
 
     @Override
@@ -54,13 +56,13 @@ public class ConfigGUI implements ICommand {
     @Override
     public String getCommandName() {
         // TODO Auto-generated method stub
-        return "ConfigGUI";
+        return "GUIRegistry";
     }
 
     @Override
     public String getCommandUsage(ICommandSender p_71518_1_) {
         // TODO Auto-generated method stub
-        return "ConfigGUI";
+        return "GUIRegistry";
     }
 
     @Override
@@ -72,9 +74,9 @@ public class ConfigGUI implements ICommand {
     @Override
     public void processCommand(ICommandSender sender, String[] p_71515_2_) {
         if (Settings.getInstance().isServer) {
-//    		throw new Exception("Trying to launch GUI on server");
+            Logging.error("Tried to open the registry GUI on the server please report this");
         } else {
-            //disconsented.anssrpg.gui.Config.main();
+            RegistryReader.getInstance().show();
         }
 
     }
