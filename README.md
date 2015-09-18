@@ -26,7 +26,8 @@ Effect Perks allow for effects (potion effects at this time) to be applied to pl
  * Steps taken to resolve it (Did I fix it? If so, How?):
  * The uploaded logs from step 3
 
-NOTE: If you're looking for help via IRC read [this](http://programmers.stackexchange.com/a/154678)
+NOTE: If you're looking for help via IRC read [this](http://programmers.stackexchange.com/a/154678).
+
 After reading that, you can find me in #disconsented on the Espernet IRC.
 
 ##Builds
