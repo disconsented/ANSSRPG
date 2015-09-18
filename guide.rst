@@ -6,7 +6,6 @@ How to install.
 2. Download and install the latest stable release of ANSSRPG.
 3. Place ANSSRPG into your ``/mods/`` folder.
 
----------------------------------
 
 How to install external configs.
 ================================
@@ -17,7 +16,6 @@ How to install external configs.
 4. ???
 5. Play.
 
----------------------------------
 
 Commands.
 =========
@@ -44,8 +42,6 @@ Shows a GUI associated with the number proceeding the command.
 
 * ``/skill``
 Returns information about all of your skills.
-
---------------------------------
 
 How to configure ANSSRPG.
 =========================
