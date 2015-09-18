@@ -10,11 +10,12 @@ How to install.
 How to install external configs.
 ================================
 
-1. If your zipped config files contains ``anssrpg.cfg`` move to step 3.
-2. Open up ``anssrpg.cfg`` (``/config/anssrpg.cfg``) and change ``B:useExternalConfig=false`` to ``B:useExternalConfig=true``.
-3. Unzip into ``/config/``.
-4. ???
-5. Play.
+1. Have you started `How To configure ANSSRPG <#how-to-configure-anssrpg>`_? If so continue to step 2.
+2. If your zipped config files contains ``anssrpg.cfg`` move to step 4.
+3. Open up ``anssrpg.cfg`` (``/config/anssrpg.cfg``) and change ``B:useExternalConfig=false`` to ``B:useExternalConfig=true``.
+4. Unzip into ``/config/``.
+5. ???
+6. Play.
 
 
 Commands.
@@ -61,13 +62,13 @@ Perk types.
 ===========
 
 * Block.
-Triggered when a player mines a block. Failure state: Block is not mined.
+Triggered when a player mines a block. Upon failure: Block is not mined.
 
 * Entity.
-Triggered when a player attacks an entity. Failure state: Entity's incoming damage is reduced to 1 and it will not drop items on death.
+Triggered when a player attacks an entity. Upon failure: Entity's incoming damage is reduced to 1 and it will not drop items on death.
 
 * Item.
-Triggered when a player attempts to craft with a vanilla crafting table or personal 2x2 crafting grid. Failure state: Crafting GUI will close.
+Triggered when a player attempts to craft with a vanilla crafting table or personal 2x2 crafting grid. Upon failure: Crafting GUI will close.
 
 * Title.
 Does not have a trigger, exists only to be used as a requirement for other perks I.E. create classes.
