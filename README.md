@@ -13,22 +13,23 @@ Unlock Perks allow failure states to be represented. If a perk if presant and th
 
 Effect Perks allow for effects (potion effects at this time) to be applied to players [among other things](https://github.com/disconsented/ANSSRPG/wiki/Action-perks-design-doc)
 
-#How to report a issue or get help
+##How to report a issue or get help
 1. Read the wiki and other resources for the mod
 2. Read: http://www.chiark.greenend.org.uk/~sgtatham/bugs.html
-3. Using a service like pastbin (no dropbox) upload:
+3. Using a service like [Hastebin](http://hastebin.com) (no Dropbox) please upload:
  1. Any crash reports
- 2. Console logs (both server.log and fml logs)
+ 2. Console logs (both server.log and forge mod loader(fml) logs)
  3. All Config files 
 4. Create a github issue with the following information:
  * Description of the issue:
- * Steps to reproduce it:
- * Steps taken to resolve it:
- * Logs uploaded
+ * Steps to reproduce it (How do I make this happen?):
+ * Steps taken to resolve it (Did I fix it? If so, How?):
+ * The uploaded logs from step 3
 
-N.B. If you're looking for help via IRC read [this](http://programmers.stackexchange.com/a/154678)
+NOTE: If you're looking for help via IRC read [this](http://programmers.stackexchange.com/a/154678)
+After reading that, you can find me in #disconsented on the Espernet IRC.
 
-#Builds
+##Builds
 Master: [![Build Status](https://travis-ci.org/disconsented/ANSSRPG.svg?branch=master)](https://travis-ci.org/disconsented/ANSSRPG)
 
 Dev: [![Build Status](https://travis-ci.org/disconsented/ANSSRPG.svg?branch=DEV)](https://travis-ci.org/disconsented/ANSSRPG)
