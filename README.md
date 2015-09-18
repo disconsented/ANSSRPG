@@ -15,7 +15,7 @@ Effect Perks allow for effects (potion effects at this time) to be applied to pl
 
 ##How to report a issue or get help
 1. Read the wiki and other resources for the mod
-2. Read: http://www.chiark.greenend.org.uk/~sgtatham/bugs.html
+2. Read: [How to report a bug](http://www.chiark.greenend.org.uk/~sgtatham/bugs.html)
 3. Using a service like [Hastebin](http://hastebin.com) (no Dropbox) please upload:
  1. Any crash reports
  2. Console logs (both server.log and forge mod loader(fml) logs)
