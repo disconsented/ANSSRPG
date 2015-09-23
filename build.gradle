@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        jcenter()
         mavenCentral()
         maven {
             name = "forge"
@@ -13,9 +14,10 @@ buildscript {
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
         classpath 'org.ajoberstar:gradle-git:1.2.0'
+        classpath 'org.kordamp.gradle:stats-gradle-plugin:0.1.1'
     }
 }
-
+apply plugin: 'org.kordamp.gradle.stats'
 import org.ajoberstar.grgit.*
 
 ext.repo = Grgit.open(project.file('.'))
