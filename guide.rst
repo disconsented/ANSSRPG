@@ -17,6 +17,10 @@ How to install external configs.
 5. ???
 6. Play.
 
+..
+
+    Please use an application like `Notepad++ <https://notepad-plus-plus.org/>`_ instead of regular Notepad, Wordpad or Word.
+
 
 Commands.
 =========
