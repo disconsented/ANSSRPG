@@ -85,3 +85,12 @@ Has 4 unique fields:
 
 Skill types.
 ============
+
+* Block.
+Gives experience on mining blocks.
+
+* Entity.
+Gives experience on killing an entity(mob's including zombies,sheep etc.).
+
+* Item.
+Gives experience when crafting am item.
