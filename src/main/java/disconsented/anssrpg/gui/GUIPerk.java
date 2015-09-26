@@ -58,35 +58,20 @@ public class GUIPerk extends GuiScreen {
             info.add(entry.getValue());
         }
 
-        //Resetting GUI elements
-        for (int i = 0; i < 4; i++) {
-            GuiButton button = (GuiButton)buttonList.get(i+3);
-            button.enabled = true;
-        }
-
         //Putting the current info into the sublist
-        int start = page * 4;
-        int end = ((page+1)*4);
-        if(info.size() < 1){
-            subList = new ArrayList<PerkInfo>();
-        } else if(start < info.size() && end < info.size()){ //Normal
-            subList = info.subList(start, end);
-        } else if (start < info.size() && end >= info.size()){//end is to high
-            subList = info.subList(start, info.size()-1);
-        }
+        int start = page * 4 < info.size() ? page * 4 : info.size()-1;
+        int end = page * 4 + 4 < info.size() ? page * 4 + 4 : info.size();
+
+        if(info.size() > 0)
+        subList = info.subList(start,end);
 
         drawDefaultBackground();
 
         for (int i = 0; i < 4; i++) {
             if(subList.size()-1 >= i){
-                if(subList.get(i).isObtained()){
-                    GuiButton button = (GuiButton)buttonList.get(i+3);
-                    button.enabled = false;
-                } else {
-                    perkList.getNames()[i] = subList.get(i).getName();
-                    GuiButton button = (GuiButton)buttonList.get(i+3);
-                    button.enabled = true;
-                }
+                perkList.getNames()[i] = subList.get(i).getName();
+                GuiButton button = (GuiButton)buttonList.get(i+3);
+                button.enabled = true;
             } else {
                 GuiButton button = (GuiButton)buttonList.get(i+3);
                 button.enabled = false;
@@ -107,7 +92,7 @@ public class GUIPerk extends GuiScreen {
         perkList.draw();
         perkControls.draw();
 
-        for(Object button : this.buttonList){
+        for(Object button : buttonList){
             GuiButton toDraw = (GuiButton) button;
             toDraw.drawButton(Minecraft.getMinecraft(), 0, 0);
         }
@@ -120,6 +105,8 @@ public class GUIPerk extends GuiScreen {
             if (selected != null) {
                 Main.snw.sendToServer(new PerkRequest(selected.getSlug()));
                 Main.snw.sendToServer(new Request(Request.REQUEST.PERKS));
+                GuiButton obtainButton = (GuiButton)buttonList.get(0);
+                obtainButton.enabled = false;
             }
             break;
         case 1: //Next
@@ -150,7 +137,15 @@ public class GUIPerk extends GuiScreen {
             if(subList.size() > 3)
             selected = subList.get(3);
             break;
+        }
 
+        if(button.id >= 3 && button.id <= 6){
+            boolean active = true;
+            if(selected.isObtained()){
+                active = false;
+            }
+            GuiButton obtainButton = (GuiButton)buttonList.get(0);
+            obtainButton.enabled = active;
         }
     }
 
