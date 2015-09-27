@@ -33,7 +33,6 @@ import net.minecraft.util.ResourceLocation;
  * @author Disconsented
  */
 public class PerkControls extends ComponentBase{
-    private FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
     private ResourceLocation texture = new ResourceLocation(Reference.ID, "perkinfo.png");
     private int width = 256;
     private int height = 256;

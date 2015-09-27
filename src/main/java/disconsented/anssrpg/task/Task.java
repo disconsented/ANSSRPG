@@ -22,7 +22,7 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.task;
 
-import cpw.mods.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public abstract class Task/* implements Comparable<TaskApplyPotion>*/{
 	

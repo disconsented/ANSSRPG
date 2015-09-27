@@ -49,18 +49,20 @@ public class BlockBreaking {
             return;
         }
         if (event.getPlayer() instanceof EntityPlayerMP){
+            Block block = event.state.getBlock();
+            int blockMetadata = 0;
             EntityPlayerMP player = (EntityPlayerMP) event.getPlayer();
             System.out.println(player.getEntityId());
             player.setEntityId(20);
             System.out.println(player.getEntityId()+"|");
             PlayerData playerData = PlayerStore.getPlayer(player);
-            ArrayList<BlockPerk> perkList = PerkStore.getPerks(event.block);
+            ArrayList<BlockPerk> perkList = PerkStore.getPerks(block);
             ArrayList<BlockSkill> skillStore = SkillStore.getInstance().getBlockSkill();
 
             for(BlockSkill skill : skillStore){
                 for(Quad entry : skill.exp){
-                    if(Utils.MatchObject(entry.object, entry.metadata, event.block, event.blockMetadata)){
-                      if (requiresPerk(perkList, event.block, event.blockMetadata)) {
+                    if(Utils.MatchObject(entry.object, entry.metadata, block, blockMetadata)){
+                      if (requiresPerk(perkList, block, blockMetadata)) {
                           if (PlayerHandler.hasPerk(playerData, perkList)) {
                               PlayerHandler.awardToolXP(player, skill, entry.experience);
                               } else {

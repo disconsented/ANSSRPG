@@ -24,7 +24,7 @@ package disconsented.anssrpg.task;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.PotionEffect;
-import cpw.mods.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.perk.Slug;
 
@@ -55,14 +55,14 @@ public class TaskApplyPotion extends TaskTrackPlayer{
     }
 
     /* (non-Javadoc)
-     * @see disconsented.anssrpg.task.Task#onTick(cpw.mods.fml.common.gameevent.TickEvent)
+     * @see disconsented.anssrpg.task.Task#onTick(net.minecraftforge.fml.common.gameevent.TickEvent)
      */
     @Override
     public void onTick(TickEvent event) {        
         if(entity.isDead){
             repeat = false;
         } else {
-            Logging.debug("Attempting to apply potion " + effect.getEffectName() + " to " + entity.getCommandSenderName());
+            Logging.debug("Attempting to apply potion " + effect.getEffectName() + " to " + entity.getName());
             entity.addPotionEffect(new PotionEffect(effect));
         }
 

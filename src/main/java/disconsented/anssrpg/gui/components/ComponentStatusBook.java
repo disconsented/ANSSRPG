@@ -37,7 +37,6 @@ public class ComponentStatusBook  extends ComponentBase{
 
     private ResourceLocation stat1 = new ResourceLocation(Reference.ID, "stat1.png"); //140x180
     private ResourceLocation stat2 = new ResourceLocation(Reference.ID, "stat2.png"); //140x180
-    private FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
     public static float currentHearts = 0;
     public static float currentSaturation = 0;
     public static float currentArmourHelmet = 0;

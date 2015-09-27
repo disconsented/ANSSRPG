@@ -77,7 +77,7 @@ public class RegistryReader{
         rawItems = new ArrayList<String>(Item.itemRegistry.getKeys());
         listItem.setListData(rawItems.toArray());
 
-        rawEntities = new ArrayList(Arrays.asList(EntityList.func_151515_b().toArray()));
+        rawEntities = new ArrayList(EntityList.idToClassMapping.keySet());
         listEntity.setListData(rawEntities.toArray());
 
         rawBlocks = new ArrayList<String>(Block.blockRegistry.getKeys());

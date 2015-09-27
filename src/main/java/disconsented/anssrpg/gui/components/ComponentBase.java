@@ -22,11 +22,12 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.gui.components;
 
-import cpw.mods.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.util.ResourceLocation;
 
 /**
@@ -38,7 +39,7 @@ public abstract class ComponentBase extends Gui{
     protected int y;
     protected int width;
     protected int height;
-    protected FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+    protected FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
     
     public abstract void draw();
     public void bindAndDrawTexture(ResourceLocation texture, int posX, int posY, int startX, int startY, int width, int height){
@@ -53,13 +54,13 @@ public abstract class ComponentBase extends Gui{
     {
         float f = 0.00390625F;
         float f1 = 0.00390625F;
-        Tessellator tessellator = Tessellator.instance;
-        tessellator.startDrawingQuads();
-        Tessellator.instance.setColorRGBA_F(1F, 1F, 1F, 1F);
-        tessellator.addVertexWithUV((double)(posX + 0), (double)(posY + height), (double)this.zLevel, (double)((float)(startX + 0) * f), (double)((float)(startY + height) * f1));
-        tessellator.addVertexWithUV((double)(posX + width), (double)(posY + height), (double)this.zLevel, (double)((float)(startX + width) * f), (double)((float)(startY + height) * f1));
-        tessellator.addVertexWithUV((double) (posX + width), (double) (posY + 0), (double) this.zLevel, (double) ((float) (startX + width) * f), (double)((float)(startY + 0) * f1));
-        tessellator.addVertexWithUV((double) (posX + 0), (double) (posY + 0), (double) this.zLevel, (double) ((float) (startX + 0) * f), (double)((float)(startY + 0) * f1));
+        Tessellator tessellator = Tessellator.getInstance();
+        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+        //worldrenderer.se
+        worldrenderer.addVertexWithUV((double)(posX + 0), (double)(posY + height), (double)this.zLevel, (double)((float)(startX + 0) * f), (double)((float)(startY + height) * f1));
+        worldrenderer.addVertexWithUV((double)(posX + width), (double)(posY + height), (double)this.zLevel, (double)((float)(startX + width) * f), (double)((float)(startY + height) * f1));
+        worldrenderer.addVertexWithUV((double) (posX + width), (double) (posY + 0), (double) this.zLevel, (double) ((float) (startX + width) * f), (double)((float)(startY + 0) * f1));
+        worldrenderer.addVertexWithUV((double) (posX + 0), (double) (posY + 0), (double) this.zLevel, (double) ((float) (startX + 0) * f), (double)((float)(startY + 0) * f1));
         tessellator.draw();
     }
 }

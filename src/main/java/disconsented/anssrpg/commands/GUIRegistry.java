@@ -28,6 +28,7 @@ package disconsented.anssrpg.commands;
 import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.gui.RegistryReader;
+import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 
@@ -37,7 +38,7 @@ import java.util.List;
 /**
  * @author Disconsented
  */
-public class GUIRegistry implements ICommand {
+public class GUIRegistry extends CommandBase {
     private List aliases;
 
     public GUIRegistry() {
@@ -87,12 +88,6 @@ public class GUIRegistry implements ICommand {
         return true;
     }
 
-    @Override
-    public List addTabCompletionOptions(ICommandSender p_71516_1_,
-                                        String[] p_71516_2_) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     @Override
     public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_) {

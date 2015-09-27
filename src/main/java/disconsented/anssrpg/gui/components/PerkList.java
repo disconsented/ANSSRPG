@@ -35,7 +35,6 @@ import java.util.ArrayList;
  * @author Disconsented
  */
 public class PerkList extends ComponentBase{
-    private FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
     private ResourceLocation texture = new ResourceLocation(Reference.ID, "perklist.png");
     private int width = 256;
     private int height = 256;

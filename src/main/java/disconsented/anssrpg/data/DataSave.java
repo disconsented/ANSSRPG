@@ -29,9 +29,9 @@ package disconsented.anssrpg.data;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.player.PlayerData;
@@ -76,7 +76,7 @@ public class DataSave {
      */
     public void onPlayerLoggedInEvent(PlayerLoggedInEvent event) {
         if (Settings.getDebug()) {
-            Logging.debug("Player " + event.player.getCommandSenderName() + " with UUID:" + event.player.getPersistentID().toString() + "has logged in");
+            Logging.debug("Player " + event.player.getDisplayName() + " with UUID:" + event.player.getPersistentID().toString() + "has logged in");
             Logging.debug("Loading player data");
         }
         PlayerFile.loadPlayer(event.player.getPersistentID().toString());
@@ -91,7 +91,7 @@ public class DataSave {
      */
     public void onPlayerLoggedOutEvent(PlayerLoggedOutEvent event) {
         if (Settings.getDebug()) {
-            Logging.debug("Player " + event.player.getCommandSenderName() + " with UUID:" + event.player.getPersistentID().toString() + "has logged out");
+            Logging.debug("Player " + event.player.getDisplayName() + " with UUID:" + event.player.getPersistentID().toString() + "has logged out");
             Logging.debug("Saving player data");
         }
         PlayerFile.writePlayer(PlayerStore.getInstance().getPlayer(event.player.getPersistentID().toString()));
@@ -106,7 +106,7 @@ public class DataSave {
      */
     public void onPlayerRespawnEvent(PlayerRespawnEvent event) {
         if (Settings.getDebug()) {
-            Logging.debug("Player " + event.player.getCommandSenderName() + " with UUID:" + event.player.getPersistentID().toString() + "has respawned");
+            Logging.debug("Player " + event.player.getDisplayName() + " with UUID:" + event.player.getPersistentID().toString() + "has respawned");
             Logging.debug("Saving player data");
         }
         PlayerFile.writePlayer(PlayerStore.getInstance().getPlayer(event.player.getPersistentID().toString()));

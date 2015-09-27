@@ -28,7 +28,7 @@ import java.util.Queue;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import disconsented.anssrpg.Main;
 import disconsented.anssrpg.client.Data;
 import disconsented.anssrpg.common.Reference;

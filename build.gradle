@@ -42,6 +42,8 @@ minecraft {
     runDir = "run"
 
     replace "@VERSION@", mod_version
+    
+    mappings = "snapshot_20141130"
 }
 
 

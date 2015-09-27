@@ -22,7 +22,7 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.task;
 
-import cpw.mods.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import disconsented.anssrpg.Main;
 import disconsented.anssrpg.common.Reference;
 import disconsented.anssrpg.handler.PlayerHandler;

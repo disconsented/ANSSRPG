@@ -30,7 +30,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import java.util.ArrayList;
 import java.util.List;
 
-import cpw.mods.fml.common.gameevent.TickEvent.Type;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Type;
 
 public class ANSSRPG extends CommandBase {
     private List aliases;
@@ -69,11 +69,6 @@ public class ANSSRPG extends CommandBase {
         return true;
     }
 
-    @Override
-    public List addTabCompletionOptions(ICommandSender icommandsender,
-                                        String[] astring) {
-        return null;
-    }
 
     @Override
     public boolean isUsernameIndex(String[] astring, int i) {
