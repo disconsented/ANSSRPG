@@ -38,7 +38,7 @@ version = "${mc_version}-${mod_version}"
 
 
 minecraft {
-    version = "${mc_version}-${forge_version}-${mc_version}"
+    version = "${mc_version}-${forge_version}"
     runDir = "run"
 
     replace "@VERSION@", mod_version
