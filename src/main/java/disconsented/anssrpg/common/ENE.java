@@ -23,17 +23,23 @@ THE SOFTWARE.
 package disconsented.anssrpg.common;
 
 import com.google.gson.annotations.Expose;
+import net.minecraft.entity.Entity;
 
-public class ObjectPerkDefinition<O>{
-    public ObjectPerkDefinition(O object, String name, int metadata){
+/**
+ * Struct like object for entities.
+ * Stands for Entities, Name, Experience.
+ * @author Disconsented
+ */
+public class ENE {
+    public ENE(Class<Entity> entity, String name, int experience){
+        this.entity = entity;
         this.name = name;
-        this.object = object;
-        this.metadata = metadata;
+        this.experience = experience;        
     }
+    //Not exposed to save on space in configs
+    public Class<Entity> entity;
     @Expose
-    public String name;
-    public Object object;
+    public String name = "";
     @Expose
-    public int metadata;
-
+    public int experience = 0;
 }

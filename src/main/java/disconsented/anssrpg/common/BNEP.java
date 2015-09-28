@@ -23,22 +23,32 @@ THE SOFTWARE.
 package disconsented.anssrpg.common;
 
 import com.google.gson.annotations.Expose;
+import net.minecraft.block.Block;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * Same as a triplet but contains an extra field for experience (for Blocks and Items)
+ * Struct like object for Block definitions in skills.
+ * Stands for Block, Name, Experience, Properties.
  * @author Disconsented
- *
- * @param <O> {@link Triplet#object}
- * @param <S> {@link Triplet#name}
- * @param <I> {@link Triplet#metadata}
- * @param <E> Experience
  */
-public class Quad<O, S, I, E> extends Triplet<O, S, I> {
+public class BNEP {
 
-    public Quad(Object object, String name,int experience, int metadata) {
-        super(object, name, experience);
-        this.metadata = metadata;
+    public  BNEP(){}
+    public BNEP(Block block, String name, int experience, Map<String, String> properties) {
+        this.block = block;
+        this.name = name;
+        this.experience = experience;
+        this.properties = properties;
     }
-    @Expose
-    public int metadata = 0;
 
+    public Block block;
+
+    @Expose
+    public String name = "";
+    @Expose
+    public int experience = 0;
+    @Expose
+    public Map<String,String> properties = new HashMap<>();
 }

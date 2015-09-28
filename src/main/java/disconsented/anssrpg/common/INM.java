@@ -23,25 +23,20 @@ THE SOFTWARE.
 package disconsented.anssrpg.common;
 
 import com.google.gson.annotations.Expose;
+import net.minecraft.item.Item;
 
 /**
- * Three part object for keeping track of data needed for Entites
- * @author Disconsented
- *
- * @param <O> object
- * @param <S> name
- * @param <I> metadata
+ * Struct like object for Item definitions for perks.
+ * Stands for Item, Name, Metadata.
  */
-public class Triplet<O,S,I> {
-    public Triplet(Object object, String name, int experience){
-        this.object = object;
-        this.name = name;
-        this.experience = experience;        
-    }
-    //Not exposed to save on space in configs
-    public Object object;
+public class INM {
+
+    public Item item;
+
     @Expose
-    public String name = "";
+    public String name;
+
     @Expose
-    public int experience = 0;
+    public int metadata;
+
 }
