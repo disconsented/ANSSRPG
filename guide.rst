@@ -97,4 +97,21 @@ Gives experience on mining blocks.
 Gives experience on killing an entity(mob's including zombies,sheep etc.).
 
 * Item.
-Gives experience when crafting am item.
+Gives experience when crafting an item.
+
+Tool field.
+===========
+
+Can be used to require skills to be preformed with a tool.
+Possible values:(Case sensitive)
+
+* Pickaxe
+* Spade
+* Sword
+* Axe
+* Hoe
+* Shears
+* Bow
+* FlintAndSteel
+* Hand
+* * or "" (special case that acts as a wildcard).
