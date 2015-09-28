@@ -25,37 +25,35 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.skill.objects;
 
-import java.util.ArrayList;
-
+import com.google.gson.annotations.Expose;
+import disconsented.anssrpg.common.INM;
+import disconsented.anssrpg.common.Logging;
 import net.minecraft.item.Item;
 
-import com.google.gson.annotations.Expose;
-
-import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.common.Quad;
+import java.util.ArrayList;
 
 /**
+ * Data carrier for ItemSkill's
  * @author Disconsented
  */
 public class ItemSkill extends Skill {
 
     @Expose
-    public ArrayList<Quad> exp = new ArrayList<Quad>();
+    public ArrayList<INM> exp = new ArrayList<>();
 
     @Override
     public void touchUp() {
-        
-        ArrayList<Quad> initalised = new ArrayList<Quad>();
-        for (Quad object : exp) {
-            object.object = (Item) Item.itemRegistry.getObject(object.name);
-            if (object.object != null){
+        ArrayList<INM> initialised = new ArrayList<>();
+        for (INM object : exp) {
+            object.item = (Item) Item.itemRegistry.getObject(object.name);
+            if (object.item != null){
                 Logging.debug(object.name+" has been found. Passing on!");
-                initalised.add(object);
+                initialised.add(object);
             } else {
                 Logging.error(object.name+" could not be found. Ignoring!");
             }
         }
-        
+        exp = initialised;
     }
 
 }

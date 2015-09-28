@@ -28,12 +28,11 @@ package disconsented.anssrpg.skill.objects;
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 
 import com.google.gson.annotations.Expose;
 
 import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.common.Quad;
+import disconsented.anssrpg.common.BNEP;
 
 /**
  * @author Disconsented
@@ -41,23 +40,23 @@ import disconsented.anssrpg.common.Quad;
 public class BlockSkill extends ToolSkill {
     
     @Expose
-    public ArrayList<Quad> exp = new ArrayList<Quad>();
+    public ArrayList<BNEP> exp = new ArrayList<BNEP>();
     
     @Override
     public void touchUp() {
-        this.initTool();
+        initTool();
         
-        ArrayList<Quad> initalised = new ArrayList<Quad>();
-        for (Quad object : exp) {
-            object.object = (Block) Block.blockRegistry.getObject(object.name);
-            if (object.object != null){
+        ArrayList<BNEP> initialised = new ArrayList<BNEP>();
+        for (BNEP object : exp) {
+            object.block = (Block) Block.blockRegistry.getObject(object.name);
+            if (object.block != null){
                 Logging.debug(object.name+" has been found. Passing on!");
-                initalised.add(object);
+                initialised.add(object);
             } else {
                 Logging.error(object.name+" could not be found. Ignoring!");
             }
         }
-        
+        exp = initialised;
     }
     
 }

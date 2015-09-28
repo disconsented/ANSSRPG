@@ -29,8 +29,7 @@ import net.minecraft.entity.EntityList;
 import com.google.gson.annotations.Expose;
 
 import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.common.Quad;
-import disconsented.anssrpg.common.Triplet;
+import disconsented.anssrpg.common.ENE;
 
 /**
  * @author Disconsented
@@ -38,23 +37,23 @@ import disconsented.anssrpg.common.Triplet;
 public class EntitySkill extends ToolSkill {
     
     @Expose
-    public ArrayList<Triplet> exp = new ArrayList<Triplet>();
+    public ArrayList<ENE> exp = new ArrayList<ENE>();
 
     @Override
     public void touchUp() { 
-        this.initTool();
+        initTool();
         
-        ArrayList<Triplet> initalised = new ArrayList<Triplet>();
-        for (Triplet object : exp) {
-            object.object = (Class) EntityList.stringToClassMapping.get(object.name);
-            if (object.object != null){
+        ArrayList<ENE> initialised = new ArrayList<ENE>();
+        for (ENE object : exp) {
+            object.entity = (Class) EntityList.stringToClassMapping.get(object.name);
+            if (object.entity != null){
                 Logging.debug(object.name+" has been found. Passing on!");
-                initalised.add(object);
+                initialised.add(object);
             } else {
                 Logging.error(object.name+" could not be found. Ignoring!");
             }
         }
-        
+        exp = initialised;
     }
     
 }
