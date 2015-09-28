@@ -29,8 +29,8 @@ if (new File(projectDir, '.git').exists()) {
 }
 
 apply plugin: 'forge'
-
 group = package_group
+
 archivesBaseName = mod_name
 def mod_version = "v${mod_version_major}.${mod_version_minor}."+gitHash
 version = "${mc_version}-${mod_version}"
@@ -42,8 +42,8 @@ minecraft {
     runDir = "run"
 
     replace "@VERSION@", mod_version
-    
     mappings = "snapshot_20141130"
+    
 }
 
 
@@ -65,8 +65,8 @@ processResources {
     }
 }
 
-targetCompatibility=7
-sourceCompatibility=7
+targetCompatibility=8
+sourceCompatibility=8
 
 jar {
     classifier = ''
