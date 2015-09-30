@@ -6,6 +6,8 @@ ANSSRPG boils down to two fundamental concepts.
 ###Skills:
 Primarily used to award a player with experience for doing things. For example you can create a 'Mining' skill that provides players with experience for mining ores. For example Iron Ore for 5 experience and Diamond Ore for 50 experience. Skills follow a few preset types but can be combined to create compound skills. All skills have a failure state which allows progression to be handled via the mod (a 'digging' skill will not allow a player to mine a block).
 
+OLD VERSION ONLY RECIEVING CRITICAL UPDATES
+
 ###Perks:
 Perks come in two flavours: Unlocks and Effects.
 
