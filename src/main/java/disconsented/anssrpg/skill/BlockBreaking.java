@@ -44,7 +44,7 @@ import disconsented.anssrpg.skill.objects.BlockSkill;
 public class BlockBreaking {
 
     public void onBreakEvent(BreakEvent event) {
-        boolean isFakePlayer = event.getPlayer() instanceof FakePlayer;
+       /* boolean isFakePlayer = event.getPlayer() instanceof FakePlayer;
         if (isFakePlayer && !Settings.isBlockFakePlayers()){
             return;
         }
@@ -60,8 +60,8 @@ public class BlockBreaking {
             ArrayList<BlockSkill> skillStore = SkillStore.getInstance().getBlockSkill();
 
             for(BlockSkill skill : skillStore){
-                for(Quad entry : skill.exp){
-                    if(Utils.MatchObject(entry.object, entry.metadata, block, blockMetadata)){
+                for(BNEP entry : skill.exp){
+                    if(Utils.MatchObject(entry.block, entry.metadata, block, blockMetadata)){
                       if (requiresPerk(perkList, block, blockMetadata)) {
                           if (PlayerHandler.hasPerk(playerData, perkList)) {
                               PlayerHandler.awardToolXP(player, skill, entry.experience);
@@ -86,13 +86,13 @@ public class BlockBreaking {
                     }
                 }
             }
-        }
+        }*/
     }
 
-    private static boolean requiresPerk(ArrayList<BlockPerk> perkList, Block block, int metadata){
+   /* private boolean requiresPerk(ArrayList<BlockPerk> perkList, Block block, int metadata){
         if(perkList != null) {
             for (BlockPerk perk : perkList) {
-                for (ObjectPerkDefinition definition : perk.blocks)
+                for (BNEP definition : perk.blocks)
                 {
                     if(Utils.MatchObject(definition.object, definition.metadata, block, metadata)){
                         return true;
@@ -101,7 +101,7 @@ public class BlockBreaking {
             }
         }
         return  false;
-    }
+    }*/
 }
 
 

@@ -61,6 +61,8 @@ How to configure ANSSRPG.
 * Skills do *not* require perk definitions.
 * Block,item,entity definitions do *not* require skills.
 * Where a perk is present with a game object (block,item,entity), if the player fails to have it they will be unable to fulfil the action.
+* Where metadata is specified -1 can be used as a wildcard.
+* The properties field list will attempt to match all specified key, value pairs(which are regex strings.
 
 Perk types.
 ===========

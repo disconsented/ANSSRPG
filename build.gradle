@@ -15,6 +15,7 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
         classpath 'org.ajoberstar:gradle-git:1.2.0'
         classpath 'org.kordamp.gradle:stats-gradle-plugin:0.1.1'
+        classpath "de.entera:gradle-relnotes-plugin:0.1.0"
     }
 }
 apply plugin: 'org.kordamp.gradle.stats'
@@ -121,4 +122,12 @@ task tagRelease {
             tags = true
         }
     }
+}
+
+apply plugin: "de.entera.relnotes"
+
+releaseNotes {
+    targetFile rootProject.file("CHANGES.md")
+    githubRepo "disconsented/ANSSRPG"
+    githubKey "ecdc6db131b292ae969eb0a6a2ce0a5565187169"
 }

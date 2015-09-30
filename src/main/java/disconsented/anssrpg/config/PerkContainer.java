@@ -30,7 +30,7 @@ import disconsented.anssrpg.perk.*;
 
 import java.util.ArrayList;
 /**
- * Used to safely retain data for saving and loading perks before initalising them for use
+ * Used to safely retain data for saving and loading perks before initialising them for use
  * @author Abelistah
  * @author Disconsented 
  */

@@ -24,24 +24,19 @@ package disconsented.anssrpg.skill;
 
 import java.util.ArrayList;
 
-import disconsented.anssrpg.common.ObjectPerkDefinition;
-import disconsented.anssrpg.gui.components.PerkList;
-import disconsented.anssrpg.perk.BlockPerk;
+import disconsented.anssrpg.objects.INME;
 import disconsented.anssrpg.perk.ItemPerk;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerOpenContainerEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
-import disconsented.anssrpg.common.Quad;
 import disconsented.anssrpg.common.Utils;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
 import disconsented.anssrpg.data.SkillStore;
 import disconsented.anssrpg.handler.PlayerHandler;
-import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.ItemSkill;
 /**
@@ -64,8 +59,8 @@ public class ItemCrafting {
               ArrayList<ItemSkill> skillStore = SkillStore.getInstance().getItemSkill();
               
               for (ItemSkill skill : skillStore){
-                  for (Quad entry : skill.exp){
-                      if(Utils.MatchObject(entry.object, entry.metadata, item, stack.getItemDamage())){
+                  for (INME entry : skill.exp){
+                      if(Utils.MatchObject(entry.item, entry.metadata, item, stack.getItemDamage())){
                           if (!PlayerHandler.hasPerk(playerData, perkList) && requiresPerk(perkList,item, stack.getItemDamage())){
                               player.closeScreen();
                               PlayerHandler.taskFail(player);
@@ -87,8 +82,8 @@ public class ItemCrafting {
             ArrayList<ItemSkill> skillStore = SkillStore.getInstance().getItemSkill();
             
             for (ItemSkill skill : skillStore){
-                for (Quad entry : skill.exp){
-                    if(Utils.MatchObject(entry.object, entry.metadata, item, stack.getItemDamage())){
+                for (INME entry : skill.exp){
+                    if(Utils.MatchObject(entry.item, entry.metadata, item, stack.getItemDamage())){
                         PlayerHandler.awardXP(player, skill, entry.experience);
                     }
                 }
@@ -96,12 +91,12 @@ public class ItemCrafting {
         }        
     }
 
-    private static boolean requiresPerk(ArrayList<ItemPerk> perkList, Item item, int metadata){
+    private boolean requiresPerk(ArrayList<ItemPerk> perkList, Item item, int metadata){
         if(perkList != null) {
             for (ItemPerk perk : perkList) {
-                for (ObjectPerkDefinition definition : perk.items)
+                for (INME definition : perk.items)
                 {
-                    if(Utils.MatchObject(definition.object, definition.metadata, item, metadata)){
+                    if(Utils.MatchObject(definition.item, definition.metadata, item, metadata)){
                         return true;
                     }
                 }

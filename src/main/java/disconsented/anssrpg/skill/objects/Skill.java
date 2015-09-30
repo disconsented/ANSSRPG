@@ -35,7 +35,7 @@ import com.google.gson.annotations.Expose;
  */
 public abstract class Skill {
     @Expose
-    public String name = "default_skillname";
+    public String name = "default_skillName";
     
     /*Equation:
      * base*(level^modifier)*/

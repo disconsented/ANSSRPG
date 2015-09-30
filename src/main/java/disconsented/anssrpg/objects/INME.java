@@ -20,45 +20,26 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-/**
- *
- */
-package disconsented.anssrpg.perk;
-
-import java.util.ArrayList;
-
-import disconsented.anssrpg.objects.ENE;
-import net.minecraft.entity.EntityList;
+package disconsented.anssrpg.objects;
 
 import com.google.gson.annotations.Expose;
+import net.minecraft.item.Item;
 
-import disconsented.anssrpg.common.Logging;
+/**
+ * Struct like object for Item definitions used for skills.
+ * Stands for Item, Name, Metadata, Experience.
+ */
+public class INME {
 
-public class EntityPerk extends Perk {
-    public EntityPerk(){}
+    public Item item;
 
     @Expose
-    public ArrayList<ENE> entities = new ArrayList<ENE>();
+    public String name = "";
 
-    public EntityPerk(String name, ArrayList<Requirement> requirements,
-                      String description, int pointCost, ArrayList<ENE> entities) {
-        super(name, requirements, description, pointCost);
-        this.entities = entities;
-    }
+    @Expose
+    public int metadata = -1;
 
-    @Override
-    public void searchObject() {
-        ArrayList<ENE> initialised = new ArrayList<ENE>();
-        for(ENE object : entities){
-            object.entity = (Class) EntityList.stringToClassMapping.get(object.name);
-            if (object.entity != null){
-                Logging.debug(object.name + " has been found. Passing on.");
-                initialised.add(object);
-            } else {
-                Logging.error(object.name + " has not been found. Skipping");
-            }
-        }
-        this.entities = initialised;
-    }
+    @Expose
+    public int experience = 0;
 
 }

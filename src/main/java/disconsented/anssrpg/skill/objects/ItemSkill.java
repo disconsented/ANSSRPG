@@ -26,7 +26,7 @@ THE SOFTWARE.
 package disconsented.anssrpg.skill.objects;
 
 import com.google.gson.annotations.Expose;
-import disconsented.anssrpg.common.INM;
+import disconsented.anssrpg.objects.INME;
 import disconsented.anssrpg.common.Logging;
 import net.minecraft.item.Item;
 
@@ -39,12 +39,12 @@ import java.util.ArrayList;
 public class ItemSkill extends Skill {
 
     @Expose
-    public ArrayList<INM> exp = new ArrayList<>();
+    public ArrayList<INME> exp = new ArrayList<>();
 
     @Override
     public void touchUp() {
-        ArrayList<INM> initialised = new ArrayList<>();
-        for (INM object : exp) {
+        ArrayList<INME> initialised = new ArrayList<>();
+        for (INME object : exp) {
             object.item = (Item) Item.itemRegistry.getObject(object.name);
             if (object.item != null){
                 Logging.debug(object.name+" has been found. Passing on!");

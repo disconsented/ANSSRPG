@@ -29,7 +29,7 @@ import net.minecraft.entity.EntityList;
 import com.google.gson.annotations.Expose;
 
 import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.common.ENE;
+import disconsented.anssrpg.objects.ENE;
 
 /**
  * @author Disconsented

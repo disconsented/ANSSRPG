@@ -45,8 +45,9 @@ public final class ToolRegistry {
         registry.put("FlintAndSteel", net.minecraft.item.ItemFlintAndSteel.class);
         registry.put("Hand", null);
         registry.put("", net.minecraft.item.Item.class);
+        registry.put("*", net.minecraft.item.Item.class);
     }
-    
+
     public static void setEntry(String key, Class value){
         registry.put(key, value);
     }

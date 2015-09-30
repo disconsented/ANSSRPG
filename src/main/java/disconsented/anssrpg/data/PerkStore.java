@@ -22,12 +22,13 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.data;
 
-import disconsented.anssrpg.common.ObjectPerkDefinition;
+import disconsented.anssrpg.objects.BNEP;
+import disconsented.anssrpg.objects.ENE;
+import disconsented.anssrpg.objects.INME;
 import disconsented.anssrpg.perk.*;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -39,18 +40,17 @@ import java.util.HashMap;
  */
 public class PerkStore {
     private static ArrayList<Perk> perks = new ArrayList<Perk>();
-    /*String needs to be a name unique to each object type*/
-    private static HashMap<String, ArrayList<BlockPerk>> blockMap = new HashMap<String, ArrayList<BlockPerk>>();
-    private static HashMap<String, ArrayList<EntityPerk>> entityMap = new HashMap<String, ArrayList<EntityPerk>>();
-    private static HashMap<String, ArrayList<ItemPerk>> itemMap = new HashMap<String, ArrayList<ItemPerk>>();
-    private static ArrayList<TitlePerk> titlePerks = new ArrayList<TitlePerk>();
-    private static HashMap<String, ArrayList<Slug>> interactionBlockMap = new HashMap<String, ArrayList<Slug>>();
-    private static ArrayList<PotionSelfPerk> potionSelf = new ArrayList<PotionSelfPerk>();
+    /*String needs to be a name unique to each entity type*/
+    private static final HashMap<String, ArrayList<BlockPerk>> blockMap = new HashMap<String, ArrayList<BlockPerk>>();
+    private static final HashMap<String, ArrayList<EntityPerk>> entityMap = new HashMap<String, ArrayList<EntityPerk>>();
+    private static final HashMap<String, ArrayList<ItemPerk>> itemMap = new HashMap<String, ArrayList<ItemPerk>>();
+    private static final ArrayList<TitlePerk> titlePerks = new ArrayList<TitlePerk>();
+    private static final ArrayList<PotionSelfPerk> potionSelf = new ArrayList<PotionSelfPerk>();
     
-    private static HashMap<String, Perk> perksMap = new HashMap<String, Perk>();
-    private static PerkStore instance = null;
+    private static final HashMap<String, Perk> perksMap = new HashMap<String, Perk>();
+    private static PerkStore instance;
 
-    private PerkStore() {/* Exists only to defeat instantiation.*/}
+    private PerkStore() {}
 
     //Adds a perk to the complete list
     public static void addPerk(Perk perk) {
@@ -63,7 +63,6 @@ public class PerkStore {
         entityMap.clear();
         itemMap.clear();
         perksMap.clear();
-        interactionBlockMap.clear();
     }
 
     public static PerkStore getInstance() {
@@ -132,8 +131,8 @@ public class PerkStore {
      */
     public static void putPerk(BlockPerk block) {
         perks.add(block);
-        for (ObjectPerkDefinition object : block.blocks){
-            Block cache = (Block) object.object;
+        for (BNEP object : block.blocks){
+            Block cache = object.block;
             putPerk(blockMap, block, cache.getUnlocalizedName());
         }
 
@@ -146,8 +145,8 @@ public class PerkStore {
      */
     public static void putPerk(EntityPerk entity) {
         perks.add(entity);
-        for (ObjectPerkDefinition object : entity.entities){
-            Class cache = (Class) object.object;
+        for (ENE object : entity.entities){
+            Class<Entity> cache = object.entity;
                 putPerk(entityMap, entity, cache.getSimpleName());
         }
 
@@ -159,8 +158,8 @@ public class PerkStore {
      */
     public static void putPerk(ItemPerk item) {
         perks.add(item);
-        for (ObjectPerkDefinition object : item.items){
-            Item cache = (Item) object.object;
+        for (INME object : item.items){
+            Item cache = object.item;
             putPerk(itemMap, item, cache.getUnlocalizedName());
         }
 

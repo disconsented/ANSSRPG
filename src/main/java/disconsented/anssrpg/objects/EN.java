@@ -20,45 +20,23 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-/**
- *
- */
-package disconsented.anssrpg.perk;
-
-import java.util.ArrayList;
-
-import disconsented.anssrpg.objects.ENE;
-import net.minecraft.entity.EntityList;
+package disconsented.anssrpg.objects;
 
 import com.google.gson.annotations.Expose;
+import net.minecraft.entity.Entity;
 
-import disconsented.anssrpg.common.Logging;
-
-public class EntityPerk extends Perk {
-    public EntityPerk(){}
-
+/**
+ * Struct like object for entities used for perks.
+ * Stands for Entities, Name.
+ * @author Disconsented
+ */
+public class EN {
+    public EN(Class<Entity> entity, String name){
+        this.entity = entity;
+        this.name = name;
+    }
+    //Not exposed to save on space in configs
+    public Class<Entity> entity;
     @Expose
-    public ArrayList<ENE> entities = new ArrayList<ENE>();
-
-    public EntityPerk(String name, ArrayList<Requirement> requirements,
-                      String description, int pointCost, ArrayList<ENE> entities) {
-        super(name, requirements, description, pointCost);
-        this.entities = entities;
-    }
-
-    @Override
-    public void searchObject() {
-        ArrayList<ENE> initialised = new ArrayList<ENE>();
-        for(ENE object : entities){
-            object.entity = (Class) EntityList.stringToClassMapping.get(object.name);
-            if (object.entity != null){
-                Logging.debug(object.name + " has been found. Passing on.");
-                initialised.add(object);
-            } else {
-                Logging.error(object.name + " has not been found. Skipping");
-            }
-        }
-        this.entities = initialised;
-    }
-
+    public String name = "";
 }

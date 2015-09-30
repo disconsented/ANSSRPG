@@ -32,29 +32,29 @@ import net.minecraft.item.Item;
 import com.google.gson.annotations.Expose;
 
 import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.common.ObjectPerkDefinition;
+import disconsented.anssrpg.objects.INME;
 
 public class ItemPerk extends Perk {
 
     @Expose
-    public ArrayList<ObjectPerkDefinition<Item>> items = new ArrayList<ObjectPerkDefinition<Item>>();
+    public ArrayList<INME> items = new ArrayList<INME>();
 
     public ItemPerk() {
         super();
     }
 
     public ItemPerk(String name, ArrayList<Requirement> requirements,
-                    String description, int pointCost, ArrayList<ObjectPerkDefinition<Item>> items) {
+                    String description, int pointCost, ArrayList<INME> items) {
         super(name, requirements, description, pointCost);
         this.items = items;
     }
 
     @Override
     public void searchObject() {
-        ArrayList<ObjectPerkDefinition<Item>> initialised = new ArrayList<ObjectPerkDefinition<Item>>();
-        for(ObjectPerkDefinition object : items){
-            object.object = Item.itemRegistry.getObject(object.name);
-            if (object.object != null){
+        ArrayList<INME> initialised = new ArrayList<>();
+        for(INME object : items){
+            object.item = (Item)Item.itemRegistry.getObject(object.name);
+            if (object.item != null){
                 Logging.debug(object.name + " has been found. Passing on.");
                 initialised.add(object);
             } else {

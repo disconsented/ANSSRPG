@@ -29,6 +29,7 @@ package disconsented.anssrpg.skill;
 import java.util.ArrayList;
 
 import disconsented.anssrpg.common.*;
+import disconsented.anssrpg.objects.ENE;
 import disconsented.anssrpg.perk.EntityPerk;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -39,7 +40,6 @@ import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
 import disconsented.anssrpg.data.SkillStore;
 import disconsented.anssrpg.handler.PlayerHandler;
-import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.EntitySkill;
 
@@ -56,8 +56,8 @@ public class EntityDamage {
             ArrayList<EntitySkill> skillStore = SkillStore.getInstance().getEntitySkill();
 
             for(EntitySkill skill : skillStore){
-                for(Triplet entry : skill.exp){
-                    if(Utils.MatchObject(event.entity.getClass(), entry.object)){
+                for(ENE entry : skill.exp){
+                    if(Utils.MatchObject(event.entity.getClass(), entry.entity)){
                       if (requiresPerk(perkList, event.entity)) {
                           if (PlayerHandler.hasPerk(playerData, perkList)) {
                                     PlayerHandler.awardToolXP(player, skill, entry.experience);
@@ -96,8 +96,8 @@ public class EntityDamage {
 
             
             for(EntitySkill skill : skillStore){
-                for(Triplet entry : skill.exp){
-                    if(Utils.MatchObject(event.entity.getClass(), entry.object)){
+                for(ENE entry : skill.exp){
+                    if(Utils.MatchObject(event.entity.getClass(), entry.entity)){
                       if (requiresPerk(perkList, event.entity)) {
                           if (!PlayerHandler.hasPerk(playerData, perkList) || !PlayerHandler.isWielding(skill, player)) {
                               PlayerHandler.taskFail(player);
@@ -110,12 +110,12 @@ public class EntityDamage {
         }
     }
 
-    private static boolean requiresPerk(ArrayList<EntityPerk> perkList, Entity entity){
+    private boolean requiresPerk(ArrayList<EntityPerk> perkList, Entity entity){
         if(perkList != null) {
             for (EntityPerk perk : perkList) {
-                for (ObjectPerkDefinition<Class> definition : perk.entities)
+                for (ENE definition : perk.entities)
                 {
-                    if(Utils.MatchObject(definition.object, entity.getClass())){
+                    if(Utils.MatchObject(definition, entity.getClass())){
                         return true;
                     }
                 }

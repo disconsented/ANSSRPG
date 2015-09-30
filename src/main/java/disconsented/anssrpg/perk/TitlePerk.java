@@ -22,7 +22,11 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.perk;
 
+import com.google.gson.annotations.Expose;
+
 public class TitlePerk extends Perk {
+
+    @Expose
     private String title = "default title";
 
     public String getTitle() {
