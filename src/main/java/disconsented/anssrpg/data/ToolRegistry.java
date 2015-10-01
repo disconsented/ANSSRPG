@@ -25,6 +25,14 @@ package disconsented.anssrpg.data;
 import java.util.HashMap;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemBow;
+import net.minecraft.item.ItemFlintAndSteel;
+import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemShears;
+import net.minecraft.item.ItemSpade;
+import net.minecraft.item.ItemSword;
 
 /**
  * @author Disconsented
@@ -32,28 +40,28 @@ import net.minecraft.item.Item;
  */
 public final class ToolRegistry {
     
-    private static HashMap<String, Class> registry = new HashMap<String, Class>();
+    private static final HashMap<String, Class> registry = new HashMap<String, Class>();
     
     public static void init(){
-        registry.put("Pickaxe", net.minecraft.item.ItemPickaxe.class);
-        registry.put("Spade", net.minecraft.item.ItemSpade.class);
-        registry.put("Sword", net.minecraft.item.ItemSword.class);
-        registry.put("Axe", net.minecraft.item.ItemAxe.class);
-        registry.put("Hoe", net.minecraft.item.ItemHoe.class);
-        registry.put("Shears", net.minecraft.item.ItemShears.class);
-        registry.put("Bow", net.minecraft.item.ItemBow.class);
-        registry.put("FlintAndSteel", net.minecraft.item.ItemFlintAndSteel.class);
-        registry.put("Hand", null);
-        registry.put("", net.minecraft.item.Item.class);
-        registry.put("*", net.minecraft.item.Item.class);
+        ToolRegistry.registry.put("Pickaxe", ItemPickaxe.class);
+        ToolRegistry.registry.put("Spade", ItemSpade.class);
+        ToolRegistry.registry.put("Sword", ItemSword.class);
+        ToolRegistry.registry.put("Axe", ItemAxe.class);
+        ToolRegistry.registry.put("Hoe", ItemHoe.class);
+        ToolRegistry.registry.put("Shears", ItemShears.class);
+        ToolRegistry.registry.put("Bow", ItemBow.class);
+        ToolRegistry.registry.put("FlintAndSteel", ItemFlintAndSteel.class);
+        ToolRegistry.registry.put("Hand", null);
+        ToolRegistry.registry.put("", Item.class);
+        ToolRegistry.registry.put("*", Item.class);
     }
 
     public static void setEntry(String key, Class value){
-        registry.put(key, value);
+        ToolRegistry.registry.put(key, value);
     }
     
     public static Class getEntry(String key){
-        return registry.get(key);
+        return ToolRegistry.registry.get(key);
     }
 
 }

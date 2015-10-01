@@ -33,12 +33,12 @@ public class Settings {
     // Categories
     public static String balancing = "Balancing";
     public static String misc = "Misc Options";
-    public static boolean isServer = false;
-    private static boolean debug = false;
+    public static boolean isServer;
+    private static boolean debug;
     private static boolean logging = true;
     private static String statusMessage = "null";
     private static double pointsRatio = .2;
-    private static boolean externalConfig = false;
+    private static boolean externalConfig;
     private static boolean requiredOnClient = true;
 
     private static boolean blockFakePlayers = true;
@@ -48,21 +48,21 @@ public class Settings {
      * 2 - Points can be converted from vanilla levels
      */
     private static int pointsMode = 1;
-    private static Settings instance = new Settings();
+    private static final Settings instance = new Settings();
 
     private Settings() {
     }
 
     public static boolean getDebug() {
-        return debug;
+        return Settings.debug;
     }
 
     public static void setDebug(Boolean yes) {
-        debug = yes;
+        Settings.debug = yes;
     }
 
     public static File getFolder() {
-        if (isServer) {
+        if (Settings.isServer) {
             return new File(MinecraftServer.getServer().getFolderName() + "\\anssrpgdata\\");
         } else {
             return new File("saves\\" + MinecraftServer.getServer().getFolderName() + "\\anssrpgdata\\");
@@ -71,53 +71,53 @@ public class Settings {
     }
 
     public static Settings getInstance() {
-        return instance;
+        return Settings.instance;
     }
 
     public static int getPointsMode() {
-        return pointsMode;
+        return Settings.pointsMode;
     }
 
     public static boolean isBlockFakePlayers() {
-        return blockFakePlayers;
+        return Settings.blockFakePlayers;
     }
 
     public static void setPointsMode(int int1) {
-        pointsMode = int1;
+        Settings.pointsMode = int1;
     }
 
     public static String getStatusMessage() {
-        return statusMessage;
+        return Settings.statusMessage;
     }
 
     public static void setStatusMessage(String message) {
-        statusMessage = message;
+        Settings.statusMessage = message;
     }
 
     public static boolean getLogging() {
-        return logging;
+        return Settings.logging;
     }
 
     public void load(FMLPreInitializationEvent event) {
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
         config.load();
 
-        config.addCustomCategoryComment(balancing, "Balancing tweaks.");
-        config.addCustomCategoryComment(misc, "Settings that don't fit in other categories");
+        config.addCustomCategoryComment(Settings.balancing, "Balancing tweaks.");
+        config.addCustomCategoryComment(Settings.misc, "Settings that don't fit in other categories");
 
-        pointsRatio = config.get(balancing, "pointsRatio", .2, "Points ratio settings.").getDouble();
-        pointsMode = config.get(balancing, "pointsMode", 1, "Points Mode. \n0 - Disabled \n1 - Points awarded based on XP from skills \n2 - Points can be converted from vanilla levels").getInt();
-        blockFakePlayers = config.getBoolean("blockUnknownFakePlayers",balancing,true,"Enables fake players that are not associated with a real player being blocked by default(where appropriate)");
+        Settings.pointsRatio = config.get(Settings.balancing, "pointsRatio", .2, "Points ratio settings.").getDouble();
+        Settings.pointsMode = config.get(Settings.balancing, "pointsMode", 1, "Points Mode. \n0 - Disabled \n1 - Points awarded based on XP from skills \n2 - Points can be converted from vanilla levels").getInt();
+        Settings.blockFakePlayers = config.getBoolean("blockUnknownFakePlayers", Settings.balancing,true,"Enables fake players that are not associated with a real player being blocked by default(where appropriate)");
 
-        debug = config.get(misc, "enableDebugMode", false, "Enables debugging features. Meant for development use.").getBoolean();
-        logging = config.get(misc, "enableLogging", true, "Enables logging to console.").getBoolean();
-        externalConfig = config.get(misc, "useExternalConfig", false, "Use config files instead of default internal configs").getBoolean();
-        requiredOnClient = config.get(misc, "requiredOnClient", true, "Clients require the mod to be able to connect to the server").getBoolean();
+        Settings.debug = config.get(Settings.misc, "enableDebugMode", false, "Enables debugging features. Meant for development use.").getBoolean();
+        Settings.logging = config.get(Settings.misc, "enableLogging", true, "Enables logging to console.").getBoolean();
+        Settings.externalConfig = config.get(Settings.misc, "useExternalConfig", false, "Use config files instead of default internal configs").getBoolean();
+        Settings.requiredOnClient = config.get(Settings.misc, "requiredOnClient", true, "Clients require the mod to be able to connect to the server").getBoolean();
 
         config.save();
     }
 
     public static boolean isExternalConfig() {
-        return externalConfig;
+        return Settings.externalConfig;
     }
 }

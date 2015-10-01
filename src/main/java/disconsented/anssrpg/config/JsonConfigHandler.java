@@ -46,13 +46,13 @@ import disconsented.anssrpg.common.Logging;
  */
 
 public class JsonConfigHandler {
-    private static File skillFile = new File("config/ANSSRPG", "skill.cfg");
-    private static File perkFile = new File("config/ANSSRPG", "perk.cfg");
-    private static File configFileLocation = new File("config/ANSSRPG");
+    private static final File skillFile = new File("config/ANSSRPG", "skill.cfg");
+    private static final File perkFile = new File("config/ANSSRPG", "perk.cfg");
+    private static final File configFileLocation = new File("config/ANSSRPG");
 
     public static void createPerkAndSkill() {
-        createSkillConfig(null);
-        createPerkConfig(null);
+        JsonConfigHandler.createSkillConfig(null);
+        JsonConfigHandler.createPerkConfig(null);
     }
 
     /**
@@ -67,9 +67,9 @@ public class JsonConfigHandler {
 
 
         try {
-            configFileLocation.mkdirs();
+            JsonConfigHandler.configFileLocation.mkdirs();
             Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().serializeNulls().create();
-            Writer osWriter = new OutputStreamWriter(new FileOutputStream(perkFile));
+            Writer osWriter = new OutputStreamWriter(new FileOutputStream(JsonConfigHandler.perkFile));
             gson.toJson(perkStore, osWriter);
             osWriter.close();
 
@@ -95,9 +95,9 @@ public class JsonConfigHandler {
             //			skillStore.addItemSkill(new ItemSkill());
         }
         try {
-            configFileLocation.mkdirs();
+            JsonConfigHandler.configFileLocation.mkdirs();
             Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().serializeNulls().create();
-            Writer osWriter = new OutputStreamWriter(new FileOutputStream(skillFile));
+            Writer osWriter = new OutputStreamWriter(new FileOutputStream(JsonConfigHandler.skillFile));
             gson.toJson(skillStore, osWriter);
             osWriter.close();
 
@@ -108,8 +108,8 @@ public class JsonConfigHandler {
     }
 
     public static void loadPerkAndSkill() {
-        loadPerkConfig();
-        loadSkillConfig();
+        JsonConfigHandler.loadPerkConfig();
+        JsonConfigHandler.loadSkillConfig();
     }
 
     /**
@@ -120,7 +120,7 @@ public class JsonConfigHandler {
             Gson gson = new Gson();
             Type objectStoreType = new TypeToken<PerkContainer>() {
             }.getType();
-            Reader isReader = new InputStreamReader(new FileInputStream(perkFile));
+            Reader isReader = new InputStreamReader(new FileInputStream(JsonConfigHandler.perkFile));
             PerkContainer perkStore = gson.fromJson(isReader, objectStoreType);
             isReader.close();
 
@@ -128,7 +128,7 @@ public class JsonConfigHandler {
                 perkStore.touchUp();
             }
         } catch (FileNotFoundException e) {
-            createPerkConfig(null);
+            JsonConfigHandler.createPerkConfig(null);
         } catch (IOException iox) {
             iox.printStackTrace();
         }
@@ -142,7 +142,7 @@ public class JsonConfigHandler {
             Gson gson = new Gson();
             Type objectStoreType = new TypeToken<SkillContainer>() {
             }.getType();
-            Reader isReader = new InputStreamReader(new FileInputStream(skillFile));
+            Reader isReader = new InputStreamReader(new FileInputStream(JsonConfigHandler.skillFile));
             SkillContainer skillStore = gson.fromJson(isReader, objectStoreType);
             isReader.close();
 
@@ -150,18 +150,18 @@ public class JsonConfigHandler {
                 skillStore.touchUp();
             }
         } catch (FileNotFoundException e) {
-            createSkillConfig(null);
+            JsonConfigHandler.createSkillConfig(null);
         } catch (IOException iox) {
             iox.printStackTrace();
         }
     }
 
     public static void loadInternalConfig() {
-        PerkContainer perkContainer = disconsented.anssrpg.config.Default.getPerkInstance();
-        SkillContainer skillContainer = disconsented.anssrpg.config.Default.getSkillInstance();
+        PerkContainer perkContainer = Default.getPerkInstance();
+        SkillContainer skillContainer = Default.getSkillInstance();
         perkContainer.touchUp();
         skillContainer.touchUp();
-        JsonConfigHandler.createPerkConfig(perkContainer);
-        JsonConfigHandler.createSkillConfig(skillContainer);        
+        createPerkConfig(perkContainer);
+        createSkillConfig(skillContainer);
     }
 }

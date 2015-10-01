@@ -37,19 +37,19 @@ import net.minecraft.item.Item;
 public class SkillHandler {
     
     public static double calculateExpForLevel(Skill skill, double level){
-        return calculateExpForLevel(skill.base, level, skill.mod);
+        return SkillHandler.calculateExpForLevel(skill.base, level, skill.mod);
     }
 
     public static double calculateExpForLevel(int base, double level, float mod){
-        return base*(Math.pow(level, mod));
+        return base* Math.pow(level, mod);
     }
     
     public static long calculateLevelForExp(Skill skill, double exp){
-        return (long) (Math.pow(exp,(1/skill.mod))/Math.pow(skill.base,(1/skill.mod)));
+        return (long) (Math.pow(exp, 1/skill.mod)/Math.pow(skill.base, 1/skill.mod));
     }
 
     public static long calculateLevelForExp(int base, float mod, double exp){
-        return (long) (Math.pow(exp,(1/mod))/Math.pow(base,(1/mod)));
+        return (long) (Math.pow(exp, 1/mod)/Math.pow(base, 1/mod));
     }
     
     public static Skill getSkill(String name){

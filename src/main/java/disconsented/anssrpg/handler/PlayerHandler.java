@@ -30,6 +30,7 @@ import disconsented.anssrpg.data.SkillStore;
 import disconsented.anssrpg.perk.ActivePerk;
 import disconsented.anssrpg.perk.Perk;
 import disconsented.anssrpg.perk.Requirement;
+import disconsented.anssrpg.perk.Requirement.Action;
 import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.Skill;
@@ -37,14 +38,14 @@ import disconsented.anssrpg.skill.objects.ToolSkill;
 import disconsented.anssrpg.task.TaskTrackPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ChatComponentText;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
-
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 
 import javax.swing.text.html.parser.Entity;
 
@@ -60,7 +61,7 @@ public final class PlayerHandler {
     }
 
     public static String addPerk(String perkSlug, EntityPlayerMP player){
-        return addPerk(perkSlug, getPlayer(player.getUniqueID()));
+        return PlayerHandler.addPerk(perkSlug, PlayerHandler.getPlayer(player.getUniqueID()));
     }
     /**
      * Checks the requirements for a perk and adds it to the player if they meet them
@@ -78,7 +79,7 @@ public final class PlayerHandler {
         int reqLevel = 0;
         ArrayList<Requirement> requirements = perk.getRequirements();
         for (Requirement req : requirements) {
-            if(req.action == Requirement.Action.LEVEL_EQUALS || req.action == Requirement.Action.LEVEL_GREATER || req.action == Requirement.Action.LEVEL_LESS){
+            if(req.action == Action.LEVEL_EQUALS || req.action == Action.LEVEL_GREATER || req.action == Action.LEVEL_LESS){
                 level = player.getSkillLevel(SkillHandler.getSkill(req.name));
                 reqLevel = Integer.parseInt(req.extraData);
             }
@@ -123,7 +124,7 @@ public final class PlayerHandler {
     }
 
     public static void awardXP(EntityPlayer playerEntity, Skill skill, int exp) {
-        PlayerData player = getPlayer(playerEntity.getUniqueID().toString());
+        PlayerData player = PlayerHandler.getPlayer(playerEntity.getUniqueID().toString());
         Integer cacheExp = player.getSkillExp().get(skill.name);
         long levelOld;
         long levelNew = -1;
@@ -156,10 +157,10 @@ public final class PlayerHandler {
     }
     
     public static void awardToolXP(EntityPlayer playerEntity, ToolSkill skill, int exp){
-        if(isWielding(skill, playerEntity)){
-            awardXP(playerEntity, skill, exp);
+        if(PlayerHandler.isWielding(skill, playerEntity)){
+            PlayerHandler.awardXP(playerEntity, skill, exp);
         } else {
-            taskFail(playerEntity);
+            PlayerHandler.taskFail(playerEntity);
         }
     }
 
@@ -173,7 +174,7 @@ public final class PlayerHandler {
     }
 
     public static PlayerData getPlayer(UUID uniqueID) {
-    	return getPlayer(uniqueID.toString());		
+    	return PlayerHandler.getPlayer(uniqueID.toString());
 	}
 
 	public static int getPoints(PlayerData player) {
@@ -229,7 +230,7 @@ public final class PlayerHandler {
      * @return
      */
     public static boolean isWielding(ToolSkill skill, EntityPlayer player){
-        if(skill.toolClass == net.minecraft.item.Item.class){
+        if(skill.toolClass == Item.class){
             return true;
         } else if(player.getCurrentEquippedItem() == null){
             return skill.toolClass == null;
@@ -242,7 +243,7 @@ public final class PlayerHandler {
     public static String activatePerk(EntityPlayerMP p2, PlayerData playerData,
             String perkSlug) {
         ActivePerk cachePerk = (ActivePerk) PerkStore.getPerk(perkSlug);
-        if(hasPerk((Perk) cachePerk, playerData)){
+        if(PlayerHandler.hasPerk((Perk) cachePerk, playerData)){
             cachePerk.activate(p2, null);
             return "Sucess";
         }
@@ -250,35 +251,35 @@ public final class PlayerHandler {
         
     }
 
-    public void reactivatePerks(PlayerLoggedInEvent event) {
-        activateDataPerks((EntityPlayerMP) event.player);
-        activateNbtPerks((EntityPlayerMP) event.player);       
+    public void reactivatePerks(PlayerEvent.PlayerLoggedInEvent event) {
+        this.activateDataPerks((EntityPlayerMP) event.player);
+        this.activateNbtPerks((EntityPlayerMP) event.player);       
         
     }
     
     public void activateDataPerks(EntityPlayerMP player){
-        activateDataPerks(player, getPlayer(player.getUniqueID()));
+        this.activateDataPerks(player, PlayerHandler.getPlayer(player.getUniqueID()));
     }
     
     public void activateDataPerks(EntityPlayerMP player, PlayerData playerData){
         for (Slug slug : playerData.getActivePerks()){
-            activatePerk(player, playerData, slug.getSlug());
+            PlayerHandler.activatePerk(player, playerData, slug.getSlug());
         }
     }
     
     public void activateNbtPerks(EntityPlayerMP player){
-        activateNbtPerks(player, getPlayer(player.getUniqueID()));
+        this.activateNbtPerks(player, PlayerHandler.getPlayer(player.getUniqueID()));
     }
     
     public void activateNbtPerks(EntityPlayerMP player, PlayerData playerData){
         NBTTagList list = player.getEntityData().getTagList(TaskTrackPlayer.tagName, 8);
         for (int i = 0; i < list.tagCount(); i++){
-            activatePerk(player, playerData, list.getStringTagAt(i));
+            PlayerHandler.activatePerk(player, playerData, list.getStringTagAt(i));
         }
     }
     
-    public void checkPlayerSkills(PlayerLoggedInEvent event){
-        PlayerData data = getPlayer(event.player.getUniqueID());
+    public void checkPlayerSkills(PlayerEvent.PlayerLoggedInEvent event){
+        PlayerData data = PlayerHandler.getPlayer(event.player.getUniqueID());
         HashMap<String,Integer> map = data.getSkillExp();
         for (Skill skill :SkillStore.getSkills()){
             if(map.get(skill.name) == null){

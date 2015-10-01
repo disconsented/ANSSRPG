@@ -56,7 +56,7 @@ public class PotionSelfPerk extends Perk implements ActivePerk{
     @Expose
     public ArrayList<PotionDefinition> effects = new ArrayList<PotionDefinition>();    
     @Expose
-    public boolean repeat = false;
+    public boolean repeat;
     @Expose
     public int cycle = 1;
     @Expose
@@ -65,10 +65,10 @@ public class PotionSelfPerk extends Perk implements ActivePerk{
     public void searchObject() {}
     @Override
     public void activate(EntityLivingBase target, EntityLivingBase source) {
-        PlayerHandler.getPlayer(((EntityPlayerMP) target).getUniqueID());
-        for (PotionDefinition effect : effects){
+        PlayerHandler.getPlayer(target.getUniqueID());
+        for (PotionDefinition effect : this.effects){
             TaskMaster.getInstance().addTask(new TaskApplyPotion(
-                    (EntityLivingBase) target, new PotionEffect(effect.id, effect.duration, effect.amplifier), null, repeat, cycle, maxCycles, slug));
+                    target, new PotionEffect(effect.id, effect.duration, effect.amplifier), null, this.repeat, this.cycle, this.maxCycles, this.slug));
         }        
         
     }

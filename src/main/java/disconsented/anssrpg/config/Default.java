@@ -28,7 +28,6 @@ import java.util.HashMap;
 import disconsented.anssrpg.common.PotionDefinition;
 import disconsented.anssrpg.objects.*;
 import disconsented.anssrpg.perk.*;
-import disconsented.anssrpg.perk.Requirement.Action;
 import disconsented.anssrpg.skill.objects.*;
 
 /**
@@ -36,107 +35,142 @@ import disconsented.anssrpg.skill.objects.*;
  * Needs to be filled out, suggestions needed ;)
  */
 public class Default {
-    private static PerkContainer perks = null;
-    private static SkillContainer skills = null;
+    private static PerkContainer perks;
+    private static SkillContainer skills;
     private Default(){}
     
     public static PerkContainer getPerkInstance(){
-        if (perks != null){
-            return perks;
+        if (Default.perks != null){
+            return Default.perks;
         } else {
-            perks = new PerkContainer();
-            perks.addPerk(new BlockPerk("Unlock: Iron Ore",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "4"));}},
+            Default.perks = new PerkContainer();
+            Default.perks.addPerk(new BlockPerk("Unlock: Iron Ore",
+                    new ArrayList<Requirement>() {{
+                        this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Mining", "4"));
+                    }},
                     "Allows you to mine Iron Ore",
                     0,
-                    new ArrayList<BNP>(){{add(new BNP( "iron_ore", new HashMap<String,String>()));}}));
-            
-            perks.addPerk(new BlockPerk("Unlock: Lapis Ore",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "4"));}},
+                    new ArrayList<BNP>() {{
+                        this.add(new BNP("iron_ore", new HashMap<String, String>()));
+                    }}));
+
+            Default.perks.addPerk(new BlockPerk("Unlock: Lapis Ore",
+                    new ArrayList<Requirement>() {{
+                        this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Mining", "4"));
+                    }},
                     "Allows you to mine Lapis Ore",
                     0,
-                    new ArrayList<BNP>(){{add(new BNP("lapis_ore", new HashMap<String,String>()));}}));
-            
-            perks.addPerk(new BlockPerk("Unlock: Gold Ore",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "9"));}},
+                    new ArrayList<BNP>() {{
+                        this.add(new BNP("lapis_ore", new HashMap<String, String>()));
+                    }}));
+
+            Default.perks.addPerk(new BlockPerk("Unlock: Gold Ore",
+                    new ArrayList<Requirement>() {{
+                        this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Mining", "9"));
+                    }},
                     "Allows you to mine Gold Ore",
                     0,
-                    new ArrayList<BNP>(){{add(new BNP("gold_ore", new HashMap<String,String>()));}}));
-            
-            perks.addPerk(new BlockPerk("Unlock: Redstone Ore",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "14"));}},
+                    new ArrayList<BNP>() {{
+                        this.add(new BNP("gold_ore", new HashMap<String, String>()));
+                    }}));
+
+            Default.perks.addPerk(new BlockPerk("Unlock: Redstone Ore",
+                    new ArrayList<Requirement>() {{
+                        this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Mining", "14"));
+                    }},
                     "Allows you to mine Redstone Ore",
                     0,
-                    new ArrayList<BNP>(){{add(new BNP("lit_redstone_ore", new HashMap<String,String>()));}}));
-            
-            perks.addPerk(new BlockPerk("Unlock: Diamond Ore",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "19"));}},
+                    new ArrayList<BNP>() {{
+                        this.add(new BNP("lit_redstone_ore", new HashMap<String, String>()));
+                    }}));
+
+            Default.perks.addPerk(new BlockPerk("Unlock: Diamond Ore",
+                    new ArrayList<Requirement>() {{
+                        this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Mining", "19"));
+                    }},
                     "Allows you to mine Diamond Ore",
                     0,
-                    new ArrayList<BNP>(){{add(new BNP("diamond_ore", new HashMap<String,String>()));}}));
-            
-            perks.addPerk(new BlockPerk("Unlock: Emerald Ore",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "24"));}},
+                    new ArrayList<BNP>() {{
+                        this.add(new BNP("diamond_ore", new HashMap<String, String>()));
+                    }}));
+
+            Default.perks.addPerk(new BlockPerk("Unlock: Emerald Ore",
+                    new ArrayList<Requirement>() {{
+                        this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Mining", "24"));
+                    }},
                     "Allows you to mine Emerald Ore",
                     0,
-                    new ArrayList<BNP>(){{add(new BNP("emerald_ore", new HashMap<String,String>()));}}));
+                    new ArrayList<BNP>() {{
+                        this.add(new BNP("emerald_ore", new HashMap<String, String>()));
+                    }}));
 
-            perks.addPerk(new ItemPerk("Unlock: Gold Armour", 
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Armouring", "4"));}},
+            Default.perks.addPerk(new ItemPerk("Unlock: Gold Armour",
+                    new ArrayList<Requirement>() {{
+                        this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Armouring", "4"));
+                    }},
                     "Allows you to craft Gold armour",
                     0,
-                    new ArrayList<INM>(){{
-                        add(new INM(null, "golden_helmet",0));
-                        add(new INM(null, "golden_chestplate",0));
-                        add(new INM(null, "golden_leggings",0));
-                        add(new INM(null, "golden_boots",0));
-                        }}));
-            
-            perks.addPerk(new ItemPerk("Unlock: Iron Armour",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Armouring", "9"));}},
+                    new ArrayList<INM>() {{
+                        this.add(new INM(null, "golden_helmet", 0));
+                        this.add(new INM(null, "golden_chestplate", 0));
+                        this.add(new INM(null, "golden_leggings", 0));
+                        this.add(new INM(null, "golden_boots", 0));
+                    }}));
+
+            Default.perks.addPerk(new ItemPerk("Unlock: Iron Armour",
+                    new ArrayList<Requirement>() {{
+                        this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Armouring", "9"));
+                    }},
                     "Allows you to craft Iron armour",
                     0,
-                    new ArrayList<INM>(){{
-                        add(new INM(null, "iron_helmet",0));
-                        add(new INM(null, "iron_chestplate",0));
-                        add(new INM(null, "iron_leggings",0));
-                        add(new INM(null, "iron_boots",0));
-                        }}));
-            
-            perks.addPerk(new ItemPerk("Unlock: Diamond Armour",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Armouring", "14"));}},
+                    new ArrayList<INM>() {{
+                        this.add(new INM(null, "iron_helmet", 0));
+                        this.add(new INM(null, "iron_chestplate", 0));
+                        this.add(new INM(null, "iron_leggings", 0));
+                        this.add(new INM(null, "iron_boots", 0));
+                    }}));
+
+            Default.perks.addPerk(new ItemPerk("Unlock: Diamond Armour",
+                    new ArrayList<Requirement>() {{
+                        this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Armouring", "14"));
+                    }},
                     "Allows you to craft Diamond armour",
                     0,
-                    new ArrayList<INM>(){{
-                        add(new INM(null, "diamond_helmet",0));
-                        add(new INM(null, "diamond_chestplate",0));
-                        add(new INM(null, "diamond_leggings",0));
-                        add(new INM(null, "diamond_boots",0));
-                        }}));
-            
-            perks.addPerk(new EntityPerk("Creeper killer",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Slaying", "4"));}},
+                    new ArrayList<INM>() {{
+                        this.add(new INM(null, "diamond_helmet", 0));
+                        this.add(new INM(null, "diamond_chestplate", 0));
+                        this.add(new INM(null, "diamond_leggings", 0));
+                        this.add(new INM(null, "diamond_boots", 0));
+                    }}));
+
+            Default.perks.addPerk(new EntityPerk("Creeper killer",
+                    new ArrayList<Requirement>() {{
+                        this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Slaying", "4"));
+                    }},
                     "Allows Creepers to be killed",
                     0,
-                    new ArrayList<ENE>(){{add (new ENE(null,"Creeper",0));}}));
+                    new ArrayList<ENE>() {{
+                        this.add(new ENE(null, "Creeper", 0));
+                    }}));
 
-            perks.addPerk(new PotionSelfPerk("Health boost", null, "Provides a 10 second shield", 0,
-                    new ArrayList<PotionDefinition>(){{
-                add(new PotionDefinition(21,1,20));}},
-                true, 20, 200));
+            Default.perks.addPerk(new PotionSelfPerk("Health boost", null, "Provides a 10 second shield", 0,
+                    new ArrayList<PotionDefinition>() {{
+                        this.add(new PotionDefinition(21, 1, 20));
+                    }},
+                    true, 20, 200));
 
-            perks.addPerk(new TitlePerk("Completionist"));
-            return perks;
+            Default.perks.addPerk(new TitlePerk("Completionist"));
+            return Default.perks;
             
         }
             
     }
     
     public static SkillContainer getSkillInstance(){
-        if (skills != null){
-            return skills;
+        if (Default.skills != null){
+            return Default.skills;
         } else {
-            skills = new SkillContainer();
+            Default.skills = new SkillContainer();
             BlockSkill mining = new BlockSkill();
             mining.name = "Mining";
             mining.exp.add(new BNEP("coal_ore", 5, null));
@@ -147,16 +181,18 @@ public class Default {
             mining.exp.add(new BNEP("diamond_ore", 30, null));
             mining.exp.add(new BNEP("emerald_ore", 35, null));
             mining.tool = "Pickaxe";
-            skills.addBlockSkill(mining);
+            Default.skills.addBlockSkill(mining);
             
             // log == Oak,Spruce,Birch,Jungle
             // log2 == Acaica,DarkOak
             BlockSkill woodcutting = new BlockSkill();
             woodcutting.name = "Woodcutting";
-            woodcutting.exp.add(new BNEP("log", 1, new HashMap<String, String>(){{put("variant","*");}}));
-            woodcutting.exp.add(new BNEP("log2", 2,  new HashMap<String, String>(){{put("variant","*");}}));
+            woodcutting.exp.add(new BNEP("log", 1, new HashMap<String, String>(){{
+                this.put("variant","*");}}));
+            woodcutting.exp.add(new BNEP("log2", 2,  new HashMap<String, String>(){{
+                this.put("variant","*");}}));
             woodcutting.tool = "Axe";
-            skills.addBlockSkill(woodcutting);
+            Default.skills.addBlockSkill(woodcutting);
             
             BlockSkill digging = new BlockSkill();
             digging.name = "Digging";
@@ -165,9 +201,10 @@ public class Default {
             digging.exp.add(new BNEP("grass", 1, null));
             digging.exp.add(new BNEP("clay", 2, null));
             digging.exp.add(new BNEP("hardened_clay", 2, null));
-            digging.exp.add(new BNEP("stained_hardened_clay", 2, new HashMap<String, String>(){{put("variant","*");}}));
+            digging.exp.add(new BNEP("stained_hardened_clay", 2, new HashMap<String, String>(){{
+                this.put("variant","*");}}));
             digging.tool = "Spade";
-            skills.addBlockSkill(digging);
+            Default.skills.addBlockSkill(digging);
             
             EntitySkill slaying = new EntitySkill();
             slaying.name = "Slaying";
@@ -176,7 +213,7 @@ public class Default {
             slaying.exp.add(new ENE(null, "Spider", 10));
             slaying.exp.add(new ENE(null, "Creeper", 20));
             slaying.tool = "Sword";
-            skills.addEntitySkill(slaying);
+            Default.skills.addEntitySkill(slaying);
             
             ItemSkill armouring = new ItemSkill();
             armouring.name = "Armouring";
@@ -200,9 +237,9 @@ public class Default {
             armouring.exp.add(new INME(null, "diamond_chestplate", 30, 0));
             armouring.exp.add(new INME(null, "diamond_leggings", 30, 0));
             armouring.exp.add(new INME(null, "diamond_boots", 30, 0));
-            
-            skills.addItemSkill(armouring);
-            return skills;
+
+            Default.skills.addItemSkill(armouring);
+            return Default.skills;
         }
         
     }

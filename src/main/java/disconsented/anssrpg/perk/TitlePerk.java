@@ -37,7 +37,7 @@ public class TitlePerk extends Perk {
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
 

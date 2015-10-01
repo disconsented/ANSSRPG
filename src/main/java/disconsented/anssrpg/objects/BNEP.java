@@ -47,7 +47,7 @@ public class BNEP {
     @Expose
     public String name = "";
     @Expose
-    public int experience = 0;
+    public int experience;
     @Expose
     public Map<String,String> properties = new HashMap<>();
 }

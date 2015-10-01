@@ -23,10 +23,7 @@ THE SOFTWARE.
 package disconsented.anssrpg.event;
 
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.handler.PlayerHandler;
@@ -40,24 +37,24 @@ import disconsented.anssrpg.task.TaskMaster;
 public class FMLBUS {
     
     @SubscribeEvent
-    public void onPlayerRespawnEvent(PlayerRespawnEvent event) {
+    public void onPlayerRespawnEvent(PlayerEvent.PlayerRespawnEvent event) {
         new DataSave().onPlayerRespawnEvent(event);
     }
     
     @SubscribeEvent
-    public void onPlayerLoggedOutEvent(PlayerLoggedOutEvent event) {
+    public void onPlayerLoggedOutEvent(PlayerEvent.PlayerLoggedOutEvent event) {
         new DataSave().onPlayerLoggedOutEvent(event);
     }
 
     @SubscribeEvent
-    public void onPlayerLoggedInEvent(PlayerLoggedInEvent event) {
+    public void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event) {
         new DataSave().onPlayerLoggedInEvent(event);
         new PlayerHandler().reactivatePerks(event);
         new PlayerHandler().checkPlayerSkills(event);
     }
     
     @SubscribeEvent
-    public void onItemCraftedEvent(ItemCraftedEvent event) {
+    public void onItemCraftedEvent(PlayerEvent.ItemCraftedEvent event) {
         new ItemCrafting().onItemCraftedEvent(event);
     }
     

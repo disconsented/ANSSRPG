@@ -36,20 +36,21 @@ import io.netty.buffer.ByteBuf;
  */
 public class Request implements IMessage {
 	public enum REQUEST {PERKS, SKILLS, ACTIVE_PERKS, OBTAINED_PERKS, START_TRACKING, STOP_TRACKING}
-	public REQUEST request;
+	public Request.REQUEST request;
     
-	public Request(){};
-    public Request(REQUEST request) {
+	public Request(){}
+
+    public Request(Request.REQUEST request) {
         this.request = request;
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        this.request = REQUEST.valueOf(ByteBufUtils.readUTF8String(buf));
+        request = Request.REQUEST.valueOf(ByteBufUtils.readUTF8String(buf));
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
-    	ByteBufUtils.writeUTF8String(buf, request.name());
+    	ByteBufUtils.writeUTF8String(buf, this.request.name());
     }
 }

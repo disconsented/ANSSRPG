@@ -46,44 +46,44 @@ import java.util.ArrayList;
  */
 public class TaskPlayerStatusTrack extends Task{
     public static final String TAG_STATUS_OPEN =  Reference.ID+"STATUS_OPEN";
-    private EntityPlayerMP player;
+    private final EntityPlayerMP player;
     private PlayerData playerData;
     public TaskPlayerStatusTrack(EntityPlayerMP player){
         this.player = player;
-        this.repeat = true;
-        this.maxTicks = 0;
+        repeat = true;
+        maxTicks = 0;
     }
 
 
     @Override
     public void onAdd() {
-        player.getEntityData().setBoolean(TAG_STATUS_OPEN, true);
+        this.player.getEntityData().setBoolean(TaskPlayerStatusTrack.TAG_STATUS_OPEN, true);
     }
 
     @Override
     public void onTick(TickEvent event) {
-        if (player != null && player.isEntityAlive() && player.getEntityData().getBoolean(TAG_STATUS_OPEN)){
-            playerData = PlayerHandler.getPlayer(player.getUniqueID());//Refreshing the playerData
-            PlayerStatus status = new PlayerStatus(player.getHealth(),player.getFoodStats().getSaturationLevel(),getArmourValue(3),getArmourValue(2),getArmourValue(1),getArmourValue(0));
-            Main.snw.sendTo(status,player);
+        if (this.player != null && this.player.isEntityAlive() && this.player.getEntityData().getBoolean(TaskPlayerStatusTrack.TAG_STATUS_OPEN)){
+            this.playerData = PlayerHandler.getPlayer(this.player.getUniqueID());//Refreshing the playerData
+            PlayerStatus status = new PlayerStatus(this.player.getHealth(), this.player.getFoodStats().getSaturationLevel(), this.getArmourValue(3), this.getArmourValue(2), this.getArmourValue(1), this.getArmourValue(0));
+            Main.snw.sendTo(status, this.player);
 
             ArrayList<String> list = new ArrayList<>();
-            for (Slug slug : playerData.getActivePerks()){
+            for (Slug slug : this.playerData.getActivePerks()){
                 list.add(slug.getSlug());
             }
-            Main.snw.sendTo(new ActivePerks(list),player);
+            Main.snw.sendTo(new ActivePerks(list), this.player);
         } else {
-            this.repeat = false;
+            repeat = false;
         }
     }
 
     @Override
     public void onEnd() {
-        player.getEntityData().setBoolean(TAG_STATUS_OPEN, false);
+        this.player.getEntityData().setBoolean(TaskPlayerStatusTrack.TAG_STATUS_OPEN, false);
     }
 
     private float getArmourValue(int slot){
-        ItemStack itemStack = player.getCurrentArmor(slot);
-        return (itemStack != null) ? ((ItemArmor)itemStack.getItem()).damageReduceAmount : 0;
+        ItemStack itemStack = this.player.getCurrentArmor(slot);
+        return itemStack != null ? ((ItemArmor)itemStack.getItem()).damageReduceAmount : 0;
     }
 }

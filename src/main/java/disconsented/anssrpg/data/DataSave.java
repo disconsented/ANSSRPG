@@ -29,9 +29,7 @@ package disconsented.anssrpg.data;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.player.PlayerData;
@@ -52,7 +50,7 @@ public class DataSave {
         ArrayList tempAL = new ArrayList();
         HashMap tempHM = new HashMap();
         PlayerData temp = new PlayerData(tempAL, tempHM, playerID, 0);
-        addPlayer(temp, playerID);
+        DataSave.addPlayer(temp, playerID);
         tempAL.clear();
         tempHM.clear();
     }
@@ -63,7 +61,7 @@ public class DataSave {
         if (player != null) {
             return player;
         } else {
-            createPlayer(playerID);
+            DataSave.createPlayer(playerID);
             PlayerStore.getInstance();
             return PlayerStore.getPlayer(playerID);
         }
@@ -74,9 +72,9 @@ public class DataSave {
      *
      * @param event
      */
-    public void onPlayerLoggedInEvent(PlayerLoggedInEvent event) {
+    public void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event) {
         if (Settings.getDebug()) {
-            Logging.debug("Player " + event.player.getDisplayName() + " with UUID:" + event.player.getPersistentID().toString() + "has logged in");
+            Logging.debug("Player " + event.player.getDisplayName() + " with UUID:" + event.player.getPersistentID() + "has logged in");
             Logging.debug("Loading player data");
         }
         PlayerFile.loadPlayer(event.player.getPersistentID().toString());
@@ -89,9 +87,9 @@ public class DataSave {
      *
      * @param event
      */
-    public void onPlayerLoggedOutEvent(PlayerLoggedOutEvent event) {
+    public void onPlayerLoggedOutEvent(PlayerEvent.PlayerLoggedOutEvent event) {
         if (Settings.getDebug()) {
-            Logging.debug("Player " + event.player.getDisplayName() + " with UUID:" + event.player.getPersistentID().toString() + "has logged out");
+            Logging.debug("Player " + event.player.getDisplayName() + " with UUID:" + event.player.getPersistentID() + "has logged out");
             Logging.debug("Saving player data");
         }
         PlayerFile.writePlayer(PlayerStore.getInstance().getPlayer(event.player.getPersistentID().toString()));
@@ -104,9 +102,9 @@ public class DataSave {
      *
      * @param event
      */
-    public void onPlayerRespawnEvent(PlayerRespawnEvent event) {
+    public void onPlayerRespawnEvent(PlayerEvent.PlayerRespawnEvent event) {
         if (Settings.getDebug()) {
-            Logging.debug("Player " + event.player.getDisplayName() + " with UUID:" + event.player.getPersistentID().toString() + "has respawned");
+            Logging.debug("Player " + event.player.getDisplayName() + " with UUID:" + event.player.getPersistentID() + "has respawned");
             Logging.debug("Saving player data");
         }
         PlayerFile.writePlayer(PlayerStore.getInstance().getPlayer(event.player.getPersistentID().toString()));

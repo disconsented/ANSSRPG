@@ -38,17 +38,17 @@ public class ActivePerks implements IMessage {
     public ActivePerks(ArrayList<String> activePerks){this.activePerks = activePerks;}
     @Override
     public void toBytes(ByteBuf buf) {
-        buf.writeInt(activePerks.size());
-        for (String string : activePerks)
+        buf.writeInt(this.activePerks.size());
+        for (String string : this.activePerks)
         ByteBufUtils.writeUTF8String(buf, string);
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
         int i = buf.readInt();
-        activePerks = new ArrayList<String>();
+        this.activePerks = new ArrayList<String>();
         for (int j = 0; j < i; j++) {
-            activePerks.add(ByteBufUtils.readUTF8String(buf));
+            this.activePerks.add(ByteBufUtils.readUTF8String(buf));
         }
 
     }

@@ -38,11 +38,11 @@ public class Responce implements IMessage {
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        responce = ByteBufUtils.readUTF8String(buf);
+        this.responce = ByteBufUtils.readUTF8String(buf);
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
-        ByteBufUtils.writeUTF8String(buf, responce);
+        ByteBufUtils.writeUTF8String(buf, this.responce);
     }
 }

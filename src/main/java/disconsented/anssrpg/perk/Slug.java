@@ -25,22 +25,23 @@ package disconsented.anssrpg.perk;
 import com.google.gson.annotations.Expose;
 
 import disconsented.anssrpg.common.Utils;
+import disconsented.anssrpg.common.Utils.Tools;
 
 public class Slug {
     @Expose
-    private String slug;
+    private final String slug;
 
     public Slug(String name) {
-        slug = Utils.Tools.stringToSlug(name);
+        this.slug = Tools.stringToSlug(name);
     }
 
     public String getSlug() {
-        return slug;
+        return this.slug;
     }
 
     @Override
     public String toString() {
-        return slug;
+        return this.slug;
     }
 
 

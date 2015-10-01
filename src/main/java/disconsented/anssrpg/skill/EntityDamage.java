@@ -58,7 +58,7 @@ public class EntityDamage {
             for(EntitySkill skill : skillStore){
                 for(ENE entry : skill.exp){
                     if(Utils.MatchObject(event.entity.getClass(), entry.entity)){
-                      if (requiresPerk(perkList, event.entity)) {
+                      if (this.requiresPerk(perkList, event.entity)) {
                           if (PlayerHandler.hasPerk(playerData, perkList)) {
                                     PlayerHandler.awardToolXP(player, skill, entry.experience);
                               } else {
@@ -98,7 +98,7 @@ public class EntityDamage {
             for(EntitySkill skill : skillStore){
                 for(ENE entry : skill.exp){
                     if(Utils.MatchObject(event.entity.getClass(), entry.entity)){
-                      if (requiresPerk(perkList, event.entity)) {
+                      if (this.requiresPerk(perkList, event.entity)) {
                           if (!PlayerHandler.hasPerk(playerData, perkList) || !PlayerHandler.isWielding(skill, player)) {
                               PlayerHandler.taskFail(player);
                               event.ammount = 1;

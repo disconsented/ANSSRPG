@@ -39,13 +39,13 @@ import java.util.List;
  * @author Disconsented
  */
 public class GUIRegistry extends CommandBase {
-    private List aliases;
+    private final List aliases;
 
     public GUIRegistry() {
-        this.aliases = new ArrayList();
-        this.aliases.add("GUIRegistry");
-        this.aliases.add("REGISTRY");
-        this.aliases.add("registry");
+        aliases = new ArrayList();
+        aliases.add("GUIRegistry");
+        aliases.add("REGISTRY");
+        aliases.add("registry");
     }
 
     @Override
@@ -69,12 +69,12 @@ public class GUIRegistry extends CommandBase {
     @Override
     public List getCommandAliases() {
         // TODO Auto-generated method stub
-        return this.aliases;
+        return aliases;
     }
 
     @Override
     public void processCommand(ICommandSender sender, String[] p_71515_2_) {
-        if (Settings.getInstance().isServer) {
+        if (Settings.isServer) {
             Logging.error("Tried to open the registry GUI on the server please report this");
         } else {
             RegistryReader.getInstance().show();

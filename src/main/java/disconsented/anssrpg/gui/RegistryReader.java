@@ -47,28 +47,28 @@ public class RegistryReader {
     private JList listBlock;
     private JTextField textFieldSearch;
     private JSplitPane JSplit;
-    private JFrame frame;
-    private ArrayList<String> rawItems;
-    private ArrayList<String> rawBlocks;
-    private ArrayList<String> rawEntities;
-    private static RegistryReader instance = null;
+    private final JFrame frame;
+    private final ArrayList<String> rawItems;
+    private final ArrayList<String> rawBlocks;
+    private final ArrayList<String> rawEntities;
+    private static RegistryReader instance;
 
     private RegistryReader() {
-        frame = new JFrame("Minecraft Registry Reader");
-        frame.setContentPane(panel1);
-        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        this.frame = new JFrame("Minecraft Registry Reader");
+        this.frame.setContentPane(this.panel1);
+        this.frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        this.frame.pack();
+        this.frame.setVisible(true);
 
-        textFieldSearch.getDocument().addDocumentListener(new DocumentListener() {
+        this.textFieldSearch.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                updateDisplayedLists();
+                RegistryReader.this.updateDisplayedLists();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                updateDisplayedLists();
+                RegistryReader.this.updateDisplayedLists();
             }
 
             @Override
@@ -76,50 +76,50 @@ public class RegistryReader {
             }
         });
 
-        rawItems = new ArrayList<String>(Item.itemRegistry.getKeys());
-        listItem.setListData(rawItems.toArray());
+        this.rawItems = new ArrayList<String>(Item.itemRegistry.getKeys());
+        this.listItem.setListData(this.rawItems.toArray());
 
-        rawEntities = new ArrayList(EntityList.idToClassMapping.keySet());
-        listEntity.setListData(rawEntities.toArray());
+        this.rawEntities = new ArrayList(EntityList.idToClassMapping.keySet());
+        this.listEntity.setListData(this.rawEntities.toArray());
 
-        rawBlocks = new ArrayList<String>(Block.blockRegistry.getKeys());
-        listBlock.setListData(rawBlocks.toArray());
+        this.rawBlocks = new ArrayList<String>(Block.blockRegistry.getKeys());
+        this.listBlock.setListData(this.rawBlocks.toArray());
 
 
     }
 
     public static RegistryReader getInstance() {
-        if (instance == null) {
-            instance = new RegistryReader();
+        if (RegistryReader.instance == null) {
+            RegistryReader.instance = new RegistryReader();
         }
-        return instance;
+        return RegistryReader.instance;
     }
 
     public void toggleShow() {
-        frame.setVisible(!frame.isShowing());
+        this.frame.setVisible(!this.frame.isShowing());
     }
 
     public void show() {
-        frame.setVisible(true);
+        this.frame.setVisible(true);
     }
 
     private void updateDisplayedLists() {
-        String query = textFieldSearch.getText();
+        String query = this.textFieldSearch.getText();
         Pattern p = Pattern.compile(query);
         if (p == null)
             return;
 
         ArrayList<String> filteredItems = new ArrayList<>();
-        filter(rawItems, p, filteredItems);
-        listItem.setListData(filteredItems.toArray());
+        this.filter(this.rawItems, p, filteredItems);
+        this.listItem.setListData(filteredItems.toArray());
 
         ArrayList<String> filteredEntities = new ArrayList<>();
-        filter(rawEntities, p, filteredEntities);
-        listEntity.setListData(filteredEntities.toArray());
+        this.filter(this.rawEntities, p, filteredEntities);
+        this.listEntity.setListData(filteredEntities.toArray());
 
         ArrayList<String> filteredBlocks = new ArrayList<>();
-        filter(rawBlocks, p, filteredBlocks);
-        listBlock.setListData(filteredBlocks.toArray());
+        this.filter(this.rawBlocks, p, filteredBlocks);
+        this.listBlock.setListData(filteredBlocks.toArray());
     }
 
     /**

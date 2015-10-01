@@ -27,21 +27,21 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Logging {
-    private static Logger logger = LogManager.getLogger("ANSSRPG");
+    private static final Logger logger = LogManager.getLogger("ANSSRPG");
 
     public static void info(Object info) {
-        if (Settings.getInstance().getLogging())
-            logger.info(info);
+        if (Settings.getLogging())
+            Logging.logger.info(info);
     }
 
     public static void error(Object error) {
-        if (Settings.getInstance().getLogging())
-            logger.info(error);
+        if (Settings.getLogging())
+            Logging.logger.info(error);
     }
 
     public static void debug(Object debug) {
-        if (Settings.getInstance().getLogging() && Settings.getInstance().getDebug())
-            logger.info(debug);
+        if (Settings.getLogging() && Settings.getDebug())
+            Logging.logger.info(debug);
     }
 
 }

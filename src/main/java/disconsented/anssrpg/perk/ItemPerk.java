@@ -41,7 +41,6 @@ public class ItemPerk extends Perk {
     public ArrayList<INM> items = new ArrayList<INM>();
 
     public ItemPerk() {
-        super();
     }
 
     public ItemPerk(String name, ArrayList<Requirement> requirements,
@@ -53,7 +52,7 @@ public class ItemPerk extends Perk {
     @Override
     public void searchObject() {
         ArrayList<INM> initialised = new ArrayList<>();
-        for(INM object : items){
+        for(INM object : this.items){
             object.item = (Item)Item.itemRegistry.getObject(object.name);
             if (object.item != null){
                 Logging.debug(object.name + " has been found. Passing on.");
@@ -62,7 +61,7 @@ public class ItemPerk extends Perk {
                 Logging.error(object.name + " has not been found. Skipping");
             }
         }
-        this.items = initialised;
+        items = initialised;
     }
     
 }

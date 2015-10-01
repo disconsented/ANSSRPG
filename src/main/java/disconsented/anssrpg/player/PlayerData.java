@@ -48,7 +48,7 @@ public class PlayerData {
     }
 
     public ArrayList<Slug> getPerkList() {
-        return perkList;
+        return this.perkList;
     }
 
     public void setPerkList(ArrayList<Slug> perkList) {
@@ -56,7 +56,7 @@ public class PlayerData {
     }
 
     public String getPlayerID() {
-        return playerID;
+        return this.playerID;
     }
 
     public void setPlayerID(String playerID) {
@@ -64,7 +64,7 @@ public class PlayerData {
     }
 
     public int getPoints() {
-        return points;
+        return this.points;
     }
 
     public void setPoints(int points) {
@@ -72,18 +72,18 @@ public class PlayerData {
     }
 
     public HashMap<String, Integer> getSkillExp() {
-        return skillExp;
+        return this.skillExp;
     }
 
     public void setSkillExp(HashMap<String, Integer> skillExp) {
         this.skillExp = skillExp;
     }
     public int getSkillLevel(Skill skill){
-        return (int) SkillHandler.calculateLevelForExp(skill, this.skillExp.get(skill.name));
+        return (int) SkillHandler.calculateLevelForExp(skill, skillExp.get(skill.name));
     }
 
     public ArrayList<Slug> getActivePerks() {
-        return activePerks;
+        return this.activePerks;
     }
     
     /**
@@ -91,7 +91,7 @@ public class PlayerData {
      * @param slug
      */
     public void addActivePerkSlug(Slug slug){
-        this.activePerks.add(slug);
+        activePerks.add(slug);
     }
     
     /**
@@ -99,7 +99,7 @@ public class PlayerData {
      * @param slug
      */
     public void removeActivePerkSlug(Slug slug){
-        this.activePerks.remove(slug);
+        activePerks.remove(slug);
     }
     
 
@@ -109,6 +109,6 @@ public class PlayerData {
 
     @Override
     public String toString() {
-        return playerID;
+        return this.playerID;
     }
 }

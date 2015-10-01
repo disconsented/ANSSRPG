@@ -22,6 +22,7 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.network;
 
+import disconsented.anssrpg.perk.Requirement.Action;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import disconsented.anssrpg.perk.Requirement;
@@ -34,9 +35,9 @@ public class PerkInfo implements IMessage {
     private String description;
     private int pointCost;
     private ArrayList<Requirement> requirements;
-    private ArrayList<String> names = new ArrayList<String>();
-    private ArrayList<String> extraData = new ArrayList<String>();
-    private ArrayList<Requirement.Action> actions = new ArrayList<Requirement.Action>();
+    private final ArrayList<String> names = new ArrayList<String>();
+    private final ArrayList<String> extraData = new ArrayList<String>();
+    private final ArrayList<Action> actions = new ArrayList<Action>();
     private int size;
     private String slug;
     private boolean obtained;
@@ -50,68 +51,68 @@ public class PerkInfo implements IMessage {
         this.slug = slug;
         this.pointCost = pointCost;
         for (Requirement requirement : requirements){
-            names.add(requirement.name);
-            extraData.add(requirement.extraData);
-            actions.add(requirement.action);
+            this.names.add(requirement.name);
+            this.extraData.add(requirement.extraData);
+            this.actions.add(requirement.action);
         }
-        this.size = requirements.size();
+        size = requirements.size();
         this.obtained = obtained;
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        size = buf.readInt();
-        name = ByteBufUtils.readUTF8String(buf);
-        description = ByteBufUtils.readUTF8String(buf);
-        slug = ByteBufUtils.readUTF8String(buf);
-        pointCost = buf.readInt();
-        requirements = new ArrayList<Requirement>();
-        for (int i = 0; i < size; i++) {
-            requirements.add(new Requirement(Requirement.Action.valueOf(ByteBufUtils.readUTF8String(buf)), ByteBufUtils.readUTF8String(buf),ByteBufUtils.readUTF8String(buf)));
+        this.size = buf.readInt();
+        this.name = ByteBufUtils.readUTF8String(buf);
+        this.description = ByteBufUtils.readUTF8String(buf);
+        this.slug = ByteBufUtils.readUTF8String(buf);
+        this.pointCost = buf.readInt();
+        this.requirements = new ArrayList<Requirement>();
+        for (int i = 0; i < this.size; i++) {
+            this.requirements.add(new Requirement(Action.valueOf(ByteBufUtils.readUTF8String(buf)), ByteBufUtils.readUTF8String(buf), ByteBufUtils.readUTF8String(buf)));
         }
-        obtained = buf.readBoolean();
+        this.obtained = buf.readBoolean();
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
-        buf.writeInt(size);
-        ByteBufUtils.writeUTF8String(buf, getName());
-        ByteBufUtils.writeUTF8String(buf, getDescription());
-        ByteBufUtils.writeUTF8String(buf, getSlug());
-        buf.writeInt(getPointCost());
-        for (int i = 0; i < names.size(); i++) {
-            ByteBufUtils.writeUTF8String(buf, actions.get(i).name());
-            ByteBufUtils.writeUTF8String(buf, names.get(i));
-            ByteBufUtils.writeUTF8String(buf, extraData.get(i));
+        buf.writeInt(this.size);
+        ByteBufUtils.writeUTF8String(buf, this.getName());
+        ByteBufUtils.writeUTF8String(buf, this.getDescription());
+        ByteBufUtils.writeUTF8String(buf, this.getSlug());
+        buf.writeInt(this.getPointCost());
+        for (int i = 0; i < this.names.size(); i++) {
+            ByteBufUtils.writeUTF8String(buf, this.actions.get(i).name());
+            ByteBufUtils.writeUTF8String(buf, this.names.get(i));
+            ByteBufUtils.writeUTF8String(buf, this.extraData.get(i));
         }
-        buf.writeBoolean(isObtained());
+        buf.writeBoolean(this.isObtained());
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public int getPointCost() {
-        return pointCost;
+        return this.pointCost;
     }
 
     public ArrayList<Requirement> getRequirements() {
         ArrayList<Requirement> req = new ArrayList<Requirement>();
-        for (int i = 0; i < names.size(); i++) {
-            req.add(new Requirement(actions.get(i),names.get(i),extraData.get(i)));
+        for (int i = 0; i < this.names.size(); i++) {
+            req.add(new Requirement(this.actions.get(i), this.names.get(i), this.extraData.get(i)));
         }
         return req;
     }
 
     public String getSlug() {
-        return slug;
+        return this.slug;
     }
 
     public boolean isObtained() {
-        return obtained;
+        return this.obtained;
     }
 }

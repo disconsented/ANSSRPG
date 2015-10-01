@@ -38,7 +38,7 @@ import java.util.ArrayList;
  *         Stores skill data
  */
 public class SkillStore {
-    private static SkillStore instance = null;
+    private static SkillStore instance;
     private static ArrayList<BlockSkill> blockSkill = new ArrayList<BlockSkill>();
     private static ArrayList<EntitySkill> entitySkill = new ArrayList<EntitySkill>();
     private static ArrayList<ItemSkill> itemSkill = new ArrayList<ItemSkill>();
@@ -47,49 +47,49 @@ public class SkillStore {
     protected SkillStore() {/* Exists only to defeat instantiation.*/}
 
     public static void addSkill(BlockSkill skill) {
-        blockSkill.add(skill);
-        skills.add(skill);
+        SkillStore.blockSkill.add(skill);
+        SkillStore.skills.add(skill);
     }
 
     public static void addSkill(EntitySkill entity) {
-        entitySkill.add(entity);
-        skills.add(entity);
+        SkillStore.entitySkill.add(entity);
+        SkillStore.skills.add(entity);
     }
 
     public static void addSkill(ItemSkill item) {
-        itemSkill.add(item);
-        skills.add(item);
+        SkillStore.itemSkill.add(item);
+        SkillStore.skills.add(item);
 
     }
 
     public static void Clear() {
-        blockSkill = new ArrayList<BlockSkill>();
-        entitySkill = new ArrayList<EntitySkill>();
-        itemSkill = new ArrayList<ItemSkill>();
-        skills = new ArrayList<Skill>();
+        SkillStore.blockSkill = new ArrayList<BlockSkill>();
+        SkillStore.entitySkill = new ArrayList<EntitySkill>();
+        SkillStore.itemSkill = new ArrayList<ItemSkill>();
+        SkillStore.skills = new ArrayList<Skill>();
     }
 
     public static ArrayList<BlockSkill> getBlockSkill() {
-        return blockSkill;
+        return SkillStore.blockSkill;
     }
 
     public static ArrayList<EntitySkill> getEntitySkill() {
-        return entitySkill;
+        return SkillStore.entitySkill;
     }
 
     public static SkillStore getInstance() {
-        if (instance == null) {
-            instance = new SkillStore();
+        if (SkillStore.instance == null) {
+            SkillStore.instance = new SkillStore();
         }
-        return instance;
+        return SkillStore.instance;
     }
 
     public static ArrayList<ItemSkill> getItemSkill() {
-        return itemSkill;
+        return SkillStore.itemSkill;
     }
 
     public static ArrayList<Skill> getSkills() {
-        return skills;
+        return SkillStore.skills;
     }
 
 }

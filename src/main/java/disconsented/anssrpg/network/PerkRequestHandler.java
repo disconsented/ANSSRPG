@@ -33,6 +33,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 public class PerkRequestHandler implements IMessageHandler<PerkRequest, IMessage> {
     @Override
     public IMessage onMessage(PerkRequest message, MessageContext ctx) {
-                return new Responce(PlayerHandler.addPerk(message.slug, (EntityPlayerMP)ctx.getServerHandler().playerEntity));
+                return new Responce(PlayerHandler.addPerk(message.slug, ctx.getServerHandler().playerEntity));
     }
 }

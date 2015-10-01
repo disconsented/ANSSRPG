@@ -49,7 +49,7 @@ public class EntityPerk extends Perk {
     @Override
     public void searchObject() {
         ArrayList<ENE> initialised = new ArrayList<ENE>();
-        for(ENE object : entities){
+        for(ENE object : this.entities){
             object.entity = (Class) EntityList.stringToClassMapping.get(object.name);
             if (object.entity != null){
                 Logging.debug(object.name + " has been found. Passing on.");
@@ -58,7 +58,7 @@ public class EntityPerk extends Perk {
                 Logging.error(object.name + " has not been found. Skipping");
             }
         }
-        this.entities = initialised;
+        entities = initialised;
     }
 
 }

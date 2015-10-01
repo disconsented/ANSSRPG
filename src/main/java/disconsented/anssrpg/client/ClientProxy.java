@@ -22,7 +22,9 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg.client;
 
-public class ClientProxy extends disconsented.anssrpg.CommonProxy {
+import disconsented.anssrpg.CommonProxy;
+
+public class ClientProxy extends CommonProxy {
     @Override
     public void registerRenderers() {
         // This is for rendering entities and so forth later on

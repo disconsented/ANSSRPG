@@ -43,15 +43,15 @@ import java.util.List;
  * @author Disconsented
  */
 public class Perks extends CommandBase {
-    private List aliases;
+    private final List aliases;
 
     /**
      *
      */
     public Perks() {
-        this.aliases = new ArrayList();
-        this.aliases.add("perk");
-        this.aliases.add("perks");
+        aliases = new ArrayList();
+        aliases.add("perk");
+        aliases.add("perks");
     }
 
     @Override
@@ -75,7 +75,7 @@ public class Perks extends CommandBase {
     @Override
     public List getCommandAliases() {
         // TODO Auto-generated method stub
-        return this.aliases;
+        return aliases;
     }
 
     @Override
@@ -108,12 +108,12 @@ public class Perks extends CommandBase {
                 }
                 break;
             case "getinfo":
-                if ((arguments.length >= 2)) {
+                if (arguments.length >= 2) {
                     toReturn = PerkStore.getInstance().getPerk(arguments[1]).toString();
                 }
                 break;
             case "convertpoints":
-                if (Settings.getInstance().getPointsMode() == 2) {
+                if (Settings.getPointsMode() == 2) {
                     if (arguments.length > 2) {
                         if (p2.experienceLevel >= Integer.parseInt(arguments[2])) {
                             p2.experienceLevel -= Integer.parseInt(arguments[2]);

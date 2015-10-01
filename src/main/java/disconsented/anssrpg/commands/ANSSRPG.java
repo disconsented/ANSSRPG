@@ -33,14 +33,14 @@ import java.util.List;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Type;
 
 public class ANSSRPG extends CommandBase {
-    private List aliases;
+    private final List aliases;
 
     public ANSSRPG() {
-        this.aliases = new ArrayList();
-        this.aliases.add("ANSSRPG");
-        this.aliases.add("anssrpg");
-        this.aliases.add("anss");
-        this.aliases.add("ANSS");
+        aliases = new ArrayList();
+        aliases.add("ANSSRPG");
+        aliases.add("anssrpg");
+        aliases.add("anss");
+        aliases.add("ANSS");
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ANSSRPG extends CommandBase {
 
     @Override
     public List getCommandAliases() {
-        return this.aliases;
+        return aliases;
     }
 
     @Override

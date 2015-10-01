@@ -35,14 +35,14 @@ import java.util.List;
  */
 public class ComponentStatusBook  extends ComponentBase{
 
-    private ResourceLocation stat1 = new ResourceLocation(Reference.ID, "stat1.png"); //140x180
-    private ResourceLocation stat2 = new ResourceLocation(Reference.ID, "stat2.png"); //140x180
-    public static float currentHearts = 0;
-    public static float currentSaturation = 0;
-    public static float currentArmourHelmet = 0;
-    public static float currentArmourChest = 0;
-    public static float currentArmourLeggings = 0;
-    public static float currentArmourBoots = 0;
+    private final ResourceLocation stat1 = new ResourceLocation(Reference.ID, "stat1.png"); //140x180
+    private final ResourceLocation stat2 = new ResourceLocation(Reference.ID, "stat2.png"); //140x180
+    public static float currentHearts;
+    public static float currentSaturation;
+    public static float currentArmourHelmet;
+    public static float currentArmourChest;
+    public static float currentArmourLeggings;
+    public static float currentArmourBoots;
     public static ArrayList<String> activePerks = new ArrayList<>();
 
 
@@ -50,8 +50,8 @@ public class ComponentStatusBook  extends ComponentBase{
     public ComponentStatusBook(int x, int y){
         this.x = x;
         this.y = y;
-        this.width = 256;
-        this.height = 256;
+        width = 256;
+        height = 256;
     }
 
 
@@ -60,32 +60,32 @@ public class ComponentStatusBook  extends ComponentBase{
      */
     @Override
     public void draw() {
-        bindAndDrawTexture(stat1, x-140, y-90, 140, 180);
-        bindAndDrawTexture(stat2, x, y - 90, width, height);
+        this.bindAndDrawTexture(this.stat1, this.x -140, this.y -90, 140, 180);
+        this.bindAndDrawTexture(this.stat2, this.x, this.y - 90, this.width, this.height);
 
-        bindAndDrawTexture(stat1, x - 100, y - 30, 1, 188, 16, 16);//Heart
-        fontRenderer.drawString(Float.toString(currentHearts), x - 90, y - 28, 0);
+        this.bindAndDrawTexture(this.stat1, this.x - 100, this.y - 30, 1, 188, 16, 16);//Heart
+        this.fontRenderer.drawString(Float.toString(ComponentStatusBook.currentHearts), this.x - 90, this.y - 28, 0);
 
-        bindAndDrawTexture(stat1, x - 100, y - 10, 18, 188, 16, 16);//Saturation
-        fontRenderer.drawString(Float.toString(currentSaturation), x - 91, y - 8, 0);
+        this.bindAndDrawTexture(this.stat1, this.x - 100, this.y - 10, 18, 188, 16, 16);//Saturation
+        this.fontRenderer.drawString(Float.toString(ComponentStatusBook.currentSaturation), this.x - 91, this.y - 8, 0);
 
-        bindAndDrawTexture(stat1, x - 70, y + 65, 35, 188, 16, 16);//Boots
-        fontRenderer.drawString(Float.toString(currentArmourBoots), x - 55, y + 68, 0);
+        this.bindAndDrawTexture(this.stat1, this.x - 70, this.y + 65, 35, 188, 16, 16);//Boots
+        this.fontRenderer.drawString(Float.toString(ComponentStatusBook.currentArmourBoots), this.x - 55, this.y + 68, 0);
 
-        bindAndDrawTexture(stat1, x - 40, y + 10, 52, 188, 16, 16);//Leggings
-        fontRenderer.drawString(Float.toString(currentArmourLeggings), x - 29, y + 16, 0);
+        this.bindAndDrawTexture(this.stat1, this.x - 40, this.y + 10, 52, 188, 16, 16);//Leggings
+        this.fontRenderer.drawString(Float.toString(ComponentStatusBook.currentArmourLeggings), this.x - 29, this.y + 16, 0);
 
-        bindAndDrawTexture(stat1, x - 50, y - 30, 69, 188, 16, 16);//Chest
-        fontRenderer.drawString(Float.toString(currentArmourChest), x - 36, y - 24, 0);
+        this.bindAndDrawTexture(this.stat1, this.x - 50, this.y - 30, 69, 188, 16, 16);//Chest
+        this.fontRenderer.drawString(Float.toString(ComponentStatusBook.currentArmourChest), this.x - 36, this.y - 24, 0);
 
-        bindAndDrawTexture(stat1, x - 70, y - 76, 86, 188, 16, 16);//Helmet
-        fontRenderer.drawString(Float.toString(currentArmourHelmet),x-59, y-74,0);
+        this.bindAndDrawTexture(this.stat1, this.x - 70, this.y - 76, 86, 188, 16, 16);//Helmet
+        this.fontRenderer.drawString(Float.toString(ComponentStatusBook.currentArmourHelmet), this.x - 59, this.y - 74, 0);
 
         String joinedPerks = "";
-        for (String string : activePerks){
+        for (String string : ComponentStatusBook.activePerks){
             joinedPerks += string+"\n";
         }
-        fontRenderer.drawSplitString(joinedPerks,x+4,y-78,123,0);
+        this.fontRenderer.drawSplitString(joinedPerks, this.x + 4, this.y - 78, 123, 0);
 
     }
 }

@@ -45,7 +45,7 @@ public class INME {
     public int metadata = -1;
 
     @Expose
-    public int experience = 0;
+    public int experience;
 
 
 }

@@ -44,7 +44,7 @@ public class ItemSkill extends Skill {
     @Override
     public void touchUp() {
         ArrayList<INME> initialised = new ArrayList<>();
-        for (INME object : exp) {
+        for (INME object : this.exp) {
             object.item = (Item) Item.itemRegistry.getObject(object.name);
             if (object.item != null){
                 Logging.debug(object.name+" has been found. Passing on!");
@@ -53,7 +53,7 @@ public class ItemSkill extends Skill {
                 Logging.error(object.name+" could not be found. Ignoring!");
             }
         }
-        exp = initialised;
+        this.exp = initialised;
     }
 
 }

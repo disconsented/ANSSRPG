@@ -33,9 +33,9 @@ import net.minecraft.util.ResourceLocation;
  * @author Disconsented
  */
 public class PerkControls extends ComponentBase{
-    private ResourceLocation texture = new ResourceLocation(Reference.ID, "perkinfo.png");
-    private int width = 256;
-    private int height = 256;
+    private final ResourceLocation texture = new ResourceLocation(Reference.ID, "perkinfo.png");
+    private final int width = 256;
+    private final int height = 256;
     public String status = "Status";
     public String description = "Description";
     public PerkControls(int x, int y){
@@ -44,9 +44,9 @@ public class PerkControls extends ComponentBase{
     }
     @Override
     public void draw() {
-        bindAndDrawTexture(texture, x, y, this.width, this.height);
-        fontRenderer.drawSplitString(status, 11 + this.x, 2 + 181 + this.y, 156, 0xBEFF00);//9,181 158x28
-        fontRenderer.drawSplitString(description, 11 + this.x, 2 + 9 + this.y, 156, 0xBEFF00); //9,9 158x164
+        this.bindAndDrawTexture(this.texture, this.x, this.y, width, height);
+        this.fontRenderer.drawSplitString(this.status, 11 + x, 2 + 181 + y, 156, 0xBEFF00);//9,181 158x28
+        this.fontRenderer.drawSplitString(this.description, 11 + x, 2 + 9 + y, 156, 0xBEFF00); //9,9 158x164
     }
 
 

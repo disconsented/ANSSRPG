@@ -37,12 +37,12 @@ public class PerkRequest implements IMessage {
     public String slug;
     @Override
     public void fromBytes(ByteBuf buf) {
-       slug = ByteBufUtils.readUTF8String(buf);
+        this.slug = ByteBufUtils.readUTF8String(buf);
 
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
-        ByteBufUtils.writeUTF8String(buf, slug);
+        ByteBufUtils.writeUTF8String(buf, this.slug);
     }
 }

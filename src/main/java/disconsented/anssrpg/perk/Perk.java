@@ -38,7 +38,7 @@ public abstract class Perk {
     @Expose
     public String description = "default_description";
     @Expose
-    public int pointCost = 0;
+    public int pointCost;
 
     public Perk() {  } // Blank constructor for Gson
 
@@ -50,7 +50,7 @@ public abstract class Perk {
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     protected void setDescription(String description) {
@@ -58,16 +58,16 @@ public abstract class Perk {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     protected void setName(String name) {
         this.name = name;
-        slug = new Slug(name);
+        this.slug = new Slug(name);
     }
 
     public int getPointCost() {
-        return pointCost;
+        return this.pointCost;
     }
 
     protected void setPointCost(int pointCost) {
@@ -75,19 +75,19 @@ public abstract class Perk {
     }
 
     public ArrayList getRequirements() {
-        return requirements;
+        return this.requirements;
     }
 
     protected void setRequirements(ArrayList<Requirement> requirments) {
-        requirements = requirments;
+        this.requirements = requirments;
     }
 
     public Slug getSlug() {
-        if (this.slug != null){
-            return slug;
-        } else {
-            this.slug = new Slug(this.name);
+        if (slug != null){
             return this.slug;
+        } else {
+            slug = new Slug(name);
+            return slug;
         }
         
     }
@@ -96,14 +96,14 @@ public abstract class Perk {
 
     @Override
     public String toString() {
-        return name + "|" + description + "|" + pointCost + "|" + requirements.toString();
+        return this.name + "|" + this.description + "|" + this.pointCost + "|" + this.requirements;
     }
 
     public void touchUp() {
-        searchObject();
-        getSlug();
-        if (this.requirements == null) {
-            this.requirements = new ArrayList<Requirement>();
+        this.searchObject();
+        this.getSlug();
+        if (requirements == null) {
+            requirements = new ArrayList<Requirement>();
         }
     }
 

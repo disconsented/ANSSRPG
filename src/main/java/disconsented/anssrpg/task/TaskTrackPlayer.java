@@ -15,24 +15,23 @@ public abstract class TaskTrackPlayer extends Task {
     protected Slug slug;
 
     public TaskTrackPlayer() {
-        super();
     }
 
     @Override
     public void onAdd() {
-        NBTTagList list = entity.getEntityData().getTagList(tagName, 8);
-        list.appendTag(new NBTTagString(this.slug.getSlug()));        
-        entity.getEntityData().setTag(tagName, list);
-        PlayerHandler.getPlayer(entity.getUniqueID()).getActivePerks().add(slug);
+        NBTTagList list = this.entity.getEntityData().getTagList(TaskTrackPlayer.tagName, 8);
+        list.appendTag(new NBTTagString(slug.getSlug()));
+        this.entity.getEntityData().setTag(TaskTrackPlayer.tagName, list);
+        PlayerHandler.getPlayer(this.entity.getUniqueID()).getActivePerks().add(this.slug);
     
     }
 
     @Override
     public void onEnd() {
-        PlayerHandler.getPlayer(entity.getUniqueID()).getActivePerks().remove(slug);
-        NBTTagList list = entity.getEntityData().getTagList(tagName, 8);
+        PlayerHandler.getPlayer(this.entity.getUniqueID()).getActivePerks().remove(this.slug);
+        NBTTagList list = this.entity.getEntityData().getTagList(TaskTrackPlayer.tagName, 8);
         for (int i = 0; i < list.tagCount(); i++){
-            if(list.getStringTagAt(i).equals(this.slug.getSlug())){
+            if(list.getStringTagAt(i).equals(slug.getSlug())){
                 list.removeTag(i);
                 return;
             }

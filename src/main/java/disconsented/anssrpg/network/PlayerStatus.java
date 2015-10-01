@@ -29,12 +29,12 @@ import io.netty.buffer.ByteBuf;
  * Created by j on 30/08/2015.
  */
 public class PlayerStatus implements IMessage{
-    public float currentHearts = 0;
-    public float currentSaturation = 0;
-    public float currentArmourHelmet = 0;
-    public float currentArmourChest = 0;
-    public float currentArmourLeggings = 0;
-    public float currentArmourBoots = 0;
+    public float currentHearts;
+    public float currentSaturation;
+    public float currentArmourHelmet;
+    public float currentArmourChest;
+    public float currentArmourLeggings;
+    public float currentArmourBoots;
 
     public PlayerStatus(){}
     public PlayerStatus(float currentHearts, float currentSaturation, float currentArmourHelmet,
@@ -48,21 +48,21 @@ public class PlayerStatus implements IMessage{
     }
     @Override
     public void fromBytes(ByteBuf buf) {
-        this.currentHearts = buf.readFloat();
-        this.currentSaturation = buf.readFloat();
-        this.currentArmourHelmet = buf.readFloat();
-        this.currentArmourChest = buf.readFloat();
-        this.currentArmourLeggings = buf.readFloat();
-        this.currentArmourBoots = buf.readFloat();
+        currentHearts = buf.readFloat();
+        currentSaturation = buf.readFloat();
+        currentArmourHelmet = buf.readFloat();
+        currentArmourChest = buf.readFloat();
+        currentArmourLeggings = buf.readFloat();
+        currentArmourBoots = buf.readFloat();
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
-        buf.writeFloat(currentHearts);
-        buf.writeFloat(currentSaturation);
-        buf.writeFloat(currentArmourHelmet);
-        buf.writeFloat(currentArmourChest);
-        buf.writeFloat(currentArmourLeggings);
-        buf.writeFloat(currentArmourBoots);
+        buf.writeFloat(this.currentHearts);
+        buf.writeFloat(this.currentSaturation);
+        buf.writeFloat(this.currentArmourHelmet);
+        buf.writeFloat(this.currentArmourChest);
+        buf.writeFloat(this.currentArmourLeggings);
+        buf.writeFloat(this.currentArmourBoots);
     }
 }

@@ -28,36 +28,35 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.relauncher.Side;
 import disconsented.anssrpg.common.Logging;
 
 public class TaskMaster{
 	protected TaskMaster(){}
 	
-	private static TaskMaster master = null;
-	private Queue<Task> queue = new LinkedList<Task>();
-	private Queue<Task> currentQueue = new LinkedList<Task>();
+	private static TaskMaster master;
+	private final Queue<Task> queue = new LinkedList<Task>();
+	private final Queue<Task> currentQueue = new LinkedList<Task>();
 	
 	public static TaskMaster getInstance(){
-		if (master == null){
-			master = new TaskMaster();
+		if (TaskMaster.master == null){
+			TaskMaster.master = new TaskMaster();
 		} 
-		return master;
+		return TaskMaster.master;
 	}
 	
 	public boolean addTask(Task task){
 		task.onAdd();
-		return queue.offer(task);
+		return this.queue.offer(task);
 	}
 	
 	public void process(TickEvent event){
-		if(event.side == Side.SERVER && event.phase == Phase.START && queue != null){
-		    while(queue.isEmpty() == false){
-		        currentQueue.offer(queue.poll());
+		if(event.side == Side.SERVER && event.phase == TickEvent.Phase.START && this.queue != null){
+		    while(this.queue.isEmpty() == false){
+				this.currentQueue.offer(this.queue.poll());
 		    }
-			while(currentQueue.peek() != null){
-				Task currentTask = currentQueue.poll();
+			while(this.currentQueue.peek() != null){
+				Task currentTask = this.currentQueue.poll();
 				Logging.debug("Attempting to process " + currentTask.getClass().getName());
 				
 				if (currentTask.canProcess(event)){
@@ -65,12 +64,12 @@ public class TaskMaster{
 					currentTask.increaseTick();
 					
 					if (currentTask.canRepeat()){
-						queue.offer(currentTask);
+						this.queue.offer(currentTask);
 					} else {
 						currentTask.onEnd();
 					}
 				} else {
-					queue.offer(currentTask);
+					this.queue.offer(currentTask);
 				}
 				
 			}

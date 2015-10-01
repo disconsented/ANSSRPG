@@ -36,33 +36,33 @@ import net.minecraft.entity.player.EntityPlayerMP;
  *         Stores player's into a hashmap with the Key being their UUID
  */
 public class PlayerStore {
-    private static HashMap<String, PlayerData> data = new HashMap<String, PlayerData>();
+    private static final HashMap<String, PlayerData> data = new HashMap<String, PlayerData>();
 
-    private static PlayerStore instance = null;
+    private static PlayerStore instance;
 
     protected PlayerStore() {/* Exists only to defeat instantiation.*/}
 
     public static void addPlayer(PlayerData player) {
-        data.put(player.getPlayerID(), player);
+        PlayerStore.data.put(player.getPlayerID(), player);
     }
 
     public static HashMap<String, PlayerData> getAllData() {
-        return data;
+        return PlayerStore.data;
     }
 
     public static PlayerStore getInstance() {
-        if (instance == null) {
-            instance = new PlayerStore();
+        if (PlayerStore.instance == null) {
+            PlayerStore.instance = new PlayerStore();
         }
-        return instance;
+        return PlayerStore.instance;
     }
 
     public static PlayerData getPlayer(String playerID) {
-        return data.get(playerID);
+        return PlayerStore.data.get(playerID);
     }
 
     public static PlayerData getPlayer(EntityPlayerMP player) {
-        return data.get(player.getUniqueID().toString());
+        return PlayerStore.data.get(player.getUniqueID().toString());
     }
 
 }

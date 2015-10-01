@@ -27,6 +27,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.perk.Slug;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Type;
 
 /**
  * @author Disconsented
@@ -36,7 +37,7 @@ import disconsented.anssrpg.perk.Slug;
 public class TaskApplyPotion extends TaskTrackPlayer{
     protected final String tagName = "TASKAPPLYPOTION";
     
-    public TaskApplyPotion(EntityLivingBase entity, PotionEffect effect, TickEvent.Type type, boolean repeat, int cycle){
+    public TaskApplyPotion(EntityLivingBase entity, PotionEffect effect, Type type, boolean repeat, int cycle){
         this.entity = entity;
         this.effect = effect;
         this.type = type;
@@ -44,14 +45,14 @@ public class TaskApplyPotion extends TaskTrackPlayer{
         this.cycle = cycle;
     }
     
-    public TaskApplyPotion(EntityLivingBase entity, PotionEffect effect, TickEvent.Type type, boolean repeat, int cycle, int maxCycles, Slug slug){
+    public TaskApplyPotion(EntityLivingBase entity, PotionEffect effect, Type type, boolean repeat, int cycle, int maxCycles, Slug slug){
         this.entity = entity;
         this.effect = effect;
         this.type = type;
         this.repeat = repeat;
         this.cycle = cycle;
         this.slug = slug;
-        this.maxTicks = maxCycles;
+        maxTicks = maxCycles;
     }
 
     /* (non-Javadoc)
@@ -59,11 +60,11 @@ public class TaskApplyPotion extends TaskTrackPlayer{
      */
     @Override
     public void onTick(TickEvent event) {        
-        if(entity.isDead){
-            repeat = false;
+        if(this.entity.isDead){
+            this.repeat = false;
         } else {
-            Logging.debug("Attempting to apply potion " + effect.getEffectName() + " to " + entity.getName());
-            entity.addPotionEffect(new PotionEffect(effect));
+            Logging.debug("Attempting to apply potion " + this.effect.getEffectName() + " to " + this.entity.getName());
+            this.entity.addPotionEffect(new PotionEffect(this.effect));
         }
 
     }

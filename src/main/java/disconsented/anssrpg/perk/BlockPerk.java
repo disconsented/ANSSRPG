@@ -38,7 +38,6 @@ public class BlockPerk extends Perk {
     public ArrayList<BNP> blocks = new ArrayList<BNP>();
 
     public BlockPerk() {
-        super();
     }
 
     public BlockPerk(String name, ArrayList<Requirement> requirements,
@@ -50,7 +49,7 @@ public class BlockPerk extends Perk {
     @Override
     public void searchObject() {
         ArrayList<BNP> initialised = new ArrayList<BNP>();
-        for(BNP object : blocks){
+        for(BNP object : this.blocks){
             object.block = (Block)Block.blockRegistry.getObject(object.name);
             if (object.block != null){
                 Logging.debug(object.name + " has been found. Passing on.");
@@ -59,7 +58,7 @@ public class BlockPerk extends Perk {
                 Logging.error(object.name + " has not been found. Skipping");
             }
         }
-        this.blocks = initialised;
+        blocks = initialised;
     }
     
 }

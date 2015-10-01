@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import com.google.gson.annotations.Expose;
 
 import disconsented.anssrpg.common.Logging;
+import disconsented.anssrpg.data.SkillStore;
 import disconsented.anssrpg.skill.objects.BlockSkill;
 import disconsented.anssrpg.skill.objects.EntitySkill;
 import disconsented.anssrpg.skill.objects.ItemSkill;
@@ -40,38 +41,38 @@ public class SkillContainer {
     @Expose
     private ArrayList<BlockSkill> blocks = new ArrayList<BlockSkill>();
     @Expose
-    private ArrayList<EntitySkill> entites = new ArrayList<EntitySkill>();
+    private final ArrayList<EntitySkill> entites = new ArrayList<EntitySkill>();
     @Expose
-    private ArrayList<ItemSkill> items = new ArrayList<ItemSkill>();
+    private final ArrayList<ItemSkill> items = new ArrayList<ItemSkill>();
 
 
     public void addBlockSkill(BlockSkill blockSkill) {
-        blocks.add(blockSkill);
+        this.blocks.add(blockSkill);
     }
 
 
     public void addEntitySkill(EntitySkill entitySkill) {
-        entites.add(entitySkill);
+        this.entites.add(entitySkill);
     }
 
 
     public void addItemSkill(ItemSkill itemSkill) {
-        items.add(itemSkill);
+        this.items.add(itemSkill);
     }
 
     public ArrayList<BlockSkill> getBlock() {
-        return blocks;
+        return this.blocks;
     }
 
     public void setBlock(ArrayList<BlockSkill> block) {
-        blocks = block;
+        this.blocks = block;
     }
 
     public void touchUp() {
         ArrayList<Skill> skills = new ArrayList<Skill>();
-        skills.addAll(blocks);
-        skills.addAll(entites);
-        skills.addAll(items);
+        skills.addAll(this.blocks);
+        skills.addAll(this.entites);
+        skills.addAll(this.items);
         
         for(Skill skillCurrent : skills){
             for(Skill skillName : skills){
@@ -80,43 +81,43 @@ public class SkillContainer {
                         Logging.debug(skillCurrent.name + " has been detected as a compound skill");
                     } else {
                         Logging.error(skillCurrent.name + " has been detected as a compound skill but does not match other definations; Removing");
-                        matchAndRemove(skillCurrent);
+                        this.matchAndRemove(skillCurrent);
                     }
                 }
             }
         }        
-        for (BlockSkill block : blocks) {
+        for (BlockSkill block : this.blocks) {
             block.touchUp();
-            disconsented.anssrpg.data.SkillStore.addSkill(block);
+            SkillStore.addSkill(block);
         }
-        for (EntitySkill entity : entites) {
+        for (EntitySkill entity : this.entites) {
             entity.touchUp();
-            disconsented.anssrpg.data.SkillStore.addSkill(entity);
+            SkillStore.addSkill(entity);
         }
-        for (ItemSkill item : items) {
+        for (ItemSkill item : this.items) {
             item.touchUp();
-            disconsented.anssrpg.data.SkillStore.addSkill(item);
+            SkillStore.addSkill(item);
         }
 
     }
     
     private void matchAndRemove(Skill skill){
-        for (BlockSkill block : blocks) {
-            blocks.remove(skill);
+        for (BlockSkill block : this.blocks) {
+            this.blocks.remove(skill);
             if(block.name == skill.name){
-                blocks.remove(block);
+                this.blocks.remove(block);
             }
         }
-        for (EntitySkill entity : entites) {
-            entites.remove(skill);
+        for (EntitySkill entity : this.entites) {
+            this.entites.remove(skill);
             if(entity.name == skill.name){
-                entites.remove(entity);
+                this.entites.remove(entity);
             }
         }
-        for (ItemSkill item : items) {
-            items.remove(skill);
+        for (ItemSkill item : this.items) {
+            this.items.remove(skill);
             if(item.name == skill.name){
-                items.remove(item);
+                this.items.remove(item);
             }
         }
     }

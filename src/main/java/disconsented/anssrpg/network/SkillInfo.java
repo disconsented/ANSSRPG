@@ -46,21 +46,21 @@ public class SkillInfo implements IMessage {
 
 	@Override
 	public void fromBytes(ByteBuf buf) {
-		this.name = ByteBufUtils.readUTF8String(buf);
-		this.expCurrent = buf.readInt();
-		this.expRequired = buf.readInt();
-		this.levelCurrent = buf.readInt();
-		this.expOld = buf.readInt();
+		name = ByteBufUtils.readUTF8String(buf);
+		expCurrent = buf.readInt();
+		expRequired = buf.readInt();
+		levelCurrent = buf.readInt();
+		expOld = buf.readInt();
 		
 	}
 
 	@Override
 	public void toBytes(ByteBuf buf) {
-		ByteBufUtils.writeUTF8String(buf, this.name);
-		buf.writeInt(expCurrent);
-		buf.writeInt(expRequired);
-		buf.writeInt(levelCurrent);
-		buf.writeInt(expOld);
+		ByteBufUtils.writeUTF8String(buf, name);
+		buf.writeInt(this.expCurrent);
+		buf.writeInt(this.expRequired);
+		buf.writeInt(this.levelCurrent);
+		buf.writeInt(this.expOld);
 		
 	}
 

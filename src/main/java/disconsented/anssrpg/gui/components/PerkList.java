@@ -35,23 +35,23 @@ import java.util.ArrayList;
  * @author Disconsented
  */
 public class PerkList extends ComponentBase{
-    private ResourceLocation texture = new ResourceLocation(Reference.ID, "perklist.png");
-    private int width = 256;
-    private int height = 256;
-    private String names[] = {"1","2","3","4"};
+    private final ResourceLocation texture = new ResourceLocation(Reference.ID, "perklist.png");
+    private final int width = 256;
+    private final int height = 256;
+    private final String[] names = {"1","2","3","4"};
     public PerkList(int x, int y){
         this.x = x;
         this.y = y;
     }
     @Override
     public void draw() {
-        bindAndDrawTexture(texture, x, y, this.width, this.height);
-        this.drawString(fontRenderer, names[0], 11 + this.x, this.y + 9 + 2, 0xBEFF00);
-        this.drawString(fontRenderer, names[1], 11 + this.x, this.y + 69 + 2, 0xBEFF00);
-        this.drawString(fontRenderer, names[2], 11 + this.x, this.y + 129 + 2, 0xBEFF00);
-        this.drawString(fontRenderer, names[3], 11 + this.x, this.y + 189 + 2, 0xBEFF00);
+        this.bindAndDrawTexture(this.texture, this.x, this.y, width, height);
+        drawString(this.fontRenderer, this.names[0], 11 + x, y + 9 + 2, 0xBEFF00);
+        drawString(this.fontRenderer, this.names[1], 11 + x, y + 69 + 2, 0xBEFF00);
+        drawString(this.fontRenderer, this.names[2], 11 + x, y + 129 + 2, 0xBEFF00);
+        drawString(this.fontRenderer, this.names[3], 11 + x, y + 189 + 2, 0xBEFF00);
     }
     public String[] getNames(){
-        return this.names;
+        return names;
     }
 }

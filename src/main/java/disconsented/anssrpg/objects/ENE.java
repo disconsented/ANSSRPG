@@ -41,5 +41,5 @@ public class ENE {
     @Expose
     public String name = "";
     @Expose
-    public int experience = 0;
+    public int experience;
 }

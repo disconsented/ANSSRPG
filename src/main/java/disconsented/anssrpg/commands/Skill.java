@@ -35,7 +35,7 @@ import net.minecraft.util.ChatComponentText;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
+import java.util.Map;
 
 /**
  * @author Disconsented
@@ -83,7 +83,7 @@ public class Skill extends CommandBase {
             toReturn += "," + slug;
         }
         toReturn += "| Your skill XP: ";
-        for (Entry<String, Integer> skill : playerData.getSkillExp().entrySet()) {
+        for (Map.Entry<String, Integer> skill : playerData.getSkillExp().entrySet()) {
             toReturn += skill.toString();
         }
         player.addChatMessage(new ChatComponentText(toReturn));

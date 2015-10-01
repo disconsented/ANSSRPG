@@ -44,10 +44,10 @@ public class BlockSkill extends ToolSkill {
     
     @Override
     public void touchUp() {
-        initTool();
+        this.initTool();
         
         ArrayList<BNEP> initialised = new ArrayList<BNEP>();
-        for (BNEP object : exp) {
+        for (BNEP object : this.exp) {
             object.block = (Block) Block.blockRegistry.getObject(object.name);
             if (object.block != null){
                 Logging.debug(object.name+" has been found. Passing on!");
@@ -56,7 +56,7 @@ public class BlockSkill extends ToolSkill {
                 Logging.error(object.name+" could not be found. Ignoring!");
             }
         }
-        exp = initialised;
+        this.exp = initialised;
     }
     
 }

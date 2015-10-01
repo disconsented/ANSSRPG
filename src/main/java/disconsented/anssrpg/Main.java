@@ -22,16 +22,12 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg;
 
-import java.util.Map.Entry;
-
 import disconsented.anssrpg.commands.GUIRegistry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -58,9 +54,11 @@ import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.player.PlayerFile;
 import disconsented.anssrpg.skill.objects.BlockSkill;
 
+import java.util.Map;
+
 @Mod(modid = Reference.ID, name = Reference.NAME, version = Reference.VERSION, acceptableRemoteVersions = "*")
 public class Main {
-    @Instance(value = Reference.ID)
+    @Mod.Instance(value = Reference.ID)
     public static Main instance;
 
     @SidedProxy(clientSide = Reference.CLIENTPROXY, serverSide = Reference.COMMONPROXY)
@@ -68,33 +66,33 @@ public class Main {
 
     public static SimpleNetworkWrapper snw;
 
-    private Settings settings = Settings.getInstance();
+    private final Settings settings = Settings.getInstance();
 
 
-    @EventHandler
+    @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) throws Exception {
-        settings.load(event);
+        this.settings.load(event);
         if (MinecraftServer.getServer() != null && MinecraftServer.getServer().isDedicatedServer()) {
-            settings.isServer = true;
+            Settings.isServer = true;
         } else {
-            settings.isServer = false;
+            Settings.isServer = false;
             ClientCommandHandler.instance.registerCommand(new GUIRegistry());
         }
         
     }
 
-    @EventHandler // used in 1.6.2
+    @Mod.EventHandler // used in 1.6.2
     //@Init       // used in 1.5.2
     public void load(FMLInitializationEvent event) {
     	Manager.init();
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
-        proxy.registerRenderers();
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, Main.proxy);
+        Main.proxy.registerRenderers();
         MinecraftForge.EVENT_BUS.register(new ForgeBUS());
         FMLCommonHandler.instance().bus().register(new FMLBUS());
         ToolRegistry.init();
     }
 
-    @EventHandler
+    @Mod.EventHandler
     public void serverLoad(FMLServerStartingEvent event) {
         event.registerServerCommand(new Perks());
         event.registerServerCommand(new ANSSRPG());
@@ -106,17 +104,17 @@ public class Main {
      *
      * @param event
      */
-    @EventHandler
+    @Mod.EventHandler
     public void onServerStoppingEvent(FMLServerStoppingEvent event) {
-        for (Entry<String, PlayerData> entry : PlayerStore.getInstance().getAllData().entrySet()) {
+        for (Map.Entry<String, PlayerData> entry : PlayerStore.getInstance().getAllData().entrySet()) {
             PlayerData player = entry.getValue();
             PlayerFile.writePlayer(player);
         }
     }
 
-    @EventHandler
+    @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) throws Exception {
-        if (settings.isExternalConfig()){
+        if (Settings.isExternalConfig()){
             JsonConfigHandler.loadPerkAndSkill();
         } else {
             JsonConfigHandler.loadInternalConfig();            

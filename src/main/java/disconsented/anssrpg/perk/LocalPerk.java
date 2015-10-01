@@ -42,7 +42,7 @@ public class LocalPerk {
      * @param requirements - What is needed to unlock.
      */
     public LocalPerk(String name, String description, int pointCost, ArrayList requirements) {
-        perkSlug = getSlug(name);
+        this.perkSlug = this.getSlug(name);
         this.name = name;
         this.requirements = requirements;
         this.pointCost = pointCost;

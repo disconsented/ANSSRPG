@@ -36,15 +36,15 @@ import java.util.ArrayList;
  */
 public class PerkContainer {
     @Expose
-    private ArrayList<ItemPerk> items = new ArrayList<>();
+    private final ArrayList<ItemPerk> items = new ArrayList<>();
     @Expose
-    private ArrayList<BlockPerk> blocks = new ArrayList<>();
+    private final ArrayList<BlockPerk> blocks = new ArrayList<>();
     @Expose
-    private ArrayList<EntityPerk> entities = new ArrayList<>();
+    private final ArrayList<EntityPerk> entities = new ArrayList<>();
     @Expose
-    private ArrayList<TitlePerk> titles = new ArrayList<>();
+    private final ArrayList<TitlePerk> titles = new ArrayList<>();
     @Expose
-    private ArrayList<PotionSelfPerk> selfPotion = new ArrayList<>();
+    private final ArrayList<PotionSelfPerk> selfPotion = new ArrayList<>();
     
 
     public PerkContainer() {
@@ -53,34 +53,34 @@ public class PerkContainer {
 
     public PerkContainer(Boolean fill) {
         if (fill) {
-            items.add(new ItemPerk());
-            blocks.add(new BlockPerk());
-            entities.add(new EntityPerk());
-            titles.add(new TitlePerk());
-            selfPotion.add(new PotionSelfPerk());
+            this.items.add(new ItemPerk());
+            this.blocks.add(new BlockPerk());
+            this.entities.add(new EntityPerk());
+            this.titles.add(new TitlePerk());
+            this.selfPotion.add(new PotionSelfPerk());
         }
     }
 
     public void addPerk(BlockPerk perk) {
-        blocks.add(perk);
+        this.blocks.add(perk);
     }
 
     public void addPerk(EntityPerk perk) {
-        entities.add(perk);
+        this.entities.add(perk);
     }
 
     public void addPerk(ItemPerk perk) {
-        items.add(perk);
+        this.items.add(perk);
     }
 
     public void addPerk(TitlePerk perk) {
-        titles.add(perk);
+        this.titles.add(perk);
     }
     public void addPerk(PotionSelfPerk effect){
-        selfPotion.add(effect);
+        this.selfPotion.add(effect);
     }
     public void touchUp() {
-        for (ItemPerk item : items) {
+        for (ItemPerk item : this.items) {
             item.touchUp();
             if (item.items != null) {
                 PerkStore.putPerk(item);
@@ -89,7 +89,7 @@ public class PerkContainer {
                 Logging.error(item.name + "'s object is null. Skipping");
             }
         }
-        for (BlockPerk block : blocks) {
+        for (BlockPerk block : this.blocks) {
             block.touchUp();
             if (block.blocks != null) {
                 PerkStore.putPerk(block);
@@ -98,7 +98,7 @@ public class PerkContainer {
                 Logging.error(block.name + "'s object is null. Skipping");
             }
         }
-        for (EntityPerk entity : entities) {
+        for (EntityPerk entity : this.entities) {
             entity.touchUp();
             if (entity.entities != null) {
                 PerkStore.putPerk(entity);
@@ -107,7 +107,7 @@ public class PerkContainer {
                 Logging.error(entity.name + "'s object is null. Skipping");
             }
         }
-        for (TitlePerk title : titles) {
+        for (TitlePerk title : this.titles) {
             if (title.getTitle() != null) {
                 PerkStore.putPerk(title);
                 PerkStore.addPerk(title);
@@ -116,7 +116,7 @@ public class PerkContainer {
             }
 
         }
-        for (PotionSelfPerk effect : selfPotion) {
+        for (PotionSelfPerk effect : this.selfPotion) {
             effect.touchUp();
             if (effect.cycle > 0){
                 PerkStore.putPerk(effect);

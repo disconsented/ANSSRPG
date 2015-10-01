@@ -40,11 +40,11 @@ public class EntitySkill extends ToolSkill {
     public ArrayList<ENE> exp = new ArrayList<ENE>();
 
     @Override
-    public void touchUp() { 
-        initTool();
+    public void touchUp() {
+        this.initTool();
         
         ArrayList<ENE> initialised = new ArrayList<ENE>();
-        for (ENE object : exp) {
+        for (ENE object : this.exp) {
             object.entity = (Class) EntityList.stringToClassMapping.get(object.name);
             if (object.entity != null){
                 Logging.debug(object.name+" has been found. Passing on!");
@@ -53,7 +53,7 @@ public class EntitySkill extends ToolSkill {
                 Logging.error(object.name+" could not be found. Ignoring!");
             }
         }
-        exp = initialised;
+        this.exp = initialised;
     }
     
 }

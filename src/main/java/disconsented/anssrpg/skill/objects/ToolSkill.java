@@ -38,14 +38,13 @@ import disconsented.anssrpg.perk.Requirement;
 public abstract class ToolSkill extends Skill{    
     @Expose
     public String tool = "";
-    public Class toolClass = null;
+    public Class toolClass;
     
     public ToolSkill() {
-        super();
     }
 
     public void initTool(){
-        this.toolClass = ToolRegistry.getEntry(tool);
+        toolClass = ToolRegistry.getEntry(this.tool);
     }
 
 }

@@ -26,6 +26,7 @@ import disconsented.anssrpg.Main;
 import disconsented.anssrpg.common.Reference;
 import disconsented.anssrpg.gui.components.ComponentStatusBook;
 import disconsented.anssrpg.network.Request;
+import disconsented.anssrpg.network.Request.REQUEST;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -36,14 +37,14 @@ import net.minecraft.util.ResourceLocation;
  * Created by Disconsented on 22/08/2015.
  */
 public class GUIStatus extends GuiScreen {
-    ComponentStatusBook status = null;
+    ComponentStatusBook status;
 
 
     @Override
     public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_) {
         //drawDefaultBackground();
         //(width/2) - 176, (height - 240)/2
-        status.draw();
+        this.status.draw();
 
     }
 
@@ -53,15 +54,15 @@ public class GUIStatus extends GuiScreen {
 
     @Override
     public void initGui() {
-        int x = width/2;
-        int y = height/2;
-        status = new ComponentStatusBook(x, y);
-        Main.snw.sendToServer(new Request(Request.REQUEST.START_TRACKING));
+        int x = this.width /2;
+        int y = this.height /2;
+        this.status = new ComponentStatusBook(x, y);
+        Main.snw.sendToServer(new Request(REQUEST.START_TRACKING));
     }
 
     //Stops sends the stop tracking packet
     @Override
-    public void onGuiClosed() {Main.snw.sendToServer(new Request(Request.REQUEST.STOP_TRACKING));}
+    public void onGuiClosed() {Main.snw.sendToServer(new Request(REQUEST.STOP_TRACKING));}
     @Override
     public boolean doesGuiPauseGame() {
         return false;

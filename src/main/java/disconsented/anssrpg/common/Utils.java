@@ -40,17 +40,9 @@ public class Utils {
      */
     public static<T> boolean MatchObject(T object1, int metadata1, T object2, int metadata2){
         if (metadata1 > -1 && metadata2 > -1){
-            if (object1.getClass().equals(object2.getClass()) && metadata1 == metadata2){
-                return true;
-            } else {
-                return false;
-            }
+            return object1.getClass().equals(object2.getClass()) && metadata1 == metadata2;
         } else {
-            if (object1.getClass().equals(object2.getClass())){
-                return true;
-            } else {
-                return false;
-            }
+            return object1.getClass().equals(object2.getClass());
         }
     }
 
@@ -63,7 +55,7 @@ public class Utils {
      * @param <T>
      * @return
      */
-    public static<T> boolean MatchObject(final T object1, final Map<String, String> properties1, final T object2, final Map<String, String> properties2){
+    public static<T> boolean MatchObject(T object1, Map<String, String> properties1, T object2, Map<String, String> properties2){
         if(object1 != object2)
             return false;
 

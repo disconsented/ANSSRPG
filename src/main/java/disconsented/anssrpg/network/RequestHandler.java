@@ -23,7 +23,7 @@ THE SOFTWARE.
 package disconsented.anssrpg.network;
 
 import java.util.ArrayList;
-import java.util.Map.Entry;
+import java.util.Map;
 
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -64,7 +64,7 @@ public class RequestHandler implements IMessageHandler<Request, IMessage> {
 			break;
 		case SKILLS:
 			SkillStore skillStore = SkillStore.getInstance();
-			for(Entry<String, Integer> entry : playerData.getSkillExp().entrySet()){
+			for(Map.Entry<String, Integer> entry : playerData.getSkillExp().entrySet()){
 				for(Skill skill : SkillStore.getSkills()){
 					if(entry.getKey().equals(skill.name)){						
 						int level = (int) SkillHandler.calculateLevelForExp(skill, entry.getValue());

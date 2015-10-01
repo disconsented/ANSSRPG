@@ -23,15 +23,16 @@ THE SOFTWARE.
 package disconsented.anssrpg.task;
 
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Type;
 
 public abstract class Task/* implements Comparable<TaskApplyPotion>*/{
 	
-	private int tick = 0;
-    private int totalTicks = 0;
-	protected boolean repeat = false;
+	private int tick;
+    private int totalTicks;
+	protected boolean repeat;
 	protected int cycle = 1;
 	protected  int maxTicks = 1;
-	protected TickEvent.Type type = null;
+	protected Type type;
 	/**
 	 * Called when the task is first added to the master
 	 */
@@ -53,12 +54,12 @@ public abstract class Task/* implements Comparable<TaskApplyPotion>*/{
 	 * @return
 	 */
 	public boolean canProcess(TickEvent event){
-		if(!filter(event)){
-			if(tick / cycle == 1){
-				this.tick = 0;
+		if(!this.filter(event)){
+			if(this.tick / this.cycle == 1){
+				tick = 0;
 				return true;
-			} else {			
-				this.tick++;
+			} else {
+				tick++;
 				return false;
 			}
 		} else {
@@ -71,22 +72,22 @@ public abstract class Task/* implements Comparable<TaskApplyPotion>*/{
 	 * @return
 	 */
 	private boolean filter(TickEvent event){
-		if(type == null) {
+		if(this.type == null) {
 			return false;
 		}
 		
-		return !event.type.equals(type);
+		return !event.type.equals(this.type);
 	}
 	
 	public boolean canRepeat(){
-        if(totalTicks > maxTicks && maxTicks > 0){
-			return this.repeat = false;
+        if(this.totalTicks > this.maxTicks && this.maxTicks > 0){
+			return repeat = false;
 		}
-			return this.repeat;
+			return repeat;
     }
 
     public void increaseTick(){
-        this.tick++;
-        this.totalTicks++;
+		tick++;
+		totalTicks++;
     }
 }

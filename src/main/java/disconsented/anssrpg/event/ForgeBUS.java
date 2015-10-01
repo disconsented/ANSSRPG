@@ -25,7 +25,7 @@ package disconsented.anssrpg.event;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerOpenContainerEvent;
-import net.minecraftforge.event.world.BlockEvent.BreakEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import disconsented.anssrpg.skill.BlockBreaking;
 import disconsented.anssrpg.skill.EntityDamage;
@@ -37,7 +37,7 @@ import disconsented.anssrpg.skill.ItemCrafting;
  */
 public class ForgeBUS {
     @SubscribeEvent
-    public void onBreakEvent(BreakEvent event) {
+    public void onBreakEvent(BlockEvent.BreakEvent event) {
         new BlockBreaking().onBreakEvent(event);
     }
     

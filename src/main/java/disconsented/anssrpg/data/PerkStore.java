@@ -37,7 +37,7 @@ import java.util.HashMap;
  * Just stores and retrieves perks
  */
 public class PerkStore {
-    private static ArrayList<Perk> perks = new ArrayList<Perk>();
+    private static final ArrayList<Perk> perks = new ArrayList<Perk>();
     /*String needs to be a name unique to each entity type*/
     private static final HashMap<String, ArrayList<BlockPerk>> blockMap = new HashMap<String, ArrayList<BlockPerk>>();
     private static final HashMap<String, ArrayList<EntityPerk>> entityMap = new HashMap<String, ArrayList<EntityPerk>>();
@@ -52,30 +52,30 @@ public class PerkStore {
 
     //Adds a perk to the complete list
     public static void addPerk(Perk perk) {
-        perksMap.put(perk.getSlug().getSlug(), perk);
+        PerkStore.perksMap.put(perk.getSlug().getSlug(), perk);
     }
 
     public static void Clear() {
-        perks.clear();
-        blockMap.clear();
-        entityMap.clear();
-        itemMap.clear();
-        perksMap.clear();
+        PerkStore.perks.clear();
+        PerkStore.blockMap.clear();
+        PerkStore.entityMap.clear();
+        PerkStore.itemMap.clear();
+        PerkStore.perksMap.clear();
     }
 
     public static PerkStore getInstance() {
-        if (instance == null) {
-            instance = new PerkStore();
+        if (PerkStore.instance == null) {
+            PerkStore.instance = new PerkStore();
         }
-        return instance;
+        return PerkStore.instance;
     }
 
     public static Perk getPerk(String perkSlug) {
-        return perksMap.get(perkSlug);
+        return PerkStore.perksMap.get(perkSlug);
     }
 
     public static ArrayList<Perk> getPerks() {
-        return perks;
+        return PerkStore.perks;
     }
 
     /**
@@ -84,7 +84,7 @@ public class PerkStore {
      * @return
      */
     public static ArrayList<BlockPerk> getPerks(Block block){
-        return blockMap.get(block.getUnlocalizedName());
+        return PerkStore.blockMap.get(block.getUnlocalizedName());
     }
 
     /**
@@ -93,7 +93,7 @@ public class PerkStore {
      * @return
      */
     public static ArrayList<ItemPerk> getPerks(Item item){
-        return itemMap.get(item.getUnlocalizedName());
+        return PerkStore.itemMap.get(item.getUnlocalizedName());
     }
 
     /**
@@ -102,7 +102,7 @@ public class PerkStore {
      * @return
      */
     public static ArrayList<EntityPerk> getPerks(Class entity){
-        return entityMap.get(entity.getSimpleName());
+        return PerkStore.entityMap.get(entity.getSimpleName());
     }
 
 
@@ -128,10 +128,10 @@ public class PerkStore {
      * @param block: BlockPerk
      */
     public static void putPerk(BlockPerk block) {
-        perks.add(block);
+        PerkStore.perks.add(block);
         for (BNP object : block.blocks){
             Block cache = object.block;
-            putPerk(blockMap, block, cache.getUnlocalizedName());
+            PerkStore.putPerk(PerkStore.blockMap, block, cache.getUnlocalizedName());
         }
 
     }
@@ -142,10 +142,10 @@ public class PerkStore {
      * @param entity: EntityPerk
      */
     public static void putPerk(EntityPerk entity) {
-        perks.add(entity);
+        PerkStore.perks.add(entity);
         for (ENE object : entity.entities){
             Class<Entity> cache = object.entity;
-                putPerk(entityMap, entity, cache.getSimpleName());
+            PerkStore.putPerk(PerkStore.entityMap, entity, cache.getSimpleName());
         }
 
     }
@@ -155,22 +155,22 @@ public class PerkStore {
      * @param item: ItemPerk
      */
     public static void putPerk(ItemPerk item) {
-        perks.add(item);
+        PerkStore.perks.add(item);
         for (INM object : item.items){
             Item cache = object.item;
-            putPerk(itemMap, item, cache.getUnlocalizedName());
+            PerkStore.putPerk(PerkStore.itemMap, item, cache.getUnlocalizedName());
         }
 
     }
     
     public static void putPerk(TitlePerk title) {
-        titlePerks.add(title);
+        PerkStore.titlePerks.add(title);
 
     }
 
 
     public static void putPerk(PotionSelfPerk effect) {
-        perks.add(effect);
+        PerkStore.perks.add(effect);
         
     }
     
