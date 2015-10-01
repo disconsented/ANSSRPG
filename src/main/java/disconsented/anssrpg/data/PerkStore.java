@@ -22,9 +22,7 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.data;
 
-import disconsented.anssrpg.objects.BNEP;
-import disconsented.anssrpg.objects.ENE;
-import disconsented.anssrpg.objects.INME;
+import disconsented.anssrpg.objects.*;
 import disconsented.anssrpg.perk.*;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -131,7 +129,7 @@ public class PerkStore {
      */
     public static void putPerk(BlockPerk block) {
         perks.add(block);
-        for (BNEP object : block.blocks){
+        for (BNP object : block.blocks){
             Block cache = object.block;
             putPerk(blockMap, block, cache.getUnlocalizedName());
         }
@@ -158,7 +156,7 @@ public class PerkStore {
      */
     public static void putPerk(ItemPerk item) {
         perks.add(item);
-        for (INME object : item.items){
+        for (INM object : item.items){
             Item cache = object.item;
             putPerk(itemMap, item, cache.getUnlocalizedName());
         }

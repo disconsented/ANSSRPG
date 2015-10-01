@@ -24,9 +24,14 @@ package disconsented.anssrpg.common;
 
 import net.minecraft.entity.Entity;
 
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+
 public class Utils {
     /**
-     * Returns 2 if two objects are matched. If either Metadata is <= -1 then it is treated as a wildcard (Metadata is ignored)
+     * Returns true if two objects are matched. If either Metadata is <= -1 then it is treated as a wildcard (Metadata is ignored)
      * @param object1
      * @param metadata1
      * @param object2
@@ -47,6 +52,39 @@ public class Utils {
                 return false;
             }
         }
+    }
+
+    /**
+     * Returns true if two objects of the same time are the same. Uses a properties map and will use Object1 as the 'master' (checks are based off that)
+     * @param object1
+     * @param properties1
+     * @param object2
+     * @param properties2
+     * @param <T>
+     * @return
+     */
+    public static<T> boolean MatchObject(final T object1, final Map<String, String> properties1, final T object2, final Map<String, String> properties2){
+        if(object1 != object2)
+            return false;
+
+        String[] keys = (String[])properties1.keySet().toArray();
+
+        for(String key : keys){
+            String value1 = properties2.get(key);
+            String value2 = properties2.get(key);
+            if(value1 == "*"){
+                if (value2 == ""){
+                    Logging.debug("Failed to evaluate key:"+key+" against values: "+value1+" & "+value2);
+                    return false;
+                }
+            } else {
+                if(!value1.equals(value2)){
+                    Logging.debug("Failed to evaluate key:"+key+" against values: "+value1+" & "+value2);
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     
     public static boolean MatchObject(Object item1, Object item2){

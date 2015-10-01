@@ -30,6 +30,11 @@ import net.minecraft.item.Item;
  * Stands for Item, Name, Metadata.
  */
 public class INM {
+    public INM(Item item, String name, int metadata) {
+        this.item = item;
+        this.name = name;
+        this.metadata = metadata;
+    }
 
     public Item item;
 
@@ -38,4 +43,6 @@ public class INM {
 
     @Expose
     public int metadata = -1;
+
+
 }

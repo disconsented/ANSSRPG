@@ -25,6 +25,7 @@ package disconsented.anssrpg.perk;
 import java.util.ArrayList;
 
 import disconsented.anssrpg.objects.BNEP;
+import disconsented.anssrpg.objects.BNP;
 import net.minecraft.block.Block;
 
 import com.google.gson.annotations.Expose;
@@ -34,22 +35,22 @@ import disconsented.anssrpg.common.Logging;
 public class BlockPerk extends Perk {
 
     @Expose
-    public ArrayList<BNEP> blocks = new ArrayList<BNEP>();
+    public ArrayList<BNP> blocks = new ArrayList<BNP>();
 
     public BlockPerk() {
         super();
     }
 
     public BlockPerk(String name, ArrayList<Requirement> requirements,
-                     String description, int pointCost, ArrayList<BNEP> blocks) {
+                     String description, int pointCost, ArrayList<BNP> blocks) {
         super(name, requirements, description, pointCost);
         this.blocks = blocks;
     }
 
     @Override
     public void searchObject() {
-        ArrayList<BNEP> initialised = new ArrayList<BNEP>();
-        for(BNEP object : blocks){
+        ArrayList<BNP> initialised = new ArrayList<BNP>();
+        for(BNP object : blocks){
             object.block = (Block)Block.blockRegistry.getObject(object.name);
             if (object.block != null){
                 Logging.debug(object.name + " has been found. Passing on.");

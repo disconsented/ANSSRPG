@@ -24,6 +24,7 @@ package disconsented.anssrpg.skill;
 
 import java.util.ArrayList;
 
+import disconsented.anssrpg.objects.INM;
 import disconsented.anssrpg.objects.INME;
 import disconsented.anssrpg.perk.ItemPerk;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -94,7 +95,7 @@ public class ItemCrafting {
     private boolean requiresPerk(ArrayList<ItemPerk> perkList, Item item, int metadata){
         if(perkList != null) {
             for (ItemPerk perk : perkList) {
-                for (INME definition : perk.items)
+                for (INM definition : perk.items)
                 {
                     if(Utils.MatchObject(definition.item, definition.metadata, item, metadata)){
                         return true;

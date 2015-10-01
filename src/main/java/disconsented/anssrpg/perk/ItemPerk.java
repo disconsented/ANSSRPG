@@ -27,6 +27,7 @@ package disconsented.anssrpg.perk;
 
 import java.util.ArrayList;
 
+import disconsented.anssrpg.objects.INM;
 import net.minecraft.item.Item;
 
 import com.google.gson.annotations.Expose;
@@ -37,22 +38,22 @@ import disconsented.anssrpg.objects.INME;
 public class ItemPerk extends Perk {
 
     @Expose
-    public ArrayList<INME> items = new ArrayList<INME>();
+    public ArrayList<INM> items = new ArrayList<INM>();
 
     public ItemPerk() {
         super();
     }
 
     public ItemPerk(String name, ArrayList<Requirement> requirements,
-                    String description, int pointCost, ArrayList<INME> items) {
+                    String description, int pointCost, ArrayList<INM> items) {
         super(name, requirements, description, pointCost);
         this.items = items;
     }
 
     @Override
     public void searchObject() {
-        ArrayList<INME> initialised = new ArrayList<>();
-        for(INME object : items){
+        ArrayList<INM> initialised = new ArrayList<>();
+        for(INM object : items){
             object.item = (Item)Item.itemRegistry.getObject(object.name);
             if (object.item != null){
                 Logging.debug(object.name + " has been found. Passing on.");

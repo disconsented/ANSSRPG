@@ -30,7 +30,12 @@ import net.minecraft.item.Item;
  * Stands for Item, Name, Metadata, Experience.
  */
 public class INME {
-
+    public INME(Item item, String name, int metadata, int experience) {
+        this.item = item;
+        this.name = name;
+        this.metadata = metadata;
+        this.experience = experience;
+    }
     public Item item;
 
     @Expose
@@ -41,5 +46,6 @@ public class INME {
 
     @Expose
     public int experience = 0;
+
 
 }

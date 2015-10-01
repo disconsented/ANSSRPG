@@ -29,16 +29,19 @@ public class TitlePerk extends Perk {
     @Expose
     private String title = "default title";
 
+    public TitlePerk(String title) {
+        this.title = title;
+    }
+
+    public TitlePerk() {
+    }
+
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     @Override
-    public void searchObject() {
-    }
+    public void searchObject() {}
 
 }

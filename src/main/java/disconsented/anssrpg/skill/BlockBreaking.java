@@ -27,8 +27,11 @@ package disconsented.anssrpg.skill;
  */
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import disconsented.anssrpg.common.*;
+import disconsented.anssrpg.objects.BNEP;
+import disconsented.anssrpg.objects.BNP;
 import disconsented.anssrpg.perk.BlockPerk;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -44,25 +47,22 @@ import disconsented.anssrpg.skill.objects.BlockSkill;
 public class BlockBreaking {
 
     public void onBreakEvent(BreakEvent event) {
-       /* boolean isFakePlayer = event.getPlayer() instanceof FakePlayer;
+        boolean isFakePlayer = event.getPlayer() instanceof FakePlayer;
         if (isFakePlayer && !Settings.isBlockFakePlayers()){
             return;
         }
         if (event.getPlayer() instanceof EntityPlayerMP){
             Block block = event.state.getBlock();
-            int blockMetadata = 0;
+            Map<String, String> properties = event.state.getProperties();
             EntityPlayerMP player = (EntityPlayerMP) event.getPlayer();
-            System.out.println(player.getEntityId());
-            player.setEntityId(20);
-            System.out.println(player.getEntityId()+"|");
             PlayerData playerData = PlayerStore.getPlayer(player);
             ArrayList<BlockPerk> perkList = PerkStore.getPerks(block);
             ArrayList<BlockSkill> skillStore = SkillStore.getInstance().getBlockSkill();
 
             for(BlockSkill skill : skillStore){
                 for(BNEP entry : skill.exp){
-                    if(Utils.MatchObject(entry.block, entry.metadata, block, blockMetadata)){
-                      if (requiresPerk(perkList, block, blockMetadata)) {
+                    if(Utils.MatchObject(entry.block, entry.properties, block, properties)){
+                      if (requiresPerk(perkList, block, properties)) {
                           if (PlayerHandler.hasPerk(playerData, perkList)) {
                               PlayerHandler.awardToolXP(player, skill, entry.experience);
                               } else {
@@ -86,22 +86,22 @@ public class BlockBreaking {
                     }
                 }
             }
-        }*/
+        }
     }
 
-   /* private boolean requiresPerk(ArrayList<BlockPerk> perkList, Block block, int metadata){
+   private boolean requiresPerk(ArrayList<BlockPerk> perkList, Block block, Map<String,String> properties){
         if(perkList != null) {
             for (BlockPerk perk : perkList) {
-                for (BNEP definition : perk.blocks)
+                for (BNP definition : perk.blocks)
                 {
-                    if(Utils.MatchObject(definition.object, definition.metadata, block, metadata)){
+                    if(Utils.MatchObject(definition.block, definition.properties, block, properties)){
                         return true;
                     }
                 }
             }
         }
         return  false;
-    }*/
+    }
 }
 
 
