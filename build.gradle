@@ -115,7 +115,7 @@ task tagRelease {
         System.setProperty("org.ajoberstar.grgit.auth.password","$psw")
         repo.tag.add {
             name = version
-            message = "Release of ${version}"
+            message = "Release of ${version} built against forge ${forge_version}"
             pointsTo = gitHash
         }
         repo.push{
