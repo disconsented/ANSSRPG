@@ -117,3 +117,9 @@ Possible values:(Case sensitive)
 * FlintAndSteel
 * Hand
 * * or "" (special case that acts as a wildcard).
+
+Experience.
+===========
+
+Works off the equation ``base*level^modifier``.
+This is represented as the keys "mod" and "base"/
