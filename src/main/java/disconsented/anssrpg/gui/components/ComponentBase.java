@@ -56,7 +56,10 @@ public abstract class ComponentBase extends Gui{
         float f1 = 0.00390625F;
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-        //worldrenderer.se
+        worldrenderer.startDrawingQuads();
+        //Set the colour in order to avoid having partially green GUI's
+        //tessellator.setColorRGBA_F(1F, 1F, 1F, 1F);
+        worldrenderer.func_178960_a(1F,1F,1F,1F);
         worldrenderer.addVertexWithUV((double)(posX + 0), (double)(posY + height), (double) zLevel, (double)((float)(startX + 0) * f), (double)((float)(startY + height) * f1));
         worldrenderer.addVertexWithUV((double)(posX + width), (double)(posY + height), (double) zLevel, (double)((float)(startX + width) * f), (double)((float)(startY + height) * f1));
         worldrenderer.addVertexWithUV((double) (posX + width), (double) (posY + 0), (double) zLevel, (double) ((float) (startX + width) * f), (double)((float)(startY + 0) * f1));
