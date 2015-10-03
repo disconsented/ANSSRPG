@@ -19,21 +19,20 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.network;
 
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import disconsented.anssrpg.gui.PerkGUI;
-import disconsented.anssrpg.perk.LocalPerk;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import disconsented.anssrpg.client.Data;
 
-public class PerkInfoHandler implements IMessageHandler<PerkInfo, IMessage>{
+public class PerkInfoHandler implements IMessageHandler<PerkInfo, IMessage> {
 
-	@Override
-	public IMessage onMessage(PerkInfo message, MessageContext ctx) {
-		PerkGUI.addPerk(new LocalPerk(message.name, message.description, message.pointCost, message.requirements));
-		return null;
-	}
+    @Override
+    public IMessage onMessage(PerkInfo message, MessageContext ctx) {
+        Data.perkInfo.put(message.getSlug(),message);
+        return null;
+    }
 
 }

@@ -19,62 +19,88 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.skill;
 /**
  * @author James
  * Handles when to add experience and blocking of events
  */
-import java.util.ArrayList;
 
+import java.util.ArrayList;
+import java.util.Map;
+
+import disconsented.anssrpg.common.*;
+import disconsented.anssrpg.objects.BNEP;
+import disconsented.anssrpg.objects.BNP;
+import disconsented.anssrpg.perk.BlockPerk;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraftforge.event.world.BlockEvent.BreakEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.common.util.FakePlayer;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
 import disconsented.anssrpg.data.SkillStore;
 import disconsented.anssrpg.handler.PlayerHandler;
-import disconsented.anssrpg.perk.BlockPerk;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.BlockSkill;
-import disconsented.anssrpg.skill.objects.BlockXP;
-import disconsented.anssrpg.skill.objects.XPGain;
-	
-    public class BlockBreaking{   
-    	/**
-    	 * Author Disconsented
-    	 */
-    @SubscribeEvent
-    public void onBreakevent(BreakEvent event){    	
-    	if(event.getPlayer() instanceof EntityPlayerMP){
-			EntityPlayerMP playerMP = (EntityPlayerMP) event.getPlayer();
-    		PlayerData player = PlayerStore.getInstance().getPlayer(event.getPlayer().getUniqueID().toString());
-    		ArrayList<BlockPerk> blockList = PerkStore.getPerksForBlock(event.block.getUnlocalizedName());
-    		boolean requiresPerk = false;
-    		if (blockList != null){
-    			requiresPerk = true;
-    		}    		
-    		for (BlockSkill skill : SkillStore.getInstance().getBlockSkill()){
-    			ArrayList<BlockXP> temp = skill.getExp();
-    			for (int i = 0; i < temp.size(); i++){
-    				if(((BlockXP) temp.get(i)).getBlock().equals(event.block)){	  
-	    				if (requiresPerk){
-	    					if (PlayerHandler.hasPerk(player, blockList)){
-	    						PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
-	    					}
-	    					else
-	    					{
-	    						PlayerHandler.taskFail(event.getPlayer());
-	    						event.setCanceled(true);
-	    					}
-	    				}
-	    				else
-	    				{
-	    					PlayerHandler.awardXP(player, skill.name, temp.get(i).getXp(), playerMP);
-	    				}
-    				}
-    			}
-    		}
-    	}
+import net.minecraftforge.event.world.BlockEvent;
+
+public class BlockBreaking {
+
+    public void onBreakEvent(BlockEvent.BreakEvent event) {
+        boolean isFakePlayer = event.getPlayer() instanceof FakePlayer;
+        if (isFakePlayer && !Settings.isBlockFakePlayers()) {
+            return;
+        }
+        if (event.getPlayer() instanceof EntityPlayerMP) {
+            Block block = event.state.getBlock();
+            Map<String, String> properties = event.state.getProperties();
+            EntityPlayerMP player = (EntityPlayerMP) event.getPlayer();
+            PlayerData playerData = PlayerStore.getPlayer(player);
+            ArrayList<BlockPerk> perkList = PerkStore.getPerks(block);
+            ArrayList<BlockSkill> skillStore = SkillStore.getInstance().getBlockSkill();
+
+            for (BlockSkill skill : skillStore) {
+                for (BNEP entry : skill.exp) {
+                    if (Utils.MatchObject(entry.block, entry.properties, block, properties)) {
+                        if (this.requiresPerk(perkList, block, properties)) {
+                            if (PlayerHandler.hasPerk(playerData, perkList)) {
+                                PlayerHandler.awardToolXP(player, skill, entry.experience);
+                            } else {
+                                if (!isFakePlayer) {
+                                    PlayerHandler.taskFail(player);
+                                    event.setCanceled(true);
+                                    return;
+                                } else {
+                                    if (Settings.isBlockFakePlayers()) {
+                                        Logging.debug("Fake player blocked at " + player.chunkCoordX + "," + player.chunkCoordY + "," + player.chunkCoordZ);
+                                        event.setCanceled(true);
+                                        return;
+                                    }
+                                }
+                                return;
+                            }
+                        } else {
+                            PlayerHandler.awardToolXP(player, skill, entry.experience);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean requiresPerk(ArrayList<BlockPerk> perkList, Block block, Map<String, String> properties) {
+        if (perkList != null) {
+            for (BlockPerk perk : perkList) {
+                for (BNP definition : perk.blocks) {
+                    if (Utils.MatchObject(definition.block, definition.properties, block, properties)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
+
+

@@ -19,97 +19,159 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.data;
 
+import disconsented.anssrpg.objects.*;
+import disconsented.anssrpg.perk.*;
+import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.Item;
+
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import disconsented.anssrpg.perk.BlockPerk;
-import disconsented.anssrpg.perk.EntityPerk;
-import disconsented.anssrpg.perk.ItemPerk;
-import disconsented.anssrpg.perk.Perk;
 
 /**
  * Author: Disconsented
  * Just stores and retrieves perks
  */
 public class PerkStore {
-	private static ArrayList<Perk> perks = new ArrayList<Perk>();
-	private static HashMap<String, ArrayList<BlockPerk>> blockMap = new HashMap<String, ArrayList<BlockPerk>>();
-	private static HashMap<String, ArrayList<EntityPerk>> entityMap = new HashMap<String, ArrayList<EntityPerk>>();
-	private static HashMap<String, ArrayList<ItemPerk>> itemMap = new HashMap<String, ArrayList<ItemPerk>>();
-	private static HashMap<String,Perk> perksMap = new HashMap<String,Perk>();
-	private static PerkStore instance = null;
-	protected PerkStore() {/* Exists only to defeat instantiation.*/}
-	public static PerkStore getInstance() {
-		if(instance == null) {
-			instance = new PerkStore();
-		}
-		return instance;
-	}
-	public static ArrayList<Perk> getPerks(){
-		return perks;
-	}
-	public static void addPerk(Perk perk){
-		
-		perksMap.put(perk.perkSlug,perk);
-	}
-	public static Perk getPerk(String perkSlug) {		
-		return perksMap.get(perkSlug);
-	}
-	public static void putBlockPerk(BlockPerk perk){
-		perks.add(perk);
-		if (blockMap.containsKey(perk.getBlock().getUnlocalizedName())){
-			blockMap.get(perk.getBlock().getUnlocalizedName()).add(perk);
-		}
-		else
-		{
-			ArrayList<BlockPerk> temp = new ArrayList<BlockPerk>();
-			temp.add(perk);
-			blockMap.put(perk.getBlock().getUnlocalizedName(), temp);
-		}
-	}
-	public static void putItemPerk(ItemPerk item) {
-		perks.add(item);
-		if (itemMap.containsKey(item.getItem().getUnlocalizedName())){
-			itemMap.get(item.getItem().getUnlocalizedName()).add(item);
-		}
-		else
-		{
-			ArrayList<ItemPerk> temp = new ArrayList<ItemPerk>();
-			temp.add(item);
-			itemMap.put(item.getItem().getUnlocalizedName(), temp);
-		}
-	}
-	public static void putEntityPerk(EntityPerk entity) {
-		perks.add(entity);
-		if (entityMap.containsKey(entity.getEntity().getSimpleName())){
-			entityMap.get(entity.getEntity().getSimpleName()).add(entity);
-		}
-		else
-		{
-			ArrayList<EntityPerk> temp = new ArrayList<EntityPerk>();
-			temp.add(entity);
-			entityMap.put(entity.getEntity().getSimpleName(), temp);
-		}		
-		
-	}
-	public static ArrayList<BlockPerk> getPerksForBlock(String unlocalisedName){
-		return blockMap.get(unlocalisedName);	
-	}
-	public static ArrayList<EntityPerk> getPerksForEntity(
-			String commandSenderName) {
-		return entityMap.get(commandSenderName);
-	}
-	public static ArrayList<ItemPerk> getPerksForItem(String unlocalizedName) {		
-		return itemMap.get(unlocalizedName);
-	}
-	public static void Clear(){
-		perks = new ArrayList<Perk>();
-		blockMap = new HashMap<String, ArrayList<BlockPerk>>();
-		entityMap = new HashMap<String, ArrayList<EntityPerk>>();
-		itemMap = new HashMap<String, ArrayList<ItemPerk>>();
-		perksMap = new HashMap<String,Perk>();
-	}
+    private static final ArrayList<Perk> perks = new ArrayList<Perk>();
+    /*String needs to be a name unique to each entity type*/
+    private static final HashMap<String, ArrayList<BlockPerk>> blockMap = new HashMap<String, ArrayList<BlockPerk>>();
+    private static final HashMap<String, ArrayList<EntityPerk>> entityMap = new HashMap<String, ArrayList<EntityPerk>>();
+    private static final HashMap<String, ArrayList<ItemPerk>> itemMap = new HashMap<String, ArrayList<ItemPerk>>();
+    private static final ArrayList<TitlePerk> titlePerks = new ArrayList<TitlePerk>();
+    private static final ArrayList<PotionSelfPerk> potionSelf = new ArrayList<PotionSelfPerk>();
+    
+    private static final HashMap<String, Perk> perksMap = new HashMap<String, Perk>();
+    private static PerkStore instance;
+
+    private PerkStore() {}
+
+    //Adds a perk to the complete list
+    public static void addPerk(Perk perk) {
+        PerkStore.perksMap.put(perk.getSlug().getSlug(), perk);
+    }
+
+    public static void Clear() {
+        PerkStore.perks.clear();
+        PerkStore.blockMap.clear();
+        PerkStore.entityMap.clear();
+        PerkStore.itemMap.clear();
+        PerkStore.perksMap.clear();
+    }
+
+    public static PerkStore getInstance() {
+        if (PerkStore.instance == null) {
+            PerkStore.instance = new PerkStore();
+        }
+        return PerkStore.instance;
+    }
+
+    public static Perk getPerk(String perkSlug) {
+        return PerkStore.perksMap.get(perkSlug);
+    }
+
+    public static ArrayList<Perk> getPerks() {
+        return PerkStore.perks;
+    }
+
+    /**
+     * Takes a Block and returns an ArrayList of the associated perks
+     * @param block
+     * @return
+     */
+    public static ArrayList<BlockPerk> getPerks(Block block){
+        return PerkStore.blockMap.get(block.getUnlocalizedName());
+    }
+
+    /**
+     * Takes a Item and returns an ArrayList of the associated perks
+     * @param item
+     * @return
+     */
+    public static ArrayList<ItemPerk> getPerks(Item item){
+        return PerkStore.itemMap.get(item.getUnlocalizedName());
+    }
+
+    /**
+     * Takes a Entity(in the form of a class object) and returns an ArrayList of the associated perks
+     * @param entity
+     * @return
+     */
+    public static ArrayList<EntityPerk> getPerks(Class entity){
+        return PerkStore.entityMap.get(entity.getSimpleName());
+    }
+
+
+    /**
+     * Safely stores any perk that is used in a map
+     * @param abstractMap
+     * @param perk
+     * @param name - Name that storage is based off
+     */
+    private static <t> void putPerk(AbstractMap<String, ArrayList<t>> abstractMap, t perk, String name){
+        ArrayList<t> cachePerkList = abstractMap.get(name);
+        if (cachePerkList != null){
+            cachePerkList.add(perk);
+        } else {
+            ArrayList<t> newPerkList = new ArrayList<t>();
+            newPerkList.add(perk);
+            abstractMap.put(name, newPerkList);
+        }
+    }
+
+    /**
+     * Stores BlockPerks based on the unlocalized names of the objects in its collection
+     * @param block: BlockPerk
+     */
+    public static void putPerk(BlockPerk block) {
+        PerkStore.perks.add(block);
+        for (BNP object : block.blocks){
+            Block cache = object.block;
+            PerkStore.putPerk(PerkStore.blockMap, block, cache.getUnlocalizedName());
+        }
+
+    }
+
+    /**
+     * Stores BlockPerks based on the class names of the objects in its collection
+     * Class names are used as there is no registry that provides objects unlike for items and blocks
+     * @param entity: EntityPerk
+     */
+    public static void putPerk(EntityPerk entity) {
+        PerkStore.perks.add(entity);
+        for (ENE object : entity.entities){
+            Class<Entity> cache = object.entity;
+            PerkStore.putPerk(PerkStore.entityMap, entity, cache.getSimpleName());
+        }
+
+    }
+
+    /**
+     * Stores BlockPerks based on the unlocalized names of the objects in its collection
+     * @param item: ItemPerk
+     */
+    public static void putPerk(ItemPerk item) {
+        PerkStore.perks.add(item);
+        for (INM object : item.items){
+            Item cache = object.item;
+            PerkStore.putPerk(PerkStore.itemMap, item, cache.getUnlocalizedName());
+        }
+
+    }
+    
+    public static void putPerk(TitlePerk title) {
+        PerkStore.titlePerks.add(title);
+
+    }
+
+
+    public static void putPerk(PotionSelfPerk effect) {
+        PerkStore.perks.add(effect);
+        
+    }
+    
 }

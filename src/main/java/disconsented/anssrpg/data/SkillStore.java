@@ -19,67 +19,77 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 /**
- * 
+ *
  */
 package disconsented.anssrpg.data;
-
-import java.util.ArrayList;
 
 import disconsented.anssrpg.skill.objects.BlockSkill;
 import disconsented.anssrpg.skill.objects.EntitySkill;
 import disconsented.anssrpg.skill.objects.ItemSkill;
 import disconsented.anssrpg.skill.objects.Skill;
 
+import java.util.ArrayList;
+
 
 /**
  * @author Disconsented
- * Stores skill data
+ *         Stores skill data
  */
 public class SkillStore {
-	private static SkillStore instance = null;
-	private static ArrayList <BlockSkill> blockSkill = new ArrayList<BlockSkill>();
-	private static ArrayList <EntitySkill> entitySkill = new ArrayList<EntitySkill>();
-	private static ArrayList <ItemSkill> itemSkill = new ArrayList <ItemSkill>();
-	private static ArrayList <Skill> skills = new ArrayList <Skill>();
-	protected SkillStore() {/* Exists only to defeat instantiation.*/}
-	public static SkillStore getInstance() {
-		if(instance == null) {
-			instance = new SkillStore();
-		}
-		return instance;
-	}
-	public static ArrayList<BlockSkill> getBlockSkill() {
-		return blockSkill;
-	}
-	public static ArrayList<EntitySkill> getEntitySkill() {
-		return entitySkill;
-	}
-	public static ArrayList<ItemSkill> getItemSkill() {
-		return itemSkill;
-	}
-	public static void addSkill(BlockSkill skill) {		
-		blockSkill.add(skill);
-		skills.add(skill);
-	}
-	public static void addSkill(EntitySkill entity) {
-		entitySkill.add(entity);
-		skills.add(entity);
-	}
-	public static void addSkill(ItemSkill item) {
-		itemSkill.add(item);
-		skills.add(item);
-		
-	}
-	public static void Clear() {
-		blockSkill = new ArrayList<BlockSkill>();
-		entitySkill = new ArrayList<EntitySkill>();
-		itemSkill = new ArrayList <ItemSkill>();
-		skills = new ArrayList <Skill>();
-	}
-	public static ArrayList<Skill> getSkills() {
-		return skills;
-	}
+    private static SkillStore instance;
+    private static ArrayList<BlockSkill> blockSkill = new ArrayList<BlockSkill>();
+    private static ArrayList<EntitySkill> entitySkill = new ArrayList<EntitySkill>();
+    private static ArrayList<ItemSkill> itemSkill = new ArrayList<ItemSkill>();
+    private static ArrayList<Skill> skills = new ArrayList<Skill>();
+
+    protected SkillStore() {/* Exists only to defeat instantiation.*/}
+
+    public static void addSkill(BlockSkill skill) {
+        SkillStore.blockSkill.add(skill);
+        SkillStore.skills.add(skill);
+    }
+
+    public static void addSkill(EntitySkill entity) {
+        SkillStore.entitySkill.add(entity);
+        SkillStore.skills.add(entity);
+    }
+
+    public static void addSkill(ItemSkill item) {
+        SkillStore.itemSkill.add(item);
+        SkillStore.skills.add(item);
+
+    }
+
+    public static void Clear() {
+        SkillStore.blockSkill = new ArrayList<BlockSkill>();
+        SkillStore.entitySkill = new ArrayList<EntitySkill>();
+        SkillStore.itemSkill = new ArrayList<ItemSkill>();
+        SkillStore.skills = new ArrayList<Skill>();
+    }
+
+    public static ArrayList<BlockSkill> getBlockSkill() {
+        return SkillStore.blockSkill;
+    }
+
+    public static ArrayList<EntitySkill> getEntitySkill() {
+        return SkillStore.entitySkill;
+    }
+
+    public static SkillStore getInstance() {
+        if (SkillStore.instance == null) {
+            SkillStore.instance = new SkillStore();
+        }
+        return SkillStore.instance;
+    }
+
+    public static ArrayList<ItemSkill> getItemSkill() {
+        return SkillStore.itemSkill;
+    }
+
+    public static ArrayList<Skill> getSkills() {
+        return SkillStore.skills;
+    }
 
 }

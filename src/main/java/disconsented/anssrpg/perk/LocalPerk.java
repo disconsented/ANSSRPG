@@ -19,39 +19,37 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 /**
- * 
+ *
  */
 package disconsented.anssrpg.perk;
 
 import java.util.ArrayList;
 
 public class LocalPerk {
-	
-	public String name;
-	public ArrayList <String> requirements = new ArrayList();
-	public String perkSlug;
-	public String description;
-	public int pointCost;
-	
-	private String getSlug(String name){		
-		return name.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
-	}
-	
-/**
- * 
- * @param name - Name of the perk
- * @param unlockBlock - What it is unlocking
- * @param description - Description
- * @param pointCost - Cost in points to unlock
- * @param requirement - 
- */
-	public LocalPerk (String name, String description, int pointCost, ArrayList requirements){
-		this.perkSlug = getSlug(name);
-		this.name = name;
-		this.requirements = requirements;
-		this.pointCost = pointCost;
-		this.description = description;
-	}
+
+    public String name;
+    public ArrayList<String> requirements = new ArrayList();
+    public String perkSlug;
+    public String description;
+    public int pointCost;
+
+    /**
+     * @param name         - Name of the perk
+     * @param description  - Description
+     * @param pointCost    - Cost in points to unlock
+     * @param requirements - What is needed to unlock.
+     */
+    public LocalPerk(String name, String description, int pointCost, ArrayList requirements) {
+        this.perkSlug = this.getSlug(name);
+        this.name = name;
+        this.requirements = requirements;
+        this.pointCost = pointCost;
+        this.description = description;
+    }
+
+    private String getSlug(String name) {
+        return name.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
+    }
 }

@@ -19,29 +19,38 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.network;
 
+import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import io.netty.buffer.ByteBuf;
-import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
-public class Request implements IMessage{
-    public String slug;
+/**
+ * Used to request INFORMATION from the server
+ * PERKS will return all perks
+ * SKILLS will return all the skills on which the player has information for
+ * ACTIVE_PERKS will return all perks current active on the player
+ * START_TRACKING will start sending updates to the player about their status
+ * STOP_TRACKING will stop the information tracking
+ */
+public class Request implements IMessage {
+	public enum REQUEST {PERKS, SKILLS, ACTIVE_PERKS, OBTAINED_PERKS, START_TRACKING, STOP_TRACKING}
+	public Request.REQUEST request;
+    
+	public Request(){}
 
-    public Request() {}
-
-    public Request(String slug) {
-        this.slug = slug;
-    }
-
-    @Override
-    public void toBytes(ByteBuf buf) {
-    	ByteBufUtils.writeUTF8String(buf, slug);
+    public Request(Request.REQUEST request) {
+        this.request = request;
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        this.slug = ByteBufUtils.readUTF8String(buf);
+        request = Request.REQUEST.valueOf(ByteBufUtils.readUTF8String(buf));
+    }
+
+    @Override
+    public void toBytes(ByteBuf buf) {
+    	ByteBufUtils.writeUTF8String(buf, this.request.name());
     }
 }

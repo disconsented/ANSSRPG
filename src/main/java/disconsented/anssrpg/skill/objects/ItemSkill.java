@@ -19,50 +19,41 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 /**
- * 
+ *
  */
 package disconsented.anssrpg.skill.objects;
 
+import com.google.gson.annotations.Expose;
+import disconsented.anssrpg.objects.INME;
+import disconsented.anssrpg.common.Logging;
+import net.minecraft.item.Item;
+
 import java.util.ArrayList;
 
-import com.google.gson.annotations.Expose;
-
 /**
+ * Data carrier for ItemSkill's
  * @author Disconsented
- *
  */
 public class ItemSkill extends Skill {
-	
-	@Expose
-	private ArrayList<ItemXP> exp = new ArrayList<ItemXP>();
-	
-	public ItemSkill(){	
-		exp.add(new ItemXP());
-		exp.add(new ItemXP());
-	}
 
-	@Override
-	public void touchUp() {
-		for (XPGain xp : exp){
-			ItemXP thing = new ItemXP();
-			thing.name = xp.name;
-			thing.xp = xp.xp;
-			thing.touchUp();
-		}
-		
-	}
+    @Expose
+    public ArrayList<INME> exp = new ArrayList<>();
 
-	@Override
-	public ArrayList<ItemXP> getExp() {
-		return exp;
-	}
-
-	@Override
-	public void setExp(ArrayList exp) {
-		this.exp = exp;
-		
-	}
+    @Override
+    public void touchUp() {
+        ArrayList<INME> initialised = new ArrayList<>();
+        for (INME object : this.exp) {
+            object.item = (Item) Item.itemRegistry.getObject(object.name);
+            if (object.item != null){
+                Logging.debug(object.name+" has been found. Passing on!");
+                initialised.add(object);
+            } else {
+                Logging.error(object.name+" could not be found. Ignoring!");
+            }
+        }
+        this.exp = initialised;
+    }
 
 }

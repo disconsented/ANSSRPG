@@ -19,53 +19,27 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
-/**
- * 
  */
-package disconsented.anssrpg.skill.objects;
+package disconsented.anssrpg.network;
 
-import com.google.gson.annotations.Expose;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import disconsented.anssrpg.gui.components.ComponentStatusBook;
 
 /**
- * @author Disconsented
- *	
+ * Created by j on 30/08/2015.
  */
-public abstract class XPGain {
-	
-	public XPGain(){		
-	}
-
-	/**
-	 * Super type abstract class
-	 */
-	@Expose
-	protected int xp = 0;
-	
-	@Expose
-	protected String name = "default_name";
-
-	public int getXp() {
-		return xp;
-	}
-
-	/**
-	 * @param xp the xp to set
-	 */
-	public void setXp(int xp) {
-		this.xp = xp;
-	}
-	/**
-	 * 
-	 */
-	public abstract void touchUp();
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
+public class PlayerStatusHandler implements IMessageHandler<PlayerStatus, IMessage>{
+    public PlayerStatusHandler(){}
+    @Override
+    public IMessage onMessage(PlayerStatus message, MessageContext ctx) {
+        ComponentStatusBook.currentHearts = message.currentHearts;
+        ComponentStatusBook.currentSaturation = message.currentSaturation;
+        ComponentStatusBook.currentArmourHelmet = message.currentArmourHelmet;
+        ComponentStatusBook.currentArmourChest = message.currentArmourChest;
+        ComponentStatusBook.currentArmourLeggings = message.currentArmourLeggings;
+        ComponentStatusBook.currentArmourBoots = message.currentArmourBoots;
+        return null;
+    }
 }

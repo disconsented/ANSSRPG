@@ -19,37 +19,33 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
-/**
- * 
  */
-package disconsented.anssrpg.skill.objects;
+package disconsented.anssrpg.objects;
 
 import com.google.gson.annotations.Expose;
-
 import net.minecraft.item.Item;
 
 /**
- * @author Disconsented
- *
+ * Struct like object for Item definitions used for skills.
+ * Stands for Item, Name, Metadata, Experience.
  */
-public class ItemXP extends XPGain {
+public class INME {
+    public INME(Item item, String name, int metadata, int experience) {
+        this.item = item;
+        this.name = name;
+        this.metadata = metadata;
+        this.experience = experience;
+    }
+    public Item item;
 
-	/**
-	 * 
-	 */
-	private Item item;
-	
-	public ItemXP() {
-	}
+    @Expose
+    public String name = "";
 
-	@Override
-	public void touchUp() {
-		item = (Item) Item.itemRegistry.getObject(name);
+    @Expose
+    public int metadata = -1;
 
-	}
-	public Item getItem(){
-		return item;
-	}
+    @Expose
+    public int experience;
+
 
 }

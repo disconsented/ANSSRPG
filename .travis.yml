@@ -1,29 +1,43 @@
 language: java
 jdk:
-- oraclejdk7
+- oraclejdk8
 cache:
   directories:
     - $HOME/.gradle
     - .gradle
 sudo: false
 install: true
+branches:
+  only:
+    - master
+    - build
+    - DEV
+
+before_install:
+  - sed -i 's/git:/https:/g' .git/config
 script:
-  - gradle build
-notifications:
- irc:
-  channels:
-   - "irc.esper.net#Disconsented "
-  template:
-   - "%{build_number} (%{branch} - %{commit}: %{commit_message} : %{author}): %{message} (%{build_url}) "
-before_deploy:
-  - ls ./build/libs/
+  - gradle build tagRelease -Pusr=$USER -Ppsw=$PASS stats
+
 deploy:
   provider: releases
   api_key:
     secure: VhPE7D1RUg5NVYN5NijQElRCBXcwG4GLFIv3Tl4OdShL2/V8VkCn8FgNnvIsYPR2J95QfYkmop2H2Fjxztni/tF8hun5qS+VAzgVjE8mep53NQ4VsfkVGcHQAMsjqELe3njGeecZs8RI2cxhPSBexvlBflakhi1cq2GlYEaeBeY=
   file_glob: true
-  file: ./build/libs/*.jar
+  file: 
+    - ./build/libs/*.jar
+    - CHANGES.md
+  skip_cleanup: true
   on:
-    tags: true
     repo: disconsented/ANSSRPG
     all_branches: true
+    
+notifications:
+ irc:
+  channels:
+   - "irc.esper.net#Disconsented "
+  use_notice: true
+  skip_join: true
+  template:
+   - "%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}"
+   - "Change view : %{compare_url}"
+   - "Build details : %{build_url}"

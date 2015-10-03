@@ -19,18 +19,26 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
-package disconsented.anssrpg.gui;
+ */
+package disconsented.anssrpg.common;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
+import com.google.gson.annotations.Expose;
 
-public class PerkGUIContainer extends Container{
-
-	@Override
-	public boolean canInteractWith(EntityPlayer p_75145_1_) {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
+/**
+ * @author Disconsented
+ *
+ */
+public class PotionDefinition{
+    @Expose
+    public int id;
+    @Expose
+    public int amplifier;
+    @Expose
+    public int duration;
+    public PotionDefinition(int id, int amplifier, int duration){
+        this.id = id;
+        this.amplifier = amplifier;
+        this.duration = duration;
+    }   
+    public PotionDefinition(){}
 }

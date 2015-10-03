@@ -19,47 +19,41 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
-/**
- * 
  */
 package disconsented.anssrpg.skill.objects;
 
 import java.util.ArrayList;
 
+import net.minecraft.entity.EntityList;
+
 import com.google.gson.annotations.Expose;
+
+import disconsented.anssrpg.common.Logging;
+import disconsented.anssrpg.objects.ENE;
 
 /**
  * @author Disconsented
- *
  */
-public class EntitySkill extends Skill {
-	@Expose
-	private ArrayList<EntityXP> exp = new ArrayList<EntityXP>();
-	
-	public EntitySkill(){
-		exp.add(new EntityXP());
-		exp.add(new EntityXP());
-	}
+public class EntitySkill extends ToolSkill {
+    
+    @Expose
+    public ArrayList<ENE> exp = new ArrayList<ENE>();
 
-	@Override
-	public void touchUp() {
-		for (XPGain xp : exp){
-			EntityXP thing = new EntityXP();
-			thing.name = xp.name;
-			thing.xp = xp.xp;
-			thing.touchUp();
-		}
-	}
-
-	@Override
-	public ArrayList<EntityXP> getExp() {
-		return exp;
-	}
-
-	@Override
-	public void setExp(ArrayList exp) {
-		this.exp = exp;
-		
-	}
+    @Override
+    public void touchUp() {
+        this.initTool();
+        
+        ArrayList<ENE> initialised = new ArrayList<ENE>();
+        for (ENE object : this.exp) {
+            object.entity = (Class) EntityList.stringToClassMapping.get(object.name);
+            if (object.entity != null){
+                Logging.debug(object.name+" has been found. Passing on!");
+                initialised.add(object);
+            } else {
+                Logging.error(object.name+" could not be found. Ignoring!");
+            }
+        }
+        this.exp = initialised;
+    }
+    
 }

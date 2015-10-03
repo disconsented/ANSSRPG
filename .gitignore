@@ -1,38 +1,27 @@
-#Git
-/.git
+# General use .gitignore for Minecraft modding.
 
-#Forge
-/.gradle
-/bin
-/build
-/eclipse
-/logs
-/mods
-/out
-.project
-.settings
+# Directories
+/.gradle/
+/build/
+/eclipse/
+/run/
+/out/
+/asm/
+/bin/
+/.idea/
+/.metadata/
+/.settings/
+
+# File Extensions
+*.psd
+*.iml
+*.ipr
+*.iws
+*.classpath
+*.project
+*.class
 *.txt
-.classpath
 
-#IntelliJ
-/.idea
-1.7.10.iml
-1.7.10.ipr
-1.7.10.iws
-ANSSRPG.iml
-
-#ANSSRPG
-/data
-/saves
-/world
-/crash-reports
-/config
-/resourcepacks
-banned-ips.json
-banned-players.json
-ops.json
-server.properties
-servers.dat
-usercache.json
-usernamecache.json
-whitelist.json
+# Specific files
+Thumbs.db
+.DS_store

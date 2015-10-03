@@ -19,67 +19,96 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.player;
 /**
  * @author James
  * For storing data about players
  */
 
+import disconsented.anssrpg.handler.SkillHandler;
+import disconsented.anssrpg.perk.Slug;
+import disconsented.anssrpg.skill.objects.Skill;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
-
-import disconsented.anssrpg.perk.Perk;
-import net.minecraft.item.Item;
 
 public class PlayerData {
-	private ArrayList<String> perkList = new ArrayList<String>();
-	private HashMap<String, Integer> skillExp = new HashMap<String, Integer>();
-	private String playerID;
-	private int points;
+    private ArrayList<Slug> perkList = new ArrayList<Slug>();
+    private ArrayList<Slug> activePerks = new ArrayList<Slug>();
+    private HashMap<String, Integer> skillExp = new HashMap<String, Integer>();
+    private String playerID;
+    private int points;
 
-	public PlayerData(ArrayList perkList, HashMap skillExp, String playerID, int points){
-		this.perkList = perkList;
-		this.skillExp = skillExp;
-		this.playerID = playerID; 
-		this.points = points;
-	}
-	@Override
-	public String toString(){
-		return this.playerID;		
-	}
+    public PlayerData(ArrayList<Slug> perkList, HashMap skillExp, String playerID, int points) {
+        this.perkList = perkList;
+        this.skillExp = skillExp;
+        this.playerID = playerID;
+        this.points = points;
+    }
 
-	public ArrayList<String> getPerkList() {
-		return perkList;
-	}
+    public ArrayList<Slug> getPerkList() {
+        return this.perkList;
+    }
 
-	public void setPerkList(ArrayList<String> perkList) {
-		this.perkList = perkList;
-	}
+    public void setPerkList(ArrayList<Slug> perkList) {
+        this.perkList = perkList;
+    }
 
-	public HashMap<String, Integer> getSkillExp() {
-		return skillExp;
-	}
+    public String getPlayerID() {
+        return this.playerID;
+    }
 
-	public void setSkillExp(HashMap<String, Integer> skillExp) {
-		this.skillExp = skillExp;
-	}
+    public void setPlayerID(String playerID) {
+        this.playerID = playerID;
+    }
 
-	public String getPlayerID() {
-		return playerID;
-	}
+    public int getPoints() {
+        return this.points;
+    }
 
-	public void setPlayerID(String playerID) {
-		this.playerID = playerID;
-	}
+    public void setPoints(int points) {
+        this.points = points;
+    }
 
-	public int getPoints() {
-		return points;
-	}
+    public HashMap<String, Integer> getSkillExp() {
+        return this.skillExp;
+    }
 
-	public void setPoints(int points) {
-		this.points = points;
-	}
+    public void setSkillExp(HashMap<String, Integer> skillExp) {
+        this.skillExp = skillExp;
+    }
+    public int getSkillLevel(Skill skill){
+        return (int) SkillHandler.calculateLevelForExp(skill, skillExp.get(skill.name));
+    }
+
+    public ArrayList<Slug> getActivePerks() {
+        return this.activePerks;
+    }
+    
+    /**
+     * Used for permanent perks 
+     * @param slug
+     */
+    public void addActivePerkSlug(Slug slug){
+        activePerks.add(slug);
+    }
+    
+    /**
+     * Used for permanent perks 
+     * @param slug
+     */
+    public void removeActivePerkSlug(Slug slug){
+        activePerks.remove(slug);
+    }
+    
+
+    public void setActivePerks(ArrayList<Slug> activePerks) {
+        this.activePerks = activePerks;
+    }
+
+    @Override
+    public String toString() {
+        return this.playerID;
+    }
 }

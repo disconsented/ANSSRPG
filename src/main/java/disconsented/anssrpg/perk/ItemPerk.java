@@ -19,56 +19,49 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 /**
- * 
+ *
  */
 package disconsented.anssrpg.perk;
 
 import java.util.ArrayList;
 
-import com.google.gson.annotations.Expose;
-
+import disconsented.anssrpg.objects.INM;
 import net.minecraft.item.Item;
 
-/**
- * @author Disconsented
- *
- */
+import com.google.gson.annotations.Expose;
+
+import disconsented.anssrpg.common.Logging;
+import disconsented.anssrpg.objects.INME;
+
 public class ItemPerk extends Perk {
 
-	public ItemPerk() {
-		super();
-	}
+    @Expose
+    public ArrayList<INM> items = new ArrayList<INM>();
 
-	public ItemPerk(String name, ArrayList<Requirement> requirements,
-			String description, int pointCost) {
-		super(name, requirements, description, pointCost);
-		// TODO Auto-generated constructor stub
-	}
+    public ItemPerk() {
+    }
 
-	private Item item;
-	@Expose
-	public String itemName = "default_itemName";
-	
-	/**
-	 * @return the item
-	 */
-	public Item getItem() {
-		return item;
-	}
+    public ItemPerk(String name, ArrayList<Requirement> requirements,
+                    String description, int pointCost, ArrayList<INM> items) {
+        super(name, requirements, description, pointCost);
+        this.items = items;
+    }
 
-	/**
-	 * @param item the item to set
-	 */
-	protected void setItem(Item item) {
-		this.item = item;
-	}
-
-	@Override
-	public void touchUp() {		
-		this.item = (Item) Item.itemRegistry.getObject(itemName);
-		this.setSlug();
-	}
-
+    @Override
+    public void searchObject() {
+        ArrayList<INM> initialised = new ArrayList<>();
+        for(INM object : this.items){
+            object.item = (Item)Item.itemRegistry.getObject(object.name);
+            if (object.item != null){
+                Logging.debug(object.name + " has been found. Passing on.");
+                initialised.add(object);
+            } else {
+                Logging.error(object.name + " has not been found. Skipping");
+            }
+        }
+        items = initialised;
+    }
+    
 }

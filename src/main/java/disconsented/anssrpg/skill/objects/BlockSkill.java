@@ -19,41 +19,44 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 /**
- * 
+ *
  */
 package disconsented.anssrpg.skill.objects;
 
 import java.util.ArrayList;
 
+import net.minecraft.block.Block;
+
 import com.google.gson.annotations.Expose;
+
+import disconsented.anssrpg.common.Logging;
+import disconsented.anssrpg.objects.BNEP;
 
 /**
  * @author Disconsented
- *
  */
-public class BlockSkill extends Skill {
-	@Expose
-	ArrayList<BlockXP> exp = new ArrayList<BlockXP>();
-	public BlockSkill(){
-		exp.add(new BlockXP());
-		exp.add(new BlockXP());
-	}
-	public void touchUp() {
-		for (XPGain xp : exp){
-			BlockXP thing = new BlockXP();
-			thing.name = xp.name;
-			thing.xp = xp.xp;
-			thing.touchUp();
-		}
-	}
-	@Override
-	public ArrayList<BlockXP> getExp() {
-		return exp;
-	}
-	@Override
-	public void setExp(ArrayList exp) {
-		this.exp = exp;		
-	}
+public class BlockSkill extends ToolSkill {
+    
+    @Expose
+    public ArrayList<BNEP> exp = new ArrayList<BNEP>();
+    
+    @Override
+    public void touchUp() {
+        this.initTool();
+        
+        ArrayList<BNEP> initialised = new ArrayList<BNEP>();
+        for (BNEP object : this.exp) {
+            object.block = (Block) Block.blockRegistry.getObject(object.name);
+            if (object.block != null){
+                Logging.debug(object.name+" has been found. Passing on!");
+                initialised.add(object);
+            } else {
+                Logging.error(object.name+" could not be found. Ignoring!");
+            }
+        }
+        this.exp = initialised;
+    }
+    
 }

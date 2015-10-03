@@ -19,38 +19,21 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
-/**
- * 
  */
-package disconsented.anssrpg.skill.objects;
+package disconsented.anssrpg.network;
 
-import com.google.gson.annotations.Expose;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import disconsented.anssrpg.client.Data;
 
-import net.minecraft.block.Block;
-
-/**
- * @author Disconsented
- *
- */
-public class BlockXP extends XPGain {
-
-	/**
-	 * 
-	 */
-	private Block block;
-	
-	public BlockXP() {
-	}
+public class SkillInfoHandler implements IMessageHandler<SkillInfo, IMessage>{
 
 	@Override
-	public void touchUp() {
-		block = (Block) Block.blockRegistry.getObject(name);
-
-	}
-
-	public Block getBlock() {
-		return block;
+	public IMessage onMessage(SkillInfo message, MessageContext ctx) {
+		Data.skillInfo.put(message.name, message);
+		Data.skillInfoList.add(message);
+		return null;
 	}
 
 }

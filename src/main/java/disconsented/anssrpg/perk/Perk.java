@@ -19,65 +19,92 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 /** Author: Disconsented
  * Supertype for perks
  */
 package disconsented.anssrpg.perk;
 
-import java.util.ArrayList;
-
 import com.google.gson.annotations.Expose;
 
+import java.util.ArrayList;
+
 public abstract class Perk {
-	
-	@Expose
-	public String name = "default_name";
-	@Expose
-	public ArrayList<Requirement> requirements = new ArrayList<Requirement>();	
-	public String perkSlug;//Not exposed as its made based on the name
-	@Expose
-	public String description = "default_description";
-	@Expose
-	public int pointCost = 0;
-	
-	private String getSlug(String name){		
-		return name.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
-	}
+    @Expose
+    public String name = "default_name";
+    @Expose
+    public ArrayList<Requirement> requirements = new ArrayList<Requirement>();
+    public Slug slug;//Not exposed as its made based on the name
+    @Expose
+    public String description = "default_description";
+    @Expose
+    public int pointCost;
 
-	public Perk(){
-		this.requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
-		this.requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
-		this.requirements.add(new Requirement(Requirement.Action.HAVE, "skill_name", "6"));
-	}
-	/**
-	 *
-	 * @param name - Name of the perk
-	 * @param description - Description
-	 * @param pointCost - Cost in points to unlock
-	 * @param requirement - Requirment object
-	 */
-	public Perk (String name, ArrayList<Requirement> requirements, String description, int pointCost){
-		this.name = name;
-		this.requirements = requirements;
-		this.description = description;
-		this.pointCost = pointCost;
-	}
+    public Perk() {  } // Blank constructor for Gson
 
-	public abstract void touchUp(); //For converting strings into object references after deserialisation
-	protected void setName(String name){this.name = name; this.perkSlug = getSlug(name);} 
-	protected void setRequirements(ArrayList<Requirement> requirments){this.requirements = requirments;}
-	protected void setDescription(String description){this.description = description;}
-	protected void setPointCost(int pointCost){this.pointCost = pointCost;}
-	protected void setSlug(){perkSlug = name.toLowerCase().replaceAll("[^A-Za-z0-9]", "");}
-	public String getName(){return name;}
-	public ArrayList getRequirements(){return requirements;}
-	public String getDescription(){return description;}
-	public int getPointCost(){return pointCost;}
-	public String getSlug(){return perkSlug;}
-	@Override
-	public String toString() {		
-		return this.name+"|"+this.description+"|"+this.pointCost+"|"+this.requirements.toString();
-	}
+    public Perk(String name, ArrayList<Requirement> requirements, String description, int pointCost) {
+        this.name = name;
+        this.requirements = requirements;
+        this.description = description;
+        this.pointCost = pointCost;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    protected void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    protected void setName(String name) {
+        this.name = name;
+        this.slug = new Slug(name);
+    }
+
+    public int getPointCost() {
+        return this.pointCost;
+    }
+
+    protected void setPointCost(int pointCost) {
+        this.pointCost = pointCost;
+    }
+
+    public ArrayList getRequirements() {
+        return this.requirements;
+    }
+
+    protected void setRequirements(ArrayList<Requirement> requirments) {
+        this.requirements = requirments;
+    }
+
+    public Slug getSlug() {
+        if (slug != null){
+            return this.slug;
+        } else {
+            slug = new Slug(name);
+            return slug;
+        }
+        
+    }
+
+    public abstract void searchObject();
+
+    @Override
+    public String toString() {
+        return this.name + "|" + this.description + "|" + this.pointCost + "|" + this.requirements;
+    }
+
+    public void touchUp() {
+        this.searchObject();
+        this.getSlug();
+        if (requirements == null) {
+            requirements = new ArrayList<Requirement>();
+        }
+    }
 
 }

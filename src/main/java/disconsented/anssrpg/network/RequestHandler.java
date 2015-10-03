@@ -19,23 +19,75 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.network;
 
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import disconsented.anssrpg.Main;
-import disconsented.anssrpg.data.PlayerStore;
-import disconsented.anssrpg.handler.PlayerHandler;
+import java.util.ArrayList;
+import java.util.Map;
 
-public class RequestHandler implements IMessageHandler<Request, IMessage>{
-	private String responceText;
-	@Override
-	public IMessage onMessage(Request message, MessageContext ctx) {
-		//PlayerData player = PlayerStore.getInstance().getPlayer(ctx.)
-		//responceText = PlayerHandler.addPerk(null, null);
-		return new Responce(responceText);
-	}
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import disconsented.anssrpg.Main;
+import disconsented.anssrpg.data.PerkStore;
+import disconsented.anssrpg.data.SkillStore;
+import disconsented.anssrpg.handler.PlayerHandler;
+import disconsented.anssrpg.handler.SkillHandler;
+import disconsented.anssrpg.perk.Perk;
+import disconsented.anssrpg.player.PlayerData;
+import disconsented.anssrpg.skill.objects.Skill;
+import disconsented.anssrpg.task.TaskMaster;
+import disconsented.anssrpg.task.TaskPlayerStatusTrack;
+import net.minecraft.entity.player.EntityPlayerMP;
+
+/**
+ * Handles the @link{request} packet
+ * Sends back requested information
+ */
+public class RequestHandler implements IMessageHandler<Request, IMessage> {
+    @Override
+    public IMessage onMessage(Request message, MessageContext ctx) {
+        EntityPlayerMP player = ctx.getServerHandler().playerEntity;
+        PlayerData playerData = PlayerHandler.getPlayer(player.getUniqueID());
+        switch(message.request){
+		case ACTIVE_PERKS:
+			break;
+		case OBTAINED_PERKS:
+			break;
+		case PERKS:
+            ArrayList<Perk> perks = PerkStore.getPerks();
+            for (Perk perk : perks)
+            {//String name, String description, String slug, int pointCost, ArrayList<Requirement> requirements, boolean obtained
+                boolean obtained =  playerData.getPerkList().contains(perk.getSlug());
+                Main.snw.sendTo(new PerkInfo(perk.name, perk.getDescription(), perk.getSlug().getSlug(), perk.getPointCost(), perk.getRequirements(),obtained),player);
+            }
+			break;
+		case SKILLS:
+			SkillStore skillStore = SkillStore.getInstance();
+			for(Map.Entry<String, Integer> entry : playerData.getSkillExp().entrySet()){
+				for(Skill skill : SkillStore.getSkills()){
+					if(entry.getKey().equals(skill.name)){						
+						int level = (int) SkillHandler.calculateLevelForExp(skill, entry.getValue());
+						int xp = (int) SkillHandler.calculateExpForLevel(skill, level + 1);
+						Main.snw.sendTo(new SkillInfo(skill.name, entry.getValue(), xp, level, (int)SkillHandler.calculateExpForLevel(skill.base, level-1, skill.mod) ), player);
+						break;
+					}
+				}
+			}
+			break;
+            //Loads the task which sends the player their information for the gui
+            case START_TRACKING:
+                TaskMaster.getInstance().addTask(new TaskPlayerStatusTrack(player));
+                break;
+            //Stops the task from sending updates to the client
+            case STOP_TRACKING:
+                player.getEntityData().setBoolean(TaskPlayerStatusTrack.TAG_STATUS_OPEN, false);
+                break;
+		default:
+			break;
+       
+        }
+        return null;
+    }
 
 }
