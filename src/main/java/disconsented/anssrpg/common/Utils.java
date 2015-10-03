@@ -25,6 +25,7 @@ package disconsented.anssrpg.common;
 import net.minecraft.entity.Entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -40,9 +41,9 @@ public class Utils {
      */
     public static<T> boolean MatchObject(T object1, int metadata1, T object2, int metadata2){
         if (metadata1 > -1 && metadata2 > -1){
-            return object1.getClass().equals(object2.getClass()) && metadata1 == metadata2;
+            return object1.equals(object2) && metadata1 == metadata2;
         } else {
-            return object1.getClass().equals(object2.getClass());
+            return object1.equals(object2);
         }
     }
 
@@ -59,10 +60,16 @@ public class Utils {
         if(object1 != object2)
             return false;
 
-        String[] keys = (String[])properties1.keySet().toArray();
+        if(properties1 == null)
+            properties1 = new HashMap<>();
+
+        if(properties2 == null)
+            properties2 = new HashMap<>();
+
+        String[] keys = properties1.keySet().toArray(new String[properties1.size()]);
 
         for(String key : keys){
-            String value1 = properties2.get(key);
+            String value1 = properties1.get(key);
             String value2 = properties2.get(key);
             if(value1 == "*"){
                 if (value2 == ""){
