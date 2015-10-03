@@ -86,10 +86,10 @@ task sourceJar(type: Jar) {
 }
 
 // Javadoc Jar
-task javadocJar(type: Jar, dependsOn: javadoc) {
+/*task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc.destinationDir
     classifier = 'javadoc'
-}
+}*/
 
 // Deobfuscated Jar
 task deobfJar(type: Jar) {
@@ -97,7 +97,7 @@ task deobfJar(type: Jar) {
     classifier = 'deobf'
 }
 
-tasks.build.dependsOn sourceJar, javadocJar, deobfJar
+tasks.build.dependsOn sourceJar, /*javadocJar,*/ deobfJar
 
 tasks.withType(JavaCompile) { task ->
     task.options.encoding = 'UTF-8'
