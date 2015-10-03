@@ -222,6 +222,10 @@ public final class PlayerHandler {
         player.addChatComponentMessage(new ChatComponentText("You are unable to preform this task"));
     }
 
+    public static void toolFail(EntityPlayer player) {
+        player.addChatComponentMessage(new ChatComponentText("You do not have the right tool for this task"));
+    }
+
     /**
      * Checks that the entity is weilding the associated tool
      * If a tool is not required always returns true
