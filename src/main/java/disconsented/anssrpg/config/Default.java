@@ -177,7 +177,7 @@ public class Default {
             mining.exp.add(new BNEP("iron_ore", 10, null));
             mining.exp.add(new BNEP("lapis_ore", 15, null));
             mining.exp.add(new BNEP("gold_ore", 20, null));
-            mining.exp.add(new BNEP("redstone_ore", 25, null));
+            mining.exp.add(new BNEP("lit_redstone_ore", 25, null));
             mining.exp.add(new BNEP("diamond_ore", 30, null));
             mining.exp.add(new BNEP("emerald_ore", 35, null));
             mining.tool = "Pickaxe";
@@ -202,7 +202,7 @@ public class Default {
             digging.exp.add(new BNEP("clay", 2, null));
             digging.exp.add(new BNEP("hardened_clay", 2, null));
             digging.exp.add(new BNEP("stained_hardened_clay", 2, new HashMap<String, String>(){{
-                this.put("variant","*");}}));
+                this.put("PropertyEnum","*");}}));
             digging.tool = "Spade";
             Default.skills.addBlockSkill(digging);
             
@@ -218,25 +218,25 @@ public class Default {
             ItemSkill armouring = new ItemSkill();
             armouring.name = "Armouring";
             //Leather
-            armouring.exp.add(new INME(null, "leather_helmet", 10, 0));
-            armouring.exp.add(new INME(null, "leather_chestplate", 10, 0));
-            armouring.exp.add(new INME(null, "leather_leggings", 10, 0));
-            armouring.exp.add(new INME(null, "leather_boots", 10, 0));
+            armouring.exp.add(new INME(null, "leather_helmet", 0, 10));
+            armouring.exp.add(new INME(null, "leather_chestplate", 0, 10));
+            armouring.exp.add(new INME(null, "leather_leggings", 0, 10));
+            armouring.exp.add(new INME(null, "leather_boots", 0, 10));
             //Gold
-            armouring.exp.add(new INME(null, "golden_helmet", 15, 0));
-            armouring.exp.add(new INME(null, "golden_chestplate", 15, 0));
-            armouring.exp.add(new INME(null, "golden_leggings", 15, 0));
-            armouring.exp.add(new INME(null, "golden_boots", 15, 0));
+            armouring.exp.add(new INME(null, "golden_helmet", 0, 15));
+            armouring.exp.add(new INME(null, "golden_chestplate", 0, 15));
+            armouring.exp.add(new INME(null, "golden_leggings", 0, 15));
+            armouring.exp.add(new INME(null, "golden_boots", 0, 15));;
             //Iron
-            armouring.exp.add(new INME(null, "iron_helmet", 20, 0));
-            armouring.exp.add(new INME(null, "iron_chestplate", 20, 0));
-            armouring.exp.add(new INME(null, "iron_leggings", 20, 0));
-            armouring.exp.add(new INME(null, "iron_boots", 20, 0));
+            armouring.exp.add(new INME(null, "iron_helmet", 0, 20));
+            armouring.exp.add(new INME(null, "iron_chestplate", 0, 20));
+            armouring.exp.add(new INME(null, "iron_leggings", 0, 20));
+            armouring.exp.add(new INME(null, "iron_boots", 0, 20));
             //Diamond
-            armouring.exp.add(new INME(null, "diamond_helmet", 30, 0));
-            armouring.exp.add(new INME(null, "diamond_chestplate", 30, 0));
-            armouring.exp.add(new INME(null, "diamond_leggings", 30, 0));
-            armouring.exp.add(new INME(null, "diamond_boots", 30, 0));
+            armouring.exp.add(new INME(null, "diamond_helmet", 0, 30));
+            armouring.exp.add(new INME(null, "diamond_chestplate", 0, 30));
+            armouring.exp.add(new INME(null, "diamond_leggings", 0, 30));
+            armouring.exp.add(new INME(null, "diamond_boots", 0, 30));
 
             Default.skills.addItemSkill(armouring);
             return Default.skills;
