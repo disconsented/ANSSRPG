@@ -63,7 +63,7 @@ public class TaskApplyPotion extends TaskTrackPlayer{
         if(this.entity.isDead){
             this.repeat = false;
         } else {
-            Logging.debug("Attempting to apply potion " + this.effect.getEffectName() + " to " + this.entity.getName());
+            Logging.debug("Attempting to apply potion " + effect.getEffectName() + " to " + entity.getName());
             this.entity.addPotionEffect(new PotionEffect(this.effect));
         }
 
