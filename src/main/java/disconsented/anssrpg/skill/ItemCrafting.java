@@ -41,6 +41,7 @@ import disconsented.anssrpg.data.SkillStore;
 import disconsented.anssrpg.handler.PlayerHandler;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.skill.objects.ItemSkill;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 /**
@@ -67,6 +68,7 @@ public class ItemCrafting {
                       if(Utils.MatchObject(entry.item, entry.metadata, item, stack.getItemDamage())){
                           if (!PlayerHandler.hasPerk(playerData, perkList) && this.requiresPerk(perkList,item, stack.getItemDamage())){
                               player.closeScreen();
+                              event.setResult(Event.Result.DENY);
                               PlayerHandler.taskFail(player);
                           }
                       }
