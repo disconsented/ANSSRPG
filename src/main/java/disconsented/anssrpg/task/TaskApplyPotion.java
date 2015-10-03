@@ -60,11 +60,11 @@ public class TaskApplyPotion extends TaskTrackPlayer{
      */
     @Override
     public void onTick(TickEvent event) {        
-        if(this.entity.isDead){
-            this.repeat = false;
+        if(entity.isDead){
+            repeat = false;
         } else {
-            Logging.debug("Attempting to apply potion " + effect.getEffectName() + " to " + entity.getName());
-            this.entity.addPotionEffect(new PotionEffect(this.effect));
+            Logging.debug("Attempting to apply potion " + effect.getEffectName() + " to " + entity.getDisplayName());
+            entity.addPotionEffect(new PotionEffect(effect));
         }
 
     }
