@@ -22,7 +22,6 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg.gui;
 
-import disconsented.anssrpg.common.Logging;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityList;
 import net.minecraft.item.Item;
@@ -32,15 +31,13 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Created by j on 3/09/2015.
  */
 public class RegistryReader {
-    private JPanel panel1;
+    private JPanel panelRegistryReader;
     private JTabbedPane tabbedPane1;
     private JList listItem;
     private JList listEntity;
@@ -55,7 +52,7 @@ public class RegistryReader {
 
     private RegistryReader() {
         this.frame = new JFrame("Minecraft Registry Reader");
-        this.frame.setContentPane(this.panel1);
+        this.frame.setContentPane(this.panelRegistryReader);
         this.frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.frame.pack();
         this.frame.setVisible(true);
@@ -79,7 +76,7 @@ public class RegistryReader {
         this.rawItems = new ArrayList<String>(Item.itemRegistry.getKeys());
         this.listItem.setListData(this.rawItems.toArray());
 
-        this.rawEntities = new ArrayList(EntityList.idToClassMapping.keySet());
+        this.rawEntities = new ArrayList(EntityList.stringToClassMapping.keySet());
         this.listEntity.setListData(this.rawEntities.toArray());
 
         this.rawBlocks = new ArrayList<String>(Block.blockRegistry.getKeys());
@@ -152,16 +149,16 @@ public class RegistryReader {
      * @noinspection ALL
      */
     private void $$$setupUI$$$() {
-        panel1 = new JPanel();
-        panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1, true, true));
-        panel1.setMinimumSize(new Dimension(600, 800));
-        panel1.setPreferredSize(new Dimension(600, 800));
+        panelRegistryReader = new JPanel();
+        panelRegistryReader.setLayout(new BorderLayout(0, 0));
+        panelRegistryReader.setMinimumSize(new Dimension(600, 800));
+        panelRegistryReader.setPreferredSize(new Dimension(600, 800));
         JSplit = new JSplitPane();
         JSplit.setContinuousLayout(false);
         JSplit.setDividerLocation(700);
         JSplit.setDividerSize(0);
         JSplit.setOrientation(0);
-        panel1.add(JSplit, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(0, 0), null, 0, false));
+        panelRegistryReader.add(JSplit, BorderLayout.CENTER);
         tabbedPane1 = new JTabbedPane();
         JSplit.setLeftComponent(tabbedPane1);
         final JScrollPane scrollPane1 = new JScrollPane();
@@ -184,6 +181,6 @@ public class RegistryReader {
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() {
-        return panel1;
+        return panelRegistryReader;
     }
 }
