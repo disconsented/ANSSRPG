@@ -27,9 +27,8 @@ package disconsented.anssrpg.commands;
 
 import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.common.Settings;
-import disconsented.anssrpg.gui.RegistryReader;
+import disconsented.anssrpg.client.gui.RegistryReader;
 import net.minecraft.command.CommandBase;
-import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 
 import java.util.ArrayList;

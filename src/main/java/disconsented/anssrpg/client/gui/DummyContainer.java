@@ -20,34 +20,17 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.gui.components;
+package disconsented.anssrpg.client.gui;
 
-import disconsented.anssrpg.common.Reference;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 
-/**
- * @author Disconsented
- */
-public class PerkControls extends ComponentBase{
-    private final ResourceLocation texture = new ResourceLocation(Reference.ID, "perkinfo.png");
-    private final int width = 256;
-    private final int height = 256;
-    public String status = "Status";
-    public String description = "Description";
-    public PerkControls(int x, int y){
-        this.x = x;
-        this.y = y;
-    }
+public class DummyContainer extends Container {
+
     @Override
-    public void draw() {
-        this.bindAndDrawTexture(this.texture, this.x, this.y, width, height);
-        this.fontRenderer.drawSplitString(this.status, 11 + x, 2 + 181 + y, 156, 0xBEFF00);//9,181 158x28
-        this.fontRenderer.drawSplitString(this.description, 11 + x, 2 + 9 + y, 156, 0xBEFF00); //9,9 158x164
+    public boolean canInteractWith(EntityPlayer p_75145_1_) {
+        // TODO Auto-generated method stub
+        return true;
     }
-
 
 }

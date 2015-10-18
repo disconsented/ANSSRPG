@@ -20,12 +20,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.gui;
+package disconsented.anssrpg.client.gui;
 
 import disconsented.anssrpg.Main;
 import disconsented.anssrpg.client.Data;
-import disconsented.anssrpg.gui.components.PerkControls;
-import disconsented.anssrpg.gui.components.PerkList;
+import disconsented.anssrpg.client.gui.components.PerkControls;
+import disconsented.anssrpg.client.gui.components.PerkList;
 import disconsented.anssrpg.network.PerkInfo;
 import disconsented.anssrpg.network.PerkRequest;
 import disconsented.anssrpg.network.Request;
@@ -36,7 +36,6 @@ import net.minecraft.client.gui.GuiScreen;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 /**

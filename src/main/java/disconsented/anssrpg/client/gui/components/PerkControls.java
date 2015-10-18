@@ -20,38 +20,30 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.gui.components;
+package disconsented.anssrpg.client.gui.components;
 
 import disconsented.anssrpg.common.Reference;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
-
-import java.util.ArrayList;
 
 /**
  * @author Disconsented
  */
-public class PerkList extends ComponentBase{
-    private final ResourceLocation texture = new ResourceLocation(Reference.ID, "perklist.png");
+public class PerkControls extends ComponentBase{
+    private final ResourceLocation texture = new ResourceLocation(Reference.ID, "perkinfo.png");
     private final int width = 256;
     private final int height = 256;
-    private final String[] names = {"1","2","3","4"};
-    public PerkList(int x, int y){
+    public String status = "Status";
+    public String description = "Description";
+    public PerkControls(int x, int y){
         this.x = x;
         this.y = y;
     }
     @Override
     public void draw() {
         this.bindAndDrawTexture(this.texture, this.x, this.y, width, height);
-        drawString(this.fontRenderer, this.names[0], 11 + x, y + 9 + 2, 0xBEFF00);
-        drawString(this.fontRenderer, this.names[1], 11 + x, y + 69 + 2, 0xBEFF00);
-        drawString(this.fontRenderer, this.names[2], 11 + x, y + 129 + 2, 0xBEFF00);
-        drawString(this.fontRenderer, this.names[3], 11 + x, y + 189 + 2, 0xBEFF00);
+        this.fontRenderer.drawSplitString(this.status, 11 + x, 2 + 181 + y, 156, 0xBEFF00);//9,181 158x28
+        this.fontRenderer.drawSplitString(this.description, 11 + x, 2 + 9 + y, 156, 0xBEFF00); //9,9 158x164
     }
-    public String[] getNames(){
-        return names;
-    }
+
+
 }

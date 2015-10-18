@@ -20,17 +20,32 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.gui;
+package disconsented.anssrpg.client.gui.components;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
+import disconsented.anssrpg.common.Reference;
+import net.minecraft.util.ResourceLocation;
 
-public class DummyContainer extends Container {
-
-    @Override
-    public boolean canInteractWith(EntityPlayer p_75145_1_) {
-        // TODO Auto-generated method stub
-        return true;
+/**
+ * @author Disconsented
+ */
+public class PerkList extends ComponentBase{
+    private final ResourceLocation texture = new ResourceLocation(Reference.ID, "perklist.png");
+    private final int width = 256;
+    private final int height = 256;
+    private final String[] names = {"1","2","3","4"};
+    public PerkList(int x, int y){
+        this.x = x;
+        this.y = y;
     }
-
+    @Override
+    public void draw() {
+        this.bindAndDrawTexture(this.texture, this.x, this.y, width, height);
+        drawString(this.fontRenderer, this.names[0], 11 + x, y + 9 + 2, 0xBEFF00);
+        drawString(this.fontRenderer, this.names[1], 11 + x, y + 69 + 2, 0xBEFF00);
+        drawString(this.fontRenderer, this.names[2], 11 + x, y + 129 + 2, 0xBEFF00);
+        drawString(this.fontRenderer, this.names[3], 11 + x, y + 189 + 2, 0xBEFF00);
+    }
+    public String[] getNames(){
+        return names;
+    }
 }

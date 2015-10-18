@@ -20,18 +20,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.gui;
+package disconsented.anssrpg.client.gui;
 
 import disconsented.anssrpg.Main;
-import disconsented.anssrpg.common.Reference;
-import disconsented.anssrpg.gui.components.ComponentStatusBook;
+import disconsented.anssrpg.client.gui.components.ComponentStatusBook;
 import disconsented.anssrpg.network.Request;
 import disconsented.anssrpg.network.Request.REQUEST;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.ResourceLocation;
 
 /**
  * Created by Disconsented on 22/08/2015.

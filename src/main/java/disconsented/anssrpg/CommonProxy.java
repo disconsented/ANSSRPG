@@ -23,7 +23,7 @@ THE SOFTWARE.
 package disconsented.anssrpg;
 
 import net.minecraftforge.fml.common.network.IGuiHandler;
-import disconsented.anssrpg.gui.*;
+import disconsented.anssrpg.client.gui.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 

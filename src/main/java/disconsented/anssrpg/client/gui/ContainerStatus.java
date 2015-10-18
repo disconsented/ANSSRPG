@@ -20,7 +20,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.gui;
+package disconsented.anssrpg.client.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;

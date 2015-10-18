@@ -20,25 +20,16 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.gui;
+package disconsented.anssrpg.client.gui;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Queue;
 
-import org.lwjgl.opengl.GL11;
-
-import net.minecraftforge.fml.client.FMLClientHandler;
 import disconsented.anssrpg.Main;
 import disconsented.anssrpg.client.Data;
-import disconsented.anssrpg.common.Reference;
-import disconsented.anssrpg.gui.components.ExpBox;
+import disconsented.anssrpg.client.gui.components.ExpBox;
 import disconsented.anssrpg.network.Request;
-import disconsented.anssrpg.network.SkillInfo;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.ResourceLocation;
 
 /**
  * @author Disconsented
