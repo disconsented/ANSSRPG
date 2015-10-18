@@ -23,11 +23,11 @@ THE SOFTWARE.
 /**
  *
  */
-package disconsented.anssrpg.commands;
+package disconsented.anssrpg.server.commands;
 
-import disconsented.anssrpg.data.PlayerStore;
-import disconsented.anssrpg.perk.Slug;
-import disconsented.anssrpg.player.PlayerData;
+import disconsented.anssrpg.server.data.PlayerStore;
+import disconsented.anssrpg.server.perk.Slug;
+import disconsented.anssrpg.server.player.PlayerData;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;

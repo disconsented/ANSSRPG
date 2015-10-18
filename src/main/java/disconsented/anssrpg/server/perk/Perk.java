@@ -23,7 +23,7 @@ THE SOFTWARE.
 /** Author: Disconsented
  * Supertype for perks
  */
-package disconsented.anssrpg.perk;
+package disconsented.anssrpg.server.perk;
 
 import com.google.gson.annotations.Expose;
 

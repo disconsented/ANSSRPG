@@ -20,13 +20,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.skill;
+package disconsented.anssrpg.server.skill;
 
 import java.util.ArrayList;
 
-import disconsented.anssrpg.objects.INM;
-import disconsented.anssrpg.objects.INME;
-import disconsented.anssrpg.perk.ItemPerk;
+import disconsented.anssrpg.server.objects.INM;
+import disconsented.anssrpg.server.objects.INME;
+import disconsented.anssrpg.server.perk.ItemPerk;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerPlayer;
@@ -34,13 +34,13 @@ import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerOpenContainerEvent;
-import disconsented.anssrpg.common.Utils;
-import disconsented.anssrpg.data.PerkStore;
-import disconsented.anssrpg.data.PlayerStore;
-import disconsented.anssrpg.data.SkillStore;
-import disconsented.anssrpg.handler.PlayerHandler;
-import disconsented.anssrpg.player.PlayerData;
-import disconsented.anssrpg.skill.objects.ItemSkill;
+import disconsented.anssrpg.server.common.Utils;
+import disconsented.anssrpg.server.data.PerkStore;
+import disconsented.anssrpg.server.data.PlayerStore;
+import disconsented.anssrpg.server.data.SkillStore;
+import disconsented.anssrpg.server.handler.PlayerHandler;
+import disconsented.anssrpg.server.player.PlayerData;
+import disconsented.anssrpg.server.skill.objects.ItemSkill;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 

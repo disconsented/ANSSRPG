@@ -20,18 +20,18 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.config;
+package disconsented.anssrpg.server.config;
 
 import java.util.ArrayList;
 
 import com.google.gson.annotations.Expose;
 
-import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.data.SkillStore;
-import disconsented.anssrpg.skill.objects.BlockSkill;
-import disconsented.anssrpg.skill.objects.EntitySkill;
-import disconsented.anssrpg.skill.objects.ItemSkill;
-import disconsented.anssrpg.skill.objects.Skill;
+import disconsented.anssrpg.server.common.Logging;
+import disconsented.anssrpg.server.data.SkillStore;
+import disconsented.anssrpg.server.skill.objects.BlockSkill;
+import disconsented.anssrpg.server.skill.objects.EntitySkill;
+import disconsented.anssrpg.server.skill.objects.ItemSkill;
+import disconsented.anssrpg.server.skill.objects.Skill;
 /**
  * Used to safely retain data for saving and loading skills before initalising them for use
  * @author Disconsented 

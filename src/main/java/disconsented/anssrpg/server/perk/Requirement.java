@@ -20,12 +20,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.perk;
+package disconsented.anssrpg.server.perk;
 
 import com.google.gson.annotations.Expose;
 
-import disconsented.anssrpg.common.Utils;
-import disconsented.anssrpg.common.Utils.Tools;
+import disconsented.anssrpg.server.common.Utils.Tools;
 
 /**
  * @author Disconsented

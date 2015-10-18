@@ -20,15 +20,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.event;
+package disconsented.anssrpg.server.event;
 
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import disconsented.anssrpg.data.DataSave;
-import disconsented.anssrpg.handler.PlayerHandler;
-import disconsented.anssrpg.skill.ItemCrafting;
-import disconsented.anssrpg.task.TaskMaster;
+import disconsented.anssrpg.server.data.DataSave;
+import disconsented.anssrpg.server.handler.PlayerHandler;
+import disconsented.anssrpg.server.skill.ItemCrafting;
+import disconsented.anssrpg.server.task.TaskMaster;
 
 /**
  * @author Disconsented

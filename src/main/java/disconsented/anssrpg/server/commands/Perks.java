@@ -23,14 +23,14 @@ THE SOFTWARE.
 /**
  *
  */
-package disconsented.anssrpg.commands;
+package disconsented.anssrpg.server.commands;
 
-import disconsented.anssrpg.common.Settings;
-import disconsented.anssrpg.data.PerkStore;
-import disconsented.anssrpg.handler.PlayerHandler;
-import disconsented.anssrpg.perk.Perk;
-import disconsented.anssrpg.perk.Slug;
-import disconsented.anssrpg.player.PlayerData;
+import disconsented.anssrpg.server.common.Settings;
+import disconsented.anssrpg.server.data.PerkStore;
+import disconsented.anssrpg.server.handler.PlayerHandler;
+import disconsented.anssrpg.server.perk.Perk;
+import disconsented.anssrpg.server.perk.Slug;
+import disconsented.anssrpg.server.player.PlayerData;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;

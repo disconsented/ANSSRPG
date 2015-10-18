@@ -23,16 +23,16 @@ THE SOFTWARE.
 /**
  *
  */
-package disconsented.anssrpg.perk;
+package disconsented.anssrpg.server.perk;
 
 import java.util.ArrayList;
 
-import disconsented.anssrpg.objects.ENE;
+import disconsented.anssrpg.server.objects.ENE;
 import net.minecraft.entity.EntityList;
 
 import com.google.gson.annotations.Expose;
 
-import disconsented.anssrpg.common.Logging;
+import disconsented.anssrpg.server.common.Logging;
 
 public class EntityPerk extends Perk {
     public EntityPerk(){}

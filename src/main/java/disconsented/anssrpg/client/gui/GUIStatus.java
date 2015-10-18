@@ -24,8 +24,8 @@ package disconsented.anssrpg.client.gui;
 
 import disconsented.anssrpg.Main;
 import disconsented.anssrpg.client.gui.components.ComponentStatusBook;
-import disconsented.anssrpg.network.Request;
-import disconsented.anssrpg.network.Request.REQUEST;
+import disconsented.anssrpg.server.network.Request;
+import disconsented.anssrpg.server.network.Request.REQUEST;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 

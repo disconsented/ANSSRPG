@@ -20,7 +20,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.network;
+package disconsented.anssrpg.server.network;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -29,15 +29,15 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import disconsented.anssrpg.Main;
-import disconsented.anssrpg.data.PerkStore;
-import disconsented.anssrpg.data.SkillStore;
-import disconsented.anssrpg.handler.PlayerHandler;
-import disconsented.anssrpg.handler.SkillHandler;
-import disconsented.anssrpg.perk.Perk;
-import disconsented.anssrpg.player.PlayerData;
-import disconsented.anssrpg.skill.objects.Skill;
-import disconsented.anssrpg.task.TaskMaster;
-import disconsented.anssrpg.task.TaskPlayerStatusTrack;
+import disconsented.anssrpg.server.data.PerkStore;
+import disconsented.anssrpg.server.data.SkillStore;
+import disconsented.anssrpg.server.handler.PlayerHandler;
+import disconsented.anssrpg.server.handler.SkillHandler;
+import disconsented.anssrpg.server.perk.Perk;
+import disconsented.anssrpg.server.player.PlayerData;
+import disconsented.anssrpg.server.skill.objects.Skill;
+import disconsented.anssrpg.server.task.TaskMaster;
+import disconsented.anssrpg.server.task.TaskPlayerStatusTrack;
 import net.minecraft.entity.player.EntityPlayerMP;
 
 /**

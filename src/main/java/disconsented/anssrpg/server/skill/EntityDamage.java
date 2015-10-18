@@ -20,7 +20,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.skill;
+package disconsented.anssrpg.server.skill;
 /**
  * @author James
  * Handles when to add experience and entitying of events
@@ -28,20 +28,20 @@ package disconsented.anssrpg.skill;
 
 import java.util.ArrayList;
 
-import disconsented.anssrpg.common.*;
-import disconsented.anssrpg.objects.ENE;
-import disconsented.anssrpg.perk.EntityPerk;
+import disconsented.anssrpg.server.common.*;
+import disconsented.anssrpg.server.objects.ENE;
+import disconsented.anssrpg.server.perk.EntityPerk;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import disconsented.anssrpg.data.PerkStore;
-import disconsented.anssrpg.data.PlayerStore;
-import disconsented.anssrpg.data.SkillStore;
-import disconsented.anssrpg.handler.PlayerHandler;
-import disconsented.anssrpg.player.PlayerData;
-import disconsented.anssrpg.skill.objects.EntitySkill;
+import disconsented.anssrpg.server.data.PerkStore;
+import disconsented.anssrpg.server.data.PlayerStore;
+import disconsented.anssrpg.server.data.SkillStore;
+import disconsented.anssrpg.server.handler.PlayerHandler;
+import disconsented.anssrpg.server.player.PlayerData;
+import disconsented.anssrpg.server.skill.objects.EntitySkill;
 
 public class EntityDamage {
     public void onLivingDeathEvent(LivingDeathEvent event) {

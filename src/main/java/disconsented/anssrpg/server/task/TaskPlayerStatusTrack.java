@@ -20,16 +20,16 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.task;
+package disconsented.anssrpg.server.task;
 
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import disconsented.anssrpg.Main;
-import disconsented.anssrpg.common.Reference;
-import disconsented.anssrpg.handler.PlayerHandler;
-import disconsented.anssrpg.network.ActivePerks;
-import disconsented.anssrpg.network.PlayerStatus;
-import disconsented.anssrpg.perk.Slug;
-import disconsented.anssrpg.player.PlayerData;
+import disconsented.anssrpg.server.common.Reference;
+import disconsented.anssrpg.server.handler.PlayerHandler;
+import disconsented.anssrpg.server.network.ActivePerks;
+import disconsented.anssrpg.server.network.PlayerStatus;
+import disconsented.anssrpg.server.perk.Slug;
+import disconsented.anssrpg.server.player.PlayerData;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;

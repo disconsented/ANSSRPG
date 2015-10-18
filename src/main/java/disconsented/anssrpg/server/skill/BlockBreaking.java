@@ -20,7 +20,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.skill;
+package disconsented.anssrpg.server.skill;
 /**
  * @author James
  * Handles when to add experience and blocking of events
@@ -29,19 +29,19 @@ package disconsented.anssrpg.skill;
 import java.util.ArrayList;
 import java.util.Map;
 
-import disconsented.anssrpg.common.*;
-import disconsented.anssrpg.objects.BNEP;
-import disconsented.anssrpg.objects.BNP;
-import disconsented.anssrpg.perk.BlockPerk;
+import disconsented.anssrpg.server.common.*;
+import disconsented.anssrpg.server.objects.BNEP;
+import disconsented.anssrpg.server.objects.BNP;
+import disconsented.anssrpg.server.perk.BlockPerk;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.util.FakePlayer;
-import disconsented.anssrpg.data.PerkStore;
-import disconsented.anssrpg.data.PlayerStore;
-import disconsented.anssrpg.data.SkillStore;
-import disconsented.anssrpg.handler.PlayerHandler;
-import disconsented.anssrpg.player.PlayerData;
-import disconsented.anssrpg.skill.objects.BlockSkill;
+import disconsented.anssrpg.server.data.PerkStore;
+import disconsented.anssrpg.server.data.PlayerStore;
+import disconsented.anssrpg.server.data.SkillStore;
+import disconsented.anssrpg.server.handler.PlayerHandler;
+import disconsented.anssrpg.server.player.PlayerData;
+import disconsented.anssrpg.server.skill.objects.BlockSkill;
 import net.minecraftforge.event.world.BlockEvent;
 
 public class BlockBreaking {

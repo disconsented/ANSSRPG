@@ -1,11 +1,11 @@
-package disconsented.anssrpg.task;
+package disconsented.anssrpg.server.task;
 
-import disconsented.anssrpg.handler.PlayerHandler;
+import disconsented.anssrpg.server.handler.PlayerHandler;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.potion.PotionEffect;
-import disconsented.anssrpg.perk.Slug;
+import disconsented.anssrpg.server.perk.Slug;
 
 public abstract class TaskTrackPlayer extends Task {
 

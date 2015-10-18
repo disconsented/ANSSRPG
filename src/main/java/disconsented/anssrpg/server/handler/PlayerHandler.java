@@ -20,22 +20,22 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.handler;
+package disconsented.anssrpg.server.handler;
 
-import disconsented.anssrpg.common.Settings;
-import disconsented.anssrpg.data.DataSave;
-import disconsented.anssrpg.data.PerkStore;
-import disconsented.anssrpg.data.PlayerStore;
-import disconsented.anssrpg.data.SkillStore;
-import disconsented.anssrpg.perk.ActivePerk;
-import disconsented.anssrpg.perk.Perk;
-import disconsented.anssrpg.perk.Requirement;
-import disconsented.anssrpg.perk.Requirement.Action;
-import disconsented.anssrpg.perk.Slug;
-import disconsented.anssrpg.player.PlayerData;
-import disconsented.anssrpg.skill.objects.Skill;
-import disconsented.anssrpg.skill.objects.ToolSkill;
-import disconsented.anssrpg.task.TaskTrackPlayer;
+import disconsented.anssrpg.server.common.Settings;
+import disconsented.anssrpg.server.data.DataSave;
+import disconsented.anssrpg.server.data.PerkStore;
+import disconsented.anssrpg.server.data.PlayerStore;
+import disconsented.anssrpg.server.data.SkillStore;
+import disconsented.anssrpg.server.perk.ActivePerk;
+import disconsented.anssrpg.server.perk.Perk;
+import disconsented.anssrpg.server.perk.Requirement;
+import disconsented.anssrpg.server.perk.Requirement.Action;
+import disconsented.anssrpg.server.perk.Slug;
+import disconsented.anssrpg.server.player.PlayerData;
+import disconsented.anssrpg.server.skill.objects.Skill;
+import disconsented.anssrpg.server.skill.objects.ToolSkill;
+import disconsented.anssrpg.server.task.TaskTrackPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
@@ -46,8 +46,6 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
-
-import javax.swing.text.html.parser.Entity;
 
 /**
  * @author Disconsented

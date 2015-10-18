@@ -21,7 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.config;
+package disconsented.anssrpg.server.config;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,7 +38,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import disconsented.anssrpg.common.Logging;
+import disconsented.anssrpg.server.common.Logging;
 
 /**
  * @author Disconsented, Abelistah

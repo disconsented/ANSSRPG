@@ -20,16 +20,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.task;
+package disconsented.anssrpg.server.task;
 
-import java.util.AbstractQueue;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Queue;
 
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import disconsented.anssrpg.common.Logging;
+import disconsented.anssrpg.server.common.Logging;
 
 public class TaskMaster{
 	protected TaskMaster(){}

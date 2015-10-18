@@ -19,7 +19,7 @@
  *
  */
 
-package disconsented.anssrpg.network;
+package disconsented.anssrpg.server.network;
 
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;

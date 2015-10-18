@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import disconsented.anssrpg.Main;
 import disconsented.anssrpg.client.Data;
 import disconsented.anssrpg.client.gui.components.ExpBox;
-import disconsented.anssrpg.network.Request;
+import disconsented.anssrpg.server.network.Request;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 

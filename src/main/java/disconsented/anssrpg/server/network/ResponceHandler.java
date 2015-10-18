@@ -20,13 +20,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.network;
+package disconsented.anssrpg.server.network;
 
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import disconsented.anssrpg.client.Data;
-import disconsented.anssrpg.common.Settings;
 
 public class ResponceHandler implements IMessageHandler<Responce, IMessage> {
 

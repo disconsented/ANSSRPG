@@ -24,8 +24,8 @@ package disconsented.anssrpg.client;
 
 import java.util.*;
 
-import disconsented.anssrpg.network.PerkInfo;
-import disconsented.anssrpg.network.SkillInfo;
+import disconsented.anssrpg.server.network.PerkInfo;
+import disconsented.anssrpg.server.network.SkillInfo;
 
 /**
  * Stores data that the client needs, populated as needed.

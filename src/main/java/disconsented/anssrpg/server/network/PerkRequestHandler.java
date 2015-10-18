@@ -19,13 +19,12 @@
  * /
  */
 
-package disconsented.anssrpg.network;
+package disconsented.anssrpg.server.network;
 
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import disconsented.anssrpg.handler.PlayerHandler;
-import net.minecraft.entity.player.EntityPlayerMP;
+import disconsented.anssrpg.server.handler.PlayerHandler;
 
 /**
  * Created by Disconsented on 6/07/2015.

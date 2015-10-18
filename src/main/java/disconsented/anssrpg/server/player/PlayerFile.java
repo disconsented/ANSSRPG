@@ -20,15 +20,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.player;
+package disconsented.anssrpg.server.player;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.common.Settings;
-import disconsented.anssrpg.data.DataSave;
-import disconsented.anssrpg.data.PlayerStore;
+import disconsented.anssrpg.server.common.Logging;
+import disconsented.anssrpg.server.common.Settings;
+import disconsented.anssrpg.server.data.PlayerStore;
 
 import java.io.*;
 

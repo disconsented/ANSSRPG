@@ -23,13 +23,10 @@ THE SOFTWARE.
 /**
  *
  */
-package disconsented.anssrpg.handler;
+package disconsented.anssrpg.server.handler;
 
-import disconsented.anssrpg.data.PerkStore;
-import disconsented.anssrpg.data.SkillStore;
-import disconsented.anssrpg.skill.objects.Skill;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import disconsented.anssrpg.server.data.SkillStore;
+import disconsented.anssrpg.server.skill.objects.Skill;
 
 /**
  * @author Disconsented

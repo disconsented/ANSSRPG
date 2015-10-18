@@ -21,12 +21,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.config;
+package disconsented.anssrpg.server.config;
 import com.google.gson.annotations.Expose;
 
-import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.data.PerkStore;
-import disconsented.anssrpg.perk.*;
+import disconsented.anssrpg.server.common.Logging;
+import disconsented.anssrpg.server.data.PerkStore;
+import disconsented.anssrpg.server.perk.*;
 
 import java.util.ArrayList;
 /**

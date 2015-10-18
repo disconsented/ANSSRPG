@@ -20,17 +20,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-package disconsented.anssrpg.commands;
+package disconsented.anssrpg.server.commands;
 
-import disconsented.anssrpg.common.Reference;
+import disconsented.anssrpg.server.common.Reference;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import net.minecraftforge.fml.common.gameevent.TickEvent.Type;
 
 public class ANSSRPG extends CommandBase {
     private final List aliases;

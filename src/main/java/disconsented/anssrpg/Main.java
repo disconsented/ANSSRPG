@@ -22,7 +22,7 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg;
 
-import disconsented.anssrpg.commands.GUIRegistry;
+import disconsented.anssrpg.server.commands.GUIRegistry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
@@ -36,23 +36,23 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import disconsented.anssrpg.commands.ANSSRPG;
-import disconsented.anssrpg.commands.Perks;
-import disconsented.anssrpg.commands.Skill;
-import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.common.Reference;
-import disconsented.anssrpg.common.Settings;
-import disconsented.anssrpg.config.JsonConfigHandler;
-import disconsented.anssrpg.data.PerkStore;
-import disconsented.anssrpg.data.PlayerStore;
-import disconsented.anssrpg.data.ToolRegistry;
-import disconsented.anssrpg.event.FMLBUS;
-import disconsented.anssrpg.event.ForgeBUS;
-import disconsented.anssrpg.handler.SkillHandler;
-import disconsented.anssrpg.network.Manager;
-import disconsented.anssrpg.player.PlayerData;
-import disconsented.anssrpg.player.PlayerFile;
-import disconsented.anssrpg.skill.objects.BlockSkill;
+import disconsented.anssrpg.server.commands.ANSSRPG;
+import disconsented.anssrpg.server.commands.Perks;
+import disconsented.anssrpg.server.commands.Skill;
+import disconsented.anssrpg.server.common.Logging;
+import disconsented.anssrpg.server.common.Reference;
+import disconsented.anssrpg.server.common.Settings;
+import disconsented.anssrpg.server.config.JsonConfigHandler;
+import disconsented.anssrpg.server.data.PerkStore;
+import disconsented.anssrpg.server.data.PlayerStore;
+import disconsented.anssrpg.server.data.ToolRegistry;
+import disconsented.anssrpg.server.event.FMLBUS;
+import disconsented.anssrpg.server.event.ForgeBUS;
+import disconsented.anssrpg.server.handler.SkillHandler;
+import disconsented.anssrpg.server.network.Manager;
+import disconsented.anssrpg.server.player.PlayerData;
+import disconsented.anssrpg.server.player.PlayerFile;
+import disconsented.anssrpg.server.skill.objects.BlockSkill;
 
 import java.util.Map;
 

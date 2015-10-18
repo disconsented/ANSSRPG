@@ -23,10 +23,10 @@ THE SOFTWARE.
 /**
  *
  */
-package disconsented.anssrpg.commands;
+package disconsented.anssrpg.server.commands;
 
-import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.common.Settings;
+import disconsented.anssrpg.server.common.Logging;
+import disconsented.anssrpg.server.common.Settings;
 import disconsented.anssrpg.client.gui.RegistryReader;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;

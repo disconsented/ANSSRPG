@@ -22,7 +22,7 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.client.gui.components;
 
-import disconsented.anssrpg.common.Reference;
+import disconsented.anssrpg.server.common.Reference;
 import net.minecraft.util.ResourceLocation;
 
 /**

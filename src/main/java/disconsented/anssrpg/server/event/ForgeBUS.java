@@ -20,16 +20,16 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.event;
+package disconsented.anssrpg.server.event;
 
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerOpenContainerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import disconsented.anssrpg.skill.BlockBreaking;
-import disconsented.anssrpg.skill.EntityDamage;
-import disconsented.anssrpg.skill.ItemCrafting;
+import disconsented.anssrpg.server.skill.BlockBreaking;
+import disconsented.anssrpg.server.skill.EntityDamage;
+import disconsented.anssrpg.server.skill.ItemCrafting;
 
 /**
  * @author Disconsented

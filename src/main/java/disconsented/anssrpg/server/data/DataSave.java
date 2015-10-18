@@ -20,7 +20,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.data;
+package disconsented.anssrpg.server.data;
 /**
  * Handles non-shut down saving and loading of player data
  * Holds the player hashmap
@@ -30,10 +30,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
-import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.common.Settings;
-import disconsented.anssrpg.player.PlayerData;
-import disconsented.anssrpg.player.PlayerFile;
+import disconsented.anssrpg.server.common.Logging;
+import disconsented.anssrpg.server.common.Settings;
+import disconsented.anssrpg.server.player.PlayerData;
+import disconsented.anssrpg.server.player.PlayerFile;
 
 /**
  * @author James

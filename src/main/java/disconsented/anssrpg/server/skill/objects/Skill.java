@@ -1,4 +1,4 @@
-package disconsented.anssrpg.skill.objects;
+package disconsented.anssrpg.server.skill.objects;
 /*The MIT License (MIT)
 
 Copyright (c) 2015 Disconsented, James Kerr

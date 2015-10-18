@@ -23,7 +23,7 @@ THE SOFTWARE.
 /**
  *
  */
-package disconsented.anssrpg.skill.objects;
+package disconsented.anssrpg.server.skill.objects;
 
 import java.util.ArrayList;
 
@@ -31,8 +31,8 @@ import net.minecraft.block.Block;
 
 import com.google.gson.annotations.Expose;
 
-import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.objects.BNEP;
+import disconsented.anssrpg.server.common.Logging;
+import disconsented.anssrpg.server.objects.BNEP;
 
 /**
  * @author Disconsented

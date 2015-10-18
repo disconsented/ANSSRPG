@@ -20,22 +20,19 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.perk;
+package disconsented.anssrpg.server.perk;
 
 import java.util.ArrayList;
 
-import disconsented.anssrpg.handler.PlayerHandler;
-import disconsented.anssrpg.player.PlayerData;
-import net.minecraft.entity.EntityLiving;
+import disconsented.anssrpg.server.handler.PlayerHandler;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.PotionEffect;
 
 import com.google.gson.annotations.Expose;
 
-import disconsented.anssrpg.common.PotionDefinition;
-import disconsented.anssrpg.task.TaskApplyPotion;
-import disconsented.anssrpg.task.TaskMaster;
+import disconsented.anssrpg.server.common.PotionDefinition;
+import disconsented.anssrpg.server.task.TaskApplyPotion;
+import disconsented.anssrpg.server.task.TaskMaster;
 
 /**
  * @author Disconsented

@@ -23,12 +23,12 @@ THE SOFTWARE.
 /**
  *
  */
-package disconsented.anssrpg.data;
+package disconsented.anssrpg.server.data;
 
-import disconsented.anssrpg.skill.objects.BlockSkill;
-import disconsented.anssrpg.skill.objects.EntitySkill;
-import disconsented.anssrpg.skill.objects.ItemSkill;
-import disconsented.anssrpg.skill.objects.Skill;
+import disconsented.anssrpg.server.skill.objects.BlockSkill;
+import disconsented.anssrpg.server.skill.objects.EntitySkill;
+import disconsented.anssrpg.server.skill.objects.ItemSkill;
+import disconsented.anssrpg.server.skill.objects.Skill;
 
 import java.util.ArrayList;
 

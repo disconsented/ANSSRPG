@@ -23,11 +23,11 @@ THE SOFTWARE.
 /**
  *
  */
-package disconsented.anssrpg.skill.objects;
+package disconsented.anssrpg.server.skill.objects;
 
 import com.google.gson.annotations.Expose;
-import disconsented.anssrpg.objects.INME;
-import disconsented.anssrpg.common.Logging;
+import disconsented.anssrpg.server.objects.INME;
+import disconsented.anssrpg.server.common.Logging;
 import net.minecraft.item.Item;
 
 import java.util.ArrayList;

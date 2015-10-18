@@ -23,7 +23,7 @@ THE SOFTWARE.
 /**
  *
  */
-package disconsented.anssrpg.perk;
+package disconsented.anssrpg.server.perk;
 
 import java.util.ArrayList;
 

@@ -20,15 +20,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.player;
+package disconsented.anssrpg.server.player;
 /**
  * @author James
  * For storing data about players
  */
 
-import disconsented.anssrpg.handler.SkillHandler;
-import disconsented.anssrpg.perk.Slug;
-import disconsented.anssrpg.skill.objects.Skill;
+import disconsented.anssrpg.server.handler.SkillHandler;
+import disconsented.anssrpg.server.perk.Slug;
+import disconsented.anssrpg.server.skill.objects.Skill;
 
 import java.util.ArrayList;
 import java.util.HashMap;

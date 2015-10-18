@@ -20,13 +20,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.task;
+package disconsented.anssrpg.server.task;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.perk.Slug;
+import disconsented.anssrpg.server.common.Logging;
+import disconsented.anssrpg.server.perk.Slug;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Type;
 
 /**
@@ -56,7 +56,7 @@ public class TaskApplyPotion extends TaskTrackPlayer{
     }
 
     /* (non-Javadoc)
-     * @see disconsented.anssrpg.task.Task#onTick(net.minecraftforge.fml.common.gameevent.TickEvent)
+     * @see disconsented.anssrpg.server.task.Task#onTick(net.minecraftforge.fml.common.gameevent.TickEvent)
      */
     @Override
     public void onTick(TickEvent event) {        

@@ -23,9 +23,9 @@ THE SOFTWARE.
 /**
  *
  */
-package disconsented.anssrpg.data;
+package disconsented.anssrpg.server.data;
 
-import disconsented.anssrpg.player.PlayerData;
+import disconsented.anssrpg.server.player.PlayerData;
 
 import java.util.HashMap;
 

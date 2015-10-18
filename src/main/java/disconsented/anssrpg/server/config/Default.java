@@ -20,15 +20,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.config;
+package disconsented.anssrpg.server.config;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import disconsented.anssrpg.common.PotionDefinition;
-import disconsented.anssrpg.objects.*;
-import disconsented.anssrpg.perk.*;
-import disconsented.anssrpg.skill.objects.*;
+import disconsented.anssrpg.server.common.PotionDefinition;
+import disconsented.anssrpg.server.objects.*;
+import disconsented.anssrpg.server.perk.*;
+import disconsented.anssrpg.server.skill.objects.*;
 
 /**
  * Contains the information for the default configs so it can be referenced as needed

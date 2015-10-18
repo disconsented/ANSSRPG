@@ -23,17 +23,16 @@ THE SOFTWARE.
 /**
  *
  */
-package disconsented.anssrpg.perk;
+package disconsented.anssrpg.server.perk;
 
 import java.util.ArrayList;
 
-import disconsented.anssrpg.objects.INM;
+import disconsented.anssrpg.server.objects.INM;
 import net.minecraft.item.Item;
 
 import com.google.gson.annotations.Expose;
 
-import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.objects.INME;
+import disconsented.anssrpg.server.common.Logging;
 
 public class ItemPerk extends Perk {
 

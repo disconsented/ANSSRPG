@@ -20,10 +20,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.data;
+package disconsented.anssrpg.server.data;
 
-import disconsented.anssrpg.objects.*;
-import disconsented.anssrpg.perk.*;
+import disconsented.anssrpg.server.objects.*;
+import disconsented.anssrpg.server.perk.*;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;

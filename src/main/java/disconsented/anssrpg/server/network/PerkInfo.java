@@ -20,12 +20,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.network;
+package disconsented.anssrpg.server.network;
 
-import disconsented.anssrpg.perk.Requirement.Action;
+import disconsented.anssrpg.server.perk.Requirement.Action;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import disconsented.anssrpg.perk.Requirement;
+import disconsented.anssrpg.server.perk.Requirement;
 import io.netty.buffer.ByteBuf;
 
 import java.util.ArrayList;
