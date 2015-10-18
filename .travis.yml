@@ -9,10 +9,7 @@ sudo: false
 install: true
 branches:
   only:
-    - master
     - build
-    - DEV
-    - 1.7.10
 
 before_install:
   - sed -i 's/git:/https:/g' .git/config
