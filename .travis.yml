@@ -9,9 +9,7 @@ sudo: false
 install: true
 branches:
   only:
-    - master
     - build
-    - DEV
 
 before_install:
   - sed -i 's/git:/https:/g' .git/config
