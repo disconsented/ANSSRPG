@@ -20,67 +20,78 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-package disconsented.anssrpg.server.commands;
+/**
+ *
+ */
+package disconsented.anssrpg.client.commands;
 
-import disconsented.anssrpg.server.common.Reference;
+import disconsented.anssrpg.server.common.Logging;
+import disconsented.anssrpg.server.common.Settings;
+import disconsented.anssrpg.client.gui.RegistryReader;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayerMP;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ANSSRPG extends CommandBase {
+/**
+ * @author Disconsented
+ */
+public class GUIRegistry extends CommandBase {
     private final List aliases;
 
-    public ANSSRPG() {
+    public GUIRegistry() {
         aliases = new ArrayList();
-        aliases.add("ANSSRPG");
-        aliases.add("anssrpg");
-        aliases.add("anss");
-        aliases.add("ANSS");
+        aliases.add("GUIRegistry");
+        aliases.add("REGISTRY");
+        aliases.add("registry");
+    }
+
+    @Override
+    public int compareTo(Object arg0) {
+        // TODO Auto-generated method stub
+        return 0;
     }
 
     @Override
     public String getCommandName() {
-        return "ANSSRPG";
+        // TODO Auto-generated method stub
+        return "GUIRegistry";
     }
 
     @Override
-    public String getCommandUsage(ICommandSender icommandsender) {
-        return "ANSSRPG -argument (-list perk/skill)";
+    public String getCommandUsage(ICommandSender p_71518_1_) {
+        // TODO Auto-generated method stub
+        return "GUIRegistry";
     }
 
     @Override
     public List getCommandAliases() {
+        // TODO Auto-generated method stub
         return aliases;
     }
 
     @Override
-    public void processCommand(ICommandSender player, String[] astring) {       
-        EntityPlayerMP playerMP = (EntityPlayerMP) player;
-        playerMP.openGui(Reference.ID, Integer.parseInt(astring[0]), null, 0, 0, 0);
+    public void processCommand(ICommandSender sender, String[] p_71515_2_) {
+        if (Settings.isServer) {
+            Logging.error("Tried to open the registry GUI on the server please report this");
+        } else {
+            RegistryReader.getInstance().show();
+        }
+
     }
 
     @Override
-    public boolean canCommandSenderUseCommand(ICommandSender icommandsender) {
+    public boolean canCommandSenderUseCommand(ICommandSender p_71519_1_) {
+        // TODO Auto-generated method stub
         return true;
     }
 
 
     @Override
-    public boolean isUsernameIndex(String[] astring, int i) {
+    public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_) {
+        // TODO Auto-generated method stub
         return false;
     }
 
-    @Override
-    public int compareTo(Object o) {
-        return 0;
-    }
-
-    @Override
-    public int getRequiredPermissionLevel() {
-        return 0;
-    }
 }
-

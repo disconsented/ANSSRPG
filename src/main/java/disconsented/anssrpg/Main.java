@@ -22,7 +22,7 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg;
 
-import disconsented.anssrpg.server.commands.GUIRegistry;
+import disconsented.anssrpg.client.commands.GUIRegistry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
@@ -36,7 +36,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import disconsented.anssrpg.server.commands.ANSSRPG;
+import disconsented.anssrpg.client.commands.ANSSRPG;
 import disconsented.anssrpg.server.commands.Perks;
 import disconsented.anssrpg.server.commands.Skill;
 import disconsented.anssrpg.server.common.Logging;
@@ -77,6 +77,7 @@ public class Main {
         } else {
             Settings.isServer = false;
             ClientCommandHandler.instance.registerCommand(new GUIRegistry());
+            ClientCommandHandler.instance.registerCommand(new ANSSRPG());
         }
         
     }
@@ -95,7 +96,6 @@ public class Main {
     @Mod.EventHandler
     public void serverLoad(FMLServerStartingEvent event) {
         event.registerServerCommand(new Perks());
-        event.registerServerCommand(new ANSSRPG());
         event.registerServerCommand(new Skill());
     }
 
