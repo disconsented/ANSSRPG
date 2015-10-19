@@ -22,7 +22,11 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg.client.commands;
 
+import disconsented.anssrpg.client.gui.GUIExperience;
+import disconsented.anssrpg.client.gui.GUIPerk;
+import disconsented.anssrpg.client.gui.GUIStatus;
 import disconsented.anssrpg.server.common.Reference;
+import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -57,9 +61,18 @@ public class ANSSRPG extends CommandBase {
     }
 
     @Override
-    public void processCommand(ICommandSender player, String[] astring) {       
-        EntityPlayerMP playerMP = (EntityPlayerMP) player;
-        playerMP.openGui(Reference.ID, Integer.parseInt(astring[0]), null, 0, 0, 0);
+    public void processCommand(ICommandSender player, String[] id) {
+        switch (id[0]){
+            case "0":
+                Minecraft.getMinecraft().displayGuiScreen(new GUIExperience());
+                break;
+            case "1":
+                Minecraft.getMinecraft().displayGuiScreen(new GUIPerk());
+                break;
+            case "2":
+                Minecraft.getMinecraft().displayGuiScreen(new GUIStatus());
+                break;
+        }
     }
 
     @Override
@@ -75,11 +88,6 @@ public class ANSSRPG extends CommandBase {
 
     @Override
     public int compareTo(Object o) {
-        return 0;
-    }
-
-    @Override
-    public int getRequiredPermissionLevel() {
         return 0;
     }
 }
