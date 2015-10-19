@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import disconsented.anssrpg.Main;
 import disconsented.anssrpg.client.Data;
 import disconsented.anssrpg.client.gui.components.ExpBox;
+import disconsented.anssrpg.server.common.Logging;
 import disconsented.anssrpg.server.network.Request;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -42,6 +43,7 @@ public class GUIExperience extends GuiScreen {
     
     @Override
     public void initGui(){
+        Logging.debug("Init");
         int x = this.width /2;
     	Data.skillInfo.clear();
     	Data.skillInfoList.clear();
@@ -62,6 +64,7 @@ public class GUIExperience extends GuiScreen {
     @Override
     public void drawScreen(int x1, int x2, float x3)
     {
+        Logging.debug("Draw");
         this.drawDefaultBackground();       
 
         int k;
