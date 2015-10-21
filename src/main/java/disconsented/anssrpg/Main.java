@@ -22,6 +22,7 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg;
 
+import disconsented.anssrpg.client.ClientTick;
 import disconsented.anssrpg.client.commands.GUIRegistry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.client.ClientCommandHandler;
@@ -89,6 +90,7 @@ public class Main {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, Main.proxy);
         Main.proxy.registerRenderers();
         MinecraftForge.EVENT_BUS.register(new ForgeBUS());
+        FMLCommonHandler.instance().bus().register(new ClientTick());
         FMLCommonHandler.instance().bus().register(new FMLBUS());
         ToolRegistry.init();
     }

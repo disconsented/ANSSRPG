@@ -19,27 +19,24 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+ */
 package disconsented.anssrpg.client;
 
-import java.util.*;
 
-import disconsented.anssrpg.server.network.PerkInfo;
-import disconsented.anssrpg.server.network.SkillInfo;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.Minecraft;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 
-/**
- * Stores data that the client needs, populated as needed.
- * @author Disconsented
- *
- */
-public class Data {
-	public static HashMap<String, SkillInfo> skillInfo = new HashMap<String, SkillInfo>();
-	public static ArrayList<SkillInfo> skillInfoList = new ArrayList<SkillInfo>();
-	public static LinkedHashMap<String, PerkInfo> perkInfo = new LinkedHashMap<String, PerkInfo>(); //Ensures that perks are all unique, allows for easy overridng
-	public static String statusMessage = "";
-	public static GuiScreen screenToOpen = null;
-    public static int ticksLeft = 0;
-	
+public class ClientTick {
 
+    @SubscribeEvent
+    public void clientTickEvent(ClientTickEvent event){
+        if(Data.screenToOpen != null && Data.ticksLeft  == 0){
+            Minecraft.getMinecraft().displayGuiScreen(Data.screenToOpen);
+            Data.screenToOpen = null;
+        } else if(Data.ticksLeft > 0) {
+            Data.ticksLeft--;
+        }
+
+    }
 }

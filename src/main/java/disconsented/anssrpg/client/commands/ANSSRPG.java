@@ -22,6 +22,7 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg.client.commands;
 
+import disconsented.anssrpg.client.Data;
 import disconsented.anssrpg.client.gui.GUIExperience;
 import disconsented.anssrpg.client.gui.GUIPerk;
 import disconsented.anssrpg.client.gui.GUIStatus;
@@ -64,13 +65,16 @@ public class ANSSRPG extends CommandBase {
     public void processCommand(ICommandSender player, String[] id) {
         switch (id[0]){
             case "0":
-                Minecraft.getMinecraft().displayGuiScreen(new GUIExperience());
+                Data.ticksLeft = 2;
+                Data.screenToOpen = new GUIExperience();
                 break;
             case "1":
-                Minecraft.getMinecraft().displayGuiScreen(new GUIPerk());
+                Data.ticksLeft = 2;
+                Data.screenToOpen = new GUIPerk();
                 break;
             case "2":
-                Minecraft.getMinecraft().displayGuiScreen(new GUIStatus());
+                Data.ticksLeft = 2;
+                Data.screenToOpen = new GUIStatus();
                 break;
         }
     }
