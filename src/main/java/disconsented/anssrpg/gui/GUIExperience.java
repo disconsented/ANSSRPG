@@ -46,6 +46,7 @@ public class GUIExperience extends GuiScreen {
         Data.skillInfo.clear();
         Data.skillInfoList.clear();
         page = 1;
+        boxes.clear();
         boxCount = 0;
         Main.snw.sendToServer(new Request(REQUEST.SKILLS));
         this.buttonList.add(new GuiButton(0, x, 76 * 3, 40, 20, "Next"));
@@ -63,7 +64,7 @@ public class GUIExperience extends GuiScreen {
     @Override
     public void drawScreen(int x, int y, float renderPartialTick) {
         drawDefaultBackground();
-        boxes.clear();
+        this.buttonList.clear();
 
         super.drawScreen(x, y, renderPartialTick);
 
@@ -98,18 +99,18 @@ public class GUIExperience extends GuiScreen {
     @Override
     protected void actionPerformed(GuiButton button) {
         switch (button.id) {
-            case 0:
+            case 0: {
                 if (page < Math.round(Data.skillInfoList.size() / 6)) {
                     page++;
                 }
                 break;
-            case 1:
+            }
+            case 1: {
                 if (page > 1) {
                     page--;
                 }
                 break;
+            }
         }
     }
-
-
 }

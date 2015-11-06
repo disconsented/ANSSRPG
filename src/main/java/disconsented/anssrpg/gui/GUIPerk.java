@@ -37,10 +37,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author Disconsented
- */
 public class GUIPerk extends GuiScreen {
+
     private PerkList perkList;
     private PerkControls perkControls;
     private int page = 0;
@@ -51,7 +49,7 @@ public class GUIPerk extends GuiScreen {
     @Override
     @SuppressWarnings("unchecked")
     public void initGui() {//176
-        this.buttonList = new <GuiButton>ArrayList();
+        this.buttonList.clear();
 
         //Clear park data on the client and request new info
         Data.perkInfo.clear();
