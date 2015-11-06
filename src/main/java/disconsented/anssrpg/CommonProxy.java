@@ -32,6 +32,10 @@ import net.minecraft.world.World;
 
 public class CommonProxy implements IGuiHandler {
 
+    public void init() {
+
+    }
+
     public void registerRenderers() {
 
     }

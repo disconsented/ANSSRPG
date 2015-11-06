@@ -84,6 +84,7 @@ public class Main {
         MinecraftForge.EVENT_BUS.register(new disconsented.anssrpg.event.EventHandler.ForgeBUS());
         FMLCommonHandler.instance().bus().register(new disconsented.anssrpg.event.EventHandler.FMLBUS());
         ToolRegistry.init();
+        proxy.init();
     }
 
     @EventHandler

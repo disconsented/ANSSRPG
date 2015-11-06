@@ -22,7 +22,15 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg.client;
 
-public class ClientProxy extends disconsented.anssrpg.CommonProxy {
+import cpw.mods.fml.common.FMLCommonHandler;
+import disconsented.anssrpg.CommonProxy;
+
+public class ClientProxy extends CommonProxy {
+
+    @Override
+    public void init() {
+        FMLCommonHandler.instance().bus().register(new ClientTick());
+    }
 
     @Override
     public void registerRenderers() {

@@ -24,6 +24,7 @@ package disconsented.anssrpg.client;
 
 import disconsented.anssrpg.network.PerkInfo;
 import disconsented.anssrpg.network.SkillInfo;
+import net.minecraft.client.gui.GuiScreen;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,4 +39,6 @@ public class Data {
     public static ArrayList<SkillInfo> skillInfoList = new ArrayList<SkillInfo>();
     public static LinkedHashMap<String, PerkInfo> perkInfo = new LinkedHashMap<String, PerkInfo>(); //Ensures that perks are all unique, allows for easy overridng
     public static String statusMessage = "";
+    public static GuiScreen screenToOpen = null;
+    public static int ticksLeft = 0;
 }

@@ -22,7 +22,11 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg.commands;
 
+import disconsented.anssrpg.client.Data;
 import disconsented.anssrpg.common.Reference;
+import disconsented.anssrpg.gui.GUIExperience;
+import disconsented.anssrpg.gui.GUIPerk;
+import disconsented.anssrpg.gui.GUIStatus;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -60,7 +64,20 @@ public class ANSSRPG extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender commandSender, String[] args) {
-        ((EntityPlayer)commandSender).openGui(Reference.ID, Integer.parseInt(args[0]), null, 0, 0, 0);
+        switch (args[0]){
+            case "0":
+                Data.ticksLeft = 2;
+                Data.screenToOpen = new GUIExperience();
+                break;
+            case "1":
+                Data.ticksLeft = 2;
+                Data.screenToOpen = new GUIPerk();
+                break;
+            case "2":
+                Data.ticksLeft = 2;
+                Data.screenToOpen = new GUIStatus();
+                break;
+        }
     }
 
     @Override
