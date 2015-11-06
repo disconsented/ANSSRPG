@@ -23,6 +23,7 @@ THE SOFTWARE.
 package disconsented.anssrpg.handler;
 
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import disconsented.anssrpg.common.ChatUtil;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.data.PerkStore;
@@ -66,7 +67,7 @@ public final class PlayerHandler {
      * @param player
      * @return the result
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "SuspiciousMethodCalls"})
     public static String addPerk(String perkSlug, PlayerData player) {
         Perk perk = PerkStore.getPerk(perkSlug);
         if (perk == null) {
@@ -118,6 +119,7 @@ public final class PlayerHandler {
     }
 
     public static void awardXP(EntityPlayer playerEntity, Skill skill, int exp) {
+        ArrayList<String> msgToSend = new ArrayList<>();
         PlayerData player = getPlayer(playerEntity.getUniqueID().toString());
         Integer cacheExp = player.getSkillExp().get(skill.name);
         long levelOld;
@@ -135,19 +137,18 @@ public final class PlayerHandler {
             player.getSkillExp().put(skill.name, exp);
             levelNew = SkillHandler.calculateLevelForExp(skill, exp);
         }
-        playerEntity.addChatComponentMessage(new ChatComponentText("You have been awared with " + exp + " exp"));
-        /* Check for level up
-         * If leveled up send info
-         */
+        msgToSend.add("+" + exp + "exp -> " + player.getSkillExp().get(skill.name) + " total");
 
         if (levelNew > levelOld) {
-            playerEntity.addChatComponentMessage(new ChatComponentText("Your skill " + skill.name + " has leveled up to " + levelNew));
+            msgToSend.add("Your skill " + skill.name + " has leveled up to " + levelNew);
 
             if (Settings.getPointsMode() == 1) {
                 player.setPoints(player.getPoints() + 1);
-                playerEntity.addChatComponentMessage(new ChatComponentText("You have recieved 1 perk point for leveling up"));
+                msgToSend.add("You have recieved 1 perk point for leveling up");
             }
         }
+//        if (msgToSend.size() > 1)
+            ChatUtil.sendNoSpamClient(msgToSend);
     }
 
     public static void awardToolXP(EntityPlayer playerEntity, ToolSkill skill, int exp) {

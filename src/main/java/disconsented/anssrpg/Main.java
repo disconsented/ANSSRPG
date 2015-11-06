@@ -43,6 +43,7 @@ import disconsented.anssrpg.data.PlayerStore;
 import disconsented.anssrpg.data.ToolRegistry;
 import disconsented.anssrpg.handler.SkillHandler;
 import disconsented.anssrpg.network.Manager;
+import disconsented.anssrpg.network.PacketHandler;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.player.PlayerFile;
 import disconsented.anssrpg.skill.objects.BlockSkill;
@@ -74,6 +75,7 @@ public class Main {
             ClientCommandHandler.instance.registerCommand(new GUIRegistry());
         }
 
+        PacketHandler.init();
     }
 
     @EventHandler

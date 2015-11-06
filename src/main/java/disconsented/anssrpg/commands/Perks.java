@@ -25,6 +25,7 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.commands;
 
+import disconsented.anssrpg.common.ChatUtil;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.handler.PlayerHandler;
@@ -132,7 +133,7 @@ public class Perks extends CommandBase {
                 break;
         }
 
-        player.addChatMessage(new ChatComponentText(toReturn));
+        ChatUtil.sendNoSpamClient(toReturn);
     }
 
     @Override

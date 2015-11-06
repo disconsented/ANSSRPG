@@ -63,9 +63,6 @@ public class BlockBreaking {
         }
         if (event.getPlayer() instanceof EntityPlayerMP) {
             EntityPlayerMP player = (EntityPlayerMP) event.getPlayer();
-            System.out.println(player.getEntityId());
-            player.setEntityId(20);
-            System.out.println(player.getEntityId() + "|");
             PlayerData playerData = PlayerStore.getPlayer(player);
             ArrayList<BlockPerk> perkList = PerkStore.getPerks(event.block);
             ArrayList<BlockSkill> skillStore = SkillStore.getBlockSkill();
