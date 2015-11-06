@@ -24,20 +24,20 @@ package disconsented.anssrpg.network;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import io.netty.buffer.ByteBuf;
+import lombok.NoArgsConstructor;
 
-/**
- * Created by Disconsented on 6/07/2015.
- */
+@NoArgsConstructor
 public class PerkRequest implements IMessage {
 
-    public PerkRequest(){}
-    public PerkRequest(String slug){
+    public String slug;
+
+    public PerkRequest(String slug) {
         this.slug = slug;
     }
-    public String slug;
+
     @Override
     public void fromBytes(ByteBuf buf) {
-       slug = ByteBufUtils.readUTF8String(buf);
+        slug = ByteBufUtils.readUTF8String(buf);
 
     }
 

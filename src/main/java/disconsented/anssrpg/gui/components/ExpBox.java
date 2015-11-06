@@ -22,86 +22,84 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.gui.components;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.client.FMLClientHandler;
 import disconsented.anssrpg.common.Reference;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * @author Disconsented
- *
  */
-public class ExpBox extends ComponentBase{
-    //176x76
-    private int x;
-    private int y;
+public class ExpBox extends ComponentBase {
+    
     public int expCurrent = 0;
     public int expRequired = 0;
-    private float currentPercent = 0;
     public int expOld = 0;
     public int level = 0;
     public String name = "Not A Name";
+    //176x76
+    private int x;
+    private int y;
+    private float currentPercent = 0;
     private ResourceLocation texture = new ResourceLocation(Reference.ID, "expbox.png");
     private ResourceLocation greenTexture = new ResourceLocation(Reference.ID, "green.png");
     private FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
-    
+
     /**
-     * 
      * @param x
      * @param y
      */
-    public ExpBox(int x, int y){
+    public ExpBox(int x, int y) {
         this.x = x;
         this.y = y;
     }
+
     @Override
-    public void draw(){
+    public void draw() {
         this.calcPercentage();
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
         drawTexturedModalRectClone(x, y, 0, 0, 256, 256);
 //        * Name box -  9,9-106x12
-        this.drawString(fontRenderer, name, this.x + 9, this.y + 11, 0xBEFF00);        
+        this.drawString(fontRenderer, name, this.x + 9, this.y + 11, 0xBEFF00);
 //        * Level box - 132,9-32x12
-        this.drawString(fontRenderer, level+"->"+(level+1), 132 + this.x, this.y + 11, 0xBEFF00);  
+        this.drawString(fontRenderer, level + "->" + (level + 1), 132 + this.x, this.y + 11, 0xBEFF00);
 //        * 0% - 15,38-20x12
-        this.drawString(fontRenderer, "0%", 14 + this.x, this.y + 40, 0xBEFF00);  
+        this.drawString(fontRenderer, "0%", 14 + this.x, this.y + 40, 0xBEFF00);
 //        * 100% - 144,38-20x12
-        this.drawString(fontRenderer, "100%", 144 + this.x, this.y + 40, 0xBEFF00);  
+        this.drawString(fontRenderer, "100%", 144 + this.x, this.y + 40, 0xBEFF00);
 //        * numerical exp box - 41,56-71x12
-        this.drawString(fontRenderer, expCurrent+"", 41 + this.x, this.y + 58, 0xBEFF00); 
+        this.drawString(fontRenderer, expCurrent + "", 41 + this.x, this.y + 58, 0xBEFF00);
 //        * percentile exp box - 118,56-20x12
-        this.drawString(fontRenderer, currentPercent+"%", 118 + this.x, this.y + 58, 0xBEFF00); 
+        this.drawString(fontRenderer, currentPercent + "%", 118 + this.x, this.y + 58, 0xBEFF00);
 //        * bar box - 40,36-99x16
-        bindAndDrawTexture(greenTexture, x+40, y+36, (int) currentPercent, 16);
+        bindAndDrawTexture(greenTexture, x + 40, y + 36, (int) currentPercent, 16);
     }
 
-    public void calcPercentage(){
-        if (this.expOld < 0)
-        {
+    public void calcPercentage() {
+        if (this.expOld < 0) {
             this.expOld = 0;
         }
         int temp = ((expCurrent - expOld) * 100) / (expRequired - expOld);
-        if(temp >= 0 && temp <= 100) {
+        if (temp >= 0 && temp <= 100) {
             this.currentPercent = temp;
         } else {
             this.currentPercent = 0;
         }
 
     }
-   private void drawTexturedModalRectClone(int x, int y, int p_73729_3_, int p_73729_4_, int width, int height)
-    {
+
+    private void drawTexturedModalRectClone(int x, int y, int p_73729_3_, int p_73729_4_, int width, int height) {
         float f = 0.00390625F;
         float f1 = 0.00390625F;
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         Tessellator.instance.setColorRGBA_F(1F, 1F, 1F, 1F);
-        tessellator.addVertexWithUV((double)(x + 0), (double)(y + height), (double)this.zLevel, (double)((float)(p_73729_3_ + 0) * f), (double)((float)(p_73729_4_ + height) * f1));
-        tessellator.addVertexWithUV((double)(x + width), (double)(y + height), (double)this.zLevel, (double)((float)(p_73729_3_ + width) * f), (double)((float)(p_73729_4_ + height) * f1));
-        tessellator.addVertexWithUV((double)(x + width), (double)(y + 0), (double)this.zLevel, (double)((float)(p_73729_3_ + width) * f), (double)((float)(p_73729_4_ + 0) * f1));
-        tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), (double)this.zLevel, (double)((float)(p_73729_3_ + 0) * f), (double)((float)(p_73729_4_ + 0) * f1));
+        tessellator.addVertexWithUV((double) (x), (double) (y + height), (double) this.zLevel, (double) ((float) (p_73729_3_) * f), (double) ((float) (p_73729_4_ + height) * f1));
+        tessellator.addVertexWithUV((double) (x + width), (double) (y + height), (double) this.zLevel, (double) ((float) (p_73729_3_ + width) * f), (double) ((float) (p_73729_4_ + height) * f1));
+        tessellator.addVertexWithUV((double) (x + width), (double) (y), (double) this.zLevel, (double) ((float) (p_73729_3_ + width) * f), (double) ((float) (p_73729_4_) * f1));
+        tessellator.addVertexWithUV((double) (x), (double) (y), (double) this.zLevel, (double) ((float) (p_73729_3_) * f), (double) ((float) (p_73729_4_) * f1));
         tessellator.draw();
     }
 }

@@ -23,22 +23,13 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.config;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.Writer;
-import java.lang.reflect.Type;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-
 import disconsented.anssrpg.common.Logging;
+
+import java.io.*;
+import java.lang.reflect.Type;
 
 /**
  * @author Disconsented, Abelistah
@@ -46,9 +37,10 @@ import disconsented.anssrpg.common.Logging;
  */
 
 public class JsonConfigHandler {
-    private static File skillFile = new File("config/ANSSRPG", "skill.cfg");
-    private static File perkFile = new File("config/ANSSRPG", "perk.cfg");
-    private static File configFileLocation = new File("config/ANSSRPG");
+
+    private static File configFileLocation = new File("config/anssrpg");
+    private static File skillFile = new File(configFileLocation, "skill.cfg");
+    private static File perkFile = new File(configFileLocation, "perk.cfg");
 
     public static void createPerkAndSkill() {
         createSkillConfig(null);
@@ -57,8 +49,6 @@ public class JsonConfigHandler {
 
     /**
      * Writes the perkStore to disk, if it is null then it will create the default one
-     *
-     * @param perkStore
      */
     public static void createPerkConfig(PerkContainer perkStore) {
         if (perkStore == null) {
@@ -81,8 +71,6 @@ public class JsonConfigHandler {
 
     /**
      * Writes the skillStore to disk, if skillStore is null it will create the default one
-     *
-     * @param skillStore
      */
     public static void createSkillConfig(SkillContainer skillStore) {
         if (skillStore == null) {
@@ -162,6 +150,6 @@ public class JsonConfigHandler {
         perkContainer.touchUp();
         skillContainer.touchUp();
         JsonConfigHandler.createPerkConfig(perkContainer);
-        JsonConfigHandler.createSkillConfig(skillContainer);        
+        JsonConfigHandler.createSkillConfig(skillContainer);
     }
 }

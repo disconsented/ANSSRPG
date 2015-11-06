@@ -25,14 +25,11 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import disconsented.anssrpg.handler.PlayerHandler;
-import net.minecraft.entity.player.EntityPlayerMP;
 
-/**
- * Created by Disconsented on 6/07/2015.
- */
 public class PerkRequestHandler implements IMessageHandler<PerkRequest, IMessage> {
+
     @Override
     public IMessage onMessage(PerkRequest message, MessageContext ctx) {
-                return new Responce(PlayerHandler.addPerk(message.slug, (EntityPlayerMP)ctx.getServerHandler().playerEntity));
+        return new Response(PlayerHandler.addPerk(message.slug, ctx.getServerHandler().playerEntity));
     }
 }

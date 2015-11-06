@@ -25,26 +25,21 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.perk;
 
-import java.util.ArrayList;
-
-import net.minecraft.item.Item;
-
 import com.google.gson.annotations.Expose;
-
 import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.common.ObjectPerkDefinition;
+import lombok.NoArgsConstructor;
+import net.minecraft.item.Item;
 
+import java.util.ArrayList;
+
+@NoArgsConstructor
 public class ItemPerk extends Perk {
 
     @Expose
     public ArrayList<ObjectPerkDefinition<Item>> items = new ArrayList<ObjectPerkDefinition<Item>>();
 
-    public ItemPerk() {
-        super();
-    }
-
-    public ItemPerk(String name, ArrayList<Requirement> requirements,
-                    String description, int pointCost, ArrayList<ObjectPerkDefinition<Item>> items) {
+    public ItemPerk(String name, ArrayList<Requirement> requirements, String description, int pointCost, ArrayList<ObjectPerkDefinition<Item>> items) {
         super(name, requirements, description, pointCost);
         this.items = items;
     }
@@ -52,9 +47,9 @@ public class ItemPerk extends Perk {
     @Override
     public void searchObject() {
         ArrayList<ObjectPerkDefinition<Item>> initialised = new ArrayList<ObjectPerkDefinition<Item>>();
-        for(ObjectPerkDefinition object : items){
+        for (ObjectPerkDefinition object : items) {
             object.object = Item.itemRegistry.getObject(object.name);
-            if (object.object != null){
+            if (object.object != null) {
                 Logging.debug(object.name + " has been found. Passing on.");
                 initialised.add(object);
             } else {
@@ -63,5 +58,5 @@ public class ItemPerk extends Perk {
         }
         this.items = initialised;
     }
-    
+
 }

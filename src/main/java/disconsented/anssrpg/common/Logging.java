@@ -30,17 +30,17 @@ public class Logging {
     private static Logger logger = LogManager.getLogger("ANSSRPG");
 
     public static void info(Object info) {
-        if (Settings.getInstance().getLogging())
+        if (Settings.isLoggingEnabled())
             logger.info(info);
     }
 
     public static void error(Object error) {
-        if (Settings.getInstance().getLogging())
+        if (Settings.isLoggingEnabled())
             logger.info(error);
     }
 
     public static void debug(Object debug) {
-        if (Settings.getInstance().getLogging() && Settings.getInstance().getDebug())
+        if (Settings.isLoggingEnabled() && Settings.isDebugEnabled())
             logger.info(debug);
     }
 

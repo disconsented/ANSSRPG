@@ -23,7 +23,6 @@ THE SOFTWARE.
 package disconsented.anssrpg.perk;
 
 import com.google.gson.annotations.Expose;
-
 import disconsented.anssrpg.common.Utils;
 
 /**
@@ -45,6 +44,7 @@ public class Requirement {
     public String name;
     @Expose
     public String extraData;
+
     public Requirement(Action action, String name, String extraData) {
         this.action = action;
         this.name = name;
@@ -55,5 +55,11 @@ public class Requirement {
         return Utils.Tools.stringToSlug(name);
     }
 
-    public enum Action {HAVE, DONT, LEVEL_EQUALS, LEVEL_GREATER, LEVEL_LESS}
+    public enum Action {
+        HAVE,
+        DONT,
+        LEVEL_EQUALS,
+        LEVEL_GREATER,
+        LEVEL_LESS
+    }
 }

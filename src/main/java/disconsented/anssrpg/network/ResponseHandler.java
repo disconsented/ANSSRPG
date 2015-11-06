@@ -20,15 +20,18 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.helper;
+package disconsented.anssrpg.network;
 
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import disconsented.anssrpg.client.Data;
 
-public class Color {
-    public static int black = 0xFF000000;
-    public static int white = 0xFFFFFFFF;
-    public static int greyLight = 0xFFC6C6C6;
-    public static int greyDark = 0xFF8B8B8B;
-    public static int greyDeep = 0xFF373737;
-    public static int brownPaper = 0xFFCAAF7A;
+public class ResponseHandler implements IMessageHandler<Response, IMessage> {
 
+    @Override
+    public IMessage onMessage(Response message, MessageContext ctx) {
+        Data.statusMessage = message.responce;
+        return null;
+    }
 }

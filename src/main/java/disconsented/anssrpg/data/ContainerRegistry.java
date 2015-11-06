@@ -24,14 +24,11 @@ package disconsented.anssrpg.data;
 
 import java.util.HashMap;
 
-/**
- * @author Disconsented
- *
- */
 public class ContainerRegistry {
-    public HashMap<String,Class> container = new HashMap<String,Class>();
-    public static void init(){
-        
+
+    public HashMap<String, Class> container = new HashMap<String, Class>();
+
+    public static void init() {
+
     }
-    
 }

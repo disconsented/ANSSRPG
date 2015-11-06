@@ -22,7 +22,6 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg.gui;
 
-import disconsented.anssrpg.common.Logging;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityList;
 import net.minecraft.item.Item;
@@ -32,13 +31,13 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Created by j on 3/09/2015.
  */
-public class RegistryReader{
+public class RegistryReader {
+    private static RegistryReader instance = null;
     private JPanel panel1;
     private JTabbedPane tabbedPane1;
     private JList listItem;
@@ -50,8 +49,8 @@ public class RegistryReader{
     private ArrayList<String> rawItems;
     private ArrayList<String> rawBlocks;
     private ArrayList<String> rawEntities;
-    private static RegistryReader instance = null;
-    private RegistryReader(){
+
+    private RegistryReader() {
         frame = new JFrame("Minecraft Registry Reader");
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -85,25 +84,26 @@ public class RegistryReader{
 
 
     }
-    public static RegistryReader getInstance(){
-        if (instance == null){
+
+    public static RegistryReader getInstance() {
+        if (instance == null) {
             instance = new RegistryReader();
         }
         return instance;
     }
 
-    public void toggleShow(){
+    public void toggleShow() {
         frame.setVisible(!frame.isShowing());
     }
 
-    public void show(){
+    public void show() {
         frame.setVisible(true);
     }
 
-    private void updateDisplayedLists(){
+    private void updateDisplayedLists() {
         String query = textFieldSearch.getText();
         Pattern p = Pattern.compile(query);
-        if(p == null)
+        if (p == null)
             return;
 
         ArrayList<String> filteredItems = new ArrayList<>();
@@ -121,13 +121,14 @@ public class RegistryReader{
 
     /**
      * Generic method for filtering items from one list into another
+     *
      * @param source
      * @param pattern
      * @param destination
      */
-    private void filter(ArrayList<String> source, Pattern pattern, ArrayList<String> destination){
-        for(String item: source){
-            if(pattern.matcher(item).find()){
+    private void filter(ArrayList<String> source, Pattern pattern, ArrayList<String> destination) {
+        for (String item : source) {
+            if (pattern.matcher(item).find()) {
                 destination.add(item);
             }
         }

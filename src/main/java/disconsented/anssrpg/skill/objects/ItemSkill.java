@@ -25,14 +25,12 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.skill.objects;
 
-import java.util.ArrayList;
-
-import net.minecraft.item.Item;
-
 import com.google.gson.annotations.Expose;
-
 import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.common.Quad;
+import net.minecraft.item.Item;
+
+import java.util.ArrayList;
 
 /**
  * @author Disconsented
@@ -44,18 +42,18 @@ public class ItemSkill extends Skill {
 
     @Override
     public void touchUp() {
-        
+
         ArrayList<Quad> initalised = new ArrayList<Quad>();
         for (Quad object : exp) {
             object.object = (Item) Item.itemRegistry.getObject(object.name);
-            if (object.object != null){
-                Logging.debug(object.name+" has been found. Passing on!");
+            if (object.object != null) {
+                Logging.debug(object.name + " has been found. Passing on!");
                 initalised.add(object);
             } else {
-                Logging.error(object.name+" could not be found. Ignoring!");
+                Logging.error(object.name + " could not be found. Ignoring!");
             }
         }
-        
+
     }
 
 }

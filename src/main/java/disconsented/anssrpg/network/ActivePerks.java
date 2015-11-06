@@ -24,23 +24,25 @@ package disconsented.anssrpg.network;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import disconsented.anssrpg.perk.ActivePerk;
 import io.netty.buffer.ByteBuf;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 
-/**
- * Created by j on 30/08/2015.
- */
+@NoArgsConstructor
 public class ActivePerks implements IMessage {
+
     public ArrayList<String> activePerks;
-    public ActivePerks(){}
-    public ActivePerks(ArrayList<String> activePerks){this.activePerks = activePerks;}
+
+    public ActivePerks(ArrayList<String> activePerks) {
+        this.activePerks = activePerks;
+    }
+
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeInt(activePerks.size());
         for (String string : activePerks)
-        ByteBufUtils.writeUTF8String(buf, string);
+            ByteBufUtils.writeUTF8String(buf, string);
     }
 
     @Override

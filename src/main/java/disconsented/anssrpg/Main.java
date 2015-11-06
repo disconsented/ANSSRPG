@@ -22,25 +22,16 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg;
 
-import java.util.Map.Entry;
-
-import disconsented.anssrpg.commands.GUIRegistry;
-import net.minecraft.server.MinecraftServer;
-import net.minecraftforge.client.ClientCommandHandler;
-import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.event.FMLServerStoppingEvent;
+import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import disconsented.anssrpg.commands.ANSSRPG;
+import disconsented.anssrpg.commands.GUIRegistry;
 import disconsented.anssrpg.commands.Perks;
 import disconsented.anssrpg.commands.Skill;
 import disconsented.anssrpg.common.Logging;
@@ -50,47 +41,48 @@ import disconsented.anssrpg.config.JsonConfigHandler;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.data.PlayerStore;
 import disconsented.anssrpg.data.ToolRegistry;
-import disconsented.anssrpg.event.FMLBUS;
-import disconsented.anssrpg.event.ForgeBUS;
 import disconsented.anssrpg.handler.SkillHandler;
 import disconsented.anssrpg.network.Manager;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.player.PlayerFile;
 import disconsented.anssrpg.skill.objects.BlockSkill;
+import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.client.ClientCommandHandler;
+import net.minecraftforge.common.MinecraftForge;
+
+import java.io.File;
+import java.util.Map.Entry;
 
 @Mod(modid = Reference.ID, name = Reference.NAME, version = Reference.VERSION, acceptableRemoteVersions = "*")
 public class Main {
+
     @Instance(value = Reference.ID)
     public static Main instance;
 
     @SidedProxy(clientSide = Reference.CLIENTPROXY, serverSide = Reference.COMMONPROXY)
-    public static CommonProxy proxy;//DONT TOUCH THIS
+    public static CommonProxy proxy;
 
     public static SimpleNetworkWrapper snw;
 
-    private Settings settings = Settings.getInstance();
-
-
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) throws Exception {
-        settings.load(event);
+        Settings.init(new File(event.getModConfigurationDirectory() + "/anssrpg/", Reference.ID + ".cfg"));
         if (MinecraftServer.getServer() != null && MinecraftServer.getServer().isDedicatedServer()) {
-            settings.isServer = true;
+            Settings.setServer(true);
         } else {
-            settings.isServer = false;
+            Settings.setServer(true);
             ClientCommandHandler.instance.registerCommand(new GUIRegistry());
         }
-        
+
     }
 
-    @EventHandler // used in 1.6.2
-    //@Init       // used in 1.5.2
+    @EventHandler
     public void load(FMLInitializationEvent event) {
-    	Manager.init();
+        Manager.init();
         NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
         proxy.registerRenderers();
-        MinecraftForge.EVENT_BUS.register(new ForgeBUS());
-        FMLCommonHandler.instance().bus().register(new FMLBUS());
+        MinecraftForge.EVENT_BUS.register(new disconsented.anssrpg.event.EventHandler.ForgeBUS());
+        FMLCommonHandler.instance().bus().register(new disconsented.anssrpg.event.EventHandler.FMLBUS());
         ToolRegistry.init();
     }
 
@@ -101,14 +93,9 @@ public class Main {
         event.registerServerCommand(new Skill());
     }
 
-    /**
-     * Should allow single player saving as well as server shutdown saving
-     *
-     * @param event
-     */
     @EventHandler
     public void onServerStoppingEvent(FMLServerStoppingEvent event) {
-        for (Entry<String, PlayerData> entry : PlayerStore.getInstance().getAllData().entrySet()) {
+        for (Entry<String, PlayerData> entry : PlayerStore.getAllData().entrySet()) {
             PlayerData player = entry.getValue();
             PlayerFile.writePlayer(player);
         }
@@ -116,24 +103,22 @@ public class Main {
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) throws Exception {
-        if (settings.isExternalConfig()){
+        if (Settings.isExternalConfig()) {
             JsonConfigHandler.loadPerkAndSkill();
         } else {
-            JsonConfigHandler.loadInternalConfig();            
+            JsonConfigHandler.loadInternalConfig();
         }
-        
-        if (Settings.getDebug()) {
+
+        if (Settings.isDebugEnabled()) {
             Logging.debug("ANSSRPG has the following perks registered");
-            Logging.debug(PerkStore.getInstance().getPerks());
+            Logging.debug(PerkStore.getPerks());
         }
 
         BlockSkill temp = new BlockSkill();
-        for (int i = 0; i < 100; i++){
+        for (int i = 0; i < 100; i++) {
             double xp = SkillHandler.calculateExpForLevel(temp, i);
             long level = SkillHandler.calculateLevelForExp(temp, xp);
-            Logging.debug("Int: "+i+"\n"
-                    +"xp: "+xp+"\n"
-                    +"Level: "+level);
+            Logging.debug("Int: " + i + "\n" + "xp: " + xp + "\n" + "Level: " + level);
         }
     }
 }

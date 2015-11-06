@@ -24,16 +24,16 @@ package disconsented.anssrpg.common;
 
 import com.google.gson.annotations.Expose;
 
-public class ObjectPerkDefinition<O>{
-    public ObjectPerkDefinition(O object, String name, int metadata){
-        this.name = name;
-        this.object = object;
-        this.metadata = metadata;
-    }
+public class ObjectPerkDefinition<O> {
     @Expose
     public String name;
     public Object object;
     @Expose
     public int metadata;
+    public ObjectPerkDefinition(O object, String name, int metadata) {
+        this.name = name;
+        this.object = object;
+        this.metadata = metadata;
+    }
 
 }

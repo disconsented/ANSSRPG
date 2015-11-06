@@ -24,20 +24,20 @@ package disconsented.anssrpg.player;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.common.Settings;
-import disconsented.anssrpg.data.DataSave;
 import disconsented.anssrpg.data.PlayerStore;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 
 public class PlayerFile {
 
 
     public static void loadPlayer(String playerID) {
-        File dataLocation = new File(Settings.getFolder(), playerID+".json");
-        if (dataLocation.exists()){
+        File dataLocation = new File(Settings.getFolder(), playerID + ".json");
+        if (dataLocation.exists()) {
             try {
                 FileReader reader = new FileReader(dataLocation);
                 Gson gson = new GsonBuilder().create();
@@ -47,7 +47,7 @@ public class PlayerFile {
                 Logging.error(e.getStackTrace());
             }
         } else {
-            Logging.debug(playerID+"'s file does not exist");
+            Logging.debug(playerID + "'s file does not exist");
         }
     }
 
@@ -56,7 +56,7 @@ public class PlayerFile {
      */
 
     public static void writePlayer(PlayerData player) {
-        if(player != null) {
+        if (player != null) {
             try {
                 File dataFolder = Settings.getFolder();
                 File dataLocation = new File(dataFolder, player.getPlayerID() + ".json");
@@ -69,7 +69,7 @@ public class PlayerFile {
             } catch (Exception e) {
                 Logging.error(e.getStackTrace());
             }
-        } else{
+        } else {
             Logging.debug("Null player object detected, please report this");
         }
     }

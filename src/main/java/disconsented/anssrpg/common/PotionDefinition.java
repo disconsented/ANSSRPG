@@ -23,22 +23,24 @@ THE SOFTWARE.
 package disconsented.anssrpg.common;
 
 import com.google.gson.annotations.Expose;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Disconsented
- *
  */
-public class PotionDefinition{
+@NoArgsConstructor
+public class PotionDefinition {
+
     @Expose
     public int id;
     @Expose
     public int amplifier;
     @Expose
     public int duration;
-    public PotionDefinition(int id, int amplifier, int duration){
+
+    public PotionDefinition(int id, int amplifier, int duration) {
         this.id = id;
         this.amplifier = amplifier;
         this.duration = duration;
-    }   
-    public PotionDefinition(){}
+    }
 }

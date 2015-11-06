@@ -26,21 +26,22 @@ THE SOFTWARE.
 package disconsented.anssrpg.data;
 
 import disconsented.anssrpg.player.PlayerData;
+import net.minecraft.entity.player.EntityPlayerMP;
 
 import java.util.HashMap;
 
-import net.minecraft.entity.player.EntityPlayerMP;
-
 /**
- * @author Disconsented
- *         Stores player's into a hashmap with the Key being their UUID
+ * Stores player's into a hashmap with the Key being their UUID
  */
 public class PlayerStore {
+
     private static HashMap<String, PlayerData> data = new HashMap<String, PlayerData>();
 
     private static PlayerStore instance = null;
 
-    protected PlayerStore() {/* Exists only to defeat instantiation.*/}
+    protected PlayerStore() {
+        // Exists only to defeat instantiation.
+    }
 
     public static void addPlayer(PlayerData player) {
         data.put(player.getPlayerID(), player);

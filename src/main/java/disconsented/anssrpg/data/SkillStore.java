@@ -34,17 +34,19 @@ import java.util.ArrayList;
 
 
 /**
- * @author Disconsented
- *         Stores skill data
+ * Stores skill data
  */
 public class SkillStore {
+
     private static SkillStore instance = null;
     private static ArrayList<BlockSkill> blockSkill = new ArrayList<BlockSkill>();
     private static ArrayList<EntitySkill> entitySkill = new ArrayList<EntitySkill>();
     private static ArrayList<ItemSkill> itemSkill = new ArrayList<ItemSkill>();
     private static ArrayList<Skill> skills = new ArrayList<Skill>();
 
-    protected SkillStore() {/* Exists only to defeat instantiation.*/}
+    protected SkillStore() {
+        // Exists only to defeat instantiation.
+    }
 
     public static void addSkill(BlockSkill skill) {
         blockSkill.add(skill);
@@ -63,10 +65,10 @@ public class SkillStore {
     }
 
     public static void Clear() {
-        blockSkill = new ArrayList<BlockSkill>();
-        entitySkill = new ArrayList<EntitySkill>();
-        itemSkill = new ArrayList<ItemSkill>();
-        skills = new ArrayList<Skill>();
+        blockSkill.clear();
+        entitySkill.clear();
+        itemSkill.clear();
+        skills.clear();
     }
 
     public static ArrayList<BlockSkill> getBlockSkill() {
@@ -78,9 +80,9 @@ public class SkillStore {
     }
 
     public static SkillStore getInstance() {
-        if (instance == null) {
+        if (instance == null)
             instance = new SkillStore();
-        }
+
         return instance;
     }
 

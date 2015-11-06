@@ -22,46 +22,47 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.network;
 
-import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import io.netty.buffer.ByteBuf;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 public class SkillInfo implements IMessage {
-	public String name;
-	public int expCurrent;
-	public int expRequired;
-	public int levelCurrent;
-	public int expOld;
-	
-	public SkillInfo (){}
-	
-	public SkillInfo(String name, int expCurrent, int expRequired, int levelCurrent, int expOld){
-		this.name = name;
-		this.expCurrent = expCurrent;
-		this.expRequired = expRequired;
-		this.levelCurrent = levelCurrent;
-		this.expOld = expOld;
 
-	}
+    public String name;
+    public int expCurrent;
+    public int expRequired;
+    public int levelCurrent;
+    public int expOld;
 
-	@Override
-	public void fromBytes(ByteBuf buf) {
-		this.name = ByteBufUtils.readUTF8String(buf);
-		this.expCurrent = buf.readInt();
-		this.expRequired = buf.readInt();
-		this.levelCurrent = buf.readInt();
-		this.expOld = buf.readInt();
-		
-	}
+    public SkillInfo(String name, int expCurrent, int expRequired, int levelCurrent, int expOld) {
+        this.name = name;
+        this.expCurrent = expCurrent;
+        this.expRequired = expRequired;
+        this.levelCurrent = levelCurrent;
+        this.expOld = expOld;
 
-	@Override
-	public void toBytes(ByteBuf buf) {
-		ByteBufUtils.writeUTF8String(buf, this.name);
-		buf.writeInt(expCurrent);
-		buf.writeInt(expRequired);
-		buf.writeInt(levelCurrent);
-		buf.writeInt(expOld);
-		
-	}
+    }
+
+    @Override
+    public void fromBytes(ByteBuf buf) {
+        this.name = ByteBufUtils.readUTF8String(buf);
+        this.expCurrent = buf.readInt();
+        this.expRequired = buf.readInt();
+        this.levelCurrent = buf.readInt();
+        this.expOld = buf.readInt();
+
+    }
+
+    @Override
+    public void toBytes(ByteBuf buf) {
+        ByteBufUtils.writeUTF8String(buf, this.name);
+        buf.writeInt(expCurrent);
+        buf.writeInt(expRequired);
+        buf.writeInt(levelCurrent);
+        buf.writeInt(expOld);
+
+    }
 
 }

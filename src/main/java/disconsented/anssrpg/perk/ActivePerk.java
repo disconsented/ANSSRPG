@@ -22,15 +22,9 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.perk;
 
-import java.util.ArrayList;
-
 import net.minecraft.entity.EntityLivingBase;
 
-/**
- * @author Disconsented
- *
- */
-public interface ActivePerk{
-    public abstract void activate(EntityLivingBase target, EntityLivingBase source);
-    
+public interface ActivePerk {
+
+    void activate(EntityLivingBase target, EntityLivingBase source);
 }

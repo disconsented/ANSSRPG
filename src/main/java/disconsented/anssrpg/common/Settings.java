@@ -23,101 +23,60 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.common;
 
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import lombok.Getter;
+import lombok.Setter;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
 
 public class Settings {
+
+    public static Configuration config;
+
     // Categories
     public static String balancing = "Balancing";
     public static String misc = "Misc Options";
-    public static boolean isServer = false;
-    private static boolean debug = false;
-    private static boolean logging = true;
-    private static String statusMessage = "null";
-    private static double pointsRatio = .2;
-    private static boolean externalConfig = false;
-    private static boolean requiredOnClient = true;
 
-    private static boolean blockFakePlayers = true;
-    /**
-     * 0 - Disabled
-     * 1 - Points awarded based on XP from skills
-     * 2 - Points can be converted from vanilla levels
-     */
-    private static int pointsMode = 1;
-    private static Settings instance = new Settings();
-
-    private Settings() {
-    }
-
-    public static boolean getDebug() {
-        return debug;
-    }
-
-    public static void setDebug(Boolean yes) {
-        debug = yes;
-    }
+    @Getter @Setter
+    private static boolean isServer;
+    @Getter @Setter
+    private static boolean debugEnabled;
+    @Getter
+    private static boolean loggingEnabled;
+    @Getter
+    private static double pointsRatio;
+    @Getter
+    private static boolean externalConfig;
+    @Getter
+    private static boolean requiredOnClient;
+    @Getter
+    private static boolean blockFakePlayers;
+    @Getter
+    private static int pointsMode;
 
     public static File getFolder() {
-        if (isServer) {
-            return new File(MinecraftServer.getServer().getFolderName() + "\\anssrpgdata\\");
-        } else {
-            return new File("saves\\" + MinecraftServer.getServer().getFolderName() + "\\anssrpgdata\\");
-        }
-
+        return new File((isServer ? "" : "saves/") + MinecraftServer.getServer().getFolderName());
     }
 
-    public static Settings getInstance() {
-        return instance;
+    public static void init(File file) {
+        config = new Configuration(file);
+        syncConfig();
     }
 
-    public static int getPointsMode() {
-        return pointsMode;
-    }
-
-    public static boolean isBlockFakePlayers() {
-        return blockFakePlayers;
-    }
-
-    public static void setPointsMode(int int1) {
-        pointsMode = int1;
-    }
-
-    public static String getStatusMessage() {
-        return statusMessage;
-    }
-
-    public static void setStatusMessage(String message) {
-        statusMessage = message;
-    }
-
-    public static boolean getLogging() {
-        return logging;
-    }
-
-    public void load(FMLPreInitializationEvent event) {
-        Configuration config = new Configuration(event.getSuggestedConfigurationFile());
-        config.load();
-
+    public static void syncConfig() {
         config.addCustomCategoryComment(balancing, "Balancing tweaks.");
         config.addCustomCategoryComment(misc, "Settings that don't fit in other categories");
 
         pointsRatio = config.get(balancing, "pointsRatio", .2, "Points ratio settings.").getDouble();
-        pointsMode = config.get(balancing, "pointsMode", 1, "Points Mode. \n0 - Disabled \n1 - Points awarded based on XP from skills \n2 - Points can be converted from vanilla levels").getInt();
-        blockFakePlayers = config.getBoolean("blockUnknownFakePlayers",balancing,true,"Enables fake players that are not associated with a real player being blocked by default(where appropriate)");
+        pointsMode = config.getInt("pointsMode", balancing, 1, 0, 2, "Points Mode. \n0 - Disabled \n1 - Points awarded based on XP from skills \n2 - Points can be converted from vanilla levels");
+        blockFakePlayers = config.getBoolean("blockUnknownFakePlayers", balancing, true, "Enables fake players that are not associated with a real player being blocked by default(where appropriate)");
 
-        debug = config.get(misc, "enableDebugMode", false, "Enables debugging features. Meant for development use.").getBoolean();
-        logging = config.get(misc, "enableLogging", true, "Enables logging to console.").getBoolean();
-        externalConfig = config.get(misc, "useExternalConfig", false, "Use config files instead of default internal configs").getBoolean();
-        requiredOnClient = config.get(misc, "requiredOnClient", true, "Clients require the mod to be able to connect to the server").getBoolean();
+        debugEnabled = config.getBoolean("enableDebugMode", misc, false, "Enables debugging features. Meant for development use.");
+        loggingEnabled = config.getBoolean("enableLogging", misc, true, "Enables loggingEnabled to console.");
+        externalConfig = config.getBoolean("useExternalConfig", misc, false, "Use config files instead of default internal configs");
+        requiredOnClient = config.getBoolean("requiredOnClient", misc, true, "Clients require the mod to be able to connect to the server");
 
         config.save();
-    }
-
-    public static boolean isExternalConfig() {
-        return externalConfig;
     }
 }

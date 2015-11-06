@@ -26,22 +26,24 @@ import com.google.gson.annotations.Expose;
 
 /**
  * Three part object for keeping track of data needed for Entites
- * @author Disconsented
  *
  * @param <O> object
  * @param <S> name
  * @param <I> metadata
+ * @author Disconsented
  */
-public class Triplet<O,S,I> {
-    public Triplet(Object object, String name, int experience){
-        this.object = object;
-        this.name = name;
-        this.experience = experience;        
-    }
+public class Triplet<O, S, I> {
+
     //Not exposed to save on space in configs
     public Object object;
     @Expose
     public String name = "";
     @Expose
     public int experience = 0;
+
+    public Triplet(Object object, String name, int experience) {
+        this.object = object;
+        this.name = name;
+        this.experience = experience;
+    }
 }

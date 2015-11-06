@@ -22,9 +22,6 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.network;
 
-import java.util.ArrayList;
-import java.util.Map.Entry;
-
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -40,41 +37,44 @@ import disconsented.anssrpg.task.TaskMaster;
 import disconsented.anssrpg.task.TaskPlayerStatusTrack;
 import net.minecraft.entity.player.EntityPlayerMP;
 
+import java.util.ArrayList;
+import java.util.Map.Entry;
+
 /**
  * Handles the @link{request} packet
  * Sends back requested information
  */
 public class RequestHandler implements IMessageHandler<Request, IMessage> {
+
     @Override
     public IMessage onMessage(Request message, MessageContext ctx) {
         EntityPlayerMP player = ctx.getServerHandler().playerEntity;
         PlayerData playerData = PlayerHandler.getPlayer(player.getUniqueID());
-        switch(message.request){
-		case ACTIVE_PERKS:
-			break;
-		case OBTAINED_PERKS:
-			break;
-		case PERKS:
-            ArrayList<Perk> perks = PerkStore.getPerks();
-            for (Perk perk : perks)
-            {//String name, String description, String slug, int pointCost, ArrayList<Requirement> requirements, boolean obtained
-                boolean obtained =  playerData.getPerkList().contains(perk.getSlug());
-                Main.snw.sendTo(new PerkInfo(perk.name, perk.getDescription(), perk.getSlug().getSlug(), perk.getPointCost(), perk.getRequirements(),obtained),player);
-            }
-			break;
-		case SKILLS:
-			SkillStore skillStore = SkillStore.getInstance();
-			for(Entry<String, Integer> entry : playerData.getSkillExp().entrySet()){
-				for(Skill skill : SkillStore.getSkills()){
-					if(entry.getKey().equals(skill.name)){						
-						int level = (int) SkillHandler.calculateLevelForExp(skill, entry.getValue());
-						int xp = (int) SkillHandler.calculateExpForLevel(skill, level + 1);
-						Main.snw.sendTo(new SkillInfo(skill.name, entry.getValue(), xp, level, (int)SkillHandler.calculateExpForLevel(skill.base, level-1, skill.mod) ), player);
-						break;
-					}
-				}
-			}
-			break;
+        switch (message.request) {
+            case ACTIVE_PERKS:
+                break;
+            case OBTAINED_PERKS:
+                break;
+            case PERKS:
+                ArrayList<Perk> perks = PerkStore.getPerks();
+                for (Perk perk : perks) {//String name, String description, String slug, int pointCost, ArrayList<Requirement> requirements, boolean obtained
+                    boolean obtained = playerData.getPerkList().contains(perk.getSlug());
+                    Main.snw.sendTo(new PerkInfo(perk.name, perk.getDescription(), perk.getSlug().getSlug(), perk.getPointCost(), perk.getRequirements(), obtained), player);
+                }
+                break;
+            case SKILLS:
+                SkillStore skillStore = SkillStore.getInstance();
+                for (Entry<String, Integer> entry : playerData.getSkillExp().entrySet()) {
+                    for (Skill skill : SkillStore.getSkills()) {
+                        if (entry.getKey().equals(skill.name)) {
+                            int level = (int) SkillHandler.calculateLevelForExp(skill, entry.getValue());
+                            int xp = (int) SkillHandler.calculateExpForLevel(skill, level + 1);
+                            Main.snw.sendTo(new SkillInfo(skill.name, entry.getValue(), xp, level, (int) SkillHandler.calculateExpForLevel(skill.base, level - 1, skill.mod)), player);
+                            break;
+                        }
+                    }
+                }
+                break;
             //Loads the task which sends the player their information for the gui
             case START_TRACKING:
                 TaskMaster.getInstance().addTask(new TaskPlayerStatusTrack(player));
@@ -83,11 +83,11 @@ public class RequestHandler implements IMessageHandler<Request, IMessage> {
             case STOP_TRACKING:
                 player.getEntityData().setBoolean(TaskPlayerStatusTrack.TAG_STATUS_OPEN, false);
                 break;
-		default:
-			break;
-       
+            default:
+                break;
+
         }
+
         return null;
     }
-
 }

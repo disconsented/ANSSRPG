@@ -22,29 +22,28 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.task;
 
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.potion.PotionEffect;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.perk.Slug;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.potion.PotionEffect;
 
 /**
  * @author Disconsented
- *
  */
 
-public class TaskApplyPotion extends TaskTrackPlayer{
+public class TaskApplyPotion extends TaskTrackPlayer {
     protected final String tagName = "TASKAPPLYPOTION";
-    
-    public TaskApplyPotion(EntityLivingBase entity, PotionEffect effect, TickEvent.Type type, boolean repeat, int cycle){
+
+    public TaskApplyPotion(EntityLivingBase entity, PotionEffect effect, TickEvent.Type type, boolean repeat, int cycle) {
         this.entity = entity;
         this.effect = effect;
         this.type = type;
         this.repeat = repeat;
         this.cycle = cycle;
     }
-    
-    public TaskApplyPotion(EntityLivingBase entity, PotionEffect effect, TickEvent.Type type, boolean repeat, int cycle, int maxCycles, Slug slug){
+
+    public TaskApplyPotion(EntityLivingBase entity, PotionEffect effect, TickEvent.Type type, boolean repeat, int cycle, int maxCycles, Slug slug) {
         this.entity = entity;
         this.effect = effect;
         this.type = type;
@@ -58,8 +57,8 @@ public class TaskApplyPotion extends TaskTrackPlayer{
      * @see disconsented.anssrpg.task.Task#onTick(cpw.mods.fml.common.gameevent.TickEvent)
      */
     @Override
-    public void onTick(TickEvent event) {        
-        if(entity.isDead){
+    public void onTick(TickEvent event) {
+        if (entity.isDead) {
             repeat = false;
         } else {
             Logging.debug("Attempting to apply potion " + effect.getEffectName() + " to " + entity.getCommandSenderName());

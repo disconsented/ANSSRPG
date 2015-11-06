@@ -37,18 +37,14 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 
 /**
- * Created by Disconsented on 30/08/2015.
- *
- */
-
-/**
  * Handles and sends data to the player every tick concerning the status GUI
  */
-public class TaskPlayerStatusTrack extends Task{
-    public static final String TAG_STATUS_OPEN =  Reference.ID+"STATUS_OPEN";
+public class TaskPlayerStatusTrack extends Task {
+    public static final String TAG_STATUS_OPEN = Reference.ID + "STATUS_OPEN";
     private EntityPlayerMP player;
     private PlayerData playerData;
-    public TaskPlayerStatusTrack(EntityPlayerMP player){
+
+    public TaskPlayerStatusTrack(EntityPlayerMP player) {
         this.player = player;
         this.repeat = true;
         this.maxTicks = 0;
@@ -62,16 +58,16 @@ public class TaskPlayerStatusTrack extends Task{
 
     @Override
     public void onTick(TickEvent event) {
-        if (player != null && player.isEntityAlive() && player.getEntityData().getBoolean(TAG_STATUS_OPEN)){
+        if (player != null && player.isEntityAlive() && player.getEntityData().getBoolean(TAG_STATUS_OPEN)) {
             playerData = PlayerHandler.getPlayer(player.getUniqueID());//Refreshing the playerData
-            PlayerStatus status = new PlayerStatus(player.getHealth(),player.getFoodStats().getSaturationLevel(),getArmourValue(3),getArmourValue(2),getArmourValue(1),getArmourValue(0));
-            Main.snw.sendTo(status,player);
+            PlayerStatus status = new PlayerStatus(player.getHealth(), player.getFoodStats().getSaturationLevel(), getArmourValue(3), getArmourValue(2), getArmourValue(1), getArmourValue(0));
+            Main.snw.sendTo(status, player);
 
             ArrayList<String> list = new ArrayList<>();
-            for (Slug slug : playerData.getActivePerks()){
+            for (Slug slug : playerData.getActivePerks()) {
                 list.add(slug.getSlug());
             }
-            Main.snw.sendTo(new ActivePerks(list),player);
+            Main.snw.sendTo(new ActivePerks(list), player);
         } else {
             this.repeat = false;
         }
@@ -82,8 +78,8 @@ public class TaskPlayerStatusTrack extends Task{
         player.getEntityData().setBoolean(TAG_STATUS_OPEN, false);
     }
 
-    private float getArmourValue(int slot){
+    private float getArmourValue(int slot) {
         ItemStack itemStack = player.getCurrentArmor(slot);
-        return (itemStack != null) ? ((ItemArmor)itemStack.getItem()).damageReduceAmount : 0;
+        return (itemStack != null) ? ((ItemArmor) itemStack.getItem()).damageReduceAmount : 0;
     }
 }

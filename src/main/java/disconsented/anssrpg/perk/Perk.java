@@ -20,16 +20,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-/** Author: Disconsented
+/**
+ * Author: Disconsented
  * Supertype for perks
  */
 package disconsented.anssrpg.perk;
 
 import com.google.gson.annotations.Expose;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 
+@NoArgsConstructor
 public abstract class Perk {
+
     @Expose
     public String name = "default_name";
     @Expose
@@ -39,8 +43,6 @@ public abstract class Perk {
     public String description = "default_description";
     @Expose
     public int pointCost = 0;
-
-    public Perk() {  } // Blank constructor for Gson
 
     public Perk(String name, ArrayList<Requirement> requirements, String description, int pointCost) {
         this.name = name;
@@ -83,13 +85,13 @@ public abstract class Perk {
     }
 
     public Slug getSlug() {
-        if (this.slug != null){
+        if (this.slug != null) {
             return slug;
         } else {
             this.slug = new Slug(this.name);
             return this.slug;
         }
-        
+
     }
 
     public abstract void searchObject();

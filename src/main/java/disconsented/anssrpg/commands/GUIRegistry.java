@@ -28,6 +28,7 @@ package disconsented.anssrpg.commands;
 import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.gui.RegistryReader;
+import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 
@@ -37,9 +38,11 @@ import java.util.List;
 /**
  * @author Disconsented
  */
-public class GUIRegistry implements ICommand {
+public class GUIRegistry extends CommandBase {
+
     private List aliases;
 
+    @SuppressWarnings("unchecked")
     public GUIRegistry() {
         this.aliases = new ArrayList();
         this.aliases.add("GUIRegistry");
@@ -48,55 +51,46 @@ public class GUIRegistry implements ICommand {
     }
 
     @Override
-    public int compareTo(Object arg0) {
-        // TODO Auto-generated method stub
+    public int compareTo(Object o) {
         return 0;
     }
 
     @Override
     public String getCommandName() {
-        // TODO Auto-generated method stub
         return "GUIRegistry";
     }
 
     @Override
-    public String getCommandUsage(ICommandSender p_71518_1_) {
-        // TODO Auto-generated method stub
+    public String getCommandUsage(ICommandSender commandSender) {
         return "GUIRegistry";
     }
 
     @Override
     public List getCommandAliases() {
-        // TODO Auto-generated method stub
         return this.aliases;
     }
 
     @Override
-    public void processCommand(ICommandSender sender, String[] p_71515_2_) {
-        if (Settings.getInstance().isServer) {
+    public void processCommand(ICommandSender commandSender, String[] args) {
+        if (Settings.isServer()) {
             Logging.error("Tried to open the registry GUI on the server please report this");
         } else {
             RegistryReader.getInstance().show();
         }
-
     }
 
     @Override
-    public boolean canCommandSenderUseCommand(ICommandSender p_71519_1_) {
-        // TODO Auto-generated method stub
+    public boolean canCommandSenderUseCommand(ICommandSender commandSender) {
         return true;
     }
 
     @Override
-    public List addTabCompletionOptions(ICommandSender p_71516_1_,
-                                        String[] p_71516_2_) {
-        // TODO Auto-generated method stub
+    public List addTabCompletionOptions(ICommandSender commandSender, String[] args) {
         return null;
     }
 
     @Override
-    public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_) {
-        // TODO Auto-generated method stub
+    public boolean isUsernameIndex(String[] args, int index) {
         return false;
     }
 

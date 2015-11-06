@@ -22,44 +22,35 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.gui;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Queue;
-
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.FMLClientHandler;
 import disconsented.anssrpg.Main;
 import disconsented.anssrpg.client.Data;
-import disconsented.anssrpg.common.Reference;
 import disconsented.anssrpg.gui.components.ExpBox;
 import disconsented.anssrpg.network.Request;
 import disconsented.anssrpg.network.Request.REQUEST;
-import disconsented.anssrpg.network.SkillInfo;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.ResourceLocation;
+
+import java.util.ArrayList;
 
 /**
  * @author Disconsented
- *
  */
-public class GUIExperience extends GuiScreen {    
+public class GUIExperience extends GuiScreen {
     private ArrayList<ExpBox> boxes = new ArrayList<ExpBox>();
     private int page;
     private int boxCount = 0;
-    
+
     @Override
-    public void initGui(){
-        int x = width/2;
-    	Data.skillInfo.clear();
-    	Data.skillInfoList.clear();
-    	page = 1;
-    	Main.snw.sendToServer(new Request(REQUEST.SKILLS));
-        this.buttonList.add(new GuiButton(0, x, 76*3, 40 , 20, "Next"));
-        this.buttonList.add(new GuiButton(1, x - 40, 76*3, 40, 20, "Prev"));
-        for (int i = 0; i < 3; i++){
+    public void initGui() {
+        int x = width / 2;
+        Data.skillInfo.clear();
+        Data.skillInfoList.clear();
+        page = 1;
+        boxCount = 0;
+        Main.snw.sendToServer(new Request(REQUEST.SKILLS));
+        this.buttonList.add(new GuiButton(0, x, 76 * 3, 40, 20, "Next"));
+        this.buttonList.add(new GuiButton(1, x - 40, 76 * 3, 40, 20, "Prev"));
+        for (int i = 0; i < 3; i++) {
             int y = i * 76;
             ExpBox box1 = new ExpBox(x - 176, y);
             ExpBox box2 = new ExpBox(x, y);
@@ -68,28 +59,23 @@ public class GUIExperience extends GuiScreen {
             boxCount += 2;
         }
     }
-    
+
     @Override
-    public void drawScreen(int x1, int x2, float x3)
-    {
-        drawDefaultBackground();       
+    public void drawScreen(int x, int y, float renderPartialTick) {
+        drawDefaultBackground();
+        boxes.clear();
 
-        int k;
+        super.drawScreen(x, y, renderPartialTick);
 
-        for (k = 0; k < this.buttonList.size(); ++k)
-        {
-            ((GuiButton)this.buttonList.get(k)).drawButton(this.mc, 0, 0);
-        }
-        
-        for(int i = 0; i < boxes.size(); i++){
+        for (int i = 0; i < boxes.size(); i++) {
             int num = (page * i);
             ExpBox box = boxes.get(i);
-            if (num < Data.skillInfoList.size()){                
+            if (num < Data.skillInfoList.size()) {
                 box.name = Data.skillInfoList.get(num).name;
                 box.expCurrent = Data.skillInfoList.get(num).expCurrent;
                 box.expRequired = Data.skillInfoList.get(num).expRequired;
                 box.level = Data.skillInfoList.get(num).levelCurrent;
-                box.expOld =  Data.skillInfoList.get(num).expOld;
+                box.expOld = Data.skillInfoList.get(num).expOld;
             } else {
                 box.name = "";
                 box.expCurrent = 0;
@@ -98,32 +84,32 @@ public class GUIExperience extends GuiScreen {
             }
             boxes.set(i, box);
         }
-        
-        for(ExpBox box : boxes){            
+
+        for (ExpBox box : boxes) {
             box.draw();
         }
     }
-    
+
     @Override
-    public boolean doesGuiPauseGame()
-    {
+    public boolean doesGuiPauseGame() {
         return false;
     }
+
     @Override
     protected void actionPerformed(GuiButton button) {
-        switch(button.id){
-        case 0:
-            if (page < Math.round(Data.skillInfoList.size() / 6)){
-                page++;
-            }
-            break;
-        case 1:
-            if (page > 1){
-                page--;
-            }
-            break;
+        switch (button.id) {
+            case 0:
+                if (page < Math.round(Data.skillInfoList.size() / 6)) {
+                    page++;
+                }
+                break;
+            case 1:
+                if (page > 1) {
+                    page--;
+                }
+                break;
         }
     }
-    
+
 
 }

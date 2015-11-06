@@ -31,35 +31,37 @@ import net.minecraft.util.ResourceLocation;
 
 /**
  * @author Disconsented
- *
  */
-public abstract class ComponentBase extends Gui{
+public abstract class ComponentBase extends Gui {
+
     protected int x;
     protected int y;
     protected int width;
     protected int height;
     protected FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
-    
+
     public abstract void draw();
-    public void bindAndDrawTexture(ResourceLocation texture, int posX, int posY, int startX, int startY, int width, int height){
+
+    public void bindAndDrawTexture(ResourceLocation texture, int posX, int posY, int startX, int startY, int width, int height) {
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
         drawTexturedModalRectClone(posX, posY, startX, startY, width, height);
     }
-    public void bindAndDrawTexture(ResourceLocation texture, int posX, int posY, int width, int height){
+
+    public void bindAndDrawTexture(ResourceLocation texture, int posX, int posY, int width, int height) {
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
         drawTexturedModalRectClone(posX, posY, 0, 0, width, height);
     }
-    private void drawTexturedModalRectClone(int posX, int posY, int startX, int startY, int width, int height)
-    {
+
+    private void drawTexturedModalRectClone(int posX, int posY, int startX, int startY, int width, int height) {
         float f = 0.00390625F;
         float f1 = 0.00390625F;
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         Tessellator.instance.setColorRGBA_F(1F, 1F, 1F, 1F);
-        tessellator.addVertexWithUV((double)(posX + 0), (double)(posY + height), (double)this.zLevel, (double)((float)(startX + 0) * f), (double)((float)(startY + height) * f1));
-        tessellator.addVertexWithUV((double)(posX + width), (double)(posY + height), (double)this.zLevel, (double)((float)(startX + width) * f), (double)((float)(startY + height) * f1));
-        tessellator.addVertexWithUV((double) (posX + width), (double) (posY + 0), (double) this.zLevel, (double) ((float) (startX + width) * f), (double)((float)(startY + 0) * f1));
-        tessellator.addVertexWithUV((double) (posX + 0), (double) (posY + 0), (double) this.zLevel, (double) ((float) (startX + 0) * f), (double)((float)(startY + 0) * f1));
+        tessellator.addVertexWithUV((double) (posX + 0), (double) (posY + height), (double) this.zLevel, (double) ((float) (startX + 0) * f), (double) ((float) (startY + height) * f1));
+        tessellator.addVertexWithUV((double) (posX + width), (double) (posY + height), (double) this.zLevel, (double) ((float) (startX + width) * f), (double) ((float) (startY + height) * f1));
+        tessellator.addVertexWithUV((double) (posX + width), (double) (posY + 0), (double) this.zLevel, (double) ((float) (startX + width) * f), (double) ((float) (startY + 0) * f1));
+        tessellator.addVertexWithUV((double) (posX + 0), (double) (posY + 0), (double) this.zLevel, (double) ((float) (startX + 0) * f), (double) ((float) (startY + 0) * f1));
         tessellator.draw();
     }
 }

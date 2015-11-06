@@ -22,19 +22,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
 package disconsented.anssrpg.config;
-import com.google.gson.annotations.Expose;
 
+import com.google.gson.annotations.Expose;
 import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.data.PerkStore;
 import disconsented.anssrpg.perk.*;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+
 /**
  * Used to safely retain data for saving and loading perks before initalising them for use
+ *
  * @author Abelistah
- * @author Disconsented 
+ * @author Disconsented
  */
+@NoArgsConstructor
 public class PerkContainer {
+
     @Expose
     private ArrayList<ItemPerk> items = new ArrayList<>();
     @Expose
@@ -45,11 +50,6 @@ public class PerkContainer {
     private ArrayList<TitlePerk> titles = new ArrayList<>();
     @Expose
     private ArrayList<PotionSelfPerk> selfPotion = new ArrayList<>();
-    
-
-    public PerkContainer() {
-
-    }
 
     public PerkContainer(Boolean fill) {
         if (fill) {
@@ -76,9 +76,11 @@ public class PerkContainer {
     public void addPerk(TitlePerk perk) {
         titles.add(perk);
     }
-    public void addPerk(PotionSelfPerk effect){
+
+    public void addPerk(PotionSelfPerk effect) {
         selfPotion.add(effect);
     }
+
     public void touchUp() {
         for (ItemPerk item : items) {
             item.touchUp();
@@ -118,7 +120,7 @@ public class PerkContainer {
         }
         for (PotionSelfPerk effect : selfPotion) {
             effect.touchUp();
-            if (effect.cycle > 0){
+            if (effect.cycle > 0) {
                 PerkStore.putPerk(effect);
                 PerkStore.addPerk(effect);
             } else {

@@ -26,12 +26,11 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import disconsented.anssrpg.gui.components.ComponentStatusBook;
+import lombok.NoArgsConstructor;
 
-/**
- * Created by j on 30/08/2015.
- */
+@NoArgsConstructor
 public class ActivePerksHandler implements IMessageHandler<ActivePerks, IMessage> {
-    public ActivePerksHandler(){}
+
     @Override
     public IMessage onMessage(ActivePerks message, MessageContext ctx) {
         ComponentStatusBook.activePerks = message.activePerks;

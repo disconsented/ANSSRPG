@@ -22,18 +22,26 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.network;
 
+import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import disconsented.anssrpg.client.Data;
-import disconsented.anssrpg.common.Settings;
+import io.netty.buffer.ByteBuf;
+import lombok.NoArgsConstructor;
 
-public class ResponceHandler implements IMessageHandler<Responce, IMessage> {
+@NoArgsConstructor
+public class Response implements IMessage {
+    public String responce;
 
-    @Override
-    public IMessage onMessage(Responce message, MessageContext ctx) {
-        Data.statusMessage = message.responce;
-        return null;
+    public Response(String responce) {
+        this.responce = responce;
     }
 
+    @Override
+    public void fromBytes(ByteBuf buf) {
+        responce = ByteBufUtils.readUTF8String(buf);
+    }
+
+    @Override
+    public void toBytes(ByteBuf buf) {
+        ByteBufUtils.writeUTF8String(buf, responce);
+    }
 }

@@ -25,30 +25,29 @@ package disconsented.anssrpg.gui.components;
 import disconsented.anssrpg.common.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
 
 /**
  * @author Disconsented
  */
-public class PerkControls extends ComponentBase{
+public class PerkControls extends ComponentBase {
+
+    public String status = "Status";
+    public String description = "Description";
     private FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
     private ResourceLocation texture = new ResourceLocation(Reference.ID, "perkinfo.png");
     private int width = 256;
     private int height = 256;
-    public String status = "Status";
-    public String description = "Description";
-    public PerkControls(int x, int y){
+
+    public PerkControls(int x, int y) {
         this.x = x;
         this.y = y;
     }
+
     @Override
     public void draw() {
         bindAndDrawTexture(texture, x, y, this.width, this.height);
         fontRenderer.drawSplitString(status, 11 + this.x, 2 + 181 + this.y, 156, 0xBEFF00);//9,181 158x28
         fontRenderer.drawSplitString(description, 11 + this.x, 2 + 9 + this.y, 156, 0xBEFF00); //9,9 158x164
     }
-
-
 }

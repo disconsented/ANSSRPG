@@ -25,6 +25,7 @@ package disconsented.anssrpg.network;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import io.netty.buffer.ByteBuf;
+import lombok.NoArgsConstructor;
 
 /**
  * Used to request INFORMATION from the server
@@ -34,11 +35,11 @@ import io.netty.buffer.ByteBuf;
  * START_TRACKING will start sending updates to the player about their status
  * STOP_TRACKING will stop the information tracking
  */
+@NoArgsConstructor
 public class Request implements IMessage {
-	public enum REQUEST {PERKS, SKILLS, ACTIVE_PERKS, OBTAINED_PERKS, START_TRACKING, STOP_TRACKING}
-	public REQUEST request;
-    
-	public Request(){};
+
+    public REQUEST request;
+
     public Request(REQUEST request) {
         this.request = request;
     }
@@ -50,6 +51,8 @@ public class Request implements IMessage {
 
     @Override
     public void toBytes(ByteBuf buf) {
-    	ByteBufUtils.writeUTF8String(buf, request.name());
+        ByteBufUtils.writeUTF8String(buf, request.name());
     }
+
+    public enum REQUEST {PERKS, SKILLS, ACTIVE_PERKS, OBTAINED_PERKS, START_TRACKING, STOP_TRACKING}
 }

@@ -22,26 +22,21 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.perk;
 
-import java.util.ArrayList;
-
-import net.minecraft.block.Block;
-
 import com.google.gson.annotations.Expose;
-
 import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.common.ObjectPerkDefinition;
+import lombok.NoArgsConstructor;
+import net.minecraft.block.Block;
 
+import java.util.ArrayList;
+
+@NoArgsConstructor
 public class BlockPerk extends Perk {
 
     @Expose
     public ArrayList<ObjectPerkDefinition<Block>> blocks = new ArrayList<ObjectPerkDefinition<Block>>();
 
-    public BlockPerk() {
-        super();
-    }
-
-    public BlockPerk(String name, ArrayList<Requirement> requirements,
-                     String description, int pointCost, ArrayList<ObjectPerkDefinition<Block>> blocks) {
+    public BlockPerk(String name, ArrayList<Requirement> requirements, String description, int pointCost, ArrayList<ObjectPerkDefinition<Block>> blocks) {
         super(name, requirements, description, pointCost);
         this.blocks = blocks;
     }
@@ -49,9 +44,9 @@ public class BlockPerk extends Perk {
     @Override
     public void searchObject() {
         ArrayList<ObjectPerkDefinition<Block>> initialised = new ArrayList<ObjectPerkDefinition<Block>>();
-        for(ObjectPerkDefinition object : blocks){
+        for (ObjectPerkDefinition object : blocks) {
             object.object = Block.blockRegistry.getObject(object.name);
-            if (object.object != null){
+            if (object.object != null) {
                 Logging.debug(object.name + " has been found. Passing on.");
                 initialised.add(object);
             } else {
@@ -60,5 +55,5 @@ public class BlockPerk extends Perk {
         }
         this.blocks = initialised;
     }
-    
+
 }

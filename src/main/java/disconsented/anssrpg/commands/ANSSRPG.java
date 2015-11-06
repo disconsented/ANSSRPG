@@ -25,16 +25,16 @@ package disconsented.anssrpg.commands;
 import disconsented.anssrpg.common.Reference;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.EntityPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cpw.mods.fml.common.gameevent.TickEvent.Type;
-
 public class ANSSRPG extends CommandBase {
+
     private List aliases;
 
+    @SuppressWarnings("unchecked")
     public ANSSRPG() {
         this.aliases = new ArrayList();
         this.aliases.add("ANSSRPG");
@@ -49,7 +49,7 @@ public class ANSSRPG extends CommandBase {
     }
 
     @Override
-    public String getCommandUsage(ICommandSender icommandsender) {
+    public String getCommandUsage(ICommandSender commandSender) {
         return "ANSSRPG -argument (-list perk/skill)";
     }
 
@@ -59,24 +59,22 @@ public class ANSSRPG extends CommandBase {
     }
 
     @Override
-    public void processCommand(ICommandSender player, String[] astring) {       
-        EntityPlayerMP playerMP = (EntityPlayerMP) player;
-        playerMP.openGui(Reference.ID, Integer.parseInt(astring[0]), null, 0, 0, 0);
+    public void processCommand(ICommandSender commandSender, String[] args) {
+        ((EntityPlayer)commandSender).openGui(Reference.ID, Integer.parseInt(args[0]), null, 0, 0, 0);
     }
 
     @Override
-    public boolean canCommandSenderUseCommand(ICommandSender icommandsender) {
+    public boolean canCommandSenderUseCommand(ICommandSender commandSender) {
         return true;
     }
 
     @Override
-    public List addTabCompletionOptions(ICommandSender icommandsender,
-                                        String[] astring) {
+    public List addTabCompletionOptions(ICommandSender commandSender, String[] args) {
         return null;
     }
 
     @Override
-    public boolean isUsernameIndex(String[] astring, int i) {
+    public boolean isUsernameIndex(String[] args, int index) {
         return false;
     }
 

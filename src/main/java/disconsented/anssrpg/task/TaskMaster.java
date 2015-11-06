@@ -22,58 +22,58 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.task;
 
-import java.util.AbstractQueue;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
-
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.relauncher.Side;
 import disconsented.anssrpg.common.Logging;
 
-public class TaskMaster{
-	protected TaskMaster(){}
-	
-	private static TaskMaster master = null;
-	private Queue<Task> queue = new LinkedList<Task>();
-	private Queue<Task> currentQueue = new LinkedList<Task>();
-	
-	public static TaskMaster getInstance(){
-		if (master == null){
-			master = new TaskMaster();
-		} 
-		return master;
-	}
-	
-	public boolean addTask(Task task){
-		task.onAdd();
-		return queue.offer(task);
-	}
-	
-	public void process(TickEvent event){
-		if(event.side == Side.SERVER && event.phase == Phase.START && queue != null){
-		    while(queue.isEmpty() == false){
-		        currentQueue.offer(queue.poll());
-		    }
-			while(currentQueue.peek() != null){
-				Task currentTask = currentQueue.poll();
-				Logging.debug("Attempting to process " + currentTask.getClass().getName());
-				
-				if (currentTask.canProcess(event)){
-					currentTask.onTick(event);
-					currentTask.increaseTick();
-					
-					if (currentTask.canRepeat()){
-						queue.offer(currentTask);
-					} else {
-						currentTask.onEnd();
-					}
-				} else {
-					queue.offer(currentTask);
-				}
-				
-			}
-		}
-	}
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class TaskMaster {
+
+    private static TaskMaster master = null;
+    private Queue<Task> queue = new LinkedList<Task>();
+    private Queue<Task> currentQueue = new LinkedList<Task>();
+
+    protected TaskMaster() {
+    }
+
+    public static TaskMaster getInstance() {
+        if (master == null) {
+            master = new TaskMaster();
+        }
+        return master;
+    }
+
+    public boolean addTask(Task task) {
+        task.onAdd();
+        return queue.offer(task);
+    }
+
+    public void process(TickEvent event) {
+        if (event.side == Side.SERVER && event.phase == Phase.START && queue != null) {
+            while (queue.isEmpty() == false) {
+                currentQueue.offer(queue.poll());
+            }
+            while (currentQueue.peek() != null) {
+                Task currentTask = currentQueue.poll();
+                Logging.debug("Attempting to process " + currentTask.getClass().getName());
+
+                if (currentTask.canProcess(event)) {
+                    currentTask.onTick(event);
+                    currentTask.increaseTick();
+
+                    if (currentTask.canRepeat()) {
+                        queue.offer(currentTask);
+                    } else {
+                        currentTask.onEnd();
+                    }
+                } else {
+                    queue.offer(currentTask);
+                }
+
+            }
+        }
+    }
 }

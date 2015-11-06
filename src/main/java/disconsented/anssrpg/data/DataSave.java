@@ -21,13 +21,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
 package disconsented.anssrpg.data;
-/**
- * Handles non-shut down saving and loading of player data
- * Holds the player hashmap
- */
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
@@ -37,12 +30,19 @@ import disconsented.anssrpg.common.Settings;
 import disconsented.anssrpg.player.PlayerData;
 import disconsented.anssrpg.player.PlayerFile;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * @author James
  *         onEntityJoinWorld - Probably not needed
  *         onLivingDeath - Saves data
+ *
+ * Handles non-shut down saving and loading of player data
+ * Holds the player hashmap
  */
 public class DataSave {
+
     public static void addPlayer(PlayerData player, String PlayerID) {
         PlayerStore.getInstance();
         PlayerStore.addPlayer(player);
@@ -71,11 +71,9 @@ public class DataSave {
 
     /**
      * Load player data
-     *
-     * @param event
      */
     public void onPlayerLoggedInEvent(PlayerLoggedInEvent event) {
-        if (Settings.getDebug()) {
+        if (Settings.isDebugEnabled()) {
             Logging.debug("Player " + event.player.getCommandSenderName() + " with UUID:" + event.player.getPersistentID().toString() + "has logged in");
             Logging.debug("Loading player data");
         }
@@ -86,29 +84,25 @@ public class DataSave {
 
     /**
      * Saves player data
-     *
-     * @param event
      */
     public void onPlayerLoggedOutEvent(PlayerLoggedOutEvent event) {
-        if (Settings.getDebug()) {
+        if (Settings.isDebugEnabled()) {
             Logging.debug("Player " + event.player.getCommandSenderName() + " with UUID:" + event.player.getPersistentID().toString() + "has logged out");
             Logging.debug("Saving player data");
         }
-        PlayerFile.writePlayer(PlayerStore.getInstance().getPlayer(event.player.getPersistentID().toString()));
+        PlayerFile.writePlayer(PlayerStore.getPlayer(event.player.getPersistentID().toString()));
         PlayerStore.getInstance();
         PlayerStore.getAllData().remove(event.player.getPersistentID().toString());
     }
 
     /**
      * Saves player data (crash damage mitigation)
-     *
-     * @param event
      */
     public void onPlayerRespawnEvent(PlayerRespawnEvent event) {
-        if (Settings.getDebug()) {
+        if (Settings.isDebugEnabled()) {
             Logging.debug("Player " + event.player.getCommandSenderName() + " with UUID:" + event.player.getPersistentID().toString() + "has respawned");
             Logging.debug("Saving player data");
         }
-        PlayerFile.writePlayer(PlayerStore.getInstance().getPlayer(event.player.getPersistentID().toString()));
+        PlayerFile.writePlayer(PlayerStore.getPlayer(event.player.getPersistentID().toString()));
     }
 }

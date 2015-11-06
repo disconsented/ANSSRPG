@@ -25,26 +25,21 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.perk;
 
-import java.util.ArrayList;
-
-import net.minecraft.entity.EntityList;
-
 import com.google.gson.annotations.Expose;
-
 import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.common.ObjectPerkDefinition;
+import lombok.NoArgsConstructor;
+import net.minecraft.entity.EntityList;
 
+import java.util.ArrayList;
+
+@NoArgsConstructor
 public class EntityPerk extends Perk {
 
     @Expose
     public ArrayList<ObjectPerkDefinition<Class>> entities = new ArrayList<ObjectPerkDefinition<Class>>();
 
-    public EntityPerk() {
-        super();
-    }
-
-    public EntityPerk(String name, ArrayList<Requirement> requirements,
-                      String description, int pointCost, ArrayList<ObjectPerkDefinition<Class>> entities) {
+    public EntityPerk(String name, ArrayList<Requirement> requirements, String description, int pointCost, ArrayList<ObjectPerkDefinition<Class>> entities) {
         super(name, requirements, description, pointCost);
         this.entities = entities;
     }
@@ -52,9 +47,9 @@ public class EntityPerk extends Perk {
     @Override
     public void searchObject() {
         ArrayList<ObjectPerkDefinition<Class>> initialised = new ArrayList<ObjectPerkDefinition<Class>>();
-        for(ObjectPerkDefinition object : entities){
+        for (ObjectPerkDefinition object : entities) {
             object.object = (Class) EntityList.stringToClassMapping.get(object.name);
-            if (object.object != null){
+            if (object.object != null) {
                 Logging.debug(object.name + " has been found. Passing on.");
                 initialised.add(object);
             } else {

@@ -25,39 +25,36 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.skill.objects;
 
-import java.util.ArrayList;
-
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-
 import com.google.gson.annotations.Expose;
-
 import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.common.Quad;
+import net.minecraft.block.Block;
+
+import java.util.ArrayList;
 
 /**
  * @author Disconsented
  */
 public class BlockSkill extends ToolSkill {
-    
+
     @Expose
     public ArrayList<Quad> exp = new ArrayList<Quad>();
-    
+
     @Override
     public void touchUp() {
         this.initTool();
-        
+
         ArrayList<Quad> initalised = new ArrayList<Quad>();
         for (Quad object : exp) {
             object.object = (Block) Block.blockRegistry.getObject(object.name);
-            if (object.object != null){
-                Logging.debug(object.name+" has been found. Passing on!");
+            if (object.object != null) {
+                Logging.debug(object.name + " has been found. Passing on!");
                 initalised.add(object);
             } else {
-                Logging.error(object.name+" could not be found. Ignoring!");
+                Logging.error(object.name + " could not be found. Ignoring!");
             }
         }
-        
+
     }
-    
+
 }

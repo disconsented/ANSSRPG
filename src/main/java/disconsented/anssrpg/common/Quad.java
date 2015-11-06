@@ -23,22 +23,23 @@ THE SOFTWARE.
 package disconsented.anssrpg.common;
 
 import com.google.gson.annotations.Expose;
+
 /**
- * Same as a triplet but contains an extra field for experience (for Blocks and Items)
- * @author Disconsented
+ * Same as a triplet but contains an extra field for metadata (for Blocks and Items)
  *
  * @param <O> {@link Triplet#object}
  * @param <S> {@link Triplet#name}
- * @param <I> {@link Triplet#metadata}
- * @param <E> Experience
+ * @param <I> {@link Triplet#experience}
+ * @param <E> Metadata
+ * @author Disconsented
  */
 public class Quad<O, S, I, E> extends Triplet<O, S, I> {
 
-    public Quad(Object object, String name,int experience, int metadata) {
-        super(object, name, experience);
-        this.metadata = metadata;
-    }
     @Expose
     public int metadata = 0;
 
+    public Quad(Object object, String name, int experience, int metadata) {
+        super(object, name, experience);
+        this.metadata = metadata;
+    }
 }

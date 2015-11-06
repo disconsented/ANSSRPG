@@ -22,39 +22,36 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.skill.objects;
 
-import java.util.ArrayList;
-
+import com.google.gson.annotations.Expose;
+import disconsented.anssrpg.common.Logging;
+import disconsented.anssrpg.common.Triplet;
 import net.minecraft.entity.EntityList;
 
-import com.google.gson.annotations.Expose;
-
-import disconsented.anssrpg.common.Logging;
-import disconsented.anssrpg.common.Quad;
-import disconsented.anssrpg.common.Triplet;
+import java.util.ArrayList;
 
 /**
  * @author Disconsented
  */
 public class EntitySkill extends ToolSkill {
-    
+
     @Expose
     public ArrayList<Triplet> exp = new ArrayList<Triplet>();
 
     @Override
-    public void touchUp() { 
+    public void touchUp() {
         this.initTool();
-        
+
         ArrayList<Triplet> initalised = new ArrayList<Triplet>();
         for (Triplet object : exp) {
             object.object = (Class) EntityList.stringToClassMapping.get(object.name);
-            if (object.object != null){
-                Logging.debug(object.name+" has been found. Passing on!");
+            if (object.object != null) {
+                Logging.debug(object.name + " has been found. Passing on!");
                 initalised.add(object);
             } else {
-                Logging.error(object.name+" could not be found. Ignoring!");
+                Logging.error(object.name + " could not be found. Ignoring!");
             }
         }
-        
+
     }
-    
+
 }

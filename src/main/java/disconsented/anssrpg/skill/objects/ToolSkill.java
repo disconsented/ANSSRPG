@@ -22,29 +22,24 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.skill.objects;
 
-import java.util.ArrayList;
-
 import com.google.gson.annotations.Expose;
-
 import disconsented.anssrpg.data.ToolRegistry;
-import disconsented.anssrpg.perk.Perk;
-import disconsented.anssrpg.perk.Requirement;
 
 /**
  * @author Disconsented
- * Abstract class for tools
- * See {@link ToolRegistry} for more information
+ *         Abstract class for tools
+ *         See {@link ToolRegistry} for more information
  */
-public abstract class ToolSkill extends Skill{    
+public abstract class ToolSkill extends Skill {
     @Expose
     public String tool = "";
     public Class toolClass = null;
-    
+
     public ToolSkill() {
         super();
     }
 
-    public void initTool(){
+    public void initTool() {
         this.toolClass = ToolRegistry.getEntry(tool);
     }
 

@@ -31,7 +31,7 @@ public class PerkInfoHandler implements IMessageHandler<PerkInfo, IMessage> {
 
     @Override
     public IMessage onMessage(PerkInfo message, MessageContext ctx) {
-        Data.perkInfo.put(message.getSlug(),message);
+        Data.perkInfo.put(message.getSlug(), message);
         return null;
     }
 

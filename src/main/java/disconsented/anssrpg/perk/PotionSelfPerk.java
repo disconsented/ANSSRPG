@@ -22,54 +22,49 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.perk;
 
-import java.util.ArrayList;
-
+import com.google.gson.annotations.Expose;
+import disconsented.anssrpg.common.PotionDefinition;
 import disconsented.anssrpg.handler.PlayerHandler;
-import disconsented.anssrpg.player.PlayerData;
-import net.minecraft.entity.EntityLiving;
+import disconsented.anssrpg.task.TaskApplyPotion;
+import disconsented.anssrpg.task.TaskMaster;
+import lombok.NoArgsConstructor;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.PotionEffect;
 
-import com.google.gson.annotations.Expose;
+import java.util.ArrayList;
 
-import disconsented.anssrpg.common.PotionDefinition;
-import disconsented.anssrpg.task.TaskApplyPotion;
-import disconsented.anssrpg.task.TaskMaster;
+@NoArgsConstructor
+public class PotionSelfPerk extends Perk implements ActivePerk {
 
-/**
- * @author Disconsented
- *
- */
-public class PotionSelfPerk extends Perk implements ActivePerk{
-    
-    public PotionSelfPerk(String name, ArrayList<Requirement> requirements, String description, int pointCost, 
-            ArrayList<PotionDefinition> effects, boolean repeat, int cycle, int maxCycles){
-        super(name, requirements, description, pointCost);
-        this.repeat = repeat;
-        this.cycle = cycle;
-        this.effects = effects;
-        this.maxCycles = maxCycles;
-    }
-    public PotionSelfPerk(){}
-    
     @Expose
-    public ArrayList<PotionDefinition> effects = new ArrayList<PotionDefinition>();    
+    public ArrayList<PotionDefinition> effects = new ArrayList<PotionDefinition>();
     @Expose
     public boolean repeat = false;
     @Expose
     public int cycle = 1;
     @Expose
     public int maxCycles = 10;
+
+    public PotionSelfPerk(String name, ArrayList<Requirement> requirements, String description, int pointCost, ArrayList<PotionDefinition> effects, boolean repeat, int cycle, int maxCycles) {
+        super(name, requirements, description, pointCost);
+        this.repeat = repeat;
+        this.cycle = cycle;
+        this.effects = effects;
+        this.maxCycles = maxCycles;
+    }
+
     @Override
-    public void searchObject() {}
+    public void searchObject() {
+    }
+
     @Override
     public void activate(EntityLivingBase target, EntityLivingBase source) {
         PlayerHandler.getPlayer(((EntityPlayerMP) target).getUniqueID());
-        for (PotionDefinition effect : effects){
+        for (PotionDefinition effect : effects) {
             TaskMaster.getInstance().addTask(new TaskApplyPotion(
                     (EntityLivingBase) target, new PotionEffect(effect.id, effect.duration, effect.amplifier), null, repeat, cycle, maxCycles, slug));
-        }        
-        
+        }
+
     }
 }

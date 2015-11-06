@@ -22,40 +22,32 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.common;
 
-import net.minecraft.entity.Entity;
-
 public class Utils {
     /**
-     * Returns 2 if two objects are matched. If either Metadata is <= -1 then it is treated as a wildcard (Metadata is ignored)
-     * @param object1
-     * @param metadata1
-     * @param object2
-     * @param metadata2
-     * @return
+     * @return - 2 if two objects are matched. If either Metadata is <= -1 then it is treated as a wildcard (Metadata is ignored)
      */
-    public static<T> boolean MatchObject(T object1, int metadata1, T object2, int metadata2){
-        if (metadata1 > -1 && metadata2 > -1){
-            if (object1.getClass().equals(object2.getClass()) && metadata1 == metadata2){
+    public static <T> boolean MatchObject(T object1, int metadata1, T object2, int metadata2) {
+        if (metadata1 > -1 && metadata2 > -1) {
+            if (object1.getClass().equals(object2.getClass()) && metadata1 == metadata2) {
                 return true;
             } else {
                 return false;
             }
         } else {
-            if (object1.getClass().equals(object2.getClass())){
+            if (object1.getClass().equals(object2.getClass())) {
                 return true;
             } else {
                 return false;
             }
         }
     }
-    
-    public static boolean MatchObject(Object item1, Object item2){
+
+    public static boolean MatchObject(Object item1, Object item2) {
         return item1.equals(item2) || item1 == item2;
     }
 
     /**
      * @author Disconsented
-     *
      */
     public static class Tools {
         public static String stringToSlug(String value){

@@ -44,8 +44,13 @@ minecraft {
     replace "@VERSION@", mod_version
 }
 
+repositories {
 
+}
 
+dependencies {
+    compile "org.projectlombok:lombok:1.16.4"
+}
 
 processResources {
     inputs.property "version", project.version

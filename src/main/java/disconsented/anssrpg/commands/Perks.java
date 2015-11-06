@@ -33,6 +33,7 @@ import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 
@@ -43,11 +44,10 @@ import java.util.List;
  * @author Disconsented
  */
 public class Perks extends CommandBase {
+
     private List aliases;
 
-    /**
-     *
-     */
+    @SuppressWarnings("unchecked")
     public Perks() {
         this.aliases = new ArrayList();
         this.aliases.add("perk");
@@ -56,68 +56,64 @@ public class Perks extends CommandBase {
 
     @Override
     public int compareTo(Object arg0) {
-        // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
     public String getCommandName() {
-        // TODO Auto-generated method stub
         return "perk";
     }
 
     @Override
-    public String getCommandUsage(ICommandSender p_71518_1_) {
-        // TODO Auto-generated method stub
+    public String getCommandUsage(ICommandSender commandSender) {
         return null;
     }
 
     @Override
     public List getCommandAliases() {
-        // TODO Auto-generated method stub
         return this.aliases;
     }
 
     @Override
-    public void processCommand(ICommandSender player, String[] arguments) {
-        String UUID = ((EntityPlayerMP) player).getPersistentID().toString();
+    public void processCommand(ICommandSender commandSender, String[] args) {
+        EntityPlayer player = (EntityPlayer) commandSender;
+        String UUID = player.getPersistentID().toString();
         String toReturn = "";
-        EntityPlayerMP p2 = (EntityPlayerMP) player;
         PlayerData playerdata = PlayerHandler.getPlayer(UUID);
-        switch (arguments[0].toLowerCase()) {
+        switch (args[0].toLowerCase()) {
             case "list":
-                switch (arguments[1].toLowerCase()) {
+                switch (args[1].toLowerCase()) {
                     case "current":
-                        for (Slug perk : PlayerHandler.getPlayer(p2.getUniqueID().toString()).getPerkList()) {
-                            toReturn += PerkStore.getInstance().getPerk(perk.getSlug().toString()) + ",";
+                        for (Slug perk : PlayerHandler.getPlayer(player.getUniqueID().toString()).getPerkList()) {
+                            toReturn += PerkStore.getPerk(perk.getSlug()) + ",";
                         }
                         break;
                     case "all":
-                        for (Perk perk : PerkStore.getInstance().getPerks()) {
-                            toReturn += perk.getSlug()+ ",";
+                        for (Perk perk : PerkStore.getPerks()) {
+                            toReturn += perk.getSlug() + ",";
                         }
                         break;
                     default:
-                        toReturn = arguments[1] + " is an invalid argument";
+                        toReturn = args[1] + " is an invalid argument";
                         break;
                 }
                 break;
             case "obtain":
-                if (arguments.length >= 2) {
-                    toReturn = PlayerHandler.addPerk(arguments[1].toString(), playerdata);
+                if (args.length >= 2) {
+                    toReturn = PlayerHandler.addPerk(args[1], playerdata);
                 }
                 break;
             case "getinfo":
-                if ((arguments.length >= 2)) {
-                    toReturn = PerkStore.getInstance().getPerk(arguments[1]).toString();
+                if ((args.length >= 2)) {
+                    toReturn = PerkStore.getPerk(args[1]).toString();
                 }
                 break;
             case "convertpoints":
-                if (Settings.getInstance().getPointsMode() == 2) {
-                    if (arguments.length > 2) {
-                        if (p2.experienceLevel >= Integer.parseInt(arguments[2])) {
-                            p2.experienceLevel -= Integer.parseInt(arguments[2]);
-                            playerdata.setPoints(playerdata.getPoints() + Integer.parseInt(arguments[2]));
+                if (Settings.getPointsMode() == 2) {
+                    if (args.length > 2) {
+                        if (player.experienceLevel >= Integer.parseInt(args[2])) {
+                            player.experienceLevel -= Integer.parseInt(args[2]);
+                            playerdata.setPoints(playerdata.getPoints() + Integer.parseInt(args[2]));
                         } else {
                             toReturn = "Invalid Argument";
                         }
@@ -129,31 +125,28 @@ public class Perks extends CommandBase {
                 }
                 break;
             case "activate":
-                if (arguments.length >= 2){
-                    toReturn = PlayerHandler.activatePerk(p2, playerdata, arguments[1]);
+                if (args.length >= 2) {
+                    toReturn = PlayerHandler.activatePerk(player, playerdata, args[1]);
                 }
-                
+
                 break;
         }
+
         player.addChatMessage(new ChatComponentText(toReturn));
     }
 
     @Override
-    public boolean canCommandSenderUseCommand(ICommandSender p_71519_1_) {
-        // TODO Auto-generated method stub
+    public boolean canCommandSenderUseCommand(ICommandSender commandSender) {
         return true;
     }
 
     @Override
-    public List addTabCompletionOptions(ICommandSender p_71516_1_,
-                                        String[] p_71516_2_) {
-        // TODO Auto-generated method stub
+    public List addTabCompletionOptions(ICommandSender commandSender, String[] args) {
         return null;
     }
 
     @Override
-    public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_) {
-        // TODO Auto-generated method stub
+    public boolean isUsernameIndex(String[] args, int index) {
         return false;
     }
 

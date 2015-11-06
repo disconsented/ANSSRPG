@@ -22,18 +22,19 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.config;
 
-import java.util.ArrayList;
-
 import com.google.gson.annotations.Expose;
-
 import disconsented.anssrpg.common.Logging;
 import disconsented.anssrpg.skill.objects.BlockSkill;
 import disconsented.anssrpg.skill.objects.EntitySkill;
 import disconsented.anssrpg.skill.objects.ItemSkill;
 import disconsented.anssrpg.skill.objects.Skill;
+
+import java.util.ArrayList;
+
 /**
  * Used to safely retain data for saving and loading skills before initalising them for use
- * @author Disconsented 
+ *
+ * @author Disconsented
  */
 public class SkillContainer {
 
@@ -72,11 +73,11 @@ public class SkillContainer {
         skills.addAll(blocks);
         skills.addAll(entites);
         skills.addAll(items);
-        
-        for(Skill skillCurrent : skills){
-            for(Skill skillName : skills){
-                if (skillCurrent.name.equals(skillName.name)){
-                    if (skillCurrent.base == skillName.base && skillCurrent.mod == skillName.mod){
+
+        for (Skill skillCurrent : skills) {
+            for (Skill skillName : skills) {
+                if (skillCurrent.name.equals(skillName.name)) {
+                    if (skillCurrent.base == skillName.base && skillCurrent.mod == skillName.mod) {
                         Logging.debug(skillCurrent.name + " has been detected as a compound skill");
                     } else {
                         Logging.error(skillCurrent.name + " has been detected as a compound skill but does not match other definations; Removing");
@@ -84,7 +85,7 @@ public class SkillContainer {
                     }
                 }
             }
-        }        
+        }
         for (BlockSkill block : blocks) {
             block.touchUp();
             disconsented.anssrpg.data.SkillStore.addSkill(block);
@@ -99,23 +100,23 @@ public class SkillContainer {
         }
 
     }
-    
-    private void matchAndRemove(Skill skill){
+
+    private void matchAndRemove(Skill skill) {
         for (BlockSkill block : blocks) {
             blocks.remove(skill);
-            if(block.name == skill.name){
+            if (block.name == skill.name) {
                 blocks.remove(block);
             }
         }
         for (EntitySkill entity : entites) {
             entites.remove(skill);
-            if(entity.name == skill.name){
+            if (entity.name == skill.name) {
                 entites.remove(entity);
             }
         }
         for (ItemSkill item : items) {
             items.remove(skill);
-            if(item.name == skill.name){
+            if (item.name == skill.name) {
                 items.remove(item);
             }
         }

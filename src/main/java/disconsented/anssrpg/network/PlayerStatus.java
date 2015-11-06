@@ -25,10 +25,7 @@ package disconsented.anssrpg.network;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import io.netty.buffer.ByteBuf;
 
-/**
- * Created by j on 30/08/2015.
- */
-public class PlayerStatus implements IMessage{
+public class PlayerStatus implements IMessage {
     public float currentHearts = 0;
     public float currentSaturation = 0;
     public float currentArmourHelmet = 0;
@@ -36,9 +33,11 @@ public class PlayerStatus implements IMessage{
     public float currentArmourLeggings = 0;
     public float currentArmourBoots = 0;
 
-    public PlayerStatus(){}
+    public PlayerStatus() {
+    }
+
     public PlayerStatus(float currentHearts, float currentSaturation, float currentArmourHelmet,
-                        float currentArmourChest, float currentArmourLeggings, float currentArmourBoots){
+                        float currentArmourChest, float currentArmourLeggings, float currentArmourBoots) {
         this.currentHearts = currentHearts;
         this.currentSaturation = currentSaturation;
         this.currentArmourHelmet = currentArmourHelmet;
@@ -46,6 +45,7 @@ public class PlayerStatus implements IMessage{
         this.currentArmourLeggings = currentArmourLeggings;
         this.currentArmourBoots = currentArmourBoots;
     }
+
     @Override
     public void fromBytes(ByteBuf buf) {
         this.currentHearts = buf.readFloat();

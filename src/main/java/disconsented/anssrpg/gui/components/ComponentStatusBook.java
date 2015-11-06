@@ -28,16 +28,9 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.ArrayList;
-import java.util.List;
 
-/**
- * Created by Disconsented on 24/08/2015.
- */
-public class ComponentStatusBook  extends ComponentBase{
+public class ComponentStatusBook extends ComponentBase {
 
-    private ResourceLocation stat1 = new ResourceLocation(Reference.ID, "stat1.png"); //140x180
-    private ResourceLocation stat2 = new ResourceLocation(Reference.ID, "stat2.png"); //140x180
-    private FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
     public static float currentHearts = 0;
     public static float currentSaturation = 0;
     public static float currentArmourHelmet = 0;
@@ -45,23 +38,24 @@ public class ComponentStatusBook  extends ComponentBase{
     public static float currentArmourLeggings = 0;
     public static float currentArmourBoots = 0;
     public static ArrayList<String> activePerks = new ArrayList<>();
+    private ResourceLocation stat1 = new ResourceLocation(Reference.ID, "stat1.png"); //140x180
+    private ResourceLocation stat2 = new ResourceLocation(Reference.ID, "stat2.png"); //140x180
+    private FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
 
-
-
-    public ComponentStatusBook(int x, int y){
+    public ComponentStatusBook(int x, int y) {
         this.x = x;
         this.y = y;
         this.width = 256;
         this.height = 256;
     }
 
-
-    /** Draws the background's first then draws the icon's with their value next to them
-     *  Active perks are drawn on the right side after being spliced together
+    /**
+     * Draws the background's first then draws the icon's with their value next to them
+     * Active perks are drawn on the right side after being spliced together
      */
     @Override
     public void draw() {
-        bindAndDrawTexture(stat1, x-140, y-90, 140, 180);
+        bindAndDrawTexture(stat1, x - 140, y - 90, 140, 180);
         bindAndDrawTexture(stat2, x, y - 90, width, height);
 
         bindAndDrawTexture(stat1, x - 100, y - 30, 1, 188, 16, 16);//Heart
@@ -80,13 +74,12 @@ public class ComponentStatusBook  extends ComponentBase{
         fontRenderer.drawString(Float.toString(currentArmourChest), x - 36, y - 24, 0);
 
         bindAndDrawTexture(stat1, x - 70, y - 76, 86, 188, 16, 16);//Helmet
-        fontRenderer.drawString(Float.toString(currentArmourHelmet),x-59, y-74,0);
+        fontRenderer.drawString(Float.toString(currentArmourHelmet), x - 59, y - 74, 0);
 
         String joinedPerks = "";
-        for (String string : activePerks){
-            joinedPerks += string+"\n";
-        }
-        fontRenderer.drawSplitString(joinedPerks,x+4,y-78,123,0);
+        for (String string : activePerks)
+            joinedPerks += string + "\n";
 
+        fontRenderer.drawSplitString(joinedPerks, x + 4, y - 78, 123, 0);
     }
 }

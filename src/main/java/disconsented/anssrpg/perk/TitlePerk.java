@@ -23,7 +23,9 @@ THE SOFTWARE.
 package disconsented.anssrpg.perk;
 
 import com.google.gson.annotations.Expose;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 public class TitlePerk extends Perk {
 
     @Expose

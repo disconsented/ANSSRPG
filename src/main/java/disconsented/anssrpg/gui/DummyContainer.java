@@ -28,9 +28,7 @@ import net.minecraft.inventory.Container;
 public class DummyContainer extends Container {
 
     @Override
-    public boolean canInteractWith(EntityPlayer p_75145_1_) {
-        // TODO Auto-generated method stub
+    public boolean canInteractWith(EntityPlayer player) {
         return true;
     }
-
 }

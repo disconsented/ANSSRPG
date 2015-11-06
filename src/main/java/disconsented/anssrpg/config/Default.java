@@ -22,17 +22,19 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.config;
 
-import java.util.ArrayList;
-
+import disconsented.anssrpg.common.ObjectPerkDefinition;
 import disconsented.anssrpg.common.PotionDefinition;
 import disconsented.anssrpg.common.Quad;
-import disconsented.anssrpg.common.ObjectPerkDefinition;
 import disconsented.anssrpg.common.Triplet;
 import disconsented.anssrpg.perk.*;
 import disconsented.anssrpg.perk.Requirement.Action;
-import disconsented.anssrpg.skill.objects.*;
+import disconsented.anssrpg.skill.objects.BlockSkill;
+import disconsented.anssrpg.skill.objects.EntitySkill;
+import disconsented.anssrpg.skill.objects.ItemSkill;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+
+import java.util.ArrayList;
 
 /**
  * Contains the information for the default configs so it can be referenced as needed
@@ -41,106 +43,145 @@ import net.minecraft.item.Item;
 public class Default {
     private static PerkContainer perks = null;
     private static SkillContainer skills = null;
-    private Default(){}
-    
-    public static PerkContainer getPerkInstance(){
-        if (perks != null){
+
+    private Default() {
+
+    }
+
+    @SuppressWarnings("unchecked")
+    public static PerkContainer getPerkInstance() {
+        if (perks != null) {
             return perks;
         } else {
-            perks = new PerkContainer();            
-            
+            perks = new PerkContainer();
+
             perks.addPerk(new BlockPerk("Unlock: Iron Ore",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "4"));}},
+                    new ArrayList<Requirement>() {{
+                        add(new Requirement(Action.LEVEL_GREATER, "Mining", "4"));
+                    }},
                     "Allows you to mine Iron Ore",
                     0,
-                    new ArrayList<ObjectPerkDefinition<Block>>(){{add(new ObjectPerkDefinition(null, "iron_ore", 0));}}));
-            
+                    new ArrayList<ObjectPerkDefinition<Block>>() {{
+                        add(new ObjectPerkDefinition(null, "iron_ore", 0));
+                    }}));
+
             perks.addPerk(new BlockPerk("Unlock: Lapis Ore",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "4"));}},
+                    new ArrayList<Requirement>() {{
+                        add(new Requirement(Action.LEVEL_GREATER, "Mining", "4"));
+                    }},
                     "Allows you to mine Lapis Ore",
                     0,
-                    new ArrayList<ObjectPerkDefinition<Block>>(){{add(new ObjectPerkDefinition(null, "lapis_ore", 0));}}));
-            
+                    new ArrayList<ObjectPerkDefinition<Block>>() {{
+                        add(new ObjectPerkDefinition(null, "lapis_ore", 0));
+                    }}));
+
             perks.addPerk(new BlockPerk("Unlock: Gold Ore",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "9"));}},
+                    new ArrayList<Requirement>() {{
+                        add(new Requirement(Action.LEVEL_GREATER, "Mining", "9"));
+                    }},
                     "Allows you to mine Gold Ore",
                     0,
-                    new ArrayList<ObjectPerkDefinition<Block>>(){{add(new ObjectPerkDefinition(null, "gold_ore", 0));}}));
-            
+                    new ArrayList<ObjectPerkDefinition<Block>>() {{
+                        add(new ObjectPerkDefinition(null, "gold_ore", 0));
+                    }}));
+
             perks.addPerk(new BlockPerk("Unlock: Redstone Ore",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "14"));}},
+                    new ArrayList<Requirement>() {{
+                        add(new Requirement(Action.LEVEL_GREATER, "Mining", "14"));
+                    }},
                     "Allows you to mine Redstone Ore",
                     0,
-                    new ArrayList<ObjectPerkDefinition<Block>>(){{add(new ObjectPerkDefinition(null, "redstone_ore", -1));}}));
-            
+                    new ArrayList<ObjectPerkDefinition<Block>>() {{
+                        add(new ObjectPerkDefinition(null, "redstone_ore", -1));
+                    }}));
+
             perks.addPerk(new BlockPerk("Unlock: Diamond Ore",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "19"));}},
+                    new ArrayList<Requirement>() {{
+                        add(new Requirement(Action.LEVEL_GREATER, "Mining", "19"));
+                    }},
                     "Allows you to mine Diamond Ore",
                     0,
-                    new ArrayList<ObjectPerkDefinition<Block>>(){{add(new ObjectPerkDefinition(null, "diamond_ore", 0));}}));
-            
+                    new ArrayList<ObjectPerkDefinition<Block>>() {{
+                        add(new ObjectPerkDefinition(null, "diamond_ore", 0));
+                    }}));
+
             perks.addPerk(new BlockPerk("Unlock: Emerald Ore",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Mining", "24"));}},
+                    new ArrayList<Requirement>() {{
+                        add(new Requirement(Action.LEVEL_GREATER, "Mining", "24"));
+                    }},
                     "Allows you to mine Emerald Ore",
                     0,
-                    new ArrayList<ObjectPerkDefinition<Block>>(){{add(new ObjectPerkDefinition(null, "emerald_ore", 0));}}));
-            
-            perks.addPerk(new ItemPerk("Unlock: Gold Armour", 
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Armouring", "4"));}},
+                    new ArrayList<ObjectPerkDefinition<Block>>() {{
+                        add(new ObjectPerkDefinition(null, "emerald_ore", 0));
+                    }}));
+
+            perks.addPerk(new ItemPerk("Unlock: Gold Armour",
+                    new ArrayList<Requirement>() {{
+                        add(new Requirement(Action.LEVEL_GREATER, "Armouring", "4"));
+                    }},
                     "Allows you to craft Gold armour",
                     0,
-                    new ArrayList<ObjectPerkDefinition<Item>>(){{
-                        add(new ObjectPerkDefinition(null, "golden_helmet",0));
-                        add(new ObjectPerkDefinition(null, "golden_chestplate",0));
-                        add(new ObjectPerkDefinition(null, "golden_leggings",0));
-                        add(new ObjectPerkDefinition(null, "golden_boots",0));
-                        }}));
-            
+                    new ArrayList<ObjectPerkDefinition<Item>>() {{
+                        add(new ObjectPerkDefinition(null, "golden_helmet", 0));
+                        add(new ObjectPerkDefinition(null, "golden_chestplate", 0));
+                        add(new ObjectPerkDefinition(null, "golden_leggings", 0));
+                        add(new ObjectPerkDefinition(null, "golden_boots", 0));
+                    }}));
+
             perks.addPerk(new ItemPerk("Unlock: Iron Armour",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Armouring", "9"));}},
+                    new ArrayList<Requirement>() {{
+                        add(new Requirement(Action.LEVEL_GREATER, "Armouring", "9"));
+                    }},
                     "Allows you to craft Iron armour",
                     0,
-                    new ArrayList<ObjectPerkDefinition<Item>>(){{
-                        add(new ObjectPerkDefinition(null, "iron_helmet",0));
-                        add(new ObjectPerkDefinition(null, "iron_chestplate",0));
-                        add(new ObjectPerkDefinition(null, "iron_leggings",0));
-                        add(new ObjectPerkDefinition(null, "iron_boots",0));
-                        }}));
-            
+                    new ArrayList<ObjectPerkDefinition<Item>>() {{
+                        add(new ObjectPerkDefinition(null, "iron_helmet", 0));
+                        add(new ObjectPerkDefinition(null, "iron_chestplate", 0));
+                        add(new ObjectPerkDefinition(null, "iron_leggings", 0));
+                        add(new ObjectPerkDefinition(null, "iron_boots", 0));
+                    }}));
+
             perks.addPerk(new ItemPerk("Unlock: Diamond Armour",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Armouring", "14"));}},
+                    new ArrayList<Requirement>() {{
+                        add(new Requirement(Action.LEVEL_GREATER, "Armouring", "14"));
+                    }},
                     "Allows you to craft Diamond armour",
                     0,
-                    new ArrayList<ObjectPerkDefinition<Item>>(){{
-                        add(new ObjectPerkDefinition(null, "diamond_helmet",0));
-                        add(new ObjectPerkDefinition(null, "diamond_chestplate",0));
-                        add(new ObjectPerkDefinition(null, "diamond_leggings",0));
-                        add(new ObjectPerkDefinition(null, "diamond_boots",0));
-                        }}));
-            
+                    new ArrayList<ObjectPerkDefinition<Item>>() {{
+                        add(new ObjectPerkDefinition(null, "diamond_helmet", 0));
+                        add(new ObjectPerkDefinition(null, "diamond_chestplate", 0));
+                        add(new ObjectPerkDefinition(null, "diamond_leggings", 0));
+                        add(new ObjectPerkDefinition(null, "diamond_boots", 0));
+                    }}));
+
             perks.addPerk(new EntityPerk("Creeper killer",
-                    new ArrayList<Requirement>(){{add(new Requirement(Action.LEVEL_GREATER, "Slaying", "4"));}},
+                    new ArrayList<Requirement>() {{
+                        add(new Requirement(Action.LEVEL_GREATER, "Slaying", "4"));
+                    }},
                     "Allows Creepers to be killed",
                     0,
-                    new ArrayList<ObjectPerkDefinition<Class>>(){{add (new ObjectPerkDefinition(null,"Creeper",0));}}));
-            
-            perks.addPerk(new PotionSelfPerk("Health boost", null, "Provides a 10 second shield", 0, 
-                    new ArrayList<PotionDefinition>(){{
-                add(new PotionDefinition(21,1,20));}},
-                true, 20, 200));
-            
+                    new ArrayList<ObjectPerkDefinition<Class>>() {{
+                        add(new ObjectPerkDefinition(null, "Creeper", 0));
+                    }}));
+
+            perks.addPerk(new PotionSelfPerk("Health boost", null, "Provides a 10 second shield", 0,
+                    new ArrayList<PotionDefinition>() {{
+                        add(new PotionDefinition(21, 1, 20));
+                    }},
+                    true, 20, 200));
+
             return perks;
-            
+
         }
-            
+
     }
-    
-    public static SkillContainer getSkillInstance(){
-        if (skills != null){
+
+    public static SkillContainer getSkillInstance() {
+        if (skills != null) {
             return skills;
         } else {
             skills = new SkillContainer();
-            
+
             BlockSkill mining = new BlockSkill();
             mining.name = "Mining";
             mining.exp.add(new Quad(null, "coal_ore", 5, 0));
@@ -165,7 +206,7 @@ public class Default {
             woodcutting.exp.add(new Quad(null, "log2", 6, 1));
             woodcutting.tool = "Axe";
             skills.addBlockSkill(woodcutting);
-            
+
             BlockSkill digging = new BlockSkill();
             digging.name = "Digging";
             digging.exp.add(new Quad(null, "sand", 1, 0));
@@ -176,7 +217,7 @@ public class Default {
             digging.exp.add(new Quad(null, "stained_hardened_clay", 2, -1));
             digging.tool = "Spade";
             skills.addBlockSkill(digging);
-            
+
             EntitySkill slaying = new EntitySkill();
             slaying.name = "Slaying";
             slaying.exp.add(new Triplet(null, "Zombie", 5));
@@ -185,7 +226,7 @@ public class Default {
             slaying.exp.add(new Triplet(null, "Creeper", 20));
             slaying.tool = "Sword";
             skills.addEntitySkill(slaying);
-            
+
             ItemSkill armouring = new ItemSkill();
             armouring.name = "Armouring";
             //Leather
@@ -208,12 +249,12 @@ public class Default {
             armouring.exp.add(new Quad(null, "diamond_chestplate", 30, 0));
             armouring.exp.add(new Quad(null, "diamond_leggings", 30, 0));
             armouring.exp.add(new Quad(null, "diamond_boots", 30, 0));
-            
+
             skills.addItemSkill(armouring);
-            
+
             return skills;
         }
-        
+
     }
-    
+
 }

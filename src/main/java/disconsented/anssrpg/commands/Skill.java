@@ -30,6 +30,7 @@ import disconsented.anssrpg.perk.Slug;
 import disconsented.anssrpg.player.PlayerData;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 
@@ -37,74 +38,61 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
-/**
- * @author Disconsented
- */
 public class Skill extends CommandBase {
 
-    /**
-     *
-     */
+    public ArrayList<String> aliases = new ArrayList<>();
+
     public Skill() {
-        // TODO Auto-generated constructor stub
+        aliases.add("skill");
     }
 
     @Override
-    public int compareTo(Object arg0) {
-        // TODO Auto-generated method stub
+    public int compareTo(Object o) {
         return 0;
     }
 
     @Override
     public String getCommandName() {
-        // TODO Auto-generated method stub
         return "skill";
     }
 
     @Override
-    public String getCommandUsage(ICommandSender p_71518_1_) {
-        // TODO Auto-generated method stub
+    public String getCommandUsage(ICommandSender commandSender) {
         return null;
     }
 
     @Override
     public List getCommandAliases() {
-        List aliases = new ArrayList();
-        aliases.add("skill");
         return aliases;
     }
 
     @Override
-    public void processCommand(ICommandSender player, String[] p_71515_2_) {
-        EntityPlayerMP user = (EntityPlayerMP) player;
-        PlayerData playerData = PlayerStore.getInstance().getPlayer(user.getPersistentID().toString());
+    public void processCommand(ICommandSender commandSender, String[] args) {
+        EntityPlayer player = (EntityPlayer) commandSender;
+        PlayerData playerData = PlayerStore.getPlayer(player.getPersistentID().toString());
         String toReturn = "You have the current perks: ";
-        for (Slug slug : playerData.getPerkList()) {
+        for (Slug slug : playerData.getPerkList())
             toReturn += "," + slug;
-        }
+
         toReturn += "| Your skill XP: ";
-        for (Entry<String, Integer> skill : playerData.getSkillExp().entrySet()) {
+        for (Entry<String, Integer> skill : playerData.getSkillExp().entrySet())
             toReturn += skill.toString();
-        }
+
         player.addChatMessage(new ChatComponentText(toReturn));
     }
 
     @Override
-    public boolean canCommandSenderUseCommand(ICommandSender p_71519_1_) {
-        // TODO Auto-generated method stub
+    public boolean canCommandSenderUseCommand(ICommandSender commandSender) {
         return true;
     }
 
     @Override
-    public List addTabCompletionOptions(ICommandSender p_71516_1_,
-                                        String[] p_71516_2_) {
-        // TODO Auto-generated method stub
+    public List addTabCompletionOptions(ICommandSender commandSender, String[] args) {
         return null;
     }
 
     @Override
-    public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_) {
-        // TODO Auto-generated method stub
+    public boolean isUsernameIndex(String[] args, int index) {
         return false;
     }
 
@@ -112,5 +100,4 @@ public class Skill extends CommandBase {
     public int getRequiredPermissionLevel() {
         return 0;
     }
-
 }

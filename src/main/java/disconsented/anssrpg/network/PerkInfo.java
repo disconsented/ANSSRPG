@@ -26,10 +26,13 @@ import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import disconsented.anssrpg.perk.Requirement;
 import io.netty.buffer.ByteBuf;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 
+@NoArgsConstructor
 public class PerkInfo implements IMessage {
+
     private String name;
     private String description;
     private int pointCost;
@@ -41,15 +44,12 @@ public class PerkInfo implements IMessage {
     private String slug;
     private boolean obtained;
 
-    public PerkInfo() {
-    }
-
     public PerkInfo(String name, String description, String slug, int pointCost, ArrayList<Requirement> requirements, boolean obtained) {
         this.name = name;
         this.description = description;
         this.slug = slug;
         this.pointCost = pointCost;
-        for (Requirement requirement : requirements){
+        for (Requirement requirement : requirements) {
             names.add(requirement.name);
             extraData.add(requirement.extraData);
             actions.add(requirement.action);
@@ -67,7 +67,7 @@ public class PerkInfo implements IMessage {
         pointCost = buf.readInt();
         requirements = new ArrayList<Requirement>();
         for (int i = 0; i < size; i++) {
-            requirements.add(new Requirement(Requirement.Action.valueOf(ByteBufUtils.readUTF8String(buf)), ByteBufUtils.readUTF8String(buf),ByteBufUtils.readUTF8String(buf)));
+            requirements.add(new Requirement(Requirement.Action.valueOf(ByteBufUtils.readUTF8String(buf)), ByteBufUtils.readUTF8String(buf), ByteBufUtils.readUTF8String(buf)));
         }
         obtained = buf.readBoolean();
     }
@@ -102,7 +102,7 @@ public class PerkInfo implements IMessage {
     public ArrayList<Requirement> getRequirements() {
         ArrayList<Requirement> req = new ArrayList<Requirement>();
         for (int i = 0; i < names.size(); i++) {
-            req.add(new Requirement(actions.get(i),names.get(i),extraData.get(i)));
+            req.add(new Requirement(actions.get(i), names.get(i), extraData.get(i)));
         }
         return req;
     }

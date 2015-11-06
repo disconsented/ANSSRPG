@@ -78,33 +78,35 @@ public class PlayerData {
     public void setSkillExp(HashMap<String, Integer> skillExp) {
         this.skillExp = skillExp;
     }
-    public int getSkillLevel(Skill skill){
+
+    public int getSkillLevel(Skill skill) {
         return (int) SkillHandler.calculateLevelForExp(skill, this.skillExp.get(skill.name));
     }
 
     public ArrayList<Slug> getActivePerks() {
         return activePerks;
     }
-    
-    /**
-     * Used for permanent perks 
-     * @param slug
-     */
-    public void addActivePerkSlug(Slug slug){
-        this.activePerks.add(slug);
-    }
-    
-    /**
-     * Used for permanent perks 
-     * @param slug
-     */
-    public void removeActivePerkSlug(Slug slug){
-        this.activePerks.remove(slug);
-    }
-    
 
     public void setActivePerks(ArrayList<Slug> activePerks) {
         this.activePerks = activePerks;
+    }
+
+    /**
+     * Used for permanent perks
+     *
+     * @param slug
+     */
+    public void addActivePerkSlug(Slug slug) {
+        this.activePerks.add(slug);
+    }
+
+    /**
+     * Used for permanent perks
+     *
+     * @param slug
+     */
+    public void removeActivePerkSlug(Slug slug) {
+        this.activePerks.remove(slug);
     }
 
     @Override
