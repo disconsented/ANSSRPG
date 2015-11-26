@@ -7,9 +7,6 @@ cache:
     - .gradle
 sudo: false
 install: true
-branches:
-  only:
-    - build
 
 before_install:
   - sed -i 's/git:/https:/g' .git/config
