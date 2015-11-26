@@ -123,7 +123,7 @@ def shouldTag(){
 task tagRelease() {
     doLast {
         if(shouldTag()) {
-            print "Releasing ${version}."
+            println "Releasing ${version}."
             System.setProperty("org.ajoberstar.grgit.auth.username", "$usr")
             System.setProperty("org.ajoberstar.grgit.auth.password", "$psw")
             repo.tag.add {
@@ -135,7 +135,7 @@ task tagRelease() {
                 tags = true
             }
         } else {
-            print "${version} already exists."
+            println "${version} already exists."
         }
     }
 }
