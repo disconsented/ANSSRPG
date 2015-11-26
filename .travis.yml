@@ -10,6 +10,8 @@ install: true
 branches:
   only:
     - build
+  except:
+    - /\d+\.\d+-v\d+\.\d+\.\d+/
 
 before_install:
   - sed -i 's/git:/https:/g' .git/config

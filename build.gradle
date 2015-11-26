@@ -111,17 +111,36 @@ sourceSets {
     main { output.resourcesDir = output.classesDir }
 }
 
-task tagRelease {
-    doLast {
-        System.setProperty("org.ajoberstar.grgit.auth.username","$usr")
-        System.setProperty("org.ajoberstar.grgit.auth.password","$psw")
-        repo.tag.add {
-            name = version
-            message = "Release of ${version}"
-            pointsTo = gitHash
+
+def shouldTag(){
+    def p = new URL ("https://api.github.com/repos/${github_repo}/releases").text
+    def json = new JsonSlurper().parseText(p)
+    println "Searching for " + version + " in ${github_repo}"
+    json.each {
+        if(it.tag_name == version){
+            return false
         }
-        repo.push{
-            tags = true
+    }
+    return true
+}
+
+task tagRelease() {
+    doLast {
+        if(shouldTag()) {
+            println "Releasing ${version}."
+            System.setProperty("org.ajoberstar.grgit.auth.username", "$usr")
+            System.setProperty("org.ajoberstar.grgit.auth.password", "$psw")
+            repo.tag.add {
+                name = version
+                message = "Release of ${version} built against forge ${forge_version}"
+                pointsTo = gitHash
+            }
+            repo.push {
+                tags = true
+            }
+        } else {
+            println "${version} already exists."
         }
     }
 }
+
