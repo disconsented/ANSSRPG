@@ -27,12 +27,12 @@ import java.util.Map;
 
 public class Utils {
     /**
-     * Returns true if two objects are matched. If either Metadata is <= -1 then it is treated as a wildcard (Metadata is ignored)
-     * @param object1
-     * @param metadata1
-     * @param object2
-     * @param metadata2
-     * @return
+     * Returns true if two objects are matched. If either Metadata is less than 0(-1) then it is treated as a wildcard (Metadata is ignored).
+     * @param object1 First object to match.
+     * @param metadata1 First objects metadata.
+     * @param object2 Second object to match.
+     * @param metadata2 Second objects metadata.
+     * @return The result.
      */
     public static<T> boolean MatchObject(T object1, int metadata1, T object2, int metadata2){
         if (metadata1 > -1 && metadata2 > -1){
@@ -44,12 +44,12 @@ public class Utils {
 
     /**
      * Returns true if two objects of the same time are the same. Uses a properties map and will use Object1 as the 'master' (checks are based off that)
-     * @param object1
-     * @param properties1
-     * @param object2
-     * @param properties2
-     * @param <T>
-     * @return
+     * @param object1 First object to match.
+     * @param properties1 Properties map of the first object.
+     * @param object2 Second object to match.
+     * @param properties2 Properties map of the second object.
+     * @param <T> Arbitrary data type.
+     * @return The result.
      */
     public static<T> boolean MatchObject(T object1, Map<String, String> properties1, T object2, Map<String, String> properties2){
         if(object1 != object2)
@@ -80,18 +80,19 @@ public class Utils {
         }
         return true;
     }
-    
+
+    /**
+     * Simple method for matching objects.
+     * @param item1 First object to match.
+     * @param item2 Second object to match.
+     * @return The result.
+     */
     public static boolean MatchObject(Object item1, Object item2){
         return item1.equals(item2) || item1 == item2;
     }
 
-    /**
-     * @author Disconsented
-     *
-     */
-    public static class Tools {
-        public static String stringToSlug(String value){
-            return value.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
-        }
+    public static String stringToSlug(String value){
+        return value.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
     }
+
 }

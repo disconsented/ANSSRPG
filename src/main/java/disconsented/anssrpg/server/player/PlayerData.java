@@ -85,23 +85,6 @@ public class PlayerData {
     public ArrayList<Slug> getActivePerks() {
         return this.activePerks;
     }
-    
-    /**
-     * Used for permanent perks 
-     * @param slug
-     */
-    public void addActivePerkSlug(Slug slug){
-        activePerks.add(slug);
-    }
-    
-    /**
-     * Used for permanent perks 
-     * @param slug
-     */
-    public void removeActivePerkSlug(Slug slug){
-        activePerks.remove(slug);
-    }
-    
 
     public void setActivePerks(ArrayList<Slug> activePerks) {
         this.activePerks = activePerks;

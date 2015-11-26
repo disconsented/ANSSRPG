@@ -39,6 +39,7 @@ import disconsented.anssrpg.server.player.PlayerFile;
  * @author James
  *         onEntityJoinWorld - Probably not needed
  *         onLivingDeath - Saves data
+ *         TODO: Refactor saving and loading into methods to be called.
  */
 public class DataSave {
     public static void addPlayer(PlayerData player, String PlayerID) {
@@ -70,7 +71,7 @@ public class DataSave {
     /**
      * Load player data
      *
-     * @param event
+     * @param event PlayerLoggedInEvent
      */
     public void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event) {
         if (Settings.getDebug()) {
@@ -85,7 +86,7 @@ public class DataSave {
     /**
      * Saves player data
      *
-     * @param event
+     * @param event PlayerLoggedOutEvent
      */
     public void onPlayerLoggedOutEvent(PlayerEvent.PlayerLoggedOutEvent event) {
         if (Settings.getDebug()) {
@@ -100,7 +101,7 @@ public class DataSave {
     /**
      * Saves player data (crash damage mitigation)
      *
-     * @param event
+     * @param event PlayerRespawnEvent
      */
     public void onPlayerRespawnEvent(PlayerEvent.PlayerRespawnEvent event) {
         if (Settings.getDebug()) {

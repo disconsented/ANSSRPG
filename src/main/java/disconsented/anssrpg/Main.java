@@ -102,9 +102,8 @@ public class Main {
     }
 
     /**
-     * Should allow single player saving as well as server shutdown saving
-     *
-     * @param event
+     * Should allow single player saving as well as server shutdown saving.     *
+     * @param event The Server stopping event.
      */
     @Mod.EventHandler
     public void onServerStoppingEvent(FMLServerStoppingEvent event) {
@@ -128,7 +127,7 @@ public class Main {
         }
 
         BlockSkill temp = new BlockSkill();
-        for (int i = 0; i < 100; i++){
+        for (int i = 0; i < 100; i++){//TODO: Remove
             double xp = SkillHandler.calculateExpForLevel(temp, i);
             long level = SkillHandler.calculateLevelForExp(temp, xp);
             Logging.debug("Int: "+i+"\n"

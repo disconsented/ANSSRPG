@@ -40,7 +40,7 @@ public abstract class Task/* implements Comparable<TaskApplyPotion>*/{
 	/**
 	 * Called every tick
 	 * Override canProcess to filter  
-	 * @param event
+	 * @param event TickEvent
 	 */
 	public abstract void onTick(TickEvent event);
 	/**
@@ -50,8 +50,8 @@ public abstract class Task/* implements Comparable<TaskApplyPotion>*/{
 	/**
 	 * Called to determine if the task should be processed
 	 * 
-	 * @param event
-	 * @return
+	 * @param event TickEvent
+	 * @return The result.
 	 */
 	public boolean canProcess(TickEvent event){
 		if(!this.filter(event)){
@@ -68,8 +68,8 @@ public abstract class Task/* implements Comparable<TaskApplyPotion>*/{
 	}
 	/**
 	 * Allows a task to be filtered to a TickEvent type
-	 * @param event
-	 * @return
+	 * @param event TickEvent
+	 * @return The result.
 	 */
 	private boolean filter(TickEvent event){
 		if(this.type == null) {

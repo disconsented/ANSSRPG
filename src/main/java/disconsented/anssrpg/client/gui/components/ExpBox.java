@@ -43,9 +43,8 @@ public class ExpBox extends ComponentBase{
     private final ResourceLocation greenTexture = new ResourceLocation(Reference.ID, "green.png");
     
     /**
-     * 
-     * @param x
-     * @param y
+     * @param x position to draw from.
+     * @param y position to draw from.
      */
     public ExpBox(int x, int y){
         this.x = x;

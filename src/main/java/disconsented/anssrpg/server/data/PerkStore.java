@@ -79,27 +79,27 @@ public class PerkStore {
     }
 
     /**
-     * Takes a Block and returns an ArrayList of the associated perks
-     * @param block
-     * @return
+     * Takes a Block and returns an ArrayList of the associated perks.
+     * @param block The block to base the lookup from.
+     * @return The result.
      */
     public static ArrayList<BlockPerk> getPerks(Block block){
         return PerkStore.blockMap.get(block.getUnlocalizedName());
     }
 
     /**
-     * Takes a Item and returns an ArrayList of the associated perks
-     * @param item
-     * @return
+     * Takes a Item and returns an ArrayList of the associated perks.
+     * @param item The item to base the lookup from.
+     * @return The result.
      */
     public static ArrayList<ItemPerk> getPerks(Item item){
         return PerkStore.itemMap.get(item.getUnlocalizedName());
     }
 
     /**
-     * Takes a Entity(in the form of a class object) and returns an ArrayList of the associated perks
-     * @param entity
-     * @return
+     * Takes a Entity(in the form of a class object) and returns an ArrayList of the associated perks.
+     * @param entity The entity to base the lookup from.
+     * @return The result.
      */
     public static ArrayList<EntityPerk> getPerks(Class entity){
         return PerkStore.entityMap.get(entity.getSimpleName());
@@ -107,10 +107,10 @@ public class PerkStore {
 
 
     /**
-     * Safely stores any perk that is used in a map
-     * @param abstractMap
-     * @param perk
-     * @param name - Name that storage is based off
+     * Safely stores any perk that is used in a map.
+     * @param abstractMap The map to put the perk into.
+     * @param perk The perk to put into the map.
+     * @param name - Name that storage is based off.
      */
     private static <t> void putPerk(AbstractMap<String, ArrayList<t>> abstractMap, t perk, String name){
         ArrayList<t> cachePerkList = abstractMap.get(name);
@@ -124,8 +124,8 @@ public class PerkStore {
     }
 
     /**
-     * Stores BlockPerks based on the unlocalized names of the objects in its collection
-     * @param block: BlockPerk
+     * Stores BlockPerks based on the unlocalized names of the objects in its collection.
+     * @param block: BlockPerk.
      */
     public static void putPerk(BlockPerk block) {
         PerkStore.perks.add(block);
@@ -137,9 +137,9 @@ public class PerkStore {
     }
 
     /**
-     * Stores BlockPerks based on the class names of the objects in its collection
-     * Class names are used as there is no registry that provides objects unlike for items and blocks
-     * @param entity: EntityPerk
+     * Stores BlockPerks based on the class names of the objects in its collection.
+     * Class names are used as there is no registry that provides objects unlike for items and blocks.
+     * @param entity: EntityPerk.
      */
     public static void putPerk(EntityPerk entity) {
         PerkStore.perks.add(entity);
@@ -151,8 +151,8 @@ public class PerkStore {
     }
 
     /**
-     * Stores BlockPerks based on the unlocalized names of the objects in its collection
-     * @param item: ItemPerk
+     * Stores BlockPerks based on the unlocalized names of the objects in its collection.
+     * @param item: ItemPerk.
      */
     public static void putPerk(ItemPerk item) {
         PerkStore.perks.add(item);

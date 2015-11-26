@@ -56,9 +56,8 @@ public class JsonConfigHandler {
     }
 
     /**
-     * Writes the perkStore to disk, if it is null then it will create the default one
-     *
-     * @param perkStore
+     * Writes the perkStore to disk, if it is null then it will create the default one     *
+     * @param perkStore The PerkStore to write to disk. If null a new one will be created.
      */
     public static void createPerkConfig(PerkContainer perkStore) {
         if (perkStore == null) {
@@ -80,9 +79,8 @@ public class JsonConfigHandler {
     }
 
     /**
-     * Writes the skillStore to disk, if skillStore is null it will create the default one
-     *
-     * @param skillStore
+     * Writes the skillStore to disk, if skillStore is null it will create the default one     *
+     * @param skillStore The SkillStore to write to disk. If null a new one will be created.
      */
     public static void createSkillConfig(SkillContainer skillStore) {
         if (skillStore == null) {

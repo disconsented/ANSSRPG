@@ -36,7 +36,7 @@ import net.minecraft.item.ItemSword;
 
 /**
  * @author Disconsented
- * Contains tool -> class mappings
+ * Contains tool to class mappings
  */
 public final class ToolRegistry {
     

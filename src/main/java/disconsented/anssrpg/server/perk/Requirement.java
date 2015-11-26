@@ -24,7 +24,7 @@ package disconsented.anssrpg.server.perk;
 
 import com.google.gson.annotations.Expose;
 
-import disconsented.anssrpg.server.common.Utils.Tools;
+import disconsented.anssrpg.server.common.Utils;
 
 /**
  * @author Disconsented
@@ -52,7 +52,7 @@ public class Requirement {
     }
 
     public String getNameAsSlug() {
-        return Tools.stringToSlug(this.name);
+        return Utils.stringToSlug(this.name);
     }
 
     public enum Action {HAVE, DONT, LEVEL_EQUALS, LEVEL_GREATER, LEVEL_LESS}

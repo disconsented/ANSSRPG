@@ -34,6 +34,10 @@ import java.io.*;
 public class PlayerFile {
 
 
+    /**
+     * Reads all of the player data from a file.
+     * @param playerID The playerId to load from disk.
+     */
     public static void loadPlayer(String playerID) {
         File dataLocation = new File(Settings.getFolder(), playerID+".json");
         if (dataLocation.exists()){
@@ -51,7 +55,8 @@ public class PlayerFile {
     }
 
     /**
-     * Write all of the player data to a file
+     * Writes all of the player data to a file.
+     * @param player The playerData to write to disk.
      */
 
     public static void writePlayer(PlayerData player) {

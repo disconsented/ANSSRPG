@@ -49,30 +49,27 @@ import java.util.UUID;
 
 /**
  * @author Disconsented
- *         Handles the data that is stored on players (experience for skills and perks)
+ *         Handles the data that is stored on players (experience for skills and perks).
+ *         //TODO: Remove redundant references and change all methods to never directly interfact with minecraft objects.
  */
 
 public final class PlayerHandler {
-
-    public static void addPerk(Perk perk, PlayerData player) {
-        player.getPerkList().add(perk.slug);
-    }
 
     public static String addPerk(String perkSlug, EntityPlayerMP player){
         return PlayerHandler.addPerk(perkSlug, PlayerHandler.getPlayer(player.getUniqueID()));
     }
     /**
-     * Checks the requirements for a perk and adds it to the player if they meet them
-     * @param perkSlug
-     * @param player
-     * @return the result
+     * Checks the requirements for a perk and adds it to the player if they meet them.
+     * @param perkSlug Slug of the perk to add to the player.
+     * @param player The PlayerData object.
+     * @return The result.
      */
     public static String addPerk(String perkSlug, PlayerData player) {
         Perk perk = PerkStore.getPerk(perkSlug);
         if (perk == null){
-            return "No perk with that slug was found"; 
+            return "No perk with that slug was found";
         }
-        //Cached here for readability
+        //Cached here for readability.
         int level = 0;
         int reqLevel = 0;
         ArrayList<Requirement> requirements = perk.getRequirements();
@@ -117,10 +114,13 @@ public final class PlayerHandler {
         }
     }
 
-    public static void addXp(Integer num, String skillName, PlayerData player) {
-        player.getSkillExp().put(skillName, player.getSkillExp().get(skillName) + num);
-    }
-
+    /**
+     * Safe method to add experience to a player.
+     * @param playerEntity The player object that associated data is retrieved for.
+     * @param skill The Skill that will have its experience added to.
+     * @param exp The Experience that will be added.
+     */
+    //TODO: Refactor this to use PlayerData and create another method to encapsulate it. Maybe split it up into other private methods.
     public static void awardXP(EntityPlayer playerEntity, Skill skill, int exp) {
         PlayerData player = PlayerHandler.getPlayer(playerEntity.getUniqueID().toString());
         Integer cacheExp = player.getSkillExp().get(skill.name);
@@ -153,7 +153,13 @@ public final class PlayerHandler {
             }
         }        
     }
-    
+
+    /**
+     * Awards experience to a player where it the tool needs to be taken into account.
+     * @param playerEntity The player to have the experience added to.
+     * @param skill The skill that will have the experience added to.
+     * @param exp The experience that needs to be added.
+     */
     public static void awardToolXP(EntityPlayer playerEntity, ToolSkill skill, int exp){
         if(PlayerHandler.isWielding(skill, playerEntity)){
             PlayerHandler.awardXP(playerEntity, skill, exp);
@@ -197,10 +203,10 @@ public final class PlayerHandler {
     }*/
 
     /**
-     * Takes a player and perkList and will return true if they have any of the perks in the list
-     * @param player
-     * @param perkList
-     * @return result
+     * Takes a player and perkList and will return true if they have any of the perks in the list.
+     * @param player The player data to check that contains the perk.
+     * @param perkList The perk list to check against.
+     * @return result The result.
      */
     public static boolean hasPerk(PlayerData player, ArrayList<? extends Perk> perkList){
         if(player == null || perkList == null){//Null check
@@ -216,20 +222,28 @@ public final class PlayerHandler {
         return false;
     }
 
+    /**
+     * Sends a failure message to the player.
+     * TODO: Language support
+     * @param player The player to send the message to.
+     */
     public static void taskFail(EntityPlayer player) {
         player.addChatComponentMessage(new ChatComponentText("You are unable to preform this task"));
     }
 
+    /**
+     * Sends a failure message to the player for when they have the wrong tool.
+     * @param player The player to send the message to.
+     */
     public static void toolFail(EntityPlayer player) {
         player.addChatComponentMessage(new ChatComponentText("You do not have the right tool for this task"));
     }
 
     /**
-     * Checks that the entity is weilding the associated tool
-     * If a tool is not required always returns true
-     * @param skill
-     * @param player
-     * @return
+     * Checks that the entity is weilding the associated tool.
+     * @param skill The ToolSkill that is for checking the tool against.
+     * @param player The player object to check against.
+     * @return The result. If a tool is not required it will return true.
      */
     public static boolean isWielding(ToolSkill skill, EntityPlayer player){
         if(skill.toolClass == Item.class){
@@ -240,13 +254,20 @@ public final class PlayerHandler {
             return skill.toolClass.isInstance(player.getCurrentEquippedItem().getItem());
         }
     }
-    
 
-    public static String activatePerk(EntityPlayerMP p2, PlayerData playerData,
+
+    /**
+     * 'Activates' a perk for a player.
+     * @param entityPlayer The player to activate the perk on.
+     * @param playerData The player data to record the perk onto.
+     * @param perkSlug The slug of the perk to activate.
+     * @return The result (in text).
+     */
+    public static String activatePerk(EntityPlayerMP entityPlayer, PlayerData playerData,
             String perkSlug) {
         ActivePerk cachePerk = (ActivePerk) PerkStore.getPerk(perkSlug);
         if(PlayerHandler.hasPerk((Perk) cachePerk, playerData)){
-            cachePerk.activate(p2, null);
+            cachePerk.activate(entityPlayer, null);
             return "Sucess";
         }
         return "Failure (Missing "+((Perk)cachePerk).getSlug().getSlug()+ ")";
