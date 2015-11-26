@@ -57,9 +57,9 @@ public class RequestHandler implements IMessageHandler<Request, IMessage> {
 		case PERKS:
             ArrayList<Perk> perks = PerkStore.getPerks();
             for (Perk perk : perks)
-            {//String name, String description, String slug, int pointCost, ArrayList<Requirement> requirements, boolean obtained
+            {//String name, String description, String slug,  ArrayList<Requirement> requirements, boolean obtained
                 boolean obtained =  playerData.getPerkList().contains(perk.getSlug());
-                Main.snw.sendTo(new PerkInfo(perk.name, perk.getDescription(), perk.getSlug().getSlug(), perk.getPointCost(), perk.getRequirements(),obtained),player);
+                Main.snw.sendTo(new PerkInfo(perk.name, perk.getDescription(), perk.getSlug().getSlug(), perk.getRequirements(),obtained),player);
             }
 			break;
 		case SKILLS:

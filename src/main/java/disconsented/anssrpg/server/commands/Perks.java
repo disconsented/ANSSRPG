@@ -112,22 +112,6 @@ public class Perks extends CommandBase {
                     toReturn = PerkStore.getInstance().getPerk(arguments[1]).toString();
                 }
                 break;
-            case "convertpoints":
-                if (Settings.getPointsMode() == 2) {
-                    if (arguments.length > 2) {
-                        if (p2.experienceLevel >= Integer.parseInt(arguments[2])) {
-                            p2.experienceLevel -= Integer.parseInt(arguments[2]);
-                            playerdata.setPoints(playerdata.getPoints() + Integer.parseInt(arguments[2]));
-                        } else {
-                            toReturn = "Invalid Argument";
-                        }
-                    } else {
-                        toReturn = "Invalid Argument";
-                    }
-                } else {
-                    toReturn = "option unavaliable";
-                }
-                break;
             case "activate":
                 if (arguments.length >= 2){
                     toReturn = PlayerHandler.activatePerk(p2, playerdata, arguments[1]);

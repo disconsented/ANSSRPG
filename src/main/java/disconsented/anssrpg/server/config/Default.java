@@ -49,7 +49,6 @@ public class Default {
                         this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Mining", "4"));
                     }},
                     "Allows you to mine Iron Ore",
-                    0,
                     new ArrayList<BNP>() {{
                         this.add(new BNP("iron_ore", new HashMap<String, String>()));
                     }}));
@@ -59,7 +58,6 @@ public class Default {
                         this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Mining", "4"));
                     }},
                     "Allows you to mine Lapis Ore",
-                    0,
                     new ArrayList<BNP>() {{
                         this.add(new BNP("lapis_ore", new HashMap<String, String>()));
                     }}));
@@ -69,7 +67,6 @@ public class Default {
                         this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Mining", "9"));
                     }},
                     "Allows you to mine Gold Ore",
-                    0,
                     new ArrayList<BNP>() {{
                         this.add(new BNP("gold_ore", new HashMap<String, String>()));
                     }}));
@@ -79,7 +76,6 @@ public class Default {
                         this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Mining", "14"));
                     }},
                     "Allows you to mine Redstone Ore",
-                    0,
                     new ArrayList<BNP>() {{
                         this.add(new BNP("lit_redstone_ore", new HashMap<String, String>()));
                     }}));
@@ -89,7 +85,6 @@ public class Default {
                         this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Mining", "19"));
                     }},
                     "Allows you to mine Diamond Ore",
-                    0,
                     new ArrayList<BNP>() {{
                         this.add(new BNP("diamond_ore", new HashMap<String, String>()));
                     }}));
@@ -99,7 +94,6 @@ public class Default {
                         this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Mining", "24"));
                     }},
                     "Allows you to mine Emerald Ore",
-                    0,
                     new ArrayList<BNP>() {{
                         this.add(new BNP("emerald_ore", new HashMap<String, String>()));
                     }}));
@@ -109,7 +103,6 @@ public class Default {
                         this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Armouring", "4"));
                     }},
                     "Allows you to craft Gold armour",
-                    0,
                     new ArrayList<INM>() {{
                         this.add(new INM(null, "golden_helmet", 0));
                         this.add(new INM(null, "golden_chestplate", 0));
@@ -122,7 +115,6 @@ public class Default {
                         this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Armouring", "9"));
                     }},
                     "Allows you to craft Iron armour",
-                    0,
                     new ArrayList<INM>() {{
                         this.add(new INM(null, "iron_helmet", 0));
                         this.add(new INM(null, "iron_chestplate", 0));
@@ -135,7 +127,6 @@ public class Default {
                         this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Armouring", "14"));
                     }},
                     "Allows you to craft Diamond armour",
-                    0,
                     new ArrayList<INM>() {{
                         this.add(new INM(null, "diamond_helmet", 0));
                         this.add(new INM(null, "diamond_chestplate", 0));
@@ -148,12 +139,11 @@ public class Default {
                         this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Slaying", "4"));
                     }},
                     "Allows Creepers to be killed",
-                    0,
                     new ArrayList<ENE>() {{
                         this.add(new ENE(null, "Creeper", 0));
                     }}));
 
-            Default.perks.addPerk(new PotionSelfPerk("Health boost", null, "Provides a 10 second shield", 0,
+            Default.perks.addPerk(new PotionSelfPerk("Health boost", null, "Provides a 10 second shield",
                     new ArrayList<PotionDefinition>() {{
                         this.add(new PotionDefinition(21, 1, 20));
                     }},

@@ -33,7 +33,6 @@ import java.util.ArrayList;
 public class PerkInfo implements IMessage {
     private String name;
     private String description;
-    private int pointCost;
     private ArrayList<Requirement> requirements;
     private final ArrayList<String> names = new ArrayList<String>();
     private final ArrayList<String> extraData = new ArrayList<String>();
@@ -45,11 +44,10 @@ public class PerkInfo implements IMessage {
     public PerkInfo() {
     }
 
-    public PerkInfo(String name, String description, String slug, int pointCost, ArrayList<Requirement> requirements, boolean obtained) {
+    public PerkInfo(String name, String description, String slug, ArrayList<Requirement> requirements, boolean obtained) {
         this.name = name;
         this.description = description;
         this.slug = slug;
-        this.pointCost = pointCost;
         for (Requirement requirement : requirements){
             this.names.add(requirement.name);
             this.extraData.add(requirement.extraData);
@@ -65,7 +63,6 @@ public class PerkInfo implements IMessage {
         this.name = ByteBufUtils.readUTF8String(buf);
         this.description = ByteBufUtils.readUTF8String(buf);
         this.slug = ByteBufUtils.readUTF8String(buf);
-        this.pointCost = buf.readInt();
         this.requirements = new ArrayList<Requirement>();
         for (int i = 0; i < this.size; i++) {
             this.requirements.add(new Requirement(Action.valueOf(ByteBufUtils.readUTF8String(buf)), ByteBufUtils.readUTF8String(buf), ByteBufUtils.readUTF8String(buf)));
@@ -79,7 +76,6 @@ public class PerkInfo implements IMessage {
         ByteBufUtils.writeUTF8String(buf, this.getName());
         ByteBufUtils.writeUTF8String(buf, this.getDescription());
         ByteBufUtils.writeUTF8String(buf, this.getSlug());
-        buf.writeInt(this.getPointCost());
         for (int i = 0; i < this.names.size(); i++) {
             ByteBufUtils.writeUTF8String(buf, this.actions.get(i).name());
             ByteBufUtils.writeUTF8String(buf, this.names.get(i));
@@ -96,9 +92,6 @@ public class PerkInfo implements IMessage {
         return this.description;
     }
 
-    public int getPointCost() {
-        return this.pointCost;
-    }
 
     public ArrayList<Requirement> getRequirements() {
         ArrayList<Requirement> req = new ArrayList<Requirement>();

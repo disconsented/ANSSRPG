@@ -41,8 +41,8 @@ public class EntityPerk extends Perk {
     public ArrayList<ENE> entities = new ArrayList<ENE>();
 
     public EntityPerk(String name, ArrayList<Requirement> requirements,
-                      String description, int pointCost, ArrayList<ENE> entities) {
-        super(name, requirements, description, pointCost);
+                      String description, ArrayList<ENE> entities) {
+        super(name, requirements, description);
         this.entities = entities;
     }
 

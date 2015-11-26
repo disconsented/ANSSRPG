@@ -40,9 +40,9 @@ import disconsented.anssrpg.server.task.TaskMaster;
  */
 public class PotionSelfPerk extends Perk implements ActivePerk{
     
-    public PotionSelfPerk(String name, ArrayList<Requirement> requirements, String description, int pointCost, 
+    public PotionSelfPerk(String name, ArrayList<Requirement> requirements, String description,
             ArrayList<PotionDefinition> effects, boolean repeat, int cycle, int maxCycles){
-        super(name, requirements, description, pointCost);
+        super(name, requirements, description);
         this.repeat = repeat;
         this.cycle = cycle;
         this.effects = effects;

@@ -37,16 +37,13 @@ public abstract class Perk {
     public Slug slug;//Not exposed as its made based on the name
     @Expose
     public String description = "default_description";
-    @Expose
-    public int pointCost;
 
     public Perk() {  } // Blank constructor for Gson
 
-    public Perk(String name, ArrayList<Requirement> requirements, String description, int pointCost) {
+    public Perk(String name, ArrayList<Requirement> requirements, String description) {
         this.name = name;
         this.requirements = requirements;
         this.description = description;
-        this.pointCost = pointCost;
     }
 
     public String getDescription() {
@@ -64,14 +61,6 @@ public abstract class Perk {
     protected void setName(String name) {
         this.name = name;
         this.slug = new Slug(name);
-    }
-
-    public int getPointCost() {
-        return this.pointCost;
-    }
-
-    protected void setPointCost(int pointCost) {
-        this.pointCost = pointCost;
     }
 
     public ArrayList getRequirements() {
@@ -96,7 +85,7 @@ public abstract class Perk {
 
     @Override
     public String toString() {
-        return this.name + "|" + this.description + "|" + this.pointCost + "|" + this.requirements;
+        return this.name + "|" + this.description + "|" + this.requirements;
     }
 
     public void touchUp() {

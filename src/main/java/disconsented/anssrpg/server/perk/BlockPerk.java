@@ -40,8 +40,8 @@ public class BlockPerk extends Perk {
     }
 
     public BlockPerk(String name, ArrayList<Requirement> requirements,
-                     String description, int pointCost, ArrayList<BNP> blocks) {
-        super(name, requirements, description, pointCost);
+                     String description, ArrayList<BNP> blocks) {
+        super(name, requirements, description);
         this.blocks = blocks;
     }
 

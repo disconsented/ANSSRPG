@@ -43,8 +43,8 @@ public class ItemPerk extends Perk {
     }
 
     public ItemPerk(String name, ArrayList<Requirement> requirements,
-                    String description, int pointCost, ArrayList<INM> items) {
-        super(name, requirements, description, pointCost);
+                    String description, ArrayList<INM> items) {
+        super(name, requirements, description);
         this.items = items;
     }
 
