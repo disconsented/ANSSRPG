@@ -8,6 +8,10 @@ cache:
 sudo: false
 install: true
 
+branches:
+  except:
+    - /\d+\.\d+-v\d+\.\d+\.\d+/
+
 before_install:
   - sed -i 's/git:/https:/g' .git/config
 script:
