@@ -109,7 +109,7 @@ tasks.withType(JavaCompile) { task ->
 idea { module { inheritOutputDirs = true } }
 
 def shouldTag(){
-    def p = new URL ("https://api.github.com/repos/${github_repo}/releases").text
+    def p = new URL ("https://api.github.com/repos/${github_repo}/releases?access_token=$token").text
     def json = new JsonSlurper().parseText(p)
     println "Searching for " + version + " in ${github_repo}"
     json.each {
