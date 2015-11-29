@@ -81,7 +81,7 @@ public abstract class Perk {
         
     }
 
-    public abstract void searchObject();
+    public abstract void init();
 
     @Override
     public String toString() {
@@ -89,7 +89,7 @@ public abstract class Perk {
     }
 
     public void touchUp() {
-        this.searchObject();
+        this.init();
         this.getSlug();
         if (requirements == null) {
             requirements = new ArrayList<Requirement>();

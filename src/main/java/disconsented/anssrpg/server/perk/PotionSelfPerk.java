@@ -59,7 +59,7 @@ public class PotionSelfPerk extends Perk implements ActivePerk{
     @Expose
     public int maxCycles = 10;
     @Override
-    public void searchObject() {}
+    public void init() {}
     @Override
     public void activate(EntityLivingBase target, EntityLivingBase source) {
         PlayerHandler.getPlayer(target.getUniqueID());

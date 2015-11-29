@@ -47,7 +47,7 @@ public class EntityPerk extends Perk {
     }
 
     @Override
-    public void searchObject() {
+    public void init() {
         ArrayList<ENE> initialised = new ArrayList<ENE>();
         for(ENE object : this.entities){
             object.entity = (Class) EntityList.stringToClassMapping.get(object.name);

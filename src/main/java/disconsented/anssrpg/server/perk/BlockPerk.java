@@ -46,7 +46,7 @@ public class BlockPerk extends Perk {
     }
 
     @Override
-    public void searchObject() {
+    public void init() {
         ArrayList<BNP> initialised = new ArrayList<BNP>();
         for(BNP object : this.blocks){
             object.block = (Block)Block.blockRegistry.getObject(object.name);

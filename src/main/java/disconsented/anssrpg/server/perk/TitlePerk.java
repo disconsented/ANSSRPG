@@ -42,6 +42,6 @@ public class TitlePerk extends Perk {
 
 
     @Override
-    public void searchObject() {}
+    public void init() {}
 
 }

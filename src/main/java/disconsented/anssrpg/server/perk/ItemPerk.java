@@ -49,7 +49,7 @@ public class ItemPerk extends Perk {
     }
 
     @Override
-    public void searchObject() {
+    public void init() {
         ArrayList<INM> initialised = new ArrayList<>();
         for(INM object : this.items){
             object.item = (Item)Item.itemRegistry.getObject(object.name);
