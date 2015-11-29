@@ -43,7 +43,6 @@ import disconsented.anssrpg.server.player.PlayerFile;
  */
 public class DataSave {
     public static void addPlayer(PlayerData player, String PlayerID) {
-        PlayerStore.getInstance();
         PlayerStore.addPlayer(player);
     }
 
@@ -51,19 +50,17 @@ public class DataSave {
         ArrayList tempAL = new ArrayList();
         HashMap tempHM = new HashMap();
         PlayerData temp = new PlayerData(tempAL, tempHM, playerID, 0);
-        DataSave.addPlayer(temp, playerID);
+        addPlayer(temp, playerID);
         tempAL.clear();
         tempHM.clear();
     }
 
     public static PlayerData getPlayerData(String playerID) {
-        PlayerStore.getInstance();
         PlayerData player = PlayerStore.getPlayer(playerID);
         if (player != null) {
             return player;
         } else {
-            DataSave.createPlayer(playerID);
-            PlayerStore.getInstance();
+            createPlayer(playerID);
             return PlayerStore.getPlayer(playerID);
         }
     }
@@ -93,8 +90,7 @@ public class DataSave {
             Logging.debug("Player " + event.player.getDisplayName() + " with UUID:" + event.player.getPersistentID() + "has logged out");
             Logging.debug("Saving player data");
         }
-        PlayerFile.writePlayer(PlayerStore.getInstance().getPlayer(event.player.getPersistentID().toString()));
-        PlayerStore.getInstance();
+        PlayerFile.writePlayer(PlayerStore.getPlayer(event.player.getPersistentID().toString()));
         PlayerStore.getAllData().remove(event.player.getPersistentID().toString());
     }
 
@@ -108,6 +104,6 @@ public class DataSave {
             Logging.debug("Player " + event.player.getDisplayName() + " with UUID:" + event.player.getPersistentID() + "has respawned");
             Logging.debug("Saving player data");
         }
-        PlayerFile.writePlayer(PlayerStore.getInstance().getPlayer(event.player.getPersistentID().toString()));
+        PlayerFile.writePlayer(PlayerStore.getPlayer(event.player.getPersistentID().toString()));
     }
 }
