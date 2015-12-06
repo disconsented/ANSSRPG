@@ -77,7 +77,7 @@ public class Skill extends CommandBase {
     @Override
     public void processCommand(ICommandSender player, String[] p_71515_2_) {
         EntityPlayerMP user = (EntityPlayerMP) player;
-        PlayerData playerData = PlayerStore.getInstance().getPlayer(user.getPersistentID().toString());
+        PlayerData playerData = PlayerStore.getPlayer(user.getPersistentID().toString());
         String toReturn = "You have the current perks: ";
         for (Slug slug : playerData.getPerkList()) {
             toReturn += "," + slug;

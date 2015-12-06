@@ -37,7 +37,6 @@ public class Settings {
     private static boolean debug;
     private static boolean logging = true;
     private static String statusMessage = "null";
-    private static double pointsRatio = .2;
     private static boolean externalConfig;
     private static boolean requiredOnClient = true;
 
@@ -74,9 +73,6 @@ public class Settings {
         return Settings.instance;
     }
 
-    public static int getPointsMode() {
-        return Settings.pointsMode;
-    }
 
     public static boolean isBlockFakePlayers() {
         return Settings.blockFakePlayers;
@@ -105,8 +101,6 @@ public class Settings {
         config.addCustomCategoryComment(Settings.balancing, "Balancing tweaks.");
         config.addCustomCategoryComment(Settings.misc, "Settings that don't fit in other categories");
 
-        Settings.pointsRatio = config.get(Settings.balancing, "pointsRatio", .2, "Points ratio settings.").getDouble();
-        Settings.pointsMode = config.get(Settings.balancing, "pointsMode", 1, "Points Mode. \n0 - Disabled \n1 - Points awarded based on XP from skills \n2 - Points can be converted from vanilla levels").getInt();
         Settings.blockFakePlayers = config.getBoolean("blockUnknownFakePlayers", Settings.balancing,true,"Enables fake players that are not associated with a real player being blocked by default(where appropriate)");
 
         Settings.debug = config.get(Settings.misc, "enableDebugMode", false, "Enables debugging features. Meant for development use.").getBoolean();

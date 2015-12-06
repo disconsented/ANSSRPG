@@ -107,7 +107,7 @@ public class Main {
      */
     @Mod.EventHandler
     public void onServerStoppingEvent(FMLServerStoppingEvent event) {
-        for (Map.Entry<String, PlayerData> entry : PlayerStore.getInstance().getAllData().entrySet()) {
+        for (Map.Entry<String, PlayerData> entry : PlayerStore.getAllData().entrySet()) {
             PlayerData player = entry.getValue();
             PlayerFile.writePlayer(player);
         }

@@ -38,13 +38,11 @@ public class PlayerData {
     private ArrayList<Slug> activePerks = new ArrayList<Slug>();
     private HashMap<String, Integer> skillExp = new HashMap<String, Integer>();
     private String playerID;
-    private int points;
 
     public PlayerData(ArrayList<Slug> perkList, HashMap skillExp, String playerID, int points) {
         this.perkList = perkList;
         this.skillExp = skillExp;
         this.playerID = playerID;
-        this.points = points;
     }
 
     public ArrayList<Slug> getPerkList() {
@@ -61,14 +59,6 @@ public class PlayerData {
 
     public void setPlayerID(String playerID) {
         this.playerID = playerID;
-    }
-
-    public int getPoints() {
-        return this.points;
-    }
-
-    public void setPoints(int points) {
-        this.points = points;
     }
 
     public HashMap<String, Integer> getSkillExp() {
