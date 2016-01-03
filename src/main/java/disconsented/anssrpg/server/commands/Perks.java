@@ -25,6 +25,7 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.commands;
 
+import disconsented.anssrpg.server.common.Logging;
 import disconsented.anssrpg.server.common.Settings;
 import disconsented.anssrpg.server.data.PerkStore;
 import disconsented.anssrpg.server.handler.PlayerHandler;
@@ -34,6 +35,7 @@ import disconsented.anssrpg.server.player.PlayerData;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.util.ChatComponentText;
 
 import java.util.ArrayList;
@@ -55,12 +57,6 @@ public class Perks extends CommandBase {
     }
 
     @Override
-    public int compareTo(Object arg0) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
     public String getCommandName() {
         // TODO Auto-generated method stub
         return "perk";
@@ -69,7 +65,7 @@ public class Perks extends CommandBase {
     @Override
     public String getCommandUsage(ICommandSender p_71518_1_) {
         // TODO Auto-generated method stub
-        return null;
+        return "Please refer to the documentation for usage.";
     }
 
     @Override
@@ -80,6 +76,14 @@ public class Perks extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender player, String[] arguments) {
+        if(player instanceof DedicatedServer){
+            Logging.info("This command needs to be run as a player. It does not have administrative functions yet.");
+            return;
+        }
+        if(arguments.length == 0){
+            player.addChatMessage(new ChatComponentText("Arguments length must be greater than 0. "+getCommandUsage(null)));
+            return;
+        }
         String UUID = ((EntityPlayerMP) player).getPersistentID().toString();
         String toReturn = "";
         EntityPlayerMP p2 = (EntityPlayerMP) player;
@@ -142,12 +146,6 @@ public class Perks extends CommandBase {
     public boolean canCommandSenderUseCommand(ICommandSender p_71519_1_) {
         // TODO Auto-generated method stub
         return true;
-    }
-
-    @Override
-    public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_) {
-        // TODO Auto-generated method stub
-        return false;
     }
 
     @Override

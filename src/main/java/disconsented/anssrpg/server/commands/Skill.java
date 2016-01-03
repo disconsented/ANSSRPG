@@ -25,12 +25,14 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.commands;
 
+import disconsented.anssrpg.server.common.Logging;
 import disconsented.anssrpg.server.data.PlayerStore;
 import disconsented.anssrpg.server.perk.Slug;
 import disconsented.anssrpg.server.player.PlayerData;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.util.ChatComponentText;
 
 import java.util.ArrayList;
@@ -41,18 +43,11 @@ import java.util.Map;
  * @author Disconsented
  */
 public class Skill extends CommandBase {
+    private final  List aliases;
 
-    /**
-     *
-     */
     public Skill() {
-        // TODO Auto-generated constructor stub
-    }
-
-    @Override
-    public int compareTo(Object arg0) {
-        // TODO Auto-generated method stub
-        return 0;
+        aliases = new ArrayList();
+        aliases.add("skill");
     }
 
     @Override
@@ -64,18 +59,20 @@ public class Skill extends CommandBase {
     @Override
     public String getCommandUsage(ICommandSender p_71518_1_) {
         // TODO Auto-generated method stub
-        return null;
+        return "N/A returns current skill and perk information (You should use the GUI's :) ).";
     }
 
     @Override
     public List getCommandAliases() {
-        List aliases = new ArrayList();
-        aliases.add("skill");
         return aliases;
     }
 
     @Override
     public void processCommand(ICommandSender player, String[] p_71515_2_) {
+        if(player instanceof DedicatedServer){
+            Logging.info("This command needs to be run as a player. It does not have administrative functions yet.");
+            return;
+        }
         EntityPlayerMP user = (EntityPlayerMP) player;
         PlayerData playerData = PlayerStore.getInstance().getPlayer(user.getPersistentID().toString());
         String toReturn = "You have the current perks: ";
@@ -93,13 +90,6 @@ public class Skill extends CommandBase {
     public boolean canCommandSenderUseCommand(ICommandSender p_71519_1_) {
         // TODO Auto-generated method stub
         return true;
-    }
-
-
-    @Override
-    public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_) {
-        // TODO Auto-generated method stub
-        return false;
     }
 
     @Override
