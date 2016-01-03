@@ -122,8 +122,8 @@ public class RegistryReader {
     /**
      * Generic method for filtering items from one list into another
      *
-     * @param source The source list to sort through.
-     * @param pattern The pattern to match against.
+     * @param source      The source list to sort through.
+     * @param pattern     The pattern to match against.
      * @param destination The destination list for those matched.
      */
     private void filter(ArrayList<String> source, Pattern pattern, ArrayList<String> destination) {
@@ -146,6 +146,7 @@ public class RegistryReader {
      * >>> IMPORTANT!! <<<
      * DO NOT edit this method OR call it in your code!
      *
+     * @noinspection ALL
      */
     private void $$$setupUI$$$() {
         panelRegistryReader = new JPanel();

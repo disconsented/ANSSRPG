@@ -32,6 +32,7 @@ public class Utils {
      * @param metadata1 First objects metadata.
      * @param object2 Second object to match.
      * @param metadata2 Second objects metadata.
+     * @param <T> Type of the object.
      * @return The result.
      */
     public static<T> boolean MatchObject(T object1, int metadata1, T object2, int metadata2){
