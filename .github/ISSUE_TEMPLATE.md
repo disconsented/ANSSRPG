@@ -1,8 +1,3 @@
-<!-- 
-Please make sure you have read the below link before making a issue
-https://github.com/disconsented/ANSSRPG#how-to-report-a-issue-or-get-help
--->
-
 Description of the issue:
 ------------------------------
 
