@@ -42,6 +42,7 @@ public class TitlePerk extends Perk {
 
 
     @Override
-    public void init() {}
+    public void init() {
+    }
 
 }

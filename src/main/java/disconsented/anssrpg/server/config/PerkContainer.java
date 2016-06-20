@@ -22,17 +22,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
 package disconsented.anssrpg.server.config;
-import com.google.gson.annotations.Expose;
 
+import com.google.gson.annotations.Expose;
 import disconsented.anssrpg.server.common.Logging;
 import disconsented.anssrpg.server.data.PerkStore;
 import disconsented.anssrpg.server.perk.*;
 
 import java.util.ArrayList;
+
 /**
  * Used to safely retain data for saving and loading perks before initialising them for use
+ *
  * @author Abelistah
- * @author Disconsented 
+ * @author Disconsented
  */
 public class PerkContainer {
     @Expose
@@ -45,7 +47,7 @@ public class PerkContainer {
     private final ArrayList<TitlePerk> titles = new ArrayList<>();
     @Expose
     private final ArrayList<PotionSelfPerk> selfPotion = new ArrayList<>();
-    
+
 
     public PerkContainer() {
 
@@ -76,9 +78,11 @@ public class PerkContainer {
     public void addPerk(TitlePerk perk) {
         this.titles.add(perk);
     }
-    public void addPerk(PotionSelfPerk effect){
+
+    public void addPerk(PotionSelfPerk effect) {
         this.selfPotion.add(effect);
     }
+
     public void touchUp() {
         for (ItemPerk item : this.items) {
             item.touchUp();
@@ -118,7 +122,7 @@ public class PerkContainer {
         }
         for (PotionSelfPerk effect : this.selfPotion) {
             effect.touchUp();
-            if (effect.cycle > 0){
+            if (effect.cycle > 0) {
                 PerkStore.putPerk(effect);
                 PerkStore.addPerk(effect);
             } else {

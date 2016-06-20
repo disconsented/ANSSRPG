@@ -24,23 +24,25 @@ package disconsented.anssrpg.server.player;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import disconsented.anssrpg.server.common.Logging;
 import disconsented.anssrpg.server.common.Settings;
 import disconsented.anssrpg.server.data.PlayerStore;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 
 public class PlayerFile {
 
 
     /**
      * Reads all of the player data from a file.
+     *
      * @param playerID The playerId to load from disk.
      */
     public static void loadPlayer(String playerID) {
-        File dataLocation = new File(Settings.getFolder(), playerID+".json");
-        if (dataLocation.exists()){
+        File dataLocation = new File(Settings.getFolder(), playerID + ".json");
+        if (dataLocation.exists()) {
             try {
                 FileReader reader = new FileReader(dataLocation);
                 Gson gson = new GsonBuilder().create();
@@ -50,17 +52,18 @@ public class PlayerFile {
                 Logging.error(e.getStackTrace());
             }
         } else {
-            Logging.debug(playerID+"'s file does not exist");
+            Logging.debug(playerID + "'s file does not exist");
         }
     }
 
     /**
      * Writes all of the player data to a file.
+     *
      * @param player The playerData to write to disk.
      */
 
     public static void writePlayer(PlayerData player) {
-        if(player != null) {
+        if (player != null) {
             try {
                 File dataFolder = Settings.getFolder();
                 File dataLocation = new File(dataFolder, player.getPlayerID() + ".json");
@@ -73,7 +76,7 @@ public class PlayerFile {
             } catch (Exception e) {
                 Logging.error(e.getStackTrace());
             }
-        } else{
+        } else {
             Logging.debug("Null player object detected, please report this");
         }
     }

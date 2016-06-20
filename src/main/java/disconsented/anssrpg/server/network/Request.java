@@ -22,9 +22,9 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.network;
 
+import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import io.netty.buffer.ByteBuf;
 
 /**
  * Used to request INFORMATION from the server
@@ -35,10 +35,10 @@ import io.netty.buffer.ByteBuf;
  * STOP_TRACKING will stop the information tracking
  */
 public class Request implements IMessage {
-	public enum REQUEST {PERKS, SKILLS, ACTIVE_PERKS, OBTAINED_PERKS, START_TRACKING, STOP_TRACKING}
-	public Request.REQUEST request;
-    
-	public Request(){}
+    public Request.REQUEST request;
+
+    public Request() {
+    }
 
     public Request(Request.REQUEST request) {
         this.request = request;
@@ -51,6 +51,8 @@ public class Request implements IMessage {
 
     @Override
     public void toBytes(ByteBuf buf) {
-    	ByteBufUtils.writeUTF8String(buf, this.request.name());
+        ByteBufUtils.writeUTF8String(buf, this.request.name());
     }
+
+    public enum REQUEST {PERKS, SKILLS, ACTIVE_PERKS, OBTAINED_PERKS, START_TRACKING, STOP_TRACKING}
 }

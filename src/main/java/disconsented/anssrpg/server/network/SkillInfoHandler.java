@@ -22,18 +22,18 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.network;
 
+import disconsented.anssrpg.client.Data;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import disconsented.anssrpg.client.Data;
 
-public class SkillInfoHandler implements IMessageHandler<SkillInfo, IMessage>{
+public class SkillInfoHandler implements IMessageHandler<SkillInfo, IMessage> {
 
-	@Override
-	public IMessage onMessage(SkillInfo message, MessageContext ctx) {
-		Data.skillInfo.put(message.name, message);
-		Data.skillInfoList.add(message);
-		return null;
-	}
+    @Override
+    public IMessage onMessage(SkillInfo message, MessageContext ctx) {
+        Data.skillInfo.put(message.name, message);
+        Data.skillInfoList.add(message);
+        return null;
+    }
 
 }

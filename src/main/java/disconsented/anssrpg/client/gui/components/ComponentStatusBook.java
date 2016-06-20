@@ -30,10 +30,8 @@ import java.util.ArrayList;
 /**
  * Created by Disconsented on 24/08/2015.
  */
-public class ComponentStatusBook  extends ComponentBase{
+public class ComponentStatusBook extends ComponentBase {
 
-    private final ResourceLocation stat1 = new ResourceLocation(Reference.ID, "stat1.png"); //140x180
-    private final ResourceLocation stat2 = new ResourceLocation(Reference.ID, "stat2.png"); //140x180
     public static float currentHearts;
     public static float currentSaturation;
     public static float currentArmourHelmet;
@@ -41,10 +39,11 @@ public class ComponentStatusBook  extends ComponentBase{
     public static float currentArmourLeggings;
     public static float currentArmourBoots;
     public static ArrayList<String> activePerks = new ArrayList<>();
+    private final ResourceLocation stat1 = new ResourceLocation(Reference.ID, "stat1.png"); //140x180
+    private final ResourceLocation stat2 = new ResourceLocation(Reference.ID, "stat2.png"); //140x180
 
 
-
-    public ComponentStatusBook(int x, int y){
+    public ComponentStatusBook(int x, int y) {
         this.x = x;
         this.y = y;
         width = 256;
@@ -52,12 +51,13 @@ public class ComponentStatusBook  extends ComponentBase{
     }
 
 
-    /** Draws the background's first then draws the icon's with their value next to them
-     *  Active perks are drawn on the right side after being spliced together
+    /**
+     * Draws the background's first then draws the icon's with their value next to them
+     * Active perks are drawn on the right side after being spliced together
      */
     @Override
     public void draw() {
-        this.bindAndDrawTexture(this.stat1, this.x -140, this.y -90, 140, 180);
+        this.bindAndDrawTexture(this.stat1, this.x - 140, this.y - 90, 140, 180);
         this.bindAndDrawTexture(this.stat2, this.x, this.y - 90, this.width, this.height);
 
         this.bindAndDrawTexture(this.stat1, this.x - 100, this.y - 30, 1, 188, 16, 16);//Heart
@@ -79,8 +79,8 @@ public class ComponentStatusBook  extends ComponentBase{
         this.fontRenderer.drawString(Float.toString(ComponentStatusBook.currentArmourHelmet), this.x - 59, this.y - 74, 0);
 
         String joinedPerks = "";
-        for (String string : ComponentStatusBook.activePerks){
-            joinedPerks += string+"\n";
+        for (String string : ComponentStatusBook.activePerks) {
+            joinedPerks += string + "\n";
         }
         this.fontRenderer.drawSplitString(joinedPerks, this.x + 4, this.y - 78, 123, 0);
 

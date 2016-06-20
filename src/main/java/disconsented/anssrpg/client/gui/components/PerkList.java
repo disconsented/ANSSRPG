@@ -28,15 +28,17 @@ import net.minecraft.util.ResourceLocation;
 /**
  * @author Disconsented
  */
-public class PerkList extends ComponentBase{
+public class PerkList extends ComponentBase {
     private final ResourceLocation texture = new ResourceLocation(Reference.ID, "perklist.png");
     private final int width = 256;
     private final int height = 256;
-    private final String[] names = {"1","2","3","4"};
-    public PerkList(int x, int y){
+    private final String[] names = {"1", "2", "3", "4"};
+
+    public PerkList(int x, int y) {
         this.x = x;
         this.y = y;
     }
+
     @Override
     public void draw() {
         this.bindAndDrawTexture(this.texture, this.x, this.y, width, height);
@@ -45,7 +47,8 @@ public class PerkList extends ComponentBase{
         drawString(this.fontRenderer, this.names[2], 11 + x, y + 129 + 2, 0xBEFF00);
         drawString(this.fontRenderer, this.names[3], 11 + x, y + 189 + 2, 0xBEFF00);
     }
-    public String[] getNames(){
+
+    public String[] getNames() {
         return names;
     }
 }

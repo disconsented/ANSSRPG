@@ -23,7 +23,6 @@ THE SOFTWARE.
 package disconsented.anssrpg.server.perk;
 
 import com.google.gson.annotations.Expose;
-
 import disconsented.anssrpg.server.common.Utils;
 
 public class Slug {

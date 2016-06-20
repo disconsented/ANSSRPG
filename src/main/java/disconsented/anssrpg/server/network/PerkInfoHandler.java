@@ -22,16 +22,16 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.network;
 
+import disconsented.anssrpg.client.Data;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import disconsented.anssrpg.client.Data;
 
 public class PerkInfoHandler implements IMessageHandler<PerkInfo, IMessage> {
 
     @Override
     public IMessage onMessage(PerkInfo message, MessageContext ctx) {
-        Data.perkInfo.put(message.getSlug(),message);
+        Data.perkInfo.put(message.getSlug(), message);
         return null;
     }
 

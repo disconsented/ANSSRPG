@@ -22,61 +22,60 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.client.gui.components;
 
-import net.minecraft.util.ResourceLocation;
 import disconsented.anssrpg.server.common.Reference;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * @author Disconsented
- *
  */
-public class ExpBox extends ComponentBase{
+public class ExpBox extends ComponentBase {
     //176x76
     private final int x;
     private final int y;
+    private final ResourceLocation texture = new ResourceLocation(Reference.ID, "expbox.png");
+    private final ResourceLocation greenTexture = new ResourceLocation(Reference.ID, "green.png");
     public int expCurrent;
     public int expRequired;
-    private float currentPercent;
     public int expOld;
     public int level;
     public String name = "Not A Name";
-    private final ResourceLocation texture = new ResourceLocation(Reference.ID, "expbox.png");
-    private final ResourceLocation greenTexture = new ResourceLocation(Reference.ID, "green.png");
-    
+    private float currentPercent;
+
     /**
      * @param x position to draw from.
      * @param y position to draw from.
      */
-    public ExpBox(int x, int y){
+    public ExpBox(int x, int y) {
         this.x = x;
         this.y = y;
     }
+
     @Override
-    public void draw(){
+    public void draw() {
         calcPercentage();
-        this.bindAndDrawTexture(this.texture, this.x, this.y,256,256);
+        this.bindAndDrawTexture(this.texture, this.x, this.y, 256, 256);
 //        * Name box -  9,9-106x12
         drawString(this.fontRenderer, this.name, x + 9, y + 11, 0xBEFF00);
 //        * Level box - 132,9-32x12
-        drawString(this.fontRenderer, this.level +"->"+(this.level +1), 132 + x, y + 11, 0xBEFF00);
+        drawString(this.fontRenderer, this.level + "->" + (this.level + 1), 132 + x, y + 11, 0xBEFF00);
 //        * 0% - 15,38-20x12
         drawString(this.fontRenderer, "0%", 14 + x, y + 40, 0xBEFF00);
 //        * 100% - 144,38-20x12
         drawString(this.fontRenderer, "100%", 144 + x, y + 40, 0xBEFF00);
 //        * numerical exp box - 41,56-71x12
-        drawString(this.fontRenderer, this.expCurrent +"", 41 + x, y + 58, 0xBEFF00);
+        drawString(this.fontRenderer, this.expCurrent + "", 41 + x, y + 58, 0xBEFF00);
 //        * percentile exp box - 118,56-20x12
-        drawString(this.fontRenderer, this.currentPercent +"%", 118 + x, y + 58, 0xBEFF00);
+        drawString(this.fontRenderer, this.currentPercent + "%", 118 + x, y + 58, 0xBEFF00);
 //        * bar box - 40,36-99x16
-        this.bindAndDrawTexture(this.greenTexture, this.x +40, this.y +36, (int) this.currentPercent, 16);
+        this.bindAndDrawTexture(this.greenTexture, this.x + 40, this.y + 36, (int) this.currentPercent, 16);
     }
 
-    public void calcPercentage(){
-        if (expOld < 0)
-        {
+    public void calcPercentage() {
+        if (expOld < 0) {
             expOld = 0;
         }
         int temp = (expCurrent - expOld) * 100 / (this.expRequired - this.expOld);
-        if(temp >= 0 && temp <= 100) {
+        if (temp >= 0 && temp <= 100) {
             currentPercent = temp;
         } else {
             currentPercent = 0;

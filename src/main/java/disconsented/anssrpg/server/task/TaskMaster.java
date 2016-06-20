@@ -22,55 +22,55 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.task;
 
+import disconsented.anssrpg.server.common.Logging;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
-import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import disconsented.anssrpg.server.common.Logging;
+public class TaskMaster {
+    private static TaskMaster master;
+    private final Queue<Task> queue = new LinkedList<Task>();
+    private final Queue<Task> currentQueue = new LinkedList<Task>();
+    protected TaskMaster() {
+    }
 
-public class TaskMaster{
-	protected TaskMaster(){}
-	
-	private static TaskMaster master;
-	private final Queue<Task> queue = new LinkedList<Task>();
-	private final Queue<Task> currentQueue = new LinkedList<Task>();
-	
-	public static TaskMaster getInstance(){
-		if (TaskMaster.master == null){
-			TaskMaster.master = new TaskMaster();
-		} 
-		return TaskMaster.master;
-	}
-	
-	public boolean addTask(Task task){
-		task.onAdd();
-		return this.queue.offer(task);
-	}
-	
-	public void process(TickEvent event){
-		if(event.side == Side.SERVER && event.phase == TickEvent.Phase.START && this.queue != null){
-		    while(this.queue.isEmpty() == false){
-				this.currentQueue.offer(this.queue.poll());
-		    }
-			while(this.currentQueue.peek() != null){
-				Task currentTask = this.currentQueue.poll();
-				Logging.debug("Attempting to process " + currentTask.getClass().getName());
-				
-				if (currentTask.canProcess(event)){
-					currentTask.onTick(event);
-					currentTask.increaseTick();
-					
-					if (currentTask.canRepeat()){
-						this.queue.offer(currentTask);
-					} else {
-						currentTask.onEnd();
-					}
-				} else {
-					this.queue.offer(currentTask);
-				}
-				
-			}
-		}
-	}
+    public static TaskMaster getInstance() {
+        if (TaskMaster.master == null) {
+            TaskMaster.master = new TaskMaster();
+        }
+        return TaskMaster.master;
+    }
+
+    public boolean addTask(Task task) {
+        task.onAdd();
+        return this.queue.offer(task);
+    }
+
+    public void process(TickEvent event) {
+        if (event.side == Side.SERVER && event.phase == TickEvent.Phase.START && this.queue != null) {
+            while (this.queue.isEmpty() == false) {
+                this.currentQueue.offer(this.queue.poll());
+            }
+            while (this.currentQueue.peek() != null) {
+                Task currentTask = this.currentQueue.poll();
+                Logging.debug("Attempting to process " + currentTask.getClass().getName());
+
+                if (currentTask.canProcess(event)) {
+                    currentTask.onTick(event);
+                    currentTask.increaseTick();
+
+                    if (currentTask.canRepeat()) {
+                        this.queue.offer(currentTask);
+                    } else {
+                        currentTask.onEnd();
+                    }
+                } else {
+                    this.queue.offer(currentTask);
+                }
+
+            }
+        }
+    }
 }

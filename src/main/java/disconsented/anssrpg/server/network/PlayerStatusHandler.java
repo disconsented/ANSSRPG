@@ -22,16 +22,18 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.network;
 
+import disconsented.anssrpg.client.gui.components.ComponentStatusBook;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import disconsented.anssrpg.client.gui.components.ComponentStatusBook;
 
 /**
  * Created by j on 30/08/2015.
  */
-public class PlayerStatusHandler implements IMessageHandler<PlayerStatus, IMessage>{
-    public PlayerStatusHandler(){}
+public class PlayerStatusHandler implements IMessageHandler<PlayerStatus, IMessage> {
+    public PlayerStatusHandler() {
+    }
+
     @Override
     public IMessage onMessage(PlayerStatus message, MessageContext ctx) {
         ComponentStatusBook.currentHearts = message.currentHearts;

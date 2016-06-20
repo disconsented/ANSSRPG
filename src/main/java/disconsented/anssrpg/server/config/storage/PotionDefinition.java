@@ -25,18 +25,9 @@ import net.minecraft.util.ResourceLocation;
 
 /**
  * @author Disconsented
- *
  */
-public class PotionDefinition{
-    public PotionDefinition(String name, int amplifier, int duration){
-        this.resourceLocation = new ResourceLocation(name);
-        this.amplifier = amplifier;
-        this.duration = duration;
-    }   
-    public PotionDefinition(){}
-
+public class PotionDefinition {
     public ResourceLocation resourceLocation;
-
     public Potion potion;
     @Expose
     public String name = "";
@@ -44,4 +35,11 @@ public class PotionDefinition{
     public int amplifier;
     @Expose
     public int duration;
+    public PotionDefinition(String name, int amplifier, int duration) {
+        this.resourceLocation = new ResourceLocation(name);
+        this.amplifier = amplifier;
+        this.duration = duration;
+    }
+    public PotionDefinition() {
+    }
 }

@@ -22,25 +22,25 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg.server.network;
 
+import disconsented.anssrpg.Main;
+import disconsented.anssrpg.server.common.Reference;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
-import disconsented.anssrpg.Main;
-import disconsented.anssrpg.server.common.Reference;
 
 public class Manager {
-	
-	public static void init(){
 
-		Main.snw = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.ID);
-		SimpleNetworkWrapper snw = Main.snw;
-		snw.registerMessage(ResponceHandler.class, Responce.class, 0, Side.CLIENT);
-		snw.registerMessage(PerkInfoHandler.class, PerkInfo.class, 1, Side.CLIENT);
-		snw.registerMessage(RequestHandler.class, Request.class, 2, Side.SERVER);
-		snw.registerMessage(SkillInfoHandler.class, SkillInfo.class, 3, Side.CLIENT);
-		snw.registerMessage(PerkRequestHandler.class, PerkRequest.class, 4, Side.SERVER);
-		snw.registerMessage(PlayerStatusHandler.class, PlayerStatus.class, 5, Side.CLIENT);
+    public static void init() {
+
+        Main.snw = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.ID);
+        SimpleNetworkWrapper snw = Main.snw;
+        snw.registerMessage(ResponceHandler.class, Responce.class, 0, Side.CLIENT);
+        snw.registerMessage(PerkInfoHandler.class, PerkInfo.class, 1, Side.CLIENT);
+        snw.registerMessage(RequestHandler.class, Request.class, 2, Side.SERVER);
+        snw.registerMessage(SkillInfoHandler.class, SkillInfo.class, 3, Side.CLIENT);
+        snw.registerMessage(PerkRequestHandler.class, PerkRequest.class, 4, Side.SERVER);
+        snw.registerMessage(PlayerStatusHandler.class, PlayerStatus.class, 5, Side.CLIENT);
         snw.registerMessage(ActivePerksHandler.class, ActivePerks.class, 6, Side.CLIENT);
-	}
+    }
 
 }

@@ -68,7 +68,8 @@ public class PlayerData {
     public void setSkillExp(HashMap<String, Integer> skillExp) {
         this.skillExp = skillExp;
     }
-    public int getSkillLevel(Skill skill){
+
+    public int getSkillLevel(Skill skill) {
         return (int) SkillHandler.calculateLevelForExp(skill, skillExp.get(skill.name));
     }
 

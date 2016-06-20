@@ -22,16 +22,18 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.network;
 
+import disconsented.anssrpg.client.gui.components.ComponentStatusBook;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import disconsented.anssrpg.client.gui.components.ComponentStatusBook;
 
 /**
  * Created by j on 30/08/2015.
  */
 public class ActivePerksHandler implements IMessageHandler<ActivePerks, IMessage> {
-    public ActivePerksHandler(){}
+    public ActivePerksHandler() {
+    }
+
     @Override
     public IMessage onMessage(ActivePerks message, MessageContext ctx) {
         ComponentStatusBook.activePerks = message.activePerks;

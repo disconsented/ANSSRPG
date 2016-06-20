@@ -32,27 +32,26 @@ import java.util.Map;
 /**
  * Struct like object for Block definitions in skills.
  * Stands for Block, Name, Experience, Properties.
+ *
  * @author Disconsented
  */
 public class BNEP {
 
-    public  BNEP(){}
+    public Block block;
+    public ResourceLocation resourceLocation;
+    @Expose
+    public int experience;
+    @Expose
+    public Map<String, String> properties = new HashMap<>();
+    @Expose
+    String name = "";
+
+    public BNEP() {
+    }
+
     public BNEP(String resourceLocation, int experience, Map<String, String> properties) {
         this.resourceLocation = new ResourceLocation(resourceLocation);
         this.experience = experience;
         this.properties = properties;
     }
-
-    public Block block;
-
-    @Expose
-    String name = "";
-
-    public ResourceLocation resourceLocation;
-
-    @Expose
-    public int experience;
-
-    @Expose
-    public Map<String,String> properties = new HashMap<>();
 }

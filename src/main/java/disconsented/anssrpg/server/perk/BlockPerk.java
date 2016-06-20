@@ -22,14 +22,12 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.perk;
 
-import java.util.ArrayList;
-
+import com.google.gson.annotations.Expose;
+import disconsented.anssrpg.server.common.Logging;
 import disconsented.anssrpg.server.config.storage.BNP;
 import net.minecraft.block.Block;
 
-import com.google.gson.annotations.Expose;
-
-import disconsented.anssrpg.server.common.Logging;
+import java.util.ArrayList;
 
 public class BlockPerk extends Perk {
 
@@ -48,9 +46,9 @@ public class BlockPerk extends Perk {
     @Override
     public void init() {
         ArrayList<BNP> initialised = new ArrayList<BNP>();
-        for(BNP object : this.blocks){
-            object.block = (Block)Block.REGISTRY.getObject(object.resourceLocation);
-            if (object.block != null){
+        for (BNP object : this.blocks) {
+            object.block = (Block) Block.REGISTRY.getObject(object.resourceLocation);
+            if (object.block != null) {
                 Logging.debug(object.resourceLocation + " has been found. Passing on.");
                 initialised.add(object);
             } else {
@@ -59,5 +57,5 @@ public class BlockPerk extends Perk {
         }
         blocks = initialised;
     }
-    
+
 }

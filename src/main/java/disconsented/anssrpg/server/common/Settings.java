@@ -24,13 +24,13 @@ THE SOFTWARE.
 package disconsented.anssrpg.server.common;
 
 import disconsented.anssrpg.server.Global;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import java.io.File;
 
 public class Settings {
+    private static final Settings instance = new Settings();
     // Categories
     public static String balancing = "Balancing";
     public static String misc = "Misc Options";
@@ -40,7 +40,6 @@ public class Settings {
     private static String statusMessage = "null";
     private static boolean externalConfig;
     private static boolean requiredOnClient = true;
-
     private static boolean blockFakePlayers = true;
     /**
      * 0 - Disabled
@@ -48,7 +47,6 @@ public class Settings {
      * 2 - Points can be converted from vanilla levels
      */
     private static int pointsMode = 1;
-    private static final Settings instance = new Settings();
 
     private Settings() {
     }
@@ -95,6 +93,10 @@ public class Settings {
         return Settings.logging;
     }
 
+    public static boolean isExternalConfig() {
+        return Settings.externalConfig;
+    }
+
     public void load(FMLPreInitializationEvent event) {
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
         config.load();
@@ -102,7 +104,7 @@ public class Settings {
         config.addCustomCategoryComment(Settings.balancing, "Balancing tweaks.");
         config.addCustomCategoryComment(Settings.misc, "Settings that don't fit in other categories");
 
-        Settings.blockFakePlayers = config.getBoolean("blockUnknownFakePlayers", Settings.balancing,true,"Enables fake players that are not associated with a real player being blocked by default(where appropriate)");
+        Settings.blockFakePlayers = config.getBoolean("blockUnknownFakePlayers", Settings.balancing, true, "Enables fake players that are not associated with a real player being blocked by default(where appropriate)");
 
         Settings.debug = config.get(Settings.misc, "enableDebugMode", false, "Enables debugging features. Meant for development use.").getBoolean();
         Settings.logging = config.get(Settings.misc, "enableLogging", true, "Enables logging to console.").getBoolean();
@@ -110,9 +112,5 @@ public class Settings {
         Settings.requiredOnClient = config.get(Settings.misc, "requiredOnClient", true, "Clients require the mod to be able to connect to the server").getBoolean();
 
         config.save();
-    }
-
-    public static boolean isExternalConfig() {
-        return Settings.externalConfig;
     }
 }

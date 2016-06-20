@@ -22,50 +22,48 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.perk;
 
-import java.util.ArrayList;
-
+import com.google.gson.annotations.Expose;
 import disconsented.anssrpg.server.common.Logging;
+import disconsented.anssrpg.server.config.storage.PotionDefinition;
 import disconsented.anssrpg.server.handler.PlayerHandler;
+import disconsented.anssrpg.server.task.TaskApplyPotion;
+import disconsented.anssrpg.server.task.TaskMaster;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
-import com.google.gson.annotations.Expose;
-
-import disconsented.anssrpg.server.config.storage.PotionDefinition;
-import disconsented.anssrpg.server.task.TaskApplyPotion;
-import disconsented.anssrpg.server.task.TaskMaster;
+import java.util.ArrayList;
 
 /**
  * @author Disconsented
- *
  */
-public class PotionSelfPerk extends Perk implements ActivePerk{
-    
-    public PotionSelfPerk(String name, ArrayList<Requirement> requirements, String description,
-            ArrayList<PotionDefinition> effects, boolean repeat, int cycle, int maxCycles){
-        super(name, requirements, description);
-        this.repeat = repeat;
-        this.cycle = cycle;
-        this.effects = effects;
-        this.maxCycles = maxCycles;
-    }
-    public PotionSelfPerk(){}
-    
+public class PotionSelfPerk extends Perk implements ActivePerk {
+
     @Expose
-    public ArrayList<PotionDefinition> effects = new ArrayList<PotionDefinition>();    
+    public ArrayList<PotionDefinition> effects = new ArrayList<PotionDefinition>();
     @Expose
     public boolean repeat;
     @Expose
     public int cycle = 1;
     @Expose
     public int maxCycles = 10;
+    public PotionSelfPerk(String name, ArrayList<Requirement> requirements, String description,
+                          ArrayList<PotionDefinition> effects, boolean repeat, int cycle, int maxCycles) {
+        super(name, requirements, description);
+        this.repeat = repeat;
+        this.cycle = cycle;
+        this.effects = effects;
+        this.maxCycles = maxCycles;
+    }
+    public PotionSelfPerk() {
+    }
+
     @Override
     public void init() {
         ArrayList<PotionDefinition> initialised = new ArrayList<>();
-        for(PotionDefinition object : effects){
+        for (PotionDefinition object : effects) {
             object.potion = (Potion) Potion.REGISTRY.getObject(object.resourceLocation);
-            if (object.potion != null){
+            if (object.potion != null) {
                 Logging.debug(object.resourceLocation + " has been found. Passing on.");
                 initialised.add(object);
             } else {
@@ -74,13 +72,14 @@ public class PotionSelfPerk extends Perk implements ActivePerk{
         }
         effects = initialised;
     }
+
     @Override
     public void activate(EntityLivingBase target, EntityLivingBase source) {
         PlayerHandler.getPlayer(target.getUniqueID());
-        for (PotionDefinition effect : this.effects){
+        for (PotionDefinition effect : this.effects) {
             TaskMaster.getInstance().addTask(new TaskApplyPotion(
                     target, new PotionEffect(effect.potion, effect.duration, effect.amplifier), null, this.repeat, this.cycle, this.maxCycles, this.slug));
         }
-        
+
     }
 }

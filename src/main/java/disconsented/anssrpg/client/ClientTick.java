@@ -30,11 +30,11 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 public class ClientTick {
 
     @SubscribeEvent
-    public void clientTickEvent(ClientTickEvent event){
-        if(Data.screenToOpen != null && Data.ticksLeft  == 0){
+    public void clientTickEvent(ClientTickEvent event) {
+        if (Data.screenToOpen != null && Data.ticksLeft == 0) {
             Minecraft.getMinecraft().displayGuiScreen(Data.screenToOpen);
             Data.screenToOpen = null;
-        } else if(Data.ticksLeft > 0) {
+        } else if (Data.ticksLeft > 0) {
             Data.ticksLeft--;
         }
 

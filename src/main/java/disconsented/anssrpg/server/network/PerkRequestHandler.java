@@ -21,10 +21,10 @@
 
 package disconsented.anssrpg.server.network;
 
+import disconsented.anssrpg.server.handler.PlayerHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import disconsented.anssrpg.server.handler.PlayerHandler;
 
 /**
  * Created by Disconsented on 6/07/2015.
@@ -32,6 +32,6 @@ import disconsented.anssrpg.server.handler.PlayerHandler;
 public class PerkRequestHandler implements IMessageHandler<PerkRequest, IMessage> {
     @Override
     public IMessage onMessage(PerkRequest message, MessageContext ctx) {
-                return new Responce(PlayerHandler.addPerk(message.slug, ctx.getServerHandler().playerEntity));
+        return new Responce(PlayerHandler.addPerk(message.slug, ctx.getServerHandler().playerEntity));
     }
 }

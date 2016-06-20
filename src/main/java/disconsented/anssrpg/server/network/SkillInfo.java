@@ -27,41 +27,42 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class SkillInfo implements IMessage {
-	public String name;
-	public int expCurrent;
-	public int expRequired;
-	public int levelCurrent;
-	public int expOld;
-	
-	public SkillInfo (){}
-	
-	public SkillInfo(String name, int expCurrent, int expRequired, int levelCurrent, int expOld){
-		this.name = name;
-		this.expCurrent = expCurrent;
-		this.expRequired = expRequired;
-		this.levelCurrent = levelCurrent;
-		this.expOld = expOld;
+    public String name;
+    public int expCurrent;
+    public int expRequired;
+    public int levelCurrent;
+    public int expOld;
 
-	}
+    public SkillInfo() {
+    }
 
-	@Override
-	public void fromBytes(ByteBuf buf) {
-		name = ByteBufUtils.readUTF8String(buf);
-		expCurrent = buf.readInt();
-		expRequired = buf.readInt();
-		levelCurrent = buf.readInt();
-		expOld = buf.readInt();
-		
-	}
+    public SkillInfo(String name, int expCurrent, int expRequired, int levelCurrent, int expOld) {
+        this.name = name;
+        this.expCurrent = expCurrent;
+        this.expRequired = expRequired;
+        this.levelCurrent = levelCurrent;
+        this.expOld = expOld;
 
-	@Override
-	public void toBytes(ByteBuf buf) {
-		ByteBufUtils.writeUTF8String(buf, name);
-		buf.writeInt(this.expCurrent);
-		buf.writeInt(this.expRequired);
-		buf.writeInt(this.levelCurrent);
-		buf.writeInt(this.expOld);
-		
-	}
+    }
+
+    @Override
+    public void fromBytes(ByteBuf buf) {
+        name = ByteBufUtils.readUTF8String(buf);
+        expCurrent = buf.readInt();
+        expRequired = buf.readInt();
+        levelCurrent = buf.readInt();
+        expOld = buf.readInt();
+
+    }
+
+    @Override
+    public void toBytes(ByteBuf buf) {
+        ByteBufUtils.writeUTF8String(buf, name);
+        buf.writeInt(this.expCurrent);
+        buf.writeInt(this.expRequired);
+        buf.writeInt(this.levelCurrent);
+        buf.writeInt(this.expOld);
+
+    }
 
 }

@@ -26,12 +26,9 @@ import disconsented.anssrpg.client.Data;
 import disconsented.anssrpg.client.gui.GUIExperience;
 import disconsented.anssrpg.client.gui.GUIPerk;
 import disconsented.anssrpg.client.gui.GUIStatus;
-import disconsented.anssrpg.server.common.Reference;
-import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 
 import java.util.ArrayList;
@@ -65,7 +62,7 @@ public class ANSSRPG extends CommandBase {
 
     @Override
     public void execute(MinecraftServer server, ICommandSender player, String[] arguments) throws CommandException {
-        switch (arguments[0]){
+        switch (arguments[0]) {
             case "0":
                 Data.ticksLeft = 2;
                 Data.screenToOpen = new GUIExperience();
@@ -80,6 +77,7 @@ public class ANSSRPG extends CommandBase {
                 break;
         }
     }
+
     @Override
     public boolean isUsernameIndex(String[] astring, int i) {
         return false;

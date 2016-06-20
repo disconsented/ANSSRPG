@@ -89,7 +89,7 @@ public class Perks extends CommandBase {
                         break;
                     case "all":
                         for (Perk perk : PerkStore.getInstance().getPerks()) {
-                            toReturn += perk.getSlug()+ ",";
+                            toReturn += perk.getSlug() + ",";
                         }
                         break;
                     default:
@@ -108,7 +108,7 @@ public class Perks extends CommandBase {
                 }
                 break;
             case "activate":
-                if (arguments.length >= 2){
+                if (arguments.length >= 2) {
                     toReturn = PlayerHandler.activatePerk(p2, playerdata, arguments[1]);
                 }
 

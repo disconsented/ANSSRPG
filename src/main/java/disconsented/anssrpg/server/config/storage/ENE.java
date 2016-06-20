@@ -28,18 +28,19 @@ import net.minecraft.entity.Entity;
 /**
  * Struct like object for entities used for skills.
  * Stands for Entities, Name, Experience.
+ *
  * @author Disconsented
  */
 public class ENE {
-    public ENE(Class<Entity> entity, String name, int experience){
-        this.entity = entity;
-        this.name = name;
-        this.experience = experience;        
-    }
     //Not exposed to save on space in configs
     public Class<Entity> entity;
     @Expose
     public String name = "";
     @Expose
     public int experience;
+    public ENE(Class<Entity> entity, String name, int experience) {
+        this.entity = entity;
+        this.name = name;
+        this.experience = experience;
+    }
 }

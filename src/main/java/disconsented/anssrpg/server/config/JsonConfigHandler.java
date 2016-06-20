@@ -23,22 +23,13 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.config;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.Writer;
-import java.lang.reflect.Type;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-
 import disconsented.anssrpg.server.common.Logging;
+
+import java.io.*;
+import java.lang.reflect.Type;
 
 /**
  * @author Disconsented, Abelistah
@@ -57,6 +48,7 @@ public class JsonConfigHandler {
 
     /**
      * Writes the perkStore to disk, if it is null then it will create the default one     *
+     *
      * @param perkStore The PerkStore to write to disk. If null a new one will be created.
      */
     public static void createPerkConfig(PerkContainer perkStore) {
@@ -80,6 +72,7 @@ public class JsonConfigHandler {
 
     /**
      * Writes the skillStore to disk, if skillStore is null it will create the default one     *
+     *
      * @param skillStore The SkillStore to write to disk. If null a new one will be created.
      */
     public static void createSkillConfig(SkillContainer skillStore) {

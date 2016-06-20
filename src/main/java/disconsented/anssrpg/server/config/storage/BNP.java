@@ -32,21 +32,21 @@ import java.util.Map;
 /**
  * Struct like object for Block definitions in perks.
  * Stands for Block, Name, Experience, Properties.
+ *
  * @author Disconsented
  */
 public class BNP {
 
-    public BNP(){}
+    public Block block;
+    public ResourceLocation resourceLocation;
+    @Expose
+    public Map<String, String> properties = new HashMap<>();
+    private String name = "";
+
+    public BNP() {
+    }
     public BNP(String name, Map<String, String> properties) {
         this.resourceLocation = new ResourceLocation(name);
         this.properties = properties;
     }
-
-    public Block block;
-
-    public ResourceLocation resourceLocation;
-
-    private String name = "";
-    @Expose
-    public Map<String,String> properties = new HashMap<>();
 }

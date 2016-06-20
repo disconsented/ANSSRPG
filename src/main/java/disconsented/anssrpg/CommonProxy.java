@@ -22,10 +22,13 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg;
 
-import net.minecraftforge.fml.common.network.IGuiHandler;
-import disconsented.anssrpg.client.gui.*;
+import disconsented.anssrpg.client.gui.DummyContainer;
+import disconsented.anssrpg.client.gui.GUIExperience;
+import disconsented.anssrpg.client.gui.GUIPerk;
+import disconsented.anssrpg.client.gui.GUIStatus;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.IGuiHandler;
 
 public class CommonProxy implements IGuiHandler {
     public void registerRenderers() {
@@ -33,21 +36,21 @@ public class CommonProxy implements IGuiHandler {
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-       return new DummyContainer();
+        return new DummyContainer();
     }
 
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        switch(ID){
-        case 0:
-            return new GUIExperience();
-        case 1:
-            return new GUIPerk();
-        case 2:
-            return new GUIStatus();
-        default:
-            return null;
+        switch (ID) {
+            case 0:
+                return new GUIExperience();
+            case 1:
+                return new GUIPerk();
+            case 2:
+                return new GUIStatus();
+            default:
+                return null;
         }
-        
+
     }
 }

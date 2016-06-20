@@ -24,7 +24,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class Global {
-    public static MinecraftServer getMinecraftServer(){
+    public static MinecraftServer getMinecraftServer() {
         return FMLCommonHandler.instance().getMinecraftServerInstance();
     }
 }

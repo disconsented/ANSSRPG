@@ -21,20 +21,24 @@
 
 package disconsented.anssrpg.server.network;
 
+import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import io.netty.buffer.ByteBuf;
 
 /**
  * Created by Disconsented on 6/07/2015.
  */
 public class PerkRequest implements IMessage {
 
-    public PerkRequest(){}
-    public PerkRequest(String slug){
+    public String slug;
+
+    public PerkRequest() {
+    }
+
+    public PerkRequest(String slug) {
         this.slug = slug;
     }
-    public String slug;
+
     @Override
     public void fromBytes(ByteBuf buf) {
         this.slug = ByteBufUtils.readUTF8String(buf);

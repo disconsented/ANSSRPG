@@ -26,9 +26,8 @@ import net.minecraft.entity.EntityLivingBase;
 
 /**
  * @author Disconsented
- *
  */
-public interface ActivePerk{
+public interface ActivePerk {
     void activate(EntityLivingBase target, EntityLivingBase source);
-    
+
 }

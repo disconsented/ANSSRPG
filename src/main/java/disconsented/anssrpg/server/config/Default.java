@@ -22,13 +22,14 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.config;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import disconsented.anssrpg.server.config.storage.PotionDefinition;
 import disconsented.anssrpg.server.config.storage.*;
 import disconsented.anssrpg.server.perk.*;
-import disconsented.anssrpg.server.skill.objects.*;
+import disconsented.anssrpg.server.skill.objects.BlockSkill;
+import disconsented.anssrpg.server.skill.objects.EntitySkill;
+import disconsented.anssrpg.server.skill.objects.ItemSkill;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Contains the information for the default configs so it can be referenced as needed
@@ -37,10 +38,12 @@ import disconsented.anssrpg.server.skill.objects.*;
 public class Default {
     private static PerkContainer perks;
     private static SkillContainer skills;
-    private Default(){}
-    
-    public static PerkContainer getPerkInstance(){
-        if (Default.perks != null){
+
+    private Default() {
+    }
+
+    public static PerkContainer getPerkInstance() {
+        if (Default.perks != null) {
             return Default.perks;
         } else {
             Default.perks = new PerkContainer();
@@ -151,13 +154,13 @@ public class Default {
 
             Default.perks.addPerk(new TitlePerk("Completionist"));
             return Default.perks;
-            
+
         }
-            
+
     }
-    
-    public static SkillContainer getSkillInstance(){
-        if (Default.skills != null){
+
+    public static SkillContainer getSkillInstance() {
+        if (Default.skills != null) {
             return Default.skills;
         } else {
             Default.skills = new SkillContainer();
@@ -172,18 +175,20 @@ public class Default {
             mining.exp.add(new BNEP("emerald_ore", 35, null));
             mining.tool = "Pickaxe";
             Default.skills.addBlockSkill(mining);
-            
+
             // log == Oak,Spruce,Birch,Jungle
             // log2 == Acaica,DarkOak
             BlockSkill woodcutting = new BlockSkill();
             woodcutting.name = "Woodcutting";
-            woodcutting.exp.add(new BNEP("log", 1, new HashMap<String, String>(){{
-                this.put("variant","*");}}));
-            woodcutting.exp.add(new BNEP("log2", 2,  new HashMap<String, String>(){{
-                this.put("variant","*");}}));
+            woodcutting.exp.add(new BNEP("log", 1, new HashMap<String, String>() {{
+                this.put("variant", "*");
+            }}));
+            woodcutting.exp.add(new BNEP("log2", 2, new HashMap<String, String>() {{
+                this.put("variant", "*");
+            }}));
             woodcutting.tool = "Axe";
             Default.skills.addBlockSkill(woodcutting);
-            
+
             BlockSkill digging = new BlockSkill();
             digging.name = "Digging";
             digging.exp.add(new BNEP("sand", 1, null));
@@ -191,11 +196,12 @@ public class Default {
             digging.exp.add(new BNEP("grass", 1, null));
             digging.exp.add(new BNEP("clay", 2, null));
             digging.exp.add(new BNEP("hardened_clay", 2, null));
-            digging.exp.add(new BNEP("stained_hardened_clay", 2, new HashMap<String, String>(){{
-                this.put("color","*");}}));
+            digging.exp.add(new BNEP("stained_hardened_clay", 2, new HashMap<String, String>() {{
+                this.put("color", "*");
+            }}));
             digging.tool = "Spade";
             Default.skills.addBlockSkill(digging);
-            
+
             EntitySkill slaying = new EntitySkill();
             slaying.name = "Slaying";
             slaying.exp.add(new ENE(null, "Zombie", 5));
@@ -204,7 +210,7 @@ public class Default {
             slaying.exp.add(new ENE(null, "Creeper", 20));
             slaying.tool = "Sword";
             Default.skills.addEntitySkill(slaying);
-            
+
             ItemSkill armouring = new ItemSkill();
             armouring.name = "Armouring";
             //Leather
@@ -216,7 +222,8 @@ public class Default {
             armouring.exp.add(new INME(null, "golden_helmet", 0, 15));
             armouring.exp.add(new INME(null, "golden_chestplate", 0, 15));
             armouring.exp.add(new INME(null, "golden_leggings", 0, 15));
-            armouring.exp.add(new INME(null, "golden_boots", 0, 15));;
+            armouring.exp.add(new INME(null, "golden_boots", 0, 15));
+            ;
             //Iron
             armouring.exp.add(new INME(null, "iron_helmet", 0, 20));
             armouring.exp.add(new INME(null, "iron_chestplate", 0, 20));
@@ -231,7 +238,7 @@ public class Default {
             Default.skills.addItemSkill(armouring);
             return Default.skills;
         }
-        
+
     }
-    
+
 }

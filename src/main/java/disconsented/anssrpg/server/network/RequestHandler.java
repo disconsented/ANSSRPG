@@ -22,12 +22,6 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.network;
 
-import java.util.ArrayList;
-import java.util.Map;
-
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import disconsented.anssrpg.Main;
 import disconsented.anssrpg.server.data.PerkStore;
 import disconsented.anssrpg.server.data.SkillStore;
@@ -39,6 +33,12 @@ import disconsented.anssrpg.server.skill.objects.Skill;
 import disconsented.anssrpg.server.task.TaskMaster;
 import disconsented.anssrpg.server.task.TaskPlayerStatusTrack;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Handles the @link{request} packet
@@ -49,32 +49,31 @@ public class RequestHandler implements IMessageHandler<Request, IMessage> {
     public IMessage onMessage(Request message, MessageContext ctx) {
         EntityPlayerMP player = ctx.getServerHandler().playerEntity;
         PlayerData playerData = PlayerHandler.getPlayer(player.getUniqueID());
-        switch(message.request){
-		case ACTIVE_PERKS:
-			break;
-		case OBTAINED_PERKS:
-			break;
-		case PERKS:
-            ArrayList<Perk> perks = PerkStore.getPerks();
-            for (Perk perk : perks)
-            {//String resourceLocation, String description, String slug,  ArrayList<Requirement> requirements, boolean obtained
-                boolean obtained =  playerData.getPerkList().contains(perk.getSlug());
-                Main.snw.sendTo(new PerkInfo(perk.name, perk.getDescription(), perk.getSlug().getSlug(), perk.getRequirements(),obtained),player);
-            }
-			break;
-		case SKILLS:
-			SkillStore skillStore = SkillStore.getInstance();
-			for(Map.Entry<String, Integer> entry : playerData.getSkillExp().entrySet()){
-				for(Skill skill : SkillStore.getSkills()){
-					if(entry.getKey().equals(skill.name)){						
-						int level = (int) SkillHandler.calculateLevelForExp(skill, entry.getValue());
-						int xp = (int) SkillHandler.calculateExpForLevel(skill, level + 1);
-						Main.snw.sendTo(new SkillInfo(skill.name, entry.getValue(), xp, level, (int)SkillHandler.calculateExpForLevel(skill.base, level-1, skill.mod) ), player);
-						break;
-					}
-				}
-			}
-			break;
+        switch (message.request) {
+            case ACTIVE_PERKS:
+                break;
+            case OBTAINED_PERKS:
+                break;
+            case PERKS:
+                ArrayList<Perk> perks = PerkStore.getPerks();
+                for (Perk perk : perks) {//String resourceLocation, String description, String slug,  ArrayList<Requirement> requirements, boolean obtained
+                    boolean obtained = playerData.getPerkList().contains(perk.getSlug());
+                    Main.snw.sendTo(new PerkInfo(perk.name, perk.getDescription(), perk.getSlug().getSlug(), perk.getRequirements(), obtained), player);
+                }
+                break;
+            case SKILLS:
+                SkillStore skillStore = SkillStore.getInstance();
+                for (Map.Entry<String, Integer> entry : playerData.getSkillExp().entrySet()) {
+                    for (Skill skill : SkillStore.getSkills()) {
+                        if (entry.getKey().equals(skill.name)) {
+                            int level = (int) SkillHandler.calculateLevelForExp(skill, entry.getValue());
+                            int xp = (int) SkillHandler.calculateExpForLevel(skill, level + 1);
+                            Main.snw.sendTo(new SkillInfo(skill.name, entry.getValue(), xp, level, (int) SkillHandler.calculateExpForLevel(skill.base, level - 1, skill.mod)), player);
+                            break;
+                        }
+                    }
+                }
+                break;
             //Loads the task which sends the player their information for the gui
             case START_TRACKING:
                 TaskMaster.getInstance().addTask(new TaskPlayerStatusTrack(player));
@@ -83,9 +82,9 @@ public class RequestHandler implements IMessageHandler<Request, IMessage> {
             case STOP_TRACKING:
                 player.getEntityData().setBoolean(TaskPlayerStatusTrack.TAG_STATUS_OPEN, false);
                 break;
-		default:
-			break;
-       
+            default:
+                break;
+
         }
         return null;
     }

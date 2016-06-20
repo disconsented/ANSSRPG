@@ -25,9 +25,9 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.client.commands;
 
+import disconsented.anssrpg.client.gui.RegistryReader;
 import disconsented.anssrpg.server.common.Logging;
 import disconsented.anssrpg.server.common.Settings;
-import disconsented.anssrpg.client.gui.RegistryReader;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -76,7 +76,6 @@ public class GUIRegistry extends CommandBase {
         }
 
     }
-
 
 
     @Override

@@ -32,15 +32,16 @@ import java.util.Map;
 public class Utils {
     /**
      * Returns true if two storage are matched. If either Metadata is less than 0(-1) then it is treated as a wildcard (Metadata is ignored).
-     * @param object1 First object to match.
+     *
+     * @param object1   First object to match.
      * @param metadata1 First storage metadata.
-     * @param object2 Second object to match.
+     * @param object2   Second object to match.
      * @param metadata2 Second storage metadata.
-     * @param <T> Arbitrary data type.
+     * @param <T>       Arbitrary data type.
      * @return The result.
      */
-    public static<T> boolean MatchObject(T object1, int metadata1, T object2, int metadata2){
-        if (metadata1 > -1 && metadata2 > -1){
+    public static <T> boolean MatchObject(T object1, int metadata1, T object2, int metadata2) {
+        if (metadata1 > -1 && metadata2 > -1) {
             return object1.equals(object2) && metadata1 == metadata2;
         } else {
             return object1.equals(object2);
@@ -49,39 +50,40 @@ public class Utils {
 
     /**
      * Returns true if two storage of the same time are the same. Uses a properties map and will use Object1 as the 'master' (checks are based off that)
-     * @param object1 First object to match.
+     *
+     * @param object1     First object to match.
      * @param properties1 Properties map of the first object.
-     * @param object2 Second object to match.
+     * @param object2     Second object to match.
      * @param properties2 Properties map of the second(game) object.
-     * @param <T> Arbitrary data type.
+     * @param <T>         Arbitrary data type.
      * @return The result.
      */
-    public static<T> boolean MatchObject(T object1, Map<String, String> properties1, T object2, ImmutableMap<IProperty<?>, Comparable<?>> properties2){
-        if(object1 != object2)
+    public static <T> boolean MatchObject(T object1, Map<String, String> properties1, T object2, ImmutableMap<IProperty<?>, Comparable<?>> properties2) {
+        if (object1 != object2)
             return false;
 
-        if(properties1 == null)
+        if (properties1 == null)
             properties1 = new HashMap<>();
 
         ImmutableSet<IProperty<?>> keys = properties2.keySet();
 
-        for(IProperty<?> key : keys){
+        for (IProperty<?> key : keys) {
             String value1 = properties1.get(key.getName());
-            if(value1 == null){
+            if (value1 == null) {
                 Logging.debug("Could not find " + key.getName() + " ; Continuing!");
                 continue;
             }
 
             String value2 = properties2.get(key).toString();
 
-            if(value1.equals("*")){
-                if (value2.equals("")){
-                    Logging.debug("Failed to evaluate key:"+key+" against values: "+value1+" & "+value2);
+            if (value1.equals("*")) {
+                if (value2.equals("")) {
+                    Logging.debug("Failed to evaluate key:" + key + " against values: " + value1 + " & " + value2);
                     return false;
                 }
             } else {
-                if(!value1.equals(value2)){
-                    Logging.debug("Failed to evaluate key:"+key+" against values: "+value1+" & "+value2);
+                if (!value1.equals(value2)) {
+                    Logging.debug("Failed to evaluate key:" + key + " against values: " + value1 + " & " + value2);
                     return false;
                 }
             }
@@ -90,21 +92,22 @@ public class Utils {
         return true;
     }
 
-    public static<T> boolean MatchObject(ImmutableMap<IProperty<?>, Comparable<?>> properties){
+    public static <T> boolean MatchObject(ImmutableMap<IProperty<?>, Comparable<?>> properties) {
         return true;
     }
 
     /**
      * Simple method for matching storage.
+     *
      * @param item1 First object to match.
      * @param item2 Second object to match.
      * @return The result.
      */
-    public static boolean MatchObject(Object item1, Object item2){
+    public static boolean MatchObject(Object item1, Object item2) {
         return item1.equals(item2) || item1 == item2;
     }
 
-    public static String stringToSlug(String value){
+    public static String stringToSlug(String value) {
         return value.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
     }
 

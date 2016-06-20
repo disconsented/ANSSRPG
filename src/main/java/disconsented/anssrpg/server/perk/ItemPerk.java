@@ -25,14 +25,12 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.perk;
 
-import java.util.ArrayList;
-
+import com.google.gson.annotations.Expose;
+import disconsented.anssrpg.server.common.Logging;
 import disconsented.anssrpg.server.config.storage.INM;
 import net.minecraft.item.Item;
 
-import com.google.gson.annotations.Expose;
-
-import disconsented.anssrpg.server.common.Logging;
+import java.util.ArrayList;
 
 public class ItemPerk extends Perk {
 
@@ -51,9 +49,9 @@ public class ItemPerk extends Perk {
     @Override
     public void init() {
         ArrayList<INM> initialised = new ArrayList<>();
-        for(INM object : this.items){
-            object.item = (Item)Item.REGISTRY.getObject(object.resourceLocation);
-            if (object.item != null){
+        for (INM object : this.items) {
+            object.item = (Item) Item.REGISTRY.getObject(object.resourceLocation);
+            if (object.item != null) {
                 Logging.debug(object.resourceLocation + " has been found. Passing on.");
                 initialised.add(object);
             } else {
@@ -62,5 +60,5 @@ public class ItemPerk extends Perk {
         }
         items = initialised;
     }
-    
+
 }

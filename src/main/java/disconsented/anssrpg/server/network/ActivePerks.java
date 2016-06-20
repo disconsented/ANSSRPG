@@ -22,9 +22,9 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.network;
 
+import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import io.netty.buffer.ByteBuf;
 
 import java.util.ArrayList;
 
@@ -33,13 +33,19 @@ import java.util.ArrayList;
  */
 public class ActivePerks implements IMessage {
     public ArrayList<String> activePerks;
-    public ActivePerks(){}
-    public ActivePerks(ArrayList<String> activePerks){this.activePerks = activePerks;}
+
+    public ActivePerks() {
+    }
+
+    public ActivePerks(ArrayList<String> activePerks) {
+        this.activePerks = activePerks;
+    }
+
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeInt(this.activePerks.size());
         for (String string : this.activePerks)
-        ByteBufUtils.writeUTF8String(buf, string);
+            ByteBufUtils.writeUTF8String(buf, string);
     }
 
     @Override

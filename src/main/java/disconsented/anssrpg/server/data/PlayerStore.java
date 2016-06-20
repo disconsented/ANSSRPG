@@ -26,10 +26,9 @@ THE SOFTWARE.
 package disconsented.anssrpg.server.data;
 
 import disconsented.anssrpg.server.player.PlayerData;
+import net.minecraft.entity.player.EntityPlayerMP;
 
 import java.util.HashMap;
-
-import net.minecraft.entity.player.EntityPlayerMP;
 
 /**
  * @author Disconsented

@@ -26,14 +26,15 @@ THE SOFTWARE.
 package disconsented.anssrpg.server.skill.objects;
 
 import com.google.gson.annotations.Expose;
-import disconsented.anssrpg.server.config.storage.INME;
 import disconsented.anssrpg.server.common.Logging;
+import disconsented.anssrpg.server.config.storage.INME;
 import net.minecraft.item.Item;
 
 import java.util.ArrayList;
 
 /**
  * Data carrier for ItemSkill's
+ *
  * @author Disconsented
  */
 public class ItemSkill extends Skill {
@@ -46,11 +47,11 @@ public class ItemSkill extends Skill {
         ArrayList<INME> initialised = new ArrayList<>();
         for (INME object : this.exp) {
             object.item = (Item) Item.REGISTRY.getObject(object.resourceLocation);
-            if (object.item != null){
-                Logging.debug(object.resourceLocation+" has been found. Passing on!");
+            if (object.item != null) {
+                Logging.debug(object.resourceLocation + " has been found. Passing on!");
                 initialised.add(object);
             } else {
-                Logging.error(object.resourceLocation+" could not be found. Ignoring!");
+                Logging.error(object.resourceLocation + " could not be found. Ignoring!");
             }
         }
         this.exp = initialised;

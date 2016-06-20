@@ -25,69 +25,76 @@ package disconsented.anssrpg.server.task;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Type;
 
-public abstract class Task/* implements Comparable<TaskApplyPotion>*/{
-	
-	private int tick;
+public abstract class Task/* implements Comparable<TaskApplyPotion>*/ {
+
+    protected boolean repeat;
+    protected int cycle = 1;
+    protected int maxTicks = 1;
+    protected Type type;
+    private int tick;
     private int totalTicks;
-	protected boolean repeat;
-	protected int cycle = 1;
-	protected  int maxTicks = 1;
-	protected Type type;
-	/**
-	 * Called when the task is first added to the master
-	 */
-	public abstract void onAdd();
-	/**
-	 * Called every tick
-	 * Override canProcess to filter  
-	 * @param event TickEvent
-	 */
-	public abstract void onTick(TickEvent event);
-	/**
-	 * Called when the task will no longer be repeated
-	 */
-	public abstract void onEnd();
-	/**
-	 * Called to determine if the task should be processed
-	 * 
-	 * @param event TickEvent
-	 * @return The result.
-	 */
-	public boolean canProcess(TickEvent event){
-		if(!this.filter(event)){
-			if(this.tick / this.cycle == 1){
-				tick = 0;
-				return true;
-			} else {
-				tick++;
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-	/**
-	 * Allows a task to be filtered to a TickEvent type
-	 * @param event TickEvent
-	 * @return The result.
-	 */
-	private boolean filter(TickEvent event){
-		if(this.type == null) {
-			return false;
-		}
-		
-		return !event.type.equals(this.type);
-	}
-	
-	public boolean canRepeat(){
-        if(this.totalTicks > this.maxTicks && this.maxTicks > 0){
-			return repeat = false;
-		}
-			return repeat;
+
+    /**
+     * Called when the task is first added to the master
+     */
+    public abstract void onAdd();
+
+    /**
+     * Called every tick
+     * Override canProcess to filter
+     *
+     * @param event TickEvent
+     */
+    public abstract void onTick(TickEvent event);
+
+    /**
+     * Called when the task will no longer be repeated
+     */
+    public abstract void onEnd();
+
+    /**
+     * Called to determine if the task should be processed
+     *
+     * @param event TickEvent
+     * @return The result.
+     */
+    public boolean canProcess(TickEvent event) {
+        if (!this.filter(event)) {
+            if (this.tick / this.cycle == 1) {
+                tick = 0;
+                return true;
+            } else {
+                tick++;
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
-    public void increaseTick(){
-		tick++;
-		totalTicks++;
+    /**
+     * Allows a task to be filtered to a TickEvent type
+     *
+     * @param event TickEvent
+     * @return The result.
+     */
+    private boolean filter(TickEvent event) {
+        if (this.type == null) {
+            return false;
+        }
+
+        return !event.type.equals(this.type);
+    }
+
+    public boolean canRepeat() {
+        if (this.totalTicks > this.maxTicks && this.maxTicks > 0) {
+            return repeat = false;
+        }
+        return repeat;
+    }
+
+    public void increaseTick() {
+        tick++;
+        totalTicks++;
     }
 }

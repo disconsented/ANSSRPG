@@ -29,25 +29,24 @@ THE SOFTWARE.
 import com.google.gson.annotations.Expose;
 
 /**
- * 
  * @author Disconsented
- * Experience = base*(level^modifier)
+ *         Experience = base*(level^modifier)
  */
 public abstract class Skill {
     @Expose
     public String name = "default_skillName";
-    
+
     /*Equation:
      * base*(level^modifier)*/
-    @Expose 
+    @Expose
     public int base = 100;
-    
+
     @Expose
     public float mod = 1;
-    
+
     public Skill() {
     }
-    
+
     public abstract void touchUp();
-    
+
 }

@@ -25,38 +25,36 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.skill.objects;
 
-import java.util.ArrayList;
-
-import net.minecraft.block.Block;
-
 import com.google.gson.annotations.Expose;
-
 import disconsented.anssrpg.server.common.Logging;
 import disconsented.anssrpg.server.config.storage.BNEP;
+import net.minecraft.block.Block;
+
+import java.util.ArrayList;
 
 /**
  * @author Disconsented
  */
 public class BlockSkill extends ToolSkill {
-    
+
     @Expose
     public ArrayList<BNEP> exp = new ArrayList<BNEP>();
-    
+
     @Override
     public void touchUp() {
         this.initTool();
-        
+
         ArrayList<BNEP> initialised = new ArrayList<BNEP>();
         for (BNEP object : this.exp) {
             object.block = (Block) Block.REGISTRY.getObject(object.resourceLocation);
-            if (object.block != null){
-                Logging.debug(object.resourceLocation +" has been found. Passing on!");
+            if (object.block != null) {
+                Logging.debug(object.resourceLocation + " has been found. Passing on!");
                 initialised.add(object);
             } else {
-                Logging.error(object.resourceLocation +" could not be found. Ignoring!");
+                Logging.error(object.resourceLocation + " could not be found. Ignoring!");
             }
         }
         this.exp = initialised;
     }
-    
+
 }

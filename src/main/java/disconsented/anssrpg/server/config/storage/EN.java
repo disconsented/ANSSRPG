@@ -28,15 +28,16 @@ import net.minecraft.entity.Entity;
 /**
  * Struct like object for entities used for perks.
  * Stands for Entities, Name.
+ *
  * @author Disconsented
  */
 public class EN {
-    public EN(Class<Entity> entity, String name){
-        this.entity = entity;
-        this.name = name;
-    }
     //Not exposed to save on space in configs
     public Class<Entity> entity;
     @Expose
     public String name = "";
+    public EN(Class<Entity> entity, String name) {
+        this.entity = entity;
+        this.name = name;
+    }
 }

@@ -22,29 +22,29 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.config;
 
-import java.util.ArrayList;
-
 import com.google.gson.annotations.Expose;
-
 import disconsented.anssrpg.server.common.Logging;
 import disconsented.anssrpg.server.data.SkillStore;
 import disconsented.anssrpg.server.skill.objects.BlockSkill;
 import disconsented.anssrpg.server.skill.objects.EntitySkill;
 import disconsented.anssrpg.server.skill.objects.ItemSkill;
 import disconsented.anssrpg.server.skill.objects.Skill;
+
+import java.util.ArrayList;
+
 /**
  * Used to safely retain data for saving and loading skills before initalising them for use
- * @author Disconsented 
+ *
+ * @author Disconsented
  */
 public class SkillContainer {
 
     @Expose
-    private ArrayList<BlockSkill> blocks = new ArrayList<BlockSkill>();
-    @Expose
     private final ArrayList<EntitySkill> entites = new ArrayList<EntitySkill>();
     @Expose
     private final ArrayList<ItemSkill> items = new ArrayList<ItemSkill>();
-
+    @Expose
+    private ArrayList<BlockSkill> blocks = new ArrayList<BlockSkill>();
 
     public void addBlockSkill(BlockSkill blockSkill) {
         this.blocks.add(blockSkill);
@@ -73,11 +73,11 @@ public class SkillContainer {
         skills.addAll(this.blocks);
         skills.addAll(this.entites);
         skills.addAll(this.items);
-        
-        for(Skill skillCurrent : skills){
-            for(Skill skillName : skills){
-                if (skillCurrent.name.equals(skillName.name)){
-                    if (skillCurrent.base == skillName.base && skillCurrent.mod == skillName.mod){
+
+        for (Skill skillCurrent : skills) {
+            for (Skill skillName : skills) {
+                if (skillCurrent.name.equals(skillName.name)) {
+                    if (skillCurrent.base == skillName.base && skillCurrent.mod == skillName.mod) {
                         Logging.debug(skillCurrent.name + " has been detected as a compound skill");
                     } else {
                         Logging.error(skillCurrent.name + " has been detected as a compound skill but does not match other definations; Removing");
@@ -85,7 +85,7 @@ public class SkillContainer {
                     }
                 }
             }
-        }        
+        }
         for (BlockSkill block : this.blocks) {
             block.touchUp();
             SkillStore.addSkill(block);
@@ -100,23 +100,23 @@ public class SkillContainer {
         }
 
     }
-    
-    private void matchAndRemove(Skill skill){
+
+    private void matchAndRemove(Skill skill) {
         for (BlockSkill block : this.blocks) {
             this.blocks.remove(skill);
-            if(block.name == skill.name){
+            if (block.name == skill.name) {
                 this.blocks.remove(block);
             }
         }
         for (EntitySkill entity : this.entites) {
             this.entites.remove(skill);
-            if(entity.name == skill.name){
+            if (entity.name == skill.name) {
                 this.entites.remove(entity);
             }
         }
         for (ItemSkill item : this.items) {
             this.items.remove(skill);
-            if(item.name == skill.name){
+            if (item.name == skill.name) {
                 this.items.remove(item);
             }
         }

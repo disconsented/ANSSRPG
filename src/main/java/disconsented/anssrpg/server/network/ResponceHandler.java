@@ -22,10 +22,10 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.network;
 
+import disconsented.anssrpg.client.Data;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import disconsented.anssrpg.client.Data;
 
 public class ResponceHandler implements IMessageHandler<Responce, IMessage> {
 

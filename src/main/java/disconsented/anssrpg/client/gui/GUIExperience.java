@@ -22,8 +22,6 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.client.gui;
 
-import java.util.ArrayList;
-
 import disconsented.anssrpg.Main;
 import disconsented.anssrpg.client.Data;
 import disconsented.anssrpg.client.gui.components.ExpBox;
@@ -32,26 +30,27 @@ import disconsented.anssrpg.server.network.Request;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 
+import java.util.ArrayList;
+
 /**
  * @author Disconsented
- *
  */
-public class GUIExperience extends GuiScreen {    
+public class GUIExperience extends GuiScreen {
     private final ArrayList<ExpBox> boxes = new ArrayList<ExpBox>();
     private int page;
     private int boxCount;
-    
+
     @Override
-    public void initGui(){
+    public void initGui() {
         Logging.debug("Init");
-        int x = this.width /2;
-    	Data.skillInfo.clear();
-    	Data.skillInfoList.clear();
+        int x = this.width / 2;
+        Data.skillInfo.clear();
+        Data.skillInfoList.clear();
         this.page = 1;
-    	Main.snw.sendToServer(new Request(Request.REQUEST.SKILLS));
+        Main.snw.sendToServer(new Request(Request.REQUEST.SKILLS));
         buttonList.add(new GuiButton(0, x, 76 * 3, 40, 20, "Next"));
         buttonList.add(new GuiButton(1, x - 40, 76 * 3, 40, 20, "Prev"));
-        for (int i = 0; i < 3; i++){
+        for (int i = 0; i < 3; i++) {
             int y = i * 76;
             ExpBox box1 = new ExpBox(x - 176, y);
             ExpBox box2 = new ExpBox(x, y);
@@ -60,29 +59,27 @@ public class GUIExperience extends GuiScreen {
             this.boxCount += 2;
         }
     }
-    
+
     @Override
-    public void drawScreen(int x1, int x2, float x3)
-    {
+    public void drawScreen(int x1, int x2, float x3) {
         Logging.debug("Draw");
-        this.drawDefaultBackground();       
+        this.drawDefaultBackground();
 
         int k;
 
-        for (k = 0; k < buttonList.size(); ++k)
-        {
+        for (k = 0; k < buttonList.size(); ++k) {
             ((GuiButton) buttonList.get(k)).drawButton(mc, 0, 0);
         }
-        
-        for(int i = 0; i < this.boxes.size(); i++){
+
+        for (int i = 0; i < this.boxes.size(); i++) {
             int num = page * i;
             ExpBox box = this.boxes.get(i);
-            if (num < Data.skillInfoList.size()){                
+            if (num < Data.skillInfoList.size()) {
                 box.name = Data.skillInfoList.get(num).name;
                 box.expCurrent = Data.skillInfoList.get(num).expCurrent;
                 box.expRequired = Data.skillInfoList.get(num).expRequired;
                 box.level = Data.skillInfoList.get(num).levelCurrent;
-                box.expOld =  Data.skillInfoList.get(num).expOld;
+                box.expOld = Data.skillInfoList.get(num).expOld;
             } else {
                 box.name = "";
                 box.expCurrent = 0;
@@ -91,32 +88,32 @@ public class GUIExperience extends GuiScreen {
             }
             this.boxes.set(i, box);
         }
-        
-        for(ExpBox box : this.boxes){            
+
+        for (ExpBox box : this.boxes) {
             box.draw();
         }
     }
-    
+
     @Override
-    public boolean doesGuiPauseGame()
-    {
+    public boolean doesGuiPauseGame() {
         return false;
     }
+
     @Override
     protected void actionPerformed(GuiButton button) {
-        switch(button.id){
-        case 0:
-            if (this.page < Math.round(Data.skillInfoList.size() / 6)){
-                this.page++;
-            }
-            break;
-        case 1:
-            if (this.page > 1){
-                this.page--;
-            }
-            break;
+        switch (button.id) {
+            case 0:
+                if (this.page < Math.round(Data.skillInfoList.size() / 6)) {
+                    this.page++;
+                }
+                break;
+            case 1:
+                if (this.page > 1) {
+                    this.page--;
+                }
+                break;
         }
     }
-    
+
 
 }

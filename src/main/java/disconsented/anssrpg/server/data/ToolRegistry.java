@@ -22,27 +22,19 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.data;
 
-import java.util.HashMap;
+import net.minecraft.item.*;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemFlintAndSteel;
-import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemPickaxe;
-import net.minecraft.item.ItemShears;
-import net.minecraft.item.ItemSpade;
-import net.minecraft.item.ItemSword;
+import java.util.HashMap;
 
 /**
  * @author Disconsented
- * Contains tool to class mappings
+ *         Contains tool to class mappings
  */
 public final class ToolRegistry {
-    
+
     private static final HashMap<String, Class> registry = new HashMap<String, Class>();
-    
-    public static void init(){
+
+    public static void init() {
         ToolRegistry.registry.put("Pickaxe", ItemPickaxe.class);
         ToolRegistry.registry.put("Spade", ItemSpade.class);
         ToolRegistry.registry.put("Sword", ItemSword.class);
@@ -56,11 +48,11 @@ public final class ToolRegistry {
         ToolRegistry.registry.put("*", Item.class);
     }
 
-    public static void setEntry(String key, Class value){
+    public static void setEntry(String key, Class value) {
         ToolRegistry.registry.put(key, value);
     }
-    
-    public static Class getEntry(String key){
+
+    public static Class getEntry(String key) {
         return ToolRegistry.registry.get(key);
     }
 

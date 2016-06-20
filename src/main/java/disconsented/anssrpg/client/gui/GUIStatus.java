@@ -50,15 +50,18 @@ public class GUIStatus extends GuiScreen {
 
     @Override
     public void initGui() {
-        int x = this.width /2;
-        int y = this.height /2;
+        int x = this.width / 2;
+        int y = this.height / 2;
         this.status = new ComponentStatusBook(x, y);
         Main.snw.sendToServer(new Request(REQUEST.START_TRACKING));
     }
 
     //Stops sends the stop tracking packet
     @Override
-    public void onGuiClosed() {Main.snw.sendToServer(new Request(REQUEST.STOP_TRACKING));}
+    public void onGuiClosed() {
+        Main.snw.sendToServer(new Request(REQUEST.STOP_TRACKING));
+    }
+
     @Override
     public boolean doesGuiPauseGame() {
         return false;

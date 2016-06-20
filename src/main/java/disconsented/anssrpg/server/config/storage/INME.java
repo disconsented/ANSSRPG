@@ -31,24 +31,21 @@ import net.minecraft.util.ResourceLocation;
  * Stands for Item, Name, Metadata, Experience.
  */
 public class INME {
+    public Item item;
+    public ResourceLocation resourceLocation;
+    @Expose
+    public int metadata = -1;
+    @Expose
+    public int experience;
+    @Expose
+    private String name = "";
+
     public INME(Item item, String name, int metadata, int experience) {
         this.item = item;
         this.resourceLocation = new ResourceLocation(name);
         this.metadata = metadata;
         this.experience = experience;
     }
-    public Item item;
-
-    @Expose
-    private String name = "";
-
-    public ResourceLocation resourceLocation;
-
-    @Expose
-    public int metadata = -1;
-
-    @Expose
-    public int experience;
 
 
 }

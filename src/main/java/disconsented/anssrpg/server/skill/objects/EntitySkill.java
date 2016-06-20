@@ -22,38 +22,36 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.skill.objects;
 
-import java.util.ArrayList;
-
-import net.minecraft.entity.EntityList;
-
 import com.google.gson.annotations.Expose;
-
 import disconsented.anssrpg.server.common.Logging;
 import disconsented.anssrpg.server.config.storage.ENE;
+import net.minecraft.entity.EntityList;
+
+import java.util.ArrayList;
 
 /**
  * @author Disconsented
  */
 public class EntitySkill extends ToolSkill {
-    
+
     @Expose
     public ArrayList<ENE> exp = new ArrayList<ENE>();
 
     @Override
     public void touchUp() {
         this.initTool();
-        
+
         ArrayList<ENE> initialised = new ArrayList<ENE>();
         for (ENE object : this.exp) {
             object.entity = (Class) EntityList.NAME_TO_CLASS.get(object.name);
-            if (object.entity != null){
-                Logging.debug(object.name+" has been found. Passing on!");
+            if (object.entity != null) {
+                Logging.debug(object.name + " has been found. Passing on!");
                 initialised.add(object);
             } else {
-                Logging.error(object.name+" could not be found. Ignoring!");
+                Logging.error(object.name + " could not be found. Ignoring!");
             }
         }
         this.exp = initialised;
     }
-    
+
 }

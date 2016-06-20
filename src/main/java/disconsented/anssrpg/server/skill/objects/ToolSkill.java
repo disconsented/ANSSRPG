@@ -23,23 +23,22 @@ THE SOFTWARE.
 package disconsented.anssrpg.server.skill.objects;
 
 import com.google.gson.annotations.Expose;
-
 import disconsented.anssrpg.server.data.ToolRegistry;
 
 /**
  * @author Disconsented
- * Abstract class for tools
- * See {@link ToolRegistry} for more information
+ *         Abstract class for tools
+ *         See {@link ToolRegistry} for more information
  */
-public abstract class ToolSkill extends Skill{    
+public abstract class ToolSkill extends Skill {
     @Expose
     public String tool = "";
     public Class toolClass;
-    
+
     public ToolSkill() {
     }
 
-    public void initTool(){
+    public void initTool() {
         toolClass = ToolRegistry.getEntry(this.tool);
     }
 

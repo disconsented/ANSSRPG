@@ -28,16 +28,18 @@ import net.minecraft.util.ResourceLocation;
 /**
  * @author Disconsented
  */
-public class PerkControls extends ComponentBase{
+public class PerkControls extends ComponentBase {
     private final ResourceLocation texture = new ResourceLocation(Reference.ID, "perkinfo.png");
     private final int width = 256;
     private final int height = 256;
     public String status = "Status";
     public String description = "Description";
-    public PerkControls(int x, int y){
+
+    public PerkControls(int x, int y) {
         this.x = x;
         this.y = y;
     }
+
     @Override
     public void draw() {
         this.bindAndDrawTexture(this.texture, this.x, this.y, width, height);

@@ -22,9 +22,9 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.network;
 
+import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import io.netty.buffer.ByteBuf;
 
 public class Responce implements IMessage {
     public String responce;

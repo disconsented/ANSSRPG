@@ -22,13 +22,13 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.network;
 
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import io.netty.buffer.ByteBuf;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 /**
  * Created by j on 30/08/2015.
  */
-public class PlayerStatus implements IMessage{
+public class PlayerStatus implements IMessage {
     public float currentHearts;
     public float currentSaturation;
     public float currentArmourHelmet;
@@ -36,9 +36,11 @@ public class PlayerStatus implements IMessage{
     public float currentArmourLeggings;
     public float currentArmourBoots;
 
-    public PlayerStatus(){}
+    public PlayerStatus() {
+    }
+
     public PlayerStatus(float currentHearts, float currentSaturation, float currentArmourHelmet,
-                        float currentArmourChest, float currentArmourLeggings, float currentArmourBoots){
+                        float currentArmourChest, float currentArmourLeggings, float currentArmourBoots) {
         this.currentHearts = currentHearts;
         this.currentSaturation = currentSaturation;
         this.currentArmourHelmet = currentArmourHelmet;
@@ -46,6 +48,7 @@ public class PlayerStatus implements IMessage{
         this.currentArmourLeggings = currentArmourLeggings;
         this.currentArmourBoots = currentArmourBoots;
     }
+
     @Override
     public void fromBytes(ByteBuf buf) {
         currentHearts = buf.readFloat();

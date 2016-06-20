@@ -22,21 +22,21 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.network;
 
+import disconsented.anssrpg.server.perk.Requirement;
 import disconsented.anssrpg.server.perk.Requirement.Action;
+import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import disconsented.anssrpg.server.perk.Requirement;
-import io.netty.buffer.ByteBuf;
 
 import java.util.ArrayList;
 
 public class PerkInfo implements IMessage {
-    private String name;
-    private String description;
-    private ArrayList<Requirement> requirements;
     private final ArrayList<String> names = new ArrayList<String>();
     private final ArrayList<String> extraData = new ArrayList<String>();
     private final ArrayList<Action> actions = new ArrayList<Action>();
+    private String name;
+    private String description;
+    private ArrayList<Requirement> requirements;
     private int size;
     private String slug;
     private boolean obtained;
@@ -48,7 +48,7 @@ public class PerkInfo implements IMessage {
         this.name = name;
         this.description = description;
         this.slug = slug;
-        for (Requirement requirement : requirements){
+        for (Requirement requirement : requirements) {
             this.names.add(requirement.name);
             this.extraData.add(requirement.extraData);
             this.actions.add(requirement.action);

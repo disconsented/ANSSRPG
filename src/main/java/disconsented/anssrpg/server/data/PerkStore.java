@@ -22,7 +22,9 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.data;
 
-import disconsented.anssrpg.server.config.storage.*;
+import disconsented.anssrpg.server.config.storage.BNP;
+import disconsented.anssrpg.server.config.storage.ENE;
+import disconsented.anssrpg.server.config.storage.INM;
 import disconsented.anssrpg.server.perk.*;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -44,11 +46,12 @@ public class PerkStore {
     private static final HashMap<String, ArrayList<ItemPerk>> itemMap = new HashMap<String, ArrayList<ItemPerk>>();
     private static final ArrayList<TitlePerk> titlePerks = new ArrayList<TitlePerk>();
     private static final ArrayList<PotionSelfPerk> potionSelf = new ArrayList<PotionSelfPerk>();
-    
+
     private static final HashMap<String, Perk> perksMap = new HashMap<String, Perk>();
     private static PerkStore instance;
 
-    private PerkStore() {}
+    private PerkStore() {
+    }
 
     //Adds a perk to the complete list
     public static void addPerk(Perk perk) {
@@ -80,41 +83,45 @@ public class PerkStore {
 
     /**
      * Takes a Block and returns an ArrayList of the associated perks.
+     *
      * @param block The block to base the lookup from.
      * @return The result.
      */
-    public static ArrayList<BlockPerk> getPerks(Block block){
+    public static ArrayList<BlockPerk> getPerks(Block block) {
         return PerkStore.blockMap.get(block.getUnlocalizedName());
     }
 
     /**
      * Takes a Item and returns an ArrayList of the associated perks.
+     *
      * @param item The item to base the lookup from.
      * @return The result.
      */
-    public static ArrayList<ItemPerk> getPerks(Item item){
+    public static ArrayList<ItemPerk> getPerks(Item item) {
         return PerkStore.itemMap.get(item.getUnlocalizedName());
     }
 
     /**
      * Takes a Entity(in the form of a class object) and returns an ArrayList of the associated perks.
+     *
      * @param entity The entity to base the lookup from.
      * @return The result.
      */
-    public static ArrayList<EntityPerk> getPerks(Class entity){
+    public static ArrayList<EntityPerk> getPerks(Class entity) {
         return PerkStore.entityMap.get(entity.getSimpleName());
     }
 
 
     /**
      * Safely stores any perk that is used in a map.
+     *
      * @param abstractMap The map to put the perk into.
-     * @param perk The perk to put into the map.
-     * @param name - Name that storage is based off.
+     * @param perk        The perk to put into the map.
+     * @param name        - Name that storage is based off.
      */
-    private static <t> void putPerk(AbstractMap<String, ArrayList<t>> abstractMap, t perk, String name){
+    private static <t> void putPerk(AbstractMap<String, ArrayList<t>> abstractMap, t perk, String name) {
         ArrayList<t> cachePerkList = abstractMap.get(name);
-        if (cachePerkList != null){
+        if (cachePerkList != null) {
             cachePerkList.add(perk);
         } else {
             ArrayList<t> newPerkList = new ArrayList<t>();
@@ -125,11 +132,12 @@ public class PerkStore {
 
     /**
      * Stores BlockPerks based on the unlocalized names of the storage in its collection.
+     *
      * @param block: BlockPerk.
      */
     public static void putPerk(BlockPerk block) {
         PerkStore.perks.add(block);
-        for (BNP object : block.blocks){
+        for (BNP object : block.blocks) {
             Block cache = object.block;
             PerkStore.putPerk(PerkStore.blockMap, block, cache.getUnlocalizedName());
         }
@@ -139,11 +147,12 @@ public class PerkStore {
     /**
      * Stores BlockPerks based on the class names of the storage in its collection.
      * Class names are used as there is no registry that provides storage unlike for items and blocks.
+     *
      * @param entity: EntityPerk.
      */
     public static void putPerk(EntityPerk entity) {
         PerkStore.perks.add(entity);
-        for (ENE object : entity.entities){
+        for (ENE object : entity.entities) {
             Class<Entity> cache = object.entity;
             PerkStore.putPerk(PerkStore.entityMap, entity, cache.getSimpleName());
         }
@@ -152,17 +161,18 @@ public class PerkStore {
 
     /**
      * Stores BlockPerks based on the unlocalized names of the storage in its collection.
+     *
      * @param item: ItemPerk.
      */
     public static void putPerk(ItemPerk item) {
         PerkStore.perks.add(item);
-        for (INM object : item.items){
+        for (INM object : item.items) {
             Item cache = object.item;
             PerkStore.putPerk(PerkStore.itemMap, item, cache.getUnlocalizedName());
         }
 
     }
-    
+
     public static void putPerk(TitlePerk title) {
         PerkStore.titlePerks.add(title);
 
@@ -171,7 +181,7 @@ public class PerkStore {
 
     public static void putPerk(PotionSelfPerk effect) {
         PerkStore.perks.add(effect);
-        
+
     }
-    
+
 }

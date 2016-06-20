@@ -22,11 +22,16 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.skill;
 
-import java.util.ArrayList;
-
+import disconsented.anssrpg.server.common.Utils;
 import disconsented.anssrpg.server.config.storage.INM;
 import disconsented.anssrpg.server.config.storage.INME;
+import disconsented.anssrpg.server.data.PerkStore;
+import disconsented.anssrpg.server.data.PlayerStore;
+import disconsented.anssrpg.server.data.SkillStore;
+import disconsented.anssrpg.server.handler.PlayerHandler;
 import disconsented.anssrpg.server.perk.ItemPerk;
+import disconsented.anssrpg.server.player.PlayerData;
+import disconsented.anssrpg.server.skill.objects.ItemSkill;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerPlayer;
@@ -34,15 +39,10 @@ import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerOpenContainerEvent;
-import disconsented.anssrpg.server.common.Utils;
-import disconsented.anssrpg.server.data.PerkStore;
-import disconsented.anssrpg.server.data.PlayerStore;
-import disconsented.anssrpg.server.data.SkillStore;
-import disconsented.anssrpg.server.handler.PlayerHandler;
-import disconsented.anssrpg.server.player.PlayerData;
-import disconsented.anssrpg.server.skill.objects.ItemSkill;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+
+import java.util.ArrayList;
 
 /**
  * @author James
@@ -51,65 +51,64 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
  *         ItemCrafted handles just giving XP
  */
 public class ItemCrafting {
-  public void onPlayerOpenCrafting(PlayerOpenContainerEvent event) {
-      if (event.getEntity() instanceof EntityPlayerMP){
-          EntityPlayerMP entityPlayerMP = (EntityPlayerMP) event.getEntity();
-          Container container = entityPlayerMP.openContainer;
-          if ((container instanceof ContainerWorkbench || container instanceof ContainerPlayer) &&
-                  entityPlayerMP.openContainer.inventoryItemStacks.get(0) != null) {
+    public void onPlayerOpenCrafting(PlayerOpenContainerEvent event) {
+        if (event.getEntity() instanceof EntityPlayerMP) {
+            EntityPlayerMP entityPlayerMP = (EntityPlayerMP) event.getEntity();
+            Container container = entityPlayerMP.openContainer;
+            if ((container instanceof ContainerWorkbench || container instanceof ContainerPlayer) &&
+                    entityPlayerMP.openContainer.inventoryItemStacks.get(0) != null) {
 
-              ItemStack stack = (ItemStack)entityPlayerMP.openContainer.inventoryItemStacks.get(0);
-              Item item = stack.getItem();             
-              PlayerData playerData = PlayerStore.getPlayer(entityPlayerMP);
-              ArrayList<ItemPerk> perkList = PerkStore.getPerks(item);
-              ArrayList<ItemSkill> skillStore = SkillStore.getInstance().getItemSkill();
-              
-              for (ItemSkill skill : skillStore){
-                  for (INME entry : skill.exp){
-                      if(Utils.MatchObject(entry.item, entry.metadata, item, stack.getItemDamage())){
-                          if (!PlayerHandler.hasPerk(playerData, perkList) && this.requiresPerk(perkList,item, stack.getItemDamage())){
-                              entityPlayerMP.closeScreen();
-                              event.setResult(Event.Result.DENY);
-                              PlayerHandler.taskFail(entityPlayerMP);
-                          }
-                      }
-                  }
-              }
-          }
-      }
+                ItemStack stack = (ItemStack) entityPlayerMP.openContainer.inventoryItemStacks.get(0);
+                Item item = stack.getItem();
+                PlayerData playerData = PlayerStore.getPlayer(entityPlayerMP);
+                ArrayList<ItemPerk> perkList = PerkStore.getPerks(item);
+                ArrayList<ItemSkill> skillStore = SkillStore.getInstance().getItemSkill();
 
-  }
-  
+                for (ItemSkill skill : skillStore) {
+                    for (INME entry : skill.exp) {
+                        if (Utils.MatchObject(entry.item, entry.metadata, item, stack.getItemDamage())) {
+                            if (!PlayerHandler.hasPerk(playerData, perkList) && this.requiresPerk(perkList, item, stack.getItemDamage())) {
+                                entityPlayerMP.closeScreen();
+                                event.setResult(Event.Result.DENY);
+                                PlayerHandler.taskFail(entityPlayerMP);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
     public void onItemCraftedEvent(PlayerEvent.ItemCraftedEvent event) {
         if (event.player instanceof EntityPlayerMP) {
             EntityPlayerMP player = (EntityPlayerMP) event.player;
             ItemStack stack = event.crafting;
-            Item item = stack.getItem();             
+            Item item = stack.getItem();
             PlayerData playerData = PlayerStore.getPlayer(player);
             ArrayList<ItemSkill> skillStore = SkillStore.getInstance().getItemSkill();
-            
-            for (ItemSkill skill : skillStore){
-                for (INME entry : skill.exp){
-                    if(Utils.MatchObject(entry.item, entry.metadata, item, stack.getItemDamage())){
+
+            for (ItemSkill skill : skillStore) {
+                for (INME entry : skill.exp) {
+                    if (Utils.MatchObject(entry.item, entry.metadata, item, stack.getItemDamage())) {
                         PlayerHandler.awardXP(player, skill, entry.experience);
                     }
                 }
             }
-        }        
+        }
     }
 
-    private boolean requiresPerk(ArrayList<ItemPerk> perkList, Item item, int metadata){
-        if(perkList != null) {
+    private boolean requiresPerk(ArrayList<ItemPerk> perkList, Item item, int metadata) {
+        if (perkList != null) {
             for (ItemPerk perk : perkList) {
-                for (INM definition : perk.items)
-                {
-                    if(Utils.MatchObject(definition.item, definition.metadata, item, metadata)){
+                for (INM definition : perk.items) {
+                    if (Utils.MatchObject(definition.item, definition.metadata, item, metadata)) {
                         return true;
                     }
                 }
             }
         }
-        return  false;
+        return false;
     }
 
 }

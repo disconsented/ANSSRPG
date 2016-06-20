@@ -22,43 +22,42 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.event;
 
+import disconsented.anssrpg.server.skill.BlockBreaking;
+import disconsented.anssrpg.server.skill.EntityDamage;
+import disconsented.anssrpg.server.skill.ItemCrafting;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerOpenContainerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import disconsented.anssrpg.server.skill.BlockBreaking;
-import disconsented.anssrpg.server.skill.EntityDamage;
-import disconsented.anssrpg.server.skill.ItemCrafting;
 
 /**
  * @author Disconsented
- *
  */
 public class ForgeBUS {
     @SubscribeEvent
     public void onBreakEvent(BlockEvent.BreakEvent event) {
         new BlockBreaking().onBreakEvent(event);
     }
-    
+
     @SubscribeEvent
     public void onLivingHurtEvent(LivingHurtEvent event) {
         new EntityDamage().onLivingHurtEvent(event);
     }
-    
+
     @SubscribeEvent
     public void onLivingDeathEvent(LivingDeathEvent event) {
         new EntityDamage().onLivingDeathEvent(event);
     }
-    
+
     @SubscribeEvent
     public void onPlayerOpenCrafting(PlayerOpenContainerEvent event) {
         new ItemCrafting().onPlayerOpenCrafting(event);
     }
-    
+
 //    @SubscribeEvent
 //    public void OnPlayerInteract(PlayerInteractEvent event){
 //        
 //    }
-    
+
 }

@@ -22,25 +22,24 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.event;
 
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 import disconsented.anssrpg.server.data.DataSave;
 import disconsented.anssrpg.server.handler.PlayerHandler;
 import disconsented.anssrpg.server.skill.ItemCrafting;
 import disconsented.anssrpg.server.task.TaskMaster;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 /**
  * @author Disconsented
- *
  */
 public class FMLBUS {
-    
+
     @SubscribeEvent
     public void onPlayerRespawnEvent(PlayerEvent.PlayerRespawnEvent event) {
         new DataSave().onPlayerRespawnEvent(event);
     }
-    
+
     @SubscribeEvent
     public void onPlayerLoggedOutEvent(PlayerEvent.PlayerLoggedOutEvent event) {
         new DataSave().onPlayerLoggedOutEvent(event);
@@ -52,14 +51,14 @@ public class FMLBUS {
         new PlayerHandler().reactivatePerks(event);
         new PlayerHandler().checkPlayerSkills(event);
     }
-    
+
     @SubscribeEvent
     public void onItemCraftedEvent(PlayerEvent.ItemCraftedEvent event) {
         new ItemCrafting().onItemCraftedEvent(event);
     }
-    
-    @SubscribeEvent 
-    public void onTickEvent(TickEvent event){
-    	TaskMaster.getInstance().process(event);
+
+    @SubscribeEvent
+    public void onTickEvent(TickEvent event) {
+        TaskMaster.getInstance().process(event);
     }
 }

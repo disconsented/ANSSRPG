@@ -37,7 +37,6 @@ import disconsented.anssrpg.server.skill.objects.ToolSkill;
 import disconsented.anssrpg.server.task.TaskTrackPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
@@ -54,18 +53,20 @@ import java.util.UUID;
 
 public final class PlayerHandler {
 
-    public static String addPerk(String perkSlug, EntityPlayerMP player){
+    public static String addPerk(String perkSlug, EntityPlayerMP player) {
         return PlayerHandler.addPerk(perkSlug, PlayerHandler.getPlayer(player.getUniqueID()));
     }
+
     /**
      * Checks the requirements for a perk and adds it to the player if they meet them.
+     *
      * @param perkSlug Slug of the perk to add to the player.
-     * @param player The PlayerData object.
+     * @param player   The PlayerData object.
      * @return The result.
      */
     public static String addPerk(String perkSlug, PlayerData player) {
         Perk perk = PerkStore.getPerk(perkSlug);
-        if (perk == null){
+        if (perk == null) {
             return "No perk with that slug was found";
         }
         //Cached here for readability.
@@ -73,11 +74,11 @@ public final class PlayerHandler {
         int reqLevel = 0;
         ArrayList<Requirement> requirements = perk.getRequirements();
         for (Requirement req : requirements) {
-            if(req.action == Action.LEVEL_EQUALS || req.action == Action.LEVEL_GREATER || req.action == Action.LEVEL_LESS){
+            if (req.action == Action.LEVEL_EQUALS || req.action == Action.LEVEL_GREATER || req.action == Action.LEVEL_LESS) {
                 level = player.getSkillLevel(SkillHandler.getSkill(req.name));
                 reqLevel = Integer.parseInt(req.extraData);
             }
-            switch(req.action){
+            switch (req.action) {
                 case DONT:
                     if (player.getPerkList().contains(req.getNameAsSlug())) {
                         return "Unable to grant perk, " + req.name + " was found on the player";
@@ -89,24 +90,24 @@ public final class PlayerHandler {
                     }
                     break;
                 case LEVEL_EQUALS:
-                    if (!(level == reqLevel)){
+                    if (!(level == reqLevel)) {
                         return "Unable to grant perk, " + req.name + "'s level did not equal " + req.extraData;
                     }
                     break;
                 case LEVEL_GREATER:
-                    if(level < reqLevel){
+                    if (level < reqLevel) {
                         return "Unable to grant perk, " + req.name + "'s level was less than " + req.extraData;
                     }
                     break;
                 case LEVEL_LESS:
-                    if(level > reqLevel){
+                    if (level > reqLevel) {
                         return "Unable to grant perk, " + req.name + "'s level did not equal " + req.extraData;
                     }
                     break;
             }
         }
-        if(player.getPerkList().contains(perkSlug)){
-            return "Already have "+ perkSlug;
+        if (player.getPerkList().contains(perkSlug)) {
+            return "Already have " + perkSlug;
         } else {
             player.getPerkList().add(perk.getSlug());
             return "All requirements meet; Granting " + perkSlug;
@@ -115,9 +116,10 @@ public final class PlayerHandler {
 
     /**
      * Safe method to add experience to a player.
+     *
      * @param playerEntity The player object that associated data is retrieved for.
-     * @param skill The Skill that will have its experience added to.
-     * @param exp The Experience that will be added.
+     * @param skill        The Skill that will have its experience added to.
+     * @param exp          The Experience that will be added.
      */
     //TODO: Refactor this to use PlayerData and create another method to encapsulate it. Maybe split it up into other private methods.
     public static void awardXP(EntityPlayer playerEntity, Skill skill, int exp) {
@@ -125,12 +127,12 @@ public final class PlayerHandler {
         Integer cacheExp = player.getSkillExp().get(skill.name);
         long levelOld;
         long levelNew = -1;
-        if(cacheExp != null){
-        	levelOld = SkillHandler.calculateLevelForExp(skill, cacheExp);
+        if (cacheExp != null) {
+            levelOld = SkillHandler.calculateLevelForExp(skill, cacheExp);
         } else {
-        	levelOld = 0;
+            levelOld = 0;
         }
-        
+
         if (cacheExp != null) {
             player.getSkillExp().put(skill.name, exp + cacheExp);
             levelNew = SkillHandler.calculateLevelForExp(skill, exp + cacheExp);
@@ -142,20 +144,21 @@ public final class PlayerHandler {
         /* Check for level up
          * If leveled up send info
          */
-        
+
         if (levelNew > levelOld) {
             playerEntity.addChatComponentMessage(new TextComponentString("Your skill " + skill.name + " has leveled up to " + levelNew));
-        }        
+        }
     }
 
     /**
      * Awards experience to a player where it the tool needs to be taken into account.
+     *
      * @param playerEntity The player to have the experience added to.
-     * @param skill The skill that will have the experience added to.
-     * @param exp The experience that needs to be added.
+     * @param skill        The skill that will have the experience added to.
+     * @param exp          The experience that needs to be added.
      */
-    public static void awardToolXP(EntityPlayer playerEntity, ToolSkill skill, int exp){
-        if(PlayerHandler.isWielding(skill, playerEntity)){
+    public static void awardToolXP(EntityPlayer playerEntity, ToolSkill skill, int exp) {
+        if (PlayerHandler.isWielding(skill, playerEntity)) {
             PlayerHandler.awardXP(playerEntity, skill, exp);
         } else {
             PlayerHandler.taskFail(playerEntity);
@@ -172,8 +175,8 @@ public final class PlayerHandler {
     }
 
     public static PlayerData getPlayer(UUID uniqueID) {
-    	return PlayerHandler.getPlayer(uniqueID.toString());
-	}
+        return PlayerHandler.getPlayer(uniqueID.toString());
+    }
 
     public static boolean hasPerk(Perk perk, PlayerData player) {
         return player.getPerkList().contains(perk.getSlug());
@@ -194,17 +197,18 @@ public final class PlayerHandler {
 
     /**
      * Takes a player and perkList and will return true if they have any of the perks in the list.
-     * @param player The player data to check that contains the perk.
+     *
+     * @param player   The player data to check that contains the perk.
      * @param perkList The perk list to check against.
      * @return result The result.
      */
-    public static boolean hasPerk(PlayerData player, ArrayList<? extends Perk> perkList){
-        if(player == null || perkList == null){//Null check
+    public static boolean hasPerk(PlayerData player, ArrayList<? extends Perk> perkList) {
+        if (player == null || perkList == null) {//Null check
             return false;
         }
-        for (Perk perk : perkList){
-            for(Slug slug : player.getPerkList()){
-                if(slug.getSlug().equals(perk.getSlug().getSlug())){
+        for (Perk perk : perkList) {
+            for (Slug slug : player.getPerkList()) {
+                if (slug.getSlug().equals(perk.getSlug().getSlug())) {
                     return true;
                 }
             }
@@ -215,6 +219,7 @@ public final class PlayerHandler {
     /**
      * Sends a failure message to the player.
      * TODO: Language support
+     *
      * @param player The player to send the message to.
      */
     public static void taskFail(EntityPlayer player) {
@@ -223,6 +228,7 @@ public final class PlayerHandler {
 
     /**
      * Sends a failure message to the player for when they have the wrong tool.
+     *
      * @param player The player to send the message to.
      */
     public static void toolFail(EntityPlayer player) {
@@ -231,11 +237,12 @@ public final class PlayerHandler {
 
     /**
      * Checks that the entity is weilding the associated tool.
-     * @param skill The ToolSkill that is for checking the tool against.
+     *
+     * @param skill  The ToolSkill that is for checking the tool against.
      * @param player The player object to check against.
      * @return The result. If a tool is not required it will return true.
      */
-    public static boolean isWielding(ToolSkill skill, EntityPlayer player){
+    public static boolean isWielding(ToolSkill skill, EntityPlayer player) {
         /*if(skill.toolClass == Item.class){//TODO:Fix
             return true;
         } else if(player.getCurrentEquippedItem() == null){
@@ -249,54 +256,55 @@ public final class PlayerHandler {
 
     /**
      * 'Activates' a perk for a player.
+     *
      * @param entityPlayer The player to activate the perk on.
-     * @param playerData The player data to record the perk onto.
-     * @param perkSlug The slug of the perk to activate.
+     * @param playerData   The player data to record the perk onto.
+     * @param perkSlug     The slug of the perk to activate.
      * @return The result (in text).
      */
     public static String activatePerk(EntityPlayerMP entityPlayer, PlayerData playerData,
-            String perkSlug) {
+                                      String perkSlug) {
         ActivePerk cachePerk = (ActivePerk) PerkStore.getPerk(perkSlug);
-        if(PlayerHandler.hasPerk((Perk) cachePerk, playerData)){
+        if (PlayerHandler.hasPerk((Perk) cachePerk, playerData)) {
             cachePerk.activate(entityPlayer, null);
             return "Sucess";
         }
-        return "Failure (Missing "+((Perk)cachePerk).getSlug().getSlug()+ ")";
-        
+        return "Failure (Missing " + ((Perk) cachePerk).getSlug().getSlug() + ")";
+
     }
 
     public void reactivatePerks(PlayerEvent.PlayerLoggedInEvent event) {
         this.activateDataPerks((EntityPlayerMP) event.player);
-        this.activateNbtPerks((EntityPlayerMP) event.player);       
-        
+        this.activateNbtPerks((EntityPlayerMP) event.player);
+
     }
-    
-    public void activateDataPerks(EntityPlayerMP player){
+
+    public void activateDataPerks(EntityPlayerMP player) {
         this.activateDataPerks(player, PlayerHandler.getPlayer(player.getUniqueID()));
     }
-    
-    public void activateDataPerks(EntityPlayerMP player, PlayerData playerData){
-        for (Slug slug : playerData.getActivePerks()){
+
+    public void activateDataPerks(EntityPlayerMP player, PlayerData playerData) {
+        for (Slug slug : playerData.getActivePerks()) {
             PlayerHandler.activatePerk(player, playerData, slug.getSlug());
         }
     }
-    
-    public void activateNbtPerks(EntityPlayerMP player){
+
+    public void activateNbtPerks(EntityPlayerMP player) {
         this.activateNbtPerks(player, PlayerHandler.getPlayer(player.getUniqueID()));
     }
-    
-    public void activateNbtPerks(EntityPlayerMP player, PlayerData playerData){
+
+    public void activateNbtPerks(EntityPlayerMP player, PlayerData playerData) {
         NBTTagList list = player.getEntityData().getTagList(TaskTrackPlayer.tagName, 8);
-        for (int i = 0; i < list.tagCount(); i++){
+        for (int i = 0; i < list.tagCount(); i++) {
             PlayerHandler.activatePerk(player, playerData, list.getStringTagAt(i));
         }
     }
-    
-    public void checkPlayerSkills(PlayerEvent.PlayerLoggedInEvent event){
+
+    public void checkPlayerSkills(PlayerEvent.PlayerLoggedInEvent event) {
         PlayerData data = PlayerHandler.getPlayer(event.player.getUniqueID());
-        HashMap<String,Integer> map = data.getSkillExp();
-        for (Skill skill :SkillStore.getSkills()){
-            if(map.get(skill.name) == null){
+        HashMap<String, Integer> map = data.getSkillExp();
+        for (Skill skill : SkillStore.getSkills()) {
+            if (map.get(skill.name) == null) {
                 map.put(skill.name, new Integer(0));
             }
         }

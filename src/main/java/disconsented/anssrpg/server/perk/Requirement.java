@@ -23,7 +23,6 @@ THE SOFTWARE.
 package disconsented.anssrpg.server.perk;
 
 import com.google.gson.annotations.Expose;
-
 import disconsented.anssrpg.server.common.Utils;
 
 /**
@@ -45,6 +44,7 @@ public class Requirement {
     public String name;
     @Expose
     public String extraData;
+
     public Requirement(Requirement.Action action, String name, String extraData) {
         this.action = action;
         this.name = name;
