@@ -20,32 +20,23 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.server.objects;
+package disconsented.anssrpg.server.config.objects;
 
 import com.google.gson.annotations.Expose;
-import net.minecraft.item.Item;
+import net.minecraft.entity.Entity;
 
 /**
- * Struct like object for Item definitions used for skills.
- * Stands for Item, Name, Metadata, Experience.
+ * Struct like object for entities used for perks.
+ * Stands for Entities, Name.
+ * @author Disconsented
  */
-public class INME {
-    public INME(Item item, String name, int metadata, int experience) {
-        this.item = item;
+public class EN {
+    public EN(Class<Entity> entity, String name){
+        this.entity = entity;
         this.name = name;
-        this.metadata = metadata;
-        this.experience = experience;
     }
-    public Item item;
-
+    //Not exposed to save on space in configs
+    public Class<Entity> entity;
     @Expose
     public String name = "";
-
-    @Expose
-    public int metadata = -1;
-
-    @Expose
-    public int experience;
-
-
 }

@@ -24,6 +24,7 @@ package disconsented.anssrpg;
 
 import disconsented.anssrpg.client.ClientTick;
 import disconsented.anssrpg.client.commands.GUIRegistry;
+import disconsented.anssrpg.server.Global;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
@@ -72,8 +73,9 @@ public class Main {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) throws Exception {
+
         this.settings.load(event);
-        if (MinecraftServer.getServer() != null && MinecraftServer.getServer().isDedicatedServer()) {
+        if (Global.getMinecraftServer() != null && Global.getMinecraftServer().isDedicatedServer()) {
             Settings.isServer = true;
         } else {
             Settings.isServer = false;

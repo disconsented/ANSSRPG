@@ -27,7 +27,7 @@ package disconsented.anssrpg.server.perk;
 
 import java.util.ArrayList;
 
-import disconsented.anssrpg.server.objects.INM;
+import disconsented.anssrpg.server.config.objects.INM;
 import net.minecraft.item.Item;
 
 import com.google.gson.annotations.Expose;

@@ -31,7 +31,7 @@ import disconsented.anssrpg.server.player.PlayerData;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.text.TextComponentString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +86,7 @@ public class Skill extends CommandBase {
         for (Map.Entry<String, Integer> skill : playerData.getSkillExp().entrySet()) {
             toReturn += skill.toString();
         }
-        player.addChatMessage(new ChatComponentText(toReturn));
+        player.addChatMessage(new TextComponentString(toReturn));
     }
 
     @Override

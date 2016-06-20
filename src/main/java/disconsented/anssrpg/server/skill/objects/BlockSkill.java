@@ -32,7 +32,7 @@ import net.minecraft.block.Block;
 import com.google.gson.annotations.Expose;
 
 import disconsented.anssrpg.server.common.Logging;
-import disconsented.anssrpg.server.objects.BNEP;
+import disconsented.anssrpg.server.config.objects.BNEP;
 
 /**
  * @author Disconsented

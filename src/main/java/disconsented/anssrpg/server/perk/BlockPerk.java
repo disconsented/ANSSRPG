@@ -24,7 +24,7 @@ package disconsented.anssrpg.server.perk;
 
 import java.util.ArrayList;
 
-import disconsented.anssrpg.server.objects.BNP;
+import disconsented.anssrpg.server.config.objects.BNP;
 import net.minecraft.block.Block;
 
 import com.google.gson.annotations.Expose;

@@ -25,8 +25,8 @@ package disconsented.anssrpg.server.config;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import disconsented.anssrpg.server.common.PotionDefinition;
-import disconsented.anssrpg.server.objects.*;
+import disconsented.anssrpg.server.config.objects.PotionDefinition;
+import disconsented.anssrpg.server.config.objects.*;
 import disconsented.anssrpg.server.perk.*;
 import disconsented.anssrpg.server.skill.objects.*;
 

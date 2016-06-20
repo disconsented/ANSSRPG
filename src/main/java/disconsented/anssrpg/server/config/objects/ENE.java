@@ -20,34 +20,26 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.server.objects;
+package disconsented.anssrpg.server.config.objects;
 
 import com.google.gson.annotations.Expose;
-import net.minecraft.block.Block;
-
-import java.util.HashMap;
-import java.util.Map;
+import net.minecraft.entity.Entity;
 
 /**
- * Struct like object for Block definitions in skills.
- * Stands for Block, Name, Experience, Properties.
+ * Struct like object for entities used for skills.
+ * Stands for Entities, Name, Experience.
  * @author Disconsented
  */
-public class BNEP {
-
-    public  BNEP(){}
-    public BNEP(String name, int experience, Map<String, String> properties) {
+public class ENE {
+    public ENE(Class<Entity> entity, String name, int experience){
+        this.entity = entity;
         this.name = name;
-        this.experience = experience;
-        this.properties = properties;
+        this.experience = experience;        
     }
-
-    public Block block;
-
+    //Not exposed to save on space in configs
+    public Class<Entity> entity;
     @Expose
     public String name = "";
     @Expose
     public int experience;
-    @Expose
-    public Map<String,String> properties = new HashMap<>();
 }

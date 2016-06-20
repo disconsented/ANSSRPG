@@ -27,7 +27,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.util.ResourceLocation;
 
 /**
@@ -55,7 +55,7 @@ public abstract class ComponentBase extends Gui{
         float f = 0.00390625F;
         float f1 = 0.00390625F;
         Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+        VertexBuffer worldrenderer = tessellator.getWorldRenderer();
         worldrenderer.startDrawingQuads();
         //Set the colour in order to avoid having partially green GUI's
         worldrenderer.setColorRGBA_F(1F, 1F, 1F, 1F);

@@ -24,8 +24,8 @@ package disconsented.anssrpg.server.skill;
 
 import java.util.ArrayList;
 
-import disconsented.anssrpg.server.objects.INM;
-import disconsented.anssrpg.server.objects.INME;
+import disconsented.anssrpg.server.config.objects.INM;
+import disconsented.anssrpg.server.config.objects.INME;
 import disconsented.anssrpg.server.perk.ItemPerk;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;

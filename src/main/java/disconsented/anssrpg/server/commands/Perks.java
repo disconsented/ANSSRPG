@@ -25,7 +25,6 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.commands;
 
-import disconsented.anssrpg.server.common.Settings;
 import disconsented.anssrpg.server.data.PerkStore;
 import disconsented.anssrpg.server.handler.PlayerHandler;
 import disconsented.anssrpg.server.perk.Perk;
@@ -34,7 +33,7 @@ import disconsented.anssrpg.server.player.PlayerData;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.text.TextComponentString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,7 +118,7 @@ public class Perks extends CommandBase {
                 
                 break;
         }
-        player.addChatMessage(new ChatComponentText(toReturn));
+        player.addChatMessage(new TextComponentString(toReturn));
     }
 
     @Override

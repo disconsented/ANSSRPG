@@ -29,7 +29,7 @@ package disconsented.anssrpg.server.skill;
 import java.util.ArrayList;
 
 import disconsented.anssrpg.server.common.*;
-import disconsented.anssrpg.server.objects.ENE;
+import disconsented.anssrpg.server.config.objects.ENE;
 import disconsented.anssrpg.server.perk.EntityPerk;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;

@@ -22,7 +22,7 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.data;
 
-import disconsented.anssrpg.server.objects.*;
+import disconsented.anssrpg.server.config.objects.*;
 import disconsented.anssrpg.server.perk.*;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;

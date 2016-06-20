@@ -20,25 +20,29 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.server.common;
+package disconsented.anssrpg.server.config.objects;
 
 import com.google.gson.annotations.Expose;
+import net.minecraft.item.Item;
 
 /**
- * @author Disconsented
- *
+ * Struct like object for Item definitions used for perks.
+ * Stands for Item, Name, Metadata.
  */
-public class PotionDefinition{
+public class INM {
+    public INM(Item item, String name, int metadata) {
+        this.item = item;
+        this.name = name;
+        this.metadata = metadata;
+    }
+
+    public Item item;
+
     @Expose
-    public int id;
+    public String name = "";
+
     @Expose
-    public int amplifier;
-    @Expose
-    public int duration;
-    public PotionDefinition(int id, int amplifier, int duration){
-        this.id = id;
-        this.amplifier = amplifier;
-        this.duration = duration;
-    }   
-    public PotionDefinition(){}
+    public int metadata = -1;
+
+
 }
