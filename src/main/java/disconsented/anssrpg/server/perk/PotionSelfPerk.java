@@ -30,7 +30,7 @@ import net.minecraft.potion.PotionEffect;
 
 import com.google.gson.annotations.Expose;
 
-import disconsented.anssrpg.server.config.objects.PotionDefinition;
+import disconsented.anssrpg.server.config.storage.PotionDefinition;
 import disconsented.anssrpg.server.task.TaskApplyPotion;
 import disconsented.anssrpg.server.task.TaskMaster;
 

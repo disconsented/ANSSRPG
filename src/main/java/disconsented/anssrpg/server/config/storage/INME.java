@@ -20,22 +20,22 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.server.config.objects;
+package disconsented.anssrpg.server.config.storage;
 
 import com.google.gson.annotations.Expose;
 import net.minecraft.item.Item;
 
 /**
- * Struct like object for Item definitions used for perks.
- * Stands for Item, Name, Metadata.
+ * Struct like object for Item definitions used for skills.
+ * Stands for Item, Name, Metadata, Experience.
  */
-public class INM {
-    public INM(Item item, String name, int metadata) {
+public class INME {
+    public INME(Item item, String name, int metadata, int experience) {
         this.item = item;
         this.name = name;
         this.metadata = metadata;
+        this.experience = experience;
     }
-
     public Item item;
 
     @Expose
@@ -43,6 +43,9 @@ public class INM {
 
     @Expose
     public int metadata = -1;
+
+    @Expose
+    public int experience;
 
 
 }

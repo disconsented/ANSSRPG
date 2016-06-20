@@ -17,7 +17,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package disconsented.anssrpg.server.config.objects;
+package disconsented.anssrpg.server.config.storage;
 
 import com.google.gson.annotations.Expose;
 

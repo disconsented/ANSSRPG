@@ -32,7 +32,7 @@ import net.minecraft.block.Block;
 import com.google.gson.annotations.Expose;
 
 import disconsented.anssrpg.server.common.Logging;
-import disconsented.anssrpg.server.config.objects.BNEP;
+import disconsented.anssrpg.server.config.storage.BNEP;
 
 /**
  * @author Disconsented
@@ -48,7 +48,7 @@ public class BlockSkill extends ToolSkill {
         
         ArrayList<BNEP> initialised = new ArrayList<BNEP>();
         for (BNEP object : this.exp) {
-            object.block = (Block) Block.blockRegistry.getObject(object.name);
+            object.block = (Block) Block.REGISTRY.getObject(object.name);
             if (object.block != null){
                 Logging.debug(object.name+" has been found. Passing on!");
                 initialised.add(object);

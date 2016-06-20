@@ -27,7 +27,7 @@ package disconsented.anssrpg.server.perk;
 
 import java.util.ArrayList;
 
-import disconsented.anssrpg.server.config.objects.ENE;
+import disconsented.anssrpg.server.config.storage.ENE;
 import net.minecraft.entity.EntityList;
 
 import com.google.gson.annotations.Expose;

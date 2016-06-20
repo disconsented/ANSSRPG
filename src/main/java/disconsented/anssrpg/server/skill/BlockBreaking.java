@@ -30,8 +30,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import disconsented.anssrpg.server.common.*;
-import disconsented.anssrpg.server.config.objects.BNEP;
-import disconsented.anssrpg.server.config.objects.BNP;
+import disconsented.anssrpg.server.config.storage.BNEP;
+import disconsented.anssrpg.server.config.storage.BNP;
 import disconsented.anssrpg.server.perk.BlockPerk;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;

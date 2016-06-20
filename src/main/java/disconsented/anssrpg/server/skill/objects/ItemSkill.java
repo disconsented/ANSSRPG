@@ -26,7 +26,7 @@ THE SOFTWARE.
 package disconsented.anssrpg.server.skill.objects;
 
 import com.google.gson.annotations.Expose;
-import disconsented.anssrpg.server.config.objects.INME;
+import disconsented.anssrpg.server.config.storage.INME;
 import disconsented.anssrpg.server.common.Logging;
 import net.minecraft.item.Item;
 

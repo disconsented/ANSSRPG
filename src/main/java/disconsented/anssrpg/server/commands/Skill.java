@@ -29,9 +29,11 @@ import disconsented.anssrpg.server.data.PlayerStore;
 import disconsented.anssrpg.server.perk.Slug;
 import disconsented.anssrpg.server.player.PlayerData;
 import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.text.TextComponentString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,12 +49,6 @@ public class Skill extends CommandBase {
      */
     public Skill() {
         // TODO Auto-generated constructor stub
-    }
-
-    @Override
-    public int compareTo(Object arg0) {
-        // TODO Auto-generated method stub
-        return 0;
     }
 
     @Override
@@ -75,7 +71,7 @@ public class Skill extends CommandBase {
     }
 
     @Override
-    public void processCommand(ICommandSender player, String[] p_71515_2_) {
+    public void execute(MinecraftServer server, ICommandSender player, String[] arguments) throws CommandException {
         EntityPlayerMP user = (EntityPlayerMP) player;
         PlayerData playerData = PlayerStore.getPlayer(user.getPersistentID().toString());
         String toReturn = "You have the current perks: ";
@@ -86,15 +82,8 @@ public class Skill extends CommandBase {
         for (Map.Entry<String, Integer> skill : playerData.getSkillExp().entrySet()) {
             toReturn += skill.toString();
         }
-        player.addChatMessage(new ChatComponentText(toReturn));
+        player.addChatMessage(new TextComponentString(toReturn));
     }
-
-    @Override
-    public boolean canCommandSenderUseCommand(ICommandSender p_71519_1_) {
-        // TODO Auto-generated method stub
-        return true;
-    }
-
 
     @Override
     public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_) {

@@ -23,6 +23,7 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.common;
 
+import disconsented.anssrpg.server.Global;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.config.Configuration;
@@ -62,9 +63,9 @@ public class Settings {
 
     public static File getFolder() {
         if (Settings.isServer) {
-            return new File(MinecraftServer.getServer().getFolderName() + "\\anssrpgdata\\");
+            return new File(Global.getMinecraftServer() + "\\anssrpgdata\\");
         } else {
-            return new File("saves\\" + MinecraftServer.getServer().getFolderName() + "\\anssrpgdata\\");
+            return new File("saves\\" + Global.getMinecraftServer().getFolderName() + "\\anssrpgdata\\");
         }
 
     }

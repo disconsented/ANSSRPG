@@ -22,7 +22,6 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.client.gui.components;
 
-import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;

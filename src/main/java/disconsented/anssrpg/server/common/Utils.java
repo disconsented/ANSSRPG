@@ -27,11 +27,11 @@ import java.util.Map;
 
 public class Utils {
     /**
-     * Returns true if two objects are matched. If either Metadata is less than 0(-1) then it is treated as a wildcard (Metadata is ignored).
+     * Returns true if two storage are matched. If either Metadata is less than 0(-1) then it is treated as a wildcard (Metadata is ignored).
      * @param object1 First object to match.
-     * @param metadata1 First objects metadata.
+     * @param metadata1 First storage metadata.
      * @param object2 Second object to match.
-     * @param metadata2 Second objects metadata.
+     * @param metadata2 Second storage metadata.
      * @return The result.
      */
     public static<T> boolean MatchObject(T object1, int metadata1, T object2, int metadata2){
@@ -43,7 +43,7 @@ public class Utils {
     }
 
     /**
-     * Returns true if two objects of the same time are the same. Uses a properties map and will use Object1 as the 'master' (checks are based off that)
+     * Returns true if two storage of the same time are the same. Uses a properties map and will use Object1 as the 'master' (checks are based off that)
      * @param object1 First object to match.
      * @param properties1 Properties map of the first object.
      * @param object2 Second object to match.
@@ -82,7 +82,7 @@ public class Utils {
     }
 
     /**
-     * Simple method for matching objects.
+     * Simple method for matching storage.
      * @param item1 First object to match.
      * @param item2 Second object to match.
      * @return The result.

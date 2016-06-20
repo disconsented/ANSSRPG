@@ -29,7 +29,7 @@ import net.minecraft.entity.EntityList;
 import com.google.gson.annotations.Expose;
 
 import disconsented.anssrpg.server.common.Logging;
-import disconsented.anssrpg.server.config.objects.ENE;
+import disconsented.anssrpg.server.config.storage.ENE;
 
 /**
  * @author Disconsented
@@ -45,7 +45,7 @@ public class EntitySkill extends ToolSkill {
         
         ArrayList<ENE> initialised = new ArrayList<ENE>();
         for (ENE object : this.exp) {
-            object.entity = (Class) EntityList.stringToClassMapping.get(object.name);
+            object.entity = (Class) EntityList.NAME_TO_CLASS.get(object.name);
             if (object.entity != null){
                 Logging.debug(object.name+" has been found. Passing on!");
                 initialised.add(object);

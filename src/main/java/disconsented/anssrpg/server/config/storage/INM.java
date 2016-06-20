@@ -20,31 +20,29 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.server.config.objects;
+package disconsented.anssrpg.server.config.storage;
 
 import com.google.gson.annotations.Expose;
-import net.minecraft.block.Block;
-
-import java.util.HashMap;
-import java.util.Map;
+import net.minecraft.item.Item;
 
 /**
- * Struct like object for Block definitions in perks.
- * Stands for Block, Name, Experience, Properties.
- * @author Disconsented
+ * Struct like object for Item definitions used for perks.
+ * Stands for Item, Name, Metadata.
  */
-public class BNP {
-
-    public BNP(){}
-    public BNP(String name, Map<String, String> properties) {
+public class INM {
+    public INM(Item item, String name, int metadata) {
+        this.item = item;
         this.name = name;
-        this.properties = properties;
+        this.metadata = metadata;
     }
 
-    public Block block;
+    public Item item;
 
     @Expose
     public String name = "";
+
     @Expose
-    public Map<String,String> properties = new HashMap<>();
+    public int metadata = -1;
+
+
 }

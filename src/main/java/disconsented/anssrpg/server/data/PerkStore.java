@@ -22,7 +22,7 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.data;
 
-import disconsented.anssrpg.server.config.objects.*;
+import disconsented.anssrpg.server.config.storage.*;
 import disconsented.anssrpg.server.perk.*;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -124,7 +124,7 @@ public class PerkStore {
     }
 
     /**
-     * Stores BlockPerks based on the unlocalized names of the objects in its collection.
+     * Stores BlockPerks based on the unlocalized names of the storage in its collection.
      * @param block: BlockPerk.
      */
     public static void putPerk(BlockPerk block) {
@@ -137,8 +137,8 @@ public class PerkStore {
     }
 
     /**
-     * Stores BlockPerks based on the class names of the objects in its collection.
-     * Class names are used as there is no registry that provides objects unlike for items and blocks.
+     * Stores BlockPerks based on the class names of the storage in its collection.
+     * Class names are used as there is no registry that provides storage unlike for items and blocks.
      * @param entity: EntityPerk.
      */
     public static void putPerk(EntityPerk entity) {
@@ -151,7 +151,7 @@ public class PerkStore {
     }
 
     /**
-     * Stores BlockPerks based on the unlocalized names of the objects in its collection.
+     * Stores BlockPerks based on the unlocalized names of the storage in its collection.
      * @param item: ItemPerk.
      */
     public static void putPerk(ItemPerk item) {

@@ -31,9 +31,11 @@ import disconsented.anssrpg.server.perk.Perk;
 import disconsented.anssrpg.server.perk.Slug;
 import disconsented.anssrpg.server.player.PlayerData;
 import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.text.TextComponentString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,12 +53,6 @@ public class Perks extends CommandBase {
         aliases = new ArrayList();
         aliases.add("perk");
         aliases.add("perks");
-    }
-
-    @Override
-    public int compareTo(Object arg0) {
-        // TODO Auto-generated method stub
-        return 0;
     }
 
     @Override
@@ -78,7 +74,7 @@ public class Perks extends CommandBase {
     }
 
     @Override
-    public void processCommand(ICommandSender player, String[] arguments) {
+    public void execute(MinecraftServer server, ICommandSender player, String[] arguments) throws CommandException {
         String UUID = ((EntityPlayerMP) player).getPersistentID().toString();
         String toReturn = "";
         EntityPlayerMP p2 = (EntityPlayerMP) player;
@@ -115,16 +111,10 @@ public class Perks extends CommandBase {
                 if (arguments.length >= 2){
                     toReturn = PlayerHandler.activatePerk(p2, playerdata, arguments[1]);
                 }
-                
+
                 break;
         }
-        player.addChatMessage(new ChatComponentText(toReturn));
-    }
-
-    @Override
-    public boolean canCommandSenderUseCommand(ICommandSender p_71519_1_) {
-        // TODO Auto-generated method stub
-        return true;
+        player.addChatMessage(new TextComponentString(toReturn));
     }
 
     @Override

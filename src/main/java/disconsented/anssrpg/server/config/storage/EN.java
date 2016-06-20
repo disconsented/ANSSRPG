@@ -20,26 +20,23 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.server.config.objects;
+package disconsented.anssrpg.server.config.storage;
 
 import com.google.gson.annotations.Expose;
 import net.minecraft.entity.Entity;
 
 /**
- * Struct like object for entities used for skills.
- * Stands for Entities, Name, Experience.
+ * Struct like object for entities used for perks.
+ * Stands for Entities, Name.
  * @author Disconsented
  */
-public class ENE {
-    public ENE(Class<Entity> entity, String name, int experience){
+public class EN {
+    public EN(Class<Entity> entity, String name){
         this.entity = entity;
         this.name = name;
-        this.experience = experience;        
     }
     //Not exposed to save on space in configs
     public Class<Entity> entity;
     @Expose
     public String name = "";
-    @Expose
-    public int experience;
 }

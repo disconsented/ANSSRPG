@@ -22,7 +22,6 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.handler;
 
-import disconsented.anssrpg.server.common.Settings;
 import disconsented.anssrpg.server.data.DataSave;
 import disconsented.anssrpg.server.data.PerkStore;
 import disconsented.anssrpg.server.data.PlayerStore;
@@ -40,7 +39,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import java.util.ArrayList;
@@ -50,7 +49,7 @@ import java.util.UUID;
 /**
  * @author Disconsented
  *         Handles the data that is stored on players (experience for skills and perks).
- *         //TODO: Remove redundant references and change all methods to never directly interfact with minecraft objects.
+ *         //TODO: Remove redundant references and change all methods to never directly interfact with minecraft storage.
  */
 
 public final class PlayerHandler {
@@ -139,13 +138,13 @@ public final class PlayerHandler {
             player.getSkillExp().put(skill.name, exp);
             levelNew = SkillHandler.calculateLevelForExp(skill, exp);
         }
-        playerEntity.addChatComponentMessage(new ChatComponentText("You have been awared with " + exp + " exp"));
+        playerEntity.addChatComponentMessage(new TextComponentString("You have been awared with " + exp + " exp"));
         /* Check for level up
          * If leveled up send info
          */
         
         if (levelNew > levelOld) {
-            playerEntity.addChatComponentMessage(new ChatComponentText("Your skill " + skill.name + " has leveled up to " + levelNew));
+            playerEntity.addChatComponentMessage(new TextComponentString("Your skill " + skill.name + " has leveled up to " + levelNew));
         }        
     }
 
@@ -219,7 +218,7 @@ public final class PlayerHandler {
      * @param player The player to send the message to.
      */
     public static void taskFail(EntityPlayer player) {
-        player.addChatComponentMessage(new ChatComponentText("You are unable to preform this task"));
+        player.addChatComponentMessage(new TextComponentString("You are unable to preform this task"));
     }
 
     /**
@@ -227,7 +226,7 @@ public final class PlayerHandler {
      * @param player The player to send the message to.
      */
     public static void toolFail(EntityPlayer player) {
-        player.addChatComponentMessage(new ChatComponentText("You do not have the right tool for this task"));
+        player.addChatComponentMessage(new TextComponentString("You do not have the right tool for this task"));
     }
 
     /**
@@ -237,13 +236,14 @@ public final class PlayerHandler {
      * @return The result. If a tool is not required it will return true.
      */
     public static boolean isWielding(ToolSkill skill, EntityPlayer player){
-        if(skill.toolClass == Item.class){
+        /*if(skill.toolClass == Item.class){//TODO:Fix
             return true;
         } else if(player.getCurrentEquippedItem() == null){
             return skill.toolClass == null;
         } else {        
             return skill.toolClass.isInstance(player.getCurrentEquippedItem().getItem());
-        }
+        }*/
+        return true;
     }
 
 

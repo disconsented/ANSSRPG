@@ -24,7 +24,7 @@ package disconsented.anssrpg.server.perk;
 
 import java.util.ArrayList;
 
-import disconsented.anssrpg.server.config.objects.BNP;
+import disconsented.anssrpg.server.config.storage.BNP;
 import net.minecraft.block.Block;
 
 import com.google.gson.annotations.Expose;
@@ -49,7 +49,7 @@ public class BlockPerk extends Perk {
     public void init() {
         ArrayList<BNP> initialised = new ArrayList<BNP>();
         for(BNP object : this.blocks){
-            object.block = (Block)Block.blockRegistry.getObject(object.name);
+            object.block = (Block)Block.REGISTRY.getObject(object.name);
             if (object.block != null){
                 Logging.debug(object.name + " has been found. Passing on.");
                 initialised.add(object);
