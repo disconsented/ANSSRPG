@@ -45,31 +45,31 @@ import disconsented.anssrpg.server.skill.objects.EntitySkill;
 
 public class EntityDamage {
     public void onLivingDeathEvent(LivingDeathEvent event) {
-     /*   boolean isFakePlayer = event.source.getEntity() instanceof FakePlayer;
+        boolean isFakePlayer = event.getSource().getEntity() instanceof FakePlayer;
         if (isFakePlayer && !Settings.isBlockFakePlayers()){
             return;
         }
-        if (event.source.getEntity() instanceof EntityPlayerMP){
-            EntityPlayerMP player = (EntityPlayerMP) event.source.getEntity();
+        if (event.getSource().getEntity() instanceof EntityPlayerMP){
+            EntityPlayerMP player = (EntityPlayerMP) event.getSource().getEntity();
             PlayerData playerData = PlayerStore.getPlayer(player);
-            ArrayList<EntityPerk> perkList = PerkStore.getPerks(event.entity.getClass());
+            ArrayList<EntityPerk> perkList = PerkStore.getPerks(event.getSource().getEntity().getClass());
             ArrayList<EntitySkill> skillStore = SkillStore.getInstance().getEntitySkill();
 
             for(EntitySkill skill : skillStore){
                 for(ENE entry : skill.exp){
-                    if(Utils.MatchObject(event.entity.getClass(), entry.entity)){
-                      if (requiresPerk(perkList, event.entity)) {
+                    if(Utils.MatchObject(event.getSource().getEntity().getClass(), entry.entity)){
+                      if (requiresPerk(perkList, event.getSource().getEntity())) {
                           if (PlayerHandler.hasPerk(playerData, perkList)) {
                                     PlayerHandler.awardToolXP(player, skill, entry.experience);
                               } else {
                                   if (!isFakePlayer) {
                                       PlayerHandler.taskFail(player);
-                                      event.entity.captureDrops = true;
+                                      event.getSource().getEntity().captureDrops = true;
                                       return;
                                   } else {
                                       if (Settings.isBlockFakePlayers()) {
                                           Logging.debug("Fake player blocked at " + player.chunkCoordX + "," + player.chunkCoordY + "," + player.chunkCoordZ);
-                                          event.entity.captureDrops = true;
+                                          event.getSource().getEntity().captureDrops = true;
                                           return;
                                       }
                                   }
@@ -80,34 +80,34 @@ public class EntityDamage {
                     }
                 }
             }
-        }*/
+        }
     }
     public void onLivingHurtEvent(LivingHurtEvent event) {
-       /* if (event.source.getEntity() instanceof FakePlayer){
+        if (event.getSource().getEntity() instanceof FakePlayer){
             if(Settings.isBlockFakePlayers()){
                 event.setCanceled(true);
             }
             return;
-        } else if (event.source.getEntity() instanceof EntityPlayerMP){
-            EntityPlayerMP player = (EntityPlayerMP) event.source.getEntity();
+        } else if (event.getSource().getEntity() instanceof EntityPlayerMP){
+            EntityPlayerMP player = (EntityPlayerMP) event.getSource().getEntity();
             PlayerData playerData = PlayerStore.getPlayer(player);
-            ArrayList<EntityPerk> perkList = PerkStore.getPerks(event.entity.getClass());
+            ArrayList<EntityPerk> perkList = PerkStore.getPerks(event.getSource().getEntity().getClass());
             ArrayList<EntitySkill> skillStore = SkillStore.getInstance().getEntitySkill();
 
             
             for(EntitySkill skill : skillStore){
                 for(ENE entry : skill.exp){
-                    if(Utils.MatchObject(event.entity.getClass(), entry.entity)){
-                      if (this.requiresPerk(perkList, event.entity)) {
+                    if(Utils.MatchObject(event.getSource().getEntity().getClass(), entry.entity)){
+                      if (this.requiresPerk(perkList, event.getSource().getEntity())) {
                           if (!PlayerHandler.hasPerk(playerData, perkList) || !PlayerHandler.isWielding(skill, player)) {
                               PlayerHandler.taskFail(player);
-                              event.ammount = 1;
+                              event.setAmount(1);//TODO: Correct damage to account for when less than this
                           }
                       }
                     }
                 }
             }
-        }*/
+        }
     }
 
     private boolean requiresPerk(ArrayList<EntityPerk> perkList, Entity entity){

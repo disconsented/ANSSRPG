@@ -192,7 +192,7 @@ public class Default {
             digging.exp.add(new BNEP("clay", 2, null));
             digging.exp.add(new BNEP("hardened_clay", 2, null));
             digging.exp.add(new BNEP("stained_hardened_clay", 2, new HashMap<String, String>(){{
-                this.put("PropertyEnum","*");}}));
+                this.put("color","*");}}));
             digging.tool = "Spade";
             Default.skills.addBlockSkill(digging);
             

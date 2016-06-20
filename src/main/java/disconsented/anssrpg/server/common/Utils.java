@@ -22,6 +22,10 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.server.common;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
+import net.minecraft.block.properties.IProperty;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,25 +52,28 @@ public class Utils {
      * @param object1 First object to match.
      * @param properties1 Properties map of the first object.
      * @param object2 Second object to match.
-     * @param properties2 Properties map of the second object.
+     * @param properties2 Properties map of the second(game) object.
      * @param <T> Arbitrary data type.
      * @return The result.
      */
-    public static<T> boolean MatchObject(T object1, Map<String, String> properties1, T object2, Map<String, String> properties2){
+    public static<T> boolean MatchObject(T object1, Map<String, String> properties1, T object2, ImmutableMap<IProperty<?>, Comparable<?>> properties2){
         if(object1 != object2)
             return false;
 
         if(properties1 == null)
             properties1 = new HashMap<>();
 
-        if(properties2 == null)
-            properties2 = new HashMap<>();
+        ImmutableSet<IProperty<?>> keys = properties2.keySet();
 
-        String[] keys = properties1.keySet().toArray(new String[properties1.size()]);
+        for(IProperty<?> key : keys){
+            String value1 = properties1.get(key.getName());
+            if(value1 == null){
+                Logging.debug("Could not find " + key.getName() + " ; Continuing!");
+                continue;
+            }
 
-        for(String key : keys){
-            String value1 = properties1.get(key);
-            String value2 = properties2.get(key);
+            String value2 = properties2.get(key).toString();
+
             if(value1.equals("*")){
                 if (value2.equals("")){
                     Logging.debug("Failed to evaluate key:"+key+" against values: "+value1+" & "+value2);
@@ -79,6 +86,11 @@ public class Utils {
                 }
             }
         }
+
+        return true;
+    }
+
+    public static<T> boolean MatchObject(ImmutableMap<IProperty<?>, Comparable<?>> properties){
         return true;
     }
 

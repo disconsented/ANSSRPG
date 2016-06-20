@@ -29,11 +29,13 @@ package disconsented.anssrpg.server.skill;
 import java.util.ArrayList;
 import java.util.Map;
 
+import com.google.common.collect.ImmutableMap;
 import disconsented.anssrpg.server.common.*;
 import disconsented.anssrpg.server.config.storage.BNEP;
 import disconsented.anssrpg.server.config.storage.BNP;
 import disconsented.anssrpg.server.perk.BlockPerk;
 import net.minecraft.block.Block;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.util.FakePlayer;
 import disconsented.anssrpg.server.data.PerkStore;
@@ -47,13 +49,13 @@ import net.minecraftforge.event.world.BlockEvent;
 public class BlockBreaking {
 
     public void onBreakEvent(BlockEvent.BreakEvent event) {
-     /*   boolean isFakePlayer = event.getPlayer() instanceof FakePlayer;
+        boolean isFakePlayer = event.getPlayer() instanceof FakePlayer;
         if (isFakePlayer && !Settings.isBlockFakePlayers()) {
             return;
         }
         if (event.getPlayer() instanceof EntityPlayerMP) {
-            Block block = event.state.getBlock();
-            Map<String, String> properties = event.state.getProperties();
+            Block block = event.getState().getBlock();
+            ImmutableMap<IProperty<?>, Comparable<?>> properties = event.getState().getProperties();
             EntityPlayerMP player = (EntityPlayerMP) event.getPlayer();
             PlayerData playerData = PlayerStore.getPlayer(player);
             ArrayList<BlockPerk> perkList = PerkStore.getPerks(block);
@@ -86,10 +88,10 @@ public class BlockBreaking {
                     }
                 }
             }
-        }*/
+        }
     }
 
-    private boolean requiresPerk(ArrayList<BlockPerk> perkList, Block block, Map<String, String> properties) {
+    private boolean requiresPerk(ArrayList<BlockPerk> perkList, Block block, ImmutableMap<IProperty<?>, Comparable<?>> properties) {
         if (perkList != null) {
             for (BlockPerk perk : perkList) {
                 for (BNP definition : perk.blocks) {

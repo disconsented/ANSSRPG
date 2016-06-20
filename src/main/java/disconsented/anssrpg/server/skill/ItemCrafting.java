@@ -52,14 +52,15 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
  */
 public class ItemCrafting {
   public void onPlayerOpenCrafting(PlayerOpenContainerEvent event) {
-     /* if (event.entityPlayer instanceof EntityPlayerMP){
-          Container container = event.entityPlayer.openContainer;
+      if (event.getEntity() instanceof EntityPlayerMP){
+          EntityPlayerMP entityPlayerMP = (EntityPlayerMP) event.getEntity();
+          Container container = entityPlayerMP.openContainer;
           if ((container instanceof ContainerWorkbench || container instanceof ContainerPlayer) &&
-                event.entityPlayer.openContainer.inventoryItemStacks.get(0) != null) {              
-              EntityPlayerMP player = (EntityPlayerMP) event.entityPlayer;
-              ItemStack stack = (ItemStack)player.openContainer.inventoryItemStacks.get(0);
+                  entityPlayerMP.openContainer.inventoryItemStacks.get(0) != null) {
+
+              ItemStack stack = (ItemStack)entityPlayerMP.openContainer.inventoryItemStacks.get(0);
               Item item = stack.getItem();             
-              PlayerData playerData = PlayerStore.getPlayer(player);
+              PlayerData playerData = PlayerStore.getPlayer(entityPlayerMP);
               ArrayList<ItemPerk> perkList = PerkStore.getPerks(item);
               ArrayList<ItemSkill> skillStore = SkillStore.getInstance().getItemSkill();
               
@@ -67,16 +68,16 @@ public class ItemCrafting {
                   for (INME entry : skill.exp){
                       if(Utils.MatchObject(entry.item, entry.metadata, item, stack.getItemDamage())){
                           if (!PlayerHandler.hasPerk(playerData, perkList) && this.requiresPerk(perkList,item, stack.getItemDamage())){
-                              player.closeScreen();
+                              entityPlayerMP.closeScreen();
                               event.setResult(Event.Result.DENY);
-                              PlayerHandler.taskFail(player);
+                              PlayerHandler.taskFail(entityPlayerMP);
                           }
                       }
                   }
               }
           }
       }
-      */
+
   }
   
     public void onItemCraftedEvent(PlayerEvent.ItemCraftedEvent event) {
