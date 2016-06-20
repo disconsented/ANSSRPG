@@ -32,6 +32,7 @@ public class Utils {
      * @param metadata1 First storage metadata.
      * @param object2 Second object to match.
      * @param metadata2 Second storage metadata.
+     * @param <T> Arbitrary data type.
      * @return The result.
      */
     public static<T> boolean MatchObject(T object1, int metadata1, T object2, int metadata2){
@@ -66,8 +67,8 @@ public class Utils {
         for(String key : keys){
             String value1 = properties1.get(key);
             String value2 = properties2.get(key);
-            if(value1 == "*"){
-                if (value2 == ""){
+            if(value1.equals("*")){
+                if (value2.equals("")){
                     Logging.debug("Failed to evaluate key:"+key+" against values: "+value1+" & "+value2);
                     return false;
                 }
