@@ -15,7 +15,7 @@ branches:
 before_install:
   - sed -i 's/git:/https:/g' .git/config
 script:
-  - gradlew build tagRelease -Pusr=$USER -Ppsw=$PASS -Ptoken=$TOKEN stats
+  - ./gradlew build tagRelease -Pusr=$USER -Ppsw=$PASS -Ptoken=$TOKEN stats
 
 deploy:
   provider: releases
