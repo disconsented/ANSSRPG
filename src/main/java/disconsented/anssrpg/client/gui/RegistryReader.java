@@ -25,6 +25,7 @@ package disconsented.anssrpg.client.gui;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityList;
 import net.minecraft.item.Item;
+import net.minecraft.potion.Potion;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -44,10 +45,12 @@ public class RegistryReader {
     private JList listBlock;
     private JTextField textFieldSearch;
     private JSplitPane JSplit;
+    private JList listPotion;
     private final JFrame frame;
-    private final ArrayList<String> rawItems;
-    private final ArrayList<String> rawBlocks;
-    private final ArrayList<String> rawEntities;
+    private final ArrayList<String> rawItems = new ArrayList<>();
+    private final ArrayList<String> rawBlocks = new ArrayList<>();
+    private final ArrayList<String> rawEntities = new ArrayList<>();
+    private final ArrayList<String> rawPotions = new ArrayList<>();
     private static RegistryReader instance;
 
     private RegistryReader() {
@@ -73,14 +76,17 @@ public class RegistryReader {
             }
         });
 
-        this.rawItems = new ArrayList<String>(Item.itemRegistry.getKeys());
+        Item.REGISTRY.getKeys().forEach(resourceLocation -> rawItems.add(resourceLocation.toString()));
         this.listItem.setListData(this.rawItems.toArray());
 
-        this.rawEntities = new ArrayList(EntityList.stringToClassMapping.keySet());
+        EntityList.NAME_TO_CLASS.keySet().forEach(s -> { rawEntities.add(s); });
         this.listEntity.setListData(this.rawEntities.toArray());
 
-        this.rawBlocks = new ArrayList<String>(Block.blockRegistry.getKeys());
+        Block.REGISTRY.getKeys().forEach(resourceLocation -> rawBlocks.add(resourceLocation.toString()));
         this.listBlock.setListData(this.rawBlocks.toArray());
+
+        Potion.REGISTRY.getKeys().forEach(resourceLocation -> rawPotions.add(resourceLocation.toString()));
+        this.listPotion.setListData(this.rawPotions.toArray());
 
 
     }
@@ -117,6 +123,10 @@ public class RegistryReader {
         ArrayList<String> filteredBlocks = new ArrayList<>();
         this.filter(this.rawBlocks, p, filteredBlocks);
         this.listBlock.setListData(filteredBlocks.toArray());
+
+        ArrayList<String> filteredPotions = new ArrayList<>();
+        this.filter(this.rawPotions, p, filteredBlocks);
+        this.listPotion.setListData(filteredPotions.toArray());
     }
 
     /**

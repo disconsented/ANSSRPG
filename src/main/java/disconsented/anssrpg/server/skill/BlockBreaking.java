@@ -47,7 +47,7 @@ import net.minecraftforge.event.world.BlockEvent;
 public class BlockBreaking {
 
     public void onBreakEvent(BlockEvent.BreakEvent event) {
-        boolean isFakePlayer = event.getPlayer() instanceof FakePlayer;
+     /*   boolean isFakePlayer = event.getPlayer() instanceof FakePlayer;
         if (isFakePlayer && !Settings.isBlockFakePlayers()) {
             return;
         }
@@ -86,7 +86,7 @@ public class BlockBreaking {
                     }
                 }
             }
-        }
+        }*/
     }
 
     private boolean requiresPerk(ArrayList<BlockPerk> perkList, Block block, Map<String, String> properties) {

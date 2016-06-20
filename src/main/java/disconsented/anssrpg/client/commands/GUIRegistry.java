@@ -29,7 +29,9 @@ import disconsented.anssrpg.server.common.Logging;
 import disconsented.anssrpg.server.common.Settings;
 import disconsented.anssrpg.client.gui.RegistryReader;
 import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.server.MinecraftServer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,12 +47,6 @@ public class GUIRegistry extends CommandBase {
         aliases.add("GUIRegistry");
         aliases.add("REGISTRY");
         aliases.add("registry");
-    }
-
-    @Override
-    public int compareTo(Object arg0) {
-        // TODO Auto-generated method stub
-        return 0;
     }
 
     @Override
@@ -72,7 +68,7 @@ public class GUIRegistry extends CommandBase {
     }
 
     @Override
-    public void processCommand(ICommandSender sender, String[] p_71515_2_) {
+    public void execute(MinecraftServer server, ICommandSender player, String[] arguments) throws CommandException {
         if (Settings.isServer) {
             Logging.error("Tried to open the registry GUI on the server please report this");
         } else {
@@ -81,11 +77,6 @@ public class GUIRegistry extends CommandBase {
 
     }
 
-    @Override
-    public boolean canCommandSenderUseCommand(ICommandSender p_71519_1_) {
-        // TODO Auto-generated method stub
-        return true;
-    }
 
 
     @Override

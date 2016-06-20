@@ -129,12 +129,5 @@ public class Main {
         }
 
         BlockSkill temp = new BlockSkill();
-        for (int i = 0; i < 100; i++){//TODO: Remove
-            double xp = SkillHandler.calculateExpForLevel(temp, i);
-            long level = SkillHandler.calculateLevelForExp(temp, xp);
-            Logging.debug("Int: "+i+"\n"
-                    +"xp: "+xp+"\n"
-                    +"Level: "+level);
-        }
     }
 }

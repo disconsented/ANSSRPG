@@ -38,7 +38,7 @@ import java.util.HashMap;
  */
 public class PerkStore {
     private static final ArrayList<Perk> perks = new ArrayList<Perk>();
-    /*String needs to be a name unique to each entity type*/
+    /*String needs to be a resourceLocation unique to each entity type*/
     private static final HashMap<String, ArrayList<BlockPerk>> blockMap = new HashMap<String, ArrayList<BlockPerk>>();
     private static final HashMap<String, ArrayList<EntityPerk>> entityMap = new HashMap<String, ArrayList<EntityPerk>>();
     private static final HashMap<String, ArrayList<ItemPerk>> itemMap = new HashMap<String, ArrayList<ItemPerk>>();

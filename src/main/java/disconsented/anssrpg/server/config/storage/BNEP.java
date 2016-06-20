@@ -37,8 +37,8 @@ import java.util.Map;
 public class BNEP {
 
     public  BNEP(){}
-    public BNEP(ResourceLocation name, int experience, Map<String, String> properties) {
-        this.name = name;
+    public BNEP(String resourceLocation, int experience, Map<String, String> properties) {
+        this.resourceLocation = new ResourceLocation(resourceLocation);
         this.experience = experience;
         this.properties = properties;
     }
@@ -46,9 +46,13 @@ public class BNEP {
     public Block block;
 
     @Expose
-    public ResourceLocation name = new ResourceLocation("");
+    String name = "";
+
+    public ResourceLocation resourceLocation;
+
     @Expose
     public int experience;
+
     @Expose
     public Map<String,String> properties = new HashMap<>();
 }

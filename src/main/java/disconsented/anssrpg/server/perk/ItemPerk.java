@@ -52,12 +52,12 @@ public class ItemPerk extends Perk {
     public void init() {
         ArrayList<INM> initialised = new ArrayList<>();
         for(INM object : this.items){
-            object.item = (Item)Item.itemRegistry.getObject(object.name);
+            object.item = (Item)Item.REGISTRY.getObject(object.resourceLocation);
             if (object.item != null){
-                Logging.debug(object.name + " has been found. Passing on.");
+                Logging.debug(object.resourceLocation + " has been found. Passing on.");
                 initialised.add(object);
             } else {
-                Logging.error(object.name + " has not been found. Skipping");
+                Logging.error(object.resourceLocation + " has not been found. Skipping");
             }
         }
         items = initialised;

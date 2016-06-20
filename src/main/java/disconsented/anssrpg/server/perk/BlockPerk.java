@@ -49,12 +49,12 @@ public class BlockPerk extends Perk {
     public void init() {
         ArrayList<BNP> initialised = new ArrayList<BNP>();
         for(BNP object : this.blocks){
-            object.block = (Block)Block.REGISTRY.getObject(object.name);
+            object.block = (Block)Block.REGISTRY.getObject(object.resourceLocation);
             if (object.block != null){
-                Logging.debug(object.name + " has been found. Passing on.");
+                Logging.debug(object.resourceLocation + " has been found. Passing on.");
                 initialised.add(object);
             } else {
-                Logging.error(object.name + " has not been found. Skipping");
+                Logging.error(object.resourceLocation + " has not been found. Skipping");
             }
         }
         blocks = initialised;

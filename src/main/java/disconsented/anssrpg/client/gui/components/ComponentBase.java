@@ -22,6 +22,8 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.client.gui.components;
 
+import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -43,25 +45,10 @@ public abstract class ComponentBase extends Gui{
     public abstract void draw();
     public void bindAndDrawTexture(ResourceLocation texture, int posX, int posY, int startX, int startY, int width, int height){
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
-        this.drawTexturedModalRectClone(posX, posY, startX, startY, width, height);
+        this.drawTexturedModalRect(posX, posY, startX, startY, width, height);
     }
     public void bindAndDrawTexture(ResourceLocation texture, int posX, int posY, int width, int height){
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
-        this.drawTexturedModalRectClone(posX, posY, 0, 0, width, height);
-    }
-    private void drawTexturedModalRectClone(int posX, int posY, int startX, int startY, int width, int height)
-    {
-        float f = 0.00390625F;
-        float f1 = 0.00390625F;
-        Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-        worldrenderer.startDrawingQuads();
-        //Set the colour in order to avoid having partially green GUI's
-        worldrenderer.setColorRGBA_F(1F, 1F, 1F, 1F);
-        worldrenderer.addVertexWithUV((double)(posX + 0), (double)(posY + height), (double) zLevel, (double)((float)(startX + 0) * f), (double)((float)(startY + height) * f1));
-        worldrenderer.addVertexWithUV((double)(posX + width), (double)(posY + height), (double) zLevel, (double)((float)(startX + width) * f), (double)((float)(startY + height) * f1));
-        worldrenderer.addVertexWithUV((double) (posX + width), (double) (posY + 0), (double) zLevel, (double) ((float) (startX + width) * f), (double)((float)(startY + 0) * f1));
-        worldrenderer.addVertexWithUV((double) (posX + 0), (double) (posY + 0), (double) zLevel, (double) ((float) (startX + 0) * f), (double)((float)(startY + 0) * f1));
-        tessellator.draw();
+        this.drawTexturedModalRect(posX, posY, 0, 0, width, height);
     }
 }

@@ -66,6 +66,19 @@
                   </component>
                 </children>
               </scrollpane>
+              <scrollpane id="3321f">
+                <constraints>
+                  <tabbedpane title="Potions"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="6e5c0" class="javax.swing.JList" binding="listPotion">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
             </children>
           </tabbedpane>
           <component id="32981" class="javax.swing.JTextField" binding="textFieldSearch">

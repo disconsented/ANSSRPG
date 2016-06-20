@@ -48,12 +48,12 @@ public class BlockSkill extends ToolSkill {
         
         ArrayList<BNEP> initialised = new ArrayList<BNEP>();
         for (BNEP object : this.exp) {
-            object.block = (Block) Block.REGISTRY.getObject(object.name);
+            object.block = (Block) Block.REGISTRY.getObject(object.resourceLocation);
             if (object.block != null){
-                Logging.debug(object.name+" has been found. Passing on!");
+                Logging.debug(object.resourceLocation +" has been found. Passing on!");
                 initialised.add(object);
             } else {
-                Logging.error(object.name+" could not be found. Ignoring!");
+                Logging.error(object.resourceLocation +" could not be found. Ignoring!");
             }
         }
         this.exp = initialised;

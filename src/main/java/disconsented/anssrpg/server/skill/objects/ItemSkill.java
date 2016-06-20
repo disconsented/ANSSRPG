@@ -45,12 +45,12 @@ public class ItemSkill extends Skill {
     public void touchUp() {
         ArrayList<INME> initialised = new ArrayList<>();
         for (INME object : this.exp) {
-            object.item = (Item) Item.itemRegistry.getObject(object.name);
+            object.item = (Item) Item.REGISTRY.getObject(object.resourceLocation);
             if (object.item != null){
-                Logging.debug(object.name+" has been found. Passing on!");
+                Logging.debug(object.resourceLocation+" has been found. Passing on!");
                 initialised.add(object);
             } else {
-                Logging.error(object.name+" could not be found. Ignoring!");
+                Logging.error(object.resourceLocation+" could not be found. Ignoring!");
             }
         }
         this.exp = initialised;

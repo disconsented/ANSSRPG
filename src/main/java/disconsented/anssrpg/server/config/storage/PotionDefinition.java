@@ -20,22 +20,28 @@
 package disconsented.anssrpg.server.config.storage;
 
 import com.google.gson.annotations.Expose;
+import net.minecraft.potion.Potion;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * @author Disconsented
  *
  */
 public class PotionDefinition{
-    @Expose
-    public int id;
-    @Expose
-    public int amplifier;
-    @Expose
-    public int duration;
-    public PotionDefinition(int id, int amplifier, int duration){
-        this.id = id;
+    public PotionDefinition(String name, int amplifier, int duration){
+        this.resourceLocation = new ResourceLocation(name);
         this.amplifier = amplifier;
         this.duration = duration;
     }   
     public PotionDefinition(){}
+
+    public ResourceLocation resourceLocation;
+
+    public Potion potion;
+    @Expose
+    public String name = "";
+    @Expose
+    public int amplifier;
+    @Expose
+    public int duration;
 }

@@ -45,7 +45,7 @@ import disconsented.anssrpg.server.skill.objects.EntitySkill;
 
 public class EntityDamage {
     public void onLivingDeathEvent(LivingDeathEvent event) {
-        boolean isFakePlayer = event.source.getEntity() instanceof FakePlayer;
+     /*   boolean isFakePlayer = event.source.getEntity() instanceof FakePlayer;
         if (isFakePlayer && !Settings.isBlockFakePlayers()){
             return;
         }
@@ -80,10 +80,10 @@ public class EntityDamage {
                     }
                 }
             }
-        }
+        }*/
     }
     public void onLivingHurtEvent(LivingHurtEvent event) {
-        if (event.source.getEntity() instanceof FakePlayer){
+       /* if (event.source.getEntity() instanceof FakePlayer){
             if(Settings.isBlockFakePlayers()){
                 event.setCanceled(true);
             }
@@ -107,7 +107,7 @@ public class EntityDamage {
                     }
                 }
             }
-        }
+        }*/
     }
 
     private boolean requiresPerk(ArrayList<EntityPerk> perkList, Entity entity){

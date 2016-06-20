@@ -50,7 +50,7 @@ public class EntityPerk extends Perk {
     public void init() {
         ArrayList<ENE> initialised = new ArrayList<ENE>();
         for(ENE object : this.entities){
-            object.entity = (Class) EntityList.stringToClassMapping.get(object.name);
+            object.entity = (Class) EntityList.ID_TO_CLASS.get(object.name);
             if (object.entity != null){
                 Logging.debug(object.name + " has been found. Passing on.");
                 initialised.add(object);

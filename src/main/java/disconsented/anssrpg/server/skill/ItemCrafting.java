@@ -52,7 +52,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
  */
 public class ItemCrafting {
   public void onPlayerOpenCrafting(PlayerOpenContainerEvent event) {
-      if (event.entityPlayer instanceof EntityPlayerMP){
+     /* if (event.entityPlayer instanceof EntityPlayerMP){
           Container container = event.entityPlayer.openContainer;
           if ((container instanceof ContainerWorkbench || container instanceof ContainerPlayer) &&
                 event.entityPlayer.openContainer.inventoryItemStacks.get(0) != null) {              
@@ -76,7 +76,7 @@ public class ItemCrafting {
               }
           }
       }
-      
+      */
   }
   
     public void onItemCraftedEvent(PlayerEvent.ItemCraftedEvent event) {

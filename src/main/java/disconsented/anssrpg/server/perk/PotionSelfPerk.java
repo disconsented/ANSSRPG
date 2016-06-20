@@ -24,8 +24,10 @@ package disconsented.anssrpg.server.perk;
 
 import java.util.ArrayList;
 
+import disconsented.anssrpg.server.common.Logging;
 import disconsented.anssrpg.server.handler.PlayerHandler;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
 import com.google.gson.annotations.Expose;
@@ -59,14 +61,26 @@ public class PotionSelfPerk extends Perk implements ActivePerk{
     @Expose
     public int maxCycles = 10;
     @Override
-    public void init() {}
+    public void init() {
+        ArrayList<PotionDefinition> initialised = new ArrayList<>();
+        for(PotionDefinition object : effects){
+            object.potion = (Potion) Potion.REGISTRY.getObject(object.resourceLocation);
+            if (object.potion != null){
+                Logging.debug(object.resourceLocation + " has been found. Passing on.");
+                initialised.add(object);
+            } else {
+                Logging.error(object.resourceLocation + " has not been found. Skipping");
+            }
+        }
+        effects = initialised;
+    }
     @Override
     public void activate(EntityLivingBase target, EntityLivingBase source) {
         PlayerHandler.getPlayer(target.getUniqueID());
         for (PotionDefinition effect : this.effects){
             TaskMaster.getInstance().addTask(new TaskApplyPotion(
-                    target, new PotionEffect(effect.id, effect.duration, effect.amplifier), null, this.repeat, this.cycle, this.maxCycles, this.slug));
-        }        
+                    target, new PotionEffect(effect.potion, effect.duration, effect.amplifier), null, this.repeat, this.cycle, this.maxCycles, this.slug));
+        }
         
     }
 }

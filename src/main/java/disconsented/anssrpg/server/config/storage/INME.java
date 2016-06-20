@@ -24,6 +24,7 @@ package disconsented.anssrpg.server.config.storage;
 
 import com.google.gson.annotations.Expose;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Struct like object for Item definitions used for skills.
@@ -32,14 +33,16 @@ import net.minecraft.item.Item;
 public class INME {
     public INME(Item item, String name, int metadata, int experience) {
         this.item = item;
-        this.name = name;
+        this.resourceLocation = new ResourceLocation(name);
         this.metadata = metadata;
         this.experience = experience;
     }
     public Item item;
 
     @Expose
-    public String name = "";
+    private String name = "";
+
+    public ResourceLocation resourceLocation;
 
     @Expose
     public int metadata = -1;

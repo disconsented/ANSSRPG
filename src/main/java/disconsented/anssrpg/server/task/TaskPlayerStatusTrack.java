@@ -83,7 +83,8 @@ public class TaskPlayerStatusTrack extends Task{
     }
 
     private float getArmourValue(int slot){
-        ItemStack itemStack = this.player.getCurrentArmor(slot);
+        //ItemStack itemStack = this.player.getCurrentArmor(slot);
+        ItemStack itemStack = null;
         return itemStack != null ? ((ItemArmor)itemStack.getItem()).damageReduceAmount : 0;
     }
 }
