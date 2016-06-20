@@ -22,6 +22,7 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.client.gui.components;
 
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraftforge.fml.client.FMLClientHandler;
@@ -44,10 +45,12 @@ public abstract class ComponentBase extends Gui{
     
     public abstract void draw();
     public void bindAndDrawTexture(ResourceLocation texture, int posX, int posY, int startX, int startY, int width, int height){
+        GlStateManager.color(255,255,255);
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
         this.drawTexturedModalRect(posX, posY, startX, startY, width, height);
     }
     public void bindAndDrawTexture(ResourceLocation texture, int posX, int posY, int width, int height){
+        GlStateManager.color(255,255,255);
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
         this.drawTexturedModalRect(posX, posY, 0, 0, width, height);
     }
