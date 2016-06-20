@@ -12,7 +12,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
         classpath 'org.ajoberstar:gradle-git:1.2.0'
         classpath 'org.kordamp.gradle:stats-gradle-plugin:0.1.1'
     }
@@ -30,7 +30,7 @@ if (new File(projectDir, '.git').exists()) {
     gitHash = repo.log().find().abbreviatedId
 }
 
-apply plugin: 'forge'
+apply plugin: 'net.minecraftforge.gradle.forge'
 group = package_group
 
 archivesBaseName = mod_name
@@ -44,7 +44,7 @@ minecraft {
     runDir = "run"
 
     replace "@VERSION@", mod_version
-    mappings = "stable_16"
+    mappings = "snapshot_20160619"
     
 }
 
@@ -65,6 +65,7 @@ processResources {
         exclude '**/*.info'
         exclude '**/*.properties'
     }
+
 }
 
 targetCompatibility=8
@@ -79,12 +80,6 @@ jar {
             "Implementation-Version": project.version,
             "Git-Hash": gitHash
     )
-}
-
-// Source Jar
-task sourceJar(type: Jar) {
-    from sourceSets.main.allSource
-    classifier = 'sources'
 }
 
 // Javadoc Jar
