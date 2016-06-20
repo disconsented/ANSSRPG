@@ -33,7 +33,7 @@ import disconsented.anssrpg.server.player.PlayerData;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.ChatComponentText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,7 +118,7 @@ public class Perks extends CommandBase {
                 
                 break;
         }
-        player.addChatMessage(new TextComponentString(toReturn));
+        player.addChatMessage(new ChatComponentText(toReturn));
     }
 
     @Override

@@ -40,7 +40,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import java.util.ArrayList;
@@ -139,18 +139,13 @@ public final class PlayerHandler {
             player.getSkillExp().put(skill.name, exp);
             levelNew = SkillHandler.calculateLevelForExp(skill, exp);
         }
-        playerEntity.addChatComponentMessage(new TextComponentString("You have been awared with " + exp + " exp"));
+        playerEntity.addChatComponentMessage(new ChatComponentText("You have been awared with " + exp + " exp"));
         /* Check for level up
          * If leveled up send info
          */
         
         if (levelNew > levelOld) {
-            playerEntity.addChatComponentMessage(new TextComponentString("Your skill " + skill.name + " has leveled up to " + levelNew));
-            
-            if (Settings.getPointsMode() == 1) {
-                player.setPoints(player.getPoints() + 1);
-                playerEntity.addChatComponentMessage(new TextComponentString("You have recieved 1 perk point for leveling up"));
-            }
+            playerEntity.addChatComponentMessage(new ChatComponentText("Your skill " + skill.name + " has leveled up to " + levelNew));
         }        
     }
 
@@ -180,10 +175,6 @@ public final class PlayerHandler {
     public static PlayerData getPlayer(UUID uniqueID) {
     	return PlayerHandler.getPlayer(uniqueID.toString());
 	}
-
-	public static int getPoints(PlayerData player) {
-        return player.getPoints();
-    }
 
     public static boolean hasPerk(Perk perk, PlayerData player) {
         return player.getPerkList().contains(perk.getSlug());
@@ -228,7 +219,7 @@ public final class PlayerHandler {
      * @param player The player to send the message to.
      */
     public static void taskFail(EntityPlayer player) {
-        player.addChatComponentMessage(new TextComponentString("You are unable to preform this task"));
+        player.addChatComponentMessage(new ChatComponentText("You are unable to preform this task"));
     }
 
     /**
@@ -236,7 +227,7 @@ public final class PlayerHandler {
      * @param player The player to send the message to.
      */
     public static void toolFail(EntityPlayer player) {
-        player.addChatComponentMessage(new TextComponentString("You do not have the right tool for this task"));
+        player.addChatComponentMessage(new ChatComponentText("You do not have the right tool for this task"));
     }
 
     /**
