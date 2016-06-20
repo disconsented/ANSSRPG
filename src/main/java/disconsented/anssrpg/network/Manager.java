@@ -29,7 +29,10 @@ import disconsented.anssrpg.Main;
 import disconsented.anssrpg.common.Reference;
 
 public class Manager {
-	
+
+	private Manager() {
+	}
+
 	public static void init(){
 
 		Main.snw = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.ID);

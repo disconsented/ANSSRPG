@@ -35,6 +35,9 @@ import java.io.*;
 public class PlayerFile {
 
 
+    private PlayerFile() {
+    }
+
     public static void loadPlayer(String playerID) {
         File dataLocation = new File(Settings.getFolder(), playerID+".json");
         if (dataLocation.exists()){

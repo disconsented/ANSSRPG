@@ -31,6 +31,9 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class Utils {
+    private Utils() {
+    }
+
     /**
      * Returns true if two objects are matched. If either Metadata is <= -1 then it is treated as a wildcard (Metadata is ignored)
      * @param object1
@@ -95,6 +98,9 @@ public class Utils {
      *
      */
     public static class Tools {
+        private Tools() {
+        }
+
         public static String stringToSlug(String value){
             return value.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
         }

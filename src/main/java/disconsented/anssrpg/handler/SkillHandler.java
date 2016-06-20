@@ -35,7 +35,10 @@ import net.minecraft.item.Item;
  * @author Disconsented
  */
 public class SkillHandler {
-    
+
+    private SkillHandler() {
+    }
+
     public static double calculateExpForLevel(Skill skill, double level){
         return SkillHandler.calculateExpForLevel(skill.base, level, skill.mod);
     }

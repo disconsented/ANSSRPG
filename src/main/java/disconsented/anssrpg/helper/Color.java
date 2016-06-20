@@ -31,4 +31,6 @@ public class Color {
     public static int greyDeep = 0xFF373737;
     public static int brownPaper = 0xFFCAAF7A;
 
+    private Color() {
+    }
 }
