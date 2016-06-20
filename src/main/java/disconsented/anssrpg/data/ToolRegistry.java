@@ -40,7 +40,7 @@ import net.minecraft.item.ItemSword;
  */
 public final class ToolRegistry {
     
-    private static final HashMap<String, Class> registry = new HashMap<String, Class>();
+    private static final HashMap<String, Class> registry = new HashMap<>();
     
     public static void init(){
         ToolRegistry.registry.put("Pickaxe", ItemPickaxe.class);

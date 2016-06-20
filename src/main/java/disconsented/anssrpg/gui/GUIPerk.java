@@ -48,7 +48,7 @@ public class GUIPerk extends GuiScreen {
     private PerkControls perkControls;
     private int page;
     private PerkInfo selected;
-    private final ArrayList<PerkInfo> info = new ArrayList<PerkInfo>();
+    private final ArrayList<PerkInfo> info = new ArrayList<>();
     private List<PerkInfo> subList = new ArrayList<>();
 
 

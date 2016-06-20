@@ -35,8 +35,8 @@ public class TaskMaster{
 	protected TaskMaster(){}
 	
 	private static TaskMaster master;
-	private final Queue<Task> queue = new LinkedList<Task>();
-	private final Queue<Task> currentQueue = new LinkedList<Task>();
+	private final Queue<Task> queue = new LinkedList<>();
+	private final Queue<Task> currentQueue = new LinkedList<>();
 	
 	public static TaskMaster getInstance(){
 		if (TaskMaster.master == null){

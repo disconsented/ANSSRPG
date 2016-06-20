@@ -39,11 +39,11 @@ import disconsented.anssrpg.skill.objects.Skill;
 public class SkillContainer {
 
     @Expose
-    private ArrayList<BlockSkill> blocks = new ArrayList<BlockSkill>();
+    private ArrayList<BlockSkill> blocks = new ArrayList<>();
     @Expose
-    private final ArrayList<EntitySkill> entites = new ArrayList<EntitySkill>();
+    private final ArrayList<EntitySkill> entites = new ArrayList<>();
     @Expose
-    private final ArrayList<ItemSkill> items = new ArrayList<ItemSkill>();
+    private final ArrayList<ItemSkill> items = new ArrayList<>();
 
 
     public void addBlockSkill(BlockSkill blockSkill) {
@@ -69,7 +69,7 @@ public class SkillContainer {
     }
 
     public void touchUp() {
-        ArrayList<Skill> skills = new ArrayList<Skill>();
+        ArrayList<Skill> skills = new ArrayList<>();
         skills.addAll(this.blocks);
         skills.addAll(this.entites);
         skills.addAll(this.items);

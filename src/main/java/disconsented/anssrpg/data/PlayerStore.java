@@ -36,7 +36,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
  *         Stores player's into a hashmap with the Key being their UUID
  */
 public class PlayerStore {
-    private static final HashMap<String, PlayerData> data = new HashMap<String, PlayerData>();
+    private static final HashMap<String, PlayerData> data = new HashMap<>();
 
     private static PlayerStore instance;
 
