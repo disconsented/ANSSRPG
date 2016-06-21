@@ -107,10 +107,11 @@ def shouldTag(){
     def p = new URL ("https://api.github.com/repos/${github_repo}/releases?access_token=$token").text
     def json = new JsonSlurper().parseText(p)
     println "Searching for " + version + " in ${github_repo}"
-    json.each {
-        if(it.tag_name.equalsIgnoreCase(version)){
-           return false
-       }
+
+    for (item in json) {
+        if(item.tag_name == version){
+            return false
+        }
     }
     return true
 }
