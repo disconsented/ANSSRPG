@@ -118,7 +118,9 @@ def shouldTag(){
 
 task tagRelease() {
     doLast {
-        if(shouldTag()) {
+        def doTag = shouldTag()
+        environment "DEPLOY", doTag
+        if(doTag) {
             println "Releasing ${version}."
             System.setProperty("org.ajoberstar.grgit.auth.username", "$usr")
             System.setProperty("org.ajoberstar.grgit.auth.password", "$psw")
