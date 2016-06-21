@@ -116,7 +116,7 @@ def shouldTag(){
     return true
 }
 
-task tagRelease(type: Exec) {
+task tagRelease {
     doLast {
         def doTag = shouldTag()
         environment "DEPLOY", doTag
