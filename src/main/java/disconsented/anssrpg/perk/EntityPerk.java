@@ -38,7 +38,7 @@ public class EntityPerk extends Perk {
     public EntityPerk(){}
 
     @Expose
-    public ArrayList<ENE> entities = new ArrayList<ENE>();
+    public ArrayList<ENE> entities = new ArrayList<>();
 
     public EntityPerk(String name, ArrayList<Requirement> requirements,
                       String description, int pointCost, ArrayList<ENE> entities) {
@@ -48,7 +48,7 @@ public class EntityPerk extends Perk {
 
     @Override
     public void searchObject() {
-        ArrayList<ENE> initialised = new ArrayList<ENE>();
+        ArrayList<ENE> initialised = new ArrayList<>();
         for(ENE object : this.entities){
             object.entity = (Class) EntityList.stringToClassMapping.get(object.name);
             if (object.entity != null){

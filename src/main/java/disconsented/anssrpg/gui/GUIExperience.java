@@ -45,7 +45,7 @@ import net.minecraft.util.ResourceLocation;
  *
  */
 public class GUIExperience extends GuiScreen {    
-    private final ArrayList<ExpBox> boxes = new ArrayList<ExpBox>();
+    private final ArrayList<ExpBox> boxes = new ArrayList<>();
     private int page;
     private int boxCount;
     

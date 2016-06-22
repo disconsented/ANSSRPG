@@ -35,7 +35,7 @@ import disconsented.anssrpg.common.Logging;
 public class BlockPerk extends Perk {
 
     @Expose
-    public ArrayList<BNP> blocks = new ArrayList<BNP>();
+    public ArrayList<BNP> blocks = new ArrayList<>();
 
     public BlockPerk() {
     }
@@ -48,7 +48,7 @@ public class BlockPerk extends Perk {
 
     @Override
     public void searchObject() {
-        ArrayList<BNP> initialised = new ArrayList<BNP>();
+        ArrayList<BNP> initialised = new ArrayList<>();
         for(BNP object : this.blocks){
             object.block = (Block)Block.blockRegistry.getObject(object.name);
             if (object.block != null){

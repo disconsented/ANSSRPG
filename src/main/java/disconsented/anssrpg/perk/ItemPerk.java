@@ -38,7 +38,7 @@ import disconsented.anssrpg.objects.INME;
 public class ItemPerk extends Perk {
 
     @Expose
-    public ArrayList<INM> items = new ArrayList<INM>();
+    public ArrayList<INM> items = new ArrayList<>();
 
     public ItemPerk() {
     }
