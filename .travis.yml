@@ -27,9 +27,9 @@ before_deploy:
 deploy:
   provider: releases
   api_key:
-    secure: VhPE7D1RUg5NVYN5NijQElRCBXcwG4GLFIv3Tl4OdShL2/V8VkCn8FgNnvIsYPR2J95QfYkmop2H2Fjxztni/tF8hun5qS+VAzgVjE8mep53NQ4VsfkVGcHQAMsjqELe3njGeecZs8RI2cxhPSBexvlBflakhi1cq2GlYEaeBeY=
+    secure: VbCy2IYaM1w1ENvFaMv6vt38EHrBHwjD+4jK2Avnj8NGOZJOKL5FaC6gT8+r51ubOstAbZRhXJ6pJZaH9AGdwyFnlgIg4Mo1l/wju58VRhx9/mXGR7boDwZ3PAWWXhKuel3YrzKegrO0FsNlt8gJSRVMoiu4z5p/SnCgWK7cG3E=
   file_glob: true
-  file: 
+  file:
     - ./build/libs/*.jar
     - CHANGES.md
   skip_cleanup: true
@@ -37,7 +37,7 @@ deploy:
     repo: disconsented/ANSSRPG
     all_branches: true
     condition: $DEPLOY || DEPLOY
-    
+
 notifications:
  irc:
   channels:
