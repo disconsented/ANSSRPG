@@ -20,6 +20,8 @@ script:
 
 after_success:
   - ./gradlew shouldDeploy -Ptoken=$TOKEN
+  - printenv $DEPLOY
+  - printenv DEPLOY
 
 before_deploy:
   - ./gradlew tagRelease -Pusr=$USER -Ppsw=$PASS -Ptoken=$TOKEN
@@ -36,7 +38,7 @@ deploy:
   on:
     repo: disconsented/ANSSRPG
     all_branches: true
-    condition: "[$DEPLOY = true] || [$DEPLOY = 'true'] "
+    condition: $DEPLOY || DEPLOY
     
 notifications:
  irc:
