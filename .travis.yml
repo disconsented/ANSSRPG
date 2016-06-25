@@ -19,6 +19,9 @@ script:
   - ./gradlew build check stats
 
 after_script:
+  - ./gradlew shouldTag -Ptoken=$TOKEN
+
+before_deploy:
   - ./gradlew tagRelease -Pusr=$USER -Ppsw=$PASS -Ptoken=$TOKEN
 
 deploy:
