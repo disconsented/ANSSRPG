@@ -86,7 +86,7 @@ public class Main {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, Main.proxy);
         Main.proxy.registerRenderers();
         MinecraftForge.EVENT_BUS.register(new ForgeBUS());
-        FMLCommonHandler.instance().bus().register(new ClientTick());
+        MinecraftForge.EVENT_BUS.register(new ClientTick());
         FMLCommonHandler.instance().bus().register(new FMLBUS());
         ToolRegistry.init();
     }
