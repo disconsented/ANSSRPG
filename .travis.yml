@@ -16,7 +16,7 @@ before_install:
   - sed -i 's/git:/https:/g' .git/config
   - chmod +x ./gradlew
 script:
-  - ./gradlew build check stats 
+  - ./gradlew build check stats -Ptoken=$TOKEN
 
 after_script:
   - ./gradlew shouldDeploy -Ptoken=$TOKEN

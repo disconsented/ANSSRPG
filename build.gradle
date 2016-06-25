@@ -125,7 +125,7 @@ def shouldTag(silent){
 
 //Task for setting the enviro var
 task shouldDeploy{
-    shouldTag(false)
+    shouldTag(true)
 }
 
 //Actual tagging task
