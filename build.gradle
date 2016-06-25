@@ -106,24 +106,32 @@ tasks.withType(JavaCompile) { task ->
 //IDEA assets fix
 idea { module { inheritOutputDirs = true } }
 
-def shouldTag(){
+//Retrieves recent releases, if it finds the release tag on github it will skip the deployment
+def shouldTag(silent){
     def p = new URL ("https://api.github.com/repos/${github_repo}/releases?access_token=$token").text
     def json = new JsonSlurper().parseText(p)
+    if(!silent)
     println "Searching for " + version + " in ${github_repo}"
 
     for (item in json) {
         if(item.tag_name == version){
+            System.setProperty("DEPLOY", "false")
             return false
         }
     }
+    System.setProperty("DEPLOY", "true")
     return true
 }
 
+//Task for setting the enviro var
+task shouldDeploy{
+    shouldTag(false)
+}
+
+//Actual tagging task
 task tagRelease {
     doLast {
-        def doTag = shouldTag()
-        System.setProperty("DEPLOY", doTag.toString())
-        if(doTag) {
+        if(shouldTag(false)) {
             println "Releasing ${version}."
             System.setProperty("org.ajoberstar.grgit.auth.username", "$usr")
             System.setProperty("org.ajoberstar.grgit.auth.password", "$psw")

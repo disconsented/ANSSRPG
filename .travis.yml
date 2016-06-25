@@ -18,7 +18,7 @@ before_install:
 script:
   - ./gradlew build check stats
 
-before_deploy:
+after_script:
   - ./gradlew tagRelease -Pusr=$USER -Ppsw=$PASS -Ptoken=$TOKEN
 
 deploy:
