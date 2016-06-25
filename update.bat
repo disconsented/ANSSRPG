@@ -1,1 +1,1 @@
-gradlew setupDecompWorkspace --refresh-dependencies idea
+gradlew setupDecompWorkspace --refresh-dependencies

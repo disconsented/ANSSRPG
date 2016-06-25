@@ -106,9 +106,10 @@ tasks.withType(JavaCompile) { task ->
 //IDEA assets fix
 idea { module { inheritOutputDirs = true } }
 
+
 //Retrieves recent releases, if it finds the release tag on github it will skip the deployment
 def shouldTag(silent){
-    def p = new URL ("https://api.github.com/repos/${github_repo}/releases?access_token=$token").text
+    def p = new URL ("https://api.github.com/repos/${github_repo}/releases?access_token=${token}").text
     def json = new JsonSlurper().parseText(p)
     if(!silent)
     println "Searching for " + version + " in ${github_repo}"
@@ -124,7 +125,7 @@ def shouldTag(silent){
 }
 
 //Task for setting the enviro var
-task shouldDeploy{
+task shouldDeploy << {
     shouldTag(true)
 }
 
