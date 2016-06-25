@@ -101,10 +101,10 @@ public class EntityDamage {
             for (EntitySkill skill : skillStore) {
                 for (ENE entry : skill.exp) {
                     if (Utils.MatchObject(event.getSource().getEntity().getClass(), entry.entity) &&
-                        requiresPerk(perkList, event.getSource().getEntity()) &&
+                            requiresPerk(perkList, event.getSource().getEntity()) &&
                             !PlayerHandler.hasPerk(playerData, perkList) || !PlayerHandler.isWielding(skill, player)) {
-                                PlayerHandler.taskFail(player);
-                                event.setAmount(1);//TODO: Correct damage to account for when less than this
+                        PlayerHandler.taskFail(player);
+                        event.setAmount(1);//TODO: Correct damage to account for when less than this
                     }
                 }
             }

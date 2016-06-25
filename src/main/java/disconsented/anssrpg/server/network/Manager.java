@@ -30,6 +30,9 @@ import net.minecraftforge.fml.relauncher.Side;
 
 public class Manager {
 
+    private Manager() {
+    }
+
     public static void init() {
 
         Main.snw = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.ID);

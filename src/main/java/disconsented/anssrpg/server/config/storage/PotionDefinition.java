@@ -35,11 +35,13 @@ public class PotionDefinition {
     public int amplifier;
     @Expose
     public int duration;
+
     public PotionDefinition(String name, int amplifier, int duration) {
         this.resourceLocation = new ResourceLocation(name);
         this.amplifier = amplifier;
         this.duration = duration;
     }
+
     public PotionDefinition() {
     }
 }

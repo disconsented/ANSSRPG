@@ -45,6 +45,7 @@ public class BNP {
 
     public BNP() {
     }
+
     public BNP(String name, Map<String, String> properties) {
         this.resourceLocation = new ResourceLocation(name);
         this.properties = properties;

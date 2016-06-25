@@ -38,6 +38,7 @@ public class ENE {
     public String name = "";
     @Expose
     public int experience;
+
     public ENE(Class<Entity> entity, String name, int experience) {
         this.entity = entity;
         this.name = name;

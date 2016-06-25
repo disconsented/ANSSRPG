@@ -36,12 +36,13 @@ import java.util.LinkedHashMap;
  * @author Disconsented
  */
 public class Data {
+
     public static HashMap<String, SkillInfo> skillInfo = new HashMap<String, SkillInfo>();
     public static ArrayList<SkillInfo> skillInfoList = new ArrayList<SkillInfo>();
     public static LinkedHashMap<String, PerkInfo> perkInfo = new LinkedHashMap<String, PerkInfo>(); //Ensures that perks are all unique, allows for easy overridng
     public static String statusMessage = "";
     public static GuiScreen screenToOpen = null;
     public static int ticksLeft = 0;
-
-
+    private Data() {
+    }
 }
