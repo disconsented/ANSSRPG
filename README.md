@@ -26,7 +26,7 @@ Effect Perks allow for effects (potion effects at this time) to be applied to pl
 
 NOTE: If you're looking for help via IRC read [this](https://workaround.org/getting-help-on-irc).
 
-After reading that, you can find me in #disconsented on the Espernet IRC [(or click here)](https://kiwiirc.com/client/irc.esper.net/?#disconsented).
+After reading that, you can find me in #disconsented on the Espernet IRC [(or click here)](https://kiwiirc.com/client/irc.esper.net/?#disconsented) or on discord. [(invite link)](https://discord.gg/0yaLvXMvAzrGhxnE)
 
 ##Builds
 Master: [![Build Status](https://travis-ci.org/disconsented/ANSSRPG.svg?branch=master)](https://travis-ci.org/disconsented/ANSSRPG)
