@@ -35,13 +35,13 @@ import java.util.ArrayList;
 public class EntitySkill extends ToolSkill {
 
     @Expose
-    public ArrayList<ENE> exp = new ArrayList<ENE>();
+    public ArrayList<ENE> exp = new ArrayList<>();
 
     @Override
     public void touchUp() {
         this.initTool();
 
-        ArrayList<ENE> initialised = new ArrayList<ENE>();
+        ArrayList<ENE> initialised = new ArrayList<>();
         for (ENE object : this.exp) {
             object.entity = (Class) EntityList.NAME_TO_CLASS.get(object.name);
             if (object.entity != null) {

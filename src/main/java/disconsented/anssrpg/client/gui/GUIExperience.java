@@ -36,7 +36,7 @@ import java.util.ArrayList;
  * @author Disconsented
  */
 public class GUIExperience extends GuiScreen {
-    private final ArrayList<ExpBox> boxes = new ArrayList<ExpBox>();
+    private final ArrayList<ExpBox> boxes = new ArrayList<>();
     private int page;
     private int boxCount;
 

@@ -34,7 +34,7 @@ import java.util.ArrayList;
 
 public class EntityPerk extends Perk {
     @Expose
-    public ArrayList<ENE> entities = new ArrayList<ENE>();
+    public ArrayList<ENE> entities = new ArrayList<>();
 
     public EntityPerk() {
     }
@@ -47,7 +47,7 @@ public class EntityPerk extends Perk {
 
     @Override
     public void init() {
-        ArrayList<ENE> initialised = new ArrayList<ENE>();
+        ArrayList<ENE> initialised = new ArrayList<>();
         for (ENE object : this.entities) {
             object.entity = (Class) EntityList.ID_TO_CLASS.get(object.name);
             if (object.entity != null) {

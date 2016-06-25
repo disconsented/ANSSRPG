@@ -53,7 +53,7 @@ public class Default {
                     }},
                     "Allows you to mine Iron Ore",
                     new ArrayList<BNP>() {{
-                        this.add(new BNP("iron_ore", new HashMap<String, String>()));
+                        this.add(new BNP("iron_ore", new HashMap<>()));
                     }}));
 
             Default.perks.addPerk(new BlockPerk("Unlock: Lapis Ore",
@@ -62,7 +62,7 @@ public class Default {
                     }},
                     "Allows you to mine Lapis Ore",
                     new ArrayList<BNP>() {{
-                        this.add(new BNP("lapis_ore", new HashMap<String, String>()));
+                        this.add(new BNP("lapis_ore", new HashMap<>()));
                     }}));
 
             Default.perks.addPerk(new BlockPerk("Unlock: Gold Ore",
@@ -71,7 +71,7 @@ public class Default {
                     }},
                     "Allows you to mine Gold Ore",
                     new ArrayList<BNP>() {{
-                        this.add(new BNP("gold_ore", new HashMap<String, String>()));
+                        this.add(new BNP("gold_ore", new HashMap<>()));
                     }}));
 
             Default.perks.addPerk(new BlockPerk("Unlock: Redstone Ore",
@@ -80,7 +80,7 @@ public class Default {
                     }},
                     "Allows you to mine Redstone Ore",
                     new ArrayList<BNP>() {{
-                        this.add(new BNP("lit_redstone_ore", new HashMap<String, String>()));
+                        this.add(new BNP("lit_redstone_ore", new HashMap<>()));
                     }}));
 
             Default.perks.addPerk(new BlockPerk("Unlock: Diamond Ore",
@@ -89,7 +89,7 @@ public class Default {
                     }},
                     "Allows you to mine Diamond Ore",
                     new ArrayList<BNP>() {{
-                        this.add(new BNP("diamond_ore", new HashMap<String, String>()));
+                        this.add(new BNP("diamond_ore", new HashMap<>()));
                     }}));
 
             Default.perks.addPerk(new BlockPerk("Unlock: Emerald Ore",
@@ -98,7 +98,7 @@ public class Default {
                     }},
                     "Allows you to mine Emerald Ore",
                     new ArrayList<BNP>() {{
-                        this.add(new BNP("emerald_ore", new HashMap<String, String>()));
+                        this.add(new BNP("emerald_ore", new HashMap<>()));
                     }}));
 
             Default.perks.addPerk(new ItemPerk("Unlock: Gold Armour",

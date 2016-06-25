@@ -32,7 +32,7 @@ import java.util.HashMap;
  */
 public final class ToolRegistry {
 
-    private static final HashMap<String, Class> registry = new HashMap<String, Class>();
+    private static final HashMap<String, Class> registry = new HashMap<>();
 
     private ToolRegistry() {
     }

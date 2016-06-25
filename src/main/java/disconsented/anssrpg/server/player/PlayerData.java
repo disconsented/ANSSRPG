@@ -34,9 +34,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PlayerData {
-    private ArrayList<Slug> perkList = new ArrayList<Slug>();
-    private ArrayList<Slug> activePerks = new ArrayList<Slug>();
-    private HashMap<String, Integer> skillExp = new HashMap<String, Integer>();
+    private ArrayList<Slug> perkList = new ArrayList<>();
+    private ArrayList<Slug> activePerks = new ArrayList<>();
+    private HashMap<String, Integer> skillExp = new HashMap<>();
     private String playerID;
 
     public PlayerData(ArrayList<Slug> perkList, HashMap skillExp, String playerID, int points) {

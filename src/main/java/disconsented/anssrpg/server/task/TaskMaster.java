@@ -31,8 +31,8 @@ import java.util.Queue;
 
 public class TaskMaster {
     private static TaskMaster master;
-    private final Queue<Task> queue = new LinkedList<Task>();
-    private final Queue<Task> currentQueue = new LinkedList<Task>();
+    private final Queue<Task> queue = new LinkedList<>();
+    private final Queue<Task> currentQueue = new LinkedList<>();
 
     protected TaskMaster() {
     }

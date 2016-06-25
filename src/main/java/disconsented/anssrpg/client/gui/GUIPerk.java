@@ -42,7 +42,7 @@ import java.util.Map.Entry;
  * @author Disconsented
  */
 public class GUIPerk extends GuiScreen {
-    private final ArrayList<PerkInfo> info = new ArrayList<PerkInfo>();
+    private final ArrayList<PerkInfo> info = new ArrayList<>();
     private PerkList perkList;
     private PerkControls perkControls;
     private int page;

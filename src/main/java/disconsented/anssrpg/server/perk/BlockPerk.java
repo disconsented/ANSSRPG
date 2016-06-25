@@ -32,7 +32,7 @@ import java.util.ArrayList;
 public class BlockPerk extends Perk {
 
     @Expose
-    public ArrayList<BNP> blocks = new ArrayList<BNP>();
+    public ArrayList<BNP> blocks = new ArrayList<>();
 
     public BlockPerk() {
     }
@@ -45,7 +45,7 @@ public class BlockPerk extends Perk {
 
     @Override
     public void init() {
-        ArrayList<BNP> initialised = new ArrayList<BNP>();
+        ArrayList<BNP> initialised = new ArrayList<>();
         for (BNP object : this.blocks) {
             object.block = (Block) Block.REGISTRY.getObject(object.resourceLocation);
             if (object.block != null) {
