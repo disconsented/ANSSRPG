@@ -116,17 +116,16 @@ def shouldTag(silent){
 
     for (item in json) {
         if(item.tag_name == version){
-            System.setProperty("DEPLOY", "false")
             return false
         }
     }
-    System.setProperty("DEPLOY", "true")
     return true
 }
 
 //Task for setting the enviro var
 task shouldDeploy << {
-    shouldTag(true)
+    System.setProperty("DEPLOY", shouldTag(true).toString())
+    println(System.getProperty("DEPLOY"));
 }
 
 //Actual tagging task
