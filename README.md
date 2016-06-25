@@ -22,11 +22,7 @@ Effect Perks allow for effects (potion effects at this time) to be applied to pl
  1. Any crash reports.
  2. Console logs (both server.log and forge mod loader(fml) logs).
  3. All Config files .
-4. Create a github issue with the following information:
- * Description of the issue:
- * Steps to reproduce it (How do I make this happen?):
- * Steps taken to resolve it (Did I fix it? If so, How?):
- * The uploaded logs from step 3.
+4. Create a new github issue, be sure to fill out all the information possible!
 
 NOTE: If you're looking for help via IRC read [this](https://workaround.org/getting-help-on-irc).
 
