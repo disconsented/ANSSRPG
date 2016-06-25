@@ -20,8 +20,6 @@ script:
 
 after_success:
   - ./gradlew shouldDeploy -Ptoken=$TOKEN
-  - printenv $DEPLOY
-  - printenv DEPLOY
 
 before_deploy:
   - ./gradlew tagRelease -Pusr=$USER -Ppsw=$PASS -Ptoken=$TOKEN
