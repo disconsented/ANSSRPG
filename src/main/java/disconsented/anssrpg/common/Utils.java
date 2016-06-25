@@ -22,6 +22,8 @@ THE SOFTWARE.
  */
 package disconsented.anssrpg.common;
 
+import disconsented.anssrpg.server.common.Logging;
+
 import java.util.HashMap;
 import java.util.Map;
 
