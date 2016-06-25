@@ -7,16 +7,22 @@ cache:
     - .gradle
 sudo: false
 install: true
+
 branches:
-  only:
-    - master
-    - build
-    - DEV
+  except:
+    - /\d+\.\d+-v\d+\.\d+\.\d+/
 
 before_install:
   - sed -i 's/git:/https:/g' .git/config
+  - chmod +x ./gradlew
 script:
-  - gradle build tagRelease -Pusr=$USER -Ppsw=$PASS stats
+  - ./gradlew build check stats
+
+after_success:
+  - ./gradlew shouldDeploy -Ptoken=$TOKEN
+
+before_deploy:
+  - ./gradlew tagRelease -Pusr=$USER -Ppsw=$PASS -Ptoken=$TOKEN
 
 deploy:
   provider: releases
@@ -30,6 +36,7 @@ deploy:
   on:
     repo: disconsented/ANSSRPG
     all_branches: true
+    condition: $DEPLOY = true
     
 notifications:
  irc:

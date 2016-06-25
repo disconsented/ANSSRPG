@@ -12,12 +12,15 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
         classpath 'org.ajoberstar:gradle-git:1.2.0'
         classpath 'org.kordamp.gradle:stats-gradle-plugin:0.1.1'
     }
 }
 apply plugin: 'org.kordamp.gradle.stats'
+apply plugin: 'pmd'
+
+import groovy.json.JsonSlurper
 import org.ajoberstar.grgit.*
 
 ext.repo = Grgit.open(project.file('.'))
@@ -28,21 +31,23 @@ if (new File(projectDir, '.git').exists()) {
     gitHash = repo.log().find().abbreviatedId
 }
 
-apply plugin: 'forge'
+apply plugin: 'net.minecraftforge.gradle.forge'
 group = package_group
 
 archivesBaseName = mod_name
-def mod_version = "v${mod_version_major}.${mod_version_minor}."+gitHash
+def mod_version = "v${mod_version_major}.${mod_version_minor}.${mod_version_patch}"
 version = "${mc_version}-${mod_version}"
 
-
+pmd {
+    consoleOutput = true
+}
 
 minecraft {
     version = "${mc_version}-${forge_version}"
     runDir = "run"
 
     replace "@VERSION@", mod_version
-    mappings = "stable_16"
+    mappings = "snapshot_20160619"
     
 }
 
@@ -63,6 +68,7 @@ processResources {
         exclude '**/*.info'
         exclude '**/*.properties'
     }
+
 }
 
 targetCompatibility=8
@@ -79,17 +85,11 @@ jar {
     )
 }
 
-// Source Jar
-task sourceJar(type: Jar) {
-    from sourceSets.main.allSource
-    classifier = 'sources'
-}
-
 // Javadoc Jar
-/*task javadocJar(type: Jar, dependsOn: javadoc) {
+task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc.destinationDir
     classifier = 'javadoc'
-}*/
+}
 
 // Deobfuscated Jar
 task deobfJar(type: Jar) {
@@ -97,7 +97,7 @@ task deobfJar(type: Jar) {
     classifier = 'deobf'
 }
 
-tasks.build.dependsOn sourceJar, /*javadocJar,*/ deobfJar
+tasks.build.dependsOn sourceJar, javadocJar, deobfJar
 
 tasks.withType(JavaCompile) { task ->
     task.options.encoding = 'UTF-8'
@@ -106,17 +106,48 @@ tasks.withType(JavaCompile) { task ->
 //IDEA assets fix
 idea { module { inheritOutputDirs = true } }
 
+
+//Retrieves recent releases, if it finds the release tag on github it will skip the deployment
+def shouldTag(silent){
+    def p = new URL ("https://api.github.com/repos/${github_repo}/releases?access_token=${token}").text
+    def json = new JsonSlurper().parseText(p)
+    if(!silent)
+    println "Searching for " + version + " in ${github_repo}"
+
+    for (item in json) {
+        if(item.tag_name == version){
+            System.setProperty("DEPLOY", "false")
+            return false
+        }
+    }
+    System.setProperty("DEPLOY", "true")
+    return true
+}
+
+//Task for setting the enviro var
+task shouldDeploy << {
+    shouldTag(true)
+}
+
+//Actual tagging task
 task tagRelease {
     doLast {
-        System.setProperty("org.ajoberstar.grgit.auth.username","$usr")
-        System.setProperty("org.ajoberstar.grgit.auth.password","$psw")
-        repo.tag.add {
-            name = version
-            message = "Release of ${version} built against forge ${forge_version}"
-            pointsTo = gitHash
-        }
-        repo.push{
-            tags = true
+        if(shouldTag(false)) {
+            println "Releasing ${version}."
+            System.setProperty("org.ajoberstar.grgit.auth.username", "$usr")
+            System.setProperty("org.ajoberstar.grgit.auth.password", "$psw")
+            repo.tag.add {
+                name = version
+                message = "Release of ${version} built against forge ${forge_version}"
+                pointsTo = gitHash
+            }
+            repo.push {
+                tags = true
+            }
+        } else {
+            println "${version} already exists."
         }
     }
 }
+
+
