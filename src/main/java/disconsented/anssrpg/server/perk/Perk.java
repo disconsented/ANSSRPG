@@ -34,7 +34,7 @@ public abstract class Perk {
     @Expose
     public String name = "default_name";
     @Expose
-    public ArrayList<Requirement> requirements = new ArrayList<Requirement>();
+    public ArrayList<Requirement> requirements = new ArrayList<>();
     public Slug slug;//Not exposed as its made based on the resourceLocation
     @Expose
     public String description = "default_description";
@@ -94,7 +94,7 @@ public abstract class Perk {
         this.init();
         this.getSlug();
         if (requirements == null) {
-            requirements = new ArrayList<Requirement>();
+            requirements = new ArrayList<>();
         }
     }
 

@@ -35,7 +35,7 @@ import java.util.ArrayList;
 public class ItemPerk extends Perk {
 
     @Expose
-    public ArrayList<INM> items = new ArrayList<INM>();
+    public ArrayList<INM> items = new ArrayList<>();
 
     public ItemPerk() {
     }

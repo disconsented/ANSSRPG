@@ -38,13 +38,13 @@ import java.util.ArrayList;
 public class BlockSkill extends ToolSkill {
 
     @Expose
-    public ArrayList<BNEP> exp = new ArrayList<BNEP>();
+    public ArrayList<BNEP> exp = new ArrayList<>();
 
     @Override
     public void touchUp() {
         this.initTool();
 
-        ArrayList<BNEP> initialised = new ArrayList<BNEP>();
+        ArrayList<BNEP> initialised = new ArrayList<>();
         for (BNEP object : this.exp) {
             object.block = (Block) Block.REGISTRY.getObject(object.resourceLocation);
             if (object.block != null) {

@@ -35,7 +35,10 @@ import java.util.HashMap;
  *         Stores player's into a hashmap with the Key being their UUID
  */
 public class PlayerStore {
-    private static final HashMap<String, PlayerData> data = new HashMap<String, PlayerData>();
+    private static final HashMap<String, PlayerData> data = new HashMap<>();
+
+    private PlayerStore() {
+    }
 
     public static void addPlayer(PlayerData player) {
         data.put(player.getPlayerID(), player);

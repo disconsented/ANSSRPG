@@ -31,9 +31,9 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import java.util.ArrayList;
 
 public class PerkInfo implements IMessage {
-    private final ArrayList<String> names = new ArrayList<String>();
-    private final ArrayList<String> extraData = new ArrayList<String>();
-    private final ArrayList<Action> actions = new ArrayList<Action>();
+    private final ArrayList<String> names = new ArrayList<>();
+    private final ArrayList<String> extraData = new ArrayList<>();
+    private final ArrayList<Action> actions = new ArrayList<>();
     private String name;
     private String description;
     private ArrayList<Requirement> requirements;
@@ -63,7 +63,7 @@ public class PerkInfo implements IMessage {
         this.name = ByteBufUtils.readUTF8String(buf);
         this.description = ByteBufUtils.readUTF8String(buf);
         this.slug = ByteBufUtils.readUTF8String(buf);
-        this.requirements = new ArrayList<Requirement>();
+        this.requirements = new ArrayList<>();
         for (int i = 0; i < this.size; i++) {
             this.requirements.add(new Requirement(Action.valueOf(ByteBufUtils.readUTF8String(buf)), ByteBufUtils.readUTF8String(buf), ByteBufUtils.readUTF8String(buf)));
         }
@@ -94,7 +94,7 @@ public class PerkInfo implements IMessage {
 
 
     public ArrayList<Requirement> getRequirements() {
-        ArrayList<Requirement> req = new ArrayList<Requirement>();
+        ArrayList<Requirement> req = new ArrayList<>();
         for (int i = 0; i < this.names.size(); i++) {
             req.add(new Requirement(this.actions.get(i), this.names.get(i), this.extraData.get(i)));
         }

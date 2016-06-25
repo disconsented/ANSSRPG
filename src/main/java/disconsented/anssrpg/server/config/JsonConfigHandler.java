@@ -41,6 +41,9 @@ public class JsonConfigHandler {
     private static final File perkFile = new File("config/ANSSRPG", "perk.cfg");
     private static final File configFileLocation = new File("config/ANSSRPG");
 
+    private JsonConfigHandler() {
+    }
+
     public static void createPerkAndSkill() {
         JsonConfigHandler.createSkillConfig(null);
         JsonConfigHandler.createPerkConfig(null);

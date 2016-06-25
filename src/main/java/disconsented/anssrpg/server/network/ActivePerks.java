@@ -51,7 +51,7 @@ public class ActivePerks implements IMessage {
     @Override
     public void fromBytes(ByteBuf buf) {
         int i = buf.readInt();
-        this.activePerks = new ArrayList<String>();
+        this.activePerks = new ArrayList<>();
         for (int j = 0; j < i; j++) {
             this.activePerks.add(ByteBufUtils.readUTF8String(buf));
         }

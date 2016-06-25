@@ -30,6 +30,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Utils {
+    private Utils() {
+    }
+
     /**
      * Returns true if two storage are matched. If either Metadata is less than 0(-1) then it is treated as a wildcard (Metadata is ignored).
      *

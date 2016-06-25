@@ -35,6 +35,9 @@ import java.io.FileWriter;
 public class PlayerFile {
 
 
+    private PlayerFile() {
+    }
+
     /**
      * Reads all of the player data from a file.
      *

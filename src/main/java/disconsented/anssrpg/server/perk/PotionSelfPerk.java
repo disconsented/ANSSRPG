@@ -40,7 +40,7 @@ import java.util.ArrayList;
 public class PotionSelfPerk extends Perk implements ActivePerk {
 
     @Expose
-    public ArrayList<PotionDefinition> effects = new ArrayList<PotionDefinition>();
+    public ArrayList<PotionDefinition> effects = new ArrayList<>();
     @Expose
     public boolean repeat;
     @Expose

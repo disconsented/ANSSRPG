@@ -39,15 +39,15 @@ import java.util.HashMap;
  * Just stores and retrieves perks
  */
 public class PerkStore {
-    private static final ArrayList<Perk> perks = new ArrayList<Perk>();
+    private static final ArrayList<Perk> perks = new ArrayList<>();
     /*String needs to be a resourceLocation unique to each entity type*/
-    private static final HashMap<String, ArrayList<BlockPerk>> blockMap = new HashMap<String, ArrayList<BlockPerk>>();
-    private static final HashMap<String, ArrayList<EntityPerk>> entityMap = new HashMap<String, ArrayList<EntityPerk>>();
-    private static final HashMap<String, ArrayList<ItemPerk>> itemMap = new HashMap<String, ArrayList<ItemPerk>>();
-    private static final ArrayList<TitlePerk> titlePerks = new ArrayList<TitlePerk>();
-    private static final ArrayList<PotionSelfPerk> potionSelf = new ArrayList<PotionSelfPerk>();
+    private static final HashMap<String, ArrayList<BlockPerk>> blockMap = new HashMap<>();
+    private static final HashMap<String, ArrayList<EntityPerk>> entityMap = new HashMap<>();
+    private static final HashMap<String, ArrayList<ItemPerk>> itemMap = new HashMap<>();
+    private static final ArrayList<TitlePerk> titlePerks = new ArrayList<>();
+    private static final ArrayList<PotionSelfPerk> potionSelf = new ArrayList<>();
 
-    private static final HashMap<String, Perk> perksMap = new HashMap<String, Perk>();
+    private static final HashMap<String, Perk> perksMap = new HashMap<>();
     private static PerkStore instance;
 
     private PerkStore() {
@@ -124,7 +124,7 @@ public class PerkStore {
         if (cachePerkList != null) {
             cachePerkList.add(perk);
         } else {
-            ArrayList<t> newPerkList = new ArrayList<t>();
+            ArrayList<t> newPerkList = new ArrayList<>();
             newPerkList.add(perk);
             abstractMap.put(name, newPerkList);
         }
