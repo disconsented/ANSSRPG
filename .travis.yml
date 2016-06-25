@@ -16,7 +16,10 @@ before_install:
   - sed -i 's/git:/https:/g' .git/config
   - chmod +x ./gradlew
 script:
-  - ./gradlew build tagRelease -Pusr=$USER -Ppsw=$PASS -Ptoken=$TOKEN stats
+  - ./gradlew build check stats
+
+before_deploy:
+  - ./gradlew tagRelease -Pusr=$USER -Ppsw=$PASS -Ptoken=$TOKEN
 
 deploy:
   provider: releases

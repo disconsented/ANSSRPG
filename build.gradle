@@ -18,6 +18,7 @@ buildscript {
     }
 }
 apply plugin: 'org.kordamp.gradle.stats'
+apply plugin: 'pmd'
 
 import groovy.json.JsonSlurper
 import org.ajoberstar.grgit.*
@@ -37,7 +38,9 @@ archivesBaseName = mod_name
 def mod_version = "v${mod_version_major}.${mod_version_minor}.${mod_version_patch}"
 version = "${mc_version}-${mod_version}"
 
-
+pmd {
+    consoleOutput = true
+}
 
 minecraft {
     version = "${mc_version}-${forge_version}"
