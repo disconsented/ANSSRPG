@@ -33,6 +33,9 @@ import disconsented.anssrpg.server.skill.objects.Skill;
  */
 public class SkillHandler {
 
+    private SkillHandler() {
+    }
+
     public static double calculateExpForLevel(Skill skill, double level) {
         return SkillHandler.calculateExpForLevel(skill.base, level, skill.mod);
     }

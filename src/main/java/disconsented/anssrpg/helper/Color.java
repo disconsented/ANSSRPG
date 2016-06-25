@@ -20,25 +20,17 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-package disconsented.anssrpg.server.config.storage;
+package disconsented.anssrpg.helper;
 
-import com.google.gson.annotations.Expose;
-import net.minecraft.entity.Entity;
 
-/**
- * Struct like object for entities used for perks.
- * Stands for Entities, Name.
- *
- * @author Disconsented
- */
-public class EN {
-    //Not exposed to save on space in configs
-    public Class<Entity> entity;
-    @Expose
-    public String name = "";
+public class Color {
+    public static int black = 0xFF000000;
+    public static int white = 0xFFFFFFFF;
+    public static int greyLight = 0xFFC6C6C6;
+    public static int greyDark = 0xFF8B8B8B;
+    public static int greyDeep = 0xFF373737;
+    public static int brownPaper = 0xFFCAAF7A;
 
-    public EN(Class<Entity> entity, String name) {
-        this.entity = entity;
-        this.name = name;
+    private Color() {
     }
 }

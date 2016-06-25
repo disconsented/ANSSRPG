@@ -34,12 +34,15 @@ import java.io.FileWriter;
 
 public class PlayerFile {
 
-
     /**
      * Reads all of the player data from a file.
      *
      * @param playerID The playerId to load from disk.
      */
+
+    private PlayerFile() {
+    }
+
     public static void loadPlayer(String playerID) {
         File dataLocation = new File(Settings.getFolder(), playerID + ".json");
         if (dataLocation.exists()) {

@@ -32,4 +32,7 @@ public class Reference {
     public static final String VERSION = "@VERSION@";
     public static final String CLIENTPROXY = "disconsented.anssrpg.client.ClientProxy";
     public static final String COMMONPROXY = "disconsented.anssrpg.CommonProxy";
+
+    private Reference() {
+    }
 }

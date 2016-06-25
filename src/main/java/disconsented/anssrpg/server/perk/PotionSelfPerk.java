@@ -47,6 +47,7 @@ public class PotionSelfPerk extends Perk implements ActivePerk {
     public int cycle = 1;
     @Expose
     public int maxCycles = 10;
+
     public PotionSelfPerk(String name, ArrayList<Requirement> requirements, String description,
                           ArrayList<PotionDefinition> effects, boolean repeat, int cycle, int maxCycles) {
         super(name, requirements, description);
@@ -55,6 +56,7 @@ public class PotionSelfPerk extends Perk implements ActivePerk {
         this.effects = effects;
         this.maxCycles = maxCycles;
     }
+
     public PotionSelfPerk() {
     }
 
