@@ -66,12 +66,12 @@ public class ItemCrafting {
 
                 for (ItemSkill skill : skillStore) {
                     for (INME entry : skill.exp) {
-                        if (Utils.MatchObject(entry.item, entry.metadata, item, stack.getItemDamage())) {
-                            if (!PlayerHandler.hasPerk(playerData, perkList) && this.requiresPerk(perkList, item, stack.getItemDamage())) {
+                        if (Utils.MatchObject(entry.item, entry.metadata, item, stack.getItemDamage()) &&
+                            !PlayerHandler.hasPerk(playerData, perkList) && this.requiresPerk(perkList, item, stack.getItemDamage())) {
                                 entityPlayerMP.closeScreen();
                                 event.setResult(Event.Result.DENY);
                                 PlayerHandler.taskFail(entityPlayerMP);
-                            }
+
                         }
                     }
                 }

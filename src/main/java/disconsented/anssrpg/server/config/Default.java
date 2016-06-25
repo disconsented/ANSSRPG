@@ -223,7 +223,6 @@ public class Default {
             armouring.exp.add(new INME(null, "golden_chestplate", 0, 15));
             armouring.exp.add(new INME(null, "golden_leggings", 0, 15));
             armouring.exp.add(new INME(null, "golden_boots", 0, 15));
-            ;
             //Iron
             armouring.exp.add(new INME(null, "iron_helmet", 0, 20));
             armouring.exp.add(new INME(null, "iron_chestplate", 0, 20));
