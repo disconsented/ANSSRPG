@@ -22,25 +22,27 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg;
 
-import disconsented.anssrpg.client.ClientTick;
-import disconsented.anssrpg.client.commands.ANSSRPG;
-import disconsented.anssrpg.client.commands.GUIRegistry;
-import disconsented.anssrpg.server.Global;
-import disconsented.anssrpg.server.commands.Perks;
-import disconsented.anssrpg.server.commands.Skill;
-import disconsented.anssrpg.server.common.Logging;
-import disconsented.anssrpg.server.common.Reference;
-import disconsented.anssrpg.server.common.Settings;
-import disconsented.anssrpg.server.config.JsonConfigHandler;
-import disconsented.anssrpg.server.data.PerkStore;
-import disconsented.anssrpg.server.data.PlayerStore;
-import disconsented.anssrpg.server.data.ToolRegistry;
-import disconsented.anssrpg.server.event.FMLBUS;
-import disconsented.anssrpg.server.event.ForgeBUS;
-import disconsented.anssrpg.server.network.Manager;
-import disconsented.anssrpg.server.player.PlayerData;
-import disconsented.anssrpg.server.player.PlayerFile;
-import disconsented.anssrpg.server.skill.objects.BlockSkill;
+import disconsented.anssrpg.compat.tconstruct.test;
+import disconsented.anssrpg.core.Support;
+import disconsented.anssrpg.core.client.ClientTick;
+import disconsented.anssrpg.core.client.commands.ANSSRPG;
+import disconsented.anssrpg.core.client.commands.GUIRegistry;
+import disconsented.anssrpg.core.server.Global;
+import disconsented.anssrpg.core.server.commands.Perks;
+import disconsented.anssrpg.core.server.commands.Skill;
+import disconsented.anssrpg.core.server.common.Logging;
+import disconsented.anssrpg.core.server.common.Reference;
+import disconsented.anssrpg.core.server.common.Settings;
+import disconsented.anssrpg.core.server.config.JsonConfigHandler;
+import disconsented.anssrpg.core.server.data.PerkStore;
+import disconsented.anssrpg.core.server.data.PlayerStore;
+import disconsented.anssrpg.core.server.data.ToolRegistry;
+import disconsented.anssrpg.core.server.event.FMLBUS;
+import disconsented.anssrpg.core.server.event.ForgeBUS;
+import disconsented.anssrpg.core.server.network.Manager;
+import disconsented.anssrpg.core.server.player.PlayerData;
+import disconsented.anssrpg.core.server.player.PlayerFile;
+import disconsented.anssrpg.core.server.skill.objects.BlockSkill;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -86,9 +88,12 @@ public class Main {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, Main.proxy);
         Main.proxy.registerRenderers();
         MinecraftForge.EVENT_BUS.register(new ForgeBUS());
+        MinecraftForge.EVENT_BUS.register(new test());
         FMLCommonHandler.instance().bus().register(new ClientTick());
         FMLCommonHandler.instance().bus().register(new FMLBUS());
         ToolRegistry.init();
+
+        Support.loadMods();
     }
 
     @Mod.EventHandler
@@ -114,8 +119,10 @@ public class Main {
     public void postInit(FMLPostInitializationEvent event) throws Exception {
         if (Settings.isExternalConfig()) {
             JsonConfigHandler.loadPerkAndSkill();
+            Support.loadExternalConfig();
         } else {
             JsonConfigHandler.loadInternalConfig();
+            Support.loadInternalConfig();
         }
 
         if (Settings.getDebug()) {
@@ -123,6 +130,6 @@ public class Main {
             Logging.debug(PerkStore.getInstance().getPerks());
         }
 
-        BlockSkill temp = new BlockSkill();
+
     }
 }

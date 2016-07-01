@@ -62,7 +62,6 @@ public class RequestHandler implements IMessageHandler<Request, IMessage> {
                 }
                 break;
             case SKILLS:
-                SkillStore skillStore = SkillStore.getInstance();
                 for (Map.Entry<String, Integer> entry : playerData.getSkillExp().entrySet()) {
                     for (Skill skill : SkillStore.getSkills()) {
                         if (entry.getKey().equals(skill.name)) {

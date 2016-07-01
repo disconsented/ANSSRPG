@@ -27,6 +27,7 @@ package disconsented.anssrpg.core.server.perk;
 
 import com.google.gson.annotations.Expose;
 import disconsented.anssrpg.core.server.common.Logging;
+import disconsented.anssrpg.core.server.config.storage.EN;
 import disconsented.anssrpg.core.server.config.storage.ENE;
 import net.minecraft.entity.EntityList;
 
@@ -34,22 +35,22 @@ import java.util.ArrayList;
 
 public class EntityPerk extends Perk {
     @Expose
-    public ArrayList<ENE> entities = new ArrayList<>();
+    public ArrayList<EN> entities = new ArrayList<>();
 
     public EntityPerk() {
     }
 
     public EntityPerk(String name, ArrayList<Requirement> requirements,
-                      String description, ArrayList<ENE> entities) {
+                      String description, ArrayList<EN> entities) {
         super(name, requirements, description);
         this.entities = entities;
     }
 
     @Override
     public void init() {
-        ArrayList<ENE> initialised = new ArrayList<>();
-        for (ENE object : this.entities) {
-            object.entity = (Class) EntityList.ID_TO_CLASS.get(object.name);
+        ArrayList<EN> initialised = new ArrayList<>();
+        for (EN object : this.entities) {
+            object.entity = (Class) EntityList.NAME_TO_CLASS.get(object.name);
             if (object.entity != null) {
                 Logging.debug(object.name + " has been found. Passing on.");
                 initialised.add(object);

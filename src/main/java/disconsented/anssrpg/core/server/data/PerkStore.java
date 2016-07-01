@@ -23,6 +23,7 @@ THE SOFTWARE.
 package disconsented.anssrpg.core.server.data;
 
 import disconsented.anssrpg.core.server.config.storage.BNP;
+import disconsented.anssrpg.core.server.config.storage.EN;
 import disconsented.anssrpg.core.server.config.storage.ENE;
 import disconsented.anssrpg.core.server.config.storage.INM;
 import disconsented.anssrpg.core.server.perk.*;
@@ -152,7 +153,7 @@ public class PerkStore {
      */
     public static void putPerk(EntityPerk entity) {
         PerkStore.perks.add(entity);
-        for (ENE object : entity.entities) {
+        for (EN object : entity.entities) {
             Class<Entity> cache = object.entity;
             PerkStore.putPerk(PerkStore.entityMap, entity, cache.getSimpleName());
         }

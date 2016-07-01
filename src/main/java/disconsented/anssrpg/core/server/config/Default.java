@@ -142,8 +142,8 @@ public class Default {
                         this.add(new Requirement(Requirement.Action.LEVEL_GREATER, "Slaying", "4"));
                     }},
                     "Allows Creepers to be killed",
-                    new ArrayList<ENE>() {{
-                        this.add(new ENE(null, "Creeper", 0));
+                    new ArrayList<EN>() {{
+                        this.add(new EN(null, "Creeper"));
                     }}));
 
             Default.perks.addPerk(new PotionSelfPerk("Health boost", null, "Provides a 10 second shield",

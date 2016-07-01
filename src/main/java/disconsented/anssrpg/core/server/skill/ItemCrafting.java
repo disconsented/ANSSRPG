@@ -62,7 +62,7 @@ public class ItemCrafting {
                 Item item = stack.getItem();
                 PlayerData playerData = PlayerStore.getPlayer(entityPlayerMP);
                 ArrayList<ItemPerk> perkList = PerkStore.getPerks(item);
-                ArrayList<ItemSkill> skillStore = SkillStore.getInstance().getItemSkill();
+                ArrayList<ItemSkill> skillStore = SkillStore.getItemSkill();
 
                 for (ItemSkill skill : skillStore) {
                     for (INME entry : skill.exp) {
@@ -86,7 +86,7 @@ public class ItemCrafting {
             ItemStack stack = event.crafting;
             Item item = stack.getItem();
             PlayerData playerData = PlayerStore.getPlayer(player);
-            ArrayList<ItemSkill> skillStore = SkillStore.getInstance().getItemSkill();
+            ArrayList<ItemSkill> skillStore = SkillStore.getItemSkill();
 
             for (ItemSkill skill : skillStore) {
                 for (INME entry : skill.exp) {

@@ -39,7 +39,6 @@ public class Settings {
     private static boolean logging = true;
     private static String statusMessage = "null";
     private static boolean externalConfig;
-    private static boolean requiredOnClient = true;
     private static boolean blockFakePlayers = true;
     /**
      * 0 - Disabled
@@ -109,7 +108,6 @@ public class Settings {
         Settings.debug = config.get(Settings.misc, "enableDebugMode", false, "Enables debugging features. Meant for development use.").getBoolean();
         Settings.logging = config.get(Settings.misc, "enableLogging", true, "Enables logging to console.").getBoolean();
         Settings.externalConfig = config.get(Settings.misc, "useExternalConfig", false, "Use config files instead of default internal configs").getBoolean();
-        Settings.requiredOnClient = config.get(Settings.misc, "requiredOnClient", true, "Clients require the mod to be able to connect to the server").getBoolean();
 
         config.save();
     }

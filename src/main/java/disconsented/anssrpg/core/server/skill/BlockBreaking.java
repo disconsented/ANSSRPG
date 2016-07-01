@@ -60,7 +60,7 @@ public class BlockBreaking {
             EntityPlayerMP player = (EntityPlayerMP) event.getPlayer();
             PlayerData playerData = PlayerStore.getPlayer(player);
             ArrayList<BlockPerk> perkList = PerkStore.getPerks(block);
-            ArrayList<BlockSkill> skillStore = SkillStore.getInstance().getBlockSkill();
+            ArrayList<BlockSkill> skillStore = SkillStore.getBlockSkill();
 
             for (BlockSkill skill : skillStore) {
                 for (BNEP entry : skill.exp) {

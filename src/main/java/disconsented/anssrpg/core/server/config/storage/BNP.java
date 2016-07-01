@@ -41,12 +41,14 @@ public class BNP {
     public ResourceLocation resourceLocation;
     @Expose
     public Map<String, String> properties = new HashMap<>();
+    @Expose
     private String name = "";
 
     public BNP() {
     }
     public BNP(String name, Map<String, String> properties) {
         this.resourceLocation = new ResourceLocation(name);
+        this.name = name;
         this.properties = properties;
     }
 }

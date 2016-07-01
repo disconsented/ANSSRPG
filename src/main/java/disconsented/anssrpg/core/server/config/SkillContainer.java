@@ -68,7 +68,7 @@ public class SkillContainer {
         this.blocks = block;
     }
 
-    public void touchUp() {
+    public void init() {
         ArrayList<Skill> skills = new ArrayList<>();
         skills.addAll(this.blocks);
         skills.addAll(this.entites);

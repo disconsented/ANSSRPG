@@ -29,6 +29,7 @@ package disconsented.anssrpg.core.server.skill;
 import disconsented.anssrpg.core.server.common.Logging;
 import disconsented.anssrpg.core.server.common.Settings;
 import disconsented.anssrpg.core.server.common.Utils;
+import disconsented.anssrpg.core.server.config.storage.EN;
 import disconsented.anssrpg.core.server.config.storage.ENE;
 import disconsented.anssrpg.core.server.data.PerkStore;
 import disconsented.anssrpg.core.server.data.PlayerStore;
@@ -55,7 +56,7 @@ public class EntityDamage {
             EntityPlayerMP player = (EntityPlayerMP) event.getSource().getEntity();
             PlayerData playerData = PlayerStore.getPlayer(player);
             ArrayList<EntityPerk> perkList = PerkStore.getPerks(event.getSource().getEntity().getClass());
-            ArrayList<EntitySkill> skillStore = SkillStore.getInstance().getEntitySkill();
+            ArrayList<EntitySkill> skillStore = SkillStore.getEntitySkill();
 
             for (EntitySkill skill : skillStore) {
                 for (ENE entry : skill.exp) {
@@ -95,7 +96,7 @@ public class EntityDamage {
             EntityPlayerMP player = (EntityPlayerMP) event.getSource().getEntity();
             PlayerData playerData = PlayerStore.getPlayer(player);
             ArrayList<EntityPerk> perkList = PerkStore.getPerks(event.getSource().getEntity().getClass());
-            ArrayList<EntitySkill> skillStore = SkillStore.getInstance().getEntitySkill();
+            ArrayList<EntitySkill> skillStore = SkillStore.getEntitySkill();
 
 
             for (EntitySkill skill : skillStore) {
@@ -114,7 +115,7 @@ public class EntityDamage {
     private boolean requiresPerk(ArrayList<EntityPerk> perkList, Entity entity) {
         if (perkList != null) {
             for (EntityPerk perk : perkList) {
-                for (ENE definition : perk.entities) {
+                for (EN definition : perk.entities) {
                     if (Utils.MatchObject(definition.entity, entity.getClass())) {
                         return true;
                     }

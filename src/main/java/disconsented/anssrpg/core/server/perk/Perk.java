@@ -35,7 +35,7 @@ public abstract class Perk {
     public String name = "default_name";
     @Expose
     public ArrayList<Requirement> requirements = new ArrayList<>();
-    public Slug slug;//Not exposed as its made based on the resourceLocation
+    public Slug slug;//Not exposed as its made based on the name
     @Expose
     public String description = "default_description";
 

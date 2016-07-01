@@ -41,6 +41,7 @@ public class INM {
     public INM(Item item, String name, int metadata) {
         this.item = item;
         this.resourceLocation = new ResourceLocation(name);
+        this.name = name;
         this.metadata = metadata;
     }
 

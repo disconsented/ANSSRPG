@@ -43,6 +43,7 @@ public class INME {
     public INME(Item item, String name, int metadata, int experience) {
         this.item = item;
         this.resourceLocation = new ResourceLocation(name);
+        this.name = name;
         this.metadata = metadata;
         this.experience = experience;
     }

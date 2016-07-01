@@ -22,10 +22,10 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg;
 
-import disconsented.anssrpg.client.gui.DummyContainer;
-import disconsented.anssrpg.client.gui.GUIExperience;
-import disconsented.anssrpg.client.gui.GUIPerk;
-import disconsented.anssrpg.client.gui.GUIStatus;
+import disconsented.anssrpg.core.client.gui.DummyContainer;
+import disconsented.anssrpg.core.client.gui.GUIExperience;
+import disconsented.anssrpg.core.client.gui.GUIPerk;
+import disconsented.anssrpg.core.client.gui.GUIStatus;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;

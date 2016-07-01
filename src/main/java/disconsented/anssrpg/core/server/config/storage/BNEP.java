@@ -44,13 +44,14 @@ public class BNEP {
     @Expose
     public Map<String, String> properties = new HashMap<>();
     @Expose
-    String name = "";
+    private String name = "";
 
     public BNEP() {
     }
 
     public BNEP(String resourceLocation, int experience, Map<String, String> properties) {
         this.resourceLocation = new ResourceLocation(resourceLocation);
+        this.name = resourceLocation;
         this.experience = experience;
         this.properties = properties;
     }

@@ -23,6 +23,13 @@ apply plugin: 'pmd'
 import groovy.json.JsonSlurper
 import org.ajoberstar.grgit.*
 
+repositories {
+    maven {
+        name 'DVS1 Maven FS'
+        url 'http://dvs1.progwml6.com/files/maven'
+    }
+}
+
 ext.repo = Grgit.open(project.file('.'))
 
 def gitHash = 'unknown'
@@ -47,12 +54,14 @@ minecraft {
     runDir = "run"
 
     replace "@VERSION@", mod_version
-    mappings = "snapshot_20160619"
+    mappings = mappings_version
     
 }
 
-
-
+dependencies {
+    deobfCompile "slimeknights.mantle:Mantle:1.9.4-0.10.1.jenkins142"
+    deobfCompile "slimeknights:TConstruct:1.9.4-2.3.1.jenkins229"
+}
 
 processResources {
     inputs.property "version", project.version

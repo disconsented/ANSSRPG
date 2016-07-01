@@ -26,6 +26,7 @@ package disconsented.anssrpg.core.server.config;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import disconsented.anssrpg.compat.CompatContainer;
 import disconsented.anssrpg.core.server.common.Logging;
 
 import java.io.*;
@@ -37,6 +38,7 @@ import java.lang.reflect.Type;
  */
 
 public class JsonConfigHandler {
+    private static final String suffix = ".cfg";
     private static final File skillFile = new File("config/ANSSRPG", "skill.cfg");
     private static final File perkFile = new File("config/ANSSRPG", "perk.cfg");
     private static final File configFileLocation = new File("config/ANSSRPG");
@@ -119,7 +121,7 @@ public class JsonConfigHandler {
             isReader.close();
 
             if (perkStore != null) {
-                perkStore.touchUp();
+                perkStore.init();
             }
         } catch (FileNotFoundException e) {
             JsonConfigHandler.createPerkConfig(null);
@@ -141,7 +143,7 @@ public class JsonConfigHandler {
             isReader.close();
 
             if (skillStore != null) {
-                skillStore.touchUp();
+                skillStore.init();
             }
         } catch (FileNotFoundException e) {
             JsonConfigHandler.createSkillConfig(null);
@@ -153,9 +155,44 @@ public class JsonConfigHandler {
     public static void loadInternalConfig() {
         PerkContainer perkContainer = Default.getPerkInstance();
         SkillContainer skillContainer = Default.getSkillInstance();
-        perkContainer.touchUp();
-        skillContainer.touchUp();
+        perkContainer.init();
+        skillContainer.init();
         createPerkConfig(perkContainer);
         createSkillConfig(skillContainer);
+    }
+
+    public static void writeCompat(CompatContainer container){
+        try {
+            JsonConfigHandler.configFileLocation.mkdirs();
+            Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().serializeNulls().create();
+                Writer osWriter = new OutputStreamWriter(new FileOutputStream(
+                        new File(configFileLocation, container.getConfigPrefix()+suffix)));
+            gson.toJson(container, osWriter);
+            osWriter.close();
+
+        } catch (Exception e) {
+            Logging.error("Exception when creating compat config");
+            Logging.error(e.getLocalizedMessage());
+        }
+    }
+
+    public static void readCompat(CompatContainer container){
+        try {
+            Gson gson = new Gson();
+            Type objectStoreType = new TypeToken<Container>() {
+            }.getType();
+            Reader isReader = new InputStreamReader(new FileInputStream(new File(configFileLocation, container.getConfigPrefix()+suffix)));
+            Container readContainer = gson.fromJson(isReader, objectStoreType);
+            isReader.close();
+
+            if (readContainer != null) {
+                readContainer.init();
+            }
+        } catch (FileNotFoundException e) {
+                writeCompat(container);
+        } catch (IOException iox) {
+            iox.printStackTrace();
+        }
+
     }
 }

@@ -1,43 +1,51 @@
 /*
- * The MIT License (MIT)
- * Copyright (c) $year Disconsented, James Kerr
+ * Copyright (c)  2015-2016, James Kerr
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
-package disconsented.anssrpg.core.server.config.storage;
+
+package disconsented.anssrpg.compat.tconstruct;
 
 import com.google.gson.annotations.Expose;
-import net.minecraft.potion.Potion;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.item.Item;
 
 /**
- * @author Disconsented
+ * Created by jpmke on 29/06/2016.
  */
-public class PotionDefinition {
-    public ResourceLocation resourceLocation;
-    public Potion potion;
+public class MaterialDefinitionSkill {
+
     @Expose
-    public String name = "";
+    public String material = "";
+
     @Expose
-    public int amplifier;
+    public int exp;
+
     @Expose
-    public int duration;
-    public PotionDefinition(String name, int amplifier, int duration) {
-        this.resourceLocation = new ResourceLocation(name);
-        this.amplifier = amplifier;
-        this.duration = duration;
+    public boolean isMaterial;
+
+    public Item item;
+
+    public MaterialDefinitionSkill(){}
+
+    public MaterialDefinitionSkill(String material, int exp, boolean isMaterial){
+        this.material = material;
+        this.exp = exp;
+        this.isMaterial = isMaterial;
     }
 }

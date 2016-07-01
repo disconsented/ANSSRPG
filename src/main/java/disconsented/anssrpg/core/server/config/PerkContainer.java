@@ -36,7 +36,7 @@ import java.util.ArrayList;
  * @author Abelistah
  * @author Disconsented
  */
-public class PerkContainer {
+public class PerkContainer extends Container{
     @Expose
     private final ArrayList<ItemPerk> items = new ArrayList<>();
     @Expose
@@ -83,7 +83,8 @@ public class PerkContainer {
         this.selfPotion.add(effect);
     }
 
-    public void touchUp() {
+    @Override
+    public void init() {
         for (ItemPerk item : this.items) {
             item.touchUp();
             if (item.items != null) {
@@ -130,4 +131,5 @@ public class PerkContainer {
             }
         }
     }
+
 }
