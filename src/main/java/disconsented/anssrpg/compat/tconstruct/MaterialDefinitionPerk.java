@@ -36,7 +36,7 @@ public class MaterialDefinitionPerk {
     @Expose
     public boolean isMaterial;
 
-    public Item item;
+    public transient Item item;
 
     public MaterialDefinitionPerk(){}
 

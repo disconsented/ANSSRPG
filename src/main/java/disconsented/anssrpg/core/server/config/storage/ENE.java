@@ -33,7 +33,7 @@ import net.minecraft.entity.Entity;
  */
 public class ENE {
     //Not exposed to save on space in configs
-    public Class<Entity> entity;
+    public transient Class<Entity> entity;
     @Expose
     public String name = "";
     @Expose

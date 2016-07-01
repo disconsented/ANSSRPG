@@ -27,8 +27,8 @@ import net.minecraft.util.ResourceLocation;
  * @author Disconsented
  */
 public class PotionDefinition {
-    public ResourceLocation resourceLocation;
-    public Potion potion;
+    public transient ResourceLocation resourceLocation;
+    public transient Potion potion;
     @Expose
     public String name = "";
     @Expose

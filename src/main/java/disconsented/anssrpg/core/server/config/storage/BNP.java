@@ -37,8 +37,8 @@ import java.util.Map;
  */
 public class BNP {
 
-    public Block block;
-    public ResourceLocation resourceLocation;
+    public transient Block block;
+    public transient ResourceLocation resourceLocation;
     @Expose
     public Map<String, String> properties = new HashMap<>();
     @Expose
@@ -47,7 +47,7 @@ public class BNP {
     public BNP() {
     }
     public BNP(String name, Map<String, String> properties) {
-        this.resourceLocation = new ResourceLocation(name);
+        //this.resourceLocation = new ResourceLocation(name);
         this.name = name;
         this.properties = properties;
     }

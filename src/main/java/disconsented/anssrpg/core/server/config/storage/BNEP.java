@@ -37,8 +37,8 @@ import java.util.Map;
  */
 public class BNEP {
 
-    public Block block;
-    public ResourceLocation resourceLocation;
+    public transient  Block block;
+    public transient  ResourceLocation resourceLocation;
     @Expose
     public int experience;
     @Expose
