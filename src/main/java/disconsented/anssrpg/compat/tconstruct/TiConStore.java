@@ -22,6 +22,7 @@
 
 package disconsented.anssrpg.compat.tconstruct;
 
+import disconsented.anssrpg.core.server.data.PerkStore;
 import disconsented.anssrpg.core.server.data.SkillStore;
 
 import java.util.ArrayList;
@@ -29,12 +30,25 @@ import java.util.ArrayList;
 /**
  * Created by jpmke on 28/06/2016.
  */
-public class TiConStore extends SkillStore {
+public class TiConStore{
     private TiConStore() {
         super();
     }
 
-    private ArrayList<PerkForge> perkForgeArrayList = new ArrayList<>();
+    private static final ArrayList<PerkForge> perkForgeArrayList = new ArrayList<>();
 
-    private ArrayList<SkillStore> skillStoreArrayList = new ArrayList<>();
+    private static final ArrayList<SkillForge> skillStoreArrayList = new ArrayList<>();
+
+    //Package local as I don't want this to be accessed elsewhere
+   static void addPerk(PerkForge perkForge){
+       PerkStore.addPerk(perkForge);
+       perkForgeArrayList.add(perkForge);
+   }
+
+    static void addSkill(SkillForge skillForge){
+        SkillStore.addSkill(skillForge);
+        skillStoreArrayList.add(skillForge);
+    }
+
+
 }

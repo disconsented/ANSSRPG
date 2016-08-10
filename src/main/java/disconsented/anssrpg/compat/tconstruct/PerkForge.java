@@ -23,8 +23,10 @@
 package disconsented.anssrpg.compat.tconstruct;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import disconsented.anssrpg.core.server.common.Logging;
 import disconsented.anssrpg.core.server.perk.Perk;
+import disconsented.anssrpg.core.server.perk.Requirement;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
@@ -36,6 +38,14 @@ import java.util.ArrayList;
 public class PerkForge extends Perk{
     @Expose
     public ArrayList<MaterialDefinitionPerk> materialDefinitionPerkArrayList = new ArrayList<>();
+
+    public PerkForge(){}
+
+    public PerkForge(String name, ArrayList<Requirement> requirements, String description, ArrayList<MaterialDefinitionPerk> materialDefinitionPerkArrayList) {
+        super(name, requirements, description);
+        this.materialDefinitionPerkArrayList = materialDefinitionPerkArrayList;
+    }
+
     @Override
     public void init() {
         ArrayList<MaterialDefinitionPerk> initialised = new ArrayList<>();

@@ -36,7 +36,11 @@ public class TiCon extends CompatContainer{
     }
 
     @Override
-    public Container getContainer() {
-        return new TiConContainer();
+    public Container getContainer(boolean fill) {
+        TiConContainer container = new TiConContainer();
+        if(fill) {
+            container.fill();
+        }
+        return container;
     }
 }

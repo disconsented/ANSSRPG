@@ -25,12 +25,20 @@ package disconsented.anssrpg.core.server.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
 import com.google.gson.reflect.TypeToken;
 import disconsented.anssrpg.compat.CompatContainer;
+import disconsented.anssrpg.compat.tconstruct.MaterialDefinitionPerk;
+import disconsented.anssrpg.compat.tconstruct.PerkForge;
+import disconsented.anssrpg.compat.tconstruct.TiCon;
+import disconsented.anssrpg.compat.tconstruct.TiConContainer;
 import disconsented.anssrpg.core.server.common.Logging;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 /**
  * @author Disconsented, Abelistah
@@ -113,7 +121,7 @@ public class JsonConfigHandler {
      */
     private static void loadPerkConfig() {
         try {
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
             Type objectStoreType = new TypeToken<PerkContainer>() {
             }.getType();
             Reader isReader = new InputStreamReader(new FileInputStream(JsonConfigHandler.perkFile));
@@ -161,13 +169,13 @@ public class JsonConfigHandler {
         createSkillConfig(skillContainer);
     }
 
-    public static void writeCompat(CompatContainer container){
+    public static void writeCompat(CompatContainer container, boolean fill){
         try {
             JsonConfigHandler.configFileLocation.mkdirs();
             Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().serializeNulls().create();
                 Writer osWriter = new OutputStreamWriter(new FileOutputStream(
                         new File(configFileLocation, container.getConfigPrefix()+suffix)));
-            gson.toJson(container, osWriter);
+            gson.toJson(container.getContainer(fill), osWriter);
             osWriter.close();
 
         } catch (Exception e) {
@@ -182,17 +190,16 @@ public class JsonConfigHandler {
             Type objectStoreType = new TypeToken<Container>() {
             }.getType();
             Reader isReader = new InputStreamReader(new FileInputStream(new File(configFileLocation, container.getConfigPrefix()+suffix)));
-            Container readContainer = gson.fromJson(isReader, objectStoreType);
+            Container readContainer = gson.fromJson(isReader, container.getContainer(false).getClass());
             isReader.close();
 
             if (readContainer != null) {
                 readContainer.init();
             }
         } catch (FileNotFoundException e) {
-                writeCompat(container);
+                writeCompat(container, true);
         } catch (IOException iox) {
             iox.printStackTrace();
         }
-
     }
 }

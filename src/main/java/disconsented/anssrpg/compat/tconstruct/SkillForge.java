@@ -37,6 +37,11 @@ public class SkillForge extends Skill {
     @Expose
     public ArrayList<MaterialDefinitionSkill> materialDefinitionSkillArrayList = new ArrayList<>();
 
+    public SkillForge(String name, int base, float mod, ArrayList<MaterialDefinitionSkill> materialDefinitionSkillArrayList) {
+        super(name, base, mod);
+        this.materialDefinitionSkillArrayList = materialDefinitionSkillArrayList;
+    }
+
     @Override
     public void touchUp() {
         ArrayList<MaterialDefinitionSkill> initialised = new ArrayList<>();

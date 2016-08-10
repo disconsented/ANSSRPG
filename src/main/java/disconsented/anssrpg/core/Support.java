@@ -43,7 +43,7 @@ public class Support {
 
     public static void loadInternalConfig(){
         containers.forEach(container -> {
-            container.getContainer().init();
+            container.getContainer(true).init();
             Logging.debug("Loading internal config for " + container.getName());
         });
     }

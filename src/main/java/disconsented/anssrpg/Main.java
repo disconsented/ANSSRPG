@@ -129,7 +129,5 @@ public class Main {
             Logging.debug("ANSSRPG has the following perks registered");
             Logging.debug(PerkStore.getInstance().getPerks());
         }
-
-
     }
 }

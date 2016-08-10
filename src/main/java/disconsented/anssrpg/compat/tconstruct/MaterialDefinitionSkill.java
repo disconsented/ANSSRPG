@@ -23,12 +23,13 @@
 package disconsented.anssrpg.compat.tconstruct;
 
 import com.google.gson.annotations.Expose;
+import disconsented.anssrpg.core.server.skill.objects.Skill;
 import net.minecraft.item.Item;
 
 /**
  * Created by jpmke on 29/06/2016.
  */
-public class MaterialDefinitionSkill {
+public class MaterialDefinitionSkill{
 
     @Expose
     public String material = "";

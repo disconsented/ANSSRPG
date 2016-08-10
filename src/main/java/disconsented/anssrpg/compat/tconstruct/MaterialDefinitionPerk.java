@@ -23,12 +23,13 @@
 package disconsented.anssrpg.compat.tconstruct;
 
 import com.google.gson.annotations.Expose;
+import disconsented.anssrpg.core.server.perk.Perk;
 import net.minecraft.item.Item;
 
 /**
  * Created by jpmke on 29/06/2016.
  */
-public class MaterialDefinitionPerk {
+public class MaterialDefinitionPerk{
 
     @Expose
     public String material = "";

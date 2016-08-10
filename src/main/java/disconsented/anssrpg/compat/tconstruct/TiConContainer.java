@@ -23,6 +23,7 @@
 package disconsented.anssrpg.compat.tconstruct;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import disconsented.anssrpg.core.server.config.Container;
 import disconsented.anssrpg.core.server.data.SkillStore;
 
@@ -32,24 +33,35 @@ import java.util.ArrayList;
  * Created by jpmke on 29/06/2016.
  */
 public class TiConContainer extends Container{
-
+    @SerializedName("Perks")
     @Expose
-    private ArrayList<PerkForge> perkForgeArrayList = new ArrayList<>();
+    public final ArrayList<PerkForge> perkForgeArrayList = new ArrayList<>();
 
+    @SerializedName("Skills")
     @Expose
-    private ArrayList<SkillForge> skillStoreArrayList = new ArrayList<>();
+    public final ArrayList<SkillForge> skillStoreArrayList = new ArrayList<>();
 
-    public TiConContainer(){
-        perkForgeArrayList.add(new PerkForge(){{materialDefinitionPerkArrayList.add(
-                new MaterialDefinitionPerk("iron", true)
-        );}});
-        skillStoreArrayList.add(new SkillForge(){{materialDefinitionSkillArrayList.add(
-                new MaterialDefinitionSkill("iron", 10, true)
-        );}});
-    }
+    public TiConContainer(){}
 
     @Override
     public void init() {
+       fill();
+    }
+
+    void fill(){
+        perkForgeArrayList.clear();
+        skillStoreArrayList.clear();
+
+        perkForgeArrayList.add(new PerkForge("Blacksmithing", null, "Example Tinkers Construct support perk. Allows for the use of iron.", new ArrayList<MaterialDefinitionPerk>(){{
+            add(new MaterialDefinitionPerk("iron", false));
+            add(new MaterialDefinitionPerk("diamond", false));
+        }}));
+
+        skillStoreArrayList.add(new SkillForge("Blacksmithing", 1, 1, new ArrayList<MaterialDefinitionSkill>(){{
+            add(new MaterialDefinitionSkill("iron", 10, false));
+            add(new MaterialDefinitionSkill("diamond", 100, false));
+        }}));
+
 
     }
 }

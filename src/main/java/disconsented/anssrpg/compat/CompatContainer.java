@@ -31,16 +31,17 @@ import disconsented.anssrpg.core.server.data.*;
  */
 public abstract class CompatContainer {
     protected String name;
+
     protected String configPrefix;
-    /*
-    Name - For checking is loaded
-    Config prefix
-    Store reference
-     */
-    public abstract Container getContainer();
+
+    public CompatContainer (){}
+
+    public abstract Container getContainer(boolean fill);
 
     public String getConfigPrefix(){
         return configPrefix;
     }
     public String getName() { return name; }
+
+
 }

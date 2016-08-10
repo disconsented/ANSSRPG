@@ -41,6 +41,12 @@ public abstract class Skill {
     @Expose
     public int base = 100;
 
+    public Skill(String name, int base, float mod) {
+        this.name = name;
+        this.base = base;
+        this.mod = mod;
+    }
+
     @Expose
     public float mod = 1;
 

@@ -45,6 +45,10 @@ public class SkillStore {
 
     protected SkillStore() {/* Exists only to defeat instantiation.*/}
 
+    public static void addSkill(Skill skill){
+        SkillStore.skills.add(skill);
+    }
+
     public static void addSkill(BlockSkill skill) {
         SkillStore.blockSkill.add(skill);
         SkillStore.skills.add(skill);

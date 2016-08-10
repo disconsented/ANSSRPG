@@ -22,24 +22,59 @@
 
 package disconsented.anssrpg.compat.tconstruct;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import disconsented.anssrpg.core.server.common.Logging;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.player.PlayerOpenContainerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.tools.ToolPart;
+import slimeknights.tconstruct.tools.inventory.ContainerToolForge;
 
 public class test {
     public test(){}
 
     @SubscribeEvent
     public void onPlayerOpenCrafting(PlayerOpenContainerEvent event) {
-        if (event.getEntity() instanceof EntityPlayerMP) {
-            EntityPlayerMP entityPlayerMP = (EntityPlayerMP) event.getEntity();
-        }
+
+
+        EntityPlayer player = event.getEntityPlayer();
+
+            if(player.openContainer instanceof ContainerToolForge && !player.worldObj.isRemote){
+                if(player.openContainer.getSlot(0) != null){
+
+                    Boolean isEmpty = true;
+                    for (int i = 0; i < 6; i++) {
+                        ItemStack itemStack = player.openContainer.getInventory().get(i);
+                        if(itemStack != null){
+                            player.openContainer.putStackInSlot(i, null);
+                            EntityItem entityItem = new EntityItem(player.worldObj, player.posX, player.posY+1.5, player.posZ, itemStack);
+                            boolean sucess = player.worldObj.spawnEntityInWorld(entityItem);
+
+                            player.openContainer.detectAndSendChanges();
+                            isEmpty = false;
+                        }
+                    }
+
+//                    if(!isEmpty){
+//
+//                        player.closeScreen();
+//                        Logging.debug("Detected item; Throwing items into the world.");
+//                    }
+
+                }
+            }
+//            Container container = entityPlayerMP.openContainer;
+//            container.getSlot(0).getStack();
+
+
     }
     @SubscribeEvent
     public void onItemCraftedEvent(PlayerEvent.ItemCraftedEvent event) {
@@ -70,5 +105,8 @@ public class test {
                 }
             }
         }
+    }
+    private boolean requiresPerk(){
+        return true;
     }
 }

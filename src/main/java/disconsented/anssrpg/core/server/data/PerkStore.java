@@ -24,7 +24,6 @@ package disconsented.anssrpg.core.server.data;
 
 import disconsented.anssrpg.core.server.config.storage.BNP;
 import disconsented.anssrpg.core.server.config.storage.EN;
-import disconsented.anssrpg.core.server.config.storage.ENE;
 import disconsented.anssrpg.core.server.config.storage.INM;
 import disconsented.anssrpg.core.server.perk.*;
 import net.minecraft.block.Block;
@@ -56,6 +55,7 @@ public class PerkStore {
 
     //Adds a perk to the complete list
     public static void addPerk(Perk perk) {
+        perk.getSlug();
         PerkStore.perksMap.put(perk.getSlug().getSlug(), perk);
     }
 
@@ -95,7 +95,7 @@ public class PerkStore {
     /**
      * Takes a Item and returns an ArrayList of the associated perks.
      *
-     * @param item The item to base the lookup from.
+     * @param item The object to base the lookup from.
      * @return The result.
      */
     public static ArrayList<ItemPerk> getPerks(Item item) {
@@ -139,8 +139,8 @@ public class PerkStore {
     public static void putPerk(BlockPerk block) {
         PerkStore.perks.add(block);
         for (BNP object : block.blocks) {
-            Block cache = object.block;
-            PerkStore.putPerk(PerkStore.blockMap, block, cache.getUnlocalizedName());
+//            Block cache = object.block;
+//            PerkStore.putPerk(PerkStore.blockMap, block, cache.getUnlocalizedName());
         }
 
     }

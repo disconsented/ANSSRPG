@@ -31,15 +31,15 @@ import net.minecraft.util.ResourceLocation;
  * Stands for Item, Name, Metadata.
  */
 public class INM {
-    public transient  Item object;
+    public transient  Item item;
     public transient ResourceLocation resourceLocation;
     @Expose
     public int metadata = -1;
     @Expose
     private String name = "";
 
-    public INM(Item object, String name, int metadata) {
-        this.object = object;
+    public INM(Item item, String name, int metadata) {
+        this.item = item;
         this.resourceLocation = new ResourceLocation(name);
         this.name = name;
         this.metadata = metadata;
