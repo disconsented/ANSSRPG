@@ -27,7 +27,7 @@ import disconsented.anssrpg.core.server.skill.EntityDamage;
 import disconsented.anssrpg.core.server.skill.ItemCrafting;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.player.PlayerOpenContainerEvent;
+import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -51,7 +51,7 @@ public class ForgeBUS {
     }
 
     @SubscribeEvent
-    public void onPlayerOpenCrafting(PlayerOpenContainerEvent event) {
+    public void onPlayerOpenCrafting(PlayerContainerEvent event) {
         new ItemCrafting().onPlayerOpenCrafting(event);
     }
 

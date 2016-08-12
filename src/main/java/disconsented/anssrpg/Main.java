@@ -22,8 +22,6 @@ THE SOFTWARE.
 */
 package disconsented.anssrpg;
 
-import disconsented.anssrpg.compat.tconstruct.test;
-import disconsented.anssrpg.core.Support;
 import disconsented.anssrpg.core.client.ClientTick;
 import disconsented.anssrpg.core.client.commands.ANSSRPG;
 import disconsented.anssrpg.core.client.commands.GUIRegistry;
@@ -88,12 +86,9 @@ public class Main {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, Main.proxy);
         Main.proxy.registerRenderers();
         MinecraftForge.EVENT_BUS.register(new ForgeBUS());
-        MinecraftForge.EVENT_BUS.register(new test());
         FMLCommonHandler.instance().bus().register(new ClientTick());
         FMLCommonHandler.instance().bus().register(new FMLBUS());
         ToolRegistry.init();
-
-        Support.loadMods();
     }
 
     @Mod.EventHandler
@@ -119,10 +114,8 @@ public class Main {
     public void postInit(FMLPostInitializationEvent event) throws Exception {
         if (Settings.isExternalConfig()) {
             JsonConfigHandler.loadPerkAndSkill();
-            Support.loadExternalConfig();
         } else {
             JsonConfigHandler.loadInternalConfig();
-            Support.loadInternalConfig();
         }
 
         if (Settings.getDebug()) {

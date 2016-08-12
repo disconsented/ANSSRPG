@@ -38,7 +38,7 @@ import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.event.entity.player.PlayerOpenContainerEvent;
+import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
@@ -51,7 +51,7 @@ import java.util.ArrayList;
  *         ItemCrafted handles just giving XP
  */
 public class ItemCrafting {
-    public void onPlayerOpenCrafting(PlayerOpenContainerEvent event) {
+    public void onPlayerOpenCrafting(PlayerContainerEvent event) {
         if (event.getEntity() instanceof EntityPlayerMP) {
             EntityPlayerMP entityPlayerMP = (EntityPlayerMP) event.getEntity();
             Container container = entityPlayerMP.openContainer;
