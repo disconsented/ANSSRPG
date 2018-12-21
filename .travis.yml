@@ -36,7 +36,7 @@ deploy:
   on:
     repo: disconsented/ANSSRPG
     all_branches: true
-    condition: $DEPLOY || DEPLOY
+    tags: true
 
 notifications:
  irc:
