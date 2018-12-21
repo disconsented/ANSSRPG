@@ -2,16 +2,31 @@ buildscript {
     repositories {
         jcenter()
         maven { url = "https://files.minecraftforge.net/maven" }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'org.ajoberstar:gradle-git:1.2.0'
     }
 }
+plugins {
+    id 'idea'
+}
 apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'org.kordamp.gradle.stats'
 apply plugin: 'pmd'
 
-apply plugin: 'net.minecraftforge.gradle.forge'
+import org.ajoberstar.grgit.*
+
+ext.repo = Grgit.open(project.file('.'))
+
+def gitHash = 'unknown'
+if (new File(projectDir, '.git').exists()) {
+    def repo = Grgit.open(project.file('.'))
+    gitHash = repo.log().find().abbreviatedId
+}
 group = package_group
 
 archivesBaseName = mod_name
