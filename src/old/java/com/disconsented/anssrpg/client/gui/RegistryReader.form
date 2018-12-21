@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.disconsented.anssrpg.client.gui.RegistryReader">
+  <grid id="27dc6" binding="panelRegistryReader" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="600" height="800"/>
+    </constraints>
+    <properties>
+      <minimumSize width="600" height="800"/>
+      <preferredSize width="600" height="800"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <splitpane id="c0fc5" binding="JSplit">
+        <constraints border-constraint="Center"/>
+        <properties>
+          <continuousLayout value="false"/>
+          <dividerLocation value="700"/>
+          <dividerSize value="0"/>
+          <orientation value="0"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <tabbedpane id="e2186" binding="tabbedPane1" default-binding="true">
+            <constraints>
+              <splitpane position="left"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <scrollpane id="a823f">
+                <constraints>
+                  <tabbedpane title="Block"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="338a5" class="javax.swing.JList" binding="listBlock">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
+              <scrollpane id="9b117">
+                <constraints>
+                  <tabbedpane title="Entity"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="a5d75" class="javax.swing.JList" binding="listEntity">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
+              <scrollpane id="84a6e">
+                <constraints>
+                  <tabbedpane title="Item"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="7f4da" class="javax.swing.JList" binding="listItem">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
+              <scrollpane id="3321f">
+                <constraints>
+                  <tabbedpane title="Potions"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="6e5c0" class="javax.swing.JList" binding="listPotion">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
+            </children>
+          </tabbedpane>
+          <component id="32981" class="javax.swing.JTextField" binding="textFieldSearch">
+            <constraints>
+              <splitpane position="right"/>
+            </constraints>
+            <properties/>
+          </component>
+        </children>
+      </splitpane>
+    </children>
+  </grid>
+</form>
