@@ -1,14 +1,14 @@
 [
 {
-  "modid": "ANSSRPG",
-  "name": "A Not So Simple RPG",
-  "description": "ANSSRPG is an open source player progression framework built for Minecraft Forge servers.",
+  "modid": "JPRG",
+  "name": "JSON RPG",
+  "description": "Tailor made RPGs for servers and modpacks.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "www.disconsented.com",
   "updateUrl": "",
   "authorList": ["Disconsented"],
-  "credits": "Abelistah, TehNut, Dmod, Jon11888",
+  "credits": "See contributors.txt",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
