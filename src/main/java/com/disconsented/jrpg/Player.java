@@ -17,24 +17,56 @@ import java.util.UUID;
 public class Player {
     private static HashMap<UUID, Player> players = new HashMap<>();
     private HashMap<String, Trait> traitList = new HashMap<>();
-    private HashMap<String, Integer> skills = new HashMap<>();
+    private HashMap<String, Long> skills = new HashMap<>();
     private transient EntityPlayer player;
 
     public Player(EntityPlayer player) {
         this.player = player;
     }
 
-    public Player(){}
+    public Player() {
+    }
+
+    /**
+     * Loads a players data from disk, creating a new object if it is otherwise needed
+     *
+     * @param player
+     */
+    public static void load(EntityPlayer player) {
+        File location = new File(DimensionManager.getCurrentSaveRootDirectory() + "\\JRPG", player.getPersistentID().toString());
+        if (location.exists()) {
+            try {
+                FileReader reader = new FileReader(location);
+                Gson gson = new Gson();
+                Player playerData = gson.fromJson(reader, Player.class);
+                players.put(player.getPersistentID(), playerData);
+                playerData.player = player;
+                JRPG.log.info("Loaded %s from disk", playerData.getUUID());
+            } catch (Exception e) {
+                JRPG.log.error(e);
+            }
+        } else {
+            players.put(player.getPersistentID(), new Player(player));
+        }
+    }
 
     /**
      * Increases a players experience for a given skill
      *
-     * @param name Skill name
+     * @param name   Skill name
      * @param amount The amount of exp to increase it by
      */
-    public void awardExperience(String name, int amount) {
-        skills.put(name, skills.getOrDefault(name, 0) + amount);
-        sendMessage(String.format("You've been awarded %d exp for %s", amount, name));
+    public void awardExperience(String name, long amount, Skill skill) {
+        Long exp = skills.getOrDefault(name, (long) 0);
+        skills.put(name, exp + amount);
+        double levelOld, levelNew;
+        levelOld = skill.getLevelForExperience(exp);
+        levelNew = skill.getLevelForExperience(exp + amount);
+        if (levelNew > levelOld) {
+            sendMessage(String.format("You've been awarded %d exp for %s, which has increased from [%s]=>[%s]", amount, name, levelOld, levelNew));
+        } else {
+            sendMessage(String.format("You've been awarded %d exp for %s", amount, name));
+        }
     }
 
     /**
@@ -44,6 +76,10 @@ public class Player {
      */
     public void sendMessage(String message) {
         player.sendMessage(new TextComponentString(message));
+    }
+
+    public void sendFail() {
+        sendMessage("I can't let you do that dave.");
     }
 
     /**
@@ -64,50 +100,39 @@ public class Player {
     }
 
     /**
-     * Loads a players data from disk, creating a new object if it is otherwise needed
-     * @param player
+     * Returns if the player has a trait
+     *
+     * @param t
+     * @return if the player has the trait t
      */
-    public static void load(EntityPlayer player) {
-        File location = new File(DimensionManager.getCurrentSaveRootDirectory()+"\\JRPG", player.getPersistentID().toString());
-        if (location.exists()) {
-            try {
-                FileReader reader = new FileReader(location);
-                Gson gson = new Gson();
-                Player playerData = gson.fromJson(reader, Player.class);
-                players.put(player.getPersistentID(), playerData);
-                playerData.player = player;
-                JRPG.log.info("Loaded %s from disk", playerData.getUUID());
-            } catch (Exception e){
-                JRPG.log.error(e);
-            }
-        } else {
-            players.put(player.getPersistentID(), new Player(player));
-        }
+    public boolean hasTrait(Trait t) {
+        return traitList.get(t.getName()) != null;
     }
 
     /**
      * Save the player to disk
      */
-    public void save(){
+    public void save() {
         Player player = players.remove(this.player.getPersistentID());
-        try{
-            File location = new File(DimensionManager.getCurrentSaveRootDirectory()+"\\JRPG", getUUID().toString());
+        try {
+            File location = new File(DimensionManager.getCurrentSaveRootDirectory() + "\\JRPG", getUUID().toString());
             location.mkdirs();
             Gson serialiser = new Gson();
             FileWriter writer = new FileWriter(location);
             writer.write(serialiser.toJson(player));
             writer.close();
             JRPG.log.info("Saved %s to disk", player.getUUID());
-        } catch (Exception e){
+        } catch (Exception e) {
             JRPG.log.error(e);
         }
     }
 
     /**
      * Convenience function to return the players UUID
+     *
      * @return
      */
-    public UUID getUUID(){
+    public UUID getUUID() {
         return player.getPersistentID();
     }
 }
