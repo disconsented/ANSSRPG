@@ -12,16 +12,16 @@ public class JRPG {
     public static final String NAME = "JRPG";
     public static final String VERSION = "@VERSION@";
 
-    private static Logger logger;
+    public static Logger log;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        logger = event.getModLog();
+        log = event.getModLog();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         // some example code
-        logger.info("Hello, World!");
+        log.info("Hello, World!");
     }
 }
