@@ -25,3 +25,4 @@
 # Specific files
 Thumbs.db
 .DS_store
+/.project
