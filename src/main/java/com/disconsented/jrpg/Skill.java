@@ -1,12 +1,13 @@
 package com.disconsented.jrpg;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Skill
  */
 public abstract class Skill {
-    static HashMap<String, Skill> storage;
+    static HashMap<String, ArrayList<Skill>> storage;
     private String name;
     private int base;
     private float modifier;
