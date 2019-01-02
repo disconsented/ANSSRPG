@@ -4,6 +4,9 @@ import com.google.gson.Gson;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import java.io.File;
 import java.io.FileReader;
@@ -14,6 +17,7 @@ import java.util.UUID;
 /**
  * JRPG representation of player information and all of the needed representations
  */
+@Mod.EventBusSubscriber
 public class Player {
     private static HashMap<UUID, Player> players = new HashMap<>();
     private HashMap<String, Trait> traitList = new HashMap<>();
@@ -33,7 +37,7 @@ public class Player {
      * @param player
      */
     public static void load(EntityPlayer player) {
-        File location = new File(DimensionManager.getCurrentSaveRootDirectory() + "\\JRPG", player.getPersistentID().toString());
+        File location = new File(DimensionManager.getCurrentSaveRootDirectory() + "\\JRPG", player.getPersistentID().toString() + ".json");
         if (location.exists()) {
             try {
                 FileReader reader = new FileReader(location);
@@ -50,23 +54,8 @@ public class Player {
         }
     }
 
-    /**
-     * Increases a players experience for a given skill
-     *
-     * @param name   Skill name
-     * @param amount The amount of exp to increase it by
-     */
-    public void awardExperience(String name, long amount, Skill skill) {
-        Long exp = skills.getOrDefault(name, (long) 0);
-        skills.put(name, exp + amount);
-        double levelOld, levelNew;
-        levelOld = skill.getLevelForExperience(exp);
-        levelNew = skill.getLevelForExperience(exp + amount);
-        if (levelNew > levelOld) {
-            sendMessage(String.format("You've been awarded %d exp for %s, which has increased from [%s]=>[%s]", amount, name, levelOld, levelNew));
-        } else {
-            sendMessage(String.format("You've been awarded %d exp for %s", amount, name));
-        }
+    public static Player getPlayer(EntityPlayer player) {
+        return players.get(player.getPersistentID());
     }
 
     /**
@@ -100,6 +89,16 @@ public class Player {
     }
 
     /**
+     * Data reliability enhancement, saves when a player changes dimension
+     *
+     * @param event
+     */
+    @SubscribeEvent
+    public static void onDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
+        getPlayer(event.player).save();
+    }
+
+    /**
      * Returns if the player has a trait
      *
      * @param t
@@ -110,21 +109,13 @@ public class Player {
     }
 
     /**
-     * Save the player to disk
+     * Data reliability enhancement, saves when a player respawns
+     *
+     * @param event
      */
-    public void save() {
-        Player player = players.remove(this.player.getPersistentID());
-        try {
-            File location = new File(DimensionManager.getCurrentSaveRootDirectory() + "\\JRPG", getUUID().toString());
-            location.mkdirs();
-            Gson serialiser = new Gson();
-            FileWriter writer = new FileWriter(location);
-            writer.write(serialiser.toJson(player));
-            writer.close();
-            JRPG.log.info("Saved %s to disk", player.getUUID());
-        } catch (Exception e) {
-            JRPG.log.error(e);
-        }
+    @SubscribeEvent
+    public static void onRespawn(PlayerEvent.PlayerRespawnEvent event) {
+        getPlayer(event.player).save();
     }
 
     /**
@@ -134,5 +125,65 @@ public class Player {
      */
     public UUID getUUID() {
         return player.getPersistentID();
+    }
+
+    /**
+     * Save on logout
+     *
+     * @param event
+     */
+    @SubscribeEvent
+    public static void onLogout(PlayerEvent.PlayerLoggedOutEvent event) {
+        getPlayer(event.player).save();
+    }
+
+    /**
+     * Load on login
+     *
+     * @param event
+     */
+    @SubscribeEvent
+    public static void onLogin(PlayerEvent.PlayerLoggedInEvent event) {
+        load(event.player);
+    }
+
+    /**
+     * Increases a players experience for a given skill
+     *
+     * @param amount The amount of exp to increase it by
+     */
+    public void awardExperience(long amount, Skill skill) {
+        Long exp = skills.getOrDefault(skill.getName(), (long) 0);
+        skills.put(skill.getName(), exp + amount);
+        double levelOld, levelNew;
+        levelOld = skill.getLevelForExperience(exp);
+        levelNew = skill.getLevelForExperience(exp + amount);
+        if (levelNew > levelOld) {
+            sendMessage(String.format("You've been awarded %d exp for %s, which has increased from [%s]=>[%s]", amount, skill.getName(), levelOld, levelNew));
+        } else {
+            sendMessage(String.format("You've been awarded %d exp for %s", amount, skill.getName()));
+        }
+    }
+
+    /**
+     * Save the player to disk
+     */
+    public void save() {
+        Player player = players.remove(this.player.getPersistentID());
+        try {
+            File location = new File(DimensionManager.getCurrentSaveRootDirectory() + "\\JRPG", getUUID().toString() + ".json");
+            Gson serialiser = new Gson();
+            if (!location.exists()) {
+                if (!location.createNewFile()) {
+                    throw new Exception("couldn't create new player save file");
+                }
+            }
+            FileWriter writer = new FileWriter(location);
+            writer.write(serialiser.toJson(player));
+            writer.close();
+            JRPG.log.info("Saved %s to disk", player.getUUID());
+        } catch (Exception e) {
+            JRPG.log.error(e);
+        }
     }
 }

@@ -31,4 +31,8 @@ public abstract class Skill {
     public double getLevelForExperience(long experience) {
         return Math.pow(experience, 1 / modifier) / Math.pow(base, 1 / modifier);
     }
+
+    public String getName() {
+        return name;
+    }
 }

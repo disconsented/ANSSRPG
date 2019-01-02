@@ -7,6 +7,7 @@ import java.util.HashMap;
  */
 public abstract class Trait {
     static HashMap<String, Trait> storage;
+
     private String name;
 
     public abstract String getName();
