@@ -31,6 +31,9 @@ public class Player {
     public Player() {
     }
 
+    public static void clear() {
+        players.clear();
+    }
     /**
      * Loads a players data from disk, creating a new object if it is otherwise needed
      *
@@ -89,7 +92,7 @@ public class Player {
     }
 
     /**
-     * Data reliability enhancement, saves when a player changes dimension
+     * Datum reliability enhancement, saves when a player changes dimension
      *
      * @param event
      */
@@ -109,7 +112,7 @@ public class Player {
     }
 
     /**
-     * Data reliability enhancement, saves when a player respawns
+     * Datum reliability enhancement, saves when a player respawns
      *
      * @param event
      */
@@ -173,11 +176,7 @@ public class Player {
         try {
             File location = new File(DimensionManager.getCurrentSaveRootDirectory() + "\\JRPG", getUUID().toString() + ".json");
             Gson serialiser = new Gson();
-            if (!location.exists()) {
-                if (!location.createNewFile()) {
-                    throw new Exception("couldn't create new player save file");
-                }
-            }
+            location.getParentFile().mkdirs();
             FileWriter writer = new FileWriter(location);
             writer.write(serialiser.toJson(player));
             writer.close();
