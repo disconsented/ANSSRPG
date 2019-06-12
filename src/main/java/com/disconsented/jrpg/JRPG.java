@@ -1,6 +1,7 @@
 package com.disconsented.jrpg;
 
 import com.disconsented.jrpg.vanilla.SkillBlockBreak;
+import com.disconsented.jrpg.vanilla.TraitBlockBreak;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.common.Mod;
@@ -18,7 +19,7 @@ public class JRPG {
 
     public static Logger log;
 
-    private static final ArrayList<Loadable> OBJS = new ArrayList<>();
+    public static final ArrayList<Loadable> OBJS = new ArrayList<>();
 
     public static boolean register(Loadable loadable) {
         if (Loader.instance().isInState(LoaderState.PREINITIALIZATION)) {
@@ -34,9 +35,12 @@ public class JRPG {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         log = event.getModLog();
-        SkillBlockBreak skill = new SkillBlockBreak();
-        skill.setDefault();
-        register(skill);
+//        SkillBlockBreak skill = ;
+//        skill.setDefault();
+        SkillBlockBreak skillBlockBreak = new SkillBlockBreak();
+        skillBlockBreak.setDefault();
+        register(skillBlockBreak);
+        register(new TraitBlockBreak());
 
     }
 
@@ -55,6 +59,7 @@ public class JRPG {
     public void postInit(FMLPostInitializationEvent event) {
         OBJS.forEach(Loadable::load);
         OBJS.forEach(Loadable::serialize);
+        log.info("Loading finished");
     }
 
     public void serverStart(FMLServerStartingEvent event) {

@@ -92,7 +92,7 @@ public class Player {
     }
 
     /**
-     * Datum reliability enhancement, saves when a player changes dimension
+     * SkillDatum reliability enhancement, saves when a player changes dimension
      *
      * @param event
      */
@@ -112,13 +112,17 @@ public class Player {
     }
 
     /**
-     * Datum reliability enhancement, saves when a player respawns
+     * SkillDatum reliability enhancement, saves when a player respawns
      *
      * @param event
      */
     @SubscribeEvent
     public static void onRespawn(PlayerEvent.PlayerRespawnEvent event) {
         getPlayer(event.player).save();
+    }
+
+    public boolean hasTrait(String t) {
+        return traitList.get(t) != null;
     }
 
     /**
@@ -162,9 +166,9 @@ public class Player {
         levelOld = skill.getLevelForExperience(exp);
         levelNew = skill.getLevelForExperience(exp + amount);
         if (levelNew > levelOld) {
-            sendMessage(String.format("You've been awarded %d exp for %s, which has increased from [%s]=>[%s]", amount, skill.getName(), levelOld, levelNew));
+            sendMessage(String.format("You've been awarded %d exp for %s, which has increased from [%d]=>[%d]", amount, skill.getName(), (int) levelOld, (int) levelNew));
         } else {
-            sendMessage(String.format("You've been awarded %d exp for %s", amount, skill.getName()));
+//            sendMessage(String.format("You've been awarded %d exp for %s", amount, skill.getName()));
         }
     }
 
@@ -184,5 +188,21 @@ public class Player {
         } catch (Exception e) {
             JRPG.log.error(e);
         }
+    }
+
+    /**
+     * Gets the level for a particular skill
+     * Will fail if there is no skill with the right name loaded
+     *
+     * @param skill
+     * @return
+     */
+    public double getLevel(String skill) {
+//        for (Skill s : Skill) {
+//            if (s.name.equals(s)){
+//                return s.getLevelForExperience(this.skills.get(skill));
+//            }
+//        }
+        return 0;
     }
 }

@@ -1,5 +1,8 @@
 package com.disconsented.jrpg;
 
+
+import java.lang.reflect.Type;
+
 public interface Loadable {
     void serialize();
 
@@ -9,4 +12,6 @@ public interface Loadable {
      * Called after all of the objects have been deserialized
      */
     void load();
+
+    Type getTypeToken();
 }
