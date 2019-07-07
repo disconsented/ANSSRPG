@@ -6,8 +6,6 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.List;
-
 @Mod.EventBusSubscriber
 public class EventBlockBreak {
 
@@ -22,24 +20,18 @@ public class EventBlockBreak {
             return;
         }
 
+        for (TraitBlockBreak trait : TraitBlockBreak.storage) {
+            if (trait.datum.matches(event.getState())) {
+                event.setCanceled(true);
+                player.sendFail();
+                return;
+            }
+        }
+
         SkillBlockBreak.storage.forEach(skillBlockBreak -> {
             skillBlockBreak.entries.forEach(blockDatum -> {
                 if (blockDatum.matches(event.getState())) {
-                    List<TraitBlockBreak> traits = TraitBlockBreak.getTraits(event.getState());
-                    // trait is required
-                    if (traits.size() > 0) {
-                        for (TraitBlockBreak trait : traits) {
-                            if (player.hasTrait(trait)) {
-                                player.awardExperience(blockDatum.experience, skillBlockBreak);
-                            } else {
-                                player.sendFail();
-                                event.setCanceled(true);
-                            }
-                            continue;
-                        }
-                    } else {
-                        player.awardExperience(blockDatum.experience, skillBlockBreak);
-                    }
+                    player.awardExperience(blockDatum.experience, skillBlockBreak);
                 }
             });
         });

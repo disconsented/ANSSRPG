@@ -35,12 +35,14 @@ public class JRPG {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         log = event.getModLog();
-//        SkillBlockBreak skill = ;
-//        skill.setDefault();
+
         SkillBlockBreak skillBlockBreak = new SkillBlockBreak();
         skillBlockBreak.setDefault();
         register(skillBlockBreak);
-        register(new TraitBlockBreak());
+
+        TraitBlockBreak traitBlockBreak = new TraitBlockBreak();
+        traitBlockBreak.setDefault();
+        register(traitBlockBreak);
 
     }
 

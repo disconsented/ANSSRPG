@@ -2,17 +2,12 @@ package com.disconsented.jrpg.vanilla;
 
 import com.disconsented.jrpg.JRPG;
 import com.disconsented.jrpg.Skill;
-import com.disconsented.jrpg.SkillDatum;
 import com.google.common.reflect.TypeToken;
 import net.minecraft.block.Block;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.Optional;
 
 
 public class SkillBlockBreak extends Skill {
@@ -48,6 +43,7 @@ public class SkillBlockBreak extends Skill {
                 }
             });
         });
+
         JRPG.log.info("loaded " + getClass().getCanonicalName());
     }
 
@@ -61,38 +57,20 @@ public class SkillBlockBreak extends Skill {
         storage.add(this);
         name = "mining";
         base = 1;
-        modifier = (float) 1.1;
-        BlockSkillDatum test = new BlockSkillDatum();
-        test.name = "minecraft:log";
-        test.properties.put("variant", "oak");
-        test.experience = 10;
-        entries.add(test);
-    }
+        modifier = (float) 2;
+        BlockSkillDatum testOak = new BlockSkillDatum();
+        testOak.name = "minecraft:log";
+        testOak.properties.put("variant", "oak");
+        testOak.experience = 10;
+        entries.add(testOak);
 
-    class BlockSkillDatum extends SkillDatum {
-        transient Block block;
+        BlockSkillDatum testBirch = new BlockSkillDatum();
+        testBirch.name = "minecraft:log";
+        testBirch.properties.put("variant", "birch");
+        testBirch.experience = 20;
+        entries.add(testBirch);
 
 
-        BlockSkillDatum() {
-        }
-
-        //
-        boolean matches(IBlockState state) {
-            if (state.getBlock() != block) {
-                return false;
-            }
-
-            for (Map.Entry<String, String> entry : this.properties.entrySet()) {
-                Optional<Map.Entry<IProperty<?>, Comparable<?>>> variant = state.getProperties().entrySet().stream().filter(prop -> prop.getKey().getName().equalsIgnoreCase(entry.getKey())).findFirst();
-                if (variant.isPresent()) {
-                    if (!variant.get().getValue().toString().equals(entry.getValue())) {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
-        }
     }
 
 
