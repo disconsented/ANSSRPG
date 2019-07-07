@@ -56,7 +56,7 @@ public class SkillBlockBreak extends Skill {
     public void setDefault() {
         storage.add(this);
         name = "mining";
-        base = 1;
+        base = 2;
         modifier = (float) 2;
         BlockSkillDatum testOak = new BlockSkillDatum();
         testOak.name = "minecraft:log";

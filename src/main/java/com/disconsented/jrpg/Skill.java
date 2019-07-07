@@ -13,9 +13,15 @@ import java.util.ArrayList;
  * Skill
  */
 public abstract class Skill<T extends Skill> implements Loadable {
+    protected static transient ArrayList<Skill> storage = new ArrayList<>();
     protected String name;
     protected int base;
     protected float modifier;
+
+    @Override
+    public void attach() {
+        storage.add(this);
+    }
 
     /**
      * Calculates how much experience is needed for a given level

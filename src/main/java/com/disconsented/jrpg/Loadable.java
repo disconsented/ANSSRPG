@@ -13,5 +13,7 @@ public interface Loadable {
      */
     void load();
 
+    void attach();
+
     Type getTypeToken();
 }

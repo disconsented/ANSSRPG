@@ -60,12 +60,14 @@ public class JRPG {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         OBJS.forEach(Loadable::load);
+        OBJS.forEach(Loadable::attach);
         OBJS.forEach(Loadable::serialize);
         log.info("Loading finished");
     }
 
+    @Mod.EventHandler
     public void serverStart(FMLServerStartingEvent event) {
-
+        event.registerServerCommand(new JRPGCommand());
     }
 
     public void serverStop(FMLServerStoppingEvent event) {

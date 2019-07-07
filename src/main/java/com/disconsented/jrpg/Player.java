@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -20,7 +22,7 @@ import java.util.UUID;
 @Mod.EventBusSubscriber
 public class Player {
     private static HashMap<UUID, Player> players = new HashMap<>();
-    private HashMap<String, Trait> traitList = new HashMap<>();
+    private Set<String> traitList = new HashSet<>();
     private HashMap<String, Long> skills = new HashMap<>();
     private transient EntityPlayer player;
 
@@ -34,6 +36,7 @@ public class Player {
     public static void clear() {
         players.clear();
     }
+
     /**
      * Loads a players data from disk, creating a new object if it is otherwise needed
      *
@@ -77,7 +80,7 @@ public class Player {
     /**
      * @return the list of traits gained by a player
      */
-    public HashMap<String, Trait> getTraits() {
+    public Set<String> getTraits() {
         return traitList;
     }
 
@@ -108,7 +111,8 @@ public class Player {
      * @return if the player has the trait t
      */
     public boolean hasTrait(Trait t) {
-        return traitList.get(t.getName()) != null;
+
+        return hasTrait(t.getName());
     }
 
     /**
@@ -122,7 +126,7 @@ public class Player {
     }
 
     public boolean hasTrait(String t) {
-        return traitList.get(t) != null;
+        return traitList.contains(t);
     }
 
     /**
@@ -165,7 +169,7 @@ public class Player {
         double levelOld, levelNew;
         levelOld = skill.getLevelForExperience(exp);
         levelNew = skill.getLevelForExperience(exp + amount);
-        if (levelNew > levelOld) {
+        if ((int) levelNew > (int) levelOld) {
             sendMessage(String.format("You've been awarded %d exp for %s, which has increased from [%d]=>[%d]", amount, skill.getName(), (int) levelOld, (int) levelNew));
         } else {
 //            sendMessage(String.format("You've been awarded %d exp for %s", amount, skill.getName()));
@@ -204,5 +208,9 @@ public class Player {
 //            }
 //        }
         return 0;
+    }
+
+    public void addTrait(Trait trait) {
+        traitList.add(trait.name);
     }
 }

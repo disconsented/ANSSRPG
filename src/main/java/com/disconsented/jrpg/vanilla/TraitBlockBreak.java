@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 public class TraitBlockBreak extends Trait {
     protected static transient ArrayList<TraitBlockBreak> storage = new ArrayList<>();
     protected BlockTraitDatum datum;
-    protected transient String name;
 
     static ArrayList<TraitBlockBreak> getTraits(IBlockState state) {
         return new ArrayList<>(storage.parallelStream().filter(traitBlockBreak -> traitBlockBreak.datum.matches(state)).collect(Collectors.toList()));
@@ -31,12 +30,11 @@ public class TraitBlockBreak extends Trait {
             }
         });
         JRPG.log.info("loaded " + getClass().getCanonicalName());
-
     }
 
     public void setDefault() {
         storage.add(this);
-        name = "Gimmie Birch";
+        name = "birch";
 
         datum = new BlockTraitDatum();
         datum.name = "minecraft:log";

@@ -22,9 +22,11 @@ public class EventBlockBreak {
 
         for (TraitBlockBreak trait : TraitBlockBreak.storage) {
             if (trait.datum.matches(event.getState())) {
-                event.setCanceled(true);
-                player.sendFail();
-                return;
+                if (!player.hasTrait(trait)) {
+                    event.setCanceled(true);
+                    player.sendFail();
+                    return;
+                }
             }
         }
 

@@ -17,7 +17,16 @@ public abstract class Trait implements Loadable {
     protected static transient ArrayList<Trait> storage = new ArrayList<>();
     protected ArrayList<Requirement> requirements = new ArrayList<>();
 
-    private String name;
+    protected String name;
+
+    public static ArrayList<Trait> getAllTraits() {
+        return storage;
+    }
+
+    @Override
+    public void attach() {
+        storage.add(this);
+    }
 
     public String getName() {
         return name;
