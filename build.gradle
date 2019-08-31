@@ -14,7 +14,7 @@ buildscript {
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
         classpath 'org.ajoberstar:gradle-git:1.2.0'
-        classpath 'org.kordamp.gradle:stats-gradle-plugin:0.1.1'
+        classpath 'org.kordamp.gradle:stats-gradle-plugin:0.2.2'
     }
 }
 apply plugin: 'org.kordamp.gradle.stats'
